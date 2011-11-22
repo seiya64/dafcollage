@@ -81,15 +81,15 @@ switch ($padre) {
         break;
     //1.2
     case 3:
-        $desc = optional_param('mascsementico', null, PARAM_TEXT) . '&' . optional_param('mascformal', null, PARAM_TEXT);
-        $desc .= optional_param('femsementico', null, PARAM_TEXT) . '&' . optional_param('femformal', null, PARAM_TEXT);
-        $desc .= optional_param('neutrosementico', null, PARAM_TEXT) . '&' . optional_param('neutroformal', null, PARAM_TEXT);
+        $desc = optional_param('mascsementico', null, PARAM_TEXT) . '&' . optional_param('mascformal', null, PARAM_TEXT). '&';
+        $desc .= optional_param('femsementico', null, PARAM_TEXT) . '&' . optional_param('femformal', null, PARAM_TEXT). '&';
+        $desc .= optional_param('neutrosementico', null, PARAM_TEXT) . '&' . optional_param('neutroformal', null, PARAM_TEXT). '&';
         break;
     //1.3
     case 4:
-        $desc = optional_param('endungs', null, PARAM_TEXT) . '&' . optional_param('genero', null, PARAM_TEXT);
-        $desc .= optional_param('endungp', null, PARAM_TEXT) . '&' . optional_param('reinesf', null, PARAM_TEXT);
-        $desc .= optional_param('reinepf', null, PARAM_TEXT);
+        $desc = optional_param('endungs', null, PARAM_TEXT) . '&' . optional_param('genero', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('endungp', null, PARAM_TEXT) . '&' . optional_param('reinesf', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('reinepf', null, PARAM_TEXT) . '&';
         break;
     //5.3.1
     case 52:
@@ -108,11 +108,18 @@ switch ($padre) {
         $desc .= optional_param('AM3', null, PARAM_TEXT) . '&' . optional_param('AN3', null, PARAM_TEXT) . '&' . optional_param('AF3', null, PARAM_TEXT) . '&';
         $desc .= optional_param('AP3', null, PARAM_TEXT) . '&' . optional_param('DM3', null, PARAM_TEXT) . '&' . optional_param('DN3', null, PARAM_TEXT) . '&';
         $desc .= optional_param('DF3', null, PARAM_TEXT) . '&' . optional_param('DP3', null, PARAM_TEXT) . '&' . optional_param('GM3', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('GN3', null, PARAM_TEXT) . '&' . optional_param('GF3', null, PARAM_TEXT) . '&' . optional_param('GP3', null, PARAM_TEXT);
+        $desc .= optional_param('GN3', null, PARAM_TEXT) . '&' . optional_param('GF3', null, PARAM_TEXT) . '&' . optional_param('GP3', null, PARAM_TEXT) . '&';
         break;
     //tablas verbos
     //3.2.1
     case 23:
+        $desc = optional_param('S1SC', null, PARAM_TEXT) . '&' . $desc = optional_param('S2SC', null, PARAM_TEXT) . '&' . $desc = optional_param('S3SC', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P1SC', null, PARAM_TEXT) . '&' . $desc = optional_param('P2SC', null, PARAM_TEXT) . '&' . $desc = optional_param('P3SC', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('S1ST', null, PARAM_TEXT) . '&' . $desc = optional_param('S2ST', null, PARAM_TEXT) . '&' . $desc = optional_param('S3ST', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P1ST', null, PARAM_TEXT) . '&' . $desc = optional_param('P2ST', null, PARAM_TEXT) . '&' . $desc = optional_param('P3ST', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('S1GE', null, PARAM_TEXT) . '&' . $desc = optional_param('S2GE', null, PARAM_TEXT) . '&' . $desc = optional_param('S3GE', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P1GE', null, PARAM_TEXT) . '&' . $desc = optional_param('P2GE', null, PARAM_TEXT) . '&' . $desc = optional_param('P3GE', null, PARAM_TEXT) . '&';
+        break;
     //3.2.2
     case 24:
     //3.2.5
@@ -136,16 +143,16 @@ switch ($padre) {
     //participio2
     //3.2.3
     case 25:
-        $desc = optional_param('participio2', null, PARAM_TEXT) . '&' . optional_param('hilfsverbs', null, PARAM_TEXT);
+        $desc = optional_param('participio2', null, PARAM_TEXT) . '&' . optional_param('hilfsverbs', null, PARAM_TEXT) . '&';
         break;
     //3.2.4
     case 26:
-        $desc = optional_param('participio1', null, PARAM_TEXT);
+        $desc = optional_param('participio1', null, PARAM_TEXT) . '&';
         break;
     //passiv
     //3.7
     case 33:
-        $desc = optional_param('zustandspassiv', null, PARAM_TEXT) . '&' . optional_param('vorganspassiv', null, PARAM_TEXT);
+        $desc = optional_param('zustandspassiv', null, PARAM_TEXT) . '&' . optional_param('vorganspassiv', null, PARAM_TEXT) . '&';
         break;
     //articulos
     //4.2 4.3 4.4 4.5 4.6 4.7
@@ -192,35 +199,35 @@ switch ($padre) {
         break;
     //4.8
     case 46:
-        $desc = optional_param('lista', null, PARAM_TEXT) . '&' . optional_param('scheinbare', null, PARAM_TEXT);
+        $desc = optional_param('lista', null, PARAM_TEXT) . '&' . optional_param('scheinbare', null, PARAM_TEXT) . '&';
         break;
     //7.2
     case 62:
         $desc = optional_param('beispielsatz', null, PARAM_TEXT) . '&' . optional_param('satzart', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('komfun', null, PARAM_TEXT);
+        $desc .= optional_param('komfun', null, PARAM_TEXT) . '&';
         break;
     //2.3
     case 9:
         $desc = optional_param('NP', null, PARAM_TEXT) . '&' . optional_param('NNP', null, PARAM_TEXT) . '&';
         $desc .= optional_param('AP', null, PARAM_TEXT) . '&' . optional_param('ANP', null, PARAM_TEXT) . '&';
         $desc .= optional_param('DP', null, PARAM_TEXT) . '&' . optional_param('DNP', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('GP', null, PARAM_TEXT) . '&' . optional_param('GNP', null, PARAM_TEXT);
+        $desc .= optional_param('GP', null, PARAM_TEXT) . '&' . optional_param('GNP', null, PARAM_TEXT) . '&';
         break;
     //8.4.1
     case 64:
-        $desc = optional_param('definido', null, PARAM_TEXT) . '&' . optional_param('indefinido', null, PARAM_TEXT);
+        $desc = optional_param('definido', null, PARAM_TEXT) . '&' . optional_param('indefinido', null, PARAM_TEXT) . '&';
         break;
     //8.4.2
     case 69:
         $desc = optional_param('temporal', null, PARAM_TEXT) . '&' . optional_param('causal', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('modal', null, PARAM_TEXT) . '&' . optional_param('local', null, PARAM_TEXT);
+        $desc .= optional_param('modal', null, PARAM_TEXT) . '&' . optional_param('local', null, PARAM_TEXT) . '&';
         break;
     //8.5.1, 8.5.2, 8.5.3
     case 72:
     case 73:
     case 74:
         $desc = optional_param('func', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('siehe', null, PARAM_TEXT);
+        $desc .= optional_param('siehe', null, PARAM_TEXT) . '&';
         break;
     //8.2
     case 65:

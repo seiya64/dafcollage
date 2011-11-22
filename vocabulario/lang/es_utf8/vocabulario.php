@@ -196,4 +196,7 @@ $string['mittelfeld'] = 'Mittelfeld';
 $string['verb2'] = 'Verb 2';
 $string['verb1'] = 'Verb 1';
 $string['miraren'] = 'Siehe auch';
+$string['schwache'] = 'Schwache verben';
+$string['starke'] = 'Starke verben';
+$string['gemischte'] = 'Gemischte verben';
 ?>
