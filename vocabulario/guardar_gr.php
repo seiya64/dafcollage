@@ -113,12 +113,12 @@ switch ($padre) {
     //tablas verbos
     //3.2.1
     case 23:
-        $desc = optional_param('S1SC', null, PARAM_TEXT) . '&' . $desc = optional_param('S2SC', null, PARAM_TEXT) . '&' . $desc = optional_param('S3SC', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('P1SC', null, PARAM_TEXT) . '&' . $desc = optional_param('P2SC', null, PARAM_TEXT) . '&' . $desc = optional_param('P3SC', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('S1ST', null, PARAM_TEXT) . '&' . $desc = optional_param('S2ST', null, PARAM_TEXT) . '&' . $desc = optional_param('S3ST', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('P1ST', null, PARAM_TEXT) . '&' . $desc = optional_param('P2ST', null, PARAM_TEXT) . '&' . $desc = optional_param('P3ST', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('S1GE', null, PARAM_TEXT) . '&' . $desc = optional_param('S2GE', null, PARAM_TEXT) . '&' . $desc = optional_param('S3GE', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('P1GE', null, PARAM_TEXT) . '&' . $desc = optional_param('P2GE', null, PARAM_TEXT) . '&' . $desc = optional_param('P3GE', null, PARAM_TEXT) . '&';
+        $desc = optional_param('S1SC', null, PARAM_TEXT) . '&' . optional_param('S2SC', null, PARAM_TEXT) . '&' . optional_param('S3SC', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P1SC', null, PARAM_TEXT) . '&' . optional_param('P2SC', null, PARAM_TEXT) . '&' . optional_param('P3SC', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('S1ST', null, PARAM_TEXT) . '&' . optional_param('S2ST', null, PARAM_TEXT) . '&' . optional_param('S3ST', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P1ST', null, PARAM_TEXT) . '&' . optional_param('P2ST', null, PARAM_TEXT) . '&' . optional_param('P3ST', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('S1GE', null, PARAM_TEXT) . '&' . optional_param('S2GE', null, PARAM_TEXT) . '&' . optional_param('S3GE', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P1GE', null, PARAM_TEXT) . '&' . optional_param('P2GE', null, PARAM_TEXT) . '&' . optional_param('P3GE', null, PARAM_TEXT) . '&';
         break;
     //3.2.2
     case 24:
