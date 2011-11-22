@@ -1153,10 +1153,65 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 break;
             //2.5.2.1
             case 14:
-                
+                //tabla
+                $mform->addElement('html', '<p>');
+                $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter">');
+                //titulillos de la tabla
+                $titulillos = '<tr class="header">';
+                $titulillos .= '<th>&nbsp;</th>';
+                $titulillos .= '<th>&nbsp;</th>';
+                $titulillos .= '</tr>';
+                $mform->addElement('html', $titulillos);
+                $titulillos = '<tr class="cell">';
+                $titulillos .= '<td class="cell">' . get_string('nominativo', 'vocabulario') . '</td>';
+                $titulillos .= '<td><input type="text" id="id_NOM" name="NOM" value="' . $descripcion_troceada[0] . '"></td>';
+                $titulillos .= '</tr>';
+                $titulillos .= '<tr class="cell">';
+                $titulillos .= '<td class="cell">' . get_string('acusativo', 'vocabulario') . '</td>';
+                $titulillos .= '<td><input type="text" id="id_AKK" name="AKK" value="' . $descripcion_troceada[1] . '"></td>';
+                $titulillos .= '</tr>';
+                $titulillos .= '<tr class="cell">';
+                $titulillos .= '<td class="cell">' . get_string('dativo', 'vocabulario') . '</td>';
+                $titulillos .= '<td><input type="text" id="id_DAT" name="DAT" value="' . $descripcion_troceada[2] . '"></td>';
+                $titulillos .= '</tr>';
+                $titulillos .= '<tr class="cell">';
+                $titulillos .= '<td class="cell">' . get_string('genitivo', 'vocabulario') . '</td>';
+                $titulillos .= '<td><input type="text" id="id_GEN" name="GEN" value="' . $descripcion_troceada[3] . '"></td>';
+                $titulillos .= '</tr>';
+                $mform->addElement('html', $titulillos);
+                $mform->addElement('html', '</table>');
+                $mform->addElement('html', '<p>');
                 break;
             //2.2
             case 8:
+                                //tabla
+                $mform->addElement('html', '<p>');
+                $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter">');
+                //titulillos de la tabla
+                $titulillos = '<tr class="header">';
+                $titulillos .= '<th>&nbsp;</th>';
+                $titulillos .= '<th>&nbsp;</th>';
+                $titulillos .= '</tr>';
+                $mform->addElement('html', $titulillos);
+                $titulillos = '<tr class="cell">';
+                $titulillos .= '<td class="cell">' . get_string('nominativo', 'vocabulario') . '</td>';
+                $titulillos .= '<td><input type="text" id="id_NOM" name="NOM" value="' . $descripcion_troceada[0] . '"></td>';
+                $titulillos .= '</tr>';
+                $titulillos .= '<tr class="cell">';
+                $titulillos .= '<td class="cell">' . get_string('acusativo', 'vocabulario') . '</td>';
+                $titulillos .= '<td><input type="text" id="id_AKK" name="AKK" value="' . $descripcion_troceada[1] . '"></td>';
+                $titulillos .= '</tr>';
+                $titulillos .= '<tr class="cell">';
+                $titulillos .= '<td class="cell">' . get_string('dativo', 'vocabulario') . '</td>';
+                $titulillos .= '<td><input type="text" id="id_DAT" name="DAT" value="' . $descripcion_troceada[2] . '"></td>';
+                $titulillos .= '</tr>';
+                $titulillos .= '<tr class="cell">';
+                $titulillos .= '<td class="cell">' . get_string('genitivo', 'vocabulario') . '</td>';
+                $titulillos .= '<td><input type="text" id="id_GEN" name="GEN" value="' . $descripcion_troceada[3] . '"></td>';
+                $titulillos .= '</tr>';
+                $mform->addElement('html', $titulillos);
+                $mform->addElement('html', '</table>');
+                $mform->addElement('html', '<p>');
                 break;
             //8.3
             case 66:
