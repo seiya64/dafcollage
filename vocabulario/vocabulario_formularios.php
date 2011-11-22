@@ -1186,18 +1186,43 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
             case 8:
                                 //tabla
                 $mform->addElement('html', '<p>');
-                $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter">');
+                $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
                 //titulillos de la tabla
                 $titulillos = '<tr class="header">';
                 $titulillos .= '<th>&nbsp;</th>';
+                $titulillos .= '<th colspan=5>'.get_string('sing','vocabulario').'</th>';
+                $titulillos .= '<th colspan=3>'.get_string('plural','vocabulario').'</th>';
+                $titulillos .= '<th rowspan=3>'.get_string('sie','vocabulario').'</th>';
+                $titulillos .= '</tr>';
+                $titulillos .= '<tr class="header">';
                 $titulillos .= '<th>&nbsp;</th>';
+                $titulillos .= '<th rowspan=2>1</th>';
+                $titulillos .= '<th rowspan=2>2</th>';
+                $titulillos .= '<th colspan=3>3</th>';
+                $titulillos .= '<th rowspan=2>1</th>';
+                $titulillos .= '<th rowspan=2>2</th>';
+                $titulillos .= '<th rowspan=2>3</th>';
+                $titulillos .= '</tr>';
+                $titulillos .= '<tr class="header">';
+                $titulillos .= '<th>&nbsp;</th>';
+                $titulillos .= '<th>m</th>';
+                $titulillos .= '<th>n</th>';
+                $titulillos .= '<th>f</th>';
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
                 $titulillos = '<tr class="cell">';
                 $titulillos .= '<td class="cell">' . get_string('nominativo', 'vocabulario') . '</td>';
-                $titulillos .= '<td><input type="text" id="id_NOM" name="NOM" value="' . $descripcion_troceada[0] . '"></td>';
+                $titulillos .= '<td><input type="text" id="id_NS1" name="NS1" value="' . $descripcion_troceada[0] . '"></td>';
+                $titulillos .= '<td><input type="text" id="id_NS2" name="NS2" value="' . $descripcion_troceada[1] . '"></td>';
+                $titulillos .= '<td><input type="text" id="id_NS3M" name="NS3M" value="' . $descripcion_troceada[2] . '"></td>';
+                $titulillos .= '<td><input type="text" id="id_NS3N" name="NS3N" value="' . $descripcion_troceada[3] . '"></td>';
+                $titulillos .= '<td><input type="text" id="id_NS3F" name="NS3F" value="' . $descripcion_troceada[4] . '"></td>';
+                $titulillos .= '<td><input type="text" id="id_NP1" name="NP1" value="' . $descripcion_troceada[5] . '"></td>';
+                $titulillos .= '<td><input type="text" id="id_NP2" name="NP2" value="' . $descripcion_troceada[6] . '"></td>';
+                $titulillos .= '<td><input type="text" id="id_NP3" name="NP3" value="' . $descripcion_troceada[7] . '"></td>';
+                $titulillos .= '<td><input type="text" id="id_NSIE" name="NSIE" value="' . $descripcion_troceada[8] . '"></td>';
                 $titulillos .= '</tr>';
-                $titulillos .= '<tr class="cell">';
+                /*$titulillos .= '<tr class="cell">';
                 $titulillos .= '<td class="cell">' . get_string('acusativo', 'vocabulario') . '</td>';
                 $titulillos .= '<td><input type="text" id="id_AKK" name="AKK" value="' . $descripcion_troceada[1] . '"></td>';
                 $titulillos .= '</tr>';
@@ -1208,7 +1233,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $titulillos .= '<tr class="cell">';
                 $titulillos .= '<td class="cell">' . get_string('genitivo', 'vocabulario') . '</td>';
                 $titulillos .= '<td><input type="text" id="id_GEN" name="GEN" value="' . $descripcion_troceada[3] . '"></td>';
-                $titulillos .= '</tr>';
+                $titulillos .= '</tr>';*/
                 $mform->addElement('html', $titulillos);
                 $mform->addElement('html', '</table>');
                 $mform->addElement('html', '<p>');

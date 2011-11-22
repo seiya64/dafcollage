@@ -59,6 +59,7 @@ $string['masc_corto'] = 'M';
 $string['fem_corto'] = 'F';
 $string['neu_corto'] = 'N';
 $string['plural'] = 'Plural';
+$string['sing'] = 'Singular';
 $string['sust'] = 'Sustantivo';
 $string['adj'] = 'Adjetivo';
 $string['vrb'] = 'Verbo';
@@ -172,6 +173,7 @@ $string['S3'] = 'er/sie/es';
 $string['P1'] = 'wir';
 $string['P2'] = 'ihr';
 $string['P3'] = 'sie/ Sie';
+$string['sie'] = 'Sie';
 //seguimos con mas cosas
 $string['beachten'] = 'Beachten';
 $string['participio1'] = 'Regeln zur Bildung des Partizip I';

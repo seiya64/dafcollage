@@ -240,6 +240,11 @@ switch ($padre) {
             }
         }
         break;
+    //2.5.2.1
+    case 14:
+        $desc = optional_param('NOM', null, PARAM_TEXT).'&'.optional_param('AKK', null, PARAM_TEXT).'&';
+        $desc .= optional_param('DAT', null, PARAM_TEXT).'&'.optional_param('GEN', null, PARAM_TEXT).'&';
+        break;
 }
 
 //soluciones varias
