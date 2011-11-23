@@ -128,8 +128,12 @@ switch ($padre) {
         break;
     //3.2.5
     case 27:
+        $desc = optional_param('futuro1', null, PARAM_TEXT) . '&';
+        break;
     //3.2.6
     case 28:
+        $desc = optional_param('futuro2', null, PARAM_TEXT) . '&';
+        break;
     //3.3
     case 29:
     //3.4

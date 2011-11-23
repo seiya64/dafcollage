@@ -1002,7 +1002,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 }
                 if ($ultimo+1 < $tope){
                     $ops = '<a href=\'javascript:desocultar("tabla'.($ultimo+1).'")\' id="mt">'.get_string("mastablas", "vocabulario").'</a>';
-                    $mform->addElement('static', 'mas_tablas', '', $ops);
+                    $mform->addElement('static', 'mas_tablas', '', $ops); 
                 }
 
                 //$mform->addElement('textarea', 'descripcion', get_string("beachten", "vocabulario"), 'rows="5" cols="30"');
@@ -1012,8 +1012,15 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
             //3.2.5
             case 27:
+                $mform->addElement('textarea', 'futuro1', get_string("futuro1", "vocabulario"), 'rows="5" cols="30"');
+                $mform->setDefault('futuro1', $descripcion_troceada[0]);
+                break;
             //3.2.6
             case 28:
+                $mform->addElement('textarea', 'futuro2', get_string("futuro2", "vocabulario"), 'rows="5" cols="30"');
+                $mform->setDefault('futuro2', $descripcion_troceada[0]);
+                break;
+
             //3.3
             case 29:
             //3.4
@@ -1079,7 +1086,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
             //3.2.4
             case 26:
                 $mform->addElement('textarea', 'participio1', get_string("participio1", "vocabulario"), 'rows="5" cols="30"');
-                $mform->setDefault('participio1', $descripcion_troceada);
+                $mform->setDefault('participio1', $descripcion_troceada[0]);
                 break;
             //passiv
             //3.7
