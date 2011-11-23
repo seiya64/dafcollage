@@ -865,7 +865,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                 //tabla
                 $tope = 20;
-                $ultimo = 0;
+                $ultimo = -1;
                 for ($i=0; $i<$tope;$i++){
                     $ocultador = '<div id="ocultador_tabla'.$i;
                     $salidor = false;
@@ -1110,7 +1110,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
             case 5:
                 //para restrngir según la categoria
                 $tope = 1;
-                $ultimo = 0;
+                $ultimo = -1;
                 switch ($grid){
                     default:
                         $tope = 1;
