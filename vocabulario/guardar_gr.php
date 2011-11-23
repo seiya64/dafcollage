@@ -113,15 +113,19 @@ switch ($padre) {
     //tablas verbos
     //3.2.1
     case 23:
-        $desc = optional_param('S1SC', null, PARAM_TEXT) . '&' . optional_param('S2SC', null, PARAM_TEXT) . '&' . optional_param('S3SC', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('P1SC', null, PARAM_TEXT) . '&' . optional_param('P2SC', null, PARAM_TEXT) . '&' . optional_param('P3SC', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('S1ST', null, PARAM_TEXT) . '&' . optional_param('S2ST', null, PARAM_TEXT) . '&' . optional_param('S3ST', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('P1ST', null, PARAM_TEXT) . '&' . optional_param('P2ST', null, PARAM_TEXT) . '&' . optional_param('P3ST', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('S1GE', null, PARAM_TEXT) . '&' . optional_param('S2GE', null, PARAM_TEXT) . '&' . optional_param('S3GE', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('P1GE', null, PARAM_TEXT) . '&' . optional_param('P2GE', null, PARAM_TEXT) . '&' . optional_param('P3GE', null, PARAM_TEXT) . '&';
-        break;
     //3.2.2
     case 24:
+        $tope=20;
+        $desc='';
+        for ($i=0; $i<$tope; $i++){
+            $desc .= optional_param('S1SC'.$i, null, PARAM_TEXT) . '&' . optional_param('S2SC'.$i, null, PARAM_TEXT) . '&' . optional_param('S3SC'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('P1SC'.$i, null, PARAM_TEXT) . '&' . optional_param('P2SC'.$i, null, PARAM_TEXT) . '&' . optional_param('P3SC'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('S1ST'.$i, null, PARAM_TEXT) . '&' . optional_param('S2ST'.$i, null, PARAM_TEXT) . '&' . optional_param('S3ST'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('P1ST'.$i, null, PARAM_TEXT) . '&' . optional_param('P2ST'.$i, null, PARAM_TEXT) . '&' . optional_param('P3ST'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('S1GE'.$i, null, PARAM_TEXT) . '&' . optional_param('S2GE'.$i, null, PARAM_TEXT) . '&' . optional_param('S3GE'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('P1GE'.$i, null, PARAM_TEXT) . '&' . optional_param('P2GE'.$i, null, PARAM_TEXT) . '&' . optional_param('P3GE'.$i, null, PARAM_TEXT) . '&';
+        }
+        break;
     //3.2.5
     case 27:
     //3.2.6
