@@ -1148,13 +1148,19 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     if ($salidor == false && $i!=0){
                         $ocultador .= '" style="display:none">';
                     }
-                    
+                    $titulillos = '';
 
                     $mform->addElement('html', $ocultador);
                     $mform->addElement('html', '<p>');
                     $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
                     //titulillos de la tabla
-                    $titulillos = '<tr class="header">';
+                    if ($grid == 16){
+                        $titulillos = '<tr class="header">';
+                        $titulillos .= '<th colspan = "5">' . get_string('declinacion_siehe','vocabulario') . '</th>';
+                        $titulillos .= '</tr>';
+                    }
+
+                    $titulillos .= '<tr class="header">';
                     $titulillos .= '<th></th>';
                     $titulillos .= '<th>' . get_string('masculino', 'vocabulario') . '</th>';
                     $titulillos .= '<th>' . get_string('neutro', 'vocabulario') . '</th>';

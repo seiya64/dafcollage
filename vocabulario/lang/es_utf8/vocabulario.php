@@ -144,6 +144,7 @@ $string['particulares'] = 'Lerntipps';
 $string['declinacion1'] = 'Deklination mit dem Nullartikel';
 $string['declinacion2'] = 'Deklination mit bestimmtem Artikel';
 $string['declinacion3'] = 'Deklination mit unbestimmtem Artikel';
+$string['declinacion_siehe'] = 'Deklinationsendungen (siehe auch 2.5 Indefinitpronomen)';
 $string['masculino'] = 'Maskulin';
 $string['neutro'] = 'Neutrum';
 $string['femenino'] = 'Feminin';
