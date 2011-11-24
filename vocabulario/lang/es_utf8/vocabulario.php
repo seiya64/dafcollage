@@ -204,4 +204,5 @@ $string['miraren'] = 'Siehe auch';
 $string['schwache'] = 'Schwache verben';
 $string['starke'] = 'Starke verben';
 $string['gemischte'] = 'Gemischte verben';
+$string['possessiv1'] = 'Possessivpronomina ohne deklination';
 ?>

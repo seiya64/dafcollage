@@ -177,6 +177,25 @@ switch ($padre) {
     case 10:
     //2.6
     case 16:
+        $tope = 1;
+        $desc='';
+        
+        for ($i=0; $i<$tope; $i++){
+
+            $desc = optional_param('NS1'.$i, null, PARAM_TEXT) . '&' . optional_param('NS2'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('NS3M'.$i, null, PARAM_TEXT) . '&' . optional_param('NS3N'.$i, null, PARAM_TEXT) . '&' . optional_param('NS3F'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('NP1'.$i, null, PARAM_TEXT) . '&' . optional_param('NP2'.$i, null, PARAM_TEXT) . '&' . optional_param('NP3'.$i, null, PARAM_TEXT) . '&' . optional_param('NSIE'.$i, null, PARAM_TEXT) . '&';
+
+            $desc .= optional_param('NM'.$i, null, PARAM_TEXT) . '&' . optional_param('NN'.$i, null, PARAM_TEXT) . '&' . optional_param('NF'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('NP'.$i, null, PARAM_TEXT) . '&' . optional_param('AM'.$i, null, PARAM_TEXT) . '&' . optional_param('AN'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('AF'.$i, null, PARAM_TEXT) . '&' . optional_param('AP'.$i, null, PARAM_TEXT) . '&' . optional_param('DM'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('DN'.$i, null, PARAM_TEXT) . '&' . optional_param('DF'.$i, null, PARAM_TEXT) . '&' . optional_param('DP'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('GM'.$i, null, PARAM_TEXT) . '&' . optional_param('GN'.$i, null, PARAM_TEXT) . '&' . optional_param('GF'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('GP'.$i, null, PARAM_TEXT) . '&';
+            //. '&' . optional_param('descripcion', null, PARAM_TEXT);
+        }
+        break;
+
     //2.7
     case 17:
     //2.5.1
