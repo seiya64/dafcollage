@@ -262,6 +262,24 @@ switch ($padre) {
         $desc = optional_param('NOM', null, PARAM_TEXT).'&'.optional_param('AKK', null, PARAM_TEXT).'&';
         $desc .= optional_param('DAT', null, PARAM_TEXT).'&'.optional_param('GEN', null, PARAM_TEXT).'&';
         break;
+    //2.2
+    case 8:
+        $desc = optional_param('NS1', null, PARAM_TEXT) . '&' . optional_param('NS2', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('NS3M', null, PARAM_TEXT) . '&' . optional_param('NS3N', null, PARAM_TEXT) . '&' . optional_param('NS3F', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('NP1', null, PARAM_TEXT) . '&' . optional_param('NP2', null, PARAM_TEXT) . '&' . optional_param('NP3', null, PARAM_TEXT) . '&' . optional_param('NSIE', null, PARAM_TEXT) . '&';
+
+        $desc .= optional_param('AS1', null, PARAM_TEXT) . '&' . optional_param('AS2', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('AS3M', null, PARAM_TEXT) . '&' . optional_param('AS3N', null, PARAM_TEXT) . '&' . optional_param('AS3F', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('AP1', null, PARAM_TEXT) . '&' . optional_param('AP2', null, PARAM_TEXT) . '&' . optional_param('AP3', null, PARAM_TEXT) . '&' . optional_param('NSIE', null, PARAM_TEXT) . '&';
+
+        $desc .= optional_param('DS1', null, PARAM_TEXT) . '&' . optional_param('DS2', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('DS3M', null, PARAM_TEXT) . '&' . optional_param('DS3N', null, PARAM_TEXT) . '&' . optional_param('DS3F', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('DP1', null, PARAM_TEXT) . '&' . optional_param('DP2', null, PARAM_TEXT) . '&' . optional_param('DP3', null, PARAM_TEXT) . '&' . optional_param('DSIE', null, PARAM_TEXT) . '&';
+
+        $desc .= optional_param('GS1', null, PARAM_TEXT) . '&' . optional_param('GS2', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('GS3M', null, PARAM_TEXT) . '&' . optional_param('GS3N', null, PARAM_TEXT) . '&' . optional_param('GS3F', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('GP1', null, PARAM_TEXT) . '&' . optional_param('GP2', null, PARAM_TEXT) . '&' . optional_param('GP3', null, PARAM_TEXT) . '&' . optional_param('GSIE', null, PARAM_TEXT) . '&';
+        break;
 }
 
 //soluciones varias
