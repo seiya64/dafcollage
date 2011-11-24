@@ -863,6 +863,10 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
             //3.2.2
             case 24:
 
+                if($grid == 23 || $grid ==24){
+                    
+                }
+
                 //tabla
                 $tope = 20;
                 $ultimo = -1;
@@ -1021,20 +1025,33 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->setDefault('futuro2', $descripcion_troceada[0]);
                 break;
 
+            //3.8.1
+            case 35:
             //3.3
             case 29:
             //3.4
             case 30:
             //3.5
             case 31:
+
+                $cabecera1 = '';
+                $cabecera2 = '';
+                if ($grid == 29 || $grid == 30 || $grid == 31){
+                    $cabecera1 = get_string('indicativo', 'vocabulario');
+                    $cabecera2 = get_string('conjuntivo1', 'vocabulario');
+                }elseif($grid = 35){
+                    $cabecera1 = get_string('sein', 'vocabulario');
+                    $cabecera2 = get_string('andere', 'vocabulario');
+                }
+
                 //tabla
                 $mform->addElement('html', '<p>');
-                $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
+                $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter">');
                 //titulillos de la tabla
                 $titulillos = '<tr class="header">';
                 $titulillos .= '<th></th>';
-                $titulillos .= '<th>' . get_string('indicativo', 'vocabulario') . '</th>';
-                $titulillos .= '<th>' . get_string('conjuntivo1', 'vocabulario') . '</th>';
+                $titulillos .= '<th>' . $cabecera1 . '</th>';
+                $titulillos .= '<th>' . $cabecera2 . '</th>';
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
                 $titulillos = '<tr class="cell">';
@@ -1107,8 +1124,6 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
             //pronombres
             //2.4
             case 10:
-            //2.6
-            case 16:
             //2.7
             case 17:
             //2.5.1
@@ -1403,6 +1418,9 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
             //8.3
             case 66:
                 break;
+            //3.8.2
+            case 36:
+
         }
 
         if ($grid){

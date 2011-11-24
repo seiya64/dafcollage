@@ -134,6 +134,8 @@ switch ($padre) {
     case 28:
         $desc = optional_param('futuro2', null, PARAM_TEXT) . '&';
         break;
+    //3.8.1
+    case 35:
     //3.3
     case 29:
     //3.4
