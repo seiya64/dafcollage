@@ -630,6 +630,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
         $mform->setDefault('campogr', $lista_padres[1]);
         //probar los campos dinamicos
         $i = 1;
+        $divparacerrar = 0;
         $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico\"  style=\"min-height: 0;\">";
         while($lista_padres[$i+1]){
             $aux = new Vocabulario_gramatica();
@@ -640,8 +641,12 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
             $elselect->setSelected($lista_padres[$i+1]);
             $campodinamico .= $elselect->toHtml();
             $campodinamico .= '</div>';
-            $campodinamico .= "<div class=\"fitem\" id=\"".'campogr'."grgeneraldinamico".$lista_padres[$i]."\" style=\"min-height: 0;\"></div>";
+            $campodinamico .= "<div class=\"fitem\" id=\"".'campogr'."grgeneraldinamico".$lista_padres[$i]."\" style=\"min-height: 0;\">";
             $i = $i+1;
+            $divparacerrar++;
+        }
+        for ($i = 0; $i < $divparacerrar; $i++){
+            $campodinamico .= "</div>";
         }
         $campodinamico .= "</div>";
         $mform->addElement('html', $campodinamico);
@@ -863,7 +868,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
             //3.2.2
             case 24:
                 //tabla
-                $tope = 10;
+                $tope = 20;
                 $ultimo = -1;
                 for ($i=0; $i<$tope;$i++){
                     $ocultador = '<div id="ocultador_tabla'.$i;
@@ -1062,8 +1067,14 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
             //3.3
             case 29:
+            case 31:
                 //tabla
+                if ($grid == 29){
                 $tope = 6;
+                }
+                elseif ($grid ==31){
+                    $tope = 10;
+                }
                 $ultimo = -1;
                 for ($i=0; $i<$tope;$i++){
                     $ocultador = '<div id="ocultador_tabla'.$i;
@@ -1158,18 +1169,8 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 break;
             //3.8.1
             case 35:
-            //3.5
-            case 31:
-
-                $cabecera1 = '';
-                $cabecera2 = '';
-                if ($grid == 29 || $grid == 30 || $grid == 31){
-                    $cabecera1 = get_string('indicativo', 'vocabulario');
-                    $cabecera2 = get_string('conjuntivo1', 'vocabulario');
-                }elseif($grid = 35){
-                    $cabecera1 = get_string('sein', 'vocabulario');
-                    $cabecera2 = get_string('andere', 'vocabulario');
-                }
+                $cabecera1 = get_string('sein', 'vocabulario');
+                $cabecera2 = get_string('andere', 'vocabulario');
 
                 //tabla
                 $mform->addElement('html', '<p>');
@@ -1746,6 +1747,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', '</table>');
                 $mform->addElement('html', '<p>');
                 break;
+            //3.9
             case 37:
                 $tope = 10;
                 $ultimo = -1;
@@ -1800,6 +1802,9 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $mform->addElement('static', 'mas_tablas', '', $ops);
                 }
 
+                break;
+            //3.6
+            case 39:
                 break;
         }
 
