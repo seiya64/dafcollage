@@ -167,6 +167,14 @@ $string['satzart'] = 'Satzart';
 $string['komfun'] = 'Kommunikative Funktion';
 $string['person'] = 'Person';
 $string['nichtperson'] = 'Nicht-Person';
+$string['satztr'] = 'Satzstruktur';
+$string['subjunktor'] = 'Subjunktor';
+$string['subjekt'] = 'Subjekt';
+//abreviaturas con una s (de small) delante
+$string['snominativo'] = 'N';
+$string['sacusativo'] = 'A';
+$string['sdativo'] = 'D';
+$string['sgenitivo'] = 'G';
 //personas
 $string['S1'] = 'ich';
 $string['S2'] = 'du';
