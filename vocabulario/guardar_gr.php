@@ -153,38 +153,42 @@ switch ($padre) {
 
     //3.3
     case 29:
-        $desc = optional_param('S1PRA', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('S1PRE', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('S1PER', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('S1PC1', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('S1PC2', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('S2PRA', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('S2PRE', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('S2PER', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('S2PC1', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('S2PC2', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('S3PRA', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('S3PRE', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('S3PER', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('S3PC1', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('S3PC2', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('P1PRA', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('P1PRE', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('P1PER', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('P1PC1', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('P1PC2', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('P2PRA', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('P2PRE', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('P2PER', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('P2PC1', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('P2PC2', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('P3PRA', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('P3PRE', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('P3PER', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('P3PC1', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('P3PC2', null, PARAM_TEXT) . '&';
+        $tope=6;
+        $desc='';
+        for ($i=0; $i<$tope; $i++){
+            $desc .= optional_param('S1PRA'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('S1PRE'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('S1PER'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('S1PC1'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('S1PC2'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('S2PRA'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('S2PRE'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('S2PER'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('S2PC1'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('S2PC2'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('S3PRA'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('S3PRE'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('S3PER'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('S3PC1'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('S3PC2'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('P1PRA'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('P1PRE'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('P1PER'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('P1PC1'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('P1PC2'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('P2PRA'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('P2PRE'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('P2PER'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('P2PC1'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('P2PC2'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('P3PRA'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('P3PRE'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('P3PER'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('P3PC1'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('P3PC2'.$i, null, PARAM_TEXT) . '&';
+        }
         break;
-        //3.8.1
+    //3.8.1
     case 35:
     //3.5
     case 31:
