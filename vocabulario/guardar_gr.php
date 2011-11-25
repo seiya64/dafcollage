@@ -150,6 +150,37 @@ switch ($padre) {
     case 35:
     //3.3
     case 29:
+        $desc = optional_param('S1PRA', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('S1PRE', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('S1PER', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('S1PC1', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('S1PC2', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('S2PRA', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('S2PRE', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('S2PER', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('S2PC1', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('S2PC2', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('S3PRA', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('S3PRE', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('S3PER', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('S3PC1', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('S3PC2', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P1PRA', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P1PRE', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P1PER', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P1PC1', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P1PC2', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P2PRA', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P2PRE', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P2PER', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P2PC1', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P2PC2', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P3PRA', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P3PRE', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P3PER', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P3PC1', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P3PC2', null, PARAM_TEXT) . '&';
+        break;
     //3.4
     case 30:
     //3.5
