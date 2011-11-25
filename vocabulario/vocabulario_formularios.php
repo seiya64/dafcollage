@@ -1053,12 +1053,76 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $mform->addElement('html', $titulillos);
                     $mform->addElement('html', '</table>');
                     $mform->addElement('html', '<p>');
-
                 break;
             //3.8.1
             case 35:
             //3.3
             case 29:
+                //tabla
+                $mform->addElement('html', '<p>');
+                $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter">');
+                //titulillos de la tabla
+                $titulillos = '<tr class="header">';
+                $titulillos .= '<th></th>';
+                $titulillos .= '<th colspan=3>' . get_string('indicativo','vocabulario') . '</th>';
+                $titulillos .= '<th colspan=2>' . get_string('conjuntivo','vocabulario') . '</th>';
+                $titulillos .= '</tr>';
+                $titulillos .= '<tr class="header">';
+                $titulillos .= '<th></th>';
+                $titulillos .= '<th>' . get_string('prasens','vocabulario') . '</th>';
+                $titulillos .= '<th>' . get_string('preterito','vocabulario') . '</th>';
+                $titulillos .= '<th>' . get_string('perfecto','vocabulario') . '</th>';
+                $titulillos .= '<th>' . get_string('conjuntivo1','vocabulario') . '</th>';
+                $titulillos .= '<th>' . get_string('conjuntivo2','vocabulario') . '</th>';
+                $titulillos .= '</tr>';
+                $mform->addElement('html', $titulillos);
+                $titulillos = '<tr class="cell">';
+                $titulillos .= '<td class="cell">' . get_string('S1', 'vocabulario') . '</td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_S1PRA" name="S1PRA" value="' . $descripcion_troceada[6] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_S1PRE" name="S1PRE" value="' . $descripcion_troceada[6] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_S1PER" name="S1PER" value="' . $descripcion_troceada[7] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_S1PC1" name="S1PC1" value="' . $descripcion_troceada[7] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_S1PC2" name="S1PC2" value="' . $descripcion_troceada[7] . '"></td>';
+                $titulillos .= '</tr>';
+                $titulillos .= '<tr class="cell">';
+                $titulillos .= '<td class="cell">' . get_string('S2', 'vocabulario') . '</td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_S2PRA" name="S2PRA" value="' . $descripcion_troceada[6] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_S2PRE" name="S2PRE" value="' . $descripcion_troceada[6] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_S2PER" name="S2PER" value="' . $descripcion_troceada[7] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_S2PC1" name="S2PC1" value="' . $descripcion_troceada[7] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_S2PC2" name="S2PC2" value="' . $descripcion_troceada[7] . '"></td>';$titulillos .= '</tr>';
+                $titulillos .= '<tr class="cell">';
+                $titulillos .= '<td class="cell">' . get_string('S3', 'vocabulario') . '</td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_S3PRA" name="S3PRA" value="' . $descripcion_troceada[6] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_S3PRE" name="S3PRE" value="' . $descripcion_troceada[6] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_S3PER" name="S3PER" value="' . $descripcion_troceada[7] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_S3PC1" name="S3PC1" value="' . $descripcion_troceada[7] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_S3PC2" name="S3PC2" value="' . $descripcion_troceada[7] . '"></td>';$titulillos .= '</tr>';
+                $titulillos .= '<tr class="cell">';
+                $titulillos .= '<td class="cell">' . get_string('P1', 'vocabulario') . '</td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_P1PRA" name="P1PRA" value="' . $descripcion_troceada[6] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_P1PRE" name="P1PRE" value="' . $descripcion_troceada[6] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_P1PER" name="P1PER" value="' . $descripcion_troceada[7] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_P1PC1" name="P1PC1" value="' . $descripcion_troceada[7] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_P1PC2" name="P1PC2" value="' . $descripcion_troceada[7] . '"></td>';$titulillos .= '</tr>';
+                $titulillos .= '<tr class="cell">';
+                $titulillos .= '<td class="cell">' . get_string('P2', 'vocabulario') . '</td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_P2PRA" name="P2PRA" value="' . $descripcion_troceada[6] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_P2PRE" name="P2PRE" value="' . $descripcion_troceada[6] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_P2PER" name="P2PER" value="' . $descripcion_troceada[7] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_P2PC1" name="P2PC1" value="' . $descripcion_troceada[7] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_P2PC2" name="P2PC2" value="' . $descripcion_troceada[7] . '"></td>';$titulillos .= '</tr>';
+                $titulillos .= '<tr class="cell">';
+                $titulillos .= '<td class="cell">' . get_string('P3', 'vocabulario') . '</td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_P3PRA" name="P3PRA" value="' . $descripcion_troceada[6] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_P3PRE" name="P3PRE" value="' . $descripcion_troceada[6] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_P3PER" name="P3PER" value="' . $descripcion_troceada[7] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_P3PC1" name="P3PC1" value="' . $descripcion_troceada[7] . '"></td>';
+                $titulillos .= '<td><input type="text" size=10 id="id_P3PC2" name="P3PC2" value="' . $descripcion_troceada[7] . '"></td>';$titulillos .= '</tr>';
+                $mform->addElement('html', $titulillos);
+                $mform->addElement('html', '</table>');
+                $mform->addElement('html', '<p>');
+                break;
             //3.4
             case 30:
             //3.5
