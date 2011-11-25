@@ -311,6 +311,13 @@ switch ($padre) {
         $desc .= optional_param('GS3M', null, PARAM_TEXT) . '&' . optional_param('GS3N', null, PARAM_TEXT) . '&' . optional_param('GS3F', null, PARAM_TEXT) . '&';
         $desc .= optional_param('GP1', null, PARAM_TEXT) . '&' . optional_param('GP2', null, PARAM_TEXT) . '&' . optional_param('GP3', null, PARAM_TEXT) . '&' . optional_param('GSIE', null, PARAM_TEXT) . '&';
         break;
+    case 37:
+        $tope = 10;
+        $desc='';
+        for ($i=0; $i<$tope; $i++){
+            $desc .= optional_param('S2'.$i, null, PARAM_TEXT) . '&' . optional_param('P2'.$i, null, PARAM_TEXT) . '&' . optional_param('SIE'.$i, null, PARAM_TEXT) . '&';
+        }
+        break;
 }
 
 //soluciones varias
