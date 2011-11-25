@@ -1551,8 +1551,6 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
             case 74:
                 $mform->addElement('textarea', 'func', get_string("func", "vocabulario"), 'rows="5" cols="30"');
                 $mform->setDefault('func', $descripcion_troceada[0]);
-                $mform->addElement('textarea', 'siehe', get_string("siehe", "vocabulario"), 'rows="5" cols="30"');
-                $mform->setDefault('siehe', $descripcion_troceada[1]);
                 break;
             //8.2
             case 65:
