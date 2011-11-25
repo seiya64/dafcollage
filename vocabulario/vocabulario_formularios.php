@@ -1054,8 +1054,12 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $mform->addElement('html', '</table>');
                     $mform->addElement('html', '<p>');
                 break;
-            //3.8.1
-            case 35:
+            //3.4
+            case 30:
+                $mform->addElement('textarea', 'trennbaren', get_string("trennbaren", "vocabulario"), 'rows="5" cols="30"');
+                $mform->setDefault('trennbaren', $descripcion_troceada[0]);
+                break;
+
             //3.3
             case 29:
                 //tabla
@@ -1123,8 +1127,8 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', '</table>');
                 $mform->addElement('html', '<p>');
                 break;
-            //3.4
-            case 30:
+            //3.8.1
+            case 35:
             //3.5
             case 31:
 

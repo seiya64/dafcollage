@@ -146,8 +146,11 @@ switch ($padre) {
         $desc .= optional_param('P2P', null, PARAM_TEXT) . '&' . optional_param('P2K', null, PARAM_TEXT) . '&';
         $desc .= optional_param('P3P', null, PARAM_TEXT) . '&' . optional_param('P3K', null, PARAM_TEXT) . '&';
         break;
-    //3.8.1
-    case 35:
+    //3.4
+    case 30:
+        $desc = optional_param('trennbaren', null, PARAM_TEXT) . '&';
+        break;
+
     //3.3
     case 29:
         $desc = optional_param('S1PRA', null, PARAM_TEXT) . '&';
@@ -181,8 +184,8 @@ switch ($padre) {
         $desc .= optional_param('P3PC1', null, PARAM_TEXT) . '&';
         $desc .= optional_param('P3PC2', null, PARAM_TEXT) . '&';
         break;
-    //3.4
-    case 30:
+        //3.8.1
+    case 35:
     //3.5
     case 31:
         $desc = optional_param('S1I', null, PARAM_TEXT) . '&' . optional_param('S1C', null, PARAM_TEXT) . '&';

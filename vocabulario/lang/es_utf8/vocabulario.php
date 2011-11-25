@@ -195,6 +195,7 @@ $string['participio2'] = 'Regeln zur Bildung des Partizip II';
 $string['futuro1'] = 'Regeln zur Bildung des Futur I';
 $string['futuro2'] = 'Regeln zur Bildung des Futur II';
 $string['hilfsverbs'] = 'Regeln zum Gebrauch des Hilfsverbs';
+$string['trennbaren'] = 'Regeln zur bildung der trennbaren verben';
 $string['zustandspassiv'] = 'Zustandspassiv (sein-Passiv)';
 $string['vorganspassiv'] = 'Vorganspassiv (werden-Passiv)';
 $string['sein'] = 'Sein';
