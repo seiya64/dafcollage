@@ -134,6 +134,18 @@ switch ($padre) {
     case 28:
         $desc = optional_param('futuro2', null, PARAM_TEXT) . '&';
         break;
+    //3.8.2
+    case 36:
+        $desc = optional_param('S1SC'.$i, null, PARAM_TEXT) . '&' . optional_param('S2SC'.$i, null, PARAM_TEXT) . '&' . optional_param('S3SC'.$i, null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P1SC'.$i, null, PARAM_TEXT) . '&' . optional_param('P2SC'.$i, null, PARAM_TEXT) . '&' . optional_param('P3SC'.$i, null, PARAM_TEXT) . '&';
+
+        $desc .= optional_param('S1P', null, PARAM_TEXT) . '&' . optional_param('S1K', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('S2P', null, PARAM_TEXT) . '&' . optional_param('S2K', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('S3P', null, PARAM_TEXT) . '&' . optional_param('S3K', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P1P', null, PARAM_TEXT) . '&' . optional_param('P1K', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P2P', null, PARAM_TEXT) . '&' . optional_param('P2K', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('P3P', null, PARAM_TEXT) . '&' . optional_param('P3K', null, PARAM_TEXT) . '&';
+        break;
     //3.8.1
     case 35:
     //3.3
