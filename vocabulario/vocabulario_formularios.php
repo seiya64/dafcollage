@@ -1021,6 +1021,10 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     //titulillos de la tabla
                     $titulillos = '<tr class="header">';
                     $titulillos .= '<th></th>';
+                    $titulillos .= '<th colspan="2">' . get_string('starke','vocabulario') . '</th>';
+                    $titulillos .= '</tr>';
+                    $titulillos .= '<tr class="header">';
+                    $titulillos .= '<th></th>';
                     $titulillos .= '<th>' . get_string('preterito','vocabulario') . '</th>';
                     $titulillos .= '<th>' . get_string('conjuntivo2','vocabulario') . '</th>';
                     $titulillos .= '</tr>';

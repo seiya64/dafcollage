@@ -52,5 +52,5 @@ if (count($graux) > 1){
     echo $elselect->toHtml();
     echo '</div>';
     echo "<div class=\"fitem\" id=\"".$nombre."grgeneraldinamico".$id."\" style=\"min-height: 0;\"></div>";
-}
+} 
 ?>
