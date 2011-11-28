@@ -220,22 +220,11 @@ switch ($padre) {
     case 33:
         $desc = optional_param('zustandspassiv', null, PARAM_TEXT) . '&' . optional_param('vorganspassiv', null, PARAM_TEXT) . '&';
         break;
-    //articulos
-    //4.2 4.3 4.4 4.5 4.6 4.7
-    case 40:
-    case 41:
-    case 42:
-    case 43:
-    case 44:
-    case 45:
-    //pronombres
-    //2.4
-    case 10:
-    //2.6
+        //2.6
     case 16:
         $tope = 1;
         $desc='';
-        
+
         for ($i=0; $i<$tope; $i++){
 
             $desc = optional_param('NS1'.$i, null, PARAM_TEXT) . '&' . optional_param('NS2'.$i, null, PARAM_TEXT) . '&';
@@ -251,7 +240,30 @@ switch ($padre) {
             //. '&' . optional_param('descripcion', null, PARAM_TEXT);
         }
         break;
+    case 42:
+        $desc = optional_param('NS1', null, PARAM_TEXT) . '&' . optional_param('NS2', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('NS3M', null, PARAM_TEXT) . '&' . optional_param('NS3N', null, PARAM_TEXT) . '&' . optional_param('NS3F', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('NP1', null, PARAM_TEXT) . '&' . optional_param('NP2', null, PARAM_TEXT) . '&' . optional_param('NP3', null, PARAM_TEXT) . '&' . optional_param('NSIE', null, PARAM_TEXT) . '&';
 
+        // los de la tabla opcional
+
+        $desc .= optional_param('NM'.$i, null, PARAM_TEXT) . '&' . optional_param('NN'.$i, null, PARAM_TEXT) . '&' . optional_param('NF'.$i, null, PARAM_TEXT) . '&';
+        $desc .= optional_param('NP'.$i, null, PARAM_TEXT) . '&' . optional_param('AM'.$i, null, PARAM_TEXT) . '&' . optional_param('AN'.$i, null, PARAM_TEXT) . '&';
+        $desc .= optional_param('AF'.$i, null, PARAM_TEXT) . '&' . optional_param('AP'.$i, null, PARAM_TEXT) . '&' . optional_param('DM'.$i, null, PARAM_TEXT) . '&';
+        $desc .= optional_param('DN'.$i, null, PARAM_TEXT) . '&' . optional_param('DF'.$i, null, PARAM_TEXT) . '&' . optional_param('DP'.$i, null, PARAM_TEXT) . '&';
+        $desc .= optional_param('GM'.$i, null, PARAM_TEXT) . '&' . optional_param('GN'.$i, null, PARAM_TEXT) . '&' . optional_param('GF'.$i, null, PARAM_TEXT) . '&';
+        $desc .= optional_param('GP'.$i, null, PARAM_TEXT) . '&';
+        break;
+    //articulos
+    //4.2 4.3 4.4 4.5 4.6 4.7
+    case 40:
+    case 41:
+    case 43:
+    case 44:
+    case 45:
+    //pronombres
+    //2.4
+    case 10:
     //2.7
     case 17:
     //2.5.1

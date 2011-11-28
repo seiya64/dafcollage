@@ -135,6 +135,7 @@ $string['que_palabras'] = '¿Con qué palabras?';
 $string['que_frases'] = '¿Con qué frases?';
 $string['que_tono'] = '¿En qué tono?';
 $string['mastablas'] = 'Añadir Nueva tabla';
+$string['muestra_tabla'] = 'Editar Tabla';
 $string['nopermisos'] = 'No tienes permisos';
 //a partir de aqui cosas en aleman que en principio no se cambian
 $string['definido'] = 'Definitiv';
@@ -144,6 +145,7 @@ $string['particulares'] = 'Lerntipps';
 $string['declinacion1'] = 'Deklination Typ 1';
 $string['declinacion2'] = 'Deklination Typ 2';
 $string['declinacion3'] = 'Deklination Typ 3';
+$string['declinacion4'] = 'Deklinationsendungen';
 $string['declinacion_siehe'] = 'Deklinationsendungen (siehe auch 2.4 Indefinitpronomen)';
 $string['masculino'] = 'Maskulin';
 $string['neutro'] = 'Neutrum';
@@ -220,4 +222,5 @@ $string['schwache_siehe'] = 'Schwache Verben (siehe auch 3.2.2 Präteritum)';
 $string['starke'] = 'Starke Verben';
 $string['gemischte'] = 'Gemischte Verben';
 $string['possessiv1'] = 'Possessivpronomina ohne deklination';
+$string['possessiv2'] = 'Possessivartikel ohne deklination';
 ?>
