@@ -1237,7 +1237,7 @@ class Vocabulario_mis_gramaticas {
 
     function guardar() {
         $gr = get_record_select('vocabulario_mis_gramaticas', 'usuarioid=' . $this->usuarioid . ' and gramaticaid=\'' . $this->gramaticaid .'\'');
-        print_object($gr);
+        //print_object($gr);
         if ($gr->id == null){
             $this->id = insert_record('vocabulario_mis_gramaticas', $this, true);
         }

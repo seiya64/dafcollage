@@ -1074,7 +1074,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
             case 31:
                 //tabla
                 if ($grid == 29){
-                $tope = 6;
+                    $tope = 6;
                 }
                 elseif ($grid ==31){
                     $tope = 10;

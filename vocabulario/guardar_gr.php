@@ -153,7 +153,14 @@ switch ($padre) {
 
     //3.3
     case 29:
-        $tope=6;
+    //3.5
+    case 31:
+        if ($padre == 29){
+            $tope = 6;
+        }
+        elseif ($padre ==31){
+            $tope = 10;
+        }
         $desc='';
         for ($i=0; $i<$tope; $i++){
             $desc .= optional_param('S1PRA'.$i, null, PARAM_TEXT) . '&';
@@ -187,11 +194,10 @@ switch ($padre) {
             $desc .= optional_param('P3PC1'.$i, null, PARAM_TEXT) . '&';
             $desc .= optional_param('P3PC2'.$i, null, PARAM_TEXT) . '&';
         }
+        echo $desc;
         break;
     //3.8.1
     case 35:
-    //3.5
-    case 31:
         $desc = optional_param('S1I', null, PARAM_TEXT) . '&' . optional_param('S1C', null, PARAM_TEXT) . '&';
         $desc .= optional_param('S2I', null, PARAM_TEXT) . '&' . optional_param('S2C', null, PARAM_TEXT) . '&';
         $desc .= optional_param('S3I', null, PARAM_TEXT) . '&' . optional_param('S3C', null, PARAM_TEXT) . '&';
