@@ -362,6 +362,14 @@ switch ($padre) {
             $desc .= optional_param('S2'.$i, null, PARAM_TEXT) . '&' . optional_param('P2'.$i, null, PARAM_TEXT) . '&' . optional_param('SIE'.$i, null, PARAM_TEXT) . '&';
         }
         break;
+    case 32:
+        $desc = optional_param('AS1', null, PARAM_TEXT) . '&' . optional_param('AS2', null, PARAM_TEXT) . '&' . optional_param('AS3', null, PARAM_TEXT). '&';
+        $desc .= optional_param('AP1', null, PARAM_TEXT) . '&' . optional_param('AP2', null, PARAM_TEXT) . '&' . optional_param('AP3', null, PARAM_TEXT). '&';
+        $desc .= optional_param('ASIE', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('DS1', null, PARAM_TEXT) . '&' . optional_param('DS2', null, PARAM_TEXT) . '&' . optional_param('DS3', null, PARAM_TEXT). '&';
+        $desc .= optional_param('DP1', null, PARAM_TEXT) . '&' . optional_param('DP2', null, PARAM_TEXT) . '&' . optional_param('DP3', null, PARAM_TEXT). '&';
+        $desc .= optional_param('DSIE', null, PARAM_TEXT) . '&';
+        break;
 }
 
 //soluciones varias

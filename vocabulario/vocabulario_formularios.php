@@ -1808,7 +1808,44 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                 break;
             //3.6
-            case 39:
+            case 32:
+                $mform->addElement('html', '<p>');
+                $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter">');
+                //titulillos de la tabla
+                $titulillos = '<tr class="header">';
+                $titulillos .= '<th></th>';
+                $titulillos .='<th colspan="3">'.get_string('sing','vocabulario').'</th>';
+                $titulillos .='<th colspan="3">'.get_string('plural','vocabulario').'</th>';
+                $titulillos .='<th> Sie </th>';
+                $titulillos .= '</tr>';
+                $titulillos .= '<tr class="header">';
+                $titulillos .= '<th></th><th>1</th><th>2</th><th>3</th><th>1</th><th>2</th><th>3</th><th></th>';
+                $titulillos .= '</tr>';
+                $mform->addElement('html', $titulillos);
+                $titulillos = '<tr class="cell">';
+                $titulillos .= '<td class="cell">' . get_string('acusativo', 'vocabulario') . '</td>';
+                $titulillos .= '<td><input size="10" type="text" id="id_AS1" name="AS1" value="' . $descripcion_troceada[0] . '"></td>';
+                $titulillos .= '<td><input size="10" type="text" id="id_AS2" name="AS2" value="' . $descripcion_troceada[1] . '"></td>';
+                $titulillos .= '<td><input size="10" type="text" id="id_AS3" name="AS3" value="' . $descripcion_troceada[2] . '"></td>';
+                $titulillos .= '<td><input size="10" type="text" id="id_AP1" name="AP1" value="' . $descripcion_troceada[3] . '"></td>';
+                $titulillos .= '<td><input size="10" type="text" id="id_AP2" name="AP2" value="' . $descripcion_troceada[4] . '"></td>';
+                $titulillos .= '<td><input size="10" type="text" id="id_AP3" name="AP3" value="' . $descripcion_troceada[5] . '"></td>';
+                $titulillos .= '<td><input size="8" type="text" id="id_ASIE" name="ASIE" value="' . $descripcion_troceada[6] . '"></td>';
+                $titulillos .= '</tr>';
+                $titulillos .= '<tr class="cell">';
+                $titulillos .= '<td class="cell">' . get_string('dativo', 'vocabulario') . '</td>';
+                $titulillos .= '<td><input size="10" type="text" id="id_DS1" name="DS1" value="' . $descripcion_troceada[7] . '"></td>';
+                $titulillos .= '<td><input size="10" type="text" id="id_DS2" name="DS2" value="' . $descripcion_troceada[8] . '"></td>';
+                $titulillos .= '<td><input size="10" type="text" id="id_DS3" name="DS3" value="' . $descripcion_troceada[9] . '"></td>';
+                $titulillos .= '<td><input size="10" type="text" id="id_DP1" name="DP1" value="' . $descripcion_troceada[10] . '"></td>';
+                $titulillos .= '<td><input size="10" type="text" id="id_DP2" name="DP2" value="' . $descripcion_troceada[11] . '"></td>';
+                $titulillos .= '<td><input size="10" type="text" id="id_DP3" name="DP3" value="' . $descripcion_troceada[12] . '"></td>';
+                $titulillos .= '<td><input size="8" type="text" id="id_SIE" name="DSIE" value="' . $descripcion_troceada[13] . '"></td>';
+                $titulillos .= '</tr>';
+
+                $mform->addElement('html', $titulillos);
+                $mform->addElement('html', '</table>');
+                $mform->addElement('html', '<p>');
                 break;
         }
 
