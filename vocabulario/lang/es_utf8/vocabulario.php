@@ -135,6 +135,7 @@ $string['que_palabras'] = '¿Con qué palabras?';
 $string['que_frases'] = '¿Con qué frases?';
 $string['que_tono'] = '¿En qué tono?';
 $string['mastablas'] = 'Añadir Nueva tabla';
+$string['masfilas'] = 'Añadir Nueva línea';
 $string['muestra_tabla'] = 'Editar Tabla';
 $string['nopermisos'] = 'No tienes permisos';
 //a partir de aqui cosas en aleman que en principio no se cambian
@@ -170,6 +171,9 @@ $string['genero'] = 'Genus';
 $string['reinesf'] = 'Reine Singularformen';
 $string['reinepf'] = 'Reine Pluralformen';
 $string['beispielsatz'] = 'Beispielsatz';
+$string['beispiele_def'] = 'Beispiele definitartikel';
+$string['beispiele_indef'] = 'Beispiele indefinitartikel';
+$string['beispiele_null'] = 'Beispiele nullartikel';
 $string['satzart'] = 'Satzart';
 $string['komfun'] = 'Kommunikative Funktion';
 $string['person'] = 'Person';
@@ -223,4 +227,5 @@ $string['starke'] = 'Starke Verben';
 $string['gemischte'] = 'Gemischte Verben';
 $string['possessiv1'] = 'Possessivpronomina ohne deklination';
 $string['possessiv2'] = 'Possessivartikel ohne deklination';
+$string['gebrauch'] = 'Gebrauch';
 ?>

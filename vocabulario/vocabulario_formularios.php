@@ -1454,7 +1454,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 }
 
                 if($salidor == false){
-                    $ops = '<a id="mctabla" href=\'javascript:desocultar("tabla")\' id="mt">'.get_string("muestra_tabla", "vocabulario").'</a>';
+                    $ops = '<a id="mctabla" href=\'javascript:desocultar("tabla")\'>'.get_string("muestra_tabla", "vocabulario").'</a>';
                     $mform->addElement('static', 'pon_tabla', '', $ops);
                     $ocultador .= '" style="display:none">';
                 }
@@ -1978,6 +1978,75 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', $titulillos);
                 $mform->addElement('html', '</table>');
                 $mform->addElement('html', '<p>');
+                break;
+            case 47:
+                $titulo='';
+                $tope = 20;
+                
+                for($tabla = 0; $tabla<3; ++$tabla){
+                    $mform->addElement('html', '<p>');
+                    $mform->addElement('html','<table class="flexible generaltable generalbox boxaligncenter">');
+
+                    //PRIMERA TABLA DE LAS 3 DE ESTE APARTADO
+                    switch($tabla){
+                        case 0:
+                            $titulo = get_string('beispiele_def','vocabulario');
+                            break;
+                        case 1:
+                            $titulo = get_string('beispiele_indef','vocabulario');
+                            break;
+                        case 2:
+                            $titulo = get_string('beispiele_null','vocabulario');
+                            break;
+                    }
+
+                    
+                    //titulillos de la tabla
+                    $titulillos = '<tr class="head">';
+                    $titulillos .='<th>'.$titulo.'</th>';
+                    $titulillos .='<th>'.get_string('gebrauch','vocabulario').'</th>';
+                    $titulillos .= '</tr>';
+                    $mform->addElement('html',$titulillos);
+
+                    //A partir de aqui pinto filas según se van necesitando
+
+                    $ultima = -1;
+
+                    for ($fila=0; $fila<$tope;$fila++){
+                        $ocultador = '<tr class="cell" id="ocultador_filaT'.$tabla.'_'.$fila;
+                        $salidor = false;
+                        for ($j=0; $j<2 && $salidor==false;$j++){
+                            if($descripcion_troceada[($tabla*$tope*2)+((2*$fila)+$j)]){
+                                $salidor = true;
+                                $ocultador .= '">';
+                                $ultima = $fila;
+                            }
+                        }
+
+                        if ($salidor == false && $fila==0){
+                            $ocultador .= '">';
+                        }
+
+                        if ($salidor == false && $fila!=0){
+                            $ocultador .= '" style="display:none">';
+                        }
+
+                        $mform->addElement('html', $ocultador);
+                        $titulillos = '<td><input type="text" id="id_BE'.$tabla.'_'.$fila.'" name="BE'.$tabla.'_'.$fila.'" value="' . $descripcion_troceada[($tabla*$tope*2)+((2*$fila)+0)] . '"></td>';
+                        $titulillos .= '<td><input type="text" id="id_GE'.$tabla.'_'.$fila.'" name="GE'.$tabla.'_'.$fila.'" value="' . $descripcion_troceada[($tabla*$tope*2)+((2*$fila)+1)] . '"></td>';
+                        $titulillos .= '</tr>';
+                        $mform->addElement('html', $titulillos);
+
+                    }
+                    $mform->addElement('html', '</table>');
+                    $mform->addElement('html', '<p>');
+
+                    if ($ultima+1 < $tope && $tope > 1){
+                        $ops = '<a href=\'javascript:desocultar("filaT'.$tabla.'_'.($ultima+1).'")\' id="mf">'.get_string("masfilas", "vocabulario").'</a>';
+                        $mform->addElement('static', 'mas_filas', '', $ops);
+                    }
+                }
+
                 break;
         }
 

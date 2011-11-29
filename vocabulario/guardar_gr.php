@@ -382,6 +382,16 @@ switch ($padre) {
         $desc .= optional_param('DP1', null, PARAM_TEXT) . '&' . optional_param('DP2', null, PARAM_TEXT) . '&' . optional_param('DP3', null, PARAM_TEXT). '&';
         $desc .= optional_param('DSIE', null, PARAM_TEXT) . '&';
         break;
+    case 47:
+        $tope = 20;
+        $tablas = 3;
+        $desc = '';
+        for($t = 0; $t<$tablas; $t++){
+            for($f=0; $f<$tope; $f++){
+                $desc .= optional_param('BE'.$t.'_'.$f, null, PARAM_TEXT) . '&' . optional_param('GE'.$t.'_'.$f, null, PARAM_TEXT) . '&';
+            }
+        }
+        break;
 }
 
 //soluciones varias
