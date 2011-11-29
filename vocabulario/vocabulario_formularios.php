@@ -428,10 +428,12 @@ class mod_vocabulario_opciones_form extends moodleform {
 /**
  * Class to create a form that is the GUI to show combinations save.
  *
+ * De momento en desuso porque hay un interfaz nueva
+ *
  * @author Fco. Javier Rodríguez López
  *
  */
-class mod_vocabulario_ver_form extends moodleform {
+class mod_vocabulario_ver_old_form extends moodleform {
 
     var $id_tocho;
 
@@ -494,10 +496,11 @@ class mod_vocabulario_ver_form extends moodleform {
 
         //titulillos de la tabla
         $titulillos = '<tr class="header">';
-        $titulillos .= '<th>' . get_string('sust', 'vocabulario') . '</th>';
-        $titulillos .= '<th>' . get_string('vrb', 'vocabulario') . '</th>';
-        $titulillos .= '<th>' . get_string('adj', 'vocabulario') . '</th>';
-        $titulillos .= '<th>' . get_string('otr', 'vocabulario') . '</th>';
+        $titulillos .= '<th>' . get_string('pal', 'vocabulario') . '</th>';
+        $titulillos .= '<th>' . get_string('campo_lex', 'vocabulario') . '</th>';
+        $titulillos .= '<th>' . get_string('campo_gram', 'vocabulario') . '</th>';
+        $titulillos .= '<th>' . get_string('campo_intencion', 'vocabulario') . '</th>';
+        $titulillos .= '<th>' . get_string('campo_tipologia', 'vocabulario') . '</th>';
         if (!$cl) {
             $titulillos .= '<th>' . get_string('campo_lex', 'vocabulario') . '</th>';
         }
@@ -571,6 +574,150 @@ class mod_vocabulario_ver_form extends moodleform {
     }
 
 }
+
+/**
+ * Class to create a form that is the GUI to show combinations save.
+ *
+ * @author Fco. Javier Rodríguez López
+ *
+ */
+class mod_vocabulario_ver_form extends moodleform {
+
+    var $id_tocho;
+
+    function definition() {
+        global $CFG, $COURSE, $USER;
+        $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
+        $mform = & $this->_form;
+        //inclusion del javascript para las funciones
+        $mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
+        $this->id_tocho = required_param('id', PARAM_INT);
+        $alfa = optional_param('alfa', '0', PARAM_INT);
+        $cl = optional_param('cl', '0', PARAM_INT);
+        $valor_campoid = optional_param('campo', '0', PARAM_INT);
+        $usuarioid = $USER->id;
+        $mp = new Vocabulario_mis_palabras();
+
+        //titulo de la seccion
+        $mform->addElement('html','<h1>'.get_string('ver','vocabulario').'</h1>');
+
+        $this->menu_opciones_visualizacion($mform, $usuarioid);
+
+        if (!$alfa && !$cl) {
+            $mis_palabras = $mp->obtener_todas($usuarioid);
+        } else if ($cl) {
+
+            $aux = new Vocabulario_campo_lexico();
+            $clex = $aux->obtener_hijos($usuarioid,0);
+
+            $mform->addElement('select', 'campoid', get_string("campo_lex", "vocabulario"), $clex,"onChange='javascript:cargaContenido(this.id,\"clgeneraldinamico\",0)' style=\"min-height: 0;\"");
+            if ($valor_campoid) {
+                $mform->setDefault('campoid', $valor_campoid);
+                $mis_palabras = $mp->obtener_todas($usuarioid, $valor_campoid);
+            }
+
+            //probar los campos dinamicos
+            $campodinamico = "<div class=\"fitem\" id=\"clgeneraldinamico\"></div>";
+            $mform->addElement('html', $campodinamico);
+
+            //botones
+            $buttonarray = array();
+            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('ver', 'vocabulario'));
+            $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
+
+            $mform->addElement('html', '</br>');
+        } else if ($alfa) {
+            $letra = optional_param('letra', 'a', PARAM_ALPHA);
+            $abecedario = '<h1 style="text-align:center;">';
+            $l = 'a';
+            for ($i = 1; $i < 27; $i++) {
+                $abecedario .= '<a href="./view?id=' . $this->id_tocho . '&opcion=2&alfa=1&letra=' . $l . '">[' . $l . ']</a>';
+                $l++;
+            }
+            $abecedario .= '</h1>';
+            $mform->addElement('html', $abecedario);
+            $mis_palabras = $mp->obtener_todas($usuarioid, $valor_campoid, $letra);
+        }
+
+        $mform->addElement('html', '<p>');
+        $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
+
+        //titulillos de la tabla
+        $titulillos = '<tr class="header">';
+        $titulillos .= '<th>' . get_string('pal', 'vocabulario') . '</th>';
+        $titulillos .= '<th>' . get_string('campo_lex', 'vocabulario') . '</th>';
+        $titulillos .= '<th>' . get_string('campo_gram', 'vocabulario') . '</th>';
+        $titulillos .= '<th>' . get_string('campo_intencion', 'vocabulario') . '</th>';
+        $titulillos .= '<th>' . get_string('campo_tipologia', 'vocabulario') . '</th>';
+        $titulillos .= '<th colspan=2>' . get_string('opciones', 'vocabulario') . '</th>';
+        $titulillos .= '</tr>';
+
+        $mform->addElement('html', $titulillos);
+
+        //filas de la tabla
+        $color = 0;
+        $mis_palabras = $mp->combinaciones_completas($USER->id);
+        foreach ($mis_palabras as $cosa) {
+            $fila = '<tr class="cell" style="text-align:center;';
+            if ($color % 2 == 0) {
+                $fila .= '">';
+                $color = 0;
+            } else {
+                $fila .= 'background:#BDC7D8;">';
+            }
+            $fila .= '<td> ' . $cosa->pal . ' </td>';
+            $fila .= '<td> ' . $cosa->campo . ' </td>';
+            $fila .= '<td> ' . $cosa->gramatica . ' </td>';
+            $fila .= '<td> ' . $cosa->intencion . ' </td>';
+            $fila .= '<td> ' . $cosa->tipo . ' </td>';
+            $acciones = '<a href="./view?id=' . $this->id_tocho . '&opcion=4&id_mp=' . $cosa->mpid . '">[' . get_string('editar', 'vocabulario') . ']</a></td>';
+            $acciones .= '<td><a href="./guardar?id_tocho=' . $this->id_tocho . '&borrar=' . $cosa->mpid . '">[' . get_string('eliminar', 'vocabulario') . ']</a>';
+            $fila .= '<td> ' . $acciones . ' </td>';
+            $fila .= '</tr>';
+            $mform->addElement('html', $fila);
+            $color++;
+        }
+
+        $mform->addElement('html', '</table>');
+        $mform->addElement('html', '<p>');
+    }
+
+    /**
+     * Function to add the options of visualization to the GUI.
+     *
+     * @author Fco. Javier Rodríguez López
+     * @param $mform form in wich it add options
+     * @param $alid
+     *
+     */
+    function menu_opciones_visualizacion($mform, $userid=0) {
+        global $USER;
+        //elegir la visualizacion
+        if ($userid) {
+            $atras = '<h1 class="main">';
+            $atras .= '<a href="./view?id=' . $this->id_tocho . '&opcion=2&alid=' . $userid . '">[' . get_string('todo', 'vocabulario') . ']</a>';
+            $atras .= '<a href="./view?id=' . $this->id_tocho . '&opcion=2&alfa=1&alid=' . $userid . '">[' . get_string('alfabetico', 'vocabulario') . ']</a>';
+            $atras .= '<a href="./view?id=' . $this->id_tocho . '&opcion=2&cl=1&alid=' . $userid . '">[' . get_string('campo_lex', 'vocabulario') . ']</a>';
+            $atras .= '<a href="./pdf?id=' . $this->id_tocho . '&us=' . $userid . '">[' . get_string('pdf', 'vocabulario') . ']</a>';
+            $atras .= '<a href="./view?id=' . $this->id_tocho . '">[' . get_string('atras', 'vocabulario') . ']</a>';
+            $atras .= '</h1>';
+            $mform->addElement('html', $atras);
+            $mform->addElement('html', '</br>');
+        } else {
+            $atras = '<h1 class="main">';
+            $atras .= '<a href="./view?id=' . $this->id_tocho . '&opcion=2">[' . get_string('todo', 'vocabulario') . ']</a>';
+            $atras .= '<a href="./view?id=' . $this->id_tocho . '&opcion=2&alfa=1">[' . get_string('alfabetico', 'vocabulario') . ']</a>';
+            $atras .= '<a href="./view?id=' . $this->id_tocho . '&opcion=2&cl=1">[' . get_string('campo_lex', 'vocabulario') . ']</a>';
+            $atras .= '<a href="./pdf?id=' . $this->id_tocho . '&us=' . $userid . '">[' . get_string('pdf', 'vocabulario') . ']</a>';
+            $atras .= '<a href="./view?id=' . $this->id_tocho . '">[' . get_string('atras', 'vocabulario') . ']</a>';
+            $atras .= '</h1>';
+            $mform->addElement('html', $atras);
+            $mform->addElement('html', '</br>');
+        }
+    }
+
+}
+
 
 class mod_vocabulario_nuevo_cl_form extends moodleform {
 

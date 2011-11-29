@@ -1040,6 +1040,11 @@ class Vocabulario_mis_palabras {
         update_record('vocabulario_mis_palabras', $this, true);
     }
 
+    function combinaciones_completas($usuarioid){
+        $combinaciones = get_records_sql('call todas_palabras('.$usuarioid.')');
+        return $combinaciones;
+    }
+
 }
 
 class Vocabulario_gramatica {
