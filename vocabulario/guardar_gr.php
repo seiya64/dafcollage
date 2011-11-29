@@ -77,7 +77,7 @@ switch ($padre) {
     case 61:
     case 64:
     case 76:
-        $desc = optional_param('particulares', null, PARAM_TEXT) . '&';
+        //$desc = optional_param('particulares', null, PARAM_TEXT) . '&';
         break;
     //1.2
     case 3:
@@ -98,17 +98,29 @@ switch ($padre) {
         $desc .= optional_param('AF1', null, PARAM_TEXT) . '&' . optional_param('AP1', null, PARAM_TEXT) . '&' . optional_param('DM1', null, PARAM_TEXT) . '&';
         $desc .= optional_param('DN1', null, PARAM_TEXT) . '&' . optional_param('DF1', null, PARAM_TEXT) . '&' . optional_param('DP1', null, PARAM_TEXT) . '&';
         $desc .= optional_param('GM1', null, PARAM_TEXT) . '&' . optional_param('GN1', null, PARAM_TEXT) . '&' . optional_param('GF1', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('GP1', null, PARAM_TEXT) . '&' . optional_param('NM2', null, PARAM_TEXT) . '&' . optional_param('NN2', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('GP1', null, PARAM_TEXT) . '&';
+
+        $desc .= optional_param('idea1', null, PARAM_TEXT) . '&';
+        
+        
+        $desc .= optional_param('NM2', null, PARAM_TEXT) . '&' . optional_param('NN2', null, PARAM_TEXT) . '&';
         $desc .= optional_param('NF2', null, PARAM_TEXT) . '&' . optional_param('NP2', null, PARAM_TEXT) . '&' . optional_param('AM2', null, PARAM_TEXT) . '&';
         $desc .= optional_param('AN2', null, PARAM_TEXT) . '&' . optional_param('AF2', null, PARAM_TEXT) . '&' . optional_param('AP2', null, PARAM_TEXT) . '&';
         $desc .= optional_param('DM2', null, PARAM_TEXT) . '&' . optional_param('DN2', null, PARAM_TEXT) . '&' . optional_param('DF2', null, PARAM_TEXT) . '&';
         $desc .= optional_param('DP2', null, PARAM_TEXT) . '&' . optional_param('GM2', null, PARAM_TEXT) . '&' . optional_param('GN2', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('GF2', null, PARAM_TEXT) . '&' . optional_param('GP2', null, PARAM_TEXT) . '&' . optional_param('NM3', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('GF2', null, PARAM_TEXT) . '&' . optional_param('GP2', null, PARAM_TEXT) . '&';
+
+        $desc .= optional_param('idea2', null, PARAM_TEXT) . '&';
+        
+        $desc .= optional_param('NM3', null, PARAM_TEXT) . '&';
         $desc .= optional_param('NN3', null, PARAM_TEXT) . '&' . optional_param('NF3', null, PARAM_TEXT) . '&' . optional_param('NP3', null, PARAM_TEXT) . '&';
         $desc .= optional_param('AM3', null, PARAM_TEXT) . '&' . optional_param('AN3', null, PARAM_TEXT) . '&' . optional_param('AF3', null, PARAM_TEXT) . '&';
         $desc .= optional_param('AP3', null, PARAM_TEXT) . '&' . optional_param('DM3', null, PARAM_TEXT) . '&' . optional_param('DN3', null, PARAM_TEXT) . '&';
         $desc .= optional_param('DF3', null, PARAM_TEXT) . '&' . optional_param('DP3', null, PARAM_TEXT) . '&' . optional_param('GM3', null, PARAM_TEXT) . '&';
         $desc .= optional_param('GN3', null, PARAM_TEXT) . '&' . optional_param('GF3', null, PARAM_TEXT) . '&' . optional_param('GP3', null, PARAM_TEXT) . '&';
+        
+        $desc .= optional_param('idea3', null, PARAM_TEXT) . '&';
+
         break;
     //tablas verbos
     //3.2.1
