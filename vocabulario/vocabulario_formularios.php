@@ -1071,6 +1071,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
             //3.3
             case 29:
+            //3.5
             case 31:
                 //tabla
                 if ($grid == 29){

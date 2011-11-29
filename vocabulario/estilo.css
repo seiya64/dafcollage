@@ -15,13 +15,13 @@ Source code:
 
 Original idea and content design:
     Ruth Burbat
+    Inmaculada Almahano Güeto
     Andrea Bies
     Julia Möller Runge
-    Antonio Salmerón Matilla
-    Karin Vilar Sánchez
-    Inmaculada Almahano Güeto
     Blanca Rodríguez Gómez
+    Antonio Salmerón Matilla
     María José Varela Salinas
+    Karin Vilar Sánchez
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License

@@ -17,13 +17,13 @@ Source code:
 
 Original idea and content design:
     Ruth Burbat
+    Inmaculada Almahano Güeto
     Andrea Bies
     Julia Möller Runge
-    Antonio Salmerón Matilla
-    Karin Vilar Sánchez
-    Inmaculada Almahano Güeto
     Blanca Rodríguez Gómez
+    Antonio Salmerón Matilla
     María José Varela Salinas
+    Karin Vilar Sánchez
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -358,7 +358,7 @@ class Vocabulario_adjetivo {
     var $intencionid;
     var $tipologiaid;
 
-    //constructor de adjetivo por defecto gramaticaid = 43 porque es un adjetivo
+    //constructor de adjetivo por defecto gramaticaid = 48 porque es un adjetivo
     /**
      * Constructor por defecto de la clase adjetivo
      * 
@@ -370,7 +370,7 @@ class Vocabulario_adjetivo {
      * @param type $tipid
      * @param type $id
      */
-    function Vocabulario_adjetivo($sin=' ', $sig='', $obs='', $grid=43, $inid=1, $tipid=1, $id=1) {
+    function Vocabulario_adjetivo($sin=' ', $sig='', $obs='', $grid=48, $inid=1, $tipid=1, $id=1) {
         $this->sin_declinar = $sin;
         $this->significado = $sig;
         $this->observaciones = $obs;
