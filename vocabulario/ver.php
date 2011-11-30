@@ -45,6 +45,7 @@ $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
 
 $campo = optional_param('campoid', 0, PARAM_INT);
 $id_tocho = optional_param('id_tocho', 0, PARAM_INT);
+$tipo = optional_param('tipo', 'cl', PARAM_ALPHA);
 
 if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false)) {
     $alumno = optional_param('alumnoid', 0, PARAM_INT);
@@ -52,5 +53,5 @@ if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false)) 
 }
 
 
-redirect('view?id=' . $id_tocho . '&opcion=2&cl=1&campo=' . $campo);
+redirect('view?id=' . $id_tocho . '&opcion=2&'.$tipo.'=1&campo=' . $campo);
 ?>
