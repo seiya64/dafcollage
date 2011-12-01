@@ -232,5 +232,4 @@ $string['reflexivo'] = 'Reflexivpronomen';
 $string['positivo'] = 'Positiv';
 $string['comparativo'] = 'Komparativ';
 $string['superlativo'] = 'Superlativ';
-
 ?>

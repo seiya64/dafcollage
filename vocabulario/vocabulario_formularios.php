@@ -1042,7 +1042,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $mform->addElement('html', '<p>');
 
                     $mform->addElement('html', '</div>');
- 
+
                 }
                 if ($ultimo+1 < $tope && $tope > 1){
                     $ops = '<a href=\'javascript:desocultar("tabla'.($ultimo+1).'")\' id="mt">'.get_string("mastablas", "vocabulario").'</a>';
