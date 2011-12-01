@@ -418,7 +418,6 @@ if ($mform->no_submit_button_pressed()){
         //print_object($graux);
     }
 }
-
 //volvemos a donde veniamos
 redirect('./view.php?id=' . $id_tocho . '&opcion=5&grid=' . $padre);
 //echo '<a href="./view.php?id='.$id_tocho.'&opcion=5&grid='.$misgram['gramaticaid'].'">continuar</a>';
