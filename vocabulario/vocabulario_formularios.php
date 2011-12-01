@@ -1932,7 +1932,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter">');
                 //titulillos de la tabla
                 $titulillos = '<tr class="header">';
-                $titulillos .= '<th colspan="5">'.getstring('satztr','vocabulario').'</th>';
+                $titulillos .= '<th colspan="5">'.get_string('satztr','vocabulario').'</th>';
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
                 $titulillos = '<tr class="cell">';
