@@ -406,6 +406,16 @@ switch ($padre) {
             $desc .= optional_param('PO'.$f, null, PARAM_TEXT) . '&' . optional_param('KO'.$f, null, PARAM_TEXT) . '&' . optional_param('SU'.$f, null, PARAM_TEXT) . '&';
         }
         break;
+    // 8.2
+    case 56:
+        $tope = 20;
+        $desc = '';
+        for($f=0; $f<$tope; $f++){
+            $desc .= optional_param('SUB'.$f, null, PARAM_TEXT) . '&' . optional_param('MIT'.$f, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('VER'.$f, null, PARAM_TEXT) . '&' . optional_param('KON'.$f, null, PARAM_TEXT) . '&';
+        }
+        break;
+
 }
 
 //soluciones varias
