@@ -228,4 +228,8 @@ $string['gemischte'] = 'Gemischte Verben';
 $string['possessiv1'] = 'Possessivpronomina ohne Deklination';
 $string['possessiv2'] = 'Possessivartikel ohne Deklination';
 $string['gebrauch'] = 'Gebrauch';
+$string['reflexivo'] = 'Reflexivpronomen';
+$string['positivo'] = 'Positiv';
+$string['comparativo'] = 'Komparativ';
+$string['superlativo'] = 'Superlativ';
 ?>

@@ -398,6 +398,13 @@ switch ($padre) {
             }
         }
         break;
+    case 47:
+        $tope = 10;
+        $desc = '';
+        for($f=0; $f<$tope; $f++){
+            $desc .= optional_param('PO'.$f, null, PARAM_TEXT) . '&' . optional_param('KO'.$f, null, PARAM_TEXT) . '&' . optional_param('SU'.$f, null, PARAM_TEXT) . '&';
+        }
+        break;
 }
 
 //soluciones varias
