@@ -2127,6 +2127,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 }
 
                 break;
+            //5.2.2
             case 47:
                 $mform->addElement('html', '<p>');
                 $mform->addElement('html','<table class="flexible generaltable generalbox boxaligncenter">');
