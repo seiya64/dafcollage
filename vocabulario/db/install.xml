@@ -208,7 +208,7 @@ GNU General Public License for more details.
         <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_intencion"/>
         <KEY NAME="clave_intencion" TYPE="foreign" FIELDS="intencionesid" REFTABLE="vocabulario_intenciones" REFFIELDS="id" COMMENT="id de la intencion" PREVIOUS="primary" NEXT="clave_usuario"/>
         <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="clave_intencion" NEXT="clave_norepetir"/>
-        <KEY NAME="clave_norepetir" TYPE="unique" FIELDS="usuarioid, palabra_id, tipo_palabra" COMMENT="clave para no repetir intenciones" PREVIOUS="clave_usuario"/>
+        <KEY NAME="clave_norepetir" TYPE="unique" FIELDS="usuarioid, intencionesid" COMMENT="clave para no repetir intenciones" PREVIOUS="clave_usuario"/>
       </KEYS>
     </TABLE>
     <TABLE NAME="vocabulario_tipologias" COMMENT="tipologias textuales" PREVIOUS="vocabulario_mis_intenciones" NEXT="vocabulario_mis_tipologias">
@@ -236,7 +236,7 @@ GNU General Public License for more details.
         <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_tipo"/>
         <KEY NAME="clave_tipo" TYPE="foreign" FIELDS="tipoid" REFTABLE="vocabulario_tipologias" REFFIELDS="id" COMMENT="id del tipo" PREVIOUS="primary" NEXT="clave_usuario"/>
         <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="clave_tipo" NEXT="clave_norepetir"/>
-        <KEY NAME="clave_norepetir" TYPE="unique" FIELDS="usuarioid, palabra_id, tipo_palabra" COMMENT="clave para no repetir intenciones" PREVIOUS="clave_usuario"/>
+        <KEY NAME="clave_norepetir" TYPE="unique" FIELDS="usuarioid, tipoid" COMMENT="clave para no repetir intenciones" PREVIOUS="clave_usuario"/>
       </KEYS>
     </TABLE>
   </TABLES>

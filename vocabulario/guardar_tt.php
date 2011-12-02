@@ -53,16 +53,18 @@ $user_object = get_record('user', 'id', $USER->id);
 
 $tipologia = new Vocabulario_tipologias($user_object->id, required_param('campott', PARAM_TEXT), optional_param('tipologia', PARAM_TEXT));
 
-
-
-$desc = optional_param('quien', null, PARAM_TEXT) . '&' . optional_param('finalidad', null, PARAM_TEXT) . '&';
-$desc .= optional_param('a_quien', null, PARAM_TEXT) . '&' . optional_param('medio', null, PARAM_TEXT). '&';
-$desc .= optional_param('donde', null, PARAM_TEXT) . '&' . optional_param('cuando', null, PARAM_TEXT). '&';
-$desc .= optional_param('motivo', null, PARAM_TEXT) . '&' . optional_param('funcion', null, PARAM_TEXT). '&';
-$desc .= optional_param('sobre_que', null, PARAM_TEXT) . '&' . optional_param('que', null, PARAM_TEXT). '&';
-$desc .= optional_param('orden', null, PARAM_TEXT) . '&' . optional_param('medios_nonverbales', null, PARAM_TEXT). '&';
-$desc .= optional_param('que_palabras', null, PARAM_TEXT) . '&' . optional_param('que_frases', null, PARAM_TEXT). '&';
-$desc .= optional_param('que_tono', null, PARAM_TEXT);
+print_object($tipologia);
+$desc = '';
+for ($i = 1; $i < 6; $i++){
+    $desc .= optional_param('quien'.$i, null, PARAM_TEXT) . '&' . optional_param('finalidad'.$i, null, PARAM_TEXT) . '&';
+    $desc .= optional_param('a_quien'.$i, null, PARAM_TEXT) . '&' . optional_param('medio'.$i, null, PARAM_TEXT). '&';
+    $desc .= optional_param('donde'.$i, null, PARAM_TEXT) . '&' . optional_param('cuando'.$i, null, PARAM_TEXT). '&';
+    $desc .= optional_param('motivo'.$i, null, PARAM_TEXT) . '&' . optional_param('funcion'.$i, null, PARAM_TEXT). '&';
+    $desc .= optional_param('sobre_que'.$i, null, PARAM_TEXT) . '&' . optional_param('que'.$i, null, PARAM_TEXT). '&';
+    $desc .= optional_param('orden'.$i, null, PARAM_TEXT) . '&' . optional_param('medios_nonverbales'.$i, null, PARAM_TEXT). '&';
+    $desc .= optional_param('que_palabras'.$i, null, PARAM_TEXT) . '&' . optional_param('que_frases'.$i, null, PARAM_TEXT). '&';
+    $desc .= optional_param('que_tono'.$i, null, PARAM_TEXT).'&';
+}
 
 if (optional_param('eliminar', 0, PARAM_INT) && $tipologia->get('padre') > 53) {
     delete_records('vocabulario_mis_tipologias', 'id', $tipologia->get('padre'));
@@ -74,8 +76,10 @@ if ($mform->no_submit_button_pressed()){
     if(optional_param('desc_btn')){
         $tipologiaaux = new Vocabulario_mis_tipologias();
         $tipologiaaux->leer($tipologia->get('padre'));
-        $tipologiaaux->set(null,null,$desc);
-        $ttidaux = update_record('vocabulario_mis_tipologias', $tipologiaaux, true);
+        $tipologiaaux->set($USER->id,$tipologia->get('padre'),$desc);
+        print_object($tipologiaaux);
+        $tipologiaaux->guardar();
+        //$ttidaux = update_record('vocabulario_mis_tipologias', $tipologiaaux, true);
     }
 }
 

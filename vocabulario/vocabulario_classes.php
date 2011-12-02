@@ -1639,14 +1639,23 @@ class Vocabulario_mis_tipologias {
     }
 
     function guardar() {
-        $this->id = insert_record('vocabulario_mis_tipologias', $this, true);
+        /*$this->id = insert_record('vocabulario_mis_tipologias', $this, true);
         if (!$this->id) {
             $ic = get_record_select('vocabulario_mis_tipologias', 'usuarioid=' . $this->usuarioid . ' and tipo_palabra=\'' . $this->tipo_palabra . '\' and palabra_id=' . $this->palabra_id);
             $this->id = $ic->id;
             if ($this->tipoid != $ic->tipoid) {
-                $this->descripcion = $gr->descripcion;
+                $this->descripcion = $ic->descripcion;
                 update_record('vocabulario_mis_tipologias', $this, true);
             }
+        }*/
+        $this->id = insert_record('vocabulario_mis_tipologias', $this, true);
+        if (!$this->id) {
+            $ic = get_record_select('vocabulario_mis_tipologias', 'usuarioid=' . $this->usuarioid . ' and tipoid=' . $this->tipoid);
+            $this->id = $ic->id;
+            //if ($this->tipoid != $ic->tipoid) {
+            //$this->descripcion = $ic->descripcion;
+            update_record('vocabulario_mis_tipologias', $this, true);
+            //}
         }
     }
 
