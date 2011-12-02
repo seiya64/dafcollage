@@ -88,7 +88,7 @@ switch ($padre) {
         $desc .= optional_param('GM1', null, PARAM_TEXT) . '&' . optional_param('GN1', null, PARAM_TEXT) . '&' . optional_param('GF1', null, PARAM_TEXT) . '&';
         $desc .= optional_param('GP1', null, PARAM_TEXT) . '&';
 
-        $desc .= optional_param('idea1', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('idea1', null, PARAM_TEXT) . '&' . optional_param('despuesde1', null, PARAM_TEXT) . '&';
         
         
         $desc .= optional_param('NM2', null, PARAM_TEXT) . '&' . optional_param('NN2', null, PARAM_TEXT) . '&';
@@ -98,7 +98,7 @@ switch ($padre) {
         $desc .= optional_param('DP2', null, PARAM_TEXT) . '&' . optional_param('GM2', null, PARAM_TEXT) . '&' . optional_param('GN2', null, PARAM_TEXT) . '&';
         $desc .= optional_param('GF2', null, PARAM_TEXT) . '&' . optional_param('GP2', null, PARAM_TEXT) . '&';
 
-        $desc .= optional_param('idea2', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('idea2', null, PARAM_TEXT) . '&' . optional_param('despuesde2', null, PARAM_TEXT) . '&';
         
         $desc .= optional_param('NM3', null, PARAM_TEXT) . '&';
         $desc .= optional_param('NN3', null, PARAM_TEXT) . '&' . optional_param('NF3', null, PARAM_TEXT) . '&' . optional_param('NP3', null, PARAM_TEXT) . '&';
@@ -107,7 +107,7 @@ switch ($padre) {
         $desc .= optional_param('DF3', null, PARAM_TEXT) . '&' . optional_param('DP3', null, PARAM_TEXT) . '&' . optional_param('GM3', null, PARAM_TEXT) . '&';
         $desc .= optional_param('GN3', null, PARAM_TEXT) . '&' . optional_param('GF3', null, PARAM_TEXT) . '&' . optional_param('GP3', null, PARAM_TEXT) . '&';
         
-        $desc .= optional_param('idea3', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('idea3', null, PARAM_TEXT) . '&' . optional_param('despuesde3', null, PARAM_TEXT) . '&';
 
         break;
     //tablas verbos
