@@ -1658,8 +1658,14 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 break;
             //4.1 Bestimmte Artikel
             case 36:
+                if($grid == 36){
+                    $tabopcional = false;
+                }
             //4.2 Unbestimmte Artikel
             case 37:
+                if($grid == 37){
+                    $tabopcional = false;
+                }
             //4.4 Negationsartikel
             case 39:
                 if($grid == 39){
@@ -1680,12 +1686,24 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 }
             //2.3 Demonstrativpronomen
             case 8:
+                if($grid == 8){
+                    $tabopcional = false;
+                }
             //2.6 Relativpronomen
             case 15:
+                if($grid == 15){
+                    $tabopcional = false;
+                }
             //2.4.1 Als Artikelwörter gebrauche Indefinitpronomina
             case 10:
+                if($grid == 10){
+                    $tabopcional = false;
+                }
             //1.3 Deklination
             case 4:
+                if($grid == 4){
+                    $tabopcional = false;
+                }
                 //para restrngir según la categoria
                 $tope = 1;
                 $ultimo = -1;
