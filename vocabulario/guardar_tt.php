@@ -66,11 +66,6 @@ for ($i = 1; $i < 6; $i++){
     $desc .= optional_param('que_tono'.$i, null, PARAM_TEXT).'&';
 }
 
-if (optional_param('eliminar', 0, PARAM_INT) && $tipologia->get('padre') > 53) {
-    delete_records('vocabulario_mis_tipologias', 'id', $tipologia->get('padre'));
-    redirect('./view.php?id=' . $id_tocho . '&opcion=9');
-}
-
 //vemos que botón hemos pulsado
 if ($mform->no_submit_button_pressed()){
     if(optional_param('desc_btn')){

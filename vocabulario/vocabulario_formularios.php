@@ -2862,10 +2862,6 @@ class mod_vocabulario_nuevo_tipologia_form extends moodleform {
             $mform->addElement('html','</div>');
         }
 
-        //opcion de eliminar un campo
-        $mform->addElement('checkbox', 'eliminar', get_string("eliminar", "vocabulario"));
-        $mform->setDefault('eliminar', 0);
-
         //solucion de enlazar todo con todo
         $mform->addElement('textarea', 'miraren', get_string('miraren','vocabulario'), 'rows="5" cols="30"');
         $mform->setDefault('miraren', $descripcion_troceada[count($descripcion_troceada)-1]);
