@@ -1590,7 +1590,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', '</table>');
                 $mform->addElement('html', '<p>');
                 
-                //la tabla que se muestra de forma opcional
+                //la tabla que se muestra de forma opcional al pulsar un boton
 
                 $ocultador = '<div id="ocultador_tabla';
                 $salidor = false;
