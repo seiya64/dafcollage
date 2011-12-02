@@ -263,7 +263,7 @@ switch ($padre) {
     //4.5 Interrogativartikel
     case 40:
     //4.6 Demonstrativartikel
-    case 21:
+    case 41:
     //2.3 Demonstrativpronomen
     case 8:
     //2.6 Relativpronomen

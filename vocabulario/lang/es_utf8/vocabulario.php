@@ -233,4 +233,7 @@ $string['positivo'] = 'Positiv';
 $string['comparativo'] = 'Komparativ';
 $string['superlativo'] = 'Superlativ';
 $string['despuesde'] = 'Steht Nach';
+$string['endungen_siehe1'] = 'Endungen Siehe auch 4.3 Indefinitartikel Ausser Pluralformen';
+$string['endungen_siehe2'] = 'Endungen Siehe auch 4.2 Definitartikel + Vorangestelltem E';
+$string['endungen_siehe3'] = 'Endungen Siehe auch 4.2 Definitartikel + Vorangestelltem E, Sowie 4.6 Interrogativartikel';
 ?>

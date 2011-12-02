@@ -1662,10 +1662,22 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
             case 37:
             //4.4 Negationsartikel
             case 39:
+                if($grid == 39){
+                    $titulo=get_string('endungen_siehe1','vocabulario');
+                    $tabopcional = true;
+                }
             //4.5 Interrogativartikel
             case 40:
+                if($grid == 40){
+                    $titulo=get_string('endungen_siehe2','vocabulario');
+                    $tabopcional = true;
+                }
             //4.6 Demonstrativartikel
-            case 21:
+            case 41:
+                if($grid == 41){
+                    $titulo=get_string('endungen_siehe3','vocabulario');
+                    $tabopcional = true;
+                }
             //2.3 Demonstrativpronomen
             case 8:
             //2.6 Relativpronomen
@@ -1699,12 +1711,31 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                             $ultimo = $i;
                         }
                     }
-                    if ($salidor == false && $i==0){
-                        $ocultador .= '">';
-                    }
+                    //para los casos 4.4, 4.5 y 4.6 decidimos el nuevo ocultador y la manera de hacerlo
+                    if ($tabopcional == true){
 
-                    if ($salidor == false && $i!=0){
-                        $ocultador .= '" style="display:none">';
+                        $mform->addElement('html','<p>');
+                        $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">' );
+                        $titulillos = '<tr class="header">';
+                        $titulillos .= '<th>'.$titulo.'</th>';
+                        $mform->addElement('html',$titulillos);
+                        $mform->addElement('html','</table>');
+                        $mform->addElement('html','<p>');
+
+                        if($salidor == false){
+                            $ops = '<a id="mctabla'.($ultimo+1).'" href=\'javascript:desocultar("tabla'.($ultimo+1).'")\'>'.get_string("muestra_tabla", "vocabulario").'</a>';
+                            $mform->addElement('static', 'pon_tabla', '', $ops);
+                            $ocultador .= '" style="display:none">';
+                        }
+
+                    }else{//fin de para los casos 4.4, 4.5 y 4.6
+                        if ($salidor == false && $i==0){
+                            $ocultador .= '">';
+                        }
+
+                        if ($salidor == false && $i!=0){
+                            $ocultador .= '" style="display:none">';
+                        }
                     }
 
                     $mform->addElement('html', $ocultador);
@@ -1752,9 +1783,11 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $mform->addElement('html', '<p>');
                     $mform->addElement('html', '</div>');
                 }
-                if ($ultimo+1 < $tope && $tope > 1){
-                    $ops = '<a href=\'javascript:desocultar("tabla'.($ultimo+1).'")\' id="mt">'.get_string("mastablas", "vocabulario").'</a>';
-                    $mform->addElement('static', 'mas_tablas', '', $ops);
+                if(!$tabopcional){  //casos que no son 4.4, 4.5 y 4.6
+                    if ($ultimo+1 < $tope && $tope > 1){
+                        $ops = '<a href=\'javascript:desocultar("tabla'.($ultimo+1).'")\' id="mt">'.get_string("mastablas", "vocabulario").'</a>';
+                        $mform->addElement('static', 'mas_tablas', '', $ops);
+                    }
                 }
                 break;
             //4.7 Gebrauch der Artikelwörter
