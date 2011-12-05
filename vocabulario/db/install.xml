@@ -388,8 +388,8 @@ GNU General Public License for more details.
         <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.7.2 Konjunktiv II','31)" />
         <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.8 Imperativ','18)" />
         <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4 Artikelwörter','0)" />
-        <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.1 Bestimmte Artikel','35)" />
-        <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.2 Unbestimmte Artikel','35)" />
+        <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.1 Definitartikel','35)" />
+        <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.2 Indefinitartikel','35)" />
         <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.3 Possessivartikel','35)" />
         <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.4 Negationsartikel','35)" />
         <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.5 Interrogativartikel','35)" />

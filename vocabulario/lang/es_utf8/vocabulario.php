@@ -135,8 +135,8 @@ $string['que_palabras'] = '¿Con qué palabras?';
 $string['que_frases'] = '¿Con qué frases?';
 $string['que_tono'] = '¿En qué tono?';
 $string['mastablas'] = 'Añadir nueva tabla';
-$string['masfilas'] = 'Añadir Nueva línea';
-$string['muestra_tabla'] = 'Editar Tabla';
+$string['masfilas'] = 'Añadir Nueva fila';
+$string['muestra_tabla'] = 'Editar tabla';
 $string['nopermisos'] = 'No tienes permisos';
 //a partir de aqui cosas en aleman que en principio no se cambian
 $string['definido'] = 'Definitiv';
@@ -232,8 +232,8 @@ $string['reflexivo'] = 'Reflexivpronomen';
 $string['positivo'] = 'Positiv';
 $string['comparativo'] = 'Komparativ';
 $string['superlativo'] = 'Superlativ';
-$string['despuesde'] = 'Steht Nach';
-$string['endungen_siehe1'] = 'Endungen Siehe auch 4.3 Indefinitartikel Ausser Pluralformen';
-$string['endungen_siehe2'] = 'Endungen Siehe auch 4.2 Definitartikel + Vorangestelltem E';
-$string['endungen_siehe3'] = 'Endungen Siehe auch 4.2 Definitartikel + Vorangestelltem E, Sowie 4.6 Interrogativartikel';
+$string['despuesde'] = 'Steht nach';
+$string['endungen_siehe1'] = 'Endungen siehe auch 4.2 Indefinitartikel auβer Pluralformen';
+$string['endungen_siehe2'] = 'Endungen siehe auch 4.1 Definitartikel + vorangestelltem e';
+$string['endungen_siehe3'] = 'Endungen siehe auch 4.1 Definitartikel + vorangestelltem e, sowie 4.5 Interrogativartikel';
 ?>

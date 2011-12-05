@@ -297,9 +297,10 @@ switch ($padre) {
         }
         break;
     //4.7 Gebrauch der Artikelwörter
-    case 42:
+    /*case 42:
         $desc = optional_param('lista', null, PARAM_TEXT) . '&' . optional_param('scheinbare', null, PARAM_TEXT) . '&';
         break;
+     */
     //7.1 Beispiele und Funktionen
     case 53:
         $desc = optional_param('beispielsatz', null, PARAM_TEXT) . '&' . optional_param('satzart', null, PARAM_TEXT) . '&';

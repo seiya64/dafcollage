@@ -1809,12 +1809,13 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 }
                 break;
             //4.7 Gebrauch der Artikelwörter
-            case 42:
+            /*case 42:
                 $mform->addElement('textarea', 'lista', get_string("lista", "vocabulario"), 'rows="5" cols="30"');
                 $mform->setDefault('lista', $descripcion_troceada[0]);
                 $mform->addElement('textarea', 'scheinbare', get_string("scheinbare", "vocabulario"), 'rows="5" cols="30"');
                 $mform->setDefault('scheinbare', $descripcion_troceada[1]);
                 break;
+             */
             //7.1 Beispiele und Funktionen
             case 53:
                 $mform->addElement('textarea', 'beispielsatz', get_string("beispielsatz", "vocabulario"), 'rows="5" cols="30"');
