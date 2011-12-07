@@ -405,20 +405,23 @@ class mod_vocabulario_opciones_form extends moodleform {
         //2,1
         $tabla_menu .='<tr><td style="text-align:left"><p><a href="view?id=' . $id . '&opcion=5"><img src="./imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im"/></br>' . get_string('admin_gr', 'vocabulario') . '</a></p></td>';
         //2,2
-        $tabla_menu .='<td><p><a href="./pdf?id=' . $id . '&us=' . $USER->id . '"><img src="./imagenes/pdf.png" id="id_pdf" name="pdf"/></br>' . get_string('pdf', 'vocabulario') . '</a></p></td>';
+        $tabla_menu .='<td><p><a href="view?id=' . $id . '&opcion=13"><img src="./imagenes/listado.png" id="id_pdf" name="listado"/></br>' . get_string('listado', 'vocabulario') . '</a></p></td>';
         //2,3
         $tabla_menu .='<td></td></tr>';
 
         //3,1
         $tabla_menu .='<tr><td style="text-align:left"><p><a href="view?id=' . $id . '&opcion=7"><img src="./imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im"/></br>' . get_string('admin_ic', 'vocabulario') . '</a></p></td>';
         //3,2
-        $tabla_menu .='<td><p><a href="./manual.pdf"><img src="./imagenes/ayuda.png" id="id_ayuda" name="ayuda"/></br>' . get_string('ayuda', 'vocabulario') . '</a></p></td>';
-        //$tabla_menu .='<td><p><a href="view?id=' . $id . '&opcion=11"><img src="./imagenes/estrategias_aprendizaje.png" id="id_ea_im" name="ea_im"/></br>[' . get_string('admin_ea', 'vocabulario') . ']</a></p></td>';
+        $tabla_menu .='<td><p><a href="./pdf?id=' . $id . '&us=' . $USER->id . '"><img src="./imagenes/pdf.png" id="id_pdf" name="pdf"/></br>' . get_string('pdf', 'vocabulario') . '</a></p></td>';
         //3,3
         $tabla_menu .='<td></td></tr>';
-        
+
         //4,1
-        $tabla_menu .='<tr><td style="text-align:left"><p><a href="view?id=' . $id . '&opcion=9"><img src="./imagenes/tipologias_textuales.png" id="id_tt_im" name="tt_im"/></br>' . get_string('admin_tt', 'vocabulario') . '</a></p></td></tr>';
+        $tabla_menu .='<tr><td style="text-align:left"><p><a href="view?id=' . $id . '&opcion=9"><img src="./imagenes/tipologias_textuales.png" id="id_tt_im" name="tt_im"/></br>' . get_string('admin_tt', 'vocabulario') . '</a></p></td>';
+        //4,2
+        $tabla_menu .='<td><p><a href="./manual.pdf"><img src="./imagenes/ayuda.png" id="id_ayuda" name="ayuda"/></br>' . get_string('ayuda', 'vocabulario') . '</a></p></td>';
+        //4,3
+        $tabla_menu .='<td></td></tr>';
         $tabla_menu .='</table>';
         $mform->addElement('html', $tabla_menu);
     }
@@ -2966,6 +2969,20 @@ class mod_vocabulario_tipologia_desc_form extends moodleform {
         $mform->addElement('hidden', 'id_mp', optional_param('id_mp',null,PARAM_INT));
     }
 
+}
+
+class mod_vocabulario_listado_form extends moodleform{
+    function definition(){
+        global $USER;
+        $mform = & $this->_form;
+        $mform->addElement('html','<p>hola</p>');
+        //botones
+        $buttonarray = array();
+        $buttonarray[] = &$mform->createElement('submit', 'cancelbutton', get_string('cancel'));
+        //$buttonarray[] = &$mform->createElement('reset', 'resetbutton', get_string('revert', 'vocabulario'));
+        //$buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel','vocabulario'));
+        $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
+    }
 }
 
 ?>
