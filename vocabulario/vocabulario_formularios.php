@@ -1592,6 +1592,14 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 
                 //la tabla que se muestra de forma opcional al pulsar un boton
 
+                $mform->addElement('html','<br/><p>');
+                $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">' );
+                $titulillos = '<tr class="header">';
+                $titulillos .= '<th>'.get_string('endungen_siehe4','vocabulario').'</th>';
+                $mform->addElement('html',$titulillos);
+                $mform->addElement('html','</table>');
+                $mform->addElement('html','<p>');
+
                 $ocultador = '<div id="ocultador_tabla';
                 $salidor = false;
                 for ($i=0; $i<16 && $salidor==false;$i++){
@@ -1656,12 +1664,12 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', '<p>');
                 $mform->addElement('html', '</div>');
                 break;
-            //4.1 Bestimmte Artikel
+            //4.1 Definitartikel
             case 36:
                 if($grid == 36){
                     $tabopcional = false;
                 }
-            //4.2 Unbestimmte Artikel
+            //4.2 Indefinitartikel
             case 37:
                 if($grid == 37){
                     $tabopcional = false;
