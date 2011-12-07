@@ -232,6 +232,9 @@ function vocabulario_view($id, $opcion=0, $id_mp=null) {
         case 12: //ayuda
             //$mform = new mod_vocabulario_tipologia_desc_form('guardar_tt_desc.php?id_tocho=' . $id,'&id_mp='.$id_mp);
             break;
+        case 13:
+            $mform = new mod_vocabulario_listado_form('listado.php?id_tocho='.$id);
+            break;
     }
 
     $mform->display();

@@ -3009,12 +3009,52 @@ class mod_vocabulario_listado_form extends moodleform {
     function definition() {
         global $USER;
         $mform = & $this->_form;
-        $mform->addElement('html','<p>hola</p>');
+        $mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
+        //campolexico
+        $campolex = new Vocabulario_campo_lexico();
+        $campolex = $campolex->obtener_todos($USER->id);
+        //inclusion del javascript para las funciones
+        $mform->addElement('static','listacl','','<a href="javascript:desocultar(\'listacl\')" id="mclistacl">'.get_string('campo_lex','vocabulario').'</a>');
+        $mform->addElement('html','<div id="ocultador_listacl" style="display:none">');
+        $mform->addElement('html','<ul>');
+        foreach ($campolex as $cosa){
+           $mform->addElement('html','<li>'.$cosa.'</li>');
+        }
+        $mform->addElement('html','</ul></div>');
+        //gramaticas
+        $gramatica = new Vocabulario_gramatica();
+        $gramatica = $gramatica->obtener_todos($USER->id);
+        $mform->addElement('static','listagr','','<a href="javascript:desocultar(\'listagr\')" id="mclistagr">'.get_string('admin_gr','vocabulario').'</a>');
+        $mform->addElement('html','<div id="ocultador_listagr" style="display:none">');
+        $mform->addElement('html','<ul>');
+        foreach ($gramatica as $cosa){
+           $mform->addElement('html','<li>'.$cosa.'</li>');
+        }
+        $mform->addElement('html','</ul></div>');
+        //intenciones
+        $intenciones = new Vocabulario_intenciones();
+        $intenciones = $intenciones->obtener_todos($USER->id);
+        $mform->addElement('static','listaic','','<a href="javascript:desocultar(\'listaic\')" id="mclistaic">'.get_string('admin_ic','vocabulario').'</a>');
+        $mform->addElement('html','<div id="ocultador_listaic" style="display:none">');
+        $mform->addElement('html','<ul>');
+        foreach ($intenciones as $cosa){
+           $mform->addElement('html','<li>'.$cosa.'</li>');
+        }
+        $mform->addElement('html','</ul></div>');
+        //tipologias
+        //intenciones
+        $tipologias = new Vocabulario_intenciones();
+        $tipologias = $tipologias->obtener_todos($USER->id);
+        $mform->addElement('static','listatt','','<a href="javascript:desocultar(\'listatt\')" id="mclistatt">'.get_string('admin_tt','vocabulario').'</a>');
+        $mform->addElement('html','<div id="ocultador_listatt" style="display:none">');
+        $mform->addElement('html','<ul>');
+        foreach ($tipologias as $cosa){
+           $mform->addElement('html','<li>'.$cosa.'</li>');
+        }
+        $mform->addElement('html','</ul></div>');
         //botones
         $buttonarray = array();
-        $buttonarray[] = &$mform->createElement('submit', 'cancelbutton', get_string('cancel'));
-        //$buttonarray[] = &$mform->createElement('reset', 'resetbutton', get_string('revert', 'vocabulario'));
-        //$buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel','vocabulario'));
+        $buttonarray[] = &$mform->createElement('submit', 'cancelbutton', get_string('cancel','vocabulario'));
         $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
     }
 }
