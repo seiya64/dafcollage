@@ -118,6 +118,7 @@ $string['guardesc'] = 'Guardar cambios';
 $string['ayuda'] = 'Ayuda';
 $string['cancel'] = 'Menú principal';
 $string['mascampos'] = 'Otros campos';
+$string['listado'] = 'Mostrar listado';
 //preguntas tipologias textuales
 $string['quien'] = '¿Quién transmite?';
 $string['finalidad'] = '¿Con qué finalidad?';
