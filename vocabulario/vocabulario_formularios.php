@@ -2718,11 +2718,11 @@ class mod_vocabulario_nuevo_ic_form extends moodleform {
         if ($icid) {
             $mform->setDefault('campoic', $icid);
         }
-        $mform->addElement('text', 'intencion', get_string("campo_intencion_nuevo", "vocabulario"));
+        //$mform->addElement('text', 'intencion', get_string("campo_intencion_nuevo", "vocabulario"));
 
         //opcion de eliminar un campo
-        $mform->addElement('checkbox', 'eliminar', get_string("eliminar", "vocabulario"));
-        $mform->setDefault('eliminar', 0);
+        //$mform->addElement('checkbox', 'eliminar', get_string("eliminar", "vocabulario"));
+        //$mform->setDefault('eliminar', 0);
 
         $intencion = new Vocabulario_mis_intenciones();
         $intencion->leer($icid, $USER->id);

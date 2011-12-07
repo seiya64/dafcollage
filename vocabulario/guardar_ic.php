@@ -60,18 +60,18 @@ if (optional_param('eliminar', 0, PARAM_INT) && $intencion->get('padre') > 145) 
     redirect('./view.php?id=' . $id_tocho . '&opcion=7');
 }
 
-if ($mform->no_submit_button_pressed()){
-    if(optional_param('desc_btn')){
-        redirect('./view.php?id=' . $id_tocho . '&opcion=7&icid=' . $intencion->get('padre'));
-    }
-}
+//if ($mform->no_submit_button_pressed()){
+//    if(optional_param('desc_btn')){
+//        redirect('./view.php?id=' . $id_tocho . '&opcion=7&icid=' . $intencion->get('padre'));
+//    }
+//}
 
-if ($intencion->get('intencion') != null) {
-    $icidaux = insert_record('vocabulario_intenciones', $intencion, true);
-}
-else{
+//if ($intencion->get('intencion') != null) {
+//    $icidaux = insert_record('vocabulario_intenciones', $intencion, true);
+//}
+//else{
     $icidaux = required_param('campoic', PARAM_TEXT);
-}
+//}
 
 if ($desc != null) {
     $mintencion = new Vocabulario_mis_intenciones();
