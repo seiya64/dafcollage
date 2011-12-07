@@ -51,28 +51,20 @@ $id_mp = optional_param('id_mp',null,PARAM_INT);
 
 //averiguo quien soy
 $user_object = get_record('user', 'id', $USER->id);
-$intencion = new Vocabulario_mis_intenciones();
-$intencion->leer($icid);
+
+$intencion = new Vocabulario_intenciones($user_object->id, required_param('campoic', PARAM_TEXT), optional_param('intencion', PARAM_TEXT));
 
 if ($mform->is_cancelled()) {
-    redirect('./view.php?id=' . $id_tocho . '&opcion=7&icid=' . $intencion->get('intencionesid'));
+    redirect('./view.php?id=' . $id_tocho);
 }
 
-//switch ($intencion->get('intencionesid')) {
-    //default:
-        $desc = optional_param('descripcion', null, PARAM_TEXT);
-        //break;
-//}
-
-$intencion->set(null, null, $desc);
-$intencion->actualizar();
-//print_object($intencion);
-
-$soy = optional_param('id_mp',null,PARAM_INT);
-if ($soy != 0){
-    //redirect('./view.php?id=' . $id_tocho . '&opcion=1&id_mp='.$id_mp);
+if (optional_param('eliminar', 0, PARAM_INT) && $intencion->get('padre') > 145) {
+    delete_records('vocabulario_intenciones', 'id', $intencion->get('padre'));
+    redirect('./view.php?id=' . $id_tocho . '&opcion=8');
 }
-else{
-    //redirect('./view.php?id=' . $id_tocho . '&opcion=7');
+
+if ($intencion->get('intencion') != null) {
+    $icidaux = insert_record('vocabulario_intenciones', $intencion, true);
 }
+redirect('./view.php?id=' . $id_tocho . '&opcion=8&icid=' . $icidaux)
 ?>

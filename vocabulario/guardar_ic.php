@@ -55,16 +55,16 @@ $user_object = get_record('user', 'id', $USER->id);
 $intencion = new Vocabulario_intenciones($user_object->id, required_param('campoic', PARAM_TEXT), optional_param('intencion', PARAM_TEXT));
 $desc = optional_param('descripcion', PARAM_TEXT);
 
-if (optional_param('eliminar', 0, PARAM_INT) && $intencion->get('padre') > 145) {
-    delete_records('vocabulario_intenciones', 'id', $intencion->get('padre'));
-    redirect('./view.php?id=' . $id_tocho . '&opcion=7');
-}
-
-//if ($mform->no_submit_button_pressed()){
-//    if(optional_param('desc_btn')){
-//        redirect('./view.php?id=' . $id_tocho . '&opcion=7&icid=' . $intencion->get('padre'));
-//    }
+//if (optional_param('eliminar', 0, PARAM_INT) && $intencion->get('padre') > 145) {
+//    delete_records('vocabulario_intenciones', 'id', $intencion->get('padre'));
+//    redirect('./view.php?id=' . $id_tocho . '&opcion=7');
 //}
+
+if ($mform->no_submit_button_pressed()){
+    if(optional_param('desc_btn')){
+        redirect('./view.php?id=' . $id_tocho . '&opcion=7&icid=' . $intencion->get('padre'));
+    }
+}
 
 //if ($intencion->get('intencion') != null) {
 //    $icidaux = insert_record('vocabulario_intenciones', $intencion, true);
