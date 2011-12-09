@@ -735,7 +735,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
             case 0:
                 break;
             //1.1 Genus
-            case 2:
+            case 3:
             //masculino
                 $mform->addElement('header', 'masculino', get_string('masculino', 'vocabulario'));
                 $mform->addElement('textarea', 'mascsemantico', get_string('clasificacionsemantica', 'vocabulario'), 'rows="5" cols="30"');
@@ -759,7 +759,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->closeHeaderBefore('botones');
                 break;
             //1.2 Numerus
-            case 3:
+            case 4:
                 $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
                 //titulillos de la tabla
                 $titulillos = '<tr class="header">';
@@ -783,7 +783,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                 break;
             //5.2.1 Deklination
-            case 46:
+            case 47:
 
             //TABLA 1
             //tabla
@@ -1028,9 +1028,9 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 break;
             //tablas verbos
             //3.1.1 Präsens
-            case 20:
-            //3.1.2 Präteritum
             case 21:
+            //3.1.2 Präteritum
+            case 22:
             //tabla
                 $tope = 20;
                 $ultimo = -1;
@@ -1129,17 +1129,17 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                 break;
             //3.1.5 Futur I
-            case 24:
+            case 23:
                 $mform->addElement('textarea', 'futuro1', get_string("futuro1", "vocabulario"), 'rows="5" cols="30"');
                 $mform->setDefault('futuro1', $descripcion_troceada[0]);
                 break;
             //3.1.6 Futur II
-            case 25:
+            case 26:
                 $mform->addElement('textarea', 'futuro2', get_string("futuro2", "vocabulario"), 'rows="5" cols="30"');
                 $mform->setDefault('futuro2', $descripcion_troceada[0]);
                 break;
             //3.7.2 Konjunktiv II
-            case 33:
+            case 34:
                 $mform->addElement('html', '<p>');
                 $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter">');
                 //titulillos de la tabla
@@ -1224,20 +1224,20 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', '<p>');
                 break;
             //3.3 Trennbare Verben
-            case 27:
+            case 28:
                 $mform->addElement('textarea', 'trennbaren', get_string("trennbaren", "vocabulario"), 'rows="5" cols="30"');
                 $mform->setDefault('trennbaren', $descripcion_troceada[0]);
                 break;
 
             //3.2 Modalverben
-            case 26:
+            case 27:
             //3.4 Besondere Verben
-            case 28:
+            case 29:
             //tabla
-                if ($grid == 26) {
+                if ($grid == 27) {
                     $tope = 6;
                 }
-                elseif ($grid ==28) {
+                elseif ($grid ==29) {
                     $tope = 10;
                 }
                 $ultimo = -1;
@@ -1338,7 +1338,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 }
                 break;
             //3.7.1 Konjunktiv I
-            case 32:
+            case 33:
                 $cabecera1 = get_string('sein', 'vocabulario');
                 $cabecera2 = get_string('andere', 'vocabulario');
 
@@ -1387,26 +1387,26 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', '<p>');
                 break;
             //3.1.3 Perfekt/Partizip II
-            case 22:
+            case 23:
                 $mform->addElement('textarea', 'participio2', get_string("participio2", "vocabulario"), 'rows="5" cols="30"');
                 $mform->setDefault('participio2', $descripcion_troceada[0]);
                 $mform->addElement('textarea', 'hilfsverbs', get_string("hilfsverbs", "vocabulario"), 'rows="5" cols="30"');
                 $mform->setDefault('hilfsverbs', $descripcion_troceada[1]);
                 break;
             //3.1.4 Partizip I
-            case 23:
+            case 24:
                 $mform->addElement('textarea', 'participio1', get_string("participio1", "vocabulario"), 'rows="5" cols="30"');
                 $mform->setDefault('participio1', $descripcion_troceada[0]);
                 break;
             //3.6 Passiv
-            case 30:
+            case 31:
                 $mform->addElement('textarea', 'zustandspassiv', get_string("zustandspassiv", "vocabulario"), 'rows="5" cols="30"');
                 $mform->setDefault('zustandspassiv', $descripcion_troceada[0]);
                 $mform->addElement('textarea', 'vorganspassiv', get_string("vorganspassiv", "vocabulario"), 'rows="5" cols="30"');
                 $mform->setDefault('vorganspassiv', $descripcion_troceada[1]);
                 break;
             //2.5 Possessivpronomen
-            case 14:
+            case 15:
                 $tope = 1;
                 $ultimo = -1;
 
@@ -1533,7 +1533,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 }
                 break;
             //4.3 Possessivartikel
-            case 38:
+            case 39:
                 $mform->addElement('html', '<p>');
                 $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
                 //titulillos de la tabla
@@ -1673,51 +1673,51 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', '</div>');
                 break;
             //4.1 Definitartikel
-            case 36:
-                if($grid == 36) {
-                    $tabopcional = false;
-                }
-            //4.2 Indefinitartikel
             case 37:
                 if($grid == 37) {
                     $tabopcional = false;
                 }
+            //4.2 Indefinitartikel
+            case 38:
+                if($grid == 38) {
+                    $tabopcional = false;
+                }
             //4.4 Negationsartikel
-            case 39:
-                if($grid == 39) {
+            case 40:
+                if($grid == 40) {
                     $titulo=get_string('endungen_siehe1','vocabulario');
                     $tabopcional = true;
                 }
             //4.5 Interrogativartikel
-            case 40:
-                if($grid == 40) {
+            case 41:
+                if($grid == 41) {
                     $titulo=get_string('endungen_siehe2','vocabulario');
                     $tabopcional = true;
                 }
             //4.6 Demonstrativartikel
-            case 41:
-                if($grid == 41) {
+            case 42:
+                if($grid == 42) {
                     $titulo=get_string('endungen_siehe3','vocabulario');
                     $tabopcional = true;
                 }
             //2.3 Demonstrativpronomen
-            case 8:
-                if($grid == 8) {
+            case 9:
+                if($grid == 9) {
                     $tabopcional = false;
                 }
             //2.6 Relativpronomen
-            case 15:
-                if($grid == 15) {
+            case 16:
+                if($grid == 16) {
                     $tabopcional = false;
                 }
             //2.4.1 Als Artikelwörter gebrauche Indefinitpronomina
-            case 10:
-                if($grid == 10) {
+            case 11:
+                if($grid == 11) {
                     $tabopcional = false;
                 }
             //1.3 Deklination
-            case 4:
-                if($grid == 4) {
+            case 5:
+                if($grid == 5) {
                     $tabopcional = false;
                 }
                 //para restrngir según la categoria
@@ -1727,10 +1727,10 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     default:
                         $tope = 1;
                         break;
-                    case 8:
+                    case 9:
                         $tope = 4;
                         break;
-                    case 4:
+                    case 5:
                         $tope = 10;
                         break;
                 }
@@ -1833,7 +1833,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 break;
             */
             //7.1 Beispiele und Funktionen
-            case 53:
+            case 54:
                 $mform->addElement('textarea', 'beispielsatz', get_string("beispielsatz", "vocabulario"), 'rows="5" cols="30"');
                 $mform->setDefault('beispielsatz', $descripcion_troceada[0]);
                 $mform->addElement('textarea', 'satzart', get_string("satzart", "vocabulario"), 'rows="5" cols="30"');
@@ -1842,7 +1842,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->setDefault('komfun', $descripcion_troceada[1]);
                 break;
             //2.2 Interrogativpronomen
-            case 7:
+            case 8:
             //tabla
                 for ($i=0; $i<3;$i++) {
                     $mform->addElement('html', '<p>');
@@ -1879,14 +1879,14 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 }
                 break;
             //8.3.1 Ergänzungen
-            case 58:
+            case 59:
                 $mform->addElement('textarea', 'definido', get_string("definido", "vocabulario"), 'rows="5" cols="30"');
                 $mform->setDefault('definido', $descripcion_troceada[0]);
                 $mform->addElement('textarea', 'indefinido', get_string("indefinido", "vocabulario"), 'rows="5" cols="30"');
                 $mform->setDefault('indefinido', $descripcion_troceada[1]);
                 break;
             //8.3.2 Angaben
-            case 59:
+            case 60:
                 $mform->addElement('textarea', 'temporal', get_string("temporal", "vocabulario"), 'rows="5" cols="30"');
                 $mform->setDefault('temporal', $descripcion_troceada[0]);
                 $mform->addElement('textarea', 'causal', get_string("causal", "vocabulario"), 'rows="5" cols="30"');
@@ -1897,16 +1897,16 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->setDefault('local', $descripcion_troceada[3]);
                 break;
             //8.4.1 Konjunktoren
-            case 62:
-            //8.4.2 Subjunktoren
             case 63:
-            //8.4.3 Konjunktionaladverbien
+            //8.4.2 Subjunktoren
             case 64:
+            //8.4.3 Konjunktionaladverbien
+            case 65:
                 $mform->addElement('textarea', 'func', get_string("func", "vocabulario"), 'rows="5" cols="30"');
                 $mform->setDefault('func', $descripcion_troceada[0]);
                 break;
             //8.1 Hauptsatz
-            case 55:
+            case 56:
             //tabla
                 $mform->addElement('html', '<p>');
                 $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
@@ -1930,7 +1930,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', '</table>');
                 break;
             //2.4.2.1 Pronomina, die nur Personen bezeichnen
-            case 12:
+            case 13:
             //tabla
                 $mform->addElement('html', '<p>');
                 $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter">');
@@ -1961,7 +1961,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', '<p>');
                 break;
             //2.1 Personalpronomen
-            case 6:
+            case 7:
             //tabla para singular
                 $mform->addElement('html', '<p>');
                 $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter">');
@@ -2069,7 +2069,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', '<p>');
                 break;
             //8.2 Nebensatz
-            case 56:
+            case 57:
 
                 $mform->addElement('html', '<p>');
                 $mform->addElement('html','<table class="flexible generaltable generalbox boxaligncenter">');
@@ -2124,7 +2124,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 }
                 break;
             //3.8 Imperativ
-            case 34:
+            case 35:
                 $tope = 10;
                 $ultimo = -1;
 
@@ -2180,7 +2180,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                 break;
             //3.5 Reflexive und reziproke Verben
-            case 29:
+            case 30:
                 $mform->addElement('html', '<p>');
                 $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter">');
                 //titulillos de la tabla
@@ -2223,7 +2223,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', '<p>');
                 break;
             //4.7 Gebrauch der Artikelwörter
-            case 42:
+            case 43:
                 $titulo='';
                 $tope = 20;
 
@@ -2293,7 +2293,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                 break;
             //5.2.2
-            case 47:
+            case 48:
                 $mform->addElement('html', '<p>');
                 $mform->addElement('html','<table class="flexible generaltable generalbox boxaligncenter">');
 

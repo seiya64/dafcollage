@@ -68,19 +68,19 @@ switch ($padre) {
         $desc = '';
         break;
     //1.1 Genus
-    case 2:
+    case 3:
         $desc = optional_param('mascsementico', null, PARAM_TEXT) . '&' . optional_param('mascformal', null, PARAM_TEXT). '&';
         $desc .= optional_param('femsementico', null, PARAM_TEXT) . '&' . optional_param('femformal', null, PARAM_TEXT). '&';
         $desc .= optional_param('neutrosementico', null, PARAM_TEXT) . '&' . optional_param('neutroformal', null, PARAM_TEXT). '&';
         break;
     //1.2 Numerus
-    case 3:
+    case 4:
         $desc = optional_param('endungs', null, PARAM_TEXT) . '&' . optional_param('genero', null, PARAM_TEXT) . '&';
         $desc .= optional_param('endungp', null, PARAM_TEXT) . '&' . optional_param('reinesf', null, PARAM_TEXT) . '&';
         $desc .= optional_param('reinepf', null, PARAM_TEXT) . '&';
         break;
     //5.2.1 Deklination
-    case 46:
+    case 47:
         $desc = optional_param('NM1', null, PARAM_TEXT) . '&' . optional_param('NN1', null, PARAM_TEXT) . '&' . optional_param('NF1', null, PARAM_TEXT) . '&';
         $desc .= optional_param('NP1', null, PARAM_TEXT) . '&' . optional_param('AM1', null, PARAM_TEXT) . '&' . optional_param('AN1', null, PARAM_TEXT) . '&';
         $desc .= optional_param('AF1', null, PARAM_TEXT) . '&' . optional_param('AP1', null, PARAM_TEXT) . '&' . optional_param('DM1', null, PARAM_TEXT) . '&';
@@ -112,9 +112,9 @@ switch ($padre) {
         break;
     //tablas verbos
     //3.1.1 Präsens
-    case 20:
-    //3.1.2 Präteritum
     case 21:
+    //3.1.2 Präteritum
+    case 22:
         
         $tope=20;
         $desc='';
@@ -128,15 +128,15 @@ switch ($padre) {
         }
         break;
     //3.1.5 Futur I
-    case 24:
+    case 25:
         $desc = optional_param('futuro1', null, PARAM_TEXT) . '&';
         break;
     //3.1.6 Futur II
-    case 25:
+    case 26:
         $desc = optional_param('futuro2', null, PARAM_TEXT) . '&';
         break;
     //3.7.2 Konjunktiv II
-    case 33:
+    case 34:
         $desc = optional_param('S1SC'.$i, null, PARAM_TEXT) . '&' . optional_param('S2SC'.$i, null, PARAM_TEXT) . '&' . optional_param('S3SC'.$i, null, PARAM_TEXT) . '&';
         $desc .= optional_param('P1SC'.$i, null, PARAM_TEXT) . '&' . optional_param('P2SC'.$i, null, PARAM_TEXT) . '&' . optional_param('P3SC'.$i, null, PARAM_TEXT) . '&';
 
@@ -148,18 +148,18 @@ switch ($padre) {
         $desc .= optional_param('P3P', null, PARAM_TEXT) . '&' . optional_param('P3K', null, PARAM_TEXT) . '&';
         break;
     //3.3 Trennbare Verben
-    case 27:
+    case 28:
         $desc = optional_param('trennbaren', null, PARAM_TEXT) . '&';
         break;
 
     //3.2 Modalverben
-    case 26:
+    case 27:
     //3.4 Besondere Verben
-    case 28:
-        if ($padre == 29){
+    case 29:
+        if ($padre == 27){
             $tope = 6;
         }
-        elseif ($padre ==31){
+        elseif ($padre ==29){
             $tope = 10;
         }
         $desc='';
@@ -198,7 +198,7 @@ switch ($padre) {
         echo $desc;
         break;
     //3.7.1 Konjunktiv I
-    case 32:
+    case 33:
         $desc = optional_param('S1I', null, PARAM_TEXT) . '&' . optional_param('S1C', null, PARAM_TEXT) . '&';
         $desc .= optional_param('S2I', null, PARAM_TEXT) . '&' . optional_param('S2C', null, PARAM_TEXT) . '&';
         $desc .= optional_param('S3I', null, PARAM_TEXT) . '&' . optional_param('S3C', null, PARAM_TEXT) . '&';
@@ -208,19 +208,19 @@ switch ($padre) {
         //$desc .= optional_param('descripcion', null, PARAM_TEXT) . '&' . optional_param('todocontodo', null, PARAM_TEXT);
         break;
     //3.1.3 Perfekt/Partizip II
-    case 22:
+    case 23:
         $desc = optional_param('participio2', null, PARAM_TEXT) . '&' . optional_param('hilfsverbs', null, PARAM_TEXT) . '&';
         break;
     //3.1.4 Partizip I
-    case 23:
+    case 24:
         $desc = optional_param('participio1', null, PARAM_TEXT) . '&';
         break;
     //3.6 Passiv
-    case 30:
+    case 31:
         $desc = optional_param('zustandspassiv', null, PARAM_TEXT) . '&' . optional_param('vorganspassiv', null, PARAM_TEXT) . '&';
         break;
     //2.5 Possessivpronomen
-    case 14:
+    case 15:
         $tope = 1;
         $desc='';
 
@@ -240,7 +240,7 @@ switch ($padre) {
         }
         break;
     //4.3 Possessivartikel
-    case 38:
+    case 39:
         $desc = optional_param('NS1', null, PARAM_TEXT) . '&' . optional_param('NS2', null, PARAM_TEXT) . '&';
         $desc .= optional_param('NS3M', null, PARAM_TEXT) . '&' . optional_param('NS3N', null, PARAM_TEXT) . '&' . optional_param('NS3F', null, PARAM_TEXT) . '&';
         $desc .= optional_param('NP1', null, PARAM_TEXT) . '&' . optional_param('NP2', null, PARAM_TEXT) . '&' . optional_param('NP3', null, PARAM_TEXT) . '&' . optional_param('NSIE', null, PARAM_TEXT) . '&';
@@ -255,33 +255,33 @@ switch ($padre) {
         $desc .= optional_param('GP'.$i, null, PARAM_TEXT) . '&';
         break;
     //4.1 Bestimmte Artikel
-    case 36:
-    //4.2 Unbestimmte Artikel
     case 37:
+    //4.2 Unbestimmte Artikel
+    case 38:
     //4.4 Negationsartikel
-    case 39:
-    //4.5 Interrogativartikel
     case 40:
-    //4.6 Demonstrativartikel
+    //4.5 Interrogativartikel
     case 41:
+    //4.6 Demonstrativartikel
+    case 42:
     //2.3 Demonstrativpronomen
-    case 8:
+    case 9:
     //2.6 Relativpronomen
-    case 15:
+    case 16:
     //2.4.1 Als Artikelwörter gebrauche Indefinitpronomina
-    case 10:
+    case 11:
     //1.3 Deklination
-    case 4:
+    case 5:
         //para restrngir según la categoria
         $tope = 1;
         switch ($padre){
             default:
                 $tope = 1;
                 break;
-            case 8:
+            case 9:
                 $tope = 4;
                 break;
-            case 4:
+            case 5:
                 $tope = 10;
                 break;
         }
@@ -302,37 +302,37 @@ switch ($padre) {
         break;
      */
     //7.1 Beispiele und Funktionen
-    case 53:
+    case 54:
         $desc = optional_param('beispielsatz', null, PARAM_TEXT) . '&' . optional_param('satzart', null, PARAM_TEXT) . '&';
         $desc .= optional_param('komfun', null, PARAM_TEXT) . '&';
         break;
     //2.2 Interrogativpronomen
-    case 7:
+    case 8:
         $desc = optional_param('NP', null, PARAM_TEXT) . '&' . optional_param('NNP', null, PARAM_TEXT) . '&';
         $desc .= optional_param('AP', null, PARAM_TEXT) . '&' . optional_param('ANP', null, PARAM_TEXT) . '&';
         $desc .= optional_param('DP', null, PARAM_TEXT) . '&' . optional_param('DNP', null, PARAM_TEXT) . '&';
         $desc .= optional_param('GP', null, PARAM_TEXT) . '&' . optional_param('GNP', null, PARAM_TEXT) . '&';
         break;
     //8.3.1 Ergänzungen
-    case 58:
+    case 59:
         $desc = optional_param('definido', null, PARAM_TEXT) . '&' . optional_param('indefinido', null, PARAM_TEXT) . '&';
         break;
     //8.3.2 Angaben
-    case 59:
+    case 60:
         $desc = optional_param('temporal', null, PARAM_TEXT) . '&' . optional_param('causal', null, PARAM_TEXT) . '&';
         $desc .= optional_param('modal', null, PARAM_TEXT) . '&' . optional_param('local', null, PARAM_TEXT) . '&';
         break;
     //8.4.1 Konjunktoren
-    case 62:
-    //8.4.2 Subjunktoren
     case 63:
-    //8.4.3 Konjunktionaladverbien
+    //8.4.2 Subjunktoren
     case 64:
+    //8.4.3 Konjunktionaladverbien
+    case 65:
         $desc = optional_param('func', null, PARAM_TEXT) . '&';
         $desc .= optional_param('siehe', null, PARAM_TEXT) . '&';
         break;
     //8.1 Hauptsatz
-    case 55:
+    case 56:
         $salir = false;
         $desc = '';
         for ($i = 0; $salir == false; $i = $i+4){
@@ -350,12 +350,12 @@ switch ($padre) {
         }
         break;
     //2.4.2.1 Pronomina, die nur Personen bezeichnen
-    case 12:
+    case 13:
         $desc = optional_param('NOM', null, PARAM_TEXT).'&'.optional_param('AKK', null, PARAM_TEXT).'&';
         $desc .= optional_param('DAT', null, PARAM_TEXT).'&'.optional_param('GEN', null, PARAM_TEXT).'&';
         break;
     //2.1 Personalpronomen
-    case 6:
+    case 7:
         $desc = optional_param('NS1', null, PARAM_TEXT) . '&' . optional_param('NS2', null, PARAM_TEXT) . '&';
         $desc .= optional_param('NS3M', null, PARAM_TEXT) . '&' . optional_param('NS3N', null, PARAM_TEXT) . '&' . optional_param('NS3F', null, PARAM_TEXT) . '&';
         $desc .= optional_param('NP1', null, PARAM_TEXT) . '&' . optional_param('NP2', null, PARAM_TEXT) . '&' . optional_param('NP3', null, PARAM_TEXT) . '&' . optional_param('NSIE', null, PARAM_TEXT) . '&';
@@ -373,7 +373,7 @@ switch ($padre) {
         $desc .= optional_param('GP1', null, PARAM_TEXT) . '&' . optional_param('GP2', null, PARAM_TEXT) . '&' . optional_param('GP3', null, PARAM_TEXT) . '&' . optional_param('GSIE', null, PARAM_TEXT) . '&';
         break;
     //3.8 Imperativ
-    case 34:
+    case 35:
         $tope = 10;
         $desc='';
         for ($i=0; $i<$tope; $i++){
@@ -381,7 +381,7 @@ switch ($padre) {
         }
         break;
     //3.5 Reflexive und reziproke Verben
-    case 29:
+    case 30:
         $desc = optional_param('AS1', null, PARAM_TEXT) . '&' . optional_param('AS2', null, PARAM_TEXT) . '&' . optional_param('AS3', null, PARAM_TEXT). '&';
         $desc .= optional_param('AP1', null, PARAM_TEXT) . '&' . optional_param('AP2', null, PARAM_TEXT) . '&' . optional_param('AP3', null, PARAM_TEXT). '&';
         $desc .= optional_param('ASIE', null, PARAM_TEXT) . '&';
@@ -390,7 +390,7 @@ switch ($padre) {
         $desc .= optional_param('DSIE', null, PARAM_TEXT) . '&';
         break;
     //4.7 Gebrauch der Artikelwörter
-    case 42:
+    case 43:
         $tope = 20;
         $tablas = 3;
         $desc = '';
@@ -400,7 +400,7 @@ switch ($padre) {
             }
         }
         break;
-    case 47:
+    case 48:
         $tope = 10;
         $desc = '';
         for($f=0; $f<$tope; $f++){
@@ -408,7 +408,7 @@ switch ($padre) {
         }
         break;
     // 8.2
-    case 56:
+    case 57:
         $tope = 20;
         $desc = '';
         for($f=0; $f<$tope; $f++){
