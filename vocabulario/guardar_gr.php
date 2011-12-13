@@ -333,16 +333,28 @@ switch ($padre) {
         break;
     //8.1 Hauptsatz
     case 56:
+    //8.2 Nebensatz
+    case 57:
         $salir = false;
         $desc = '';
-        for ($i = 0; $salir == false; $i = $i+4){
-            if (optional_param('vor'.$i, null, PARAM_TEXT) ||
-                optional_param('kon'.$i, null, PARAM_TEXT) ||
-                optional_param('mit'.$i, null, PARAM_TEXT) ||
-                optional_param('ver2'.$i, null, PARAM_TEXT)){
+        $avance = 1;
+        if($padre == 56){
+            $avance = 4;
+        }elseif($padre == 57){
+            $avance = 5;
+        }
+        for ($i = 0; $salir == false; $i = $i+$avance){
+            if (optional_param('VORSUB'.$i, null, PARAM_TEXT) ||
+                optional_param('KONSUB'.$i, null, PARAM_TEXT) ||
+                optional_param('MIT'.$i, null, PARAM_TEXT) ||
+                optional_param('VER2'.$i, null, PARAM_TEXT) ||
+                optional_param('VER1'.$i, null, PARAM_TEXT)){
                 
-                $desc .= optional_param('vor'.$i, null, PARAM_TEXT).'&'.optional_param('kon'.$i, null, PARAM_TEXT).'&';
-                $desc .= optional_param('mit'.$i, null, PARAM_TEXT).'&'.optional_param('ver2'.$i, null, PARAM_TEXT).'&';
+                $desc .= optional_param('VORSUB'.$i, null, PARAM_TEXT).'&'.optional_param('KONSUB'.$i, null, PARAM_TEXT).'&';
+                $desc .= optional_param('MIT'.$i, null, PARAM_TEXT).'&'.optional_param('VER2'.$i, null, PARAM_TEXT).'&';
+                if($padre == 57){
+                    $desc .= optional_param('VER1'.$i,null,PARAM_TEXT).'&';
+                }
             }
             else{
                 $salir = true;
@@ -416,6 +428,7 @@ switch ($padre) {
             $desc .= optional_param('VER'.$f, null, PARAM_TEXT) . '&' . optional_param('KON'.$f, null, PARAM_TEXT) . '&';
         }
         break;
+        
 
 }
 

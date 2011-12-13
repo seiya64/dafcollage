@@ -1907,23 +1907,45 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 break;
             //8.1 Hauptsatz
             case 56:
+            //8.2 Nebensatz
+            case 57:
+                
             //tabla
                 $mform->addElement('html', '<p>');
                 $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
                 //titulillos de la tabla
                 $titulillos = '<tr class="header">';
-                $titulillos .= '<th>' . get_string('vorfeld', 'vocabulario') . '</th>';
-                $titulillos .= '<th>' . get_string('konjugier', 'vocabulario') . '</th>';
-                $titulillos .= '<th>' . get_string('mittelfeld', 'vocabulario') . '</th>';
-                $titulillos .= '<th>' . get_string('verb2', 'vocabulario') . '</th>';
+
+                $avance = 1;
+
+                if($grid == 56){
+                    $titulillos .= '<th>' . get_string('vorfeld', 'vocabulario') . '</th>';
+                    $titulillos .= '<th>' . get_string('konjugier', 'vocabulario') . '</th>';
+                    $titulillos .= '<th>' . get_string('mittelfeld', 'vocabulario') . '</th>';
+                    $titulillos .= '<th>' . get_string('verb2', 'vocabulario') . '</th>';
+                    $avance = 4;
+
+                }elseif($grid == 57){
+                    $titulillos .='<th>'.get_string('subjunktor','vocabulario').'</th>';
+                    $titulillos .='<th>'.get_string('subjekt','vocabulario').'</th>';
+                    $titulillos .= '<th>' . get_string('mittelfeld', 'vocabulario') . '</th>';
+                    $titulillos .='<th>'.get_string('verb2','vocabulario').'</th>';
+                    $titulillos .='<th>'.get_string('verb1','vocabulario').'</th>';
+                    $avance = 5;
+                }
+
+
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
-                for ($i = 0; $i < count($descripcion_troceada); $i = $i+4) {
+                for ($i = 0; $i < count($descripcion_troceada)-2; $i = $i+$avance) {
                     $titulillos = '<tr class="cell">';
-                    $titulillos .= '<td><input type="text" id="id_vor'.$i.'" name="vor'.$i.'" value="' . $descripcion_troceada[$i] . '"></td>';
-                    $titulillos .= '<td><input type="text" id="id_kon'.$i.'" name="kon'.$i.'" value="' . $descripcion_troceada[$i+1] . '"></td>';
-                    $titulillos .= '<td><input type="text" id="id_mit'.$i.'" name="mit'.$i.'" value="' . $descripcion_troceada[$i+2] . '"></td>';
-                    $titulillos .= '<td><input type="text" id="id_ver2'.$i.'" name="ver2'.$i.'" value="' . $descripcion_troceada[$i+3] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_VORSUB'.$i.'" name="VORSUB'.$i.'" value="' . $descripcion_troceada[$i] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_KONSUB'.$i.'" name="KONSUB'.$i.'" value="' . $descripcion_troceada[$i+1] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_MIT'.$i.'" name="MIT'.$i.'" value="' . $descripcion_troceada[$i+2] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_VER2'.$i.'" name="VER2'.$i.'" value="' . $descripcion_troceada[$i+3] . '"></td>';
+                    if($grid ==  57){
+                        $titulillos .= '<td><input type="text" id="id_VER1'.$i.'" name="VER1'.$i.'" value="' . $descripcion_troceada[$i+4] . '"></td>';
+                    }
                     $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
                 }
@@ -2067,61 +2089,6 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', $titulillos);
                 $mform->addElement('html', '</table>');
                 $mform->addElement('html', '<p>');
-                break;
-            //8.2 Nebensatz
-            case 57:
-
-                $mform->addElement('html', '<p>');
-                $mform->addElement('html','<table class="flexible generaltable generalbox boxaligncenter">');
-
-                //titulillos de la tabla
-                $titulillos = '<tr class="head">';
-                $titulillos .='<th>'.get_string('subjunktor','vocabulario').'</th>';
-                $titulillos .='<th>'.get_string('mittelfeld','vocabulario').'</th>';
-                $titulillos .='<th>'.get_string('verb2','vocabulario').'</th>';
-                $titulillos .='<th>'.get_string('konjugier','vocabulario').'</th>';
-                $titulillos .= '</tr>';
-                $mform->addElement('html',$titulillos);
-
-                //A partir de aqui pinto filas según se van necesitando
-                $tope = 20;
-                $ultima = -1;
-
-                for ($fila=0; $fila<$tope;$fila++) {
-                    $ocultador = '<tr class="cell" id="ocultador_filaT'.$fila;
-                    $salidor = false;
-                    for ($j=0; $j<3 && $salidor==false;$j++) {
-                        if($descripcion_troceada[((4*$fila)+$j)]) {
-                            $salidor = true;
-                            $ocultador .= '">';
-                            $ultima = $fila;
-                        }
-                    }
-
-                    if ($salidor == false && $fila==0) {
-                        $ocultador .= '">';
-                    }
-
-                    if ($salidor == false && $fila!=0) {
-                        $ocultador .= '" style="display:none">';
-                    }
-
-                    $mform->addElement('html', $ocultador);
-                    $titulillos = '<td><input type="text" id="id_SUB'.$fila.'" name="SUB'.$fila.'" value="' . $descripcion_troceada[((4*$fila)+0)] . '"></td>';
-                    $titulillos .= '<td><input type="text" id="id_MIT'.$fila.'" name="MIT'.$fila.'" value="' . $descripcion_troceada[((4*$fila)+1)] . '"></td>';
-                    $titulillos .= '<td><input type="text" id="id_VER'.$fila.'" name="VER'.$fila.'" value="' . $descripcion_troceada[((4*$fila)+2)] . '"></td>';
-                    $titulillos .= '<td><input type="text" id="id_KON'.$fila.'" name="KON'.$fila.'" value="' . $descripcion_troceada[((4*$fila)+3)] . '"></td>';
-                    $titulillos .= '</tr>';
-                    $mform->addElement('html', $titulillos);
-
-                }
-                $mform->addElement('html', '</table>');
-                $mform->addElement('html', '<p>');
-
-                if ($ultima+1 < $tope && $tope > 1) {
-                    $ops = '<a href=\'javascript:desocultar("filaT'.($ultima+1).'")\' id="mf">'.get_string("masfilas", "vocabulario").'</a>';
-                    $mform->addElement('static', 'mas_filas', '', $ops);
-                }
                 break;
             //3.8 Imperativ
             case 35:
@@ -2332,6 +2299,58 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $titulillos = '<td><input type="text" id="id_PO'.$fila.'" name="PO'.$fila.'" value="' . $descripcion_troceada[((3*$fila)+0)] . '"></td>';
                     $titulillos .= '<td><input type="text" id="id_KO'.$fila.'" name="KO'.$fila.'" value="' . $descripcion_troceada[((3*$fila)+1)] . '"></td>';
                     $titulillos .= '<td><input type="text" id="id_SU'.$fila.'" name="SU'.$fila.'" value="' . $descripcion_troceada[((3*$fila)+2)] . '"></td>';
+                    $titulillos .= '</tr>';
+                    $mform->addElement('html', $titulillos);
+
+                }
+                $mform->addElement('html', '</table>');
+                $mform->addElement('html', '<p>');
+
+                if ($ultima+1 < $tope && $tope > 1) {
+                    $ops = '<a href=\'javascript:desocultar("filaT'.($ultima+1).'")\' id="mf">'.get_string("masfilas", "vocabulario").'</a>';
+                    $mform->addElement('static', 'mas_filas', '', $ops);
+                }
+                break;
+            case 50:
+
+                $mform->addElement('html', '<p>');
+                $mform->addElement('html','<table class="flexible generaltable generalbox boxaligncenter">');
+
+                //titulillos de la tabla
+                $titulillos = '<tr class="head">';
+                $titulillos .='<th>'.get_string('praposit','vocabulario').'</th>';
+                $titulillos .='<th>'.get_string('func','vocabulario').'</th>';
+                $titulillos .='<th>'.get_string('beisp','vocabulario').'</th>';
+                $titulillos .= '</tr>';
+                $mform->addElement('html',$titulillos);
+
+                //A partir de aqui pinto filas según se van necesitando
+                $tope = 30;
+                $ultima = -1;
+
+                for ($fila=0; $fila<$tope;$fila++) {
+                    $ocultador = '<tr class="cell" id="ocultador_filaT'.$fila;
+                    $salidor = false;
+                    for ($j=0; $j<3 && $salidor==false;$j++) {
+                        if($descripcion_troceada[((4*$fila)+$j)]) {
+                            $salidor = true;
+                            $ocultador .= '">';
+                            $ultima = $fila;
+                        }
+                    }
+
+                    if ($salidor == false && $fila==0) {
+                        $ocultador .= '">';
+                    }
+
+                    if ($salidor == false && $fila!=0) {
+                        $ocultador .= '" style="display:none">';
+                    }
+
+                    $mform->addElement('html', $ocultador);
+                    $titulillos = '<td><input size=8 type="text" id="id_PRA'.$fila.'" name="PRA'.$fila.'" value="' . $descripcion_troceada[((4*$fila)+0)] . '"></td>';
+                    $titulillos .= '<td><input size=30 type="text" id="id_FUN'.$fila.'" name="FUN'.$fila.'" value="' . $descripcion_troceada[((4*$fila)+1)] . '"></td>';
+                    $titulillos .= '<td><input size=50 type="text" id="id_BEI'.$fila.'" name="BEI'.$fila.'" value="' . $descripcion_troceada[((4*$fila)+2)] . '"></td>';
                     $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
 

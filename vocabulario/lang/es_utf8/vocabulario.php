@@ -239,4 +239,6 @@ $string['endungen_siehe1'] = 'Endungen siehe auch 4.2 Indefinitartikel auβer Pl
 $string['endungen_siehe2'] = 'Endungen siehe auch 4.1 Definitartikel + vorangestelltem e';
 $string['endungen_siehe3'] = 'Endungen siehe auch 4.1 Definitartikel + vorangestelltem e, sowie 4.5 Interrogativartikel';
 $string['endungen_siehe4'] = 'Endungen siehe auch 4.2 Indefinitartikel auβer Pluralformen, sowie 4.4 Negationsartikel';
+$string['praposit'] = 'Präposition';
+$string['beisp'] = 'Beispiel';
 ?>
