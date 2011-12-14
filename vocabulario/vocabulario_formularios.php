@@ -1138,7 +1138,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                 break;
             //3.1.5 Futur I
-            case 23:
+            case 25:
                 $mform->addElement('textarea', 'futuro1', get_string("futuro1", "vocabulario"), 'rows="5" cols="30"');
                 $mform->setDefault('futuro1', $descripcion_troceada[0]);
                 break;
@@ -1926,7 +1926,8 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
-                for ($i = 0; $i < count($descripcion_troceada)-2; $i = $i+$avance) {
+                $totalfilas = (count($descripcion_troceada)-2 / 4) + 1;
+                for ($i = 0; $i < $totalfilas; $i = $i+$avance) {
                     $titulillos = '<tr class="cell">';
                     $titulillos .= '<td><input type="text" id="id_VORSUB'.$i.'" name="VORSUB'.$i.'" value="' . $descripcion_troceada[$i] . '"></td>';
                     $titulillos .= '<td><input type="text" id="id_KONSUB'.$i.'" name="KONSUB'.$i.'" value="' . $descripcion_troceada[$i+1] . '"></td>';

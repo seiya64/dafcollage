@@ -219,7 +219,7 @@ class Vocabulario_verbo {
      * @param type $tipid
      * @param type $id
      */
-    function Vocabulario_verbo($infi=' ', $ter='', $pre='', $par='', $sig='', $obs='', $grid=18, $inid=1, $tipid=1, $id=1) {
+    function Vocabulario_verbo($infi=' ', $ter='', $pre='', $par='', $sig='', $obs='', $grid=1, $inid=1, $tipid=1, $id=1) {
         $this->infinitivo = $infi;
         $this->ter_pers_sing = $ter;
         $this->preterito = $pre;
@@ -370,7 +370,7 @@ class Vocabulario_adjetivo {
      * @param type $tipid
      * @param type $id
      */
-    function Vocabulario_adjetivo($sin=' ', $sig='', $obs='', $grid=43, $inid=1, $tipid=1, $id=1) {
+    function Vocabulario_adjetivo($sin=' ', $sig='', $obs='', $grid=1, $inid=1, $tipid=1, $id=1) {
         $this->sin_declinar = $sin;
         $this->significado = $sig;
         $this->observaciones = $obs;

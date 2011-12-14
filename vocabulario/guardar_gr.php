@@ -54,12 +54,12 @@ $user_object = get_record('user', 'id', $USER->id);
 
 $padre = required_param('campogr', PARAM_TEXT);
 
-$gram = new Vocabulario_gramatica($user_object->id, required_param('campogr', PARAM_TEXT), optional_param('gramatica', PARAM_TEXT));
+//$gram = new Vocabulario_gramatica($user_object->id, required_param('campogr', PARAM_TEXT), optional_param('gramatica', PARAM_TEXT));
 
-if (optional_param('eliminar', 0, PARAM_INT) && $gram->get('padre') > 72) {
+/*if (optional_param('eliminar', 0, PARAM_INT) && $gram->get('padre') > 72) {
     delete_records('vocabulario_gramatica', 'id', $gram->get('padre'));
     redirect('./view.php?id=' . $id_tocho . '&opcion=5');
-}
+}*/
 
 //recogemos todos los datos de la gramatica
 switch ($padre) {
@@ -69,9 +69,10 @@ switch ($padre) {
         break;
     //1.1 Genus
     case 3:
-        $desc = optional_param('mascsementico', null, PARAM_TEXT) . '&' . optional_param('mascformal', null, PARAM_TEXT). '&';
-        $desc .= optional_param('femsementico', null, PARAM_TEXT) . '&' . optional_param('femformal', null, PARAM_TEXT). '&';
-        $desc .= optional_param('neutrosementico', null, PARAM_TEXT) . '&' . optional_param('neutroformal', null, PARAM_TEXT). '&';
+        $desc = optional_param('mascsemantico', null, PARAM_TEXT) . '&' . optional_param('mascformal', null, PARAM_TEXT). '&';
+        $desc .= optional_param('femsemantico', null, PARAM_TEXT) . '&' . optional_param('femformal', null, PARAM_TEXT). '&';
+        $desc .= optional_param('neutrosemantico', null, PARAM_TEXT) . '&' . optional_param('neutroformal', null, PARAM_TEXT). '&';
+        echo $desc;
         break;
     //1.2 Numerus
     case 4:
@@ -308,10 +309,13 @@ switch ($padre) {
         break;
     //2.2 Interrogativpronomen
     case 8:
-        $desc = optional_param('NP', null, PARAM_TEXT) . '&' . optional_param('NNP', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('AP', null, PARAM_TEXT) . '&' . optional_param('ANP', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('DP', null, PARAM_TEXT) . '&' . optional_param('DNP', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('GP', null, PARAM_TEXT) . '&' . optional_param('GNP', null, PARAM_TEXT) . '&';
+        $desc = '';
+        for($i = 0; $i < 3; $i++){
+        $desc .= optional_param('NP'.$i, null, PARAM_TEXT) . '&' . optional_param('NNP'.$i, null, PARAM_TEXT) . '&';
+        $desc .= optional_param('AP'.$i, null, PARAM_TEXT) . '&' . optional_param('ANP'.$i, null, PARAM_TEXT) . '&';
+        $desc .= optional_param('DP'.$i, null, PARAM_TEXT) . '&' . optional_param('DNP'.$i, null, PARAM_TEXT) . '&';
+        $desc .= optional_param('GP'.$i, null, PARAM_TEXT) . '&' . optional_param('GNP'.$i, null, PARAM_TEXT) . '&';
+        }
         break;
     //8.3.1 Ergänzungen
     case 59:
@@ -437,12 +441,14 @@ $desc .= optional_param('descripcion', null, PARAM_TEXT) . '&' . optional_param(
 
 //vemos que botón hemos pulsado
 if ($mform->no_submit_button_pressed()){
+
     if(optional_param('desc_btn')){
-        $graux = new Vocabulario_mis_gramaticas($USER->id,$gram->get('padre'),$desc);
+        //$graux = new Vocabulario_mis_gramaticas($user_object->id,$gram->get('padre'),$desc);
+        $graux = new Vocabulario_mis_gramaticas($user_object->id,$padre,$desc);
         $graux->guardar();
-        //print_object($graux);
     }
 }
+
 //volvemos a donde veniamos
 redirect('./view.php?id=' . $id_tocho . '&opcion=5&grid=' . $padre);
 //echo '<a href="./view.php?id='.$id_tocho.'&opcion=5&grid='.$misgram['gramaticaid'].'">continuar</a>';
