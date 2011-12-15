@@ -261,7 +261,7 @@ GNU General Public License for more details.
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','3.1 Tipos de vivienda/ edificios/ partes de la casa','15)" />
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','3.2 Decoración/ mobiliario ','15)" />
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','3.3 Alquiler/ compra-venta','15)" />
-        <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','4 CENTRO COMERCIAL/ DE TIENDAS/ DE COMPRAS/ SHOPPING','0)" />
+        <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','4 CENTRO COMERCIAL / DE TIENDAS / HACER LA COMPRA','0)" />
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','4.1 Moda/ Ropa','19)" />
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','4.2 Complementos','19)" />
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','4.3 Perfumería y cuidado personal','19)" />
@@ -282,7 +282,7 @@ GNU General Public License for more details.
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.5 Teatro/ Cine','23)" />
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.5.1 Cartelera y programa','37)" />
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.5.2 Géneros','37)" />
-        <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.6Fotografía','23)" />
+        <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.6 Fotografía','23)" />
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.7 Pintura','23)" />
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.7.1 Colores','41)" />
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.7.2 Estilos','41)" />
@@ -347,7 +347,7 @@ GNU General Public License for more details.
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','17 MEDICINA/ SANIDAD','0)" />
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','18 LA LENGUA Y SUS ASPECTOS','0)" />
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','18.1 Idiomas','103)" />
-        <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','18.2 Aspectos lingüsticos (p.ej: FACHCHINESESICH)','103)" />
+        <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','18.2 Aspectos lingüsticos (p.ej: FACHCHINESISCH','103)" />
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','18.3 Denominaciones gramaticales','103)" />
       </SENTENCES>
     </STATEMENT>

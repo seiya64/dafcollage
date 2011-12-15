@@ -94,7 +94,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $ctipologia = $aux->obtener_todos($USER->id);
 
         //inclusion del css para que salga en columnitas
-        //$mform->addElement('html','<link rel="stylesheet" type="text/css" href="./estilo.css">');
+        $mform->addElement('html','<link rel="stylesheet" type="text/css" href="./estilo.css">');
 
         //inclusion del javascript para las funciones
         $mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
@@ -198,7 +198,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $ops = '<a href=\'javascript:desocultar("sus")\' id="mcsus">[' . get_string('mascampos', 'vocabulario') . ']</a>';
         $mform->addElement('static', 'opciones_adj', get_string("opciones", "vocabulario"), $ops);
 
-        $mform->addElement('submit', 'submitbutton', get_string('savechanges'));
+        //$mform->addElement('submit', 'submitbutton', get_string('savechanges'));
         $mform->closeHeaderBefore('vrb');
         ////------ sustantivo
         //------ verbo
@@ -250,7 +250,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $ops .= '<a href=\'javascript:desocultar("verb")\' id="mcverb">[' . get_string('mascampos', 'vocabulario') . ']</a>';
         $mform->addElement('static', 'opciones_vrb', get_string("opciones", "vocabulario"), $ops);
 
-        $mform->addElement('submit', 'submitbutton', get_string('savechanges'));
+        //$mform->addElement('submit', 'submitbutton', get_string('savechanges'));
         $mform->closeHeaderBefore('adj');
         ////------ verbo
         //------ adjetivo
@@ -293,7 +293,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $ops .= '<a href=\'javascript:desocultar("adj")\' id="mcadj">[' . get_string('mascampos', 'vocabulario') . ']</a>';
         $mform->addElement('static', 'opciones_adj', get_string("opciones", "vocabulario"), $ops);
 
-        $mform->addElement('submit', 'submitbutton', get_string('savechanges'));
+        //$mform->addElement('submit', 'submitbutton', get_string('savechanges'));
         $mform->closeHeaderBefore('otr');
         ////------ adjetivo
         //------ otros
@@ -337,7 +337,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $mform->addElement('static', 'opciones_otr', get_string("opciones", "vocabulario"), $ops);
 
 
-        $mform->addElement('submit', 'submitbutton', get_string('savechanges'));
+        //$mform->addElement('submit', 'submitbutton', get_string('savechanges'));
         $mform->closeHeaderBefore('botones');
         ////------ otros
         //botones
@@ -396,12 +396,12 @@ class mod_vocabulario_opciones_form extends moodleform {
         //} else {
 
         //0,1
-        $tabla_menu .='<tr><td style="text-align:left"><p>ANOTAR</p></td>';
+        $tabla_menu .='<tr><td style="text-align:left"><p>'.get_string('anotar','vocabulario').'</p></td>';
         //}
         //0,2
-        $tabla_menu .='<td><p>BUSCAR Y ORGANIZAR</p></td>';
+        $tabla_menu .='<td><p>'.get_string('busc','vocabulario').'</p></td>';
         //0,3
-        $tabla_menu .='<td style="text-align:right"><p>NUEVOS CAMPOS</td></tr>';
+        $tabla_menu .='<td style="text-align:right"><p>'.get_string('nuevos','vocabulario').'</td></tr>';
 
         //1,1
         $tabla_menu .='<tr><td style="text-align:left"><p><a href="view.php?id=' . $id . '&opcion=1"><img src="./imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im"/></br>' . get_string('guardar', 'vocabulario') . '</a></p></td>';
@@ -1917,9 +1917,9 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 }elseif($grid == 57){
                     $titulillos .='<th>'.get_string('subjunktor','vocabulario').'</th>';
                     $titulillos .='<th>'.get_string('subjekt','vocabulario').'</th>';
+                    $titulillos .='<th>'.get_string('konjugier','vocabulario').'</th>';
                     $titulillos .= '<th>' . get_string('mittelfeld', 'vocabulario') . '</th>';
                     $titulillos .='<th>'.get_string('verb2','vocabulario').'</th>';
-                    $titulillos .='<th>'.get_string('verb1','vocabulario').'</th>';
                     $avance = 5;
                 }
 
@@ -1930,12 +1930,12 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 for ($i = 0; $i < $totalfilas; $i = $i+$avance) {
                     $titulillos = '<tr class="cell">';
                     $titulillos .= '<td><input type="text" id="id_VORSUB'.$i.'" name="VORSUB'.$i.'" value="' . $descripcion_troceada[$i] . '"></td>';
-                    $titulillos .= '<td><input type="text" id="id_KONSUB'.$i.'" name="KONSUB'.$i.'" value="' . $descripcion_troceada[$i+1] . '"></td>';
-                    $titulillos .= '<td><input type="text" id="id_MIT'.$i.'" name="MIT'.$i.'" value="' . $descripcion_troceada[$i+2] . '"></td>';
-                    $titulillos .= '<td><input type="text" id="id_VER2'.$i.'" name="VER2'.$i.'" value="' . $descripcion_troceada[$i+3] . '"></td>';
                     if($grid ==  57){
                         $titulillos .= '<td><input type="text" id="id_VER1'.$i.'" name="VER1'.$i.'" value="' . $descripcion_troceada[$i+4] . '"></td>';
                     }
+                    $titulillos .= '<td style="background: #BDC7D8;"><input type="text" style="background: #BDC7D8;" id="id_KONSUB'.$i.'" name="KONSUB'.$i.'" value="' . $descripcion_troceada[$i+1] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_MIT'.$i.'" name="MIT'.$i.'" value="' . $descripcion_troceada[$i+2] . '"></td>';
+                    $titulillos .= '<td style="background: #BDC7D8;"><input type="text" style="background: #BDC7D8;" id="id_VER2'.$i.'" name="VER2'.$i.'" value="' . $descripcion_troceada[$i+3] . '"></td>';
                     $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
                 }
@@ -3056,7 +3056,7 @@ class mod_vocabulario_listado_form extends moodleform {
         $mform->addElement('html','</ul></div>');
         //tipologias
         //intenciones
-        $tipologias = new Vocabulario_intenciones();
+        $tipologias = new Vocabulario_tipologias();
         $tipologias = $tipologias->obtener_todos($USER->id);
         $mform->addElement('static','listatt','','<a href="javascript:desocultar(\'listatt\')" id="mclistatt">'.get_string('admin_tt','vocabulario').'</a>');
         $mform->addElement('html','<div id="ocultador_listatt" style="display:none">');

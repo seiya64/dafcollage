@@ -49,6 +49,7 @@ guardar palabras por columnas
     float: left;
     min-height: 250px;
     display: table-cell;
+    clear: left;
 }
 
 #vrb {
@@ -65,6 +66,7 @@ guardar palabras por columnas
     min-height: 250px;
     vertical-align: 20px;
     display: table-cell;
+    clear: left;
 }
 
 #otr {
