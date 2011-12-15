@@ -2322,7 +2322,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $ocultador = '<tr class="cell" id="ocultador_filaT'.$fila;
                     $salidor = false;
                     for ($j=0; $j<3 && $salidor==false;$j++) {
-                        if($descripcion_troceada[((4*$fila)+$j)]) {
+                        if($descripcion_troceada[((3*$fila)+$j)]) {
                             $salidor = true;
                             $ocultador .= '">';
                             $ultima = $fila;
@@ -2338,9 +2338,9 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     }
 
                     $mform->addElement('html', $ocultador);
-                    $titulillos = '<td><input size=8 type="text" id="id_PRA'.$fila.'" name="PRA'.$fila.'" value="' . $descripcion_troceada[((4*$fila)+0)] . '"></td>';
-                    $titulillos .= '<td><input size=30 type="text" id="id_FUN'.$fila.'" name="FUN'.$fila.'" value="' . $descripcion_troceada[((4*$fila)+1)] . '"></td>';
-                    $titulillos .= '<td><input size=50 type="text" id="id_BEI'.$fila.'" name="BEI'.$fila.'" value="' . $descripcion_troceada[((4*$fila)+2)] . '"></td>';
+                    $titulillos = '<td><input size=8 type="text" id="id_PRA'.$fila.'" name="PRA'.$fila.'" value="' . $descripcion_troceada[((3*$fila)+0)] . '"></td>';
+                    $titulillos .= '<td><input size=30 type="text" id="id_FUN'.$fila.'" name="FUN'.$fila.'" value="' . $descripcion_troceada[((3*$fila)+1)] . '"></td>';
+                    $titulillos .= '<td><input size=50 type="text" id="id_BEI'.$fila.'" name="BEI'.$fila.'" value="' . $descripcion_troceada[((3*$fila)+2)] . '"></td>';
                     $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
 
