@@ -2460,9 +2460,13 @@ class mod_vocabulario_nuevo_ic_form extends moodleform {
         $mform->addElement('html',$titulillos);
 
         $totalfilas = ((count($descripcion_troceada)-1)/4);
+        $pintar = false;
+        if ($totalfilas == 0){
+            $pintar = true;
+        }
         $avance = 4;
         $i = 1;
-        for ($i = 1; $i < $totalfilas*$avance; $i = $i+$avance) {
+        for ($i = 1; $i < $totalfilas*$avance || $pintar; $i = $i+$avance) {
             $titulillos = '<tr class="cell">';
             $titulillos .= '<td><input type="text" id="id_mittel'.$i.'" name="mittel'.$i.'" value="' . $descripcion_troceada[$i] . '"></td>';
             $titulillos .= '<td><input type="text" id="id_wortklase'.$i.'" name="wortklase'.$i.'" value="' . $descripcion_troceada[$i+1] . '"></td>';
@@ -2470,6 +2474,7 @@ class mod_vocabulario_nuevo_ic_form extends moodleform {
             $titulillos .= '<td><input type="text" id="id_siehe'.$i.'" name="siehe'.$i.'" value="' . $descripcion_troceada[$i+3] . '"></td>';
             $titulillos .= '</tr>';
             $mform->addElement('html', $titulillos);
+            $pintar = false;
         }
         $mform->addElement('html', '</table>');
 
