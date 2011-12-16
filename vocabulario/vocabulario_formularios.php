@@ -2369,6 +2369,52 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $mform->addElement('static', 'mas_filas', '', $ops);
                 }
                 break;
+            case 51:
+
+                $gr = new Vocabulario_mis_gramaticas();
+                $gr->leer('50',$USER->id);
+                $descripcion_troceada = explode('&', $gr->get('descripcion'));
+                $arrayAux = array();
+                for($ind=0; $ind<count($descripcion_troceada); $ind+=4){
+                    $arrayAux[]=$descripcion_troceada[$ind].'&'.$descripcion_troceada[$ind+1].'&'.$descripcion_troceada[$ind+2].'&'.$descripcion_troceada[$ind+3];
+                }
+
+                
+                $abecedario = '<h1 style="text-align:center;">';
+                $l = 'a';
+                for ($i = 1; $i < 27; $i++) {
+                    $abecedario .= '<a>[' . $l . ']</a>';
+                    $l++;
+                }
+                $abecedario .= '</h1>';
+                $mform -> addElement('html',$abecedario);
+
+                $mform->addElement('html', '<p>');
+                $mform->addElement('html','<table class="flexible generaltable generalbox boxaligncenter">');
+
+                //titulillos de la tabla
+                $titulillos = '<tr class="head">';
+                $titulillos .='<th>'.get_string('praposit','vocabulario').'</th>';
+                $titulillos .='<th>'.get_string('func','vocabulario').'</th>';
+                $titulillos .='<th>'.get_string('kas','vocabulario').'</th>';
+                $titulillos .='<th>'.get_string('beisp','vocabulario').'</th>';
+                $titulillos .= '</tr>';
+                $mform->addElement('html',$titulillos);
+
+
+                $salidor = false;
+                for ($j=0;$j<count($arrayAux) && $salidor==false;$j++) {
+                    $desc_aux = explode('&',$arrayAux);
+                    if(!$desc_aux[0]) {
+                        $salidor = true;
+                    }
+                }
+
+
+                $mform->addElement('html', '</table>');
+                $mform->addElement('html', '<p>');
+
+                break;
 
         }
 
