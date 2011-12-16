@@ -53,7 +53,24 @@ if ($mform->is_cancelled()) {
 $user_object = get_record('user', 'id', $USER->id);
 
 $intencion = new Vocabulario_intenciones($user_object->id, required_param('campoic', PARAM_TEXT), optional_param('intencion', PARAM_TEXT));
-$desc = optional_param('descripcion', PARAM_TEXT);
+$desc = optional_param('descripcion', PARAM_TEXT).'&';
+
+$salir = false;
+$avance = 4;
+for ($i = 1; $salir == false; $i = $i+$avance){
+    if (optional_param('mittel'.$i, null, PARAM_TEXT) ||
+        optional_param('wortklase'.$i, null, PARAM_TEXT) ||
+        optional_param('beisp'.$i, null, PARAM_TEXT) ||
+        optional_param('siehe'.$i, null, PARAM_TEXT)){
+
+        $desc .= optional_param('mittel'.$i, null, PARAM_TEXT).'&'.optional_param('wortklase'.$i, null, PARAM_TEXT).'&';
+        $desc .= optional_param('beisp'.$i, null, PARAM_TEXT).'&'.optional_param('siehe'.$i, null, PARAM_TEXT).'&';
+    }
+    else{
+        $salir = true;
+    }
+}
+$desc .= '&&&&';
 
 //if (optional_param('eliminar', 0, PARAM_INT) && $intencion->get('padre') > 145) {
 //    delete_records('vocabulario_intenciones', 'id', $intencion->get('padre'));
