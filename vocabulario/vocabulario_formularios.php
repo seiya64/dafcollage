@@ -1926,8 +1926,15 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
-                $totalfilas = (count($descripcion_troceada)-2 / 4) + 1;
-                for ($i = 0; $i < $totalfilas; $i = $i+$avance) {
+                $totalfilas = ((count($descripcion_troceada)-2)/4);
+                if($grid ==  57){
+                    $totalfilas = ((count($descripcion_troceada)-2)/5);
+                }
+                echo 'desc='.((count($descripcion_troceada)-2)/5);
+                echo 'total='.$totalfilas;
+                echo 'casillas='.($totalfilas*$avance);
+                $i = 0;
+                for ($i = 0; $i < $totalfilas*$avance; $i = $i+$avance) {
                     $titulillos = '<tr class="cell">';
                     $titulillos .= '<td><input type="text" id="id_VORSUB'.$i.'" name="VORSUB'.$i.'" value="' . $descripcion_troceada[$i] . '"></td>';
                     if($grid ==  57){

@@ -364,6 +364,10 @@ switch ($padre) {
                 $salir = true;
             }
         }
+        $desc .= '&&&&';
+        if($padre==57){
+            $desc .= '&';
+        }
         break;
     //2.4.2.1 Pronomina, die nur Personen bezeichnen
     case 13:
