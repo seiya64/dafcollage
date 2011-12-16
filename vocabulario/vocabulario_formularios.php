@@ -2303,6 +2303,8 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 break;
             case 50:
 
+                $kasus = array(get_string('acusativo','vocabulario'),get_string('dativo','vocabulario'),get_string('acudat','vocabulario'),get_string('genitivo','vocabulario'));
+
                 $mform->addElement('html', '<p>');
                 $mform->addElement('html','<table class="flexible generaltable generalbox boxaligncenter">');
 
@@ -2310,6 +2312,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $titulillos = '<tr class="head">';
                 $titulillos .='<th>'.get_string('praposit','vocabulario').'</th>';
                 $titulillos .='<th>'.get_string('func','vocabulario').'</th>';
+                $titulillos .='<th>'.get_string('kas','vocabulario').'</th>';
                 $titulillos .='<th>'.get_string('beisp','vocabulario').'</th>';
                 $titulillos .= '</tr>';
                 $mform->addElement('html',$titulillos);
@@ -2321,8 +2324,8 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 for ($fila=0; $fila<$tope;$fila++) {
                     $ocultador = '<tr class="cell" id="ocultador_filaT'.$fila;
                     $salidor = false;
-                    for ($j=0; $j<3 && $salidor==false;$j++) {
-                        if($descripcion_troceada[((3*$fila)+$j)]) {
+                    for ($j=0; $j<4 && $salidor==false;$j++) {
+                        if($descripcion_troceada[((4*$fila)+$j)]) {
                             $salidor = true;
                             $ocultador .= '">';
                             $ultima = $fila;
@@ -2338,9 +2341,18 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     }
 
                     $mform->addElement('html', $ocultador);
-                    $titulillos = '<td><input size=8 type="text" id="id_PRA'.$fila.'" name="PRA'.$fila.'" value="' . $descripcion_troceada[((3*$fila)+0)] . '"></td>';
-                    $titulillos .= '<td><input size=30 type="text" id="id_FUN'.$fila.'" name="FUN'.$fila.'" value="' . $descripcion_troceada[((3*$fila)+1)] . '"></td>';
-                    $titulillos .= '<td><input size=50 type="text" id="id_BEI'.$fila.'" name="BEI'.$fila.'" value="' . $descripcion_troceada[((3*$fila)+2)] . '"></td>';
+                    $titulillos = '<td><input size=8 type="text" id="id_PRA'.$fila.'" name="PRA'.$fila.'" value="' . $descripcion_troceada[((4*$fila)+0)] . '"></td>';
+                    $titulillos .= '<td><input size=20 type="text" id="id_FUN'.$fila.'" name="FUN'.$fila.'" value="' . $descripcion_troceada[((4*$fila)+1)] . '"></td>';
+                    //ponemos un select para los kasus
+                    $titulillos .= '<td>';
+                    $mform->addElement('html', $titulillos);
+
+                    $mform->addElement('select','KAS'.$fila,'',$kasus);
+                    $mform->setDefault('KAS'.$fila,$descripcion_troceada[((4*$fila)+2)]);
+                    
+                    $titulillos = '</td>';
+                    //endselect
+                    $titulillos .= '<td><input size=50 type="text" id="id_BEI'.$fila.'" name="BEI'.$fila.'" value="' . $descripcion_troceada[((4*$fila)+3)] . '"></td>';
                     $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
 

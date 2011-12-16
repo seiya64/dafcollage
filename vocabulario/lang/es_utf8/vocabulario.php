@@ -161,6 +161,7 @@ $string['plural'] = 'Plural';
 $string['nominativo'] = 'Nominativ';
 $string['acusativo'] = 'Akkusativ';
 $string['dativo'] = 'Dativ';
+$string['acudat'] = 'Akkusativ + Dativ';
 $string['genitivo'] = 'Genitiv';
 $string['indicativo'] = 'Indikativ';
 $string['conjuntivo'] = 'Konjunktiv';
@@ -245,4 +246,5 @@ $string['endungen_siehe3'] = 'Endungen siehe auch 4.1 Definitartikel + vorangest
 $string['endungen_siehe4'] = 'Endungen siehe auch 4.2 Indefinitartikel auβer Pluralformen, sowie 4.4 Negationsartikel';
 $string['praposit'] = 'Präposition';
 $string['beisp'] = 'Beispiel';
+$string['kas'] = 'Kasus';
 ?>

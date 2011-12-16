@@ -429,7 +429,7 @@ switch ($padre) {
         $desc = '';
         for($f=0; $f<$tope; $f++){
             $desc .= optional_param('PRA'.$f, null, PARAM_TEXT) . '&' . optional_param('FUN'.$f, null, PARAM_TEXT) . '&';
-            $desc .= optional_param('BEI'.$f, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('KAS'.$f, null, PARAM_TEXT) . '&' . optional_param('BEI'.$f, null, PARAM_TEXT) . '&';
         }
         break;
 
