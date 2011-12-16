@@ -2766,7 +2766,23 @@ class mod_vocabulario_nuevo_ic_form extends moodleform {
             $mform->setDefault('campoic', $icid);
         }
 
-        $mform->addElement('static', 'intencion', '', 'Se refiere a una condición que ya no se puede realizar al referirse ésta al pasado.');
+        switch($icid){
+            case 37:
+                $mform->addElement('static', 'intencion', '', get_string('desc_inten3.3','vocabulario'));
+                break;
+            case 47:
+                $mform->addElement('static', 'intencion', '', get_string('desc_inten4.1','vocabulario'));
+                break;
+            case 56:
+                $mform->addElement('static', 'intencion', '', get_string('desc_inten4.2','vocabulario'));
+                break;
+            case 66:
+                $mform->addElement('static', 'intencion', '', get_string('desc_inten5.1','vocabulario'));
+                break;
+            case 75:
+                $mform->addElement('static', 'intencion', '', get_string('desc_inten5.2','vocabulario'));
+                break;
+        }
 
         //opcion de eliminar un campo
         //$mform->addElement('checkbox', 'eliminar', get_string("eliminar", "vocabulario"));

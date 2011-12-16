@@ -144,6 +144,12 @@ $string['mastablas'] = 'Añadir nueva tabla';
 $string['masfilas'] = 'Añadir nueva fila';
 $string['muestra_tabla'] = 'Editar tabla';
 $string['nopermisos'] = 'No tienes permisos';
+//descripciones de las intenciones
+$string['desc_inten3.3'] = 'Se refiere a una condición que ya no se puede realizar al referirse ésta al pasado.';
+$string['desc_inten4.1'] = 'Se refiere a acciones realizadas por seres vivos / instituciones etc. para conseguir un determinado fin.';
+$string['desc_inten4.2'] = 'Se refiere a recursos / instrumentos que se utilizan con un determinado fin.';
+$string['desc_inten5.1'] = 'Se refiere a una consecuencia que se ha esperado y que finalmente se ha realizado.';
+$string['desc_inten5.2'] = 'Se refiere a una consecuencia que se ha esperado pero que no se ha realizado.';
 //a partir de aqui cosas en aleman que en principio no se cambian
 $string['definido'] = 'Definitiv';
 $string['indefinido'] = 'Indefinitiv';
