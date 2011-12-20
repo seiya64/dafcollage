@@ -1075,6 +1075,14 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $titulillos .= '<th></th>';
                     $titulillos .= '<th>' . get_string('gemischte', 'vocabulario') . '</th>';
                     $titulillos .= '</tr>';
+                    $titulillos .= '<tr class="header">';
+                    $titulillos .= '<th></th>';
+                    $titulillos .= '<th>' . get_string('par_schwac', 'vocabulario') . '</th>';
+                    $titulillos .= '<th></th>';
+                    $titulillos .= '<th>' . get_string('par_star', 'vocabulario') . '</th>';
+                    $titulillos .= '<th></th>';
+                    $titulillos .= '<th>' . get_string('par_gemis', 'vocabulario') . '</th>';
+                    $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
                     $titulillos = '<tr class="cell">';
                     $titulillos .= '<td class="cell">' . get_string('S1', 'vocabulario') . '</td>';
