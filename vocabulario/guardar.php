@@ -201,12 +201,15 @@ if ($mform->no_submit_button_pressed()){
 }
 
 //volvemos a donde veniamos
-if ($act!=2){
-	//redirect('./view.php?id='.$id_tocho.'&opcion=2');
-        redirect('./view.php?id='.$id_tocho.'&opcion=1&act=2&id_mp='.$cosa_leida->get('id'));
+if ($act==1){
+    redirect('./view.php?id='.$id_tocho.'&opcion=2');
+    //redirect('./view.php?id='.$id_tocho.'&opcion=1&act=2&id_mp='.$cosa_leida->get('id'));
 }
 else if ($act==2){
-	redirect('./view.php?id='.$id_tocho.'&opcion=1&act=2&id_mp='.$leido.'&add='.optional_param('add',PARAM_TEXT));
+    redirect('./view.php?id='.$id_tocho.'&opcion=1&act=2&id_mp='.$leido.'&add='.optional_param('add',PARAM_TEXT));
+}
+else{
+    redirect('./view.php?id='.$id_tocho.'&opcion=1&act=2&id_mp='.$cosa_leida->get('id'));
 }
 
 ?>

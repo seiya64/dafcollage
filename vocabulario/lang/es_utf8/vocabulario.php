@@ -43,11 +43,10 @@ $string['impr_vocab'] = 'Vocabulario';
 $string['impr_gram'] = 'Gramática';
 $string['impr_tipol'] = 'Tipologías textuales';
 $string['impr_inten'] = 'Intenciones comunicativas';
-
+$string['add_gram'] = 'Añadir nueva gramática';
 $string['modulenameplural'] = 'vocabularios';
 $string['modulename'] = 'vocabulario';
 $string['buttonlabel'] = 'Guardar';
-//$string['campo_lex'] = 'Campo l&eacute;xico';
 $string['campo_lex'] = 'Campos temáticos';
 $string['campo_gram'] = 'Gramática';
 $string['campo_intencion'] = 'Intención Comunicativa';

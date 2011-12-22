@@ -51,7 +51,11 @@ class mod_vocabulario_rellenar_form extends moodleform {
     function definition() {
 
         global $USER;
-        $add = optional_param('add', PARAM_ALPHA);
+        $add = optional_param('add', null,PARAM_ALPHA);
+        $act = optional_param('act',0, PARAM_INT);
+        if($add){
+            $act=2;
+        }
 
         //creo los objetos
         $sustantivo = new Vocabulario_sustantivo();
@@ -106,7 +110,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $mform->addElement('html','<h1>'.get_string('guardar','vocabulario').'</h1>');
 
         if ($leido) {
-            //$mform->addElement('text', 'idleido', '', 'value=' . $leido . ' hidden');
+            $mform->addElement('hidden', 'idleido', $leido);
         }
 
         //campo lexico
@@ -135,6 +139,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         }
         $campodinamico .= "</div>";
         $mform->addElement('html', $campodinamico);
+        $mform->addElement('hidden', 'act',$act);
 
         //diccionario
         $dic = Array();
@@ -416,7 +421,7 @@ class mod_vocabulario_opciones_form extends moodleform {
         //2,2
         $tabla_menu .='<td><p><a href="view.php?id=' . $id . '&opcion=13"><img src="./imagenes/listado.png" id="id_listado" name="listado"/></br>' . get_string('listado', 'vocabulario') . '</a></p></td>';
         //2,3
-        $tabla_menu .='<td style="text-align:right"></td></tr>';
+        $tabla_menu .='<td style="text-align:right"><p><a href="view.php?id=' . $id . '&opcion=15"><img src="./imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im"/></br>' . get_string('add_gram', 'vocabulario') . '</a></p></td></tr>';
 
         //3,1
         $tabla_menu .='<tr><td style="text-align:left"><p><a href="view.php?id=' . $id . '&opcion=7"><img src="./imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im"/></br>' . get_string('admin_ic', 'vocabulario') . '</a></p></td>';
@@ -604,7 +609,7 @@ class mod_vocabulario_ver_form extends moodleform {
             $fila .= '<td> ' . $cosa->gramatica . ' </td>';
             $fila .= '<td> ' . $cosa->intencion . ' </td>';
             $fila .= '<td> ' . $cosa->tipo . ' </td>';
-            $acciones = '<a href="./view?id=' . $this->id_tocho . '&opcion=4&id_mp=' . $cosa->mpid . '">[' . get_string('editar', 'vocabulario') . ']</a></td>';
+            $acciones = '<a href="./view?id=' . $this->id_tocho . '&opcion=4&act=1&id_mp=' . $cosa->mpid . '">[' . get_string('editar', 'vocabulario') . ']</a></td>';
             $acciones .= '<td><a href="./guardar?id_tocho=' . $this->id_tocho . '&borrar=' . $cosa->mpid . '">[' . get_string('eliminar', 'vocabulario') . ']</a>';
             $fila .= '<td> ' . $acciones . ' </td>';
             $fila .= '</tr>';
@@ -2528,6 +2533,63 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
         $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
     }
 
+}
+
+class mod_vocabulario_aniadir_gr_form extends moodleform {
+    function definition() {
+        global $USER;
+        $mform = & $this->_form;
+        //inclusion del javascript para las funciones
+        $mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
+
+        $grid = optional_param('grid', 0, PARAM_INT);
+        $id_tocho = optional_param('id', 0, PARAM_INT);
+
+        $aux = new Vocabulario_gramatica();
+        $gramaticas = $aux->obtener_hijos($USER->id, 0);
+        $lista_padres = $aux->obtener_padres($USER->id, $grid);
+
+        //titulo de la seccion
+        $mform->addElement('html','<h1>'.get_string('add_gram','vocabulario').'</h1>');
+
+        //campo gramatical
+        $mform->addElement('select', 'campogr', get_string("campo_gram", "vocabulario"), $gramaticas,"onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico\",1)' style=\"min-height: 0;\"");
+        $mform->setDefault('campogr', $lista_padres[1]);
+        //probar los campos dinamicos
+        $i = 1;
+        $divparacerrar = 0;
+        $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico\"  style=\"min-height: 0;\">";
+        while($lista_padres[$i+1]) {
+            $aux = new Vocabulario_gramatica();
+            $graux = $aux->obtener_hijos($USER->id, $lista_padres[$i]);
+            $campodinamico .= '<div class="fitemtitle"></div>';
+            $campodinamico .= '<div class="felement fselect">';
+            $elselect = new MoodleQuickForm_select('campogr','Subcampo',$graux,"id=\"id_campogr".$lista_padres[$i]."\" onChange='javascript:cargaContenido(this.id,\"".'campogr'."grgeneraldinamico".$lista_padres[$i]."\",1)'");
+            $elselect->setSelected($lista_padres[$i+1]);
+            $campodinamico .= $elselect->toHtml();
+            $campodinamico .= '</div>';
+            $campodinamico .= "<div class=\"fitem\" id=\"".'campogr'."grgeneraldinamico".$lista_padres[$i]."\" style=\"min-height: 0;\">";
+            $i = $i+1;
+            $divparacerrar++;
+        }
+        for ($i = 0; $i < $divparacerrar; $i++) {
+            $campodinamico .= "</div>";
+        }
+        $campodinamico .= "</div>";
+        $mform->addElement('html', $campodinamico);
+
+        $mform->addElement('text', 'campo', get_string("campo_gram", "vocabulario"));
+        //opcion de eliminar un campo
+        $mform->addElement('checkbox', 'eliminar', get_string("eliminar", "vocabulario"));
+        $mform->setDefault('eliminar', 0);
+
+        //botones
+        $buttonarray = array();
+        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('savechanges'));
+        //$buttonarray[] = &$mform->createElement('reset', 'resetbutton', get_string('revert', 'vocabulario'));
+        $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel','vocabulario'));
+        $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
+    }
 }
 
 class mod_vocabulario_nuevo_ic_form extends moodleform {
