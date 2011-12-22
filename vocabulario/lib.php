@@ -238,6 +238,9 @@ function vocabulario_view($id, $opcion=0, $id_mp=null) {
         case 14: //imprimir apuntes en pdf
             $mform = new mod_vocabulario_pdf_form('pdf.php?id_tocho='.$id);
             break;
+        case 15: //añadir gramatica
+            $mform = new mod_vocabulario_aniadir_gr_form('guardar_gr_desc.php?id_tocho='.$id);
+            break;
     }
 
     $mform->display();
