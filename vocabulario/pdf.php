@@ -42,6 +42,14 @@ require_once("$CFG->libdir/tcpdf/tcpdf.php");
 require_once("$CFG->libdir/tcpdf/config/lang/eng.php");
 global $USER;
 
+$id_tocho = optional_param('id_tocho', 0, PARAM_INT);
+
+$mform = new mod_vocabulario_pdf_form();
+
+if ($mform->is_cancelled()) {
+    redirect('./view.php?id=' . $id_tocho);
+}
+
 //$usuario = optional_param('us', $USER->id, PARAM_INT);
 $usuario = $USER->id;
 
