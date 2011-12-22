@@ -2313,6 +2313,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $mform->addElement('static', 'mas_filas', '', $ops);
                 }
                 break;
+            //6
             case 50:
 
                 $kasus = array(get_string('acusativo','vocabulario'),get_string('dativo','vocabulario'),get_string('acudat','vocabulario'),get_string('genitivo','vocabulario'));
@@ -2378,24 +2379,93 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 }
                 break;
             case 51:
+            case 52:
 
+                //array para traducir el campo de caso, que al ser un entero se tiene que corresponder con un string
+                $kasus = array(get_string('acusativo','vocabulario'),get_string('dativo','vocabulario'),get_string('acudat','vocabulario'),get_string('genitivo','vocabulario'));
+
+
+                //Extraer el contenido de la plantilla 6 de la base de datos y crear un array
+                //que agrupa los elementos de 4 en 4
                 $gr = new Vocabulario_mis_gramaticas();
                 $gr->leer('50',$USER->id);
                 $descripcion_troceada = explode('&', $gr->get('descripcion'));
-                $arrayAux = array();
-                for($ind=0; $ind<count($descripcion_troceada); $ind+=4){
-                    $arrayAux[]=$descripcion_troceada[$ind].'&'.$descripcion_troceada[$ind+1].'&'.$descripcion_troceada[$ind+2].'&'.$descripcion_troceada[$ind+3];
+                $arrayAux1 = array();
+                for($ind=0; $ind<count($descripcion_troceada)-2; $ind+=4){
+                    $arrayAux1[]=$descripcion_troceada[$ind].'&'.$descripcion_troceada[$ind+1].'&'.$descripcion_troceada[$ind+2].'&'.$descripcion_troceada[$ind+3];
                 }
 
-                
-                $abecedario = '<h1 style="text-align:center;">';
-                $l = 'a';
-                for ($i = 1; $i < 27; $i++) {
-                    $abecedario .= '<a>[' . $l . ']</a>';
-                    $l++;
+
+
+                $letra = optional_param('letra',null,PARAM_TEXT);
+                $caso = optional_param('caso',null,PARAM_TEXT);
+
+                //se ordena el array
+                sort($arrayAux1);
+
+                if($grid == 51){                //discriminamos por letras
+                    // Se pinta el selector de letras
+                    $abecedario = '<h1 style="text-align:center;">';
+                    $l = 'a';
+                    for ($i = 1; $i < 27; $i++) {
+                        $abecedario .= '<a href="./view?id=' . $id_tocho . '&opcion=5&grid='.$grid.'&letra='.$l.'">[' . $l . ']</a>';
+                        $l++;
+                    }
+                    $abecedario .= '<a href="./view?id=' . $id_tocho . '&opcion=5&grid='.$grid.'">[Todas]</a>';
+                    $abecedario .= '</h1>';
+                    $mform -> addElement('html',$abecedario);
+
+
+                    //si es necesario discriminamos por la letra seleccionada
+
+                    $arrayAux = array();
+                    if($letra != null){
+                        foreach($arrayAux1 as $cosa){
+                            if($cosa[0]==$letra || $cosa[0]==strtoupper($letra)){
+                                $arrayAux[] = $cosa;
+                            }
+                        }
+                    }elseif($letra == null){
+                        foreach($arrayAux1 as $cosa){
+                            if($cosa[0]!='&'){
+                                $arrayAux[] = $cosa;
+                            }
+                        }
+                    }
+                }elseif($grid == 52){           //discriminamos por casos
+                    $kasos = '<h1 style="text-align:center;">';
+                    for ($i = 0; $i < 4; $i++) {
+                        $kasos .= '<a href="./view?id=' . $id_tocho . '&opcion=5&grid='.$grid.'&caso='.$i.'">[' . $kasus[$i] . ']</a>';
+                        $l++;
+                    }
+                    $kasos .= '<a href="./view?id=' . $id_tocho . '&opcion=5&grid='.$grid.'">[Todas]</a>';
+                    $kasos .= '</h1>';
+                    $mform -> addElement('html',$kasos);
+
+
+                    //si es necesario discriminamos por el caso seleccionado
+
+                    $arrayAux = array();
+                    if($caso != null){
+                        $filaux='';
+                        foreach($arrayAux1 as $cosa){
+                            $filaux = explode('&',$cosa);
+                            if($filaux[2]==$caso && $filaux[0]!=null){
+                                $arrayAux[] = $cosa;
+                            }
+                        }
+                    }elseif($caso == null){
+                        foreach($arrayAux1 as $cosa){
+                            if($cosa[0]!='&'){
+                                $arrayAux[] = $cosa;
+                            }
+                        }
+                    }
                 }
-                $abecedario .= '</h1>';
-                $mform -> addElement('html',$abecedario);
+
+
+
+                //a partir de aqui empezamos a pintar la tabla
 
                 $mform->addElement('html', '<p>');
                 $mform->addElement('html','<table class="flexible generaltable generalbox boxaligncenter">');
@@ -2409,15 +2479,24 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $titulillos .= '</tr>';
                 $mform->addElement('html',$titulillos);
 
+                //si hay filas que mostrar las pinamos, en caso contrario solo se verá la cabecera de la tabla.
 
                 $salidor = false;
                 for ($j=0;$j<count($arrayAux) && $salidor==false;$j++) {
-                    $desc_aux = explode('&',$arrayAux);
+                    $desc_aux = explode('&',$arrayAux[$j]);
                     if(!$desc_aux[0]) {
                         $salidor = true;
+                    }else{
+                        $titulillos = '<tr class="cell" style="text-align:center;">';
+                        $titulillos .= '<td style="padding:0px 10px 0px 10px;">'.$desc_aux[0].'</td>';
+                        $titulillos .= '<td style="padding:0px 10px 0px 10px;">'.$desc_aux[1].'</td>';
+                        $titulillos .= '<td style="padding:0px 10px 0px 10px;">'.$kasus[$desc_aux[2]].'</td>';
+                        $titulillos .= '<td style="padding:0px 10px 0px 10px;">'.$desc_aux[3].'</td>';
+                        $titulillos .= '</tr>';
+                        $mform->addElement('html',$titulillos);
                     }
                 }
-
+                
 
                 $mform->addElement('html', '</table>');
                 $mform->addElement('html', '<p>');
