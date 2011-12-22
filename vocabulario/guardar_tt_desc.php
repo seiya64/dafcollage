@@ -64,6 +64,7 @@ if (optional_param('eliminar', 0, PARAM_INT) && $tipologia->get('padre') > 54) {
 }
 
 if ($tipologia->get('tipo') != null) {
+    $tipologia->set(null, null, 0);
     $ttidaux = insert_record('vocabulario_tipologias', $tipologia, true);
 }
 redirect('./view.php?id=' . $id_tocho . '&opcion=10&ttid=' . $ttidaux)
