@@ -435,7 +435,7 @@ class mod_vocabulario_opciones_form extends moodleform {
         //4,2
         $tabla_menu .='<td><p><a href="./manual.pdf"><img src="./imagenes/ayuda.png" id="id_ayuda" name="ayuda"/></br>' . get_string('ayuda', 'vocabulario') . '</a></p></td>';
         //4,3
-        $tabla_menu .='<td></td></tr>';
+        $tabla_menu .='<td style="text-align:right"><p><a href="view.php?id=' . $id . '&opcion=10"><img src="./imagenes/ayuda.png" id="id_nueva_tt" name="nueva_tt"/></br>' . get_string('nueva_tt', 'vocabulario') . '</a></p></td></tr>';
         $tabla_menu .='</table>';
         $mform->addElement('html', $tabla_menu);
     }
@@ -2805,79 +2805,30 @@ class mod_vocabulario_tipologia_desc_form extends moodleform {
     function definition() {
         global $USER;
         $mform = & $this->_form;
-        //inclusion del javascript para las funciones
-        $mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
+
         $ttid = optional_param('ttid', 0, PARAM_INT);
-        $tipologias = new Vocabulario_mis_tipologias();
-        $tipologias->leer($ttid);
-        $mtipologias = new Vocabulario_tipologias();
-        $mtipologias->leer($tipologias->get('tipoid'), $USER->id);
-        $descripcion_troceada = explode('&', $tipologias->get('descripcion'));
-        $palabra = 0;
-        switch ($tipologias->get('tipo_palabra')) {
-            case 'sustantivo':
-                $palabra = new Vocabulario_sustantivo();
-                $palabra->leer($tipologias->get('palabraid'));
-                break;
-            case 'adjetivo':
-                $palabra = new Vocabulario_adjetivo();
-                $palabra->leer($tipologias->get('palabraid'));
-                break;
-            case 'verbo':
-                $palabra = new Vocabulario_verbo();
-                $palabra->leer($tipologias->get('palabraid'));
-                break;
-            case 'otro':
-                $palabra = new Vocabulario_otro();
-                $palabra->leer($tipologias->get('palabraid'));
-                break;
+        $id_tocho = optional_param('id', 0, PARAM_INT);
+
+        //titulo de la seccion
+        $mform->addElement('html','<h1>'.get_string('nueva_tt','vocabulario').'</h1>');
+
+        $aux = new Vocabulario_tipologias();
+        $tipologias = $aux->obtener_todos($USER->id);
+        $mform->addElement('select', 'campott', get_string("nivel", "vocabulario"), $tipologias);
+        if ($ttid) {
+            $mform->setDefault('campott', $ttid);
         }
 
-        $mform->addElement('html', '<p>' . get_string("pal", "vocabulario") . ': ' . $palabra->get('palabra') . '</p>');
-        $mform->addElement('html', '<p>' . get_string("campo_tipologia", "vocabulario") . ': ' . $mtipologias->get('palabra') . '</p>');
+        $mform->addElement('text', 'tipologia', get_string("campo_tipologia_nuevo", "vocabulario"));
 
-        $mform->addElement('text', 'quien', get_string('quien', 'vocabulario'));
-        $mform->setDefault('quien', $descripcion_troceada[0]);
-        $mform->addElement('text', 'finalidad', get_string('finalidad', 'vocabulario'));
-        $mform->setDefault('finalidad', $descripcion_troceada[1]);
-        $mform->addElement('text', 'a_quien', get_string('a_quien', 'vocabulario'));
-        $mform->setDefault('a_quien', $descripcion_troceada[2]);
-        $mform->addElement('text', 'medio', get_string('medio', 'vocabulario'));
-        $mform->setDefault('medio', $descripcion_troceada[3]);
-        $mform->addElement('text', 'donde', get_string('donde', 'vocabulario'));
-        $mform->setDefault('donde', $descripcion_troceada[4]);
-        $mform->addElement('text', 'cuando', get_string('cuando', 'vocabulario'));
-        $mform->setDefault('cuando', $descripcion_troceada[5]);
-        $mform->addElement('text', 'motivo', get_string('motivo', 'vocabulario'));
-        $mform->setDefault('motivo', $descripcion_troceada[6]);
-        $mform->addElement('text', 'funcion', get_string('funcion', 'vocabulario'));
-        $mform->setDefault('funcion', $descripcion_troceada[7]);
-        $mform->addElement('text', 'sobre_que', get_string('sobre_que', 'vocabulario'));
-        $mform->setDefault('sobre_que', $descripcion_troceada[8]);
-        $mform->addElement('text', 'que', get_string('que', 'vocabulario'));
-        $mform->setDefault('que', $descripcion_troceada[9]);
-        $mform->addElement('text', 'orden', get_string('orden', 'vocabulario'));
-        $mform->setDefault('orden', $descripcion_troceada[10]);
-        $mform->addElement('text', 'medios_nonverbales', get_string('medios_nonverbales', 'vocabulario'));
-        $mform->setDefault('medios_nonverbales', $descripcion_troceada[11]);
-        $mform->addElement('text', 'que_palabras', get_string('que_palabras', 'vocabulario'));
-        $mform->setDefault('que_palabras', $descripcion_troceada[12]);
-        $mform->addElement('text', 'que_frases', get_string('que_frases', 'vocabulario'));
-        $mform->setDefault('que_frases', $descripcion_troceada[13]);
-        $mform->addElement('text', 'que_tono', get_string('que_tono', 'vocabulario'));
-        $mform->setDefault('que_tono', $descripcion_troceada[14]);
+        //opcion de eliminar un campo
+        $mform->addElement('checkbox', 'eliminar', get_string("eliminar", "vocabulario"));
+        $mform->setDefault('eliminar', 0);
 
-
-
-        //botones
         $buttonarray = array();
-        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('savechanges'));
-        $buttonarray[] = &$mform->createElement('reset', 'resetbutton', get_string('revert', 'vocabulario'));
+        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('guardesc','vocabulario'));
         $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel','vocabulario'));
         $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
-
-        $mform->addElement('hidden', 'ttid', $ttid);
-        $mform->addElement('hidden', 'id_mp', optional_param('id_mp',null,PARAM_INT));
     }
 
 }

@@ -47,6 +47,31 @@ $mform = new mod_vocabulario_tipologia_desc_form();
 
 $ttid = optional_param('ttid', 0, PARAM_INT);
 
+$id_mp = optional_param('id_mp',null,PARAM_INT);
+
+//averiguo quien soy
+$user_object = get_record('user', 'id', $USER->id);
+
+$tipologia = new Vocabulario_tipologias($user_object->id, required_param('campott', PARAM_TEXT), optional_param('tipologia', PARAM_TEXT));
+
+if ($mform->is_cancelled()) {
+    redirect('./view.php?id=' . $id_tocho);
+}
+
+if (optional_param('eliminar', 0, PARAM_INT) && $tipologia->get('padre') > 54) {
+    delete_records('vocabulario_tipologias', 'id', $tipologia->get('padre'));
+    redirect('./view.php?id=' . $id_tocho . '&opcion=10');
+}
+
+if ($tipologia->get('tipo') != null) {
+    $ttidaux = insert_record('vocabulario_tipologias', $tipologia, true);
+}
+redirect('./view.php?id=' . $id_tocho . '&opcion=10&ttid=' . $ttidaux)
+
+/*$mform = new mod_vocabulario_tipologia_desc_form();
+
+$ttid = optional_param('ttid', 0, PARAM_INT);
+
 
 $id_mp = optional_param('id_mp',null,PARAM_INT);
 
@@ -75,5 +100,5 @@ if ($soy != 0){
 }
 else{
     redirect('./view.php?id=' . $id_tocho . '&opcion=9');
-}
+}*/
 ?>

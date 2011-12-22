@@ -58,7 +58,7 @@ if ($mform->is_cancelled()) {
     redirect('./view.php?id=' . $id_tocho);
 }
 
-if (optional_param('eliminar', 0, PARAM_INT) && $intencion->get('padre') > 145) {
+if (optional_param('eliminar', 0, PARAM_INT) && $intencion->get('padre') > 146) {
     delete_records('vocabulario_intenciones', 'id', $intencion->get('padre'));
     redirect('./view.php?id=' . $id_tocho . '&opcion=8');
 }
