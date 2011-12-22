@@ -235,6 +235,9 @@ function vocabulario_view($id, $opcion=0, $id_mp=null) {
         case 13:
             $mform = new mod_vocabulario_listado_form('listado.php?id_tocho='.$id);
             break;
+        case 14: //imprimir apuntes en pdf
+            $mform = new mod_vocabulario_pdf_form('pdf.php?id_tocho='.$id);
+            break;
     }
 
     $mform->display();

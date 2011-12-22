@@ -421,7 +421,7 @@ class mod_vocabulario_opciones_form extends moodleform {
         //3,1
         $tabla_menu .='<tr><td style="text-align:left"><p><a href="view.php?id=' . $id . '&opcion=7"><img src="./imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im"/></br>' . get_string('admin_ic', 'vocabulario') . '</a></p></td>';
         //3,2
-        $tabla_menu .='<td><p><a href="./pdf?id=' . $id . '&us=' . $USER->id . '"><img src="./imagenes/pdf.png" id="id_pdf" name="pdf"/></br>' . get_string('pdf', 'vocabulario') . '</a></p></td>';
+        $tabla_menu .='<td><p><a href="view.php?id=' . $id . '&opcion=14"><img src="./imagenes/pdf.png" id="id_pdf" name="pdf"/></br>' . get_string('pdf', 'vocabulario') . '</a></p></td>';
         //3,3
         $tabla_menu .='<td style="text-align:right"><p><a href="view.php?id=' . $id . '&opcion=8"><img src="./imagenes/nueva_ic.png" id="id_nueva_ic" name="nueva_ic"/></br>' . get_string('nueva_ic', 'vocabulario') . '</a></p></td></tr>';
 
@@ -2870,6 +2870,32 @@ class mod_vocabulario_listado_form extends moodleform {
         //botones
         $buttonarray = array();
         $buttonarray[] = &$mform->createElement('submit', 'cancelbutton', get_string('cancel','vocabulario'));
+        $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
+    }
+}
+
+class mod_vocabulario_pdf_form extends moodleform{
+    function definition(){
+        global $USER;
+        $mform = & $this->_form;
+
+        //titulo de la seccion
+        $mform->addElement('html','<h1>'.get_string('imprcuaderno','vocabulario').'</h1>');
+
+        //opcion de eliminar un campo
+        $mform->addElement('checkbox', 'impr_vocab', get_string('impr_vocab', 'vocabulario'));
+        $mform->addElement('checkbox', 'impr_gram', get_string('impr_gram', 'vocabulario'));
+        $mform->addElement('checkbox', 'impr_tipol', get_string('impr_tipol', 'vocabulario'));
+        $mform->addElement('checkbox', 'impr_inten', get_string('impr_inten', 'vocabulario'));
+        $mform->setDefault('impr_vocab', 1);
+        $mform->setDefault('impr_gram', 1);
+        $mform->setDefault('impr_tipol', 1);
+        $mform->setDefault('impr_inten', 1);
+
+
+        $buttonarray = array();
+        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('imprimir','vocabulario'));
+        $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel','vocabulario'));
         $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
     }
 }
