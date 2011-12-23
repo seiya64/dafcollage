@@ -64,45 +64,10 @@ if (optional_param('eliminar', 0, PARAM_INT) && $tip->get('padre') > 54) {
 }
 
 if ($tip->get('tipo') != null) {
+    $tip->set(null,null,'0');
+    print_object($tip);
     
-    $tip2 = new Vocabulario_tipologias($tip->get('usuarioid'),0,$tip->get('tipo'));
-    
-    
-    $ttidaux = insert_record('vocabulario_tipologias', $tip2, true);
+    $ttidaux = insert_record('vocabulario_tipologias', $tip, true);
 }
 redirect('./view.php?id=' . $id_tocho . '&opcion=10&ttid=' . $ttidaux)
-
-/*$mform = new mod_vocabulario_tipologia_desc_form();
-
-$ttid = optional_param('ttid', 0, PARAM_INT);
-
-
-$id_mp = optional_param('id_mp',null,PARAM_INT);
-
-//averiguo quien soy
-$user_object = get_record('user', 'id', $USER->id);
-$tipologia = new Vocabulario_mis_tipologias();
-$tipologia->leer($ttid);
-if ($mform->is_cancelled()) {
-    redirect('./view.php?id=' . $id_tocho . '&opcion=9&ttid=' . $tipologia->get('tipoid'));
-}
-
-$desc = optional_param('quien', null, PARAM_TEXT) . '&' . optional_param('finalidad', null, PARAM_TEXT) . '&';
-$desc .= optional_param('a_quien', null, PARAM_TEXT) . '&' . optional_param('medio', null, PARAM_TEXT). '&';
-$desc .= optional_param('donde', null, PARAM_TEXT) . '&' . optional_param('cuando', null, PARAM_TEXT). '&';
-$desc .= optional_param('motivo', null, PARAM_TEXT) . '&' . optional_param('funcion', null, PARAM_TEXT). '&';
-$desc .= optional_param('sobre_que', null, PARAM_TEXT) . '&' . optional_param('que', null, PARAM_TEXT). '&';
-$desc .= optional_param('orden', null, PARAM_TEXT) . '&' . optional_param('medios_nonverbales', null, PARAM_TEXT). '&';
-$desc .= optional_param('que_palabras', null, PARAM_TEXT) . '&' . optional_param('que_frases', null, PARAM_TEXT). '&';
-$desc .= optional_param('que_tono', null, PARAM_TEXT);
-
-$tipologia->set(null, null, $desc);
-$tipologia->actualizar();
-$soy = optional_param('id_mp',null,PARAM_INT);
-if ($soy != 0){
-    redirect('./view.php?id=' . $id_tocho . '&opcion=1&id_mp='.$id_mp);
-}
-else{
-    redirect('./view.php?id=' . $id_tocho . '&opcion=9');
-}*/
 ?>
