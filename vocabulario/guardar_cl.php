@@ -56,7 +56,7 @@ $campo['usuarioid'] = $user_object->id;
 $campo['padre'] = required_param('campoid', PARAM_TEXT);
 $campo['campo'] = optional_param('campo', PARAM_TEXT);
 
-if (optional_param('eliminar', 0, PARAM_INT) && $campo['padre'] > 116) {
+if (optional_param('eliminar', 0, PARAM_INT) && $campo['padre'] > 106) {
     delete_records('vocabulario_camposlexicos', 'id', $campo['padre']);
     //echo 'eliminado ' . $campo['padre'];
 }
