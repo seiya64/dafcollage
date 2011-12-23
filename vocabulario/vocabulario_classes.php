@@ -631,7 +631,7 @@ class Vocabulario_campo_lexico {
     }
 
     function obtener_hijos($usuarioid, $padreid) {
-        $campos_lexicos = get_records_select('vocabulario_camposlexicos', 'usuarioid=' . $usuarioid . ' or usuarioid=0 and padre=' . $padreid);
+        $campos_lexicos = get_records_select('vocabulario_camposlexicos', '(usuarioid=' . $usuarioid . ' or usuarioid=0) and padre=' . $padreid);
         $clex = array();
         $clex[$padreid] = 'Seleccionar';
         $orden = $this->ordena($campos_lexicos, $padreid);
@@ -1115,7 +1115,7 @@ class Vocabulario_gramatica {
     }
 
     function obtener_hijos($usuarioid, $padreid) {
-        $gramaticas = get_records_select('vocabulario_gramatica', 'usuarioid=' . $usuarioid . ' or usuarioid=0 and padre=' . $padreid);
+        $gramaticas = get_records_select('vocabulario_gramatica', '(usuarioid=' . $usuarioid . ' or usuarioid=0) and padre=' . $padreid);
         $gr = array();
         $gr[$padreid] = 'Seleccionar';
         $orden = $this->ordena($gramaticas, $padreid);
@@ -1242,7 +1242,6 @@ class Vocabulario_mis_gramaticas {
 
     function guardar() {
         $gr = get_record_select('vocabulario_mis_gramaticas', 'usuarioid=' . $this->usuarioid . ' and gramaticaid=\'' . $this->gramaticaid .'\'');
-        //print_object($gr);
         if ($gr->id == null){
             $this->id = insert_record('vocabulario_mis_gramaticas', $this, true);
         }
