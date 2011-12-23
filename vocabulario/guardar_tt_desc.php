@@ -52,20 +52,23 @@ $id_mp = optional_param('id_mp',null,PARAM_INT);
 //averiguo quien soy
 $user_object = get_record('user', 'id', $USER->id);
 
-$tipologia = new Vocabulario_tipologias($user_object->id, required_param('campott', PARAM_TEXT), optional_param('tipologia', PARAM_TEXT));
+$tip = new Vocabulario_tipologias($user_object->id, required_param('campott', PARAM_TEXT), optional_param('tipologia', null ,PARAM_TEXT));
 
 if ($mform->is_cancelled()) {
     redirect('./view.php?id=' . $id_tocho);
 }
 
-if (optional_param('eliminar', 0, PARAM_INT) && $tipologia->get('padre') > 54) {
-    delete_records('vocabulario_tipologias', 'id', $tipologia->get('padre'));
+if (optional_param('eliminar', 0, PARAM_INT) && $tip->get('padre') > 54) {
+    delete_records('vocabulario_tipologias', 'id', $tip->get('padre'));
     redirect('./view.php?id=' . $id_tocho . '&opcion=10');
 }
 
-if ($tipologia->get('tipo') != null) {
-    $tipologia->set(null, null, 0);
-    $ttidaux = insert_record('vocabulario_tipologias', $tipologia, true);
+if ($tip->get('tipo') != null) {
+    
+    $tip2 = new Vocabulario_tipologias($tip->get('usuarioid'),0,$tip->get('tipo'));
+    
+    
+    $ttidaux = insert_record('vocabulario_tipologias', $tip2, true);
 }
 redirect('./view.php?id=' . $id_tocho . '&opcion=10&ttid=' . $ttidaux)
 
