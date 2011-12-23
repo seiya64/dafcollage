@@ -69,5 +69,5 @@ if ($tip->get('tipo') != null) {
     
     $ttidaux = insert_record('vocabulario_tipologias', $tip, true);
 }
-redirect('./view.php?id=' . $id_tocho . '&opcion=10&ttid=' . $ttidaux)
+redirect('./view.php?id=' . $id_tocho . '&opcion=10&ttid=' . $ttidaux);
 ?>
