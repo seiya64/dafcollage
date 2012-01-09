@@ -167,6 +167,7 @@ switch ($padre) {
         }
         $desc='';
         for ($i=0; $i<$tope; $i++){
+            $desc .= optional_param('INF'.$i, null, PARAM_TEXT) . '&';
             $desc .= optional_param('S1PRA'.$i, null, PARAM_TEXT) . '&';
             $desc .= optional_param('S1PRE'.$i, null, PARAM_TEXT) . '&';
             $desc .= optional_param('S1PER'.$i, null, PARAM_TEXT) . '&';
@@ -399,7 +400,7 @@ switch ($padre) {
         $tope = 10;
         $desc='';
         for ($i=0; $i<$tope; $i++){
-            $desc .= optional_param('S2'.$i, null, PARAM_TEXT) . '&' . optional_param('P2'.$i, null, PARAM_TEXT) . '&' . optional_param('SIE'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('INF'.$i, null, PARAM_TEXT) . '&' . optional_param('S2'.$i, null, PARAM_TEXT) . '&' . optional_param('P2'.$i, null, PARAM_TEXT) . '&' . optional_param('SIE'.$i, null, PARAM_TEXT) . '&';
         }
         break;
     //3.5 Reflexive und reziproke Verben
