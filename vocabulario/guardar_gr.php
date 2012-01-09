@@ -116,7 +116,6 @@ switch ($padre) {
     case 21:
     //3.1.2 Präteritum
     case 22:
-        
         $tope=20;
         $desc='';
         for ($i=0; $i<$tope; $i++){

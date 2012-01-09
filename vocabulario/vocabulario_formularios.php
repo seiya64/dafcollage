@@ -1047,7 +1047,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
             //tablas verbos
             //3.1.1 Präsens
             case 21:
-            //3.1.2 Präteritum
+            //3.1.2 Präteritum 
             case 22:
             //tabla
                 $tope = 20;
@@ -1093,7 +1093,6 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $titulillos .= '<th>' . get_string('par_gemis', 'vocabulario') . '</th>';
                     $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
-
                     $titulillos = '<tr class="cell">';
                     $titulillos .= '<td class="cell">' . get_string('infinitivo','vocabulario') . '</td>';
                     $titulillos .= '<td><input type="text" id="id_INFSC'.$i.'" name="INFSC'.$i.'" value="' . $descripcion_troceada[(21*$i)+0] . '"></td>';
@@ -1108,7 +1107,6 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $titulillos .= '<td class="cell" colspan=2>&nbsp;</td>';
                     $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
-
                     $titulillos = '<tr class="cell">';
                     $titulillos .= '<td class="cell">' . get_string('S1', 'vocabulario') . '</td>';
                     $titulillos .= '<td><input type="text" id="id_S1SC'.$i.'" name="S1SC'.$i.'" value="' . $descripcion_troceada[(21*$i)+1] . '"></td>';

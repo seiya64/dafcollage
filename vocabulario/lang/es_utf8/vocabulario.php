@@ -254,6 +254,7 @@ $string['irregulares'] = 'Unregelmäßige Verben';
 $string['gebrauch'] = 'Gebrauch';
 $string['reflexivo'] = 'Reflexivpronomen';
 $string['positivo'] = 'Positiv';
+$string['infinitivo'] = 'Infinitiv';
 $string['comparativo'] = 'Komparativ';
 $string['superlativo'] = 'Superlativ';
 $string['despuesde'] = 'Steht nach';
