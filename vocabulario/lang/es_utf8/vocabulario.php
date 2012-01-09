@@ -250,6 +250,7 @@ $string['starke'] = 'Starke Verben';
 $string['gemischte'] = 'Gemischte Verben';
 $string['possessiv1'] = 'Possessivpronomina ohne Deklination';
 $string['possessiv2'] = 'Possessivartikel ohne Deklination';
+$string['irregulares'] = 'Unregelmäßige Verben';
 $string['gebrauch'] = 'Gebrauch';
 $string['reflexivo'] = 'Reflexivpronomen';
 $string['positivo'] = 'Positiv';

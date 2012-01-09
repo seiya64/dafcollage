@@ -1410,10 +1410,12 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 break;
             //3.1.3 Perfekt/Partizip II
             case 23:
+                $mform->addElement('textarea', 'irregulares', get_string("irregulares", "vocabulario"), 'rows="5" cols="30"');
+                $mform->setDefault('irregulares', $descripcion_troceada[0]);
                 $mform->addElement('textarea', 'participio2', get_string("participio2", "vocabulario"), 'rows="5" cols="30"');
-                $mform->setDefault('participio2', $descripcion_troceada[0]);
+                $mform->setDefault('participio2', $descripcion_troceada[1]);
                 $mform->addElement('textarea', 'hilfsverbs', get_string("hilfsverbs", "vocabulario"), 'rows="5" cols="30"');
-                $mform->setDefault('hilfsverbs', $descripcion_troceada[1]);
+                $mform->setDefault('hilfsverbs', $descripcion_troceada[2]);
                 break;
             //3.1.4 Partizip I
             case 24:
@@ -1846,7 +1848,31 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
             //2.2 Interrogativpronomen
             case 8:
             //tabla
-                for ($i=0; $i<3;$i++) {
+                $tope = 3;
+                $ultimo = -1;
+
+                //tabla
+                for ($i=0; $i<$tope;$i++) {
+                    $ocultador = '<div id="ocultador_tabla'.$i;
+                    $salidor = false;
+                    for ($j=0; $j<8 && $salidor==false;$j++) {
+                        if($descripcion_troceada[(8*$i)+$j]) {
+                            $salidor = true;
+                            $ocultador .= '">';
+                            $ultimo = $i;
+                        }
+                    }
+
+                    if ($salidor == false && $i==0) {
+                        $ocultador .= '">';
+                    }
+
+                    if ($salidor == false && $i!=0) {
+                        $ocultador .= '" style="display:none">';
+                    }
+
+                    $mform->addElement('html', $ocultador);
+
                     $mform->addElement('html', '<p>');
                     $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter">');
                     //titulillos de la tabla
@@ -1878,6 +1904,14 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
                     $mform->addElement('html', '</table>');
+                    $mform->addElement('html', '<p>');
+                    $mform->addElement('html', '</div>');
+
+                }
+
+                if ($ultimo+1 < $tope && $tope > 1) {
+                    $ops = '<a href=\'javascript:desocultar("tabla'.($ultimo+1).'")\' id="mt">'.get_string("mastablas", "vocabulario").'</a>';
+                    $mform->addElement('static', 'mas_tablas', '', $ops);
                 }
                 break;
             //8.3.1 Ergänzungen

@@ -210,7 +210,7 @@ switch ($padre) {
         break;
     //3.1.3 Perfekt/Partizip II
     case 23:
-        $desc = optional_param('participio2', null, PARAM_TEXT) . '&' . optional_param('hilfsverbs', null, PARAM_TEXT) . '&';
+        $desc = optional_param('irregulares', null, PARAM_TEXT) . '&' . optional_param('participio2', null, PARAM_TEXT) . '&' . optional_param('hilfsverbs', null, PARAM_TEXT) . '&';
         break;
     //3.1.4 Partizip I
     case 24:
