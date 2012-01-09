@@ -120,10 +120,13 @@ switch ($padre) {
         $tope=20;
         $desc='';
         for ($i=0; $i<$tope; $i++){
+            $desc .= optional_param('INFSC'.$i, null, PARAM_TEXT) . '&';
             $desc .= optional_param('S1SC'.$i, null, PARAM_TEXT) . '&' . optional_param('S2SC'.$i, null, PARAM_TEXT) . '&' . optional_param('S3SC'.$i, null, PARAM_TEXT) . '&';
             $desc .= optional_param('P1SC'.$i, null, PARAM_TEXT) . '&' . optional_param('P2SC'.$i, null, PARAM_TEXT) . '&' . optional_param('P3SC'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('INFST'.$i, null, PARAM_TEXT) . '&';
             $desc .= optional_param('S1ST'.$i, null, PARAM_TEXT) . '&' . optional_param('S2ST'.$i, null, PARAM_TEXT) . '&' . optional_param('S3ST'.$i, null, PARAM_TEXT) . '&';
             $desc .= optional_param('P1ST'.$i, null, PARAM_TEXT) . '&' . optional_param('P2ST'.$i, null, PARAM_TEXT) . '&' . optional_param('P3ST'.$i, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('INFGE'.$i, null, PARAM_TEXT) . '&';
             $desc .= optional_param('S1GE'.$i, null, PARAM_TEXT) . '&' . optional_param('S2GE'.$i, null, PARAM_TEXT) . '&' . optional_param('S3GE'.$i, null, PARAM_TEXT) . '&';
             $desc .= optional_param('P1GE'.$i, null, PARAM_TEXT) . '&' . optional_param('P2GE'.$i, null, PARAM_TEXT) . '&' . optional_param('P3GE'.$i, null, PARAM_TEXT) . '&';
         }

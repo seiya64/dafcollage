@@ -770,7 +770,11 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->setDefault('neutrosemantico', $descripcion_troceada[4]);
                 $mform->addElement('textarea', 'neutroformal', get_string('clasificacionformal', 'vocabulario'), 'rows="5" cols="30"');
                 $mform->setDefault('neutroformal', $descripcion_troceada[5]);
+
+                $mform->closeHeaderBefore('gnerales');
+
                 $mform->closeHeaderBefore('botones');
+                
                 break;
             //1.2 Numerus
             case 4:
@@ -1051,8 +1055,8 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 for ($i=0; $i<$tope;$i++) {
                     $ocultador = '<div id="ocultador_tabla'.$i;
                     $salidor = false;
-                    for ($j=0; $j<18 && $salidor==false;$j++) {
-                        if($descripcion_troceada[(18*$i)+$j]) {
+                    for ($j=0; $j<21 && $salidor==false;$j++) {
+                        if($descripcion_troceada[(21*$i)+$j]) {
                             $salidor = true;
                             $ocultador .= '">';
                             $ultimo = $i;
@@ -1089,53 +1093,69 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $titulillos .= '<th>' . get_string('par_gemis', 'vocabulario') . '</th>';
                     $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
+
+                    $titulillos = '<tr class="cell">';
+                    $titulillos .= '<td class="cell">' . get_string('infinitivo','vocabulario') . '</td>';
+                    $titulillos .= '<td><input type="text" id="id_INFSC'.$i.'" name="INFSC'.$i.'" value="' . $descripcion_troceada[(21*$i)+0] . '"></td>';
+                    $titulillos .= '<td class="cell">' . get_string('infinitivo','vocabulario') . '</td>';
+                    $titulillos .= '<td><input type="text" id="id_INFST'.$i.'" name="INFST'.$i.'" value="' . $descripcion_troceada[(21*$i)+7] . '"></td>';
+                    $titulillos .= '<td class="cell">' . get_string('infinitivo','vocabulario') . '</td>';
+                    $titulillos .= '<td><input type="text" id="id_INFGE'.$i.'" name="INFGE'.$i.'" value="' . $descripcion_troceada[(21*$i)+14] . '"></td>';
+                    $titulillos .= '</tr>';
+                    $titulillos .= '<tr class="cell">';
+                    $titulillos .= '<td class="cell" colspan=2>&nbsp;</td>';
+                    $titulillos .= '<td class="cell" colspan=2>&nbsp;</td>';
+                    $titulillos .= '<td class="cell" colspan=2>&nbsp;</td>';
+                    $titulillos .= '</tr>';
+                    $mform->addElement('html', $titulillos);
+
                     $titulillos = '<tr class="cell">';
                     $titulillos .= '<td class="cell">' . get_string('S1', 'vocabulario') . '</td>';
-                    $titulillos .= '<td><input type="text" id="id_S1SC'.$i.'" name="S1SC'.$i.'" value="' . $descripcion_troceada[(18*$i)+0] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_S1SC'.$i.'" name="S1SC'.$i.'" value="' . $descripcion_troceada[(21*$i)+1] . '"></td>';
                     $titulillos .= '<td class="cell">' . get_string('S1', 'vocabulario') . '</td>';
-                    $titulillos .= '<td><input type="text" id="id_S1ST'.$i.'" name="S1ST'.$i.'" value="' . $descripcion_troceada[(18*$i)+6] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_S1ST'.$i.'" name="S1ST'.$i.'" value="' . $descripcion_troceada[(21*$i)+8] . '"></td>';
                     $titulillos .= '<td class="cell">' . get_string('S1', 'vocabulario') . '</td>';
-                    $titulillos .= '<td><input type="text" id="id_S1GE'.$i.'" name="S1GE'.$i.'" value="' . $descripcion_troceada[(18*$i)+12] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_S1GE'.$i.'" name="S1GE'.$i.'" value="' . $descripcion_troceada[(21*$i)+15] . '"></td>';
                     $titulillos .= '</tr>';
                     $titulillos .= '<tr class="cell">';
                     $titulillos .= '<td class="cell">' . get_string('S2', 'vocabulario') . '</td>';
-                    $titulillos .= '<td><input type="text" id="id_S2SC'.$i.'" name="S2SC'.$i.'" value="' . $descripcion_troceada[(18*$i)+1] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_S2SC'.$i.'" name="S2SC'.$i.'" value="' . $descripcion_troceada[(21*$i)+2] . '"></td>';
                     $titulillos .= '<td class="cell">' . get_string('S2', 'vocabulario') . '</td>';
-                    $titulillos .= '<td><input type="text" id="id_S2ST'.$i.'" name="S2ST'.$i.'" value="' . $descripcion_troceada[(18*$i)+7] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_S2ST'.$i.'" name="S2ST'.$i.'" value="' . $descripcion_troceada[(21*$i)+9] . '"></td>';
                     $titulillos .= '<td class="cell">' . get_string('S2', 'vocabulario') . '</td>';
-                    $titulillos .= '<td><input type="text" id="id_S2GE'.$i.'" name="S2GE'.$i.'" value="' . $descripcion_troceada[(18*$i)+13] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_S2GE'.$i.'" name="S2GE'.$i.'" value="' . $descripcion_troceada[(21*$i)+16] . '"></td>';
                     $titulillos .= '</tr>';
                     $titulillos .= '<tr class="cell">';
                     $titulillos .= '<td class="cell">' . get_string('S3', 'vocabulario') . '</td>';
-                    $titulillos .= '<td><input type="text" id="id_S3SC'.$i.'" name="S3SC'.$i.'" value="' . $descripcion_troceada[(18*$i)+2] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_S3SC'.$i.'" name="S3SC'.$i.'" value="' . $descripcion_troceada[(21*$i)+3] . '"></td>';
                     $titulillos .= '<td class="cell">' . get_string('S3', 'vocabulario') . '</td>';
-                    $titulillos .= '<td><input type="text" id="id_S3ST'.$i.'" name="S3ST'.$i.'" value="' . $descripcion_troceada[(18*$i)+8] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_S3ST'.$i.'" name="S3ST'.$i.'" value="' . $descripcion_troceada[(21*$i)+10] . '"></td>';
                     $titulillos .= '<td class="cell">' . get_string('S3', 'vocabulario') . '</td>';
-                    $titulillos .= '<td><input type="text" id="id_S3GE'.$i.'" name="S3GE'.$i.'" value="' . $descripcion_troceada[(18*$i)+14] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_S3GE'.$i.'" name="S3GE'.$i.'" value="' . $descripcion_troceada[(21*$i)+17] . '"></td>';
                     $titulillos .= '</tr>';
                     $titulillos .= '<tr class="cell">';
                     $titulillos .= '<td class="cell">' . get_string('P1', 'vocabulario') . '</td>';
-                    $titulillos .= '<td><input type="text" id="id_P1SC'.$i.'" name="P1SC'.$i.'" value="' . $descripcion_troceada[(18*$i)+3] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_P1SC'.$i.'" name="P1SC'.$i.'" value="' . $descripcion_troceada[(21*$i)+4] . '"></td>';
                     $titulillos .= '<td class="cell">' . get_string('P1', 'vocabulario') . '</td>';
-                    $titulillos .= '<td><input type="text" id="id_P1ST'.$i.'" name="P1ST'.$i.'" value="' . $descripcion_troceada[(18*$i)+9] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_P1ST'.$i.'" name="P1ST'.$i.'" value="' . $descripcion_troceada[(21*$i)+11] . '"></td>';
                     $titulillos .= '<td class="cell">' . get_string('P1', 'vocabulario') . '</td>';
-                    $titulillos .= '<td><input type="text" id="id_P1GE'.$i.'" name="P1GE'.$i.'" value="' . $descripcion_troceada[(18*$i)+15] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_P1GE'.$i.'" name="P1GE'.$i.'" value="' . $descripcion_troceada[(21*$i)+18] . '"></td>';
                     $titulillos .= '</tr>';
                     $titulillos .= '<tr class="cell">';
                     $titulillos .= '<td class="cell">' . get_string('P2', 'vocabulario') . '</td>';
-                    $titulillos .= '<td><input type="text" id="id_P2SC'.$i.'" name="P2SC'.$i.'" value="' . $descripcion_troceada[(18*$i)+4] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_P2SC'.$i.'" name="P2SC'.$i.'" value="' . $descripcion_troceada[(21*$i)+5] . '"></td>';
                     $titulillos .= '<td class="cell">' . get_string('P2', 'vocabulario') . '</td>';
-                    $titulillos .= '<td><input type="text" id="id_P2ST'.$i.'" name="P2ST'.$i.'" value="' . $descripcion_troceada[(18*$i)+10] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_P2ST'.$i.'" name="P2ST'.$i.'" value="' . $descripcion_troceada[(21*$i)+12] . '"></td>';
                     $titulillos .= '<td class="cell">' . get_string('P2', 'vocabulario') . '</td>';
-                    $titulillos .= '<td><input type="text" id="id_P2GE'.$i.'" name="P2GE'.$i.'" value="' . $descripcion_troceada[(18*$i)+16] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_P2GE'.$i.'" name="P2GE'.$i.'" value="' . $descripcion_troceada[(21*$i)+19] . '"></td>';
                     $titulillos .= '</tr>';
                     $titulillos .= '<tr class="cell">';
                     $titulillos .= '<td class="cell">' . get_string('P3', 'vocabulario') . '</td>';
-                    $titulillos .= '<td><input type="text" id="id_P3SC'.$i.'" name="P3SC'.$i.'" value="' . $descripcion_troceada[(18*$i)+5] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_P3SC'.$i.'" name="P3SC'.$i.'" value="' . $descripcion_troceada[(21*$i)+6] . '"></td>';
                     $titulillos .= '<td class="cell">' . get_string('P3', 'vocabulario') . '</td>';
-                    $titulillos .= '<td><input type="text" id="id_P3ST'.$i.'" name="P3ST'.$i.'" value="' . $descripcion_troceada[(18*$i)+11] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_P3ST'.$i.'" name="P3ST'.$i.'" value="' . $descripcion_troceada[(21*$i)+13] . '"></td>';
                     $titulillos .= '<td class="cell">' . get_string('P3', 'vocabulario') . '</td>';
-                    $titulillos .= '<td><input type="text" id="id_P3GE'.$i.'" name="P3GE'.$i.'" value="' . $descripcion_troceada[(18*$i)+17] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_P3GE'.$i.'" name="P3GE'.$i.'" value="' . $descripcion_troceada[(21*$i)+20] . '"></td>';
                     $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
                     $mform->addElement('html', '</table>');
