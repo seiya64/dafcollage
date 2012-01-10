@@ -771,9 +771,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('textarea', 'neutroformal', get_string('clasificacionformal', 'vocabulario'), 'rows="5" cols="30"');
                 $mform->setDefault('neutroformal', $descripcion_troceada[5]);
 
-                $mform->closeHeaderBefore('gnerales');
-
-                $mform->closeHeaderBefore('botones');
+                $mform->closeHeaderBefore('hojas_default');
                 
                 break;
             //1.2 Numerus
@@ -2575,12 +2573,15 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
         if ($grid) {
             //exclamacion de todos las categorias
+            $mform->addElement('html','<div id="hojas_default">');
             $mform->addElement('textarea', 'descripcion', '<img src="./imagenes/alerta.png" id="id_alerta_im" name="alerta_im"/>', 'rows="5" cols="30"');
             $mform->setDefault('descripcion', $descripcion_troceada[count($descripcion_troceada)-2]);
 
             //solucion de enlazar todo con todo
             $mform->addElement('textarea', 'miraren', get_string('miraren','vocabulario'), 'rows="5" cols="30"');
             $mform->setDefault('miraren', $descripcion_troceada[count($descripcion_troceada)-1]);
+
+            $mform->addElement('html','</div>');
         }
 
         //botones
@@ -2658,10 +2659,17 @@ class mod_vocabulario_aniadir_gr_form extends moodleform {
 class mod_vocabulario_nuevo_ic_form extends moodleform {
 
     function definition() {
+
+
         global $USER;
         $mform = & $this->_form;
         //inclusion del javascript para las funciones
         $mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
+
+        /***********************************************************************/
+        $aux = new Vocabulario_intenciones();
+        $icom = $aux->obtener_hijos($USER->id,0);
+        /***********************************************************************/
 
         $icid = optional_param('icid', 0, PARAM_INT);
         $id_tocho = optional_param('id', 0, PARAM_INT);
@@ -2671,10 +2679,21 @@ class mod_vocabulario_nuevo_ic_form extends moodleform {
 
         $aux = new Vocabulario_intenciones();
         $intenciones = $aux->obtener_todos($USER->id);
-        $mform->addElement('select', 'campoic', get_string("nivel", "vocabulario"), $intenciones);
+
+
+        /***********************************************************************/
+        //campo lexico
+        $mform->addElement('select', 'campoic', get_string("nivel", "vocabulario"), $icom,"onChange='javascript:cargaContenido(this.id,\"icgeneraldinamico\",2)' style=\"min-height: 0;\"");
         if ($icid) {
             $mform->setDefault('campoic', $icid);
         }
+        //probar los campos dinamicos
+        $campodinamico = "<div class=\"fitem\" id=\"icgeneraldinamico\"></div>";
+        $mform->addElement('html', $campodinamico);
+        /***********************************************************************/
+
+//        $mform->addElement('select', 'campoic', get_string("nivel", "vocabulario"), $intenciones);
+        
 
         switch($icid){
             case 37:
@@ -2753,18 +2772,32 @@ class mod_vocabulario_intencion_desc_form extends moodleform {
         global $USER;
         $mform = & $this->_form;
 
-        $icid = optional_param('icid', 0, PARAM_INT);
-        $id_tocho = optional_param('id', 0, PARAM_INT);
+        $mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
+
+        $aux = new Vocabulario_intenciones();
+        $icom = $aux->obtener_hijos($USER->id,0);
 
         //titulo de la seccion
         $mform->addElement('html','<h1>'.get_string('nueva_ic','vocabulario').'</h1>');
 
-        $aux = new Vocabulario_intenciones();
-        $intenciones = $aux->obtener_todos($USER->id);
-        $mform->addElement('select', 'campoic', get_string("nivel", "vocabulario"), $intenciones);
-        if ($icid) {
-            $mform->setDefault('campoic', $icid);
-        }
+        //intencion comunicativa
+        $mform->addElement('select', 'campoic', get_string("nivel", "vocabulario"), $icom,"onChange='javascript:cargaContenido(this.id,\"icgeneraldinamico\",2)' style=\"min-height: 0;\"");
+        //probar los campos dinamicos
+        $campodinamico = "<div class=\"fitem\" id=\"icgeneraldinamico\"></div>";
+        $mform->addElement('html', $campodinamico);
+
+//        $icid = optional_param('icid', 0, PARAM_INT);
+//        $id_tocho = optional_param('id', 0, PARAM_INT);
+//
+//        //titulo de la seccion
+//        $mform->addElement('html','<h1>'.get_string('nueva_ic','vocabulario').'</h1>');
+//
+//        $aux = new Vocabulario_intenciones();
+//        $intenciones = $aux->obtener_todos($USER->id);
+//        $mform->addElement('select', 'campoic', get_string("nivel", "vocabulario"), $intenciones);
+//        if ($icid) {
+//            $mform->setDefault('campoic', $icid);
+//        }
 
         $mform->addElement('text', 'intencion', get_string("campo_intencion_nuevo", "vocabulario"));
 

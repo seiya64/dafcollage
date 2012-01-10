@@ -1350,6 +1350,34 @@ class Vocabulario_intenciones {
         return $ic;
     }
 
+    function obtener_hijos($usuarioid, $padreid) {
+        $intenciones = get_records_select('vocabulario_intenciones', '(usuarioid=' . $usuarioid . ' or usuarioid=0) and padre=' . $padreid);
+        $ic = array();
+        $ic[$padreid] = 'Seleccionar';
+        $orden = $this->ordena($intenciones, $padreid);
+        foreach ($orden as $i) {
+            $ic[$intenciones[$i]->id] = $intenciones[$i]->intencion;
+        }
+        return $ic;
+    }
+
+    function obtener_padres($hijoid){
+        $clex = array();
+
+        $clex[] = $hijoid;
+        $padre = $hijoid;
+
+        while ($padre != 0){
+            $cl = new Vocabulario_intenciones();
+            //pongo 0 porque el usarioid no es necesario, ya que no se usa en la funcion
+            $cl->leer($padre,0);
+            $padre = $cl->get('padre');
+            $clex[] = $padre;
+        }
+        $clex = array_reverse($clex);
+        return $clex;
+    }
+
     function ordena($lista, $padre='0', $salida='') {
         $milista = array();
         foreach ($lista as $cosa) {

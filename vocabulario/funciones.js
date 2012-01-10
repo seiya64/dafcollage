@@ -109,6 +109,9 @@ function cargaContenido(miselect,otroselect,tipo){
     else if (tipo == 1){ //gramaticas
         xmlhttp.open("GET","subgramaticas.php?id="+elselect+"&nombre="+nombre,true);
     }
+    else if (tipo == 2){ //intenciones comunicativas
+        xmlhttp.open("GET","subintenciones.php?id="+elselect+"&nombre="+nombre,true);
+    }
     xmlhttp.send();
 }
 
