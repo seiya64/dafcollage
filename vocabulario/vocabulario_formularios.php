@@ -2021,33 +2021,65 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
             //2.4.2.1 Pronomina, die nur Personen bezeichnen
             case 13:
             //tabla
-                $mform->addElement('html', '<p>');
-                $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter">');
-                //titulillos de la tabla
-                $titulillos = '<tr class="header">';
-                $titulillos .= '<th>&nbsp;</th>';
-                $titulillos .= '<th>&nbsp;</th>';
-                $titulillos .= '</tr>';
-                $mform->addElement('html', $titulillos);
-                $titulillos = '<tr class="cell">';
-                $titulillos .= '<td class="cell">' . get_string('nominativo', 'vocabulario') . '</td>';
-                $titulillos .= '<td><input type="text" id="id_NOM" name="NOM" value="' . $descripcion_troceada[0] . '"></td>';
-                $titulillos .= '</tr>';
-                $titulillos .= '<tr class="cell">';
-                $titulillos .= '<td class="cell">' . get_string('acusativo', 'vocabulario') . '</td>';
-                $titulillos .= '<td><input type="text" id="id_AKK" name="AKK" value="' . $descripcion_troceada[1] . '"></td>';
-                $titulillos .= '</tr>';
-                $titulillos .= '<tr class="cell">';
-                $titulillos .= '<td class="cell">' . get_string('dativo', 'vocabulario') . '</td>';
-                $titulillos .= '<td><input type="text" id="id_DAT" name="DAT" value="' . $descripcion_troceada[2] . '"></td>';
-                $titulillos .= '</tr>';
-                $titulillos .= '<tr class="cell">';
-                $titulillos .= '<td class="cell">' . get_string('genitivo', 'vocabulario') . '</td>';
-                $titulillos .= '<td><input type="text" id="id_GEN" name="GEN" value="' . $descripcion_troceada[3] . '"></td>';
-                $titulillos .= '</tr>';
-                $mform->addElement('html', $titulillos);
-                $mform->addElement('html', '</table>');
-                $mform->addElement('html', '<p>');
+
+                $tope = 5;
+                $ultimo = -1;
+
+                //tabla
+                for ($i=0; $i<$tope;$i++) {
+                    $ocultador = '<div id="ocultador_tabla'.$i;
+                    $salidor = false;
+                    for ($j=0; $j<4 && $salidor==false;$j++) {
+                        if($descripcion_troceada[(4*$i)+$j]) {
+                            $salidor = true;
+                            $ocultador .= '">';
+                            $ultimo = $i;
+                        }
+                    }
+
+                    if ($salidor == false && $i==0) {
+                        $ocultador .= '">';
+                    }
+
+                    if ($salidor == false && $i!=0) {
+                        $ocultador .= '" style="display:none">';
+                    }
+
+                    $mform->addElement('html', $ocultador);
+
+                    $mform->addElement('html', '<p>');
+                    $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter">');
+                    //titulillos de la tabla
+                    $titulillos = '<tr class="header">';
+                    $titulillos .= '<th>&nbsp;</th>';
+                    $titulillos .= '<th>&nbsp;</th>';
+                    $titulillos .= '</tr>';
+                    $mform->addElement('html', $titulillos);
+                    $titulillos = '<tr class="cell">';
+                    $titulillos .= '<td class="cell">' . get_string('nominativo', 'vocabulario') . '</td>';
+                    $titulillos .= '<td><input type="text" id="id_NOM'.$i.'" name="NOM'.$i.'" value="' . $descripcion_troceada[4*$i+0] . '"></td>';
+                    $titulillos .= '</tr>';
+                    $titulillos .= '<tr class="cell">';
+                    $titulillos .= '<td class="cell">' . get_string('acusativo', 'vocabulario') . '</td>';
+                    $titulillos .= '<td><input type="text" id="id_AKK'.$i.'" name="AKK'.$i.'" value="' . $descripcion_troceada[4*$i+1] . '"></td>';
+                    $titulillos .= '</tr>';
+                    $titulillos .= '<tr class="cell">';
+                    $titulillos .= '<td class="cell">' . get_string('dativo', 'vocabulario') . '</td>';
+                    $titulillos .= '<td><input type="text" id="id_DAT'.$i.'" name="DAT'.$i.'" value="' . $descripcion_troceada[4*$i+2] . '"></td>';
+                    $titulillos .= '</tr>';
+                    $titulillos .= '<tr class="cell">';
+                    $titulillos .= '<td class="cell">' . get_string('genitivo', 'vocabulario') . '</td>';
+                    $titulillos .= '<td><input type="text" id="id_GEN'.$i.'" name="GEN'.$i.'" value="' . $descripcion_troceada[4*$i+3] . '"></td>';
+                    $titulillos .= '</tr>';
+                    $mform->addElement('html', $titulillos);
+                    $mform->addElement('html', '</table>');
+                    $mform->addElement('html', '<p>');
+                    $mform->addElement('html', '</div>');
+                }
+                if ($ultimo+1 < $tope && $tope > 1) {
+                    $ops = '<a href=\'javascript:desocultar("tabla'.($ultimo+1).'")\' id="mt">'.get_string("mastablas", "vocabulario").'</a>';
+                    $mform->addElement('static', 'mas_tablas', '', $ops);
+                }
                 break;
             //2.1 Personalpronomen
             case 7:

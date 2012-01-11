@@ -374,8 +374,12 @@ switch ($padre) {
         break;
     //2.4.2.1 Pronomina, die nur Personen bezeichnen
     case 13:
-        $desc = optional_param('NOM', null, PARAM_TEXT).'&'.optional_param('AKK', null, PARAM_TEXT).'&';
-        $desc .= optional_param('DAT', null, PARAM_TEXT).'&'.optional_param('GEN', null, PARAM_TEXT).'&';
+        $tope = 5;
+        $desc='';
+        for ($i=0; $i<$tope; $i++){
+            $desc .= optional_param('NOM'.$i, null, PARAM_TEXT).'&'.optional_param('AKK'.$i, null, PARAM_TEXT).'&';
+            $desc .= optional_param('DAT'.$i, null, PARAM_TEXT).'&'.optional_param('GEN'.$i, null, PARAM_TEXT).'&';
+        }
         break;
     //2.1 Personalpronomen
     case 7:
