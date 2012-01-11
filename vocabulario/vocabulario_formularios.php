@@ -771,7 +771,9 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('textarea', 'neutroformal', get_string('clasificacionformal', 'vocabulario'), 'rows="5" cols="30"');
                 $mform->setDefault('neutroformal', $descripcion_troceada[5]);
 
-                $mform->closeHeaderBefore('hojas_default');
+                $mform->addElement('html','</fieldset>');   //cerramos el fieldset con header "neutro"
+
+               // $mform->closeHeaderBefore('hojas_default');
                 
                 break;
             //1.2 Numerus
@@ -2605,7 +2607,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
         if ($grid) {
             //exclamacion de todos las categorias
-            $mform->addElement('html','<div id="hojas_default">');
+            $mform->addElement('html','<div id="hojas_default" style="border:0px;">');
             $mform->addElement('textarea', 'descripcion', '<img src="./imagenes/alerta.png" id="id_alerta_im" name="alerta_im"/>', 'rows="5" cols="30"');
             $mform->setDefault('descripcion', $descripcion_troceada[count($descripcion_troceada)-2]);
 
