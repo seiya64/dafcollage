@@ -363,10 +363,10 @@ GNU General Public License for more details.
         <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.2 Interrogativpronomen','5)" />
         <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.3 Demonstrativpronomen','5)" />
         <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.4 Indefinitpronomen','5)" />
-        <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.4.1 Als Artikelwörter gebrauche Indefinitpronomina','9)" />
-        <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.4.2 Nur substantivische gebrauchte Indefinitpronomina ','9)" />
+        <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.4.1 Als Artikelwörter gebr. Indefinitpronomina','9)" />
+        <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.4.2 Nur substantivisch gebr. Indefinitpronomina','9)" />
         <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.4.2.1 Pronomina, die nur Personen bezeichnen ','11)" />
-        <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.4.2.2 Pronomina, die nur Nicht-Personen bezeichnen','11)" />
+        <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.4.2.2 Pron., die nur Nicht-Personen bezeichnen','11)" />
         <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.5 Possessivpronomen','5)" />
         <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.6 Relativpronomen','5)" />
         <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.7 Pronominaladverbien','5)" />
