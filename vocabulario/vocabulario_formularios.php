@@ -2723,47 +2723,46 @@ class mod_vocabulario_nuevo_ic_form extends moodleform {
                 break;
         }
 
-        //opcion de eliminar un campo
-        //$mform->addElement('checkbox', 'eliminar', get_string("eliminar", "vocabulario"));
-        //$mform->setDefault('eliminar', 0);
 
-        $intencion = new Vocabulario_mis_intenciones();
-        $intencion->leer($icid, $USER->id);
-        $descripcion_troceada = explode('&', $intencion->get('descripcion'));
-        $mform->addElement('textarea', 'descripcion', get_string("desc", "vocabulario"), 'rows="5" cols="30"');
-        $mform->setDefault('descripcion', $descripcion_troceada[0]);
+        if($icid>1){
+            $intencion = new Vocabulario_mis_intenciones();
+            $intencion->leer($icid, $USER->id);
+            $descripcion_troceada = explode('&', $intencion->get('descripcion'));
+            $mform->addElement('textarea', 'descripcion', get_string("desc", "vocabulario"), 'rows="5" cols="30"');
+            $mform->setDefault('descripcion', $descripcion_troceada[0]);
 
-        //tabla
-        $mform->addElement('html', '<p>');
-        $mform->addElement('html','<table class="flexible generaltable generalbox boxaligncenter">');
+            //tabla
+            $mform->addElement('html', '<p>');
+            $mform->addElement('html','<table class="flexible generaltable generalbox boxaligncenter">');
 
-        //titulillos de la tabla
-        $titulillos = '<tr class="head">';
-        $titulillos .='<th>'.get_string('mittel','vocabulario').'</th>';
-        $titulillos .='<th>'.get_string('wortklase','vocabulario').'</th>';
-        $titulillos .='<th>'.get_string('beisp','vocabulario').'</th>';
-        $titulillos .='<th>'.get_string('siehe','vocabulario').'</th>';
-        $titulillos .= '</tr>';
-        $mform->addElement('html',$titulillos);
-
-        $totalfilas = ((count($descripcion_troceada)-1)/4);
-        $pintar = false;
-        if ($totalfilas == 0){
-            $pintar = true;
-        }
-        $avance = 4;
-        $i = 1;
-        for ($i = 1; $i < $totalfilas*$avance || $pintar; $i = $i+$avance) {
-            $titulillos = '<tr class="cell">';
-            $titulillos .= '<td><input type="text" id="id_mittel'.$i.'" name="mittel'.$i.'" value="' . $descripcion_troceada[$i] . '"></td>';
-            $titulillos .= '<td><input type="text" id="id_wortklase'.$i.'" name="wortklase'.$i.'" value="' . $descripcion_troceada[$i+1] . '"></td>';
-            $titulillos .= '<td><input type="text" id="id_beisp'.$i.'" name="beisp'.$i.'" value="' . $descripcion_troceada[$i+2] . '"></td>';
-            $titulillos .= '<td><input type="text" id="id_siehe'.$i.'" name="siehe'.$i.'" value="' . $descripcion_troceada[$i+3] . '"></td>';
+            //titulillos de la tabla
+            $titulillos = '<tr class="head">';
+            $titulillos .='<th>'.get_string('mittel','vocabulario').'</th>';
+            $titulillos .='<th>'.get_string('wortklase','vocabulario').'</th>';
+            $titulillos .='<th>'.get_string('beisp','vocabulario').'</th>';
+            $titulillos .='<th>'.get_string('siehe','vocabulario').'</th>';
             $titulillos .= '</tr>';
-            $mform->addElement('html', $titulillos);
+            $mform->addElement('html',$titulillos);
+
+            $totalfilas = ((count($descripcion_troceada)-1)/4);
             $pintar = false;
+            if ($totalfilas == 0){
+                $pintar = true;
+            }
+            $avance = 4;
+            $i = 1;
+            for ($i = 1; $i < $totalfilas*$avance || $pintar; $i = $i+$avance) {
+                $titulillos = '<tr class="cell">';
+                $titulillos .= '<td><input type="text" id="id_mittel'.$i.'" name="mittel'.$i.'" value="' . $descripcion_troceada[$i] . '"></td>';
+                $titulillos .= '<td><input type="text" id="id_wortklase'.$i.'" name="wortklase'.$i.'" value="' . $descripcion_troceada[$i+1] . '"></td>';
+                $titulillos .= '<td><input type="text" id="id_beisp'.$i.'" name="beisp'.$i.'" value="' . $descripcion_troceada[$i+2] . '"></td>';
+                $titulillos .= '<td><input type="text" id="id_siehe'.$i.'" name="siehe'.$i.'" value="' . $descripcion_troceada[$i+3] . '"></td>';
+                $titulillos .= '</tr>';
+                $mform->addElement('html', $titulillos);
+                $pintar = false;
+            }
+            $mform->addElement('html', '</table>');
         }
-        $mform->addElement('html', '</table>');
 
         //botones
         $buttonarray = array();
