@@ -39,6 +39,7 @@ GNU General Public License for more details.*/
 //lo que aqui aparece en aleman es porque tiene que ser asi
 //traducir esas partes al idioma que se quiere enseñar para que sirva para cualquiera
 $string['vocabulario'] = 'vocabulario';
+$string['vocabulario_may'] = 'VOCABULARIO';
 $string['impr_vocab'] = 'Vocabulario';
 $string['impr_gram'] = 'Gramática';
 $string['impr_tipol'] = 'Tipologías textuales';
@@ -152,6 +153,8 @@ $string['muestra_tabla'] = 'Editar tabla';
 $string['nopermisos'] = 'No tienes permisos';
 $string['imprcuaderno'] = 'Exportar cuaderno en PDF';
 $string['imprimir'] = 'Imprimir';
+$string['cuad_digital_min'] = 'Cuaderno digital';
+$string['cuad_digital_may'] = 'CUADERNO DIGITAL';
 //descripciones de las intenciones
 $string['desc_inten3.3'] = 'Se refiere a una condición que ya no se puede realizar al referirse ésta al pasado.';
 $string['desc_inten4.1'] = 'Se refiere a acciones realizadas por seres vivos / instituciones etc. para conseguir un determinado fin.';

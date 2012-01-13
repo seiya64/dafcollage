@@ -2031,8 +2031,8 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 for ($i=0; $i<$tope;$i++) {
                     $ocultador = '<div id="ocultador_tabla'.$i;
                     $salidor = false;
-                    for ($j=0; $j<4 && $salidor==false;$j++) {
-                        if($descripcion_troceada[(4*$i)+$j]) {
+                    for ($j=0; $j<5 && $salidor==false;$j++) {
+                        if($descripcion_troceada[(5*$i)+$j]) {
                             $salidor = true;
                             $ocultador .= '">';
                             $ultimo = $i;
@@ -2057,21 +2057,26 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $titulillos .= '<th>&nbsp;</th>';
                     $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
+
                     $titulillos = '<tr class="cell">';
+                    $titulillos .= '<td colspan=2><input size="30" type="text" id="id_DEFA'.$i.'" name="DEFA'.$i.'" value="' . $descripcion_troceada[5*$i+0] . '"></td>';
+                    $titulillos .= '</tr>';
+
+                    $titulillos .= '<tr class="cell">';
                     $titulillos .= '<td class="cell">' . get_string('nominativo', 'vocabulario') . '</td>';
-                    $titulillos .= '<td><input type="text" id="id_NOM'.$i.'" name="NOM'.$i.'" value="' . $descripcion_troceada[4*$i+0] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_NOM'.$i.'" name="NOM'.$i.'" value="' . $descripcion_troceada[5*$i+1] . '"></td>';
                     $titulillos .= '</tr>';
                     $titulillos .= '<tr class="cell">';
                     $titulillos .= '<td class="cell">' . get_string('acusativo', 'vocabulario') . '</td>';
-                    $titulillos .= '<td><input type="text" id="id_AKK'.$i.'" name="AKK'.$i.'" value="' . $descripcion_troceada[4*$i+1] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_AKK'.$i.'" name="AKK'.$i.'" value="' . $descripcion_troceada[5*$i+2] . '"></td>';
                     $titulillos .= '</tr>';
                     $titulillos .= '<tr class="cell">';
                     $titulillos .= '<td class="cell">' . get_string('dativo', 'vocabulario') . '</td>';
-                    $titulillos .= '<td><input type="text" id="id_DAT'.$i.'" name="DAT'.$i.'" value="' . $descripcion_troceada[4*$i+2] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_DAT'.$i.'" name="DAT'.$i.'" value="' . $descripcion_troceada[5*$i+3] . '"></td>';
                     $titulillos .= '</tr>';
                     $titulillos .= '<tr class="cell">';
                     $titulillos .= '<td class="cell">' . get_string('genitivo', 'vocabulario') . '</td>';
-                    $titulillos .= '<td><input type="text" id="id_GEN'.$i.'" name="GEN'.$i.'" value="' . $descripcion_troceada[4*$i+3] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_GEN'.$i.'" name="GEN'.$i.'" value="' . $descripcion_troceada[5*$i+4] . '"></td>';
                     $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
                     $mform->addElement('html', '</table>');

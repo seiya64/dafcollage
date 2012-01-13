@@ -67,8 +67,16 @@ $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false);
 $mis_palabras_aux = new Vocabulario_mis_palabras();
 $mis_palabras = $mis_palabras_aux->obtener_todas($usuario);
 
-$pdf->SetTitle('Cuaderno Digital');
-$pdf->SetSubject('-Todas mis palabras guardadas');
+$pdf->SetTitle(get_string('cuad_digital_min','vocabulario'));
+
+//
+//
+//DESCOMENTAR ESTA LINEA EN UN MOMENTO DADO
+//
+//
+//$pdf->SetSubject('-Todas mis palabras guardadas');
+
+
 
 //para que no diga lo del undefined font grrrrr
 $pdf->SetMargins(10, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
@@ -82,14 +90,14 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 //Portada
 $pdf->AddPage();
 
-$pdf->writeHTMLCell(0, 0, 50, 100, '<h1>CUADERNO DIGITAL</h1>', 0, 1, 0, true);
+$pdf->writeHTMLCell(0, 0, 50, 100, '<h1>'.get_string('cuad_digital_may','vocabulario').'</h1>', 0, 1, 0, true);
 $pdf->writeHTMLCell(0, 0, 20, 200, $USER->firstname . ' ' . $USER->lastname, 0, 1, 0, true);
 $pdf->writeHTMLCell(0, 0, 20, 205, $USER->email, 0, 1, 0, true);
 
 if($impr_vocab == 1){
-    //Portada
+    //Portada vocabulario
     $pdf->AddPage();
-    $pdf->writeHTMLCell(0, 0, 50, 100, '<h1>VOCABULARIO</h1>', 0, 1, 0, true);
+    $pdf->writeHTMLCell(0, 0, 50, 100, '<h1>'.get_string('vocabulario_may','vocabulario').'</h1>', 0, 1, 0, true);
 
     $pdf->AddPage();
     //resto de paginas

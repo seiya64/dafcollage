@@ -377,6 +377,7 @@ switch ($padre) {
         $tope = 5;
         $desc='';
         for ($i=0; $i<$tope; $i++){
+            $desc .= optional_param('DEFA'.$i, null, PARAM_TEXT).'&';
             $desc .= optional_param('NOM'.$i, null, PARAM_TEXT).'&'.optional_param('AKK'.$i, null, PARAM_TEXT).'&';
             $desc .= optional_param('DAT'.$i, null, PARAM_TEXT).'&'.optional_param('GEN'.$i, null, PARAM_TEXT).'&';
         }
