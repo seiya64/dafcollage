@@ -221,6 +221,7 @@ $string['P3'] = 'sie/Sie';
 $string['sie'] = 'Sie';
 //seguimos con mas cosas
 $string['beachten'] = 'Beachten';
+$string['atencion_may'] = 'BEACHTEN!!';
 $string['participio1'] = 'Regeln zur Bildung des Partizip I';
 $string['participio2'] = 'Regeln zur Bildung des Partizip II';
 $string['futuro1'] = 'Regeln zur Bildung des Futur I';

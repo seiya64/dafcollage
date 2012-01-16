@@ -173,7 +173,7 @@ if($impr_vocab == 1){
     if ($mi_campo != '0') {
         $pdf->Ln();
     }
-
+}
 if($impr_gram == 1){
     //gramaticas
     $gramaticas = new Vocabulario_gramatica();
@@ -185,7 +185,7 @@ if($impr_gram == 1){
     for ($i = 0; $i < count($gr_pal); $i++) {
         $gramaticas_usadas[$i] = array($gr_pal[$i], $gr_num[$i]);
     }
-}
+
 
 
     //nueva pagina para las gramaticas
@@ -196,13 +196,13 @@ if($impr_gram == 1){
         $mgr = new Vocabulario_mis_gramaticas();
         $palabras = $mgr->relacionadas($USER->id, $cosa[1]);
         if ($palabras) {
-            
             //imprimo el nombre de la gramatica
             $pdf->AddPage();
             $mi_gram = $cosa[0];
             $pdf->SetTextColor(0);
-            $pdf->SetFont('', 'B', '12');
-            $pdf->Cell(0, 5, $mi_gram, 0, 1, 'L', 0);
+            //$pdf->SetFont('', 'B', '12');
+            $pdf->writeHTMLCell(0, 0, 0, 0, '<h2>'.$mi_gram.'</h2>', 0, 1, 0, true);
+           // $pdf->Cell(0, 5, $mi_gram, 0, 1, 'L', 0);
 
             
             foreach ($palabras as $palabra) {
@@ -241,6 +241,9 @@ if($impr_gram == 1){
                     $pdf->SetTextColor(0);
                     $pdf->SetFont('', 'B', '10');
                     $pdf->Ln();
+
+
+
                     switch ($palabra->gramaticaid) {
                         //normal
                         default:
@@ -249,45 +252,42 @@ if($impr_gram == 1){
                             $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
                             $pdf->Ln();
                             break;
-                        //allgemaines
-                        case 2:
-                        case 7:
-                        case 21:
-                        case 35:
-                        case 45:
-                        case 53:
-                        case 57:
-                        case 60:
-                        case 72:
-                            $pdf->SetFont('', '', '10');
-                            $pdf->Cell(0, 10, '-' . get_string('generales', 'vocabulario'), 0, 1, 'L', 0);
-                            $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
-                            $pdf->Ln();
-                            $pdf->Cell(0, 10, '-' . get_string('particulares', 'vocabulario'), 0, 1, 'L', 0);
-                            $pdf->MultiCell(0, 5, $descripcion_troceada[1], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
-                            $pdf->Ln();
-                            break;
-                        //1.2
                         case 3:
-                            $pdf->SetFont('', '', '10');
-                            $pdf->Cell(0, 10, '-' . get_string('clasificacionsemantica', 'vocabulario'), 0, 1, 'L', 0);
+                            //masculino
+                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('masculino','vocabulario').'</h3>', 0, 1, 0, true);
+                            $pdf->setLeftMargin(20);
+                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>'.get_string('clasificacionsemantica','vocabulario').'</h4>', 0, 1, 0, true);
                             $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
                             $pdf->Ln();
-                            $pdf->Cell(0, 10, '-' . get_string('clasificacionformal', 'vocabulario'), 0, 1, 'L', 0);
+                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>'.get_string('clasificacionformal','vocabulario').'</h4>', 0, 1, 0, true);
                             $pdf->MultiCell(0, 5, $descripcion_troceada[1], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+                            $pdf->setLeftMargin(10);
                             $pdf->Ln();
-                            $pdf->Cell(0, 10, '-' . get_string('clasificacionsemantica', 'vocabulario'), 0, 1, 'L', 0);
+
+                            //femenino
+
+                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('femenino','vocabulario').'</h3>', 0, 1, 0, true);
+                            $pdf->setLeftMargin(20);
+                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>'.get_string('clasificacionsemantica','vocabulario').'</h4>', 0, 1, 0, true);
                             $pdf->MultiCell(0, 5, $descripcion_troceada[2], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
                             $pdf->Ln();
-                            $pdf->Cell(0, 10, '-' . get_string('clasificacionformal', 'vocabulario'), 0, 1, 'L', 0);
+                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>'.get_string('clasificacionformal','vocabulario').'</h4>', 0, 1, 0, true);
                             $pdf->MultiCell(0, 5, $descripcion_troceada[3], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+                            $pdf->setLeftMargin(10);
                             $pdf->Ln();
-                            $pdf->Cell(0, 10, '-' . get_string('clasificacionsemantica', 'vocabulario'), 0, 1, 'L', 0);
+
+                            //neutro
+
+                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('neutro','vocabulario').'</h3>', 0, 1, 0, true);
+                            $pdf->setLeftMargin(20);
+                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>'.get_string('clasificacionsemantica','vocabulario').'</h4>', 0, 1, 0, true);
                             $pdf->MultiCell(0, 5, $descripcion_troceada[4], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
                             $pdf->Ln();
-                            $pdf->Cell(0, 10, '-' . get_string('clasificacionformal', 'vocabulario'), 0, 1, 'L', 0);
+                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>'.get_string('clasificacionformal','vocabulario').'</h4>', 0, 1, 0, true);
                             $pdf->MultiCell(0, 5, $descripcion_troceada[5], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+                            $pdf->setLeftMargin(10);
                             $pdf->Ln();
+
                             break;
                         //1.3
                         case 4:
@@ -598,17 +598,30 @@ if($impr_gram == 1){
                             $pdf->Ln();
                             break;
                     }
+
+
+                    $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('atencion_may','vocabulario').'</h3>', 0, 1, 0, true);
+                    $pdf->setLeftMargin(20);
+                    $pdf->MultiCell(0, 5, $descripcion_troceada[count($descripcion_troceada)-2], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+                    $pdf->setLeftMargin(10);
+                    $pdf->Ln();
+                    $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('miraren','vocabulario').'</h3>', 0, 1, 0, true);
+                    $pdf->setLeftMargin(20);
+                    $pdf->MultiCell(0, 5, $descripcion_troceada[count($descripcion_troceada)-1], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+                    $pdf->setLeftMargin(10);
+                    $pdf->Ln();
+
                 }
             }
         }
     }
+}
 
+
+if($impr_tipol == 1){
     //tipologías textuales
     $tipologias = new Vocabulario_mis_tipologias();
     $todas = $tipologias->obtener_todas($USER->id);
-}
-
-if($impr_tipol == 1){
     //nueva pagina para las tipologias
     $pdf->AddPage();
     $pdf->writeHTMLCell(0, 0, 50, 100, '<h1>TIPOLOG&iacute;AS TEXTUALES</h1>', 0, 1, 0, true);
