@@ -291,11 +291,46 @@ if($impr_gram == 1){
                             break;
                         //1.3
                         case 4:
-                            //hacer la tabla!
-                            $pdf->SetFont('', '', '10');
-                            $pdf->Cell(0, 10, '-' . 'Creación de la plantilla para impresión endesarrollo', 0, 1, 'L', 0);
+                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('endungs','vocabulario').'</h3>', 0, 1, 0, true);
+                            $pdf->setLeftMargin(20);
                             $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+                            $pdf->setLeftMargin(10);
                             $pdf->Ln();
+
+                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('genero','vocabulario').'</h3>', 0, 1, 0, true);
+                            $pdf->setLeftMargin(20);
+                            $pdf->MultiCell(0, 5, $descripcion_troceada[1], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+                            $pdf->setLeftMargin(10);
+                            $pdf->Ln();
+
+                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('endungp','vocabulario').'</h3>', 0, 1, 0, true);
+                            $pdf->setLeftMargin(20);
+                            $pdf->MultiCell(0, 5, $descripcion_troceada[2], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+                            $pdf->setLeftMargin(10);
+                            $pdf->Ln();
+
+                            $pdf->Ln();
+
+                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('reinesf','vocabulario').'</h3>', 0, 1, 0, true);
+                            $pdf->setLeftMargin(20);
+                            $pdf->MultiCell(0, 5, $descripcion_troceada[3], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+                            $pdf->setLeftMargin(10);
+                            $pdf->Ln();
+
+                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('reinepf','vocabulario').'</h3>', 0, 1, 0, true);
+                            $pdf->setLeftMargin(20);
+                            $pdf->MultiCell(0, 5, $descripcion_troceada[4], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+                            $pdf->setLeftMargin(10);
+                            $pdf->Ln();
+
+                            $pdf->setLeftMargin(50);
+                            $pdf->setRightMargin(50);
+                            //$pdf->writeHTMLCell(0, 0, 0, 0, '<hr />', 0, 1, 0, true);
+                            $pdf->setLeftMargin(10);
+                            $pdf->setRightMargin(PDF_MARGIN_RIGHT);
+                            $pdf->Ln();
+                            
+
                             break;
                         //5.3.1
                         case 48:
