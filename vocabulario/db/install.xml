@@ -403,8 +403,8 @@ GNU General Public License for more details.
         <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','5.2.2 Komparativ / Superlativ','45)" />
         <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','5.3 Adverbien','43)" />
         <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','6 Präpositionen','0)" />
-        <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','6.1 Alfabetische Suche','49)" />
-        <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','6.2 Suche nach Kasus','49)" />
+        <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','6.1 Neue Präposition hinzufügen','49)" />
+        <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','6.2 Präposition suchen','49)" />
         <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','7 Modalpartikel','0)" />
         <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','7.1 Beispiele und Funktionen','52)" />
         <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8 Syntax','0)" />

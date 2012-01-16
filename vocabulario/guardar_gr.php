@@ -435,8 +435,8 @@ switch ($padre) {
             $desc .= optional_param('PO'.$f, null, PARAM_TEXT) . '&' . optional_param('KO'.$f, null, PARAM_TEXT) . '&' . optional_param('SU'.$f, null, PARAM_TEXT) . '&';
         }
         break;
-    // 6
-    case 50:
+    // 6.1
+    case 51:
         $tope = 30;
         $desc = '';
         for($f=0; $f<$tope; $f++){
@@ -445,7 +445,6 @@ switch ($padre) {
         }
         break;
 
-        
 
 }
 

@@ -2420,7 +2420,8 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 break;
             //6
             case 50:
-
+                break;
+            case 51:
                 $kasus = array(get_string('acusativo','vocabulario'),get_string('dativo','vocabulario'),get_string('acudat','vocabulario'),get_string('genitivo','vocabulario'));
 
                 $mform->addElement('html', '<p>');
@@ -2467,7 +2468,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                     $mform->addElement('select','KAS'.$fila,'',$kasus);
                     $mform->setDefault('KAS'.$fila,$descripcion_troceada[((4*$fila)+2)]);
-                    
+
                     $titulillos = '</td>';
                     //endselect
                     $titulillos .= '<td><input size=50 type="text" id="id_BEI'.$fila.'" name="BEI'.$fila.'" value="' . $descripcion_troceada[((4*$fila)+3)] . '"></td>';
@@ -2483,7 +2484,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $mform->addElement('static', 'mas_filas', '', $ops);
                 }
                 break;
-            case 51:
+               
             case 52:
 
                 //array para traducir el campo de caso, que al ser un entero se tiene que corresponder con un string
@@ -2493,7 +2494,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 //Extraer el contenido de la plantilla 6 de la base de datos y crear un array
                 //que agrupa los elementos de 4 en 4
                 $gr = new Vocabulario_mis_gramaticas();
-                $gr->leer('50',$USER->id);
+                $gr->leer('51',$USER->id);
                 $descripcion_troceada = explode('&', $gr->get('descripcion'));
                 $arrayAux1 = array();
                 for($ind=0; $ind<count($descripcion_troceada)-2; $ind+=4){
@@ -2507,8 +2508,8 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                 //se ordena el array
                 sort($arrayAux1);
-
-                if($grid == 51){                //discriminamos por letras
+//aqui se buscan alfabeticamente
+//                if($grid == 51){                //discriminamos por letras
                     // Se pinta el selector de letras
                     $abecedario = '<h1 style="text-align:center;">';
                     $l = 'a';
@@ -2523,21 +2524,17 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                     //si es necesario discriminamos por la letra seleccionada
 
-                    $arrayAux = array();
-                    if($letra != null){
-                        foreach($arrayAux1 as $cosa){
-                            if($cosa[0]==$letra || $cosa[0]==strtoupper($letra)){
-                                $arrayAux[] = $cosa;
-                            }
-                        }
-                    }elseif($letra == null){
-                        foreach($arrayAux1 as $cosa){
-                            if($cosa[0]!='&'){
-                                $arrayAux[] = $cosa;
-                            }
-                        }
-                    }
-                }elseif($grid == 52){           //discriminamos por casos
+                    
+//                    elseif($letra == null){
+//                        foreach($arrayAux1 as $cosa){
+//                            if($cosa[0]!='&'){
+//                                $arrayAux[] = $cosa;
+//                            }
+//                        }
+//                    }
+
+//aqui se buscan por casos
+//                }elseif($grid == 52){           //discriminamos por casos
                     $kasos = '<h1 style="text-align:center;">';
                     for ($i = 0; $i < 4; $i++) {
                         $kasos .= '<a href="./view?id=' . $id_tocho . '&opcion=5&grid='.$grid.'&caso='.$i.'">[' . $kasus[$i] . ']</a>';
@@ -2551,7 +2548,15 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     //si es necesario discriminamos por el caso seleccionado
 
                     $arrayAux = array();
-                    if($caso != null){
+
+                    if($letra != null){
+                        foreach($arrayAux1 as $cosa){
+                            if($cosa[0]==$letra || $cosa[0]==strtoupper($letra)){
+                                $arrayAux[] = $cosa;
+                            }
+                        }
+                    }
+                    elseif($caso != null){
                         $filaux='';
                         foreach($arrayAux1 as $cosa){
                             $filaux = explode('&',$cosa);
@@ -2559,14 +2564,17 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                                 $arrayAux[] = $cosa;
                             }
                         }
-                    }elseif($caso == null){
+                    }
+                    elseif($caso == null && $letra == null){
                         foreach($arrayAux1 as $cosa){
                             if($cosa[0]!='&'){
                                 $arrayAux[] = $cosa;
                             }
                         }
                     }
-                }
+//                }
+
+//aqui termina el ifelse de caso
 
 
 
@@ -2585,7 +2593,6 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html',$titulillos);
 
                 //si hay filas que mostrar las pinamos, en caso contrario solo se verá la cabecera de la tabla.
-
                 $salidor = false;
                 for ($j=0;$j<count($arrayAux) && $salidor==false;$j++) {
                     $desc_aux = explode('&',$arrayAux[$j]);

@@ -50,6 +50,7 @@ $string['modulename'] = 'vocabulario';
 $string['buttonlabel'] = 'Guardar';
 $string['campo_lex'] = 'Campos temáticos';
 $string['campo_gram'] = 'Gramática';
+$string['gramatica_may'] = 'GRAMÁTICA';
 $string['campo_intencion'] = 'Intención Comunicativa';
 $string['campo_intencion_nuevo'] = 'Nombre nueva int. comunicativa';
 $string['campo_tipologia'] = 'Tipología textual';

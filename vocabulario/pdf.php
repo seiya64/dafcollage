@@ -174,6 +174,7 @@ if($impr_vocab == 1){
         $pdf->Ln();
     }
 
+if($impr_gram == 1){
     //gramaticas
     $gramaticas = new Vocabulario_gramatica();
     $gramaticas_usadas = array();
@@ -186,24 +187,35 @@ if($impr_vocab == 1){
     }
 }
 
-if($impr_gram == 1){
+
     //nueva pagina para las gramaticas
     $pdf->AddPage();
-    $pdf->writeHTMLCell(0, 0, 50, 100, '<h1>GRAM&Aacute;TICA</h1>', 0, 1, 0, true);
+    $pdf->writeHTMLCell(0, 0, 50, 100, '<h1>'.get_string('gramatica_may','vocabulario').'</h1>', 0, 1, 0, true);
 
     foreach ($gramaticas_usadas as $cosa) {
         $mgr = new Vocabulario_mis_gramaticas();
         $palabras = $mgr->relacionadas($USER->id, $cosa[1]);
         if ($palabras) {
+            
             //imprimo el nombre de la gramatica
             $pdf->AddPage();
             $mi_gram = $cosa[0];
             $pdf->SetTextColor(0);
             $pdf->SetFont('', 'B', '12');
             $pdf->Cell(0, 5, $mi_gram, 0, 1, 'L', 0);
+
+            
             foreach ($palabras as $palabra) {
                 $descripcion_troceada = explode('&', $palabra->descripcion);
+                
                 if ($descripcion_troceada) {
+
+///////////////////////                              ///////////////////////////
+///////////////////////DESCOMENTAR EN UN MOMENTO DADO///////////////////////////
+///////////////////////                              ///////////////////////////
+                /***************************************************************
+
+                
                     switch ($palabra->tipo_palabra) {
                         case 'sustantivo':
                             $pal_aux = new Vocabulario_sustantivo();
@@ -222,6 +234,9 @@ if($impr_gram == 1){
                             $pal_aux->leer($palabra->palabra_id);
                             break;
                     }
+
+                    ************************************************************/
+
                     $pdf->SetFillColor(255, 255, 255);
                     $pdf->SetTextColor(0);
                     $pdf->SetFont('', 'B', '10');
