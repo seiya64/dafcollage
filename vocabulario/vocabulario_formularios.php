@@ -2437,7 +2437,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html',$titulillos);
 
                 //A partir de aqui pinto filas según se van necesitando
-                $tope = 30;
+                $tope = 500;
                 $ultima = -1;
 
                 for ($fila=0; $fila<$tope;$fila++) {
