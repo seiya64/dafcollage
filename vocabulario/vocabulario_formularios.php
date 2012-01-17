@@ -2005,6 +2005,9 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 if($grid ==  57){
                     $totalfilas = ((count($descripcion_troceada)-2)/5);
                 }
+                if($totalfilas <=0){
+                    $totalfilas=1;
+                }
                 $i = 0;
                 for ($i = 0; $i < $totalfilas*$avance; $i = $i+$avance) {
                     $titulillos = '<tr class="cell">';
