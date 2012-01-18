@@ -630,7 +630,6 @@ if($impr_gram == 1){
                     $pdf->Ln();
                     $pdf->Cell(0, 5,'', 0, 1, 'C', 0);
                     $pdf->setLeftMargin(MARGIN_L2);
-                    $pdf->setRightMargin(MARGIN_L2);
 
                     $pdf->SetFillColor(59, 89, 152); //#3B5998
                     $pdf->SetTextColor(TEXT_WHITE);
@@ -639,16 +638,13 @@ if($impr_gram == 1){
                     $pdf->Cell(47, 5, get_string('atencion_may', 'vocabulario'), 1, 1, 'C', 1);
                     $pdf->SetTextColor(TEXT_AUTO);
 //                  $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('atencion_may','vocabulario').'</h3>', 1, 1, 1);
-                    $pdf->MultiCell(0, 5, $descripcion_troceada[count($descripcion_troceada)-2], 1, 'L', 0);
+                    $pdf->MultiCell(170, 5, $descripcion_troceada[count($descripcion_troceada)-2], 1, 'L', 0);
                     $pdf->Ln();
                     $pdf->SetTextColor(TEXT_WHITE);
                     $pdf->Cell(47, 5, get_string('miraren', 'vocabulario'), 1, 1, 'C', 1);
                     $pdf->SetTextColor(TEXT_AUTO);
-                    $pdf->MultiCell(0, 5, $descripcion_troceada[count($descripcion_troceada)-1], 1, 'L',0);
+                    $pdf->MultiCell(170, 5, $descripcion_troceada[count($descripcion_troceada)-1], 1, 'L',0);
 
-                    
-
-                    $pdf->setRightMargin(MARGIN);
                     $pdf->setLeftMargin(MARGIN);
 
                     $pdf->Ln();
