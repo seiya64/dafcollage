@@ -473,26 +473,27 @@ if($impr_gram == 1){
                             //filas
                             $pdf->setTextColor(TEXT_AUTO);
                             $pdf->SetFont('','',10);
+                            $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
 
-                            $pdf->Cell(30, 5, get_string('nominativo', 'vocabulario'), 1, 0, 'C', 0);
+                            $pdf->Cell(30, 5, get_string('nominativo', 'vocabulario'), 1, 0, 'C', 1);
                             $pdf->Cell(40, 5, $descripcion_troceada[36], 1, 0, 'C', 0);
                             $pdf->Cell(40, 5, $descripcion_troceada[37], 1, 0, 'C', 0);
                             $pdf->Cell(40, 5, $descripcion_troceada[38], 1, 0, 'C', 0);
                             $pdf->Cell(40, 5, $descripcion_troceada[39], 1, 1, 'C', 0);
 
-                            $pdf->Cell(30, 5, get_string('acusativo', 'vocabulario'), 1, 0, 'C', 0);
+                            $pdf->Cell(30, 5, get_string('acusativo', 'vocabulario'), 1, 0, 'C', 1);
                             $pdf->Cell(40, 5, $descripcion_troceada[40], 1, 0, 'C', 0);
                             $pdf->Cell(40, 5, $descripcion_troceada[41], 1, 0, 'C', 0);
                             $pdf->Cell(40, 5, $descripcion_troceada[42], 1, 0, 'C', 0);
                             $pdf->Cell(40, 5, $descripcion_troceada[43], 1, 1, 'C', 0);
 
-                            $pdf->Cell(30, 5, get_string('dativo', 'vocabulario'), 1, 0, 'C', 0);
+                            $pdf->Cell(30, 5, get_string('dativo', 'vocabulario'), 1, 0, 'C', 1);
                             $pdf->Cell(40, 5, $descripcion_troceada[44], 1, 0, 'C', 0);
                             $pdf->Cell(40, 5, $descripcion_troceada[45], 1, 0, 'C', 0);
                             $pdf->Cell(40, 5, $descripcion_troceada[46], 1, 0, 'C', 0);
                             $pdf->Cell(40, 5, $descripcion_troceada[47], 1, 1, 'C', 0);
 
-                            $pdf->Cell(30, 5, get_string('genitivo', 'vocabulario'), 1, 0, 'C', 0);
+                            $pdf->Cell(30, 5, get_string('genitivo', 'vocabulario'), 1, 0, 'C', 1);
                             $pdf->Cell(40, 5, $descripcion_troceada[48], 1, 0, 'C', 0);
                             $pdf->Cell(40, 5, $descripcion_troceada[49], 1, 0, 'C', 0);
                             $pdf->Cell(40, 5, $descripcion_troceada[50], 1, 0, 'C', 0);
