@@ -243,8 +243,8 @@ if($impr_gram == 1){
                     }
 
                     ************************************************************/
-
-                    switch ($palabra->gramaticaid) {
+                    $grid=$palabra->gramaticaid;
+                    switch ($grid) {
                         //normal
                         default:
                             break;
@@ -612,8 +612,25 @@ if($impr_gram == 1){
 
 
                             break;
+
+                        //3.1.5 Futur I
+                        case 25:
+                        //3.1.6 Futur II
+                        case 26:
+
+                            if($grid==25){
+                                $titulo=get_string("futuro1", "vocabulario");
+                            }elseif($grid==26){
+                                $titulo=get_string("futuro2", "vocabulario");
+                            }
+
+                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.$titulo.'</h3>', 0, 1, 0);
+                            $pdf->setLeftMargin(MARGIN_L2);
+                            $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
+                            $pdf->setLeftMargin(MARGIN);
+                            $pdf->Ln();
+                            break;
                         
-                       
                     }
 
 
