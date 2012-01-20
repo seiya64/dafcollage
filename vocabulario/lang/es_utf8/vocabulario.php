@@ -157,6 +157,7 @@ $string['imprimir'] = 'Imprimir';
 $string['cuad_digital_min'] = 'Cuaderno digital';
 $string['cuad_digital_may'] = 'CUADERNO DIGITAL';
 //descripciones de las intenciones
+$string['desc_inten3.2'] = 'A diferencia de la condición realizable la condición hipotética no se refiere a un hecho real sino a la posible situación contraria.';
 $string['desc_inten3.3'] = 'Se refiere a una condición que ya no se puede realizar al referirse ésta al pasado.';
 $string['desc_inten4.1'] = 'Se refiere a acciones realizadas por seres vivos / instituciones etc. para conseguir un determinado fin.';
 $string['desc_inten4.2'] = 'Se refiere a recursos / instrumentos que se utilizan con un determinado fin.';
@@ -245,7 +246,7 @@ $string['vorfeld'] = 'Vorfeld';
 $string['konjugier'] = 'Konjugiertes Verb';
 $string['mittelfeld'] = 'Mittelfeld';
 $string['mittel'] = 'Mittel';
-$string['wortklase'] = 'Wortklase';
+$string['wortklase'] = 'Theoretische Beschreibung';
 $string['verb2'] = 'Verb 2';
 $string['verb1'] = 'Verb 1';
 $string['miraren'] = 'Siehe auch';
