@@ -2588,10 +2588,10 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                 //titulillos de la tabla
                 $titulillos = '<tr class="head">';
-                $titulillos .='<th>'.get_string('praposit','vocabulario').'</th>';
-                $titulillos .='<th>'.get_string('func','vocabulario').'</th>';
-                $titulillos .='<th>'.get_string('kas','vocabulario').'</th>';
-                $titulillos .='<th>'.get_string('beisp','vocabulario').'</th>';
+                $titulillos .='<th style="min-width:100px;">'.get_string('praposit','vocabulario').'</th>';
+                $titulillos .='<th style="min-width:100px;">'.get_string('func','vocabulario').'</th>';
+                $titulillos .='<th style="min-width:100px;">'.get_string('kas','vocabulario').'</th>';
+                $titulillos .='<th style="min-width:100px;">'.get_string('beisp','vocabulario').'</th>';
                 $titulillos .= '</tr>';
                 $mform->addElement('html',$titulillos);
 
@@ -2755,6 +2755,9 @@ class mod_vocabulario_nuevo_ic_form extends moodleform {
         $mform->addElement('html', $campodinamico);
 
         switch($icid){
+            case 28:
+                $mform->addElement('static', 'intencion', '', get_string('desc_inten3.2','vocabulario'));
+                break;
             case 37:
                 $mform->addElement('static', 'intencion', '', get_string('desc_inten3.3','vocabulario'));
                 break;
@@ -2807,6 +2810,12 @@ class mod_vocabulario_nuevo_ic_form extends moodleform {
                 $titulillos .= '<td><input type="text" id="id_beisp'.$i.'" name="beisp'.$i.'" value="' . $descripcion_troceada[$i+2] . '"></td>';
                 $titulillos .= '<td><input type="text" id="id_siehe'.$i.'" name="siehe'.$i.'" value="' . $descripcion_troceada[$i+3] . '"></td>';
                 $titulillos .= '</tr>';
+                
+//                $titulillos .= '<tr class="cell">';
+//                $titulillos .= '<td>BEISPIEL</td>';
+//                $titulillos .= '<td colspan=2><input type="text" id="id_beisp'.$i.'" name="beisp'.$i.'" value="' . $descripcion_troceada[$i+2] . '"></td>';
+//                $titulillos .= '</tr>';
+
                 $mform->addElement('html', $titulillos);
                 $pintar = false;
             }
