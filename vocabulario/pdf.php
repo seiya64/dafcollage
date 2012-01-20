@@ -648,7 +648,7 @@ if($impr_gram == 1){
                             //cabecera
                             $pdf->Cell(110, 5, get_string('schwache_siehe', 'vocabulario'), 1, 1, 'C', 1);
 
-                            $pdf->SetTextColor(TEXT_WHITE);
+                            $pdf->SetTextColor(TEXT_AUTO);
                             $pdf->SetFont('','',10);
                             $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
 
@@ -687,7 +687,7 @@ if($impr_gram == 1){
                             $pdf->Cell(80, 5, get_string('preterito', 'vocabulario'), 1, 0, 'C', 1);
                             $pdf->Cell(80, 5, get_string('conjuntivo2','vocabulario'), 1, 1, 'C', 1);
 
-                            $pdf->SetTextColor(TEXT_WHITE);
+                            $pdf->SetTextColor(TEXT_AUTO);
                             $pdf->SetFont('','',10);
                             $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul cla
 
