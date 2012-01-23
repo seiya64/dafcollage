@@ -1285,7 +1285,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $ocultador = '<div id="ocultador_tabla'.$i;
                     $salidor = false;
                     for ($j=0; $j<31 && $salidor==false;$j++) {
-                        if($descripcion_troceada[(30*$i)+$j]) {
+                        if($descripcion_troceada[(31*$i)+$j]) {
                             $salidor = true;
                             $ocultador .= '">';
                             $ultimo = $i;
