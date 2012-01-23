@@ -251,7 +251,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         //opciones
         $ocultador = "</div>";
         $mform->addElement('html',$ocultador);
-        $ops = '<a href="view?id=' . optional_param('id', 0, PARAM_INT) . '&opcion=1&add=v&id_mp=' . $leido . '">[' . get_string('advrb', 'vocabulario') . ']</a>';
+        $ops = '<a href="view.php?id=' . optional_param('id', 0, PARAM_INT) . '&opcion=1&add=v&id_mp=' . $leido . '">[' . get_string('advrb', 'vocabulario') . ']</a>';
         $ops .= '<a href=\'javascript:desocultar("verb")\' id="mcverb">[' . get_string('mascampos', 'vocabulario') . ']</a>';
         $mform->addElement('static', 'opciones_vrb', get_string("opciones", "vocabulario"), $ops);
 
@@ -294,7 +294,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         //opciones
         $ocultador = "</div>";
         $mform->addElement('html',$ocultador);
-        $ops = '<a href="view?id=' . optional_param('id', 0, PARAM_INT) . '&opcion=1&add=a&id_mp=' . $leido . '">[' . get_string('adadj', 'vocabulario') . ']</a>';
+        $ops = '<a href="view.php?id=' . optional_param('id', 0, PARAM_INT) . '&opcion=1&add=a&id_mp=' . $leido . '">[' . get_string('adadj', 'vocabulario') . ']</a>';
         $ops .= '<a href=\'javascript:desocultar("adj")\' id="mcadj">[' . get_string('mascampos', 'vocabulario') . ']</a>';
         $mform->addElement('static', 'opciones_adj', get_string("opciones", "vocabulario"), $ops);
 
@@ -337,7 +337,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         //opciones
         $ocultador = "</div>";
         $mform->addElement('html',$ocultador);
-        $ops = '<a href="view?id=' . optional_param('id', 0, PARAM_INT) . '&opcion=1&add=o&id_mp=' . $leido . '">[' . get_string('adotr', 'vocabulario') . ']</a>';
+        $ops = '<a href="view.php?id=' . optional_param('id', 0, PARAM_INT) . '&opcion=1&add=o&id_mp=' . $leido . '">[' . get_string('adotr', 'vocabulario') . ']</a>';
         $ops .= '<a href=\'javascript:desocultar("otr")\' id="mcotr">[' . get_string('mascampos', 'vocabulario') . ']</a>';
         $mform->addElement('static', 'opciones_otr', get_string("opciones", "vocabulario"), $ops);
 
@@ -569,7 +569,7 @@ class mod_vocabulario_ver_form extends moodleform {
             $abecedario = '<h1 style="text-align:center;">';
             $l = 'a';
             for ($i = 1; $i < 27; $i++) {
-                $abecedario .= '<a href="./view?id=' . $this->id_tocho . '&opcion=2&alfa=1&letra=' . $l . '">[' . $l . ']</a>';
+                $abecedario .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&alfa=1&letra=' . $l . '">[' . $l . ']</a>';
                 $l++;
             }
             $abecedario .= '</h1>';
@@ -609,7 +609,7 @@ class mod_vocabulario_ver_form extends moodleform {
             $fila .= '<td> ' . $cosa->gramatica . ' </td>';
             $fila .= '<td> ' . $cosa->intencion . ' </td>';
             $fila .= '<td> ' . $cosa->tipo . ' </td>';
-            $acciones = '<a href="./view?id=' . $this->id_tocho . '&opcion=4&act=1&id_mp=' . $cosa->mpid . '">[' . get_string('editar', 'vocabulario') . ']</a></td>';
+            $acciones = '<a href="./view.php?id=' . $this->id_tocho . '&opcion=4&act=1&id_mp=' . $cosa->mpid . '">[' . get_string('editar', 'vocabulario') . ']</a></td>';
             $acciones .= '<td><a href="./guardar?id_tocho=' . $this->id_tocho . '&borrar=' . $cosa->mpid . '">[' . get_string('eliminar', 'vocabulario') . ']</a>';
             $fila .= '<td> ' . $acciones . ' </td>';
             $fila .= '</tr>';
@@ -634,24 +634,24 @@ class mod_vocabulario_ver_form extends moodleform {
         //elegir la visualizacion
         if ($userid) {
             $atras = '<h1 class="main">';
-            $atras .= '<a href="./view?id=' . $this->id_tocho . '&opcion=2&alid=' . $userid . '">[' . get_string('todo', 'vocabulario') . ']</a>';
-            $atras .= '<a href="./view?id=' . $this->id_tocho . '&opcion=2&alfa=1&alid=' . $userid . '">[' . get_string('alfabetico', 'vocabulario') . ']</a>';
-            $atras .= '<a href="./view?id=' . $this->id_tocho . '&opcion=2&cl=1&alid=' . $userid . '">[' . get_string('campo_lex', 'vocabulario') . ']</a>';
-            $atras .= '<a href="./view?id=' . $this->id_tocho . '&opcion=2&gr=1&alid=' . $userid . '">[' . get_string('campo_gram', 'vocabulario') . ']</a></br>';
-            $atras .= '<a href="./view?id=' . $this->id_tocho . '&opcion=2&ic=1&alid=' . $userid . '">[' . get_string('campo_intencion', 'vocabulario') . ']</a>';
-            $atras .= '<a href="./view?id=' . $this->id_tocho . '&opcion=2&tt=1&alid=' . $userid . '">[' . get_string('campo_tipologia', 'vocabulario') . ']</a>';
+            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&alid=' . $userid . '">[' . get_string('todo', 'vocabulario') . ']</a>';
+            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&alfa=1&alid=' . $userid . '">[' . get_string('alfabetico', 'vocabulario') . ']</a>';
+            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&cl=1&alid=' . $userid . '">[' . get_string('campo_lex', 'vocabulario') . ']</a>';
+            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&gr=1&alid=' . $userid . '">[' . get_string('campo_gram', 'vocabulario') . ']</a></br>';
+            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&ic=1&alid=' . $userid . '">[' . get_string('campo_intencion', 'vocabulario') . ']</a>';
+            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&tt=1&alid=' . $userid . '">[' . get_string('campo_tipologia', 'vocabulario') . ']</a>';
             //$atras .= '<a href="./pdf?id=' . $this->id_tocho . '&us=' . $userid . '">[' . get_string('pdf', 'vocabulario') . ']</a>';
-            $atras .= '<a href="./view?id=' . $this->id_tocho . '">[' . get_string('atras', 'vocabulario') . ']</a>';
+            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '">[' . get_string('atras', 'vocabulario') . ']</a>';
             $atras .= '</h1>';
             $mform->addElement('html', $atras);
             $mform->addElement('html', '</br>');
         } else {
             $atras = '<h1 class="main">';
-            $atras .= '<a href="./view?id=' . $this->id_tocho . '&opcion=2">[' . get_string('todo', 'vocabulario') . ']</a>';
-            $atras .= '<a href="./view?id=' . $this->id_tocho . '&opcion=2&alfa=1">[' . get_string('alfabetico', 'vocabulario') . ']</a>';
-            $atras .= '<a href="./view?id=' . $this->id_tocho . '&opcion=2&cl=1">[' . get_string('campo_lex', 'vocabulario') . ']</a>';
-            $atras .= '<a href="./pdf?id=' . $this->id_tocho . '&us=' . $userid . '">[' . get_string('pdf', 'vocabulario') . ']</a>';
-            $atras .= '<a href="./view?id=' . $this->id_tocho . '">[' . get_string('atras', 'vocabulario') . ']</a>';
+            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2">[' . get_string('todo', 'vocabulario') . ']</a>';
+            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&alfa=1">[' . get_string('alfabetico', 'vocabulario') . ']</a>';
+            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&cl=1">[' . get_string('campo_lex', 'vocabulario') . ']</a>';
+            $atras .= '<a href="./pdf.php?id=' . $this->id_tocho . '&us=' . $userid . '">[' . get_string('pdf', 'vocabulario') . ']</a>';
+            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '">[' . get_string('atras', 'vocabulario') . ']</a>';
             $atras .= '</h1>';
             $mform->addElement('html', $atras);
             $mform->addElement('html', '</br>');
@@ -2424,6 +2424,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
             //6
             case 50:
                 break;
+            //6.1
             case 51:
                 $kasus = array(get_string('acusativo','vocabulario'),get_string('dativo','vocabulario'),get_string('acudat','vocabulario'),get_string('genitivo','vocabulario'));
 
@@ -2440,7 +2441,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html',$titulillos);
 
                 //A partir de aqui pinto filas según se van necesitando
-                $tope = 500;
+                $tope = 50;         //con mas de 50 va petadisimo de lento
                 $ultima = -1;
 
                 for ($fila=0; $fila<$tope;$fila++) {
@@ -2487,7 +2488,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $mform->addElement('static', 'mas_filas', '', $ops);
                 }
                 break;
-               
+            //6.2
             case 52:
 
                 //array para traducir el campo de caso, que al ser un entero se tiene que corresponder con un string
@@ -2517,10 +2518,10 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $abecedario = '<h1 style="text-align:center;">';
                     $l = 'a';
                     for ($i = 1; $i < 27; $i++) {
-                        $abecedario .= '<a href="./view?id=' . $id_tocho . '&opcion=5&grid='.$grid.'&letra='.$l.'">[' . $l . ']</a>';
+                        $abecedario .= '<a href="./view.php?id=' . $id_tocho . '&opcion=5&grid='.$grid.'&letra='.$l.'">[' . $l . ']</a>';
                         $l++;
                     }
-                    $abecedario .= '<a href="./view?id=' . $id_tocho . '&opcion=5&grid='.$grid.'">[Todas]</a>';
+                    $abecedario .= '<a href="./view.php?id=' . $id_tocho . '&opcion=5&grid='.$grid.'">[Todas]</a>';
                     $abecedario .= '</h1>';
                     $mform -> addElement('html',$abecedario);
 
@@ -2540,10 +2541,10 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 //                }elseif($grid == 52){           //discriminamos por casos
                     $kasos = '<h1 style="text-align:center;">';
                     for ($i = 0; $i < 4; $i++) {
-                        $kasos .= '<a href="./view?id=' . $id_tocho . '&opcion=5&grid='.$grid.'&caso='.$i.'">[' . $kasus[$i] . ']</a>';
+                        $kasos .= '<a href="./view.php?id=' . $id_tocho . '&opcion=5&grid='.$grid.'&caso='.$i.'">[' . $kasus[$i] . ']</a>';
                         $l++;
                     }
-                    $kasos .= '<a href="./view?id=' . $id_tocho . '&opcion=5&grid='.$grid.'">[Todas]</a>';
+                    $kasos .= '<a href="./view.php?id=' . $id_tocho . '&opcion=5&grid='.$grid.'">[Todas]</a>';
                     $kasos .= '</h1>';
                     $mform -> addElement('html',$kasos);
 
