@@ -839,6 +839,48 @@ if($impr_gram == 1){
 
                             }
 
+                            break;
+                        //3.7.1 Konjunktiv I
+                        case 33:
+                            $pdf->SetTextColor(TEXT_WHITE);
+                            $pdf->SetFont('','B',10);
+                            $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
+
+                            //cabecera
+                            $pdf->Cell(30, 5, '', 1, 0, 'C', 1);
+                            $pdf->Cell(80, 5, get_string('sein', 'vocabulario'), 1, 0, 'C', 1);
+                            $pdf->Cell(80, 5, get_string('andere','vocabulario'), 1, 1, 'C', 1);
+
+                            $pdf->SetTextColor(TEXT_AUTO);
+                            $pdf->SetFont('','',10);
+                            $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul cla
+
+                            //filas
+                            $pdf->Cell(30, 5, get_string('S1', 'vocabulario'), 1, 0, 'C', 1);
+                            $pdf->Cell(80, 5, $descripcion_troceada[0], 1, 0, 'C', 0);
+                            $pdf->Cell(80, 5, $descripcion_troceada[1], 1, 1, 'C', 0);
+
+                            $pdf->Cell(30, 5, get_string('S2', 'vocabulario'), 1, 0, 'C', 1);
+                            $pdf->Cell(80, 5, $descripcion_troceada[2], 1, 0, 'C', 0);
+                            $pdf->Cell(80, 5, $descripcion_troceada[3], 1, 1, 'C', 0);
+
+                            $pdf->Cell(30, 5, get_string('S3', 'vocabulario'), 1, 0, 'C', 1);
+                            $pdf->Cell(80, 5, $descripcion_troceada[4], 1, 0, 'C', 0);
+                            $pdf->Cell(80, 5, $descripcion_troceada[5], 1, 1, 'C', 0);
+
+                            $pdf->Cell(30, 5, get_string('P1', 'vocabulario'), 1, 0, 'C', 1);
+                            $pdf->Cell(80, 5, $descripcion_troceada[6], 1, 0, 'C', 0);
+                            $pdf->Cell(80, 5, $descripcion_troceada[7], 1, 1, 'C', 0);
+
+                            $pdf->Cell(30, 5, get_string('P2', 'vocabulario'), 1, 0, 'C', 1);
+                            $pdf->Cell(80, 5, $descripcion_troceada[8], 1, 0, 'C', 0);
+                            $pdf->Cell(80, 5, $descripcion_troceada[9], 1, 1, 'C', 0);
+
+                            $pdf->Cell(30, 5, get_string('P3', 'vocabulario'), 1, 0, 'C', 1);
+                            $pdf->Cell(80, 5, $descripcion_troceada[10], 1, 0, 'C', 0);
+                            $pdf->Cell(80, 5, $descripcion_troceada[11], 1, 1, 'C', 0);
+
+                            $pdf->Ln();
 
                             break;
                         
