@@ -743,7 +743,7 @@ if($impr_gram == 1){
                             for($i=0; $i<$numtablas; $i++){
                                 $salidor = false;
                                 $pintar = false;
-                                for ($j=0; $j<21 && $salidor==false;$j++) {
+                                for ($j=0; $j<31 && $salidor==false;$j++) {
                                     if($descripcion_troceada[(31*$i)+$j]) {
                                         $salidor = true;
                                         $pintar = true;
@@ -759,53 +759,80 @@ if($impr_gram == 1){
 
                                     $pdf->Ln();
 
+                                    //cabecera infinitiva
+                                    
+                                    $pdf->Cell(20, 5, get_string('infinitivo', 'vocabulario'), 1, 0, 'C', 1);
+
+                                    $pdf->SetTextColor(TEXT_AUTO);
+                                    $pdf->SetFont('','',10);
+
+                                    $pdf->Cell(170, 5, $descripcion_troceada[(31*$i)+0], 1, 1, 'C', 0);
+
+
+                                    //cabeceras indicativo / conjuntivo
+
+                                    $pdf->SetTextColor(TEXT_WHITE);
+                                    $pdf->SetFont('','B',10);
+
+                                    $pdf->Cell(20, 5, '', 'TLB', 0, 'C', 1);
+                                    $pdf->Cell(102, 5, get_string('indicativo', 'vocabulario'), 'TRB', 0, 'C', 1);
+                                    $pdf->Cell(68, 5, get_string('conjuntivo', 'vocabulario'), 1, 1, 'C', 1);
+
                                     //cabeceras
-                                    $pdf->Cell(31, 5, '', 'TLB', 0, 'C', 1);
-                                    $pdf->Cell(53, 5, get_string('schwache', 'vocabulario').'*', 'TRB', 0, 'C', 1);
-                                    $pdf->Cell(53, 5, get_string('starke', 'vocabulario').'**', 1, 0, 'C', 1);
-                                    $pdf->Cell(53, 5, get_string('gemischte', 'vocabulario').'***', 1, 1, 'C', 1);
+                                    $pdf->Cell(20, 5, '', 'TLB', 0, 'C', 1);
+                                    $pdf->Cell(34, 5, get_string('prasens', 'vocabulario'), 'TRB', 0, 'C', 1);
+                                    $pdf->Cell(34, 5, get_string('preterito', 'vocabulario'), 1, 0, 'C', 1);
+                                    $pdf->Cell(34, 5, get_string('perfecto', 'vocabulario'), 1, 0, 'C', 1);
+                                    $pdf->Cell(34, 5, get_string('conjuntivo1', 'vocabulario'), 1, 0, 'C', 1);
+                                    $pdf->Cell(34, 5, get_string('conjuntivo2', 'vocabulario'), 1, 1, 'C', 1);
 
                                     $pdf->SetTextColor(TEXT_AUTO);
                                     $pdf->SetFont('','',10);
                                     $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
 
                                     //la tabla
-                                    $pdf->Cell(31, 5, get_string('infinitivo', 'vocabulario'), 1, 0, 'C', 1);
-                                    $pdf->Cell(53, 5, $descripcion_troceada[(21*$i)+0], 1, 0, 'C', 0);
-                                    $pdf->Cell(53, 5, $descripcion_troceada[(21*$i)+7], 1, 0, 'C', 0);
-                                    $pdf->Cell(53, 5, $descripcion_troceada[(21*$i)+14], 1, 1, 'C', 0);
 
-                                    $pdf->Cell(190, 5, '', 1, 1, 'C', 0);
+                                    $pdf->Cell(20, 5, get_string('S1', 'vocabulario'), 1, 0, 'C', 1);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+1], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+2], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+3], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+4], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+5], 1, 1, 'C', 0);
 
-                                    $pdf->Cell(31, 5, get_string('S1', 'vocabulario'), 1, 0, 'C', 1);
-                                    $pdf->Cell(53, 5, $descripcion_troceada[(21*$i)+1], 1, 0, 'C', 0);
-                                    $pdf->Cell(53, 5, $descripcion_troceada[(21*$i)+8], 1, 0, 'C', 0);
-                                    $pdf->Cell(53, 5, $descripcion_troceada[(21*$i)+15], 1, 1, 'C', 0);
+                                    $pdf->Cell(20, 5, get_string('S2', 'vocabulario'), 1, 0, 'C', 1);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+6], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+7], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+8], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+9], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+10], 1, 1, 'C', 0);
 
-                                    $pdf->Cell(31, 5, get_string('S2', 'vocabulario'), 1, 0, 'C', 1);
-                                    $pdf->Cell(53, 5, $descripcion_troceada[(21*$i)+2], 1, 0, 'C', 0);
-                                    $pdf->Cell(53, 5, $descripcion_troceada[(21*$i)+9], 1, 0, 'C', 0);
-                                    $pdf->Cell(53, 5, $descripcion_troceada[(21*$i)+16], 1, 1, 'C', 0);
+                                    $pdf->Cell(20, 5, get_string('S3', 'vocabulario'), 1, 0, 'C', 1);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+11], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+12], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+13], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+14], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+15], 1, 1, 'C', 0);
 
-                                    $pdf->Cell(22, 5, get_string('S3', 'vocabulario'), 1, 0, 'C', 1);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+3], 1, 0, 'C', 0);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+10], 1, 0, 'C', 0);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+17], 1, 1, 'C', 0);
+                                    $pdf->Cell(20, 5, get_string('P1', 'vocabulario'), 1, 0, 'C', 1);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+16], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+17], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+18], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+19], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+20], 1, 1, 'C', 0);
 
-                                    $pdf->Cell(31, 5, get_string('P1', 'vocabulario'), 1, 0, 'C', 1);
-                                    $pdf->Cell(53, 5, $descripcion_troceada[(21*$i)+4], 1, 0, 'C', 0);
-                                    $pdf->Cell(53, 5, $descripcion_troceada[(21*$i)+11], 1, 0, 'C', 0);
-                                    $pdf->Cell(53, 5, $descripcion_troceada[(21*$i)+18], 1, 1, 'C', 0);
+                                    $pdf->Cell(20, 5, get_string('P2', 'vocabulario'), 1, 0, 'C', 1);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+21], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+22], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+23], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+24], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+25], 1, 1, 'C', 0);
 
-                                    $pdf->Cell(31, 5, get_string('P2', 'vocabulario'), 1, 0, 'C', 1);
-                                    $pdf->Cell(53, 5, $descripcion_troceada[(21*$i)+5], 1, 0, 'C', 0);
-                                    $pdf->Cell(53, 5, $descripcion_troceada[(21*$i)+12], 1, 0, 'C', 0);
-                                    $pdf->Cell(53, 5, $descripcion_troceada[(21*$i)+19], 1, 1, 'C', 0);
-
-                                    $pdf->Cell(31, 5, get_string('P3', 'vocabulario'), 1, 0, 'C', 1);
-                                    $pdf->Cell(53, 5, $descripcion_troceada[(21*$i)+6], 1, 0, 'C', 0);
-                                    $pdf->Cell(53, 5, $descripcion_troceada[(21*$i)+13], 1, 0, 'C', 0);
-                                    $pdf->Cell(53, 5, $descripcion_troceada[(21*$i)+20], 1, 1, 'C', 0);
+                                    $pdf->Cell(20, 5, get_string('P3', 'vocabulario'), 1, 0, 'C', 1);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+26], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+27], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+28], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+29], 1, 0, 'C', 0);
+                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+30], 1, 1, 'C', 0);
 
                                     $pdf->Ln();
                                 }
@@ -813,128 +840,6 @@ if($impr_gram == 1){
                             }
 
 
-                            break;
-
-
-
-
-
-
-
-                            if ($grid == 27) {
-                                $tope = 6;
-                            }
-                            elseif ($grid ==29) {
-                                $tope = 10;
-                            }
-
-
-                            $ultimo = -1;
-                            for ($i=0; $i<$tope;$i++) {
-                                $ocultador = '<div id="ocultador_tabla'.$i;
-                                $salidor = false;
-                                for ($j=0; $j<31 && $salidor==false;$j++) {
-                                    if($descripcion_troceada[(30*$i)+$j]) {
-                                        $salidor = true;
-                                        $ocultador .= '">';
-                                        $ultimo = $i;
-                                    }
-                                }
-
-                                if ($salidor == false && $i==0) {
-                                    $ocultador .= '">';
-                                }
-
-                                if ($salidor == false && $i!=0) {
-                                    $ocultador .= '" style="display:none">';
-                                }
-
-                                $mform->addElement('html', $ocultador);
-                                $mform->addElement('html', '<p>');
-                                $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter">');
-
-                                $titulillos = '<tr class="header">';
-                                $titulillos .= '<th class="">' . get_string('infinitivo','vocabulario') . '</th>';
-                                $titulillos .= '<th colspan=5><input size=59 type="text" id="id_INF'.$i.'" name="INF'.$i.'" value="' . $descripcion_troceada[31*$i+0] . '"></th>';
-                                $titulillos .= '</tr>';
-            //                    $titulillos .= '<tr class="cell">';
-            //                    $titulillos .= '<td class="cell" colspan=6>&nbsp;</td>';
-            //                    $titulillos .= '</tr>';
-                                $mform->addElement('html', $titulillos);
-
-                                //titulillos de la tabla
-                                $titulillos = '<tr class="header">';
-                                $titulillos .= '<th></th>';
-                                $titulillos .= '<th colspan=3>' . get_string('indicativo','vocabulario') . '</th>';
-                                $titulillos .= '<th colspan=2>' . get_string('conjuntivo','vocabulario') . '</th>';
-                                $titulillos .= '</tr>';
-                                $titulillos .= '<tr class="header">';
-                                $titulillos .= '<th></th>';
-                                $titulillos .= '<th>' . get_string('prasens','vocabulario') . '</th>';
-                                $titulillos .= '<th>' . get_string('preterito','vocabulario') . '</th>';
-                                $titulillos .= '<th>' . get_string('perfecto','vocabulario') . '</th>';
-                                $titulillos .= '<th>' . get_string('conjuntivo1','vocabulario') . '</th>';
-                                $titulillos .= '<th>' . get_string('conjuntivo2','vocabulario') . '</th>';
-                                $titulillos .= '</tr>';
-                                $mform->addElement('html', $titulillos);
-                                $titulillos = '<tr class="cell">';
-                                $titulillos .= '<td class="cell">' . get_string('S1', 'vocabulario') . '</td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_S1PRA'.$i.'" name="S1PRA'.$i.'" value="' . $descripcion_troceada[31*$i+1] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_S1PRE'.$i.'" name="S1PRE'.$i.'" value="' . $descripcion_troceada[31*$i+2] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_S1PER'.$i.'" name="S1PER'.$i.'" value="' . $descripcion_troceada[31*$i+3] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_S1PC1'.$i.'" name="S1PC1'.$i.'" value="' . $descripcion_troceada[31*$i+4] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_S1PC2'.$i.'" name="S1PC2'.$i.'" value="' . $descripcion_troceada[31*$i+5] . '"></td>';
-                                $titulillos .= '</tr>';
-                                $titulillos .= '<tr class="cell">';
-                                $titulillos .= '<td class="cell">' . get_string('S2', 'vocabulario') . '</td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_S2PRA'.$i.'" name="S2PRA'.$i.'" value="' . $descripcion_troceada[31*$i+6] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_S2PRE'.$i.'" name="S2PRE'.$i.'" value="' . $descripcion_troceada[31*$i+7] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_S2PER'.$i.'" name="S2PER'.$i.'" value="' . $descripcion_troceada[31*$i+8] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_S2PC1'.$i.'" name="S2PC1'.$i.'" value="' . $descripcion_troceada[31*$i+9] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_S2PC2'.$i.'" name="S2PC2'.$i.'" value="' . $descripcion_troceada[31*$i+10] . '"></td>';
-                                $titulillos .= '</tr>';
-                                $titulillos .= '<tr class="cell">';
-                                $titulillos .= '<td class="cell">' . get_string('S3', 'vocabulario') . '</td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_S3PRA'.$i.'" name="S3PRA'.$i.'" value="' . $descripcion_troceada[31*$i+11] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_S3PRE'.$i.'" name="S3PRE'.$i.'" value="' . $descripcion_troceada[31*$i+12] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_S3PER'.$i.'" name="S3PER'.$i.'" value="' . $descripcion_troceada[31*$i+13] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_S3PC1'.$i.'" name="S3PC1'.$i.'" value="' . $descripcion_troceada[31*$i+14] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_S3PC2'.$i.'" name="S3PC2'.$i.'" value="' . $descripcion_troceada[31*$i+15] . '"></td>';
-                                $titulillos .= '</tr>';
-                                $titulillos .= '<tr class="cell">';
-                                $titulillos .= '<td class="cell">' . get_string('P1', 'vocabulario') . '</td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_P1PRA'.$i.'" name="P1PRA'.$i.'" value="' . $descripcion_troceada[31*$i+16] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_P1PRE'.$i.'" name="P1PRE'.$i.'" value="' . $descripcion_troceada[31*$i+17] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_P1PER'.$i.'" name="P1PER'.$i.'" value="' . $descripcion_troceada[31*$i+18] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_P1PC1'.$i.'" name="P1PC1'.$i.'" value="' . $descripcion_troceada[31*$i+19] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_P1PC2'.$i.'" name="P1PC2'.$i.'" value="' . $descripcion_troceada[31*$i+20] . '"></td>';
-                                $titulillos .= '</tr>';
-                                $titulillos .= '<tr class="cell">';
-                                $titulillos .= '<td class="cell">' . get_string('P2', 'vocabulario') . '</td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_P2PRA'.$i.'" name="P2PRA'.$i.'" value="' . $descripcion_troceada[31*$i+21] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_P2PRE'.$i.'" name="P2PRE'.$i.'" value="' . $descripcion_troceada[31*$i+22] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_P2PER'.$i.'" name="P2PER'.$i.'" value="' . $descripcion_troceada[31*$i+23] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_P2PC1'.$i.'" name="P2PC1'.$i.'" value="' . $descripcion_troceada[31*$i+24] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_P2PC2'.$i.'" name="P2PC2'.$i.'" value="' . $descripcion_troceada[31*$i+25] . '"></td>';
-                                $titulillos .= '</tr>';
-                                $titulillos .= '<tr class="cell">';
-                                $titulillos .= '<td class="cell">' . get_string('P3', 'vocabulario') . '</td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_P3PRA'.$i.'" name="P3PRA'.$i.'" value="' . $descripcion_troceada[31*$i+26] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_P3PRE'.$i.'" name="P3PRE'.$i.'" value="' . $descripcion_troceada[31*$i+27] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_P3PER'.$i.'" name="P3PER'.$i.'" value="' . $descripcion_troceada[31*$i+28] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_P3PC1'.$i.'" name="P3PC1'.$i.'" value="' . $descripcion_troceada[31*$i+29] . '"></td>';
-                                $titulillos .= '<td><input type="text" size=10 id="id_P3PC2'.$i.'" name="P3PC2'.$i.'" value="' . $descripcion_troceada[31*$i+30] . '"></td>';
-                                $titulillos .= '</tr>';
-                                $mform->addElement('html', $titulillos);
-                                $mform->addElement('html', '</table>');
-                                $mform->addElement('html', '<p>');
-
-                                $mform->addElement('html', '</div>');
-                            }
-                            if ($ultimo+1 < $tope && $tope > 1) {
-                                $ops = '<a href=\'javascript:desocultar("tabla'.($ultimo+1).'")\' id="mt">'.get_string("mastablas", "vocabulario").'</a>';
-                                $mform->addElement('static', 'mas_tablas', '', $ops);
-                            }
                             break;
                         
                     }
