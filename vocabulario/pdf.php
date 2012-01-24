@@ -948,6 +948,87 @@ if($impr_gram == 1){
                             $pdf->Ln();
 
                             break;
+                        //2.5 Possessivpronomen
+                        case 15:
+
+                            $pdf->SetTextColor(TEXT_WHITE);
+                            
+                            $pdf->SetFillColor(59, 89, 152); //#3B5998
+                            $pdf->setLeftMargin(MARGIN);
+
+                            $pdf->SetFont('','B',12);
+                            //cabecera grande
+                            $pdf->Cell(190,6,get_string('possessiv1','vocabulario'),1,1,'C',1);
+                            //separador
+                            $pdf->Cell(190,3,'',0,1,'C',0);
+
+                            //cabeceras chicas tabla 1.1
+
+                            $pdf->SetFont('','B',10);
+
+                            $pdf->Cell(20,5,'','LTB',0,'C',1);
+                            $pdf->Cell(170,5,get_string('sing','vocabulario'),'TRB',1,'C',1);
+                            $pdf->Cell(20,5,'','LT',0,'C',1);
+                            $pdf->Cell(34,5,'1','TR',0,'C',1);
+                            $pdf->Cell(34,5,'2','LTR',0,'C',1);
+                            $pdf->Cell(102,5,'3','LTR',1,'C',1);
+
+                            $pdf->Cell(20,5,'','LB',0,'C',1);
+                            $pdf->Cell(34,5,'','BR',0,'C',1);
+                            $pdf->Cell(34,5,'','LBR',0,'C',1);
+                            $pdf->Cell(34,5,'m','LB',0,'C',1);
+                            $pdf->Cell(34,5,'n','B',0,'C',1);
+                            $pdf->Cell(34,5,'f','BR',1,'C',1);
+
+                            //celdas tabla 1.1
+
+                            $pdf->setTextColor(TEXT_AUTO);
+                            $pdf->SetFont('','',10);
+                            $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+
+                            $pdf->Cell(20,5,get_string('nominativo','vocabulario'),1,0,'C',1);
+                            $pdf->Cell(34,5,$descripcion_troceada[0],1,0,'C',0);
+                            $pdf->Cell(34,5,$descripcion_troceada[1],1,0,'C',0);
+                            $pdf->Cell(34,5,$descripcion_troceada[2],1,0,'C',0);
+                            $pdf->Cell(34,5,$descripcion_troceada[3],1,0,'C',0);
+                            $pdf->Cell(34,5,$descripcion_troceada[4],1,1,'C',0);
+
+                            $pdf->Ln();
+
+                            //cabeceras chicas tabla 1.2
+                            $pdf->SetTextColor(TEXT_WHITE);
+                            $pdf->SetFont('','B',10);
+                            $pdf->SetFillColor(59, 89, 152); //#3B5998
+
+                            $pdf->Cell(20,5,'','LTB',0,'C',1);
+                            $pdf->Cell(126,5,get_string('plural','vocabulario'),'TRB',0,'C',1);
+                            $pdf->Cell(44,5,'','LTR',1,'C',1);
+                            
+                            $pdf->Cell(20,5,'','LT',0,'C',1);
+                            $pdf->Cell(42,5,'1','TR',0,'C',1);
+                            $pdf->Cell(42,5,'2','LTR',0,'C',1);
+                            $pdf->Cell(42,5,'3','LTR',0,'C',1);
+                            $pdf->Cell(44,5,get_string('sie','vocabulario'),'LR',1,'C',1);
+
+//                            $pdf->Cell(20,5,'','LB',0,'C',1);
+//                            $pdf->Cell(42,5,'','RB',0,'C',1);
+//                            $pdf->Cell(42,5,'','LRB',0,'C',1);
+//                            $pdf->Cell(42,5,'','LRB',0,'C',1);
+//                            $pdf->Cell(44,5,'','LRB',1,'C',1);
+
+                            //celdas tabla 1.2
+
+                            $pdf->setTextColor(TEXT_AUTO);
+                            $pdf->SetFont('','',10);
+                            $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+
+                            $pdf->Cell(20,5,get_string('nominativo','vocabulario'),1,0,'C',1);
+                            $pdf->Cell(42,5,$descripcion_troceada[5],1,0,'C',0);
+                            $pdf->Cell(42,5,$descripcion_troceada[6],1,0,'C',0);
+                            $pdf->Cell(42,5,$descripcion_troceada[7],1,0,'C',0);
+                            $pdf->Cell(44,5,$descripcion_troceada[8],1,1,'C',0);
+
+                            break;
                         
                     }
 
