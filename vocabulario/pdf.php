@@ -1026,7 +1026,7 @@ if($impr_gram == 1){
                             $pdf->Ln();
                             
                             //cabecera grande
-
+ 
                             $pdf->SetTextColor(TEXT_WHITE);
                             $pdf->SetFillColor(59, 89, 152); //#3B5998
                             $pdf->SetFont('','B',12);
