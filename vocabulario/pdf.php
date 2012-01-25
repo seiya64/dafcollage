@@ -1229,6 +1229,25 @@ if($impr_gram == 1){
 
                             break;
 
+                        //4.1 Definitartikel
+                        case 37:
+                        //4.2 Indefinitartikel
+                        case 38:
+                        //4.4 Negationsartikel
+                        case 40:
+                        //4.5 Interrogativartikel
+                        case 41:
+                        //4.6 Demonstrativartikel
+                        case 42:
+                        //2.3 Demonstrativpronomen
+                        case 9:
+                        //2.6 Relativpronomen
+                        case 16:
+                        //2.4.1 Als Artikelwörter gebrauche Indefinitpronomina
+                        case 11:
+                        //1.3 Deklination
+                        case 5:
+
                         
                     }
 
