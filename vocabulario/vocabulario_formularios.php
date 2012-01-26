@@ -2989,6 +2989,11 @@ class mod_vocabulario_listado_form extends moodleform {
         global $USER;
         $mform = & $this->_form;
         $mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
+
+        //titulo de la seccion
+        $mform->addElement('html','<h1>'.get_string('listado','vocabulario').'</h1>');
+
+        
         //campolexico
         $campolex = new Vocabulario_campo_lexico();
         $campolex = $campolex->obtener_todos($USER->id);
