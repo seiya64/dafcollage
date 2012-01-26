@@ -48,17 +48,17 @@ $campo = optional_param('campoid', 0, PARAM_INT);
 $id_tocho = optional_param('id_tocho', 0, PARAM_INT);
 $tipo = optional_param('tipo', 'cl', PARAM_ALPHA);
 
-$mform = new mod_vocabulario_ver_form();
+$cancel = optional_param('cancelbutton','',PARAM_ALPHA);
 
-if ($mform->is_cancelled()) {
+if($cancel){
     redirect('./view.php?id=' . $id_tocho);
 }
 
 if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false)) {
     $alumno = optional_param('alumnoid', 0, PARAM_INT);
-    redirect('view?id=' . $id_tocho . '&opcion=2&alid=' . $alumno);
+    redirect('view.php?id=' . $id_tocho . '&opcion=2&alid=' . $alumno);
 }
 
 
-redirect('view?id=' . $id_tocho . '&opcion=2&'.$tipo.'=1&campo=' . $campo);
+redirect('view.php?id=' . $id_tocho . '&opcion=2&'.$tipo.'=1&campo=' . $campo);
 ?>

@@ -619,6 +619,11 @@ class mod_vocabulario_ver_form extends moodleform {
 
         $mform->addElement('html', '</table>');
         $mform->addElement('html', '<p>');
+
+        //botones
+        $buttonarray = array();
+        $buttonarray[] = &$mform->createElement('submit', 'cancelbutton', get_string('cancel','vocabulario'));
+        $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
     }
 
     /**
@@ -641,7 +646,7 @@ class mod_vocabulario_ver_form extends moodleform {
             $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&ic=1&alid=' . $userid . '">[' . get_string('campo_intencion', 'vocabulario') . ']</a>';
             $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&tt=1&alid=' . $userid . '">[' . get_string('campo_tipologia', 'vocabulario') . ']</a>';
             //$atras .= '<a href="./pdf?id=' . $this->id_tocho . '&us=' . $userid . '">[' . get_string('pdf', 'vocabulario') . ']</a>';
-            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '">[' . get_string('atras', 'vocabulario') . ']</a>';
+            //$atras .= '<a href="./view.php?id=' . $this->id_tocho . '">[' . get_string('atras', 'vocabulario') . ']</a>';
             $atras .= '</h1>';
             $mform->addElement('html', $atras);
             $mform->addElement('html', '</br>');
