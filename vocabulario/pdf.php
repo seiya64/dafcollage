@@ -1088,7 +1088,7 @@ if($impr_gram == 1){
                             }
 
                             break;
-
+ 
                         //4.3 Possessivartikel
                         case 39:
 
