@@ -43,9 +43,16 @@ require_once("vocabulario_formularios.php");
 global $CFG, $COURSE, $USER;
 $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
 
+
 $campo = optional_param('campoid', 0, PARAM_INT);
 $id_tocho = optional_param('id_tocho', 0, PARAM_INT);
 $tipo = optional_param('tipo', 'cl', PARAM_ALPHA);
+
+$mform = new mod_vocabulario_ver_form();
+
+if ($mform->is_cancelled()) {
+    redirect('./view.php?id=' . $id_tocho);
+}
 
 if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false)) {
     $alumno = optional_param('alumnoid', 0, PARAM_INT);
