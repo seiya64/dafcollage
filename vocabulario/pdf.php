@@ -315,81 +315,6 @@ if($impr_gram == 1){
                                 $pdf->setLeftMargin(MARGIN);
                                 $pdf->Ln();
                                 break;
-                            //3.1.4 Partizip I
-                            case 24:
-                            //3.3 Trennbare Verben
-                            case 28:
-                            //3.1.5 Futur I
-                            case 25:
-                            //3.1.6 Futur II
-                            case 26:
-                                $pdf->setLeftMargin(MARGIN);
-                                $pdf->SetTextColor(TEXT_AUTO);
-                                $pdf->SetFont('','',10);
-
-                                if($grid==25){
-                                    $titulo=get_string("futuro1", "vocabulario");
-                                }elseif($grid==26){
-                                    $titulo=get_string("futuro2", "vocabulario");
-                                }elseif($grid==28){
-                                    $titulo=get_string('trennbaren','vocabulario');
-                                }elseif($grid==24){
-                                    $titulo=get_string('participio1','vocabulario');
-                                }
-
-                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.$titulo.'</h3>', 0, 1, 0);
-                                $pdf->setLeftMargin(MARGIN_L2);
-                                $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
-                                $pdf->setLeftMargin(MARGIN);
-                                $pdf->Ln();
-                                break;
-                            //3.1.3 Perfekt/Partizip II
-                            case 23:
-
-                                $pdf->SetTextColor(TEXT_AUTO);
-                                $pdf->SetFont('','',10);
-                                $pdf->SetFillColor(59, 89, 152); //#3B5998
-                                $pdf->setLeftMargin(MARGIN);
-
-                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('irregulares','vocabulario').'</h3>', 0, 1, 0);
-                                $pdf->setLeftMargin(MARGIN_L2);
-                                $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
-                                $pdf->setLeftMargin(MARGIN);
-                                $pdf->Ln();
-
-                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('participio2','vocabulario').'</h3>', 0, 1, 0);
-                                $pdf->setLeftMargin(MARGIN_L2);
-                                $pdf->MultiCell(0, 5, $descripcion_troceada[1], 0, 'J', 0);
-                                $pdf->setLeftMargin(MARGIN);
-                                $pdf->Ln();
-
-                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('hilfsverbs','vocabulario').'</h3>', 0, 1, 0);
-                                $pdf->setLeftMargin(MARGIN_L2);
-                                $pdf->MultiCell(0, 5, $descripcion_troceada[2], 0, 'J', 0);
-                                $pdf->setLeftMargin(MARGIN);
-                                $pdf->Ln();
-
-                                break;
-                            //3.6 Passiv
-                            case 31:
-                                $pdf->SetTextColor(TEXT_AUTO);
-                                $pdf->SetFont('','',10);
-                                $pdf->SetFillColor(59, 89, 152); //#3B5998
-                                $pdf->setLeftMargin(MARGIN);
-
-                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('zustandspassiv','vocabulario').'</h3>', 0, 1, 0);
-                                $pdf->setLeftMargin(MARGIN_L2);
-                                $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
-                                $pdf->setLeftMargin(MARGIN);
-                                $pdf->Ln();
-
-                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('vorganspassiv','vocabulario').'</h3>', 0, 1, 0);
-                                $pdf->setLeftMargin(MARGIN_L2);
-                                $pdf->MultiCell(0, 5, $descripcion_troceada[1], 0, 'J', 0);
-                                $pdf->setLeftMargin(MARGIN);
-                                $pdf->Ln();
-
-                                break;
                             //5.2.1
                             case 47:
                                 //Tabla 1
@@ -772,14 +697,18 @@ if($impr_gram == 1){
                             case 29:
                             //tabla
                                 $numtablas = (count($descripcion_troceada)-2)/31;
-
+                                $todovacío = true;
                                 for($i=0; $i<$numtablas; $i++){
-                                    $salidor = false;
                                     $pintar = false;
-                                    for ($j=0; $j<31 && $salidor==false;$j++) {
+
+                                    if($i==$numtablas-1 && $todovacío){
+                                        $pintar = true;
+                                    }
+
+                                    for ($j=0; $j<31 && $pintar==false;$j++) {
                                         if($descripcion_troceada[(31*$i)+$j]) {
-                                            $salidor = true;
                                             $pintar = true;
+                                            $todovacío = false;
                                          }
                                     }
 
@@ -789,8 +718,6 @@ if($impr_gram == 1){
                                         $pdf->SetFont('','B',10);
                                         $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
                                         $pdf->setLineWidth(0.3);
-
-                                        $pdf->Ln();
 
                                         //cabecera infinitiva
 
@@ -1251,8 +1178,6 @@ if($impr_gram == 1){
 
                                     //cabecera grande
     //                                $pdf->Cell(190, 6, get_string('endungen_siehe4', 'vocabulario'), 1, 1, 'C', 1);
-
-                                    $pdf->Ln();
 
                                     //cabeceras
                                     $pdf->SetFont('','B',10);
