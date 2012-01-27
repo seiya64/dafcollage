@@ -1064,22 +1064,20 @@ if($impr_gram == 1){
                                 $pdf->Ln();
                                 $pdf->Ln();
 
-                                    $pdf->SetTextColor(TEXT_WHITE);
-                                    $pdf->SetFont('','B',12);
-                                    $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
-                                    $pdf->setLineWidth(0.3);
+                                $pdf->SetTextColor(TEXT_WHITE);
+                                $pdf->SetFont('','B',12);
+                                $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
+                                $pdf->setLineWidth(0.3);
 
-                                    //cabecera grande
-                                    $pdf->Cell(190, 6, get_string('endungen_siehe4', 'vocabulario'), 1, 1, 'C', 1);
+                                //cabecera grande
+                                $pdf->Cell(190, 6, get_string('endungen_siehe4', 'vocabulario'), 1, 1, 'C', 1);
 
-                                    $pdf->Ln();
+                                $pdf->Ln();
 
                                 $pintar=false;
-                                $salidor=false;
 
-                                for ($j=9; $j<(count($descripcion_troceada)-2) && $salidor==false;$j++) {
+                                for ($j=9; $j<(count($descripcion_troceada)-2) && $pintar==false;$j++) {
                                         if($descripcion_troceada[$j]) {
-                                            $salidor = true;
                                             $pintar = true;
                                          }
                                 }
