@@ -510,12 +510,12 @@ if($impr_gram == 1){
                                 //$pintadoAst = false;
                                 $numtablas = (count($descripcion_troceada)-2)/21;
                                 $pintarChuleta=false;
-                                $todovacío = true;
+                                $todovacio = true;
 
                                 for($i=0; $i<$numtablas; $i++){
                                     $pintar = false;
 
-                                    if($i==$numtablas-1 && $todovacío){
+                                    if($i==$numtablas-1 && $todovacio){
                                         $pintar = true;
                                         $pintarChuleta = true;
                                     }
@@ -524,7 +524,7 @@ if($impr_gram == 1){
                                         if($descripcion_troceada[(21*$i)+$j]) {
                                             $pintar = true;
                                             $pintarChuleta=true;
-                                            $todovacío = false;
+                                            $todovacio = false;
                                          }
                                     }
 
@@ -697,18 +697,18 @@ if($impr_gram == 1){
                             case 29:
                             //tabla
                                 $numtablas = (count($descripcion_troceada)-2)/31;
-                                $todovacío = true;
+                                $todovacio = true;
                                 for($i=0; $i<$numtablas; $i++){
                                     $pintar = false;
 
-                                    if($i==$numtablas-1 && $todovacío){
+                                    if($i==$numtablas-1 && $todovacio){
                                         $pintar = true;
                                     }
 
                                     for ($j=0; $j<31 && $pintar==false;$j++) {
                                         if($descripcion_troceada[(31*$i)+$j]) {
                                             $pintar = true;
-                                            $todovacío = false;
+                                            $todovacio = false;
                                          }
                                     }
 
@@ -848,13 +848,17 @@ if($impr_gram == 1){
                             case 15:
 
                                 $numtablas = (count($descripcion_troceada)-2)/25;
-
+                                $todovacio = true;
                                 for($i=0; $i<$numtablas; $i++){
-                                    $salidor = false;
                                     $pintar = false;
-                                    for ($j=0; $j<25 && $salidor==false;$j++) {
+
+                                    if($i==$numtablas-1 && $todovacio){
+                                        $pintar = true;
+                                    }
+
+                                    for ($j=0; $j<25 && $pintar==false;$j++) {
                                         if($descripcion_troceada[(25*$i)+$j]) {
-                                            $salidor = true;
+                                            $todovacio=false;
                                             $pintar = true;
                                          }
                                     }
