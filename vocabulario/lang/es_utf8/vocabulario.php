@@ -168,6 +168,7 @@ $string['definido'] = 'Definitiv';
 $string['indefinido'] = 'Indefinitiv';
 $string['generales'] = 'Allgemeines';
 $string['particulares'] = 'Lerntipps';
+$string['particular'] = 'Lerntipp';
 $string['declinacion1'] = 'Deklination Typ 1';
 $string['declinacion2'] = 'Deklination Typ 2';
 $string['declinacion3'] = 'Deklination Typ 3';
