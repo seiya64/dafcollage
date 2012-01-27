@@ -209,7 +209,7 @@ if($impr_gram == 1){
             $pdf->AddPage();
             $mi_gram = $cosa[0];
             //$pdf->SetFont('', 'B', '12');
-            $pdf->writeHTMLCell(0, 0, 0, 0, '<h2>'.$mi_gram.'</h2>', 0, 1, 0);
+            
            // $pdf->Cell(0, 5, $mi_gram, 0, 1, 'L', 0);
 
             
@@ -218,840 +218,971 @@ if($impr_gram == 1){
                 
                 if ($descripcion_troceada) {
 
-///////////////////////                              ///////////////////////////
-///////////////////////DESCOMENTAR EN UN MOMENTO DADO///////////////////////////
-///////////////////////                              ///////////////////////////
-                /***************************************************************
-
-                
-                    switch ($palabra->tipo_palabra) {
-                        case 'sustantivo':
-                            $pal_aux = new Vocabulario_sustantivo();
-                            $pal_aux->leer($palabra->palabra_id);
-                            break;
-                        case 'adjetivo':
-                            $pal_aux = new Vocabulario_adjetivo();
-                            $pal_aux->leer($palabra->palabra_id);
-                            break;
-                        case 'verbo':
-                            $pal_aux = new Vocabulario_verbo();
-                            $pal_aux->leer($palabra->palabra_id);
-                            break;
-                        case 'otro':
-                            $pal_aux = new Vocabulario_otro();
-                            $pal_aux->leer($palabra->palabra_id);
-                            break;
+                    $pintartochaco = false;
+                    for($p=0; $p<count($descripcion_troceada) && $pintartochaco==false;$p++){
+                        if($descripcion_troceada[$p]){
+                            $pintartochaco=true;
+                        }
                     }
 
-                    ************************************************************/
-                    $grid=$palabra->gramaticaid;
-                    switch ($grid) {
-                        //normal
-                        default:
-                            break;
-                        //1.1
-                        case 3:
-                            $pdf->setLeftMargin(MARGIN);
-                            $pdf->SetTextColor(TEXT_AUTO);
-                            $pdf->SetFont('','',10);
-                            $pdf->SetFillColor(59, 89, 152); //#3B5998
-
-                            //masculino
-                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('masculino','vocabulario').'</h3>', 0, 1, 0);
-                            $pdf->setLeftMargin(MARGIN_L2);
-                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>'.get_string('clasificacionsemantica','vocabulario').'</h4>', 0, 1, 0);
-                            $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J',0);
-                            $pdf->Ln();
-                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>'.get_string('clasificacionformal','vocabulario').'</h4>', 0, 1, 0);
-                            $pdf->MultiCell(0, 5, $descripcion_troceada[1], 0, 'J', 0);
-                            $pdf->setLeftMargin(MARGIN);
-                            $pdf->Ln();
-
-                            //femenino
-
-                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('femenino','vocabulario').'</h3>', 0, 1, 0);
-                            $pdf->setLeftMargin(MARGIN_L2);
-                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>'.get_string('clasificacionsemantica','vocabulario').'</h4>', 0, 1, 0);
-                            $pdf->MultiCell(0, 5, $descripcion_troceada[2], 0, 'J', 0);
-                            $pdf->Ln();
-                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>'.get_string('clasificacionformal','vocabulario').'</h4>', 0, 1, 0);
-                            $pdf->MultiCell(0, 5, $descripcion_troceada[3], 0, 'J', 0);
-                            $pdf->setLeftMargin(MARGIN);
-                            $pdf->Ln();
-
-                            //neutro
-
-                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('neutro','vocabulario').'</h3>', 0, 1, 0);
-                            $pdf->setLeftMargin(MARGIN_L2);
-                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>'.get_string('clasificacionsemantica','vocabulario').'</h4>', 0, 1, 0);
-                            $pdf->MultiCell(0, 5, $descripcion_troceada[4], 0, 'J', 0);
-                            $pdf->Ln();
-                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>'.get_string('clasificacionformal','vocabulario').'</h4>', 0, 1, 0);
-                            $pdf->MultiCell(0, 5, $descripcion_troceada[5], 0, 'J', 0);
-                            $pdf->setLeftMargin(MARGIN);
-                            $pdf->Ln();
-
-                            break;
-                        //1.2
-                        case 4:
-                            $pdf->setLeftMargin(MARGIN);
-                            $pdf->SetTextColor(TEXT_AUTO);
-                            $pdf->SetFont('','',10);
-                            $pdf->SetFillColor(59, 89, 152); //#3B5998
-
-                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('endungs','vocabulario').'</h3>', 0, 1, 0);
-                            $pdf->setLeftMargin(MARGIN_L2);
-                            $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
-                            $pdf->setLeftMargin(MARGIN);
-                            $pdf->Ln();
-
-                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('genero','vocabulario').'</h3>', 0, 1, 0);
-                            $pdf->setLeftMargin(MARGIN_L2);
-                            $pdf->MultiCell(0, 5, $descripcion_troceada[1], 0, 'J', 0);
-                            $pdf->setLeftMargin(MARGIN);
-                            $pdf->Ln();
-
-                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('endungp','vocabulario').'</h3>', 0, 1, 0);
-                            $pdf->setLeftMargin(MARGIN_L2);
-                            $pdf->MultiCell(0, 5, $descripcion_troceada[2], 0, 'J', 0);
-                            $pdf->setLeftMargin(MARGIN);
-                            $pdf->Ln();
-
-                            $pdf->Ln();
-
-                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('reinesf','vocabulario').'</h3>', 0, 1, 0);
-                            $pdf->setLeftMargin(MARGIN_L2);
-                            $pdf->MultiCell(0, 5, $descripcion_troceada[3], 0, 'J', 0);
-                            $pdf->setLeftMargin(MARGIN);
-                            $pdf->Ln();
-
-                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('reinepf','vocabulario').'</h3>', 0, 1, 0, true);
-                            $pdf->setLeftMargin(MARGIN_L2);
-                            $pdf->MultiCell(0, 5, $descripcion_troceada[4], 0, 'J', 0);
-                            $pdf->setLeftMargin(MARGIN);
-                            $pdf->Ln();
-                            break;
-                        //5.2.1
-                        case 47:
-                            //Tabla 1
-                            //primera Cabecera
-                            $pdf->setLeftMargin(MARGIN);
-                            $pdf->SetTextColor(TEXT_WHITE);
-                            $pdf->SetFont('','B',12);
-                            $pdf->SetFillColor(59, 89, 152); //#3B5998
-                            $pdf->setLineWidth(0.3);
-
-                            $pdf->Cell(190, 8,get_string('declinacion1', 'vocabulario'), 1, 1, 'C', 1);
-                            
-                            //Cabeceras
-
-                            $pdf->SetFont('','B',10);
-
-                            $pdf->Cell(30, 5, '', 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, get_string('masculino', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, get_string('femenino', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, get_string('neutro', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, get_string('plural', 'vocabulario'), 1, 1, 'C', 1);
-
-                            //filas
-                            $pdf->setTextColor(TEXT_AUTO);
-                            $pdf->SetFont('','',10);
-                            $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
-
-                            $pdf->Cell(30, 5, get_string('nominativo', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, $descripcion_troceada[0], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[1], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[2], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[3], 1, 1, 'C', 0);
-
-                            $pdf->Cell(30, 5, get_string('acusativo', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, $descripcion_troceada[4], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[5], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[6], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[7], 1, 1, 'C', 0);
-
-                            $pdf->Cell(30, 5, get_string('dativo', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, $descripcion_troceada[8], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[9], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[10], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[11], 1, 1, 'C', 0);
-
-                            $pdf->Cell(30, 5, get_string('genitivo', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, $descripcion_troceada[12], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[13], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[14], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[15], 1, 1, 'C', 0);
-
-                            $pdf->Ln();
-                            $pdf->setLeftMargin(MARGIN_L2);
-
-                            $pdf->writeHTMLCell(0, 0, 0, 0,'<h4>'.get_string('particular', 'vocabulario').'</h4>', 0, 1, 0);
-                            $pdf->MultiCell(170, 5, $descripcion_troceada[16], 0, 'L', 0);
-                            $pdf->Ln();
-                            $pdf->writeHTMLCell(0, 0, 0, 0,'<h4>'.get_string('despuesde', 'vocabulario').'</h4>', 0, 1, 0);
-                            $pdf->MultiCell(170, 5, $descripcion_troceada[17], 0, 'L',0);
-
-                            $pdf->setLeftMargin(MARGIN);
-
-                            $pdf->Ln();
-
-                            //Tabla 2
-                            //primera Cabecera
-                            $pdf->SetTextColor(TEXT_WHITE);
-                            $pdf->SetFont('','B',12);
-                            $pdf->SetFillColor(59, 89, 152); //#3B5998
-                            $pdf->setLineWidth(0.3);
-
-                            $pdf->Cell(190, 8,get_string('declinacion2', 'vocabulario'), 1, 1, 'C', 1);
-
-                            //Cabeceras
-
-                            $pdf->SetFont('','B',10);
-
-                            $pdf->Cell(30, 5, '', 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, get_string('masculino', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, get_string('femenino', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, get_string('neutro', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, get_string('plural', 'vocabulario'), 1, 1, 'C', 1);
-
-                            //filas
-                            $pdf->setTextColor(TEXT_AUTO);
-                            $pdf->SetFont('','',10);
-                            $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
-
-                            $pdf->Cell(30, 5, get_string('nominativo', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, $descripcion_troceada[18], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[19], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[20], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[21], 1, 1, 'C', 0);
-
-                            $pdf->Cell(30, 5, get_string('acusativo', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, $descripcion_troceada[22], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[23], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[24], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[25], 1, 1, 'C', 0);
-
-                            $pdf->Cell(30, 5, get_string('dativo', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, $descripcion_troceada[26], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[27], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[28], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[29], 1, 1, 'C', 0);
-
-                            $pdf->Cell(30, 5, get_string('genitivo', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, $descripcion_troceada[30], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[31], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[32], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[33], 1, 1, 'C', 0);
-
-                            $pdf->Ln();
-                            $pdf->setLeftMargin(MARGIN_L2);
-
-                            $pdf->writeHTMLCell(0, 0, 0, 0,'<h4>'.get_string('particular', 'vocabulario').'</h4>', 0, 1, 0);
-                            $pdf->MultiCell(170, 5, $descripcion_troceada[34], 0, 'L', 0);
-                            $pdf->Ln();
-                            $pdf->writeHTMLCell(0, 0, 0, 0,'<h4>'.get_string('despuesde', 'vocabulario').'</h4>', 0, 1, 0);
-                            $pdf->MultiCell(170, 5, $descripcion_troceada[35], 0, 'L',0);
-
-                            $pdf->setLeftMargin(MARGIN);
-
-                            $pdf->Ln();
-
-                            //Tabla 3
-                            //primera Cabecera
-                            $pdf->SetTextColor(TEXT_WHITE);
-                            $pdf->SetFont('','B',12);
-                            $pdf->SetFillColor(59, 89, 152); //#3B5998
-                            $pdf->setLineWidth(0.3);
-
-                            $pdf->Cell(190, 8,get_string('declinacion3', 'vocabulario'), 1, 1, 'C', 1);
-
-                            //Cabeceras
-
-                            $pdf->SetFont('','B',10);
-
-                            $pdf->Cell(30, 5, '', 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, get_string('masculino', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, get_string('femenino', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, get_string('neutro', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, get_string('plural', 'vocabulario'), 1, 1, 'C', 1);
-
-                            //filas
-                            $pdf->setTextColor(TEXT_AUTO);
-                            $pdf->SetFont('','',10);
-                            $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
-
-                            $pdf->Cell(30, 5, get_string('nominativo', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, $descripcion_troceada[36], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[37], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[38], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[39], 1, 1, 'C', 0);
-
-                            $pdf->Cell(30, 5, get_string('acusativo', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, $descripcion_troceada[40], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[41], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[42], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[43], 1, 1, 'C', 0);
-
-                            $pdf->Cell(30, 5, get_string('dativo', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, $descripcion_troceada[44], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[45], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[46], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[47], 1, 1, 'C', 0);
-
-                            $pdf->Cell(30, 5, get_string('genitivo', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(40, 5, $descripcion_troceada[48], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[49], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[50], 1, 0, 'C', 0);
-                            $pdf->Cell(40, 5, $descripcion_troceada[51], 1, 1, 'C', 0);
-
-                            $pdf->Ln();
-                            $pdf->setLeftMargin(MARGIN_L2);
-
-                            $pdf->writeHTMLCell(0, 0, 0, 0,'<h4>'.get_string('particular', 'vocabulario').'</h4>', 0, 1, 0);
-                            $pdf->MultiCell(170, 5, $descripcion_troceada[52], 0, 'L', 0);
-                            $pdf->Ln();
-                            $pdf->writeHTMLCell(0, 0, 0, 0,'<h4>'.get_string('despuesde', 'vocabulario').'</h4>', 0, 1, 0);
-                            $pdf->MultiCell(170, 5, $descripcion_troceada[53], 0, 'L',0);
-
-                            $pdf->setLeftMargin(MARGIN);
-
-                            $pdf->Ln();
-
-                            break;
-                         //3.1.1 Präsens
-                        case 21:
-                        //3.1.2 Präteritum
-                        case 22:
-
-                            //$pintadoAst = false;
-                            $numtablas = (count($descripcion_troceada)-2)/21;
-                            $pintarChuleta=false;
-
-                            for($i=0; $i<$numtablas; $i++){
-                                $salidor = false;
-                                $pintar = false;
-                                for ($j=0; $j<21 && $salidor==false;$j++) {
-                                    if($descripcion_troceada[(21*$i)+$j]) {
-                                        $salidor = true;
-                                        $pintar = true;
-                                        $pintarChuleta=true;
-                                     }
-                                }
-
-                                if($pintar){
-
-                                    $pdf->setLeftMargin(MARGIN);
-                                    $pdf->SetTextColor(TEXT_WHITE);
-                                    $pdf->SetFont('','B',10);
-                                    $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
-                                    $pdf->setLineWidth(0.3);
-
-                                    
-
-                                    //cabeceras
-                                    $pdf->Cell(22, 5, '', 'TLB', 0, 'C', 1);
-                                    $pdf->Cell(56, 5, get_string('schwache', 'vocabulario').'*', 'TRB', 0, 'C', 1);
-                                    $pdf->Cell(56, 5, get_string('starke', 'vocabulario').'**', 1, 0, 'C', 1);
-                                    $pdf->Cell(56, 5, get_string('gemischte', 'vocabulario').'***', 1, 1, 'C', 1);
-
-                                    $pdf->SetTextColor(TEXT_AUTO);
-                                    $pdf->SetFont('','',10);
-                                    $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
-
-                                    //la tabla
-                                    $pdf->Cell(22, 5, get_string('infinitivo', 'vocabulario'), 1, 0, 'C', 1);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+0], 1, 0, 'C', 0);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+7], 1, 0, 'C', 0);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+14], 1, 1, 'C', 0);
-
-                                    $pdf->Cell(190, 5, '', 1, 1, 'C', 0);
-
-                                    $pdf->Cell(22, 5, get_string('S1', 'vocabulario'), 1, 0, 'C', 1);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+1], 1, 0, 'C', 0);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+8], 1, 0, 'C', 0);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+15], 1, 1, 'C', 0);
-
-                                    $pdf->Cell(22, 5, get_string('S2', 'vocabulario'), 1, 0, 'C', 1);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+2], 1, 0, 'C', 0);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+9], 1, 0, 'C', 0);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+16], 1, 1, 'C', 0);
-
-                                    $pdf->Cell(22, 5, get_string('S3', 'vocabulario'), 1, 0, 'C', 1);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+3], 1, 0, 'C', 0);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+10], 1, 0, 'C', 0);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+17], 1, 1, 'C', 0);
-
-                                    $pdf->Cell(22, 5, get_string('P1', 'vocabulario'), 1, 0, 'C', 1);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+4], 1, 0, 'C', 0);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+11], 1, 0, 'C', 0);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+18], 1, 1, 'C', 0);
-
-                                    $pdf->Cell(22, 5, get_string('P2', 'vocabulario'), 1, 0, 'C', 1);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+5], 1, 0, 'C', 0);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+12], 1, 0, 'C', 0);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+19], 1, 1, 'C', 0);
-
-                                    $pdf->Cell(22, 5, get_string('P3', 'vocabulario'), 1, 0, 'C', 1);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+6], 1, 0, 'C', 0);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+13], 1, 0, 'C', 0);
-                                    $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+20], 1, 1, 'C', 0);
-
-                                    $pdf->Ln();
-
-                                }
-
-                            }
-
-                            if($pintarChuleta == true){
+                    if($pintartochaco){
+
+                        $pdf->writeHTMLCell(0, 0, 0, 0, '<h2>'.$mi_gram.'</h2>', 0, 1, 0);
+
+                        $grid=$palabra->gramaticaid;
+                        switch ($grid) {
+                            //normal
+                            default:
+                                break;
+                            //1.1
+                            case 3:
+                                $pdf->setLeftMargin(MARGIN);
                                 $pdf->SetTextColor(TEXT_AUTO);
-                                
                                 $pdf->SetFont('','',10);
-                                $pdf->Cell(5, 5, '*', 0, 0, 'L', 0);
-                                $pdf->Cell(0, 5, get_string('par_schwac', 'vocabulario'), 0, 1, 'L', 0);
-                                $pdf->Cell(5, 5, '**', 0, 0, 'L', 0);
-                                $pdf->Cell(0, 5, get_string('par_star', 'vocabulario'), 0, 1, 'L', 0);
-                                $pdf->Cell(5, 5, '***', 0, 0, 'L', 0);
-                                $pdf->Cell(0, 5, get_string('par_gemis', 'vocabulario'), 0, 1, 'L', 0);
+                                $pdf->SetFillColor(59, 89, 152); //#3B5998
+
+                                //masculino
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('masculino','vocabulario').'</h3>', 0, 1, 0);
+                                $pdf->setLeftMargin(MARGIN_L2);
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>'.get_string('clasificacionsemantica','vocabulario').'</h4>', 0, 1, 0);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J',0);
+                                $pdf->Ln();
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>'.get_string('clasificacionformal','vocabulario').'</h4>', 0, 1, 0);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[1], 0, 'J', 0);
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->Ln();
+
+                                //femenino
+
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('femenino','vocabulario').'</h3>', 0, 1, 0);
+                                $pdf->setLeftMargin(MARGIN_L2);
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>'.get_string('clasificacionsemantica','vocabulario').'</h4>', 0, 1, 0);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[2], 0, 'J', 0);
+                                $pdf->Ln();
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>'.get_string('clasificacionformal','vocabulario').'</h4>', 0, 1, 0);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[3], 0, 'J', 0);
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->Ln();
+
+                                //neutro
+
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('neutro','vocabulario').'</h3>', 0, 1, 0);
+                                $pdf->setLeftMargin(MARGIN_L2);
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>'.get_string('clasificacionsemantica','vocabulario').'</h4>', 0, 1, 0);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[4], 0, 'J', 0);
+                                $pdf->Ln();
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>'.get_string('clasificacionformal','vocabulario').'</h4>', 0, 1, 0);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[5], 0, 'J', 0);
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->Ln();
+
+                                break;
+                            //1.2
+                            case 4:
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->SetTextColor(TEXT_AUTO);
+                                $pdf->SetFont('','',10);
+                                $pdf->SetFillColor(59, 89, 152); //#3B5998
+
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('endungs','vocabulario').'</h3>', 0, 1, 0);
+                                $pdf->setLeftMargin(MARGIN_L2);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->Ln();
+
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('genero','vocabulario').'</h3>', 0, 1, 0);
+                                $pdf->setLeftMargin(MARGIN_L2);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[1], 0, 'J', 0);
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->Ln();
+
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('endungp','vocabulario').'</h3>', 0, 1, 0);
+                                $pdf->setLeftMargin(MARGIN_L2);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[2], 0, 'J', 0);
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->Ln();
 
                                 $pdf->Ln();
-                            }
+
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('reinesf','vocabulario').'</h3>', 0, 1, 0);
+                                $pdf->setLeftMargin(MARGIN_L2);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[3], 0, 'J', 0);
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->Ln();
+
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('reinepf','vocabulario').'</h3>', 0, 1, 0, true);
+                                $pdf->setLeftMargin(MARGIN_L2);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[4], 0, 'J', 0);
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->Ln();
+                                break;
+                            //5.2.1
+                            case 47:
+                                //Tabla 1
+                                //primera Cabecera
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->SetTextColor(TEXT_WHITE);
+                                $pdf->SetFont('','B',12);
+                                $pdf->SetFillColor(59, 89, 152); //#3B5998
+                                $pdf->setLineWidth(0.3);
+
+                                $pdf->Cell(190, 8,get_string('declinacion1', 'vocabulario'), 1, 1, 'C', 1);
+
+                                //Cabeceras
+
+                                $pdf->SetFont('','B',10);
+
+                                $pdf->Cell(30, 5, '', 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, get_string('masculino', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, get_string('femenino', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, get_string('neutro', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, get_string('plural', 'vocabulario'), 1, 1, 'C', 1);
+
+                                //filas
+                                $pdf->setTextColor(TEXT_AUTO);
+                                $pdf->SetFont('','',10);
+                                $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+
+                                $pdf->Cell(30, 5, get_string('nominativo', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, $descripcion_troceada[0], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[1], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[2], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[3], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('acusativo', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, $descripcion_troceada[4], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[5], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[6], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[7], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('dativo', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, $descripcion_troceada[8], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[9], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[10], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[11], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('genitivo', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, $descripcion_troceada[12], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[13], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[14], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[15], 1, 1, 'C', 0);
+
+                                $pdf->Ln();
+                                $pdf->setLeftMargin(MARGIN_L2);
+
+                                $pdf->writeHTMLCell(0, 0, 0, 0,'<h4>'.get_string('particular', 'vocabulario').'</h4>', 0, 1, 0);
+                                $pdf->MultiCell(170, 5, $descripcion_troceada[16], 0, 'L', 0);
+                                $pdf->Ln();
+                                $pdf->writeHTMLCell(0, 0, 0, 0,'<h4>'.get_string('despuesde', 'vocabulario').'</h4>', 0, 1, 0);
+                                $pdf->MultiCell(170, 5, $descripcion_troceada[17], 0, 'L',0);
+
+                                $pdf->setLeftMargin(MARGIN);
+
+                                $pdf->Ln();
+
+                                //Tabla 2
+                                //primera Cabecera
+                                $pdf->SetTextColor(TEXT_WHITE);
+                                $pdf->SetFont('','B',12);
+                                $pdf->SetFillColor(59, 89, 152); //#3B5998
+                                $pdf->setLineWidth(0.3);
+
+                                $pdf->Cell(190, 8,get_string('declinacion2', 'vocabulario'), 1, 1, 'C', 1);
+
+                                //Cabeceras
+
+                                $pdf->SetFont('','B',10);
+
+                                $pdf->Cell(30, 5, '', 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, get_string('masculino', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, get_string('femenino', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, get_string('neutro', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, get_string('plural', 'vocabulario'), 1, 1, 'C', 1);
+
+                                //filas
+                                $pdf->setTextColor(TEXT_AUTO);
+                                $pdf->SetFont('','',10);
+                                $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+
+                                $pdf->Cell(30, 5, get_string('nominativo', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, $descripcion_troceada[18], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[19], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[20], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[21], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('acusativo', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, $descripcion_troceada[22], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[23], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[24], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[25], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('dativo', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, $descripcion_troceada[26], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[27], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[28], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[29], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('genitivo', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, $descripcion_troceada[30], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[31], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[32], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[33], 1, 1, 'C', 0);
+
+                                $pdf->Ln();
+                                $pdf->setLeftMargin(MARGIN_L2);
+
+                                $pdf->writeHTMLCell(0, 0, 0, 0,'<h4>'.get_string('particular', 'vocabulario').'</h4>', 0, 1, 0);
+                                $pdf->MultiCell(170, 5, $descripcion_troceada[34], 0, 'L', 0);
+                                $pdf->Ln();
+                                $pdf->writeHTMLCell(0, 0, 0, 0,'<h4>'.get_string('despuesde', 'vocabulario').'</h4>', 0, 1, 0);
+                                $pdf->MultiCell(170, 5, $descripcion_troceada[35], 0, 'L',0);
+
+                                $pdf->setLeftMargin(MARGIN);
+
+                                $pdf->Ln();
+
+                                //Tabla 3
+                                //primera Cabecera
+                                $pdf->SetTextColor(TEXT_WHITE);
+                                $pdf->SetFont('','B',12);
+                                $pdf->SetFillColor(59, 89, 152); //#3B5998
+                                $pdf->setLineWidth(0.3);
+
+                                $pdf->Cell(190, 8,get_string('declinacion3', 'vocabulario'), 1, 1, 'C', 1);
+
+                                //Cabeceras
+
+                                $pdf->SetFont('','B',10);
+
+                                $pdf->Cell(30, 5, '', 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, get_string('masculino', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, get_string('femenino', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, get_string('neutro', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, get_string('plural', 'vocabulario'), 1, 1, 'C', 1);
+
+                                //filas
+                                $pdf->setTextColor(TEXT_AUTO);
+                                $pdf->SetFont('','',10);
+                                $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+
+                                $pdf->Cell(30, 5, get_string('nominativo', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, $descripcion_troceada[36], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[37], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[38], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[39], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('acusativo', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, $descripcion_troceada[40], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[41], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[42], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[43], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('dativo', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, $descripcion_troceada[44], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[45], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[46], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[47], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('genitivo', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, $descripcion_troceada[48], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[49], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[50], 1, 0, 'C', 0);
+                                $pdf->Cell(40, 5, $descripcion_troceada[51], 1, 1, 'C', 0);
+
+                                $pdf->Ln();
+                                $pdf->setLeftMargin(MARGIN_L2);
+
+                                $pdf->writeHTMLCell(0, 0, 0, 0,'<h4>'.get_string('particular', 'vocabulario').'</h4>', 0, 1, 0);
+                                $pdf->MultiCell(170, 5, $descripcion_troceada[52], 0, 'L', 0);
+                                $pdf->Ln();
+                                $pdf->writeHTMLCell(0, 0, 0, 0,'<h4>'.get_string('despuesde', 'vocabulario').'</h4>', 0, 1, 0);
+                                $pdf->MultiCell(170, 5, $descripcion_troceada[53], 0, 'L',0);
+
+                                $pdf->setLeftMargin(MARGIN);
+
+                                $pdf->Ln();
+
+                                break;
+                             //3.1.1 Präsens
+                            case 21:
+                            //3.1.2 Präteritum
+                            case 22:
+
+                                //$pintadoAst = false;
+                                $numtablas = (count($descripcion_troceada)-2)/21;
+                                $pintarChuleta=false;
+
+                                for($i=0; $i<$numtablas; $i++){
+                                    $salidor = false;
+                                    $pintar = false;
+                                    for ($j=0; $j<21 && $salidor==false;$j++) {
+                                        if($descripcion_troceada[(21*$i)+$j]) {
+                                            $salidor = true;
+                                            $pintar = true;
+                                            $pintarChuleta=true;
+                                         }
+                                    }
+
+                                    if($pintar){
+
+                                        $pdf->setLeftMargin(MARGIN);
+                                        $pdf->SetTextColor(TEXT_WHITE);
+                                        $pdf->SetFont('','B',10);
+                                        $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
+                                        $pdf->setLineWidth(0.3);
 
 
-                            break;
 
-                        //3.1.5 Futur I
-                        case 25:
-                        //3.1.6 Futur II
-                        case 26:
-                            $pdf->setLeftMargin(MARGIN);
-                            $pdf->SetTextColor(TEXT_AUTO);
-                            $pdf->SetFont('','',10);
+                                        //cabeceras
+                                        $pdf->Cell(22, 5, '', 'TLB', 0, 'C', 1);
+                                        $pdf->Cell(56, 5, get_string('schwache', 'vocabulario').'*', 'TRB', 0, 'C', 1);
+                                        $pdf->Cell(56, 5, get_string('starke', 'vocabulario').'**', 1, 0, 'C', 1);
+                                        $pdf->Cell(56, 5, get_string('gemischte', 'vocabulario').'***', 1, 1, 'C', 1);
 
-                            if($grid==25){
-                                $titulo=get_string("futuro1", "vocabulario");
-                            }elseif($grid==26){
-                                $titulo=get_string("futuro2", "vocabulario");
-                            }
+                                        $pdf->SetTextColor(TEXT_AUTO);
+                                        $pdf->SetFont('','',10);
+                                        $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
 
-                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.$titulo.'</h3>', 0, 1, 0);
-                            $pdf->setLeftMargin(MARGIN_L2);
-                            $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
-                            $pdf->setLeftMargin(MARGIN);
-                            $pdf->Ln();
-                            break;
+                                        //la tabla
+                                        $pdf->Cell(22, 5, get_string('infinitivo', 'vocabulario'), 1, 0, 'C', 1);
+                                        $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+0], 1, 0, 'C', 0);
+                                        $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+7], 1, 0, 'C', 0);
+                                        $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+14], 1, 1, 'C', 0);
 
+                                        $pdf->Cell(190, 5, '', 1, 1, 'C', 0);
 
-                        //3.7.2 Konjunktiv II
-                        case 34:
-                            $pdf->setLeftMargin(MARGIN_L5);
-                            $pdf->SetTextColor(TEXT_WHITE);
-                            $pdf->SetFont('','B',10);
-                            $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
-                            $pdf->setLineWidth(0.3);
-                            //tabla 1
+                                        $pdf->Cell(22, 5, get_string('S1', 'vocabulario'), 1, 0, 'C', 1);
+                                        $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+1], 1, 0, 'C', 0);
+                                        $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+8], 1, 0, 'C', 0);
+                                        $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+15], 1, 1, 'C', 0);
 
-                            //cabecera
-                            $pdf->Cell(110, 5, get_string('schwache_siehe', 'vocabulario'), 1, 1, 'C', 1);
+                                        $pdf->Cell(22, 5, get_string('S2', 'vocabulario'), 1, 0, 'C', 1);
+                                        $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+2], 1, 0, 'C', 0);
+                                        $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+9], 1, 0, 'C', 0);
+                                        $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+16], 1, 1, 'C', 0);
 
-                            $pdf->SetTextColor(TEXT_AUTO);
-                            $pdf->SetFont('','',10);
-                            $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+                                        $pdf->Cell(22, 5, get_string('S3', 'vocabulario'), 1, 0, 'C', 1);
+                                        $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+3], 1, 0, 'C', 0);
+                                        $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+10], 1, 0, 'C', 0);
+                                        $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+17], 1, 1, 'C', 0);
 
-                            //filas
-                            $pdf->Cell(30, 5, get_string('S1', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(80, 5, $descripcion_troceada[0], 1, 1, 'C', 0);
+                                        $pdf->Cell(22, 5, get_string('P1', 'vocabulario'), 1, 0, 'C', 1);
+                                        $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+4], 1, 0, 'C', 0);
+                                        $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+11], 1, 0, 'C', 0);
+                                        $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+18], 1, 1, 'C', 0);
 
-                            $pdf->Cell(30, 5, get_string('S2', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(80, 5, $descripcion_troceada[1], 1, 1, 'C', 0);
+                                        $pdf->Cell(22, 5, get_string('P2', 'vocabulario'), 1, 0, 'C', 1);
+                                        $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+5], 1, 0, 'C', 0);
+                                        $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+12], 1, 0, 'C', 0);
+                                        $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+19], 1, 1, 'C', 0);
 
-                            $pdf->Cell(30, 5, get_string('S3', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(80, 5, $descripcion_troceada[2], 1, 1, 'C', 0);
+                                        $pdf->Cell(22, 5, get_string('P3', 'vocabulario'), 1, 0, 'C', 1);
+                                        $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+6], 1, 0, 'C', 0);
+                                        $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+13], 1, 0, 'C', 0);
+                                        $pdf->Cell(56, 5, $descripcion_troceada[(21*$i)+20], 1, 1, 'C', 0);
 
-                            $pdf->Cell(30, 5, get_string('P1', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(80, 5, $descripcion_troceada[3], 1, 1, 'C', 0);
+                                        $pdf->Ln();
 
-                            $pdf->Cell(30, 5, get_string('P2', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(80, 5, $descripcion_troceada[4], 1, 1, 'C', 0);
+                                    }
 
-                            $pdf->Cell(30, 5, get_string('P3', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(80, 5, $descripcion_troceada[5], 1, 1, 'C', 0);
-
-                            $pdf->SetLeftMargin(MARGIN);
-
-                            $pdf->Ln();
-                            
-                            //tabla 2
-                            $pdf->SetTextColor(TEXT_WHITE);
-                            $pdf->SetFont('','B',10);
-                            $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
-
-                            //cabecera
-                            $pdf->Cell(30, 5, '', 'TLB', 0, 'C', 1);
-                            $pdf->Cell(160, 5, get_string('starke', 'vocabulario'), 'TRB', 1, 'C', 1);
-                            $pdf->Cell(30, 5, '', 1, 0, 'C', 1);
-                            $pdf->Cell(80, 5, get_string('preterito', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(80, 5, get_string('conjuntivo2','vocabulario'), 1, 1, 'C', 1);
-
-                            $pdf->SetTextColor(TEXT_AUTO);
-                            $pdf->SetFont('','',10);
-                            $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul cla
-
-                            //filas
-                            $pdf->Cell(30, 5, get_string('S1', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(80, 5, $descripcion_troceada[6], 1, 0, 'C', 0);
-                            $pdf->Cell(80, 5, $descripcion_troceada[7], 1, 1, 'C', 0);
-
-                            $pdf->Cell(30, 5, get_string('S2', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(80, 5, $descripcion_troceada[8], 1, 0, 'C', 0);
-                            $pdf->Cell(80, 5, $descripcion_troceada[9], 1, 1, 'C', 0);
-
-                            $pdf->Cell(30, 5, get_string('S3', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(80, 5, $descripcion_troceada[10], 1, 0, 'C', 0);
-                            $pdf->Cell(80, 5, $descripcion_troceada[11], 1, 1, 'C', 0);
-
-                            $pdf->Cell(30, 5, get_string('P1', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(80, 5, $descripcion_troceada[12], 1, 0, 'C', 0);
-                            $pdf->Cell(80, 5, $descripcion_troceada[13], 1, 1, 'C', 0);
-
-                            $pdf->Cell(30, 5, get_string('P2', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(80, 5, $descripcion_troceada[14], 1, 0, 'C', 0);
-                            $pdf->Cell(80, 5, $descripcion_troceada[15], 1, 1, 'C', 0);
-
-                            $pdf->Cell(30, 5, get_string('P3', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(80, 5, $descripcion_troceada[16], 1, 0, 'C', 0);
-                            $pdf->Cell(80, 5, $descripcion_troceada[17], 1, 1, 'C', 0);
-
-                            $pdf->Ln();
-
-                            break;
-                         //3.3 Trennbare Verben
-                        case 28:
-                            $pdf->setLeftMargin(MARGIN);
-                            $pdf->SetTextColor(TEXT_AUTO);
-                            $pdf->SetFont('','',10);
-                            $pdf->SetFillColor(59, 89, 152); //#3B5998
-
-                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('trennbaren','vocabulario').'</h3>', 0, 1, 0);
-                            $pdf->setLeftMargin(MARGIN_L2);
-                            $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
-                            $pdf->setLeftMargin(MARGIN);
-                            $pdf->Ln();
-                            
-                            break;
-                        //3.2 Modalverben
-                        case 27:
-                        //3.4 Besondere Verben
-                        case 29:
-                        //tabla
-                            $numtablas = (count($descripcion_troceada)-2)/31;
-
-                            for($i=0; $i<$numtablas; $i++){
-                                $salidor = false;
-                                $pintar = false;
-                                for ($j=0; $j<31 && $salidor==false;$j++) {
-                                    if($descripcion_troceada[(31*$i)+$j]) {
-                                        $salidor = true;
-                                        $pintar = true;
-                                     }
                                 }
 
-                                if($pintar){
-                                    $pdf->setLeftMargin(MARGIN);
+                                if($pintarChuleta == true){
+                                    $pdf->SetTextColor(TEXT_AUTO);
+
+                                    $pdf->SetFont('','',10);
+                                    $pdf->Cell(5, 5, '*', 0, 0, 'L', 0);
+                                    $pdf->Cell(0, 5, get_string('par_schwac', 'vocabulario'), 0, 1, 'L', 0);
+                                    $pdf->Cell(5, 5, '**', 0, 0, 'L', 0);
+                                    $pdf->Cell(0, 5, get_string('par_star', 'vocabulario'), 0, 1, 'L', 0);
+                                    $pdf->Cell(5, 5, '***', 0, 0, 'L', 0);
+                                    $pdf->Cell(0, 5, get_string('par_gemis', 'vocabulario'), 0, 1, 'L', 0);
+
+                                    $pdf->Ln();
+                                }
+
+
+                                break;
+
+                            //3.1.5 Futur I
+                            case 25:
+                            //3.1.6 Futur II
+                            case 26:
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->SetTextColor(TEXT_AUTO);
+                                $pdf->SetFont('','',10);
+
+                                if($grid==25){
+                                    $titulo=get_string("futuro1", "vocabulario");
+                                }elseif($grid==26){
+                                    $titulo=get_string("futuro2", "vocabulario");
+                                }
+
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.$titulo.'</h3>', 0, 1, 0);
+                                $pdf->setLeftMargin(MARGIN_L2);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->Ln();
+                                break;
+
+
+                            //3.7.2 Konjunktiv II
+                            case 34:
+                                $pdf->setLeftMargin(MARGIN_L5);
+                                $pdf->SetTextColor(TEXT_WHITE);
+                                $pdf->SetFont('','B',10);
+                                $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
+                                $pdf->setLineWidth(0.3);
+                                //tabla 1
+
+                                //cabecera
+                                $pdf->Cell(110, 5, get_string('schwache_siehe', 'vocabulario'), 1, 1, 'C', 1);
+
+                                $pdf->SetTextColor(TEXT_AUTO);
+                                $pdf->SetFont('','',10);
+                                $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+
+                                //filas
+                                $pdf->Cell(30, 5, get_string('S1', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(80, 5, $descripcion_troceada[0], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('S2', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(80, 5, $descripcion_troceada[1], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('S3', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(80, 5, $descripcion_troceada[2], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('P1', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(80, 5, $descripcion_troceada[3], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('P2', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(80, 5, $descripcion_troceada[4], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('P3', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(80, 5, $descripcion_troceada[5], 1, 1, 'C', 0);
+
+                                $pdf->SetLeftMargin(MARGIN);
+
+                                $pdf->Ln();
+
+                                //tabla 2
+                                $pdf->SetTextColor(TEXT_WHITE);
+                                $pdf->SetFont('','B',10);
+                                $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
+
+                                //cabecera
+                                $pdf->Cell(30, 5, '', 'TLB', 0, 'C', 1);
+                                $pdf->Cell(160, 5, get_string('starke', 'vocabulario'), 'TRB', 1, 'C', 1);
+                                $pdf->Cell(30, 5, '', 1, 0, 'C', 1);
+                                $pdf->Cell(80, 5, get_string('preterito', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(80, 5, get_string('conjuntivo2','vocabulario'), 1, 1, 'C', 1);
+
+                                $pdf->SetTextColor(TEXT_AUTO);
+                                $pdf->SetFont('','',10);
+                                $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul cla
+
+                                //filas
+                                $pdf->Cell(30, 5, get_string('S1', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(80, 5, $descripcion_troceada[6], 1, 0, 'C', 0);
+                                $pdf->Cell(80, 5, $descripcion_troceada[7], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('S2', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(80, 5, $descripcion_troceada[8], 1, 0, 'C', 0);
+                                $pdf->Cell(80, 5, $descripcion_troceada[9], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('S3', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(80, 5, $descripcion_troceada[10], 1, 0, 'C', 0);
+                                $pdf->Cell(80, 5, $descripcion_troceada[11], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('P1', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(80, 5, $descripcion_troceada[12], 1, 0, 'C', 0);
+                                $pdf->Cell(80, 5, $descripcion_troceada[13], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('P2', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(80, 5, $descripcion_troceada[14], 1, 0, 'C', 0);
+                                $pdf->Cell(80, 5, $descripcion_troceada[15], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('P3', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(80, 5, $descripcion_troceada[16], 1, 0, 'C', 0);
+                                $pdf->Cell(80, 5, $descripcion_troceada[17], 1, 1, 'C', 0);
+
+                                $pdf->Ln();
+
+                                break;
+                             //3.3 Trennbare Verben
+                            case 28:
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->SetTextColor(TEXT_AUTO);
+                                $pdf->SetFont('','',10);
+                                $pdf->SetFillColor(59, 89, 152); //#3B5998
+
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('trennbaren','vocabulario').'</h3>', 0, 1, 0);
+                                $pdf->setLeftMargin(MARGIN_L2);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->Ln();
+
+                                break;
+                            //3.2 Modalverben
+                            case 27:
+                            //3.4 Besondere Verben
+                            case 29:
+                            //tabla
+                                $numtablas = (count($descripcion_troceada)-2)/31;
+
+                                for($i=0; $i<$numtablas; $i++){
+                                    $salidor = false;
+                                    $pintar = false;
+                                    for ($j=0; $j<31 && $salidor==false;$j++) {
+                                        if($descripcion_troceada[(31*$i)+$j]) {
+                                            $salidor = true;
+                                            $pintar = true;
+                                         }
+                                    }
+
+                                    if($pintar){
+                                        $pdf->setLeftMargin(MARGIN);
+                                        $pdf->SetTextColor(TEXT_WHITE);
+                                        $pdf->SetFont('','B',10);
+                                        $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
+                                        $pdf->setLineWidth(0.3);
+
+                                        $pdf->Ln();
+
+                                        //cabecera infinitiva
+
+                                        $pdf->Cell(20, 5, get_string('infinitivo', 'vocabulario'), 1, 0, 'C', 1);
+
+                                        $pdf->SetTextColor(TEXT_AUTO);
+                                        $pdf->SetFont('','',10);
+
+                                        $pdf->Cell(170, 5, $descripcion_troceada[(31*$i)+0], 1, 1, 'C', 0);
+
+
+                                        //cabeceras indicativo / conjuntivo
+
+                                        $pdf->SetTextColor(TEXT_WHITE);
+                                        $pdf->SetFont('','B',10);
+
+                                        $pdf->Cell(20, 5, '', 'TLB', 0, 'C', 1);
+                                        $pdf->Cell(102, 5, get_string('indicativo', 'vocabulario'), 'TRB', 0, 'C', 1);
+                                        $pdf->Cell(68, 5, get_string('conjuntivo', 'vocabulario'), 1, 1, 'C', 1);
+
+                                        //cabeceras
+                                        $pdf->Cell(20, 5, '', 'TLB', 0, 'C', 1);
+                                        $pdf->Cell(34, 5, get_string('prasens', 'vocabulario'), 'TRB', 0, 'C', 1);
+                                        $pdf->Cell(34, 5, get_string('preterito', 'vocabulario'), 1, 0, 'C', 1);
+                                        $pdf->Cell(34, 5, get_string('perfecto', 'vocabulario'), 1, 0, 'C', 1);
+                                        $pdf->Cell(34, 5, get_string('conjuntivo1', 'vocabulario'), 1, 0, 'C', 1);
+                                        $pdf->Cell(34, 5, get_string('conjuntivo2', 'vocabulario'), 1, 1, 'C', 1);
+
+                                        $pdf->SetTextColor(TEXT_AUTO);
+                                        $pdf->SetFont('','',10);
+                                        $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+
+                                        //la tabla
+
+                                        $pdf->Cell(20, 5, get_string('S1', 'vocabulario'), 1, 0, 'C', 1);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+1], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+2], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+3], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+4], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+5], 1, 1, 'C', 0);
+
+                                        $pdf->Cell(20, 5, get_string('S2', 'vocabulario'), 1, 0, 'C', 1);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+6], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+7], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+8], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+9], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+10], 1, 1, 'C', 0);
+
+                                        $pdf->Cell(20, 5, get_string('S3', 'vocabulario'), 1, 0, 'C', 1);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+11], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+12], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+13], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+14], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+15], 1, 1, 'C', 0);
+
+                                        $pdf->Cell(20, 5, get_string('P1', 'vocabulario'), 1, 0, 'C', 1);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+16], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+17], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+18], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+19], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+20], 1, 1, 'C', 0);
+
+                                        $pdf->Cell(20, 5, get_string('P2', 'vocabulario'), 1, 0, 'C', 1);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+21], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+22], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+23], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+24], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+25], 1, 1, 'C', 0);
+
+                                        $pdf->Cell(20, 5, get_string('P3', 'vocabulario'), 1, 0, 'C', 1);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+26], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+27], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+28], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+29], 1, 0, 'C', 0);
+                                        $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+30], 1, 1, 'C', 0);
+
+                                        $pdf->Ln();
+                                    }
+
+                                }
+
+                                break;
+                            //3.7.1 Konjunktiv I
+                            case 33:
+                                $pdf->SetTextColor(TEXT_WHITE);
+                                $pdf->SetFont('','B',10);
+                                $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
+                                $pdf->setLeftMargin(MARGIN);
+
+                                //cabecera
+                                $pdf->Cell(30, 5, '', 1, 0, 'C', 1);
+                                $pdf->Cell(80, 5, get_string('sein', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(80, 5, get_string('andere','vocabulario'), 1, 1, 'C', 1);
+
+                                $pdf->SetTextColor(TEXT_AUTO);
+                                $pdf->SetFont('','',10);
+                                $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul claro
+
+                                //filas
+                                $pdf->Cell(30, 5, get_string('S1', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(80, 5, $descripcion_troceada[0], 1, 0, 'C', 0);
+                                $pdf->Cell(80, 5, $descripcion_troceada[1], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('S2', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(80, 5, $descripcion_troceada[2], 1, 0, 'C', 0);
+                                $pdf->Cell(80, 5, $descripcion_troceada[3], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('S3', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(80, 5, $descripcion_troceada[4], 1, 0, 'C', 0);
+                                $pdf->Cell(80, 5, $descripcion_troceada[5], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('P1', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(80, 5, $descripcion_troceada[6], 1, 0, 'C', 0);
+                                $pdf->Cell(80, 5, $descripcion_troceada[7], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('P2', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(80, 5, $descripcion_troceada[8], 1, 0, 'C', 0);
+                                $pdf->Cell(80, 5, $descripcion_troceada[9], 1, 1, 'C', 0);
+
+                                $pdf->Cell(30, 5, get_string('P3', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(80, 5, $descripcion_troceada[10], 1, 0, 'C', 0);
+                                $pdf->Cell(80, 5, $descripcion_troceada[11], 1, 1, 'C', 0);
+
+                                $pdf->Ln();
+
+                                break;
+                            //3.1.3 Perfekt/Partizip II
+                            case 23:
+
+                                $pdf->SetTextColor(TEXT_AUTO);
+                                $pdf->SetFont('','',10);
+                                $pdf->SetFillColor(59, 89, 152); //#3B5998
+                                $pdf->setLeftMargin(MARGIN);
+
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('irregulares','vocabulario').'</h3>', 0, 1, 0);
+                                $pdf->setLeftMargin(MARGIN_L2);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->Ln();
+
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('participio2','vocabulario').'</h3>', 0, 1, 0);
+                                $pdf->setLeftMargin(MARGIN_L2);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[1], 0, 'J', 0);
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->Ln();
+
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('hilfsverbs','vocabulario').'</h3>', 0, 1, 0);
+                                $pdf->setLeftMargin(MARGIN_L2);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[2], 0, 'J', 0);
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->Ln();
+
+                                break;
+                            //3.1.4 Partizip I
+                            case 24:
+                                $pdf->SetTextColor(TEXT_AUTO);
+                                $pdf->SetFont('','',10);
+                                $pdf->SetFillColor(59, 89, 152); //#3B5998
+                                $pdf->setLeftMargin(MARGIN);
+
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('participio1','vocabulario').'</h3>', 0, 1, 0);
+                                $pdf->setLeftMargin(MARGIN_L2);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->Ln();
+
+                                break;
+
+                            //3.6 Passiv
+                            case 31:
+                                $pdf->SetTextColor(TEXT_AUTO);
+                                $pdf->SetFont('','',10);
+                                $pdf->SetFillColor(59, 89, 152); //#3B5998
+                                $pdf->setLeftMargin(MARGIN);
+
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('zustandspassiv','vocabulario').'</h3>', 0, 1, 0);
+                                $pdf->setLeftMargin(MARGIN_L2);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->Ln();
+
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('vorganspassiv','vocabulario').'</h3>', 0, 1, 0);
+                                $pdf->setLeftMargin(MARGIN_L2);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[1], 0, 'J', 0);
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->Ln();
+
+                                break;
+                            //2.5 Possessivpronomen
+                            case 15:
+
+                                $numtablas = (count($descripcion_troceada)-2)/25;
+
+                                for($i=0; $i<$numtablas; $i++){
+                                    $salidor = false;
+                                    $pintar = false;
+                                    for ($j=0; $j<25 && $salidor==false;$j++) {
+                                        if($descripcion_troceada[(25*$i)+$j]) {
+                                            $salidor = true;
+                                            $pintar = true;
+                                         }
+                                    }
+
+                                    if($pintar){
+
+                                        $pdf->SetTextColor(TEXT_WHITE);
+
+                                        $pdf->SetFillColor(59, 89, 152); //#3B5998
+                                        $pdf->setLeftMargin(MARGIN);
+
+                                        $pdf->SetFont('','B',12);
+                                        //cabecera grande
+                                        $pdf->Cell(190,6,get_string('possessiv1','vocabulario'),1,1,'C',1);
+                                        //separador
+                                        $pdf->Cell(190,3,'',0,1,'C',0);
+
+                                        //cabeceras chicas tabla 1.1
+
+                                        $pdf->SetFont('','B',10);
+
+                                        $pdf->Cell(20,5,'','LTB',0,'C',1);
+                                        $pdf->Cell(170,5,get_string('sing','vocabulario'),'TRB',1,'C',1);
+                                        $pdf->Cell(20,5,'','LT',0,'C',1);
+                                        $pdf->Cell(34,5,'1','TR',0,'C',1);
+                                        $pdf->Cell(34,5,'2','LTR',0,'C',1);
+                                        $pdf->Cell(102,5,'3','LTR',1,'C',1);
+
+                                        $pdf->Cell(20,5,'','LB',0,'C',1);
+                                        $pdf->Cell(34,5,'','BR',0,'C',1);
+                                        $pdf->Cell(34,5,'','LBR',0,'C',1);
+                                        $pdf->Cell(34,5,'m','LB',0,'C',1);
+                                        $pdf->Cell(34,5,'n','B',0,'C',1);
+                                        $pdf->Cell(34,5,'f','BR',1,'C',1);
+
+                                        //celdas tabla 1.1
+
+                                        $pdf->setTextColor(TEXT_AUTO);
+                                        $pdf->SetFont('','',10);
+                                        $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+
+                                        $pdf->Cell(20,5,get_string('nominativo','vocabulario'),1,0,'C',1);
+                                        $pdf->Cell(34,5,$descripcion_troceada[(25*$i)+0],1,0,'C',0);
+                                        $pdf->Cell(34,5,$descripcion_troceada[(25*$i)+1],1,0,'C',0);
+                                        $pdf->Cell(34,5,$descripcion_troceada[(25*$i)+2],1,0,'C',0);
+                                        $pdf->Cell(34,5,$descripcion_troceada[(25*$i)+3],1,0,'C',0);
+                                        $pdf->Cell(34,5,$descripcion_troceada[(25*$i)+4],1,1,'C',0);
+
+                                        $pdf->Ln();
+
+                                        //cabeceras chicas tabla 1.2
+                                        $pdf->SetTextColor(TEXT_WHITE);
+                                        $pdf->SetFont('','B',10);
+                                        $pdf->SetFillColor(59, 89, 152); //#3B5998
+
+                                        $pdf->Cell(20,5,'','LTB',0,'C',1);
+                                        $pdf->Cell(126,5,get_string('plural','vocabulario'),'TRB',0,'C',1);
+                                        $pdf->Cell(44,5,'','LTR',1,'C',1);
+
+                                        $pdf->Cell(20,5,'','LT',0,'C',1);
+                                        $pdf->Cell(42,5,'1','TR',0,'C',1);
+                                        $pdf->Cell(42,5,'2','LTR',0,'C',1);
+                                        $pdf->Cell(42,5,'3','LTR',0,'C',1);
+                                        $pdf->Cell(44,5,get_string('sie','vocabulario'),'LR',1,'C',1);
+
+                                        //celdas tabla 1.2
+
+                                        $pdf->setTextColor(TEXT_AUTO);
+                                        $pdf->SetFont('','',10);
+                                        $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+
+                                        $pdf->Cell(20,5,get_string('nominativo','vocabulario'),1,0,'C',1);
+                                        $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+5],1,0,'C',0);
+                                        $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+6],1,0,'C',0);
+                                        $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+7],1,0,'C',0);
+                                        $pdf->Cell(44,5,$descripcion_troceada[(25*$i)+8],1,1,'C',0);
+
+                                        $pdf->Ln();
+                                        $pdf->Ln();
+
+                                        //cabecera grande
+
+                                        $pdf->SetTextColor(TEXT_WHITE);
+                                        $pdf->SetFillColor(59, 89, 152); //#3B5998
+                                        $pdf->SetFont('','B',12);
+
+                                        $pdf->Cell(190,6,get_string('declinacion_siehe','vocabulario'),1,1,'C',1);
+
+                                        //cabeceras chicas tabla 2
+                                        $pdf->SetFont('','B',10);
+
+                                        $pdf->Cell(22,5,'','LTB',0,'C',1);
+                                        $pdf->Cell(42,5,get_string('masculino','vocabulario'),'TRB',0,'C',1);
+                                        $pdf->Cell(42,5,get_string('neutro','vocabulario'),1,0,'C',1);
+                                        $pdf->Cell(42,5,get_string('femenino','vocabulario'),1,0,'C',1);
+                                        $pdf->Cell(42,5,get_string('plural','vocabulario'),1,1,'C',1);
+
+                                        //celdas tabla 2
+
+                                        $pdf->setTextColor(TEXT_AUTO);
+                                        $pdf->SetFont('','',10);
+                                        $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+
+                                        $pdf->Cell(22,5,get_string('nominativo','vocabulario'),1,0,'C',1);
+                                        $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+9],1,0,'C',0);
+                                        $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+10],1,0,'C',0);
+                                        $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+11],1,0,'C',0);
+                                        $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+12],1,1,'C',0);
+                                        $pdf->Cell(22,5,get_string('acusativo','vocabulario'),1,0,'C',1);
+                                        $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+13],1,0,'C',0);
+                                        $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+14],1,0,'C',0);
+                                        $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+15],1,0,'C',0);
+                                        $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+16],1,1,'C',0);
+                                        $pdf->Cell(22,5,get_string('dativo','vocabulario'),1,0,'C',1);
+                                        $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+17],1,0,'C',0);
+                                        $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+18],1,0,'C',0);
+                                        $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+19],1,0,'C',0);
+                                        $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+20],1,1,'C',0);
+                                        $pdf->Cell(22,5,get_string('genitivo','vocabulario'),1,0,'C',1);
+                                        $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+21],1,0,'C',0);
+                                        $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+22],1,0,'C',0);
+                                        $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+23],1,0,'C',0);
+                                        $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+24],1,1,'C',0);
+
+                                        $pdf->Ln();
+                                    }
+                                }
+
+                                break;
+
+                            //4.3 Possessivartikel
+                            case 39:
+
+                                $pdf->SetTextColor(TEXT_WHITE);
+                                $pdf->SetFillColor(59, 89, 152); //#3B5998
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->SetFont('','B',12);
+
+                                //cabecera grande
+                                $pdf->Cell(190,6,get_string('possessiv2','vocabulario'),1,1,'C',1);
+                                //separador
+                                $pdf->Cell(190,3,'',0,1,'C',0);
+
+                                //cabeceras chicas tabla 1.1
+                                $pdf->SetFont('','B',10);
+
+                                $pdf->Cell(20,5,'','LTB',0,'C',1);
+                                $pdf->Cell(170,5,get_string('sing','vocabulario'),'TRB',1,'C',1);
+                                $pdf->Cell(20,5,'','LT',0,'C',1);
+                                $pdf->Cell(34,5,'1','TR',0,'C',1);
+                                $pdf->Cell(34,5,'2','LTR',0,'C',1);
+                                $pdf->Cell(102,5,'3','LTR',1,'C',1);
+
+                                $pdf->Cell(20,5,'','LB',0,'C',1);
+                                $pdf->Cell(34,5,'','BR',0,'C',1);
+                                $pdf->Cell(34,5,'','LBR',0,'C',1);
+                                $pdf->Cell(34,5,'m','LB',0,'C',1);
+                                $pdf->Cell(34,5,'n','B',0,'C',1);
+                                $pdf->Cell(34,5,'f','BR',1,'C',1);
+
+                                //celdas tabla 1.1
+
+                                $pdf->setTextColor(TEXT_AUTO);
+                                $pdf->SetFont('','',10);
+                                $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+
+                                $pdf->Cell(20,5,get_string('nominativo','vocabulario'),1,0,'C',1);
+                                $pdf->Cell(34,5,$descripcion_troceada[0],1,0,'C',0);
+                                $pdf->Cell(34,5,$descripcion_troceada[1],1,0,'C',0);
+                                $pdf->Cell(34,5,$descripcion_troceada[2],1,0,'C',0);
+                                $pdf->Cell(34,5,$descripcion_troceada[3],1,0,'C',0);
+                                $pdf->Cell(34,5,$descripcion_troceada[4],1,1,'C',0);
+
+                                $pdf->Ln();
+
+                                //cabeceras chicas tabla 1.2
+                                $pdf->SetTextColor(TEXT_WHITE);
+                                $pdf->SetFont('','B',10);
+                                $pdf->SetFillColor(59, 89, 152); //#3B5998
+
+                                $pdf->Cell(20,5,'','LTB',0,'C',1);
+                                $pdf->Cell(126,5,get_string('plural','vocabulario'),'TRB',0,'C',1);
+                                $pdf->Cell(44,5,'','LTR',1,'C',1);
+
+                                $pdf->Cell(20,5,'','LT',0,'C',1);
+                                $pdf->Cell(42,5,'1','TR',0,'C',1);
+                                $pdf->Cell(42,5,'2','LTR',0,'C',1);
+                                $pdf->Cell(42,5,'3','LTR',0,'C',1);
+                                $pdf->Cell(44,5,get_string('sie','vocabulario'),'LR',1,'C',1);
+
+                                //celdas tabla 1.2
+
+                                $pdf->setTextColor(TEXT_AUTO);
+                                $pdf->SetFont('','',10);
+                                $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+
+                                $pdf->Cell(20,5,get_string('nominativo','vocabulario'),1,0,'C',1);
+                                $pdf->Cell(42,5,$descripcion_troceada[5],1,0,'C',0);
+                                $pdf->Cell(42,5,$descripcion_troceada[6],1,0,'C',0);
+                                $pdf->Cell(42,5,$descripcion_troceada[7],1,0,'C',0);
+                                $pdf->Cell(44,5,$descripcion_troceada[8],1,1,'C',0);
+
+                                $pdf->Ln();
+                                $pdf->Ln();
+
                                     $pdf->SetTextColor(TEXT_WHITE);
-                                    $pdf->SetFont('','B',10);
+                                    $pdf->SetFont('','B',12);
                                     $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
                                     $pdf->setLineWidth(0.3);
 
-                                    $pdf->Ln();
-
-                                    //cabecera infinitiva
-                                    
-                                    $pdf->Cell(20, 5, get_string('infinitivo', 'vocabulario'), 1, 0, 'C', 1);
-
-                                    $pdf->SetTextColor(TEXT_AUTO);
-                                    $pdf->SetFont('','',10);
-
-                                    $pdf->Cell(170, 5, $descripcion_troceada[(31*$i)+0], 1, 1, 'C', 0);
-
-
-                                    //cabeceras indicativo / conjuntivo
-
-                                    $pdf->SetTextColor(TEXT_WHITE);
-                                    $pdf->SetFont('','B',10);
-
-                                    $pdf->Cell(20, 5, '', 'TLB', 0, 'C', 1);
-                                    $pdf->Cell(102, 5, get_string('indicativo', 'vocabulario'), 'TRB', 0, 'C', 1);
-                                    $pdf->Cell(68, 5, get_string('conjuntivo', 'vocabulario'), 1, 1, 'C', 1);
-
-                                    //cabeceras
-                                    $pdf->Cell(20, 5, '', 'TLB', 0, 'C', 1);
-                                    $pdf->Cell(34, 5, get_string('prasens', 'vocabulario'), 'TRB', 0, 'C', 1);
-                                    $pdf->Cell(34, 5, get_string('preterito', 'vocabulario'), 1, 0, 'C', 1);
-                                    $pdf->Cell(34, 5, get_string('perfecto', 'vocabulario'), 1, 0, 'C', 1);
-                                    $pdf->Cell(34, 5, get_string('conjuntivo1', 'vocabulario'), 1, 0, 'C', 1);
-                                    $pdf->Cell(34, 5, get_string('conjuntivo2', 'vocabulario'), 1, 1, 'C', 1);
-
-                                    $pdf->SetTextColor(TEXT_AUTO);
-                                    $pdf->SetFont('','',10);
-                                    $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
-
-                                    //la tabla
-
-                                    $pdf->Cell(20, 5, get_string('S1', 'vocabulario'), 1, 0, 'C', 1);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+1], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+2], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+3], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+4], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+5], 1, 1, 'C', 0);
-
-                                    $pdf->Cell(20, 5, get_string('S2', 'vocabulario'), 1, 0, 'C', 1);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+6], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+7], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+8], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+9], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+10], 1, 1, 'C', 0);
-
-                                    $pdf->Cell(20, 5, get_string('S3', 'vocabulario'), 1, 0, 'C', 1);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+11], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+12], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+13], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+14], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+15], 1, 1, 'C', 0);
-
-                                    $pdf->Cell(20, 5, get_string('P1', 'vocabulario'), 1, 0, 'C', 1);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+16], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+17], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+18], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+19], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+20], 1, 1, 'C', 0);
-
-                                    $pdf->Cell(20, 5, get_string('P2', 'vocabulario'), 1, 0, 'C', 1);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+21], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+22], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+23], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+24], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+25], 1, 1, 'C', 0);
-
-                                    $pdf->Cell(20, 5, get_string('P3', 'vocabulario'), 1, 0, 'C', 1);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+26], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+27], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+28], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+29], 1, 0, 'C', 0);
-                                    $pdf->Cell(34, 5, $descripcion_troceada[(31*$i)+30], 1, 1, 'C', 0);
+                                    //cabecera grande
+                                    $pdf->Cell(190, 6, get_string('endungen_siehe4', 'vocabulario'), 1, 1, 'C', 1);
 
                                     $pdf->Ln();
-                                }
 
-                            }
+                                $pintar=false;
+                                $salidor=false;
 
-                            break;
-                        //3.7.1 Konjunktiv I
-                        case 33:
-                            $pdf->SetTextColor(TEXT_WHITE);
-                            $pdf->SetFont('','B',10);
-                            $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
-                            $pdf->setLeftMargin(MARGIN);
-
-                            //cabecera
-                            $pdf->Cell(30, 5, '', 1, 0, 'C', 1);
-                            $pdf->Cell(80, 5, get_string('sein', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(80, 5, get_string('andere','vocabulario'), 1, 1, 'C', 1);
-
-                            $pdf->SetTextColor(TEXT_AUTO);
-                            $pdf->SetFont('','',10);
-                            $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul cla
-
-                            //filas
-                            $pdf->Cell(30, 5, get_string('S1', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(80, 5, $descripcion_troceada[0], 1, 0, 'C', 0);
-                            $pdf->Cell(80, 5, $descripcion_troceada[1], 1, 1, 'C', 0);
-
-                            $pdf->Cell(30, 5, get_string('S2', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(80, 5, $descripcion_troceada[2], 1, 0, 'C', 0);
-                            $pdf->Cell(80, 5, $descripcion_troceada[3], 1, 1, 'C', 0);
-
-                            $pdf->Cell(30, 5, get_string('S3', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(80, 5, $descripcion_troceada[4], 1, 0, 'C', 0);
-                            $pdf->Cell(80, 5, $descripcion_troceada[5], 1, 1, 'C', 0);
-
-                            $pdf->Cell(30, 5, get_string('P1', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(80, 5, $descripcion_troceada[6], 1, 0, 'C', 0);
-                            $pdf->Cell(80, 5, $descripcion_troceada[7], 1, 1, 'C', 0);
-
-                            $pdf->Cell(30, 5, get_string('P2', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(80, 5, $descripcion_troceada[8], 1, 0, 'C', 0);
-                            $pdf->Cell(80, 5, $descripcion_troceada[9], 1, 1, 'C', 0);
-
-                            $pdf->Cell(30, 5, get_string('P3', 'vocabulario'), 1, 0, 'C', 1);
-                            $pdf->Cell(80, 5, $descripcion_troceada[10], 1, 0, 'C', 0);
-                            $pdf->Cell(80, 5, $descripcion_troceada[11], 1, 1, 'C', 0);
-
-                            $pdf->Ln();
-
-                            break;
-                        //3.1.3 Perfekt/Partizip II
-                        case 23:
-
-                            $pdf->SetTextColor(TEXT_AUTO);
-                            $pdf->SetFont('','',10);
-                            $pdf->SetFillColor(59, 89, 152); //#3B5998
-                            $pdf->setLeftMargin(MARGIN);
-
-                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('irregulares','vocabulario').'</h3>', 0, 1, 0);
-                            $pdf->setLeftMargin(MARGIN_L2);
-                            $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
-                            $pdf->setLeftMargin(MARGIN);
-                            $pdf->Ln();
-
-                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('participio2','vocabulario').'</h3>', 0, 1, 0);
-                            $pdf->setLeftMargin(MARGIN_L2);
-                            $pdf->MultiCell(0, 5, $descripcion_troceada[1], 0, 'J', 0);
-                            $pdf->setLeftMargin(MARGIN);
-                            $pdf->Ln();
-
-                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('hilfsverbs','vocabulario').'</h3>', 0, 1, 0);
-                            $pdf->setLeftMargin(MARGIN_L2);
-                            $pdf->MultiCell(0, 5, $descripcion_troceada[2], 0, 'J', 0);
-                            $pdf->setLeftMargin(MARGIN);
-                            $pdf->Ln();
-
-                            break;
-                        //3.1.4 Partizip I
-                        case 24:
-                            $pdf->SetTextColor(TEXT_AUTO);
-                            $pdf->SetFont('','',10);
-                            $pdf->SetFillColor(59, 89, 152); //#3B5998
-                            $pdf->setLeftMargin(MARGIN);
-
-                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('participio1','vocabulario').'</h3>', 0, 1, 0);
-                            $pdf->setLeftMargin(MARGIN_L2);
-                            $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
-                            $pdf->setLeftMargin(MARGIN);
-                            $pdf->Ln();
-
-                            break;
-
-                        //3.6 Passiv
-                        case 31:
-                            $pdf->SetTextColor(TEXT_AUTO);
-                            $pdf->SetFont('','',10);
-                            $pdf->SetFillColor(59, 89, 152); //#3B5998
-                            $pdf->setLeftMargin(MARGIN);
-
-                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('zustandspassiv','vocabulario').'</h3>', 0, 1, 0);
-                            $pdf->setLeftMargin(MARGIN_L2);
-                            $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
-                            $pdf->setLeftMargin(MARGIN);
-                            $pdf->Ln();
-
-                            $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('vorganspassiv','vocabulario').'</h3>', 0, 1, 0);
-                            $pdf->setLeftMargin(MARGIN_L2);
-                            $pdf->MultiCell(0, 5, $descripcion_troceada[1], 0, 'J', 0);
-                            $pdf->setLeftMargin(MARGIN);
-                            $pdf->Ln();
-
-                            break;
-                        //2.5 Possessivpronomen
-                        case 15:
-
-                            $numtablas = (count($descripcion_troceada)-2)/25;
-
-                            for($i=0; $i<$numtablas; $i++){
-                                $salidor = false;
-                                $pintar = false;
-                                for ($j=0; $j<25 && $salidor==false;$j++) {
-                                    if($descripcion_troceada[(25*$i)+$j]) {
-                                        $salidor = true;
-                                        $pintar = true;
-                                     }
+                                for ($j=9; $j<(count($descripcion_troceada)-2) && $salidor==false;$j++) {
+                                        if($descripcion_troceada[$j]) {
+                                            $salidor = true;
+                                            $pintar = true;
+                                         }
                                 }
 
                                 if($pintar){
-
                                     $pdf->SetTextColor(TEXT_WHITE);
+    //                                $pdf->SetFont('','B',12);
+                                    $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
+                                    $pdf->setLineWidth(0.3);
 
-                                    $pdf->SetFillColor(59, 89, 152); //#3B5998
-                                    $pdf->setLeftMargin(MARGIN);
-
-                                    $pdf->SetFont('','B',12);
-                                    //cabecera grande
-                                    $pdf->Cell(190,6,get_string('possessiv1','vocabulario'),1,1,'C',1);
-                                    //separador
-                                    $pdf->Cell(190,3,'',0,1,'C',0);
-
-                                    //cabeceras chicas tabla 1.1
-
+                                    //cabeceras
                                     $pdf->SetFont('','B',10);
 
-                                    $pdf->Cell(20,5,'','LTB',0,'C',1);
-                                    $pdf->Cell(170,5,get_string('sing','vocabulario'),'TRB',1,'C',1);
-                                    $pdf->Cell(20,5,'','LT',0,'C',1);
-                                    $pdf->Cell(34,5,'1','TR',0,'C',1);
-                                    $pdf->Cell(34,5,'2','LTR',0,'C',1);
-                                    $pdf->Cell(102,5,'3','LTR',1,'C',1);
-
-                                    $pdf->Cell(20,5,'','LB',0,'C',1);
-                                    $pdf->Cell(34,5,'','BR',0,'C',1);
-                                    $pdf->Cell(34,5,'','LBR',0,'C',1);
-                                    $pdf->Cell(34,5,'m','LB',0,'C',1);
-                                    $pdf->Cell(34,5,'n','B',0,'C',1);
-                                    $pdf->Cell(34,5,'f','BR',1,'C',1);
-
-                                    //celdas tabla 1.1
-
-                                    $pdf->setTextColor(TEXT_AUTO);
-                                    $pdf->SetFont('','',10);
-                                    $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
-
-                                    $pdf->Cell(20,5,get_string('nominativo','vocabulario'),1,0,'C',1);
-                                    $pdf->Cell(34,5,$descripcion_troceada[(25*$i)+0],1,0,'C',0);
-                                    $pdf->Cell(34,5,$descripcion_troceada[(25*$i)+1],1,0,'C',0);
-                                    $pdf->Cell(34,5,$descripcion_troceada[(25*$i)+2],1,0,'C',0);
-                                    $pdf->Cell(34,5,$descripcion_troceada[(25*$i)+3],1,0,'C',0);
-                                    $pdf->Cell(34,5,$descripcion_troceada[(25*$i)+4],1,1,'C',0);
-
-                                    $pdf->Ln();
-
-                                    //cabeceras chicas tabla 1.2
-                                    $pdf->SetTextColor(TEXT_WHITE);
-                                    $pdf->SetFont('','B',10);
-                                    $pdf->SetFillColor(59, 89, 152); //#3B5998
-
-                                    $pdf->Cell(20,5,'','LTB',0,'C',1);
-                                    $pdf->Cell(126,5,get_string('plural','vocabulario'),'TRB',0,'C',1);
-                                    $pdf->Cell(44,5,'','LTR',1,'C',1);
-
-                                    $pdf->Cell(20,5,'','LT',0,'C',1);
-                                    $pdf->Cell(42,5,'1','TR',0,'C',1);
-                                    $pdf->Cell(42,5,'2','LTR',0,'C',1);
-                                    $pdf->Cell(42,5,'3','LTR',0,'C',1);
-                                    $pdf->Cell(44,5,get_string('sie','vocabulario'),'LR',1,'C',1);
-
-                                    //celdas tabla 1.2
-
-                                    $pdf->setTextColor(TEXT_AUTO);
-                                    $pdf->SetFont('','',10);
-                                    $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
-
-                                    $pdf->Cell(20,5,get_string('nominativo','vocabulario'),1,0,'C',1);
-                                    $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+5],1,0,'C',0);
-                                    $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+6],1,0,'C',0);
-                                    $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+7],1,0,'C',0);
-                                    $pdf->Cell(44,5,$descripcion_troceada[(25*$i)+8],1,1,'C',0);
-
-                                    $pdf->Ln();
-                                    $pdf->Ln();
-
-                                    //cabecera grande
-
-                                    $pdf->SetTextColor(TEXT_WHITE);
-                                    $pdf->SetFillColor(59, 89, 152); //#3B5998
-                                    $pdf->SetFont('','B',12);
-
-                                    $pdf->Cell(190,6,get_string('declinacion_siehe','vocabulario'),1,1,'C',1);
-
-                                    //cabeceras chicas tabla 2
-                                    $pdf->SetFont('','B',10);
+                                    $pdf->Cell(22, 5, '', 'TLB', 0, 'C', 1);
+                                    $pdf->Cell(168, 5, get_string('declinacion4', 'vocabulario'), 'TRB', 1, 'C', 1);
 
                                     $pdf->Cell(22,5,'','LTB',0,'C',1);
                                     $pdf->Cell(42,5,get_string('masculino','vocabulario'),'TRB',0,'C',1);
@@ -1059,284 +1190,157 @@ if($impr_gram == 1){
                                     $pdf->Cell(42,5,get_string('femenino','vocabulario'),1,0,'C',1);
                                     $pdf->Cell(42,5,get_string('plural','vocabulario'),1,1,'C',1);
 
-                                    //celdas tabla 2
+                                    //celdas
 
                                     $pdf->setTextColor(TEXT_AUTO);
                                     $pdf->SetFont('','',10);
                                     $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
 
                                     $pdf->Cell(22,5,get_string('nominativo','vocabulario'),1,0,'C',1);
-                                    $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+9],1,0,'C',0);
-                                    $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+10],1,0,'C',0);
-                                    $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+11],1,0,'C',0);
-                                    $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+12],1,1,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[9],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[10],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[11],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[12],1,1,'C',0);
                                     $pdf->Cell(22,5,get_string('acusativo','vocabulario'),1,0,'C',1);
-                                    $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+13],1,0,'C',0);
-                                    $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+14],1,0,'C',0);
-                                    $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+15],1,0,'C',0);
-                                    $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+16],1,1,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[13],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[14],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[15],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[16],1,1,'C',0);
                                     $pdf->Cell(22,5,get_string('dativo','vocabulario'),1,0,'C',1);
-                                    $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+17],1,0,'C',0);
-                                    $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+18],1,0,'C',0);
-                                    $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+19],1,0,'C',0);
-                                    $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+20],1,1,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[17],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[18],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[19],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[20],1,1,'C',0);
                                     $pdf->Cell(22,5,get_string('genitivo','vocabulario'),1,0,'C',1);
-                                    $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+21],1,0,'C',0);
-                                    $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+22],1,0,'C',0);
-                                    $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+23],1,0,'C',0);
-                                    $pdf->Cell(42,5,$descripcion_troceada[(25*$i)+24],1,1,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[21],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[22],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[23],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[24],1,1,'C',0);
 
                                     $pdf->Ln();
                                 }
-                            }
 
-                            break;
- 
-                        //4.3 Possessivartikel
-                        case 39:
+                                break;
 
-                            $pdf->SetTextColor(TEXT_WHITE);
-                            $pdf->SetFillColor(59, 89, 152); //#3B5998
-                            $pdf->setLeftMargin(MARGIN);
-                            $pdf->SetFont('','B',12);
+                            //4.1 Definitartikel
+                            case 37:
+                            //4.2 Indefinitartikel
+                            case 38:
+                            //4.4 Negationsartikel
+                            case 40:
+                            //4.5 Interrogativartikel
+                            case 41:
+                            //4.6 Demonstrativartikel
+                            case 42:
+                            //2.3 Demonstrativpronomen
+                            case 9:
+                            //2.6 Relativpronomen
+                            case 16:
+                            //2.4.1 Als Artikelwörter gebrauche Indefinitpronomina
+                            case 11:
+                            //1.3 Deklination
+                            case 5:
 
-                            //cabecera grande
-                            $pdf->Cell(190,6,get_string('possessiv2','vocabulario'),1,1,'C',1);
-                            //separador
-                            $pdf->Cell(190,3,'',0,1,'C',0);
+                                //para decidir el titulo
+                                $tabopcional = false;
+                                //para restringir según la categoria
+                                $tope = 1;
+                                $ultimo = -1;
+                                switch ($grid) {
+                                    case 40:
+                                        $titulo=get_string('endungen_siehe1','vocabulario');
+                                        $tabopcional = true;
+                                        break;
+                                    case 42:
+                                        $titulo=get_string('endungen_siehe3','vocabulario');
+                                        $tabopcional = true;
+                                        break;
+                                }
 
-                            //cabeceras chicas tabla 1.1
-                            $pdf->SetFont('','B',10);
 
-                            $pdf->Cell(20,5,'','LTB',0,'C',1);
-                            $pdf->Cell(170,5,get_string('sing','vocabulario'),'TRB',1,'C',1);
-                            $pdf->Cell(20,5,'','LT',0,'C',1);
-                            $pdf->Cell(34,5,'1','TR',0,'C',1);
-                            $pdf->Cell(34,5,'2','LTR',0,'C',1);
-                            $pdf->Cell(102,5,'3','LTR',1,'C',1);
 
-                            $pdf->Cell(20,5,'','LB',0,'C',1);
-                            $pdf->Cell(34,5,'','BR',0,'C',1);
-                            $pdf->Cell(34,5,'','LBR',0,'C',1);
-                            $pdf->Cell(34,5,'m','LB',0,'C',1);
-                            $pdf->Cell(34,5,'n','B',0,'C',1);
-                            $pdf->Cell(34,5,'f','BR',1,'C',1);
 
-                            //celdas tabla 1.1
 
-                            $pdf->setTextColor(TEXT_AUTO);
-                            $pdf->SetFont('','',10);
-                            $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
 
-                            $pdf->Cell(20,5,get_string('nominativo','vocabulario'),1,0,'C',1);
-                            $pdf->Cell(34,5,$descripcion_troceada[0],1,0,'C',0);
-                            $pdf->Cell(34,5,$descripcion_troceada[1],1,0,'C',0);
-                            $pdf->Cell(34,5,$descripcion_troceada[2],1,0,'C',0);
-                            $pdf->Cell(34,5,$descripcion_troceada[3],1,0,'C',0);
-                            $pdf->Cell(34,5,$descripcion_troceada[4],1,1,'C',0);
 
-                            $pdf->Ln();
+                                    $pdf->SetTextColor(TEXT_WHITE);
+    //                                $pdf->SetFont('','B',12);
+                                    $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
+                                    $pdf->setLineWidth(0.3);
 
-                            //cabeceras chicas tabla 1.2
-                            $pdf->SetTextColor(TEXT_WHITE);
-                            $pdf->SetFont('','B',10);
-                            $pdf->SetFillColor(59, 89, 152); //#3B5998
+                                    //cabecera grande
+    //                                $pdf->Cell(190, 6, get_string('endungen_siehe4', 'vocabulario'), 1, 1, 'C', 1);
 
-                            $pdf->Cell(20,5,'','LTB',0,'C',1);
-                            $pdf->Cell(126,5,get_string('plural','vocabulario'),'TRB',0,'C',1);
-                            $pdf->Cell(44,5,'','LTR',1,'C',1);
+                                    $pdf->Ln();
 
-                            $pdf->Cell(20,5,'','LT',0,'C',1);
-                            $pdf->Cell(42,5,'1','TR',0,'C',1);
-                            $pdf->Cell(42,5,'2','LTR',0,'C',1);
-                            $pdf->Cell(42,5,'3','LTR',0,'C',1);
-                            $pdf->Cell(44,5,get_string('sie','vocabulario'),'LR',1,'C',1);
+                                    //cabeceras
+                                    $pdf->SetFont('','B',10);
 
-                            //celdas tabla 1.2
+                                    $pdf->Cell(22, 5, '', 'TLB', 0, 'C', 1);
+                                    $pdf->Cell(168, 5, get_string('declinacion4', 'vocabulario'), 'TRB', 1, 'C', 1);
 
-                            $pdf->setTextColor(TEXT_AUTO);
-                            $pdf->SetFont('','',10);
-                            $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+                                    $pdf->Cell(22,5,'','LTB',0,'C',1);
+                                    $pdf->Cell(42,5,get_string('masculino','vocabulario'),'TRB',0,'C',1);
+                                    $pdf->Cell(42,5,get_string('neutro','vocabulario'),1,0,'C',1);
+                                    $pdf->Cell(42,5,get_string('femenino','vocabulario'),1,0,'C',1);
+                                    $pdf->Cell(42,5,get_string('plural','vocabulario'),1,1,'C',1);
 
-                            $pdf->Cell(20,5,get_string('nominativo','vocabulario'),1,0,'C',1);
-                            $pdf->Cell(42,5,$descripcion_troceada[5],1,0,'C',0);
-                            $pdf->Cell(42,5,$descripcion_troceada[6],1,0,'C',0);
-                            $pdf->Cell(42,5,$descripcion_troceada[7],1,0,'C',0);
-                            $pdf->Cell(44,5,$descripcion_troceada[8],1,1,'C',0);
+                                    //celdas
 
-                            $pdf->Ln();
-                            $pdf->Ln();
+                                    $pdf->setTextColor(TEXT_AUTO);
+                                    $pdf->SetFont('','',10);
+                                    $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
 
-                                $pdf->SetTextColor(TEXT_WHITE);
-                                $pdf->SetFont('','B',12);
-                                $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
-                                $pdf->setLineWidth(0.3);
+                                    $pdf->Cell(22,5,get_string('nominativo','vocabulario'),1,0,'C',1);
+                                    $pdf->Cell(42,5,$descripcion_troceada[0],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[1],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[2],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[3],1,1,'C',0);
+                                    $pdf->Cell(22,5,get_string('acusativo','vocabulario'),1,0,'C',1);
+                                    $pdf->Cell(42,5,$descripcion_troceada[4],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[5],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[6],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[7],1,1,'C',0);
+                                    $pdf->Cell(22,5,get_string('dativo','vocabulario'),1,0,'C',1);
+                                    $pdf->Cell(42,5,$descripcion_troceada[8],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[9],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[10],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[11],1,1,'C',0);
+                                    $pdf->Cell(22,5,get_string('genitivo','vocabulario'),1,0,'C',1);
+                                    $pdf->Cell(42,5,$descripcion_troceada[12],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[13],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[14],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[15],1,1,'C',0);
 
-                                //cabecera grande
-                                $pdf->Cell(190, 6, get_string('endungen_siehe4', 'vocabulario'), 1, 1, 'C', 1);
+                                    $pdf->Ln();
 
-                                $pdf->Ln();
 
-                            $pintar=false;
-                            $salidor=false;
+                        }
 
-                            for ($j=9; $j<(count($descripcion_troceada)-2) && $salidor==false;$j++) {
-                                    if($descripcion_troceada[$j]) {
-                                        $salidor = true;
-                                        $pintar = true;
-                                     }
-                            }
 
-                            if($pintar){
-                                $pdf->SetTextColor(TEXT_WHITE);
-//                                $pdf->SetFont('','B',12);
-                                $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
-                                $pdf->setLineWidth(0.3);
+                        $pdf->Ln();
+                        $pdf->setLeftMargin(MARGIN_L2);
 
-                                //cabecera grande
-//                                $pdf->Cell(190, 6, get_string('endungen_siehe4', 'vocabulario'), 1, 1, 'C', 1);
-//
-//                                $pdf->Ln();
+                        $pdf->SetFillColor(59, 89, 152); //#3B5998
+                        $pdf->SetTextColor(TEXT_WHITE);
+                        $pdf->SetLineWidth(0.3);
+                        $pdf->SetFont('', 'B', '10');
+                        $pdf->Cell(47, 5, get_string('atencion_may', 'vocabulario'), 1, 1, 'C', 1);
+                        $pdf->SetTextColor(TEXT_AUTO);
+                        $pdf->SetFont('', '', '10');
+                        $pdf->MultiCell(170, 5, $descripcion_troceada[count($descripcion_troceada)-2], 1, 'L', 0);
+                        $pdf->Ln();
+                        $pdf->SetTextColor(TEXT_WHITE);
+                        $pdf->SetFont('', 'B', '10');
+                        $pdf->Cell(47, 5, get_string('miraren', 'vocabulario'), 1, 1, 'C', 1);
+                        $pdf->SetTextColor(TEXT_AUTO);
+                        $pdf->SetFont('', '', '10');
+                        $pdf->MultiCell(170, 5, $descripcion_troceada[count($descripcion_troceada)-1], 1, 'L',0);
 
-                                //cabeceras
-                                $pdf->SetFont('','B',10);
+                        $pdf->setLeftMargin(MARGIN);
 
-                                $pdf->Cell(22, 5, '', 'TLB', 0, 'C', 1);
-                                $pdf->Cell(168, 5, get_string('declinacion4', 'vocabulario'), 'TRB', 1, 'C', 1);
-
-                                $pdf->Cell(22,5,'','LTB',0,'C',1);
-                                $pdf->Cell(42,5,get_string('masculino','vocabulario'),'TRB',0,'C',1);
-                                $pdf->Cell(42,5,get_string('neutro','vocabulario'),1,0,'C',1);
-                                $pdf->Cell(42,5,get_string('femenino','vocabulario'),1,0,'C',1);
-                                $pdf->Cell(42,5,get_string('plural','vocabulario'),1,1,'C',1);
-
-                                //celdas
-
-                                $pdf->setTextColor(TEXT_AUTO);
-                                $pdf->SetFont('','',10);
-                                $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
-
-                                $pdf->Cell(22,5,get_string('nominativo','vocabulario'),1,0,'C',1);
-                                $pdf->Cell(42,5,$descripcion_troceada[9],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[10],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[11],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[12],1,1,'C',0);
-                                $pdf->Cell(22,5,get_string('acusativo','vocabulario'),1,0,'C',1);
-                                $pdf->Cell(42,5,$descripcion_troceada[13],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[14],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[15],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[16],1,1,'C',0);
-                                $pdf->Cell(22,5,get_string('dativo','vocabulario'),1,0,'C',1);
-                                $pdf->Cell(42,5,$descripcion_troceada[17],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[18],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[19],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[20],1,1,'C',0);
-                                $pdf->Cell(22,5,get_string('genitivo','vocabulario'),1,0,'C',1);
-                                $pdf->Cell(42,5,$descripcion_troceada[21],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[22],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[23],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[24],1,1,'C',0);
-
-                                $pdf->Ln();
-                            }
-
-                            break;
-
-                        //4.1 Definitartikel
-                        case 37:
-                        //4.2 Indefinitartikel
-                        case 38:
-                        //4.4 Negationsartikel
-                        case 40:
-                        //4.5 Interrogativartikel
-                        case 41:
-                        //4.6 Demonstrativartikel
-                        case 42:
-                        //2.3 Demonstrativpronomen
-                        case 9:
-                        //2.6 Relativpronomen
-                        case 16:
-                        //2.4.1 Als Artikelwörter gebrauche Indefinitpronomina
-                        case 11:
-                        //1.3 Deklination
-                        case 5:
-                            $pdf->SetTextColor(TEXT_WHITE);
-                                $pdf->SetFont('','B',12);
-                                $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
-                                $pdf->setLineWidth(0.3);
-
-                                //cabecera grande
-                                $pdf->Cell(190, 6, get_string('endungen_siehe4', 'vocabulario'), 1, 1, 'C', 1);
-
-                                $pdf->Ln();
-
-                                //cabeceras
-                                $pdf->SetFont('','B',10);
-
-                                $pdf->Cell(22, 5, '', 'TLB', 0, 'C', 1);
-                                $pdf->Cell(168, 5, get_string('declinacion4', 'vocabulario'), 'TRB', 1, 'C', 1);
-
-                                $pdf->Cell(22,5,'','LTB',0,'C',1);
-                                $pdf->Cell(42,5,get_string('masculino','vocabulario'),'TRB',0,'C',1);
-                                $pdf->Cell(42,5,get_string('neutro','vocabulario'),1,0,'C',1);
-                                $pdf->Cell(42,5,get_string('femenino','vocabulario'),1,0,'C',1);
-                                $pdf->Cell(42,5,get_string('plural','vocabulario'),1,1,'C',1);
-
-                                //celdas
-
-                                $pdf->setTextColor(TEXT_AUTO);
-                                $pdf->SetFont('','',10);
-                                $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
-
-                                $pdf->Cell(22,5,get_string('nominativo','vocabulario'),1,0,'C',1);
-                                $pdf->Cell(42,5,$descripcion_troceada[9],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[10],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[11],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[12],1,1,'C',0);
-                                $pdf->Cell(22,5,get_string('acusativo','vocabulario'),1,0,'C',1);
-                                $pdf->Cell(42,5,$descripcion_troceada[13],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[14],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[15],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[16],1,1,'C',0);
-                                $pdf->Cell(22,5,get_string('dativo','vocabulario'),1,0,'C',1);
-                                $pdf->Cell(42,5,$descripcion_troceada[17],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[18],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[19],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[20],1,1,'C',0);
-                                $pdf->Cell(22,5,get_string('genitivo','vocabulario'),1,0,'C',1);
-                                $pdf->Cell(42,5,$descripcion_troceada[21],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[22],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[23],1,0,'C',0);
-                                $pdf->Cell(42,5,$descripcion_troceada[24],1,1,'C',0);
-
-                                $pdf->Ln();
-
-                        
+                        $pdf->Ln();
                     }
-
-
-                    $pdf->Ln();
-                    $pdf->setLeftMargin(MARGIN_L2);
-
-                    $pdf->SetFillColor(59, 89, 152); //#3B5998
-                    $pdf->SetTextColor(TEXT_WHITE);
-                    $pdf->SetLineWidth(0.3);
-                    $pdf->SetFont('', 'B', '10');
-                    $pdf->Cell(47, 5, get_string('atencion_may', 'vocabulario'), 1, 1, 'C', 1);
-                    $pdf->SetTextColor(TEXT_AUTO);
-                    $pdf->SetFont('', '', '10');
-                    $pdf->MultiCell(170, 5, $descripcion_troceada[count($descripcion_troceada)-2], 1, 'L', 0);
-                    $pdf->Ln();
-                    $pdf->SetTextColor(TEXT_WHITE);
-                    $pdf->SetFont('', 'B', '10');
-                    $pdf->Cell(47, 5, get_string('miraren', 'vocabulario'), 1, 1, 'C', 1);
-                    $pdf->SetTextColor(TEXT_AUTO);
-                    $pdf->SetFont('', '', '10');
-                    $pdf->MultiCell(170, 5, $descripcion_troceada[count($descripcion_troceada)-1], 1, 'L',0);
-
-                    $pdf->setLeftMargin(MARGIN);
-
-                    $pdf->Ln();
                 }
             }
         }
