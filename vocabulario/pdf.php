@@ -206,7 +206,6 @@ if($impr_gram == 1){
         $palabras = $mgr->relacionadas($USER->id, $cosa[1]);
         if ($palabras) {
             //imprimo el nombre de la gramatica
-            $pdf->AddPage();
             $mi_gram = $cosa[0];
             //$pdf->SetFont('', 'B', '12');
             
@@ -226,7 +225,7 @@ if($impr_gram == 1){
                     }
 
                     if($pintartochaco){
-
+                        $pdf->AddPage();
                         $pdf->writeHTMLCell(0, 0, 0, 0, '<h2>'.$mi_gram.'</h2>', 0, 1, 0);
 
                         $grid=$palabra->gramaticaid;
