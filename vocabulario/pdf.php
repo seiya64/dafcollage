@@ -343,27 +343,39 @@ if($impr_gram == 1){
                                 $pdf->setLeftMargin(MARGIN);
                                 $pdf->Ln();
                                 break;
+                            //7.1 Beispiele und Funktionen
+                            case 54:
                             //3.1.3 Perfekt/Partizip II
                             case 23:
+
+                                if($grid == 23){
+                                    $titulo0 = get_string('irregulares','vocabulario');
+                                    $titulo1 = get_string('participio2','vocabulario');
+                                    $titulo2 = get_string('hilfsverbs','vocabulario');
+                                }elseif($grid == 54){
+                                    $titulo0 = get_string('beispielsatz','vocabulario');
+                                    $titulo1 = get_string('satzart','vocabulario');
+                                    $titulo2 = get_string('komfun','vocabulario');
+                                }
 
                                 $pdf->SetTextColor(TEXT_AUTO);
                                 $pdf->SetFont('','',10);
                                 $pdf->SetFillColor(59, 89, 152); //#3B5998
                                 $pdf->setLeftMargin(MARGIN);
 
-                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('irregulares','vocabulario').'</h3>', 0, 1, 0);
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.$titulo0.'</h3>', 0, 1, 0);
                                 $pdf->setLeftMargin(MARGIN_L2);
                                 $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
                                 $pdf->setLeftMargin(MARGIN);
                                 $pdf->Ln();
 
-                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('participio2','vocabulario').'</h3>', 0, 1, 0);
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.$titulo1.'</h3>', 0, 1, 0);
                                 $pdf->setLeftMargin(MARGIN_L2);
                                 $pdf->MultiCell(0, 5, $descripcion_troceada[1], 0, 'J', 0);
                                 $pdf->setLeftMargin(MARGIN);
                                 $pdf->Ln();
 
-                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('hilfsverbs','vocabulario').'</h3>', 0, 1, 0);
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.$titulo2.'</h3>', 0, 1, 0);
                                 $pdf->setLeftMargin(MARGIN_L2);
                                 $pdf->MultiCell(0, 5, $descripcion_troceada[2], 0, 'J', 0);
                                 $pdf->setLeftMargin(MARGIN);
