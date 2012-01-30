@@ -1876,7 +1876,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('textarea', 'satzart', get_string("satzart", "vocabulario"), 'rows="5" cols="30"');
                 $mform->setDefault('satzart', $descripcion_troceada[1]);
                 $mform->addElement('textarea', 'komfun', get_string("komfun", "vocabulario"), 'rows="5" cols="30"');
-                $mform->setDefault('komfun', $descripcion_troceada[1]);
+                $mform->setDefault('komfun', $descripcion_troceada[2]);
                 break;
             //2.2 Interrogativpronomen
             case 8:
