@@ -382,20 +382,32 @@ if($impr_gram == 1){
                                 $pdf->Ln();
 
                                 break;
+                            //8.3.1 Ergänzungen
+                            case 59:
                             //3.6 Passiv
                             case 31:
+                                
+                                if($grid == 31){
+                                    $titulo0 = get_string('zustandspassiv','vocabulario');
+                                    $titulo1 = get_string('vorganspassiv','vocabulario');
+                                }elseif($grid == 59){
+                                    $titulo0 = get_string('definido','vocabulario');
+                                    $titulo1 = get_string('indefinido','vocabulario');
+                                }
+
+
                                 $pdf->SetTextColor(TEXT_AUTO);
                                 $pdf->SetFont('','',10);
                                 $pdf->SetFillColor(59, 89, 152); //#3B5998
                                 $pdf->setLeftMargin(MARGIN);
 
-                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('zustandspassiv','vocabulario').'</h3>', 0, 1, 0);
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.$titulo0.'</h3>', 0, 1, 0);
                                 $pdf->setLeftMargin(MARGIN_L2);
                                 $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
                                 $pdf->setLeftMargin(MARGIN);
                                 $pdf->Ln();
 
-                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('vorganspassiv','vocabulario').'</h3>', 0, 1, 0);
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.$titulo1.'</h3>', 0, 1, 0);
                                 $pdf->setLeftMargin(MARGIN_L2);
                                 $pdf->MultiCell(0, 5, $descripcion_troceada[1], 0, 'J', 0);
                                 $pdf->setLeftMargin(MARGIN);
