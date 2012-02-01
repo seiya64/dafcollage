@@ -414,7 +414,42 @@ if($impr_gram == 1){
                                 $pdf->Ln();
 
                                 break;
-                            
+                            //8.3.2 Angaben
+                            case 60:
+                                $titulo0 = get_string('temporal','vocabulario');
+                                $titulo1 = get_string('causal','vocabulario');
+                                $titulo2 = get_string('modal','vocabulario');
+                                $titulo3 = get_string('local','vocabulario');
+                                
+                                $pdf->SetTextColor(TEXT_AUTO);
+                                $pdf->SetFont('','',10);
+                                $pdf->SetFillColor(59, 89, 152); //#3B5998
+                                $pdf->setLeftMargin(MARGIN);
+
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.$titulo0.'</h3>', 0, 1, 0);
+                                $pdf->setLeftMargin(MARGIN_L2);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->Ln();
+
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.$titulo1.'</h3>', 0, 1, 0);
+                                $pdf->setLeftMargin(MARGIN_L2);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[1], 0, 'J', 0);
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->Ln();
+
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.$titulo2.'</h3>', 0, 1, 0);
+                                $pdf->setLeftMargin(MARGIN_L2);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[2], 0, 'J', 0);
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->Ln();
+
+                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.$titulo3.'</h3>', 0, 1, 0);
+                                $pdf->setLeftMargin(MARGIN_L2);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[3], 0, 'J', 0);
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->Ln();
+                                break;
                             //5.2.1
                             case 47:
                                 //Tabla 1
