@@ -2006,6 +2006,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
+                
                 $totalfilas = ((count($descripcion_troceada)-2)/4);
                 if($grid ==  57){
                     $totalfilas = ((count($descripcion_troceada)-2)/5);
@@ -2027,6 +2028,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $mform->addElement('html', $titulillos);
                 }
                 $mform->addElement('html', '</table>');
+                $mform->addElement('html', '<p>');
                 break;
             //2.4.2.1 Pronomina, die nur Personen bezeichnen
             case 13:
@@ -2431,6 +2433,66 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 break;
             //6.1
             case 51:
+                $totalfilas = ((count($descripcion_troceada)-2)/4);
+
+                $kasus = array(get_string('acusativo','vocabulario'),get_string('dativo','vocabulario'),get_string('acudat','vocabulario'),get_string('genitivo','vocabulario'));
+
+                $mform->addElement('html', '<p>');
+                $mform->addElement('html','<table class="flexible generaltable generalbox boxaligncenter">');
+
+                //titulillos de la tabla
+                $titulillos = '<tr class="head">';
+                $titulillos .='<th>'.get_string('praposit','vocabulario').'</th>';
+                $titulillos .='<th>'.get_string('func','vocabulario').'</th>';
+                $titulillos .='<th>'.get_string('kas','vocabulario').'</th>';
+                $titulillos .='<th>'.get_string('beisp','vocabulario').'</th>';
+                $titulillos .= '</tr>';
+                $mform->addElement('html',$titulillos);
+
+                if($totalfilas<0){
+                    $totalfilas=0;
+                }
+
+                for($fila=0; $fila<$totalfilas+1; ++$fila){
+
+                    //Esto que se hace a continuación es para meter datos en los campos de texto
+                    //sólo en caso de que no sea la ultima fila, que deberá ser siempre en blanco
+                    //si no se hace esto, en los dos primero campos pondrá el contenido de las hojas
+                    //en blanco que se muestran al final
+
+                    $valores = array($descripcion_troceada[((4*$fila)+0)], $descripcion_troceada[((4*$fila)+1)], $descripcion_troceada[((4*$fila)+2)], $descripcion_troceada[((4*$fila)+3)]);
+                    if($fila == $totalfilas) $valores = null;
+
+                    
+
+                    $titulillos = '<tr class="cell">';
+                    $titulillos .= '<td><input size=8 type="text" id="id_PRA'.$fila.'" name="PRA'.$fila.'" value="' . $valores[0] . '"></td>';
+                    $titulillos .= '<td><input size=20 type="text" id="id_FUN'.$fila.'" name="FUN'.$fila.'" value="' . $valores[1] . '"></td>';
+                    //ponemos un select para los kasus
+                    $titulillos .= '<td>';
+                    $mform->addElement('html', $titulillos);
+
+                    $mform->addElement('select','KAS'.$fila,'',$kasus);
+                    $mform->setDefault('KAS'.$fila,$valores[2]);
+
+                    $titulillos = '</td>';
+                    //endselect
+                    $titulillos .= '<td><input size=50 type="text" id="id_BEI'.$fila.'" name="BEI'.$fila.'" value="' . $valores[3] . '"></td>';
+                    $titulillos .= '</tr>';
+                    $mform->addElement('html', $titulillos);
+
+                }
+                
+                $mform->addElement('html', '</table>');
+                $mform->addElement('html', '<p>');
+
+                break;
+
+
+
+
+                /*
+
                 $kasus = array(get_string('acusativo','vocabulario'),get_string('dativo','vocabulario'),get_string('acudat','vocabulario'),get_string('genitivo','vocabulario'));
 
                 $mform->addElement('html', '<p>');
@@ -2492,7 +2554,15 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $ops = '<a href=\'javascript:desocultar("filaT'.($ultima+1).'")\' id="mf">'.get_string("masfilas", "vocabulario").'</a>';
                     $mform->addElement('static', 'mas_filas', '', $ops);
                 }
-                break;
+                break;*/
+
+
+
+
+
+
+
+
             //6.2
             case 52:
 
@@ -2517,8 +2587,6 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                 //se ordena el array
                 sort($arrayAux1);
-//aqui se buscan alfabeticamente
-//                if($grid == 51){                //discriminamos por letras
                     // Se pinta el selector de letras
                     $abecedario = '<h1 style="text-align:center;">';
                     $l = 'a';
@@ -2531,19 +2599,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $mform -> addElement('html',$abecedario);
 
 
-                    //si es necesario discriminamos por la letra seleccionada
-
-                    
-//                    elseif($letra == null){
-//                        foreach($arrayAux1 as $cosa){
-//                            if($cosa[0]!='&'){
-//                                $arrayAux[] = $cosa;
-//                            }
-//                        }
-//                    }
-
-//aqui se buscan por casos
-//                }elseif($grid == 52){           //discriminamos por casos
+                    //aqui se buscan por casos
                     $kasos = '<h1 style="text-align:center;">';
                     for ($i = 0; $i < 4; $i++) {
                         $kasos .= '<a href="./view.php?id=' . $id_tocho . '&opcion=5&grid='.$grid.'&caso='.$i.'">[' . $kasus[$i] . ']</a>';
