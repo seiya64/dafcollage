@@ -1379,6 +1379,62 @@ if($impr_gram == 1){
                                     
                                 break;
 
+                            //2.2 Interrogativpronomen
+                            case 8:
+
+                                $numtablas = (count($descripcion_troceada)-2)/8;
+                                $todovacio = true;
+
+                                for($i=0; $i<$numtablas; $i++){
+                                    $pintar = false;
+
+                                    if($i==$numtablas-1 && $todovacio){
+                                        $pintar = true;
+                                    }
+
+                                    for ($j=0; $j<8 && $pintar==false;$j++) {
+                                        if($descripcion_troceada[(8*$i)+$j]) {
+                                            $todovacio=false;
+                                            $pintar = true;
+                                         }
+                                    }
+
+                                    if($pintar){
+
+                                        $pdf->SetTextColor(TEXT_WHITE);
+                                        $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
+                                        $pdf->setLineWidth(0.3);
+                                        //cabeceras
+                                        $pdf->SetFont('','B',10);
+
+                                        $pdf->Cell(24,5,'','LTB',0,'C',1);
+                                        $pdf->Cell(83,5,get_string('person','vocabulario'),'TRB',0,'C',1);
+                                        $pdf->Cell(83,5,get_string('nichtperson','vocabulario'),1,1,'C',1);
+
+                                        //celdas
+
+                                        $pdf->setTextColor(TEXT_AUTO);
+                                        $pdf->SetFont('','',10);
+                                        $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+
+                                        $pdf->Cell(24,5,get_string('nominativo','vocabulario'),1,0,'C',1);
+                                        $pdf->Cell(83,5,$descripcion_troceada[(8*$i)+0],1,0,'C',0);
+                                        $pdf->Cell(83,5,$descripcion_troceada[(8*$i)+1],1,1,'C',0);
+                                        $pdf->Cell(24,5,get_string('acusativo','vocabulario'),1,0,'C',1);
+                                        $pdf->Cell(83,5,$descripcion_troceada[(8*$i)+2],1,0,'C',0);
+                                        $pdf->Cell(83,5,$descripcion_troceada[(8*$i)+3],1,1,'C',0);
+                                        $pdf->Cell(24,5,get_string('dativo','vocabulario'),1,0,'C',1);
+                                        $pdf->Cell(83,5,$descripcion_troceada[(8*$i)+4],1,0,'C',0);
+                                        $pdf->Cell(83,5,$descripcion_troceada[(8*$i)+5],1,1,'C',0);
+                                        $pdf->Cell(24,5,get_string('genitivo','vocabulario'),1,0,'C',1);
+                                        $pdf->Cell(83,5,$descripcion_troceada[(8*$i)+6],1,0,'C',0);
+                                        $pdf->Cell(83,5,$descripcion_troceada[(8*$i)+7],1,1,'C',0);
+
+                                        $pdf->Ln();
+                                    }
+                                }
+                break;
+
                         }
 
 
