@@ -315,6 +315,12 @@ if($impr_gram == 1){
                                 $pdf->setLeftMargin(MARGIN);
                                 $pdf->Ln();
                                 break;
+                            //8.4.1 Konjunktoren
+                            case 63:
+                            //8.4.2 Subjunktoren
+                            case 64:
+                            //8.4.3 Konjunktionaladverbien
+                            case 65:
                             //3.1.4 Partizip I
                             case 24:
                             //3.3 Trennbare Verben
@@ -335,6 +341,8 @@ if($impr_gram == 1){
                                     $titulo=get_string('trennbaren','vocabulario');
                                 }elseif($grid==24){
                                     $titulo=get_string('participio1','vocabulario');
+                                }elseif($grid==63 && $grid==64 && $grid==65){
+                                    $titulo=get_string('func','vocabulario');
                                 }
 
                                 $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.$titulo.'</h3>', 0, 1, 0);
