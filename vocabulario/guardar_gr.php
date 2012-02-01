@@ -437,6 +437,25 @@ switch ($padre) {
         break;
     // 6.1
     case 51:
+        $salir = false;
+        $desc = '';
+
+        for($f=0; $salir==false; $f++){
+            if(optional_param('PRA'.$f, null, PARAM_TEXT) ||
+               optional_param('FUN'.$f, null, PARAM_TEXT) ||
+               optional_param('KAS'.$f, null, PARAM_TEXT) ||
+               optional_param('BEI'.$f, null, PARAM_TEXT)
+               ){
+
+            $desc .= optional_param('PRA'.$f, null, PARAM_TEXT) . '&' . optional_param('FUN'.$f, null, PARAM_TEXT) . '&';
+            $desc .= optional_param('KAS'.$f, null, PARAM_TEXT) . '&' . optional_param('BEI'.$f, null, PARAM_TEXT) . '&';
+               }else{
+                   $salir=true;
+               }
+        }
+        break;
+
+        /*
         $tope = 30;
         $desc = '';
         for($f=0; $f<$tope; $f++){
@@ -444,6 +463,8 @@ switch ($padre) {
             $desc .= optional_param('KAS'.$f, null, PARAM_TEXT) . '&' . optional_param('BEI'.$f, null, PARAM_TEXT) . '&';
         }
         break;
+
+         */
 
 
 }
