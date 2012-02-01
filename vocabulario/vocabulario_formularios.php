@@ -2873,7 +2873,7 @@ class mod_vocabulario_nuevo_ic_form extends moodleform {
                 $titulillos .= '<td><input type="text" id="id_siehe'.$i.'" name="siehe'.$i.'" value="' . $descripcion_troceada[$i+3] . '"></td>';
                 $titulillos .= '</tr>';
                 
-//                $titulillos .= '<tr class="cell">';
+//                $titulillos .= '<tr class="cell">'; 
 //                $titulillos .= '<td>BEISPIEL</td>';
 //                $titulillos .= '<td colspan=2><input type="text" id="id_beisp'.$i.'" name="beisp'.$i.'" value="' . $descripcion_troceada[$i+2] . '"></td>';
 //                $titulillos .= '</tr>';
