@@ -1523,7 +1523,7 @@ if($impr_gram == 1){
                                     if($pintar){
 
                                         $pdf->Cell(38,5,$descripcion_troceada[($f*5)],1,0,'C',0);
-                                        $pdf->Cell(38,5,$descripcion_troceada[($f*5)+4],1,0,'C',1);
+                                        $pdf->Cell(38,5,$descripcion_troceada[($f*5)+4],1,0,'C',0);
                                         $pdf->Cell(38,5,$descripcion_troceada[($f*5)+1],1,0,'C',1);
                                         $pdf->Cell(38,5,$descripcion_troceada[($f*5)+2],1,0,'C',0);
                                         $pdf->Cell(38,5,$descripcion_troceada[($f*5)+3],1,1,'C',1);
