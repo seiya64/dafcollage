@@ -1485,7 +1485,51 @@ if($impr_gram == 1){
                                 break;
                             //8.2 Nebensatz
                             case 57:
-                                
+                                $pdf->SetTextColor(TEXT_WHITE);
+                                $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
+                                $pdf->setLineWidth(0.3);
+                                //cabeceras
+                                $pdf->SetFont('','B',10);
+
+                                $pdf->Cell(38,5,get_string('subjunktor','vocabulario'),1,0,'C',1);
+                                $pdf->Cell(38,5,get_string('subjekt','vocabulario'),1,0,'C',1);
+                                $pdf->Cell(38,5,get_string('konjugier','vocabulario'),1,0,'C',1);
+                                $pdf->Cell(38,5,get_string('mittelfeld','vocabulario'),1,0,'C',1);
+                                $pdf->Cell(38,5,get_string('verb2','vocabulario'),1,1,'C',1);
+
+                                $pdf->SetTextColor(TEXT_AUTO);
+                                $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+                                $pdf->SetFont('','',10);
+
+                                //se calcula el nº de filas totales
+                                $totalfilas = ((count($descripcion_troceada)-2)/5);
+
+                                $todovacio = true;
+
+                                for($f = 0; $f < $totalfilas; $f++){
+                                    $pintar = false;
+
+                                    if($f==$totalfilas-1 && $todovacio){
+                                        $pintar = true;
+                                    }
+
+                                    for ($j=0; $j<5 && $pintar==false;$j++) {
+                                        if($descripcion_troceada[(5*$f)+$j]) {
+                                            $todovacio=false;
+                                            $pintar = true;
+                                         }
+                                    }
+
+                                    if($pintar){
+
+                                        $pdf->Cell(38,5,$descripcion_troceada[($f*5)],1,0,'C',0);
+                                        $pdf->Cell(38,5,$descripcion_troceada[($f*5)+4],1,0,'C',1);
+                                        $pdf->Cell(38,5,$descripcion_troceada[($f*5)+1],1,0,'C',1);
+                                        $pdf->Cell(38,5,$descripcion_troceada[($f*5)+2],1,0,'C',0);
+                                        $pdf->Cell(38,5,$descripcion_troceada[($f*5)+3],1,1,'C',1);
+                                    }
+
+                                }
                             break;
 
                         }
