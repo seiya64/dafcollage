@@ -1435,6 +1435,93 @@ if($impr_gram == 1){
                                 }
                                 break;
 
+                            //8.1 Hauptsatz
+                            case 56:
+
+                                $pdf->SetTextColor(TEXT_WHITE);
+                                $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
+                                $pdf->setLineWidth(0.3);
+                                //cabeceras
+                                $pdf->SetFont('','B',10);
+
+                                $pdf->Cell(47,5,get_string('vorfeld','vocabulario'),1,0,'C',1);
+                                $pdf->Cell(48,5,get_string('konjugier','vocabulario'),1,0,'C',1);
+                                $pdf->Cell(48,5,get_string('mittelfeld','vocabulario'),1,0,'C',1);
+                                $pdf->Cell(47,5,get_string('verb2','vocabulario'),1,1,'C',1);
+
+                                $pdf->SetTextColor(TEXT_AUTO);
+                                $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+                                $pdf->SetFont('','',10);
+
+                                //se calcula el nº de filas totales
+                                $totalfilas = ((count($descripcion_troceada)-2)/4);
+
+                                $todovacio = true;
+                                
+                                for($f = 0; $f < $totalfilas; $f++){
+                                    $pintar = false;
+
+                                    if($f==$totalfilas-1 && $todovacio){
+                                        $pintar = true;
+                                    }
+
+                                    for ($j=0; $j<4 && $pintar==false;$j++) {
+                                        if($descripcion_troceada[(4*$f)+$j]) {
+                                            $todovacio=false;
+                                            $pintar = true;
+                                         }
+                                    }
+
+                                    if($pintar){
+
+                                        $pdf->Cell(47,5,$descripcion_troceada[($f*4)],1,0,'C',0);
+                                        $pdf->Cell(48,5,$descripcion_troceada[($f*4)+1],1,0,'C',1);
+                                        $pdf->Cell(48,5,$descripcion_troceada[($f*4)+2],1,0,'C',0);
+                                        $pdf->Cell(47,5,$descripcion_troceada[($f*4)+3],1,1,'C',1);
+                                    }
+
+                                }
+
+                                break;
+                            //8.2 Nebensatz
+                            case 57:
+                                //primero se calcula el nº de filas totales
+                                $totalfilas = ((count($descripcion_troceada)-2)/4);
+
+                                $titulo0 = get_string('vorfeld', 'vocabulario');
+                                $titulo1 = get_string('konjugier', 'vocabulario');
+                                $titulo2 = get_string('mittelfeld', 'vocabulario');
+                                $titulo3 = get_string('verb2', 'vocabulario');
+
+
+
+                                //Si es la 8.2 hay que añadir una cabecera más y las filas tienen
+                                //5 celdas en lugar de 4
+                                if($grid == 57){
+                                    $titulo4 = get_string('subjekt', 'vocabulario');
+                                    $totalfilas = ((count($descripcion_troceada)-2)/5);
+                                }
+
+                                for($f = 0; $f < $totalfilas; $f++){
+
+                                }
+
+                $i = 0;
+                for ($i = 0; $i < $totalfilas*$avance; $i = $i+$avance) {
+                    $titulillos = '<tr class="cell">';
+                    $titulillos .= '<td><input type="text" id="id_VORSUB'.$i.'" name="VORSUB'.$i.'" value="' . $descripcion_troceada[$i] . '"></td>';
+                    if($grid ==  57){
+                        $titulillos .= '<td><input type="text" id="id_VER1'.$i.'" name="VER1'.$i.'" value="' . $descripcion_troceada[$i+4] . '"></td>';
+                    }
+                    $titulillos .= '<td style="background: #BDC7D8;"><input type="text" style="background: #BDC7D8;" id="id_KONSUB'.$i.'" name="KONSUB'.$i.'" value="' . $descripcion_troceada[$i+1] . '"></td>';
+                    $titulillos .= '<td><input type="text" id="id_MIT'.$i.'" name="MIT'.$i.'" value="' . $descripcion_troceada[$i+2] . '"></td>';
+                    $titulillos .= '<td style="background: #BDC7D8;"><input type="text" style="background: #BDC7D8;" id="id_VER2'.$i.'" name="VER2'.$i.'" value="' . $descripcion_troceada[$i+3] . '"></td>';
+                    $titulillos .= '</tr>';
+                    $mform->addElement('html', $titulillos);
+                }
+                $mform->addElement('html', '</table>');
+                break;
+
                         }
 
 
