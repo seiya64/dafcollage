@@ -1485,42 +1485,8 @@ if($impr_gram == 1){
                                 break;
                             //8.2 Nebensatz
                             case 57:
-                                //primero se calcula el nº de filas totales
-                                $totalfilas = ((count($descripcion_troceada)-2)/4);
-
-                                $titulo0 = get_string('vorfeld', 'vocabulario');
-                                $titulo1 = get_string('konjugier', 'vocabulario');
-                                $titulo2 = get_string('mittelfeld', 'vocabulario');
-                                $titulo3 = get_string('verb2', 'vocabulario');
-
-
-
-                                //Si es la 8.2 hay que añadir una cabecera más y las filas tienen
-                                //5 celdas en lugar de 4
-                                if($grid == 57){
-                                    $titulo4 = get_string('subjekt', 'vocabulario');
-                                    $totalfilas = ((count($descripcion_troceada)-2)/5);
-                                }
-
-                                for($f = 0; $f < $totalfilas; $f++){
-
-                                }
-
-                $i = 0;
-                for ($i = 0; $i < $totalfilas*$avance; $i = $i+$avance) {
-                    $titulillos = '<tr class="cell">';
-                    $titulillos .= '<td><input type="text" id="id_VORSUB'.$i.'" name="VORSUB'.$i.'" value="' . $descripcion_troceada[$i] . '"></td>';
-                    if($grid ==  57){
-                        $titulillos .= '<td><input type="text" id="id_VER1'.$i.'" name="VER1'.$i.'" value="' . $descripcion_troceada[$i+4] . '"></td>';
-                    }
-                    $titulillos .= '<td style="background: #BDC7D8;"><input type="text" style="background: #BDC7D8;" id="id_KONSUB'.$i.'" name="KONSUB'.$i.'" value="' . $descripcion_troceada[$i+1] . '"></td>';
-                    $titulillos .= '<td><input type="text" id="id_MIT'.$i.'" name="MIT'.$i.'" value="' . $descripcion_troceada[$i+2] . '"></td>';
-                    $titulillos .= '<td style="background: #BDC7D8;"><input type="text" style="background: #BDC7D8;" id="id_VER2'.$i.'" name="VER2'.$i.'" value="' . $descripcion_troceada[$i+3] . '"></td>';
-                    $titulillos .= '</tr>';
-                    $mform->addElement('html', $titulillos);
-                }
-                $mform->addElement('html', '</table>');
-                break;
+                                
+                            break;
 
                         }
 
