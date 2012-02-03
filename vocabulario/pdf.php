@@ -1688,6 +1688,58 @@ if($impr_gram == 1){
 
                                     $pdf->Ln();
                                     break;
+                                //3.8 Imperativ
+                                case 35:
+
+                                    $numtablas = (count($descripcion_troceada)-2)/4;
+                                    $todovacio = true;
+
+                                    for($i=0; $i<$numtablas; $i++){
+                                        $pintar = false;
+
+                                        if($i==$numtablas-1 && $todovacio){
+                                            $pintar = true;
+                                        }
+
+                                        for ($j=0; $j<4 && $pintar==false;$j++) {
+                                            if($descripcion_troceada[(4*$i)+$j]) {
+                                                $todovacio=false;
+                                                $pintar = true;
+                                             }
+                                        }
+
+                                        if($pintar){
+                                            $pdf->setLeftMargin(MARGIN_L5);
+                                            $pdf->SetTextColor(TEXT_WHITE);
+                                            $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
+                                            $pdf->setLineWidth(0.3);
+
+                                            //cabeceras
+                                            $pdf->SetFont('','B',10);
+
+                                            $pdf->Cell(24,5,get_string('infinitivo','vocabulario'),1,0,'C',1);
+
+                                            $pdf->SetTextColor(TEXT_AUTO);
+                                            
+                                            $pdf->Cell(86,5,$descripcion_troceada[(4*$i)],1,1,'C',0);
+
+                                            //celdas
+                                            $pdf->SetFont('','',10);
+                                            $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+
+                                            $pdf->Cell(24,5,get_string('S2','vocabulario'),1,0,'C',1);
+                                            $pdf->Cell(86,5,$descripcion_troceada[(4*$i)+1],1,1,'C',0);
+                                            $pdf->Cell(24,5,get_string('P2','vocabulario'),1,0,'C',1);
+                                            $pdf->Cell(86,5,$descripcion_troceada[(4*$i)+2],1,1,'C',0);
+                                            $pdf->Cell(24,5,get_string('sie','vocabulario'),1,0,'C',1);
+                                            $pdf->Cell(86,5,$descripcion_troceada[(4*$i)+3],1,1,'C',0);
+
+                                            $pdf->setLeftMargin(MARGIN);
+                                            $pdf->Ln();
+                                        }
+                                    }
+
+                                    break;
 
                         }
 
