@@ -390,7 +390,7 @@ switch ($padre) {
 
         $desc .= optional_param('AS1', null, PARAM_TEXT) . '&' . optional_param('AS2', null, PARAM_TEXT) . '&';
         $desc .= optional_param('AS3M', null, PARAM_TEXT) . '&' . optional_param('AS3N', null, PARAM_TEXT) . '&' . optional_param('AS3F', null, PARAM_TEXT) . '&';
-        $desc .= optional_param('AP1', null, PARAM_TEXT) . '&' . optional_param('AP2', null, PARAM_TEXT) . '&' . optional_param('AP3', null, PARAM_TEXT) . '&' . optional_param('NSIE', null, PARAM_TEXT) . '&';
+        $desc .= optional_param('AP1', null, PARAM_TEXT) . '&' . optional_param('AP2', null, PARAM_TEXT) . '&' . optional_param('AP3', null, PARAM_TEXT) . '&' . optional_param('ASIE', null, PARAM_TEXT) . '&';
 
         $desc .= optional_param('DS1', null, PARAM_TEXT) . '&' . optional_param('DS2', null, PARAM_TEXT) . '&';
         $desc .= optional_param('DS3M', null, PARAM_TEXT) . '&' . optional_param('DS3N', null, PARAM_TEXT) . '&' . optional_param('DS3F', null, PARAM_TEXT) . '&';
