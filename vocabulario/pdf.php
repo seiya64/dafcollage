@@ -1580,7 +1580,7 @@ if($impr_gram == 1){
                                     }
                                 }
                                 break;
-                                //2.1 Personalpronomen
+                                //2.1 Personalpronomen 
                                 case 7:
                                     $pdf->SetTextColor(TEXT_WHITE);
 
