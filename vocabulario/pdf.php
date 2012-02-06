@@ -1743,7 +1743,7 @@ if($impr_gram == 1){
                                 //3.5 Reflexive und reziproke Verben
                                 case 30:
                                     $pdf->SetTextColor(TEXT_WHITE);
-                                    $pdf->SetFillColor(59, 89, 152); //#3B5998
+                                    $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
                                     $pdf->setLeftMargin(MARGIN);
                                     $pdf->SetFont('','B',12);
 
@@ -1783,7 +1783,7 @@ if($impr_gram == 1){
                                     //cabeceras chicas tabla 1.2
                                     $pdf->SetTextColor(TEXT_WHITE);
                                     $pdf->SetFont('','B',10);
-                                    $pdf->SetFillColor(59, 89, 152); //#3B5998
+                                    $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
 
                                     $pdf->Cell(22,5,'','LTB',0,'C',1);
                                     $pdf->Cell(126,5,get_string('plural','vocabulario'),'TRB',0,'C',1);
@@ -1814,6 +1814,70 @@ if($impr_gram == 1){
                                     $pdf->Cell(42,5,$descripcion_troceada[13],1,1,'C',0);
 
                                     $pdf->Ln();
+                                    break;
+                                //4.7 Gebrauch der Artikelwörter
+                                case 43:
+                                    $titulo='';
+                                    $tope = 20;
+
+                                    for($tabla = 0; $tabla<3; ++$tabla) {
+                                        
+                                        //Según la tabla pongo un indice u otro
+                                        switch($tabla) {
+                                            case 0:
+                                                $titulo = get_string('beispiele_def','vocabulario');
+                                                break;
+                                            case 1:
+                                                $titulo = get_string('beispiele_indef','vocabulario');
+                                                break;
+                                            case 2:
+                                                $titulo = get_string('beispiele_null','vocabulario');
+                                                break;
+                                        }
+
+
+                                        //titulillos de la tabla
+
+                                        $pdf->SetTextColor(TEXT_WHITE);
+                                        $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
+                                        $pdf->setLeftMargin(MARGIN_L3);
+                                        $pdf->SetFont('','B',10);
+
+                                        $pdf->Cell(75,5,$titulo,1,0,'C',1);
+                                        $pdf->Cell(75,5,get_string('gebrauch','vocabulario'),1,1,'C',1);
+                                        
+                                        //A partir de aqui pinto filas según se van necesitando
+                                        $pdf->SetTextColor(TEXT_AUTO);
+                                        $pdf->SetFont('','',10);
+
+
+                                        $todovacio = true;
+                                        for ($fila=0; $fila<$tope;$fila++) {
+                                            
+                                            $pintar = false;
+
+                                            if($fila==$tope-1 && $todovacio){
+                                                $pintar = true;
+                                            }
+
+                                            for ($j=0; $j<2 && $pintar==false;$j++) {
+                                                if($descripcion_troceada[($tabla*$tope*2)+((2*$fila)+$j)]) {
+                                                    $todovacio=false;
+                                                    $pintar = true;
+                                                 }
+                                            }
+
+                                            if($pintar){
+
+                                                $pdf->Cell(75,5,$descripcion_troceada[($tabla*$tope*2)+((2*$fila)+0)],1,0,'C',0);
+                                                $pdf->Cell(75,5,$descripcion_troceada[($tabla*$tope*2)+((2*$fila)+1)],1,1,'C',0);
+
+                                            }
+                                        }
+                                        $pdf->setLeftMargin(MARGIN);
+                                        $pdf->Ln();
+                                    }
+
                                     break;
 
                         }
