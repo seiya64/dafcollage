@@ -1880,6 +1880,53 @@ if($impr_gram == 1){
 
                                     break;
 
+                                //5.2.2
+                                case 48:
+
+                                    $pdf->setLeftMargin(MARGIN);
+                                    $pdf->SetTextColor(TEXT_WHITE);
+                                    $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
+                                    $pdf->setLineWidth(0.3);
+                                    //cabeceras
+                                    $pdf->SetFont('','B',10);
+
+                                    $pdf->Cell(63,5,get_string('positivo','vocabulario'),1,0,'C',1);
+                                    $pdf->Cell(64,5,get_string('comparativo','vocabulario'),1,0,'C',1);
+                                    $pdf->Cell(63,5,get_string('superlativo','vocabulario'),1,1,'C',1);
+
+                                    $pdf->SetTextColor(TEXT_AUTO);
+                                    $pdf->SetFont('','',10);
+
+                                    //se calcula el nº de filas totales
+                                    $totalfilas = ((count($descripcion_troceada)-2)/3);
+
+                                    $todovacio = true;
+
+                                    for($f = 0; $f < $totalfilas; $f++){
+                                        $pintar = false;
+
+                                        if($f==$totalfilas-1 && $todovacio){
+                                            $pintar = true;
+                                        }
+
+                                        for ($j=0; $j<3 && $pintar==false;$j++) {
+                                            if($descripcion_troceada[(3*$f)+$j]) {
+                                                $todovacio=false;
+                                                $pintar = true;
+                                             }
+                                        }
+
+                                        if($pintar){
+
+                                            $pdf->Cell(63,5,$descripcion_troceada[($f*3)],1,0,'C',0);
+                                            $pdf->Cell(64,5,$descripcion_troceada[($f*3)+1],1,0,'C',0);
+                                            $pdf->Cell(63,5,$descripcion_troceada[($f*3)+2],1,1,'C',0);
+                                        }
+
+                                    }
+                                    $pdf->Ln();
+                                    break;
+
                         }
 
 
