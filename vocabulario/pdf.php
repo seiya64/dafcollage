@@ -1740,6 +1740,81 @@ if($impr_gram == 1){
                                     }
 
                                     break;
+                                //3.5 Reflexive und reziproke Verben
+                                case 30:
+                                    $pdf->SetTextColor(TEXT_WHITE);
+                                    $pdf->SetFillColor(59, 89, 152); //#3B5998
+                                    $pdf->setLeftMargin(MARGIN);
+                                    $pdf->SetFont('','B',12);
+
+                                    //cabecera grande
+                                    $pdf->Cell(190,6,get_string('reflexivo','vocabulario'),1,1,'C',1);
+                                    //separador
+                                    $pdf->Cell(190,3,'',0,1,'C',0);
+
+                                    //cabeceras chicas tabla 1.1
+                                    $pdf->SetFont('','B',10);
+
+                                    $pdf->Cell(22,5,'','LTB',0,'C',1);
+                                    $pdf->Cell(168,5,get_string('sing','vocabulario'),'TRB',1,'C',1);
+                                    $pdf->Cell(22,5,'','LT',0,'C',1);
+                                    $pdf->Cell(56,5,'1','TR',0,'C',1);
+                                    $pdf->Cell(56,5,'2','LTR',0,'C',1);
+                                    $pdf->Cell(56,5,'3','LTR',1,'C',1);
+
+                                    //celdas tabla 1.1
+
+                                    $pdf->setTextColor(TEXT_AUTO);
+                                    $pdf->SetFont('','',10);
+                                    $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+
+                                    $pdf->Cell(22,5,get_string('acusativo','vocabulario'),1,0,'C',1);
+                                    $pdf->Cell(56,5,$descripcion_troceada[0],1,0,'C',0);
+                                    $pdf->Cell(56,5,$descripcion_troceada[1],1,0,'C',0);
+                                    $pdf->Cell(56,5,$descripcion_troceada[2],1,1,'C',0);
+
+                                    $pdf->Cell(22,5,get_string('dativo','vocabulario'),1,0,'C',1);
+                                    $pdf->Cell(56,5,$descripcion_troceada[7],1,0,'C',0);
+                                    $pdf->Cell(56,5,$descripcion_troceada[8],1,0,'C',0);
+                                    $pdf->Cell(56,5,$descripcion_troceada[9],1,1,'C',0);
+
+                                    $pdf->Ln();
+
+                                    //cabeceras chicas tabla 1.2
+                                    $pdf->SetTextColor(TEXT_WHITE);
+                                    $pdf->SetFont('','B',10);
+                                    $pdf->SetFillColor(59, 89, 152); //#3B5998
+
+                                    $pdf->Cell(22,5,'','LTB',0,'C',1);
+                                    $pdf->Cell(126,5,get_string('plural','vocabulario'),'TRB',0,'C',1);
+                                    $pdf->Cell(42,5,'','LTR',1,'C',1);
+
+                                    $pdf->Cell(22,5,'','LT',0,'C',1);
+                                    $pdf->Cell(42,5,'1','TR',0,'C',1);
+                                    $pdf->Cell(42,5,'2','LTR',0,'C',1);
+                                    $pdf->Cell(42,5,'3','LTR',0,'C',1);
+                                    $pdf->Cell(42,5,get_string('sie','vocabulario'),'LR',1,'C',1);
+
+                                    //celdas tabla 1.2
+
+                                    $pdf->setTextColor(TEXT_AUTO);
+                                    $pdf->SetFont('','',10);
+                                    $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+
+                                    $pdf->Cell(22,5,get_string('acusativo','vocabulario'),1,0,'C',1);
+                                    $pdf->Cell(42,5,$descripcion_troceada[3],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[4],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[5],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[6],1,1,'C',0);
+
+                                    $pdf->Cell(22,5,get_string('dativo','vocabulario'),1,0,'C',1);
+                                    $pdf->Cell(42,5,$descripcion_troceada[10],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[11],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[12],1,0,'C',0);
+                                    $pdf->Cell(42,5,$descripcion_troceada[13],1,1,'C',0);
+
+                                    $pdf->Ln();
+                                    break;
 
                         }
 
