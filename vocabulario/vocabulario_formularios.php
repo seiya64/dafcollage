@@ -2697,7 +2697,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
         //botones
         $buttonarray = array();
-        if($grid != 0){
+        if($grid != 0 && $grid != 52){  //caso especial, si es el caso 52 no pinta el botón de guardar
             $buttonarray[] = &$mform->createElement('submit', 'desc_btn', get_string('guardesc','vocabulario'));
             //$mform->registerNoSubmitButton('desc_btn');
         }
