@@ -194,7 +194,15 @@ if($impr_gram == 1){
     $pdf->SetTextColor(TEXT_AUTO);
 
     for ($i = 0; $i < count($gr_pal); $i++) {
+        //Caso especial para las preposiciones:
+        //Si es la gramatica 51(añadir preposicion)
+        //le cambia el título por el de Consultar preposicion.
+        if($gr_num[$i] == 51){
+            $gr_pal[$i] = $gr_pal[$i+1];
+        }
+
         $gramaticas_usadas[$i] = array($gr_pal[$i], $gr_num[$i]);
+
     }
 
     //nueva pagina para las gramaticas
@@ -1923,6 +1931,134 @@ if($impr_gram == 1){
                                             $pdf->Cell(63,5,$descripcion_troceada[($f*3)+2],1,1,'C',0);
                                         }
 
+                                    }
+                                    $pdf->Ln();
+                                    break;
+                                //6.1
+                                //6.2 Preposiciones
+                                case 51:
+
+                                    //array para traducir el campo de caso, que al ser un entero se tiene que corresponder con un string
+                                    $kasus = array(get_string('acusativo','vocabulario'),get_string('dativo','vocabulario'),get_string('acudat','vocabulario'),get_string('genitivo','vocabulario'));
+
+                                    $arrayAux1 = array();
+                                    for($ind=0; $ind<count($descripcion_troceada)-2; $ind+=4){
+                                        $arrayAux1[]=$descripcion_troceada[$ind].'&'.$descripcion_troceada[$ind+1].'&'.$descripcion_troceada[$ind+2].'&'.$descripcion_troceada[$ind+3];
+                                    }
+
+                                    //se ordena el array
+                                    sort($arrayAux1);
+
+                                    $arrayAux = array();
+                                    foreach($arrayAux1 as $cosa){
+                                        if($cosa[0]!='&'){
+                                            $arrayAux[] = $cosa;
+                                        }
+                                    }
+
+                                    
+
+//                                    $titulillos .='<th>'.get_string('beisp','vocabulario').'</th>';
+
+                                    //si hay filas que mostrar las pinamos, en caso contrario solo se verá la cabecera de la tabla.
+                                    $salidor = false;
+                                    $anterior='';
+                                    for ($j=0;$j<count($arrayAux) && $salidor==false;$j++) {
+                                        $desc_aux = explode('&',$arrayAux[$j]);
+                                        if(!$desc_aux[0]) {
+                                            $salidor = true;
+                                        }else{
+
+                                            $pdf->setLeftMargin(MARGIN);
+                                            $pdf->SetTextColor(TEXT_WHITE);
+                                            $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
+                                            $pdf->setLineWidth(0.3);
+                                            //cabeceras
+                                            $pdf->SetFont('','B',10);
+
+                                            //titulillos de la tabla
+
+                                            if($desc_aux[0]!=$anterior){
+                                                if($anterior!=''){
+                                                    $pdf->Ln();
+                                                    $pdf->Ln();
+                                                }
+
+                                                $pdf->Cell(25,5,get_string('praposit','vocabulario'),1,0,'C',1);
+                                                $pdf->SetTextColor(TEXT_AUTO);
+                                                $pdf->Cell(25,5,$desc_aux[0],0,1,'C',0);
+                                                $anterior = $desc_aux[0];
+                                            }
+
+                                            $pdf->Cell(25,3,'',0,1,'C',0);
+
+                                            $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+                                            $pdf->SetTextColor(TEXT_AUTO);
+
+                                            
+//                                            $pdf->SetTextColor(TEXT_WHITE);
+                                            $pdf->SetFont('','B',10);
+                                            $pdf->Cell(18,5,get_string('func','vocabulario'),'LT',0,'L',1);
+                                            $pdf->SetTextColor(TEXT_AUTO);
+                                            $pdf->SetFont('','',10);
+                                            $pdf->Cell(172,5,$desc_aux[1],'TR',1,'L',0);
+
+//                                            $pdf->SetTextColor(TEXT_WHITE);
+                                            $pdf->SetFont('','B',10);
+                                            $pdf->Cell(18,5,get_string('kas','vocabulario'),'L',0,'L',1);
+                                            $pdf->SetTextColor(TEXT_AUTO);
+                                            $pdf->SetFont('','',10);
+                                            $pdf->Cell(172,5,$kasus[$desc_aux[2]],'R',1,'L',0);
+
+//                                            $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+//                                            $pdf->SetTextColor(TEXT_WHITE);
+                                            $pdf->SetFont('','B',10);
+                                            $pdf->Cell(18,5,get_string('beisp','vocabulario'),'LB',0,'L',1);
+                                            $pdf->SetTextColor(TEXT_AUTO);
+                                            $pdf->SetFont('','',10);
+                                            $pdf->MultiCell(172, 5, $desc_aux[3], 'BR', 'L', 0);
+
+
+
+
+
+                                            /*
+                                             * Opción estetica 1
+                                             *
+                                            if($desc_aux[0]!=$anterior){
+                                                $pdf->Ln();
+                                                $pdf->Cell(25,5,get_string('praposit','vocabulario'),1,0,'C',1);
+                                                $pdf->SetTextColor(TEXT_AUTO);
+                                                $pdf->Cell(25,5,$desc_aux[0],0,1,'C',0);
+                                                $anterior = $desc_aux[0];
+                                                
+                                                $pdf->SetTextColor(TEXT_WHITE);
+//                                                $pdf->Cell(25,3,'',0,1,'C',0);
+                                                $pdf->Cell(150,5,get_string('func','vocabulario'),1,0,'C',1);
+                                                $pdf->Cell(40,5,get_string('kas','vocabulario'),1,1,'C',1);
+                                                $pdf->Cell(25,3,'',0,1,'C',0);
+
+                                            }
+
+                                            
+
+                                            $pdf->SetTextColor(TEXT_AUTO);
+                                            //cabeceras
+                                            $pdf->SetFont('','',10);
+                                            //filas
+//                                            $pdf->Cell(25,5,$desc_aux[0],1,0,'C',0);
+                                            $pdf->Cell(150,5,$desc_aux[1],1,0,'C',0);
+                                            $pdf->Cell(40,5,$kasus[$desc_aux[2]],1,1,'C',0);
+
+                                            $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+                                            $pdf->SetFont('','B',10);
+                                            $pdf->Cell(20,5,get_string('beisp','vocabulario'),1,0,'C',1);
+                                            $pdf->SetFont('','',10);
+                                            $pdf->MultiCell(165, 5, $desc_aux[3], 0, 'L', 0);
+                                            $pdf->Cell(40,3,'',0,1,'C',0);
+                                            */
+
+                                        }
                                     }
                                     $pdf->Ln();
                                     break;
