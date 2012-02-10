@@ -198,7 +198,8 @@ if($impr_gram == 1){
         //Si es la gramatica 51(añadir preposicion)
         //le cambia el título por el de Consultar preposicion.
         if($gr_num[$i] == 51){
-            $gr_pal[$i] = $gr_pal[$i+1];
+            //$gr_pal[$i] = $gr_pal[$i+1];
+            $gr_pal[$i] = '6.2 Präpositionen';
         }
 
         $gramaticas_usadas[$i] = array($gr_pal[$i], $gr_num[$i]);
