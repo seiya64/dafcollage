@@ -1253,7 +1253,7 @@ class Vocabulario_mis_gramaticas {
 
     function actualizar() {
         update_record('vocabulario_mis_gramaticas', $this, true);
-        echo 'actualizo';
+        
     }
 
     function leer($grid,$usuarioid=null) {
@@ -1688,11 +1688,11 @@ class Vocabulario_mis_tipologias {
 
     function actualizar() {
         update_record('vocabulario_mis_tipologias', $this, true);
-        echo 'actualizo';
+
     }
 
     function leer($icid) {
-        $gr = get_record('vocabulario_mis_tipologias', 'id', $icid);
+        $gr = get_record('vocabulario_mis_tipologias', 'tipoid', $icid);
         $this->usuarioid = $gr->usuarioid;
         $this->descripcion = $gr->descripcion;
         $this->tipoid = $gr->tipoid;
