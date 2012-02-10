@@ -52,6 +52,7 @@ $string['campo_lex'] = 'Campos temáticos';
 $string['pal_campo_lex'] = 'Palabras por campos temáticos';
 $string['campo_gram'] = 'Gramática';
 $string['gramatica_may'] = 'GRAMÁTICA';
+$string['tipologias_may'] = 'TIPOLOGÍAS TEXTUALES';
 $string['campo_intencion'] = 'Intención Comunicativa';
 $string['campo_intencion_nuevo'] = 'Nombre nueva int. comunicativa';
 $string['campo_tipologia'] = 'Tipología textual';
