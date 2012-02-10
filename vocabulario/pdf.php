@@ -2105,11 +2105,19 @@ if($impr_tipol == 1){
     $todas = $tipologias->obtener_todas($USER->id);
     //nueva pagina para las tipologias
     $pdf->AddPage();
-    $pdf->writeHTMLCell(0, 0, 50, 100, '<h1>TIPOLOG&iacute;AS TEXTUALES</h1>', 0, 1, 0);
-    $pdf->AddPage();
-    
+    $pdf->writeHTMLCell(0, 0, 50, 100, '<h1>'.get_string('tipologias_may','vocabulario').'</h1>', 0, 1, 0);
+
     foreach ($todas as $cosa){
         $descripcion_troceada = explode('&', $cosa->descripcion);
+
+        $pintartochaco = false;
+        for($p=0; $p<count($descripcion_troceada) && $pintartochaco==false;$p++){
+            if($descripcion_troceada[$p]){
+                $pintartochaco=true;
+            }
+        }
+
+        if($pintartochaco){
         //imprimo el nombre de la gramatica
         $pdf->AddPage();
         $tt = new Vocabulario_tipologias();
@@ -2126,73 +2134,74 @@ if($impr_tipol == 1){
 
         $pdf->SetFont('', '', '10');
         $pdf->Cell(0, 10, '-' . get_string('finalidad', 'vocabulario'), 0, 1, 'L', 0);
-        $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+        $pdf->MultiCell(0, 5, $descripcion_troceada[1], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
         $pdf->Ln();
 
         $pdf->SetFont('', '', '10');
         $pdf->Cell(0, 10, '-' . get_string('a_quien', 'vocabulario'), 0, 1, 'L', 0);
-        $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+        $pdf->MultiCell(0, 5, $descripcion_troceada[2], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
         $pdf->Ln();
 
         $pdf->SetFont('', '', '10');
         $pdf->Cell(0, 10, '-' . get_string('medio', 'vocabulario'), 0, 1, 'L', 0);
-        $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+        $pdf->MultiCell(0, 5, $descripcion_troceada[3], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
         $pdf->Ln();
 
         $pdf->SetFont('', '', '10');
         $pdf->Cell(0, 10, '-' . get_string('donde', 'vocabulario'), 0, 1, 'L', 0);
-        $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+        $pdf->MultiCell(0, 5, $descripcion_troceada[4], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
         $pdf->Ln();
 
         $pdf->SetFont('', '', '10');
         $pdf->Cell(0, 10, '-' . get_string('cuando', 'vocabulario'), 0, 1, 'L', 0);
-        $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+        $pdf->MultiCell(0, 5, $descripcion_troceada[5], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
         $pdf->Ln();
 
         $pdf->SetFont('', '', '10');
         $pdf->Cell(0, 10, '-' . get_string('motivo', 'vocabulario'), 0, 1, 'L', 0);
-        $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+        $pdf->MultiCell(0, 5, $descripcion_troceada[6], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
         $pdf->Ln();
 
         $pdf->SetFont('', '', '10');
         $pdf->Cell(0, 10, '-' . get_string('funcion', 'vocabulario'), 0, 1, 'L', 0);
-        $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+        $pdf->MultiCell(0, 5, $descripcion_troceada[7], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
         $pdf->Ln();
 
         $pdf->SetFont('', '', '10');
         $pdf->Cell(0, 10, '-' . get_string('sobre_que', 'vocabulario'), 0, 1, 'L', 0);
-        $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+        $pdf->MultiCell(0, 5, $descripcion_troceada[8], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
         $pdf->Ln();
 
         $pdf->SetFont('', '', '10');
         $pdf->Cell(0, 10, '-' . get_string('que', 'vocabulario'), 0, 1, 'L', 0);
-        $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+        $pdf->MultiCell(0, 5, $descripcion_troceada[9], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
         $pdf->Ln();
 
         $pdf->SetFont('', '', '10');
         $pdf->Cell(0, 10, '-' . get_string('orden', 'vocabulario'), 0, 1, 'L', 0);
-        $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+        $pdf->MultiCell(0, 5, $descripcion_troceada[10], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
         $pdf->Ln();
 
         $pdf->SetFont('', '', '10');
         $pdf->Cell(0, 10, '-' . get_string('medios_nonverbales', 'vocabulario'), 0, 1, 'L', 0);
-        $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+        $pdf->MultiCell(0, 5, $descripcion_troceada[11], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
         $pdf->Ln();
 
         $pdf->SetFont('', '', '10');
         $pdf->Cell(0, 10, '-' . get_string('que_palabras', 'vocabulario'), 0, 1, 'L', 0);
-        $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+        $pdf->MultiCell(0, 5, $descripcion_troceada[12], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
         $pdf->Ln();
 
         $pdf->SetFont('', '', '10');
         $pdf->Cell(0, 10, '-' . get_string('que_frases', 'vocabulario'), 0, 1, 'L', 0);
-        $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+        $pdf->MultiCell(0, 5, $descripcion_troceada[13], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
         $pdf->Ln();
 
         $pdf->SetFont('', '', '10');
         $pdf->Cell(0, 10, '-' . get_string('que_tono', 'vocabulario'), 0, 1, 'L', 0);
-        $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
+        $pdf->MultiCell(0, 5, $descripcion_troceada[14], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
         $pdf->Ln();
+        }
     }
 }
 //se imprime el pdf
