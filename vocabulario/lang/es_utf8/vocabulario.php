@@ -276,5 +276,6 @@ $string['par_schwac'] = '(= Regelmäβige Verben)';
 $string['par_star'] = '(= Verben mit bestimmten gemeinsamen Unregelmäβigkeiten)';
 $string['par_gemis'] = '(= Unregelmäβige Verben)';
 $string['kas'] = 'Kasus';
+$string['preposiciones']='Präpositionen';
 
 ?>
