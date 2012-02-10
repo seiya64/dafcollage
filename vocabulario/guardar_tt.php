@@ -66,6 +66,8 @@ for ($i = 1; $i < 6; $i++){
     $desc .= optional_param('que_tono'.$i, null, PARAM_TEXT).'&';
 }
 
+$desc .=  optional_param('miraren', null, PARAM_TEXT);
+
 //vemos que botón hemos pulsado
 if ($mform->no_submit_button_pressed()){
     if(optional_param('desc_btn')){
