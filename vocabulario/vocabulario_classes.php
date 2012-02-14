@@ -1714,4 +1714,210 @@ class Vocabulario_mis_tipologias {
 
 }
 
+class Vocabulario_estrategias {
+
+    var $id;
+    var $usuarioid;
+    var $padre;
+    var $estrategia;
+    var $descripcion;
+
+    function Vocabulario_estrategias($usuarioid=null, $padre=null, $estrategia=null, $descripcion=null, $id=null) {
+        $this->id = $id;
+        $this->usuarioid = $usuarioid;
+        $this->padre = $padre;
+        $this->estrategia = $estrategia;
+        $this->descripcion = $descripcion;
+    }
+
+    function set($id=null, $usuarioid=null, $padre=null, $estrategia=null, $descripcion=null) {
+        if ($id != null && $id != $this->id) {
+            $this->id = $id;
+        }
+        if ($usuarioid != null && $usuarioid != $this->usuarioid) {
+            $this->usuarioid = $usuarioid;
+        }
+        if ($padre != null && $padre != $this->padre) {
+            $this->padre = $padre;
+        }
+        if ($estrategia != null && $estrategia != $this->estrategia) {
+            $this->estrategia = $estrategia;
+        }
+        if ($descripcion != null && $descripcion != $this->descripcion) {
+            $this->descripcion = $descripcion;
+        }
+    }
+
+    function get($param) {
+        $param = strtolower($param);
+        switch ($param) {
+            default:
+            case 'id':
+                return $this->id;
+                break;
+            case 'usuarioid':
+                return $this->usuarioid;
+                break;
+            case 'padre':
+                return $this->padre;
+                break;
+            case 'estrategia':
+            case 'palabra':
+                return $this->estrategia;
+                break;
+            case 'descripcion':
+                return $this->descripcion;
+                break;
+        }
+    }
+
+    function leer($estrategiaid, $usuarioid) {
+        $est = get_record('vocabulario_estrategias', 'id', $estrategiaid);
+        $this->usuarioid = $est->usuarioid;
+        $this->padre = $est->padre;
+        $this->estrategia = $est->estrategia;
+        $this->id = $est->id;
+        $this->descripcion = $est->descripcion;
+    }
+
+    function obtener_todos($usuarioid) {
+        $estrategia = get_records_select('vocabulario_estrategias', 'usuarioid=' . $usuarioid . ' or usuarioid=0');
+        $ea = array();
+        $orden = $this->ordena($estrategia);
+        foreach ($orden as $e) {
+            $ea[$tipo[$e]->id] = $estrategia[$e]->tipo;
+        }
+        return $ea;
+    }
+
+    function obtener_todos_ids($usuarioid) {
+        $estrategia = get_records_select('vocabulario_estrategias', 'usuarioid=' . $usuarioid . ' or usuarioid=0');
+        $ea = array();
+        $orden = $this->ordena($estrategia);
+        foreach ($orden as $e) {
+            $ea[$estrategia[$e]->id] = $estrategia[$e]->id;
+        }
+        return $ea;
+    }
+
+    function ordena($lista, $padre='0', $salida='') {
+        $milista = array();
+        foreach ($lista as $cosa) {
+            $milista[$cosa->id] = $cosa->padre;
+        }
+        $encontrados = array_keys($milista, $padre);
+        foreach ($encontrados as $cosa) {
+            $salida[] = $cosa;
+            $salida = $this->ordena($lista, $cosa, $salida);
+        }
+        return $salida;
+    }
+
+}
+
+class Vocabulario_mis_estrategias {
+
+    var $id;
+    var $usuarioid;
+    var $estrategiaid;
+    var $descripcion;
+    var $tipo_palabra;
+    var $palabra_id;
+
+    function Vocabulario_mis_estrategias($usuarioid=null, $estrategiaid=null, $descripcion=null, $tipo_palabra=null, $palabraid=null, $id=null) {
+        $this->id = $id;
+        $this->usuarioid = $usuarioid;
+        $this->estrategiaid = $estrategiaid;
+        $this->descripcion = $descripcion;
+        $this->tipo_palabra = $tipo_palabra;
+        $this->palabra_id = $palabraid;
+    }
+
+    function set($usuarioid=null, $estrategiaid=null, $descripcion=null, $tipo_palabra=null, $palabraid=null, $id=null) {
+        if ($id != null && $id != $this->id) {
+            $this->id = $id;
+        }
+        if ($usuarioid != null && $usuarioid != $this->usuarioid) {
+            $this->usuarioid = $usuarioid;
+        }
+        if ($estrategiaid != null && $estrategiaid != $this->estrategiaid) {
+            $this->tipoid = $tipoid;
+        }
+        if ($tipo_palabra != null && $tipo_palabra != $this->tipo_palabra) {
+            $this->tipo_palabra = $tipo_palabra;
+        }
+        if ($palabraid != null && $palabraid != $this->palabraid) {
+            $this->palabra_id = $palabraid;
+        }
+        if ($descripcion != null && $descripcion != $this->descripcion) {
+            $this->descripcion = $descripcion;
+        }
+    }
+
+    function get($param) {
+        $param = strtolower($param);
+        switch ($param) {
+            default:
+            case 'id':
+                return $this->id;
+                break;
+            case 'usuarioid':
+                return $this->usuarioid;
+                break;
+            case 'estrategiaid':
+                return $this->estrategiaid;
+                break;
+            case 'tipo_palabra':
+                return $this->tipo_palabra;
+                break;
+            case 'palabraid':
+                return $this->palabra_id;
+                break;
+            case 'descripcion':
+                return $this->descripcion;
+                break;
+        }
+    }
+
+    function guardar() {
+
+        $this->id = insert_record('vocabulario_mis_estrategias', $this, true);
+        if (!$this->id) {
+            $ic = get_record_select('vocabulario_mis_estrategias', 'usuarioid=' . $this->usuarioid . ' and estrategiaid=' . $this->estrategiaid);
+            $this->id = $ic->id;
+            update_record('vocabulario_mis_estrategias', $this, true);
+        }
+    }
+
+    function actualizar() {
+        update_record('vocabulario_mis_estrategias', $this, true);
+
+    }
+
+    function leer($eaid) {
+        $gr = get_record('vocabulario_mis_estrategias', 'estrategiaid', $eaid);
+        $this->usuarioid = $gr->usuarioid;
+        $this->descripcion = $gr->descripcion;
+        $this->estrategiaid = $gr->estrategiaid;
+        $this->id = $gr->id;
+        $this->tipo_palabra = $gr->tipo_palabra;
+        $this->palabra_id = $gr->palabra_id;
+
+    }
+
+    function relacionadas($usuarioid, $estrategiaid) {
+        $palabras = get_records_select('vocabulario_mis_estrategias', 'usuarioid=' . $usuarioid . ' and estrategiaid=' . $estrategiaid);
+        return $palabras;
+    }
+
+    function obtener_todas($usuarioid){
+        $tt = get_records_select('vocabulario_mis_estrategias', 'usuarioid='. $usuarioid);
+        return $tt;
+    }
+
+}
+
+
+
+
 ?>

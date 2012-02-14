@@ -43,31 +43,30 @@ require_once("vocabulario_formularios.php");
 
 $id_tocho = optional_param('id_tocho', 0, PARAM_INT);
 
-$mform = new mod_vocabulario_tipologia_desc_form();
+$mform = new mod_vocabulario_estrategia_desc_form();
 
-$ttid = optional_param('ttid', 0, PARAM_INT);
+$eaid = optional_param('eaid', 0, PARAM_INT);
 
 $id_mp = optional_param('id_mp',null,PARAM_INT);
 
 //averiguo quien soy
 $user_object = get_record('user', 'id', $USER->id);
 
-$tip = new Vocabulario_tipologias($user_object->id, required_param('campott', PARAM_TEXT), optional_param('tipologia', null ,PARAM_TEXT));
+$est = new Vocabulario_estrategias($user_object->id, required_param('campoea', PARAM_TEXT), optional_param('estrategia', null ,PARAM_TEXT));
 
 if ($mform->is_cancelled()) {
     redirect('./view.php?id=' . $id_tocho);
 }
 
-if (optional_param('eliminar', 0, PARAM_INT) && $tip->get('padre') > 54) {
-    delete_records('vocabulario_tipologias', 'id', $tip->get('padre'));
+if (optional_param('eliminar', 0, PARAM_INT) && $est->get('padre') > 1) {
+    delete_records('vocabulario_estrategias', 'id', $est->get('padre'));
     redirect('./view.php?id=' . $id_tocho . '&opcion=10');
 }
 
-if ($tip->get('tipo') != null) {
-    $tip->set(null,null,'0');
-    print_object($tip);
+if ($est->get('tipo') != null) {
+    $est->set(null,null,'0');
     
-    $ttidaux = insert_record('vocabulario_tipologias', $tip, true);
+    $eaidaux = insert_record('vocabulario_tipologias', $est, true);
 }
-redirect('./view.php?id=' . $id_tocho . '&opcion=10&ttid=' . $ttidaux);
+redirect('./view.php?id=' . $id_tocho . '&opcion=10&ttid=' . $eaidaux);
 ?>

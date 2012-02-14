@@ -65,7 +65,7 @@ if (optional_param('eliminar', 0, PARAM_INT) && $tip->get('padre') > 54) {
 
 if ($tip->get('tipo') != null) {
     $tip->set(null,null,'0');
-    print_object($tip);
+//    print_object($tip);
     
     $ttidaux = insert_record('vocabulario_tipologias', $tip, true);
 }

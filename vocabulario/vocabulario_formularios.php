@@ -436,6 +436,16 @@ class mod_vocabulario_opciones_form extends moodleform {
         $tabla_menu .='<td><p><a href=""><img src="./imagenes/ayuda.png" id="id_ayuda" name="ayuda"/></br>' . get_string('ayuda', 'vocabulario') . '</a></p></td>';
         //4,3
         $tabla_menu .='<td style="text-align:right"><p><a href="view.php?id=' . $id . '&opcion=10"><img src="./imagenes/tipologias_textuales.png" id="id_nueva_tt_im" name="nueva_tt_im"/></br>' . get_string('nueva_tt', 'vocabulario') . '</a></p></td></tr>';
+
+        //5,1
+        $tabla_menu .='<tr><td style="text-align:left"><p><a href="view.php?id=' . $id . '&opcion=11"><img src="./imagenes/tipologias_textuales.png" id="id_ea_im" name="ea_im"/></br>' . get_string('admin_ea', 'vocabulario') . '</a></p></td>';
+        //5,2
+        $tabla_menu .='<td><p><a href=""></br></a></p></td>';
+        //5,3
+        $tabla_menu .='<td style="text-align:right"><p><a href="view.php?id=' . $id . '&opcion=12"><img src="./imagenes/tipologias_textuales.png" id="id_nueva_ea_im" name="nueva_ea_im"/></br>' . get_string('nueva_ea', 'vocabulario') . '</a></p></td></tr>';
+
+
+
         $tabla_menu .='</table>';
         $mform->addElement('html', $tabla_menu);
     }
@@ -3044,6 +3054,92 @@ class mod_vocabulario_tipologia_desc_form extends moodleform {
     }
 
 }
+
+
+
+
+
+
+class mod_vocabulario_nuevo_estrategia_form extends moodleform {
+
+    function definition() {
+        global $USER;
+        $mform = & $this->_form;
+        //inclusion del javascript para las funciones
+        $mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
+
+        $eaid = optional_param('eaid', 1, PARAM_INT);
+        $id_tocho = optional_param('id', 0, PARAM_INT);
+
+        //titulo de la seccion
+        $mform->addElement('html','<h1>'.get_string('admin_ea','vocabulario').'</h1>');
+
+        $aux = new Vocabulario_estrategias();
+        $estrategias = $aux->obtener_todos($USER->id);
+        $mform->addElement('select', 'campoea', get_string("campo_estrategia", "vocabulario"), $estrategias);
+        if ($eaid) {
+            $mform->setDefault('campott', $eaid);
+        }
+
+        $ea = new Vocabulario_mis_estrategias();
+        $ea->leer($eaid);
+        //$descripcion_troceada = explode('&', $ea->get('descripcion'));
+        $descripcion = $ea->get('descripcion');
+
+        //solucion de enlazar todo con todo
+        $mform->addElement('textarea', 'miestrategia', get_string('miestrategia','vocabulario'), 'rows="5" cols="30"');
+        $mform->setDefault('miestrategia', $descripcion);
+
+        //botones
+        $buttonarray = array();
+        $buttonarray[] = &$mform->createElement('submit', 'desc_btn', get_string('guardesc','vocabulario'));
+        $mform->registerNoSubmitButton('desc_btn');
+        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('verdesc','vocabulario'));
+        $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel','vocabulario'));
+        $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
+    }
+
+}
+
+class mod_vocabulario_estrategia_desc_form extends moodleform {
+
+    function definition() {
+        global $USER;
+        $mform = & $this->_form;
+
+        $eaid = optional_param('eaid', 0, PARAM_INT);
+        $id_tocho = optional_param('id', 0, PARAM_INT);
+
+        //titulo de la seccion
+        $mform->addElement('html','<h1>'.get_string('nueva_ea','vocabulario').'</h1>');
+
+        $aux = new Vocabulario_estrategias();
+        $estrategias = $aux->obtener_todos($USER->id);
+        $mform->addElement('select', 'campoea', get_string("nivel_estrategia", "vocabulario"), $estrategias);
+        if ($eaid) {
+            $mform->setDefault('campoea', $eaid);
+        }
+
+        $mform->addElement('text', 'estrategia', get_string("campo_estrategia_nuevo", "vocabulario"));
+
+        //opcion de eliminar un campo
+        $mform->addElement('checkbox', 'eliminar', get_string("eliminar", "vocabulario"));
+        $mform->setDefault('eliminar', 0);
+
+        $buttonarray = array();
+        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('guardesc','vocabulario'));
+        $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel','vocabulario'));
+        $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
+    }
+
+}
+
+
+
+
+
+
+
 
 class mod_vocabulario_listado_form extends moodleform {
     function definition() {
