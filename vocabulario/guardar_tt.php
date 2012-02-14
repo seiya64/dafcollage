@@ -53,7 +53,7 @@ $user_object = get_record('user', 'id', $USER->id);
 
 $tipologia = new Vocabulario_tipologias($user_object->id, required_param('campott', PARAM_TEXT), optional_param('tipologia', PARAM_TEXT));
 
-print_object($tipologia);
+//print_object($tipologia);
 $desc = '';
 for ($i = 1; $i < 6; $i++){
     $desc .= optional_param('quien'.$i, null, PARAM_TEXT) . '&' . optional_param('finalidad'.$i, null, PARAM_TEXT) . '&';
@@ -74,7 +74,7 @@ if ($mform->no_submit_button_pressed()){
         $tipologiaaux = new Vocabulario_mis_tipologias();
         $tipologiaaux->leer($tipologia->get('padre'));
         $tipologiaaux->set($USER->id,$tipologia->get('padre'),$desc);
-        print_object($tipologiaaux);
+//        print_object($tipologiaaux);
         $tipologiaaux->guardar();
         //$ttidaux = update_record('vocabulario_mis_tipologias', $tipologiaaux, true);
     }
