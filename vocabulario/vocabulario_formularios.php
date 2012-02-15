@@ -444,8 +444,6 @@ class mod_vocabulario_opciones_form extends moodleform {
         //5,3
         $tabla_menu .='<td style="text-align:right"><p><a href="view.php?id=' . $id . '&opcion=12"><img src="./imagenes/tipologias_textuales.png" id="id_nueva_ea_im" name="nueva_ea_im"/></br>' . get_string('nueva_ea', 'vocabulario') . '</a></p></td></tr>';
 
-
-
         $tabla_menu .='</table>';
         $mform->addElement('html', $tabla_menu);
     }
@@ -3055,11 +3053,6 @@ class mod_vocabulario_tipologia_desc_form extends moodleform {
 
 }
 
-
-
-
-
-
 class mod_vocabulario_nuevo_estrategia_form extends moodleform {
 
     function definition() {
@@ -3078,7 +3071,7 @@ class mod_vocabulario_nuevo_estrategia_form extends moodleform {
         $estrategias = $aux->obtener_todos($USER->id);
         $mform->addElement('select', 'campoea', get_string("campo_estrategia", "vocabulario"), $estrategias);
         if ($eaid) {
-            $mform->setDefault('campott', $eaid);
+            $mform->setDefault('campoea', $eaid);
         }
 
         $ea = new Vocabulario_mis_estrategias();

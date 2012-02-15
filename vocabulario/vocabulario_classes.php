@@ -1785,7 +1785,7 @@ class Vocabulario_estrategias {
         $ea = array();
         $orden = $this->ordena($estrategia);
         foreach ($orden as $e) {
-            $ea[$tipo[$e]->id] = $estrategia[$e]->tipo;
+            $ea[$estrategia[$e]->id] = $estrategia[$e]->estrategia;
         }
         return $ea;
     }
@@ -1841,7 +1841,7 @@ class Vocabulario_mis_estrategias {
             $this->usuarioid = $usuarioid;
         }
         if ($estrategiaid != null && $estrategiaid != $this->estrategiaid) {
-            $this->tipoid = $tipoid;
+            $this->estrategiaid = $estrategiaid;
         }
         if ($tipo_palabra != null && $tipo_palabra != $this->tipo_palabra) {
             $this->tipo_palabra = $tipo_palabra;

@@ -60,13 +60,13 @@ if ($mform->is_cancelled()) {
 
 if (optional_param('eliminar', 0, PARAM_INT) && $est->get('padre') > 1) {
     delete_records('vocabulario_estrategias', 'id', $est->get('padre'));
-    redirect('./view.php?id=' . $id_tocho . '&opcion=10');
+    redirect('./view.php?id=' . $id_tocho . '&opcion=12');
 }
 
-if ($est->get('tipo') != null) {
+if ($est->get('estrategia') != null) {
     $est->set(null,null,'0');
     
-    $eaidaux = insert_record('vocabulario_tipologias', $est, true);
+    $eaidaux = insert_record('vocabulario_estrategias', $est, true);
 }
-redirect('./view.php?id=' . $id_tocho . '&opcion=10&ttid=' . $eaidaux);
+redirect('./view.php?id=' . $id_tocho . '&opcion=12&eaid=' . $eaidaux);
 ?>

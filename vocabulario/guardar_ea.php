@@ -66,5 +66,5 @@ if ($mform->no_submit_button_pressed()){
 }
 
 //volvemos a donde veniamos
-redirect('./view.php?id=' . $id_tocho . '&opcion=9&ttid=' . $tipologia->get('padre'));
+redirect('./view.php?id=' . $id_tocho . '&opcion=11&ttid=' . $tipologia->get('padre'));
 ?>
