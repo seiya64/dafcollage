@@ -59,12 +59,12 @@ $desc =  optional_param('miestrategia', null, PARAM_TEXT);
 if ($mform->no_submit_button_pressed()){
     if(optional_param('desc_btn')){
         $estrategiaaux = new Vocabulario_mis_estrategias();
-        $estrategiaaux->leer($tipologia->get('padre'));
-        $estrategiaaux->set($USER->id,$tipologia->get('padre'),$desc);
+        $estrategiaaux->leer($estrategia->get('padre'));
+        $estrategiaaux->set($USER->id,$estrategia->get('padre'),$desc);
         $estrategiaaux->guardar();
     }
 }
 
 //volvemos a donde veniamos
-redirect('./view.php?id=' . $id_tocho . '&opcion=11&ttid=' . $tipologia->get('padre'));
+redirect('./view.php?id=' . $id_tocho . '&opcion=11&eaid=' . $estrategia->get('padre'));
 ?>
