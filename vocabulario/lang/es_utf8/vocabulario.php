@@ -55,6 +55,7 @@ $string['campo_gram'] = 'Gramática';
 $string['gramatica_may'] = 'GRAMÁTICA';
 $string['tipologias_may'] = 'TIPOLOGÍAS TEXTUALES';
 $string['estrategias_may'] = 'ESTRATEGIAS DE APRENDIZAJE';
+$string['intenciones_may'] = 'INTENCIONES COMUNICATIVAS';
 $string['campo_intencion'] = 'Intención Comunicativa';
 $string['campo_intencion_nuevo'] = 'Nombre nueva int. comunicativa';
 $string['campo_tipologia'] = 'Tipología textual';
@@ -172,7 +173,11 @@ $string['desc_inten4.1'] = 'Se refiere a acciones realizadas por seres vivos / i
 $string['desc_inten4.2'] = 'Se refiere a recursos / instrumentos que se utilizan con un determinado fin.';
 $string['desc_inten5.1'] = 'Se refiere a una consecuencia que se ha esperado y que finalmente se ha realizado.';
 $string['desc_inten5.2'] = 'Se refiere a una consecuencia que se ha esperado pero que no se ha realizado.';
-//a partir de aqui cosas en aleman que en principio no se cambian
+
+///////////////////////////////////////////////////////////
+//a partir de aqui cosas en aleman que NO SE DEBEN TRADUCIR
+///////////////////////////////////////////////////////////
+
 $string['definido'] = 'Definitiv';
 $string['indefinido'] = 'Indefinitiv';
 $string['generales'] = 'Allgemeines';

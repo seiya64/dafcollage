@@ -2266,11 +2266,179 @@ if($impr_tipol == 1){
 }
 
 
+
+
+
+if($impr_inten == 1) {
+    //estrategias de aprendizaje
+    $intenciones = new Vocabulario_mis_intenciones();
+    $todas = $intenciones->obtener_todas($USER->id);
+    //nueva pagina para las estrategias
+    $pdf->AddPage();
+    $pdf->writeHTMLCell(0, 0, 50, 100, '<h1>'.get_string('intenciones_may','vocabulario').'</h1>', 0, 1, 0);
+
+
+
+    foreach ($todas as $cosa) {
+        $descripcion_troceada = explode('&', $cosa->descripcion);
+//        $descripcion = $cosa->descripcion;
+
+         if ($descripcion_troceada) {
+            $pintartochaco = false;
+
+            for($p=0; $p<count($descripcion_troceada) && $pintartochaco==false; $p++){
+                if($descripcion_troceada[$p]){
+                    $pintartochaco=true;
+                }
+            }
+
+            if ($pintartochaco) {
+                    $pdf->AddPage();
+                    //imprimo el nombre de estrategia
+                    $ic = new Vocabulario_intenciones();
+                    $ic->leer($cosa->intencionesid, $USER->id);
+                    $mic = $ic->get('palabra');
+
+                    $pdf->SetTextColor(TEXT_AUTO);
+                    $pdf->setLeftMargin(MARGIN);
+                    $pdf->SetFillColor(59, 89, 152); //#3B5998
+                    $pdf->SetLineWidth(0.3);
+
+                    $pdf->writeHTMLCell(0, 0, 0, 0, '<h2>'.$mic.'</h2>', 0, 1, 0);
+
+
+                    //Primer cuadro, el de la descripcion
+                    $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>'.get_string('desc','vocabulario').'</h3>', 0, 1, 0);
+
+                    $pdf->setLeftMargin(MARGIN_L2);
+                    $pdf->SetFont('','B',10);
+
+                    //ponemos la descripcion por defecto en caso de que sea necesario
+                    switch($icid){
+                        case 28:
+                            $pdf->MultiCell(0, 5, get_string('desc_inten3.2','vocabulario'), 0, 'J', 0);
+                            break;
+                        case 37:
+                            $pdf->MultiCell(0, 5, get_string('desc_inten3.3','vocabulario'), 0, 'J', 0);
+                            break;
+                        case 47:
+                            $pdf->MultiCell(0, 5, get_string('desc_inten4.1','vocabulario'), 0, 'J', 0);
+                            break;
+                        case 56:
+                            $pdf->MultiCell(0, 5, get_string('desc_inten4.2','vocabulario'), 0, 'J', 0);
+                            break;
+                        case 66:
+                            $pdf->MultiCell(0, 5, get_string('desc_inten5.1','vocabulario'), 0, 'J', 0);
+                            break;
+                        case 75:
+                            $pdf->MultiCell(0, 5, get_string('desc_inten5.2','vocabulario'), 0, 'J', 0);
+                            break;
+                    }
+
+
+                    $pdf->SetFont('','',10);
+                    $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
+                    $pdf->setLeftMargin(MARGIN);
+                    $pdf->Ln();
+
+                    //cabecera de la tabla
+                    $pdf->SetTextColor(TEXT_WHITE);
+                    $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
+                    $pdf->setLineWidth(0.3);
+                    //cabeceras
+                    $pdf->SetFont('','B',10);
+
+
+
+//            $titulillos .='<th>'.get_string('beisp','vocabulario').'</th>';
+
+
+//
+//                    $pdf->Cell(63,5,get_string('mittel','vocabulario'),1,0,'C',1);
+//                    $pdf->Cell(64,5,get_string('wortklase','vocabulario'),1,0,'C',1);
+//                    $pdf->Cell(63,5,get_string('siehe','vocabulario'),1,1,'C',1);
+
+                    $pdf->SetTextColor(TEXT_AUTO);
+                    $pdf->SetFont('','',10);
+
+
+
+                    //se calcula el nº de filas totales
+                    $totalfilas = ((count($descripcion_troceada)-1)/4);
+
+                    $todovacio = true;
+
+                    for($f = 0; $f < $totalfilas; $f++){
+                        $pintar = false;
+
+                        if($f==$totalfilas-1 && $todovacio){
+                            $pintar = true;
+                        }
+
+                        for ($j=0; $j<4 && $pintar==false;$j++) {
+                            if($descripcion_troceada[1+(4*$f)+$j]) {
+                                $todovacio=false;
+                                $pintar = true;
+                             }
+                        }
+
+                        if($pintar){
+
+
+                            $pdf->Cell(25,3,'',0,1,'C',0);
+
+                            $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+                            $pdf->SetTextColor(TEXT_AUTO);
+
+
+//                                            $pdf->SetTextColor(TEXT_WHITE);
+                            $pdf->SetFont('','B',10);
+                            $pdf->Cell(46,5,get_string('mittel','vocabulario'),'LT',0,'L',1);
+                            $pdf->SetTextColor(TEXT_AUTO);
+                            $pdf->SetFont('','',10);
+                            $pdf->Cell(144,5,$descripcion_troceada[1+($f*4)+0],'TR',1,'L',0);
+
+//                                            $pdf->SetTextColor(TEXT_WHITE);
+                            $pdf->SetFont('','B',10);
+                            $pdf->Cell(46,5,get_string('wortklase','vocabulario'),'L',0,'L',1);
+                            $pdf->SetTextColor(TEXT_AUTO);
+                            $pdf->SetFont('','',10);
+                            $pdf->Cell(144,5,$descripcion_troceada[1+($f*4)+1],'R',1,'L',0);
+
+//                                            $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
+//                                            $pdf->SetTextColor(TEXT_WHITE);
+                            $pdf->SetFont('','B',10);
+                            $pdf->Cell(46,5,get_string('beisp','vocabulario'),'L',0,'L',1);
+                            $pdf->SetTextColor(TEXT_AUTO);
+                            $pdf->SetFont('','',10);
+                            $pdf->MultiCell(144, 5, $descripcion_troceada[1+($f*4)+2], 'R', 'L', 0);
+
+
+                            $pdf->SetFont('','B',10);
+                            $pdf->Cell(46,5,get_string('siehe','vocabulario'),'BL',0,'L',1);
+                            $pdf->SetTextColor(TEXT_AUTO);
+                            $pdf->SetFont('','',10);
+                            $pdf->Cell(144,5,$descripcion_troceada[1+($f*4)+3],'BR',1,'L',0);
+
+                        }
+
+                    }
+                    $pdf->Ln();
+            }
+         }
+    }
+}
+
+
+
+
+
+
 if($impr_estra == 1) {
-    //tipologías textuales
+    //estrategias de aprendizaje
     $estrategias = new Vocabulario_mis_estrategias();
     $todas = $estrategias->obtener_todas($USER->id);
-    //nueva pagina para las tipologias
+    //nueva pagina para las estrategias
     $pdf->AddPage();
     $pdf->writeHTMLCell(0, 0, 50, 100, '<h1>'.get_string('estrategias_may','vocabulario').'</h1>', 0, 1, 0);
 
@@ -2292,7 +2460,6 @@ if($impr_estra == 1) {
             if ($pintartochaco) {
                     $pdf->AddPage();
                     //imprimo el nombre de estrategia
-
                     $ea = new Vocabulario_estrategias();
                     $ea->leer($cosa->estrategiaid, $USER->id);
                     $mea = $ea->get('palabra');
@@ -2304,14 +2471,7 @@ if($impr_estra == 1) {
 
                     $pdf->writeHTMLCell(0, 0, 0, 0, '<h2>'.$mea.'</h2>', 0, 1, 0);
 
-
-
                     $pdf->setLeftMargin(MARGIN_L2);
-
-
-    //                $pdf->SetFont('', 'B', '10');
-    //                $pdf->Cell(47, 5, get_string('miraren', 'vocabulario'), 1, 1, 'C', 1);
-    //                $pdf->SetTextColor(TEXT_AUTO);
                     $pdf->SetFont('', '', '10');
                     $pdf->MultiCell(170, 5, $descripcion[1], 0, 'L',0);
 
