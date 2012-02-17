@@ -67,6 +67,7 @@ $impr_vocab = optional_param('impr_vocab',0,PARAM_INT);
 $impr_gram = optional_param('impr_gram',0,PARAM_INT);
 $impr_tipol = optional_param('impr_tipol',0,PARAM_INT);
 $impr_inten = optional_param('impr_inten',0,PARAM_INT);
+$impr_estra = optional_param('impr_estra',0,PARAM_INT);
 
 
 //se crea el pdf
@@ -2130,7 +2131,7 @@ if($impr_tipol == 1){
                 $pdf->SetTextColor(TEXT_AUTO);
                 //$pdf->SetFont('', 'B', '12');
 //                $pdf->Cell(0, 5, $mtt, 0, 1, 'L', 0);
-
+                $pdf->setLeftMargin(MARGIN);
                 $pdf->writeHTMLCell(0, 0, 0, 0, '<h2>'.$mtt.'</h2>', 0, 1, 0);
 
 
@@ -2158,7 +2159,7 @@ if($impr_tipol == 1){
                     if($pintar){
 
 
-
+                        $pdf->setLeftMargin(MARGIN);
                         $pdf->SetTextColor(TEXT_WHITE);
                         $pdf->SetFont('', 'B', '10');
                         $pdf->SetLineWidth(0.3);
@@ -2207,7 +2208,7 @@ if($impr_tipol == 1){
                         $pdf->MultiCell(0, 5, $descripcion_troceada[(15*$i)+7], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
                         $pdf->Ln();
 
-                       $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>'.get_string('sobre_que','vocabulario').'</h4>', 0, 1, 0);
+                        $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>'.get_string('sobre_que','vocabulario').'</h4>', 0, 1, 0);
                         $pdf->MultiCell(0, 5, $descripcion_troceada[(15*$i)+8], 0, 'J', false, 1, '', '', true, 0, false, true, 0, '', false);
                         $pdf->Ln();
 
@@ -2241,21 +2242,21 @@ if($impr_tipol == 1){
                     }
                 }
 
-                        $pdf->Ln();
-                        $pdf->setLeftMargin(MARGIN_L2);
+                $pdf->Ln();
+                $pdf->setLeftMargin(MARGIN_L2);
 
-                        $pdf->SetFillColor(59, 89, 152); //#3B5998
-                        $pdf->SetTextColor(TEXT_WHITE);
-                        $pdf->SetLineWidth(0.3);
-                        $pdf->SetFont('', 'B', '10');
-                        $pdf->Cell(47, 5, get_string('miraren', 'vocabulario'), 1, 1, 'C', 1);
-                        $pdf->SetTextColor(TEXT_AUTO);
-                        $pdf->SetFont('', '', '10');
-                        $pdf->MultiCell(170, 5, $descripcion_troceada[count($descripcion_troceada)-1], 1, 'L',0);
+                $pdf->SetFillColor(59, 89, 152); //#3B5998
+                $pdf->SetTextColor(TEXT_WHITE);
+                $pdf->SetLineWidth(0.3);
+                $pdf->SetFont('', 'B', '10');
+                $pdf->Cell(47, 5, get_string('miraren', 'vocabulario'), 1, 1, 'C', 1);
+                $pdf->SetTextColor(TEXT_AUTO);
+                $pdf->SetFont('', '', '10');
+                $pdf->MultiCell(170, 5, $descripcion_troceada[count($descripcion_troceada)-1], 1, 'L',0);
 
-                        $pdf->setLeftMargin(MARGIN);
+                $pdf->setLeftMargin(MARGIN);
 
-                        $pdf->Ln();
+                $pdf->Ln();
                 
 
 
@@ -2263,6 +2264,67 @@ if($impr_tipol == 1){
         }
     }
 }
+
+
+if($impr_estra == 1) {
+    //tipologías textuales
+    $estrategias = new Vocabulario_mis_estrategias();
+    $todas = $estrategias->obtener_todas($USER->id);
+    //nueva pagina para las tipologias
+    $pdf->AddPage();
+    $pdf->writeHTMLCell(0, 0, 50, 100, '<h1>'.get_string('estrategias_may','vocabulario').'</h1>', 0, 1, 0);
+
+    
+
+    foreach ($todas as $cosa) {
+        $descripcion = explode('&', $cosa->descripcion);
+//        $descripcion = $cosa->descripcion;
+
+         if ($descripcion) {
+            $pintartochaco = false;
+
+            for($p=0; $p<count($descripcion) && $pintartochaco==false; $p++){
+                if($descripcion[$p]){
+                    $pintartochaco=true;
+                }
+            }
+
+            if ($pintartochaco) {
+                    $pdf->AddPage();
+                    //imprimo el nombre de estrategia
+
+                    $ea = new Vocabulario_estrategias();
+                    $ea->leer($cosa->estrategiaid, $USER->id);
+                    $mea = $ea->get('palabra');
+
+                    $pdf->SetTextColor(TEXT_AUTO);
+                    $pdf->setLeftMargin(MARGIN);
+                    $pdf->SetFillColor(59, 89, 152); //#3B5998
+                    $pdf->SetLineWidth(0.3);
+
+                    $pdf->writeHTMLCell(0, 0, 0, 0, '<h2>'.$mea.'</h2>', 0, 1, 0);
+
+
+
+                    $pdf->setLeftMargin(MARGIN_L2);
+
+
+    //                $pdf->SetFont('', 'B', '10');
+    //                $pdf->Cell(47, 5, get_string('miraren', 'vocabulario'), 1, 1, 'C', 1);
+    //                $pdf->SetTextColor(TEXT_AUTO);
+                    $pdf->SetFont('', '', '10');
+                    $pdf->MultiCell(170, 5, $descripcion[1], 0, 'L',0);
+
+                    $pdf->setLeftMargin(MARGIN);
+
+                    $pdf->Ln();
+
+            }
+         }
+    }
+}
+
+
 //se imprime el pdf
 $pdf->AliasNbPages();
 $pdf->Close();

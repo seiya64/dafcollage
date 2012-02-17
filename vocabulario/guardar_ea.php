@@ -53,11 +53,15 @@ $user_object = get_record('user', 'id', $USER->id);
 
 $estrategia = new Vocabulario_estrategias($user_object->id, required_param('campoea', PARAM_TEXT), optional_param('estrategia', PARAM_TEXT));
 
-$desc =  optional_param('miestrategia', null, PARAM_TEXT);
+
+
+$desc =  '&'.optional_param('miestrategia', null, PARAM_TEXT);
+
 
 //vemos que botón hemos pulsado
 if ($mform->no_submit_button_pressed()){
     if(optional_param('desc_btn')){
+
         $estrategiaaux = new Vocabulario_mis_estrategias();
         $estrategiaaux->leer($estrategia->get('padre'));
         $estrategiaaux->set($USER->id,$estrategia->get('padre'),$desc);
