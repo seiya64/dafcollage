@@ -1498,6 +1498,11 @@ class Vocabulario_mis_intenciones {
         return $palabras;
     }
 
+    function obtener_todas($usuarioid){
+        $ic = get_records_select('vocabulario_mis_intenciones', 'usuarioid='. $usuarioid);
+        return $ic;
+    }
+
 }
 
 class Vocabulario_tipologias {
