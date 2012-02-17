@@ -2894,7 +2894,8 @@ class mod_vocabulario_nuevo_ic_form extends moodleform {
 
         //botones
         $buttonarray = array();
-        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('guardesc','vocabulario'));
+        if($icid>1)
+            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('guardesc','vocabulario'));
         $buttonarray[] = &$mform->createElement('submit', 'desc_btn', get_string('verdesc','vocabulario'));
         $mform->registerNoSubmitButton('desc_btn');
         $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel','vocabulario'));
@@ -2959,59 +2960,61 @@ class mod_vocabulario_nuevo_tipologia_form extends moodleform {
             $mform->setDefault('campott', $ttid);
         }
 
-        $tt = new Vocabulario_mis_tipologias();
-        $tt->leer($ttid);
-        $descripcion_troceada = explode('&', $tt->get('descripcion'));
+        if($ttid>1){
+            $tt = new Vocabulario_mis_tipologias();
+            $tt->leer($ttid);
+            $descripcion_troceada = explode('&', $tt->get('descripcion'));
 
-        for ($i = 1; $i < 6; $i++) {
-            if($i-1) {
-                $mform->addElement('html','</br><a href="javascript:desocultar(\'tabla'.$i.'\')" id="mctabla'.$i.'">'.get_string("ejem","vocabulario").' '.$i.'</a>');
-                $mform->addElement('html','<div id="ocultador_tabla'.$i.'" style="display:none">');
+            for ($i = 1; $i < 6; $i++) {
+                if($i-1) {
+                    $mform->addElement('html','</br><a href="javascript:desocultar(\'tabla'.$i.'\')" id="mctabla'.$i.'">'.get_string("ejem","vocabulario").' '.$i.'</a>');
+                    $mform->addElement('html','<div id="ocultador_tabla'.$i.'" style="display:none">');
+                }
+                else {
+                    $mform->addElement('html','</br><a href="javascript:ocultar(\'tabla'.$i.'\')" id="mctabla'.$i.'">'.get_string("ejem","vocabulario").' '.$i.'</a>');
+                    $mform->addElement('html','<div id="ocultador_tabla'.$i.'">');
+                }
+                $mform->addElement('text', 'quien'.$i, get_string('quien', 'vocabulario'));
+                $mform->setDefault('quien'.$i, $descripcion_troceada[15*($i-1)+0]);
+                $mform->addElement('text', 'finalidad'.$i, get_string('finalidad', 'vocabulario'));
+                $mform->setDefault('finalidad'.$i, $descripcion_troceada[15*($i-1)+1]);
+                $mform->addElement('text', 'a_quien'.$i, get_string('a_quien', 'vocabulario'));
+                $mform->setDefault('a_quien'.$i, $descripcion_troceada[15*($i-1)+2]);
+                $mform->addElement('text', 'medio'.$i, get_string('medio', 'vocabulario'));
+                $mform->setDefault('medio'.$i, $descripcion_troceada[15*($i-1)+3]);
+                $mform->addElement('text', 'donde'.$i, get_string('donde', 'vocabulario'));
+                $mform->setDefault('donde'.$i, $descripcion_troceada[15*($i-1)+4]);
+                $mform->addElement('text', 'cuando'.$i, get_string('cuando', 'vocabulario'));
+                $mform->setDefault('cuando'.$i, $descripcion_troceada[15*($i-1)+5]);
+                $mform->addElement('text', 'motivo'.$i, get_string('motivo', 'vocabulario'));
+                $mform->setDefault('motivo'.$i, $descripcion_troceada[15*($i-1)+6]);
+                $mform->addElement('text', 'funcion'.$i, get_string('funcion', 'vocabulario'));
+                $mform->setDefault('funcion'.$i, $descripcion_troceada[15*($i-1)+7]);
+                $mform->addElement('text', 'sobre_que'.$i, get_string('sobre_que', 'vocabulario'));
+                $mform->setDefault('sobre_que'.$i, $descripcion_troceada[15*($i-1)+8]);
+                $mform->addElement('text', 'que'.$i, get_string('que', 'vocabulario'));
+                $mform->setDefault('que'.$i, $descripcion_troceada[15*($i-1)+9]);
+                $mform->addElement('text', 'orden'.$i, get_string('orden', 'vocabulario'));
+                $mform->setDefault('orden'.$i, $descripcion_troceada[15*($i-1)+10]);
+                $mform->addElement('text', 'medios_nonverbales'.$i, get_string('medios_nonverbales', 'vocabulario'));
+                $mform->setDefault('medios_nonverbales'.$i, $descripcion_troceada[15*($i-1)+11]);
+                $mform->addElement('text', 'que_palabras'.$i, get_string('que_palabras', 'vocabulario'));
+                $mform->setDefault('que_palabras'.$i, $descripcion_troceada[15*($i-1)+12]);
+                $mform->addElement('text', 'que_frases'.$i, get_string('que_frases', 'vocabulario'));
+                $mform->setDefault('que_frases'.$i, $descripcion_troceada[15*($i-1)+13]);
+                $mform->addElement('text', 'que_tono'.$i, get_string('que_tono', 'vocabulario'));
+                $mform->setDefault('que_tono'.$i, $descripcion_troceada[15*($i-1)+14]);
+                $mform->addElement('html','</div>');
             }
-            else {
-                $mform->addElement('html','</br><a href="javascript:ocultar(\'tabla'.$i.'\')" id="mctabla'.$i.'">'.get_string("ejem","vocabulario").' '.$i.'</a>');
-                $mform->addElement('html','<div id="ocultador_tabla'.$i.'">');
-            }
-            $mform->addElement('text', 'quien'.$i, get_string('quien', 'vocabulario'));
-            $mform->setDefault('quien'.$i, $descripcion_troceada[15*($i-1)+0]);
-            $mform->addElement('text', 'finalidad'.$i, get_string('finalidad', 'vocabulario'));
-            $mform->setDefault('finalidad'.$i, $descripcion_troceada[15*($i-1)+1]);
-            $mform->addElement('text', 'a_quien'.$i, get_string('a_quien', 'vocabulario'));
-            $mform->setDefault('a_quien'.$i, $descripcion_troceada[15*($i-1)+2]);
-            $mform->addElement('text', 'medio'.$i, get_string('medio', 'vocabulario'));
-            $mform->setDefault('medio'.$i, $descripcion_troceada[15*($i-1)+3]);
-            $mform->addElement('text', 'donde'.$i, get_string('donde', 'vocabulario'));
-            $mform->setDefault('donde'.$i, $descripcion_troceada[15*($i-1)+4]);
-            $mform->addElement('text', 'cuando'.$i, get_string('cuando', 'vocabulario'));
-            $mform->setDefault('cuando'.$i, $descripcion_troceada[15*($i-1)+5]);
-            $mform->addElement('text', 'motivo'.$i, get_string('motivo', 'vocabulario'));
-            $mform->setDefault('motivo'.$i, $descripcion_troceada[15*($i-1)+6]);
-            $mform->addElement('text', 'funcion'.$i, get_string('funcion', 'vocabulario'));
-            $mform->setDefault('funcion'.$i, $descripcion_troceada[15*($i-1)+7]);
-            $mform->addElement('text', 'sobre_que'.$i, get_string('sobre_que', 'vocabulario'));
-            $mform->setDefault('sobre_que'.$i, $descripcion_troceada[15*($i-1)+8]);
-            $mform->addElement('text', 'que'.$i, get_string('que', 'vocabulario'));
-            $mform->setDefault('que'.$i, $descripcion_troceada[15*($i-1)+9]);
-            $mform->addElement('text', 'orden'.$i, get_string('orden', 'vocabulario'));
-            $mform->setDefault('orden'.$i, $descripcion_troceada[15*($i-1)+10]);
-            $mform->addElement('text', 'medios_nonverbales'.$i, get_string('medios_nonverbales', 'vocabulario'));
-            $mform->setDefault('medios_nonverbales'.$i, $descripcion_troceada[15*($i-1)+11]);
-            $mform->addElement('text', 'que_palabras'.$i, get_string('que_palabras', 'vocabulario'));
-            $mform->setDefault('que_palabras'.$i, $descripcion_troceada[15*($i-1)+12]);
-            $mform->addElement('text', 'que_frases'.$i, get_string('que_frases', 'vocabulario'));
-            $mform->setDefault('que_frases'.$i, $descripcion_troceada[15*($i-1)+13]);
-            $mform->addElement('text', 'que_tono'.$i, get_string('que_tono', 'vocabulario'));
-            $mform->setDefault('que_tono'.$i, $descripcion_troceada[15*($i-1)+14]);
-            $mform->addElement('html','</div>');
+
+            //solucion de enlazar todo con todo
+            $mform->addElement('textarea', 'miraren', get_string('miraren','vocabulario'), 'rows="5" cols="30"');
+            $mform->setDefault('miraren', $descripcion_troceada[count($descripcion_troceada)-1]);
         }
-
-        //solucion de enlazar todo con todo
-        $mform->addElement('textarea', 'miraren', get_string('miraren','vocabulario'), 'rows="5" cols="30"');
-        $mform->setDefault('miraren', $descripcion_troceada[count($descripcion_troceada)-1]);
-
         //botones
         $buttonarray = array();
-        $buttonarray[] = &$mform->createElement('submit', 'desc_btn', get_string('guardesc','vocabulario'));
+        if($ttid>1)
+            $buttonarray[] = &$mform->createElement('submit', 'desc_btn', get_string('guardesc','vocabulario'));
         $mform->registerNoSubmitButton('desc_btn');
         $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('verdesc','vocabulario'));
         $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel','vocabulario'));
@@ -3074,22 +3077,26 @@ class mod_vocabulario_nuevo_estrategia_form extends moodleform {
             $mform->setDefault('campoea', $eaid);
         }
 
-        $ea = new Vocabulario_mis_estrategias();
-        $ea->leer($eaid);
-        //$descripcion_troceada = explode('&', $ea->get('descripcion'));
-        $descripcion = $ea->get('descripcion');
+        if($eaid > 1){
+            $ea = new Vocabulario_mis_estrategias();
+            $ea->leer($eaid);
+            //$descripcion_troceada = explode('&', $ea->get('descripcion'));
+            $descripcion = explode('&', $ea->get('descripcion'));
+            //$descripcion = $ea->get('descripcion');
 
-        //solucion de enlazar todo con todo
-        $mform->addElement('textarea', 'miestrategia', get_string('miestrategia','vocabulario'), 'rows="5" cols="30"');
-        $mform->setDefault('miestrategia', $descripcion);
-
-        //botones
-        $buttonarray = array();
-        $buttonarray[] = &$mform->createElement('submit', 'desc_btn', get_string('guardesc','vocabulario'));
-        $mform->registerNoSubmitButton('desc_btn');
-        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('verdesc','vocabulario'));
-        $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel','vocabulario'));
-        $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
+            //solucion de enlazar todo con todo
+            $mform->addElement('textarea', 'miestrategia', get_string('miestrategia','vocabulario'), 'rows="5" cols="30"');
+            $mform->setDefault('miestrategia', $descripcion[1]);
+        }
+            //botones
+            $buttonarray = array();
+            if($eaid>1)
+                $buttonarray[] = &$mform->createElement('submit', 'desc_btn', get_string('guardesc','vocabulario'));
+            $mform->registerNoSubmitButton('desc_btn');
+            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('verdesc','vocabulario'));
+            $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel','vocabulario'));
+            $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
+        
     }
 
 }
@@ -3206,10 +3213,12 @@ class mod_vocabulario_pdf_form extends moodleform{
         $mform->addElement('checkbox', 'impr_gram', get_string('impr_gram', 'vocabulario'));
         $mform->addElement('checkbox', 'impr_tipol', get_string('impr_tipol', 'vocabulario'));
         $mform->addElement('checkbox', 'impr_inten', get_string('impr_inten', 'vocabulario'));
+        $mform->addElement('checkbox', 'impr_estra', get_string('impr_estra', 'vocabulario'));
         $mform->setDefault('impr_vocab', 1);
         $mform->setDefault('impr_gram', 1);
         $mform->setDefault('impr_tipol', 1);
         $mform->setDefault('impr_inten', 1);
+        $mform->setDefault('impr_estra', 1);
 
 
         $buttonarray = array();
