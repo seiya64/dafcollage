@@ -2022,46 +2022,6 @@ if($impr_gram == 1){
                                             $pdf->SetFont('','',10);
                                             $pdf->MultiCell(172, 5, $desc_aux[3], 'BR', 'L', 0);
 
-
-
-
-
-                                            /*
-                                             * Opción estetica 1
-                                             *
-                                            if($desc_aux[0]!=$anterior){
-                                                $pdf->Ln();
-                                                $pdf->Cell(25,5,get_string('praposit','vocabulario'),1,0,'C',1);
-                                                $pdf->SetTextColor(TEXT_AUTO);
-                                                $pdf->Cell(25,5,$desc_aux[0],0,1,'C',0);
-                                                $anterior = $desc_aux[0];
-                                                
-                                                $pdf->SetTextColor(TEXT_WHITE);
-//                                                $pdf->Cell(25,3,'',0,1,'C',0);
-                                                $pdf->Cell(150,5,get_string('func','vocabulario'),1,0,'C',1);
-                                                $pdf->Cell(40,5,get_string('kas','vocabulario'),1,1,'C',1);
-                                                $pdf->Cell(25,3,'',0,1,'C',0);
-
-                                            }
-
-                                            
-
-                                            $pdf->SetTextColor(TEXT_AUTO);
-                                            //cabeceras
-                                            $pdf->SetFont('','',10);
-                                            //filas
-//                                            $pdf->Cell(25,5,$desc_aux[0],1,0,'C',0);
-                                            $pdf->Cell(150,5,$desc_aux[1],1,0,'C',0);
-                                            $pdf->Cell(40,5,$kasus[$desc_aux[2]],1,1,'C',0);
-
-                                            $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
-                                            $pdf->SetFont('','B',10);
-                                            $pdf->Cell(20,5,get_string('beisp','vocabulario'),1,0,'C',1);
-                                            $pdf->SetFont('','',10);
-                                            $pdf->MultiCell(165, 5, $desc_aux[3], 0, 'L', 0);
-                                            $pdf->Cell(40,3,'',0,1,'C',0);
-                                            */
-
                                         }
                                     }
                                     $pdf->Ln();
