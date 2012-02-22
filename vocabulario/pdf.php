@@ -105,8 +105,8 @@ if($impr_vocab == 1){
     $pdf->AddPage();
     $pdf->writeHTMLCell(0, 0, 50, 100, '<h1>'.get_string('vocabulario_may','vocabulario').'</h1>', 0, 1, 0);
     $pdf->writeHTMLCell(0, 0, 50, 150, '<h1>LA IMPRESIÓN DE VOCABULARIO ESTARÁ DISPONIBLE EN UNOS DÍAS</h1>', 0, 1, 0);
-//}
-//if(false){
+}
+if(false){
     $pdf->AddPage();
     //resto de paginas
     //palabras por campos
@@ -116,15 +116,10 @@ if($impr_vocab == 1){
 
     $mi_campo = 0;
     $color = 1;
-    
-    $Sgram = '0';
-    $Spal = '';
-    $Ssig = '';
-    $Sobs ='';
 
 
 
-
+    $genero = array (get_string('masc', 'vocabulario'),get_string('fem', 'vocabulario'),get_string('neu', 'vocabulario'));
 
     foreach ($mis_palabras as $cosa) {
         if ($cosa->get('campo')->get('campo') != $mi_campo) {
@@ -160,8 +155,7 @@ if($impr_vocab == 1){
         } else {
             $pdf->SetFillColor(255, 255, 255); //blanco
         }
-        $pdf->SetTextColor(TEXT_AUTO);
-        $pdf->SetFont('', 'B', '10');
+        
 
 
 
@@ -169,60 +163,72 @@ if($impr_vocab == 1){
 
 
         $sustantivo = $cosa->get('sustantivo');
-
-        if($Spal != $sustantivo->get('palabra') || $Ssig != $sustantivo->get('significado') ||
-           $Sgram != $sustantivo->get('gramaticaid') || $Sobs != $sustantivo->get('observaciones')){
-
-            $Spal = $sustantivo->get('palabra');
-            $Ssig = $sustantivo->get('significado');
+            $Spal = $sustantivo->get('palabra');            //1 linea
+            $Sgen = $genero[$sustantivo->get('genero')];    //3 linea
+            $Ssig = $sustantivo->get('significado');        //2 linea
             $Sgram = $sustantivo->get('gramaticaid');
             $Sobs = $sustantivo->get('observaciones');
-
-            $SpalI = $sustantivo->get('palabra');
-            $SsigI = $sustantivo->get('significado');
-            $SgramI = $sustantivo->get('gramaticaid');
-            $SobsI = $sustantivo->get('observaciones');
-
-        }else{
-            $SgramI = '0';
-            $SpalI = '';
-            $SsigI = '';
-            $SobsI ='';
-        }
-
         $adjetivo = $cosa->get('adjetivo');
+            $Apal = $adjetivo->get('sin_declinar');         //1 linea
+            $Agen = '';                                     //3 linea
+            $Asig = $adjetivo->get('significado');          //2 linea
+            $Agram = $adjetivo->get('gramaticaid');
+            $Aobs = $adjetivo->get('observaciones');
         $verbo = $cosa->get('verbo');
+            $Vpal = $verbo->get('infinitivo');              //1 linea
+            $Vter = $verbo->get('ter_pers_sing');           //3 linea
+            $Vsig = $verbo->get('significado');             //2 linea
+            $Vgram = $verbo->get('gramaticaid');
+            $Vobs = $verbo->get('observaciones');
         $otro = $cosa->get('otro');
+            $Opal = $otro->get('palabra');                  //1 linea
+            $Ogen = '';                                     //3 linea
+            $Osig = $otro->get('significado');              //2 linea
+            $Ogram = $otro->get('gramaticaid');
+            $Oobs = $otro->get('observaciones');
 
 
-        $pdf->Cell(47, 7, $SpalI, 'LTR', 0, 'C', 1);
-        $pdf->Cell(47, 7, $adjetivo->get('sin_declinar'), 'RT', 0, 'C', 1);
-        $pdf->Cell(47, 7, $verbo->get('infinitivo'), 'TR', 0, 'C', 1);
-        $pdf->Cell(47, 7, $otro->get('palabra'), 'RT', 0, 'C', 1);
+
+        //1 Linea -> Palabra/verbo/adjetivo/otra
+        $pdf->SetTextColor(TEXT_AUTO);
+        $pdf->SetFont('', 'B', '10');
+        $pdf->Cell(47, 5, $Spal, 'LTR', 0, 'C', 1);
+        $pdf->Cell(47, 5, $Apal, 'RT', 0, 'C', 1);
+        $pdf->Cell(47, 5, $Vpal, 'TR', 0, 'C', 1);
+        $pdf->Cell(47, 5, $Opal, 'RT', 0, 'C', 1);
         $pdf->Ln();
-        //significados
+        
+        //2 Linea -> significados
         $pdf->SetFont('', '', '7');
-        $pdf->Cell(47, 7, $SsigI, 'LR', 0, 'R', 1);
-        $pdf->Cell(47, 7, $adjetivo->get('significado'), 'R', 0, 'R', 1);
-        $pdf->Cell(47, 7, $verbo->get('significado'), 'R', 0, 'R', 1);
-        $pdf->Cell(47, 7, $otro->get('significado'), 'R', 0, 'R', 1);
+        $pdf->Cell(47, 3, $Ssig, 'LR', 0, 'R', 1);
+        $pdf->Cell(47, 3, $Asig, 'R', 0, 'R', 1);
+        $pdf->Cell(47, 3, $Vsig, 'R', 0, 'R', 1);
+        $pdf->Cell(47, 3, $Osig, 'R', 0, 'R', 1);
+        $pdf->Ln();
+
+        //3 Linea -> genero/ter_pers
+        $pdf->SetFont('', '', '7');
+        $pdf->Cell(47, 4, $Sgen, 'LR', 0, 'L', 1);
+        $pdf->Cell(47, 4, $Agen, 'R', 0, 'L', 1);
+        $pdf->Cell(47, 4, $Vter, 'R', 0, 'L', 1);
+        $pdf->Cell(47, 4, $Ogen, 'R', 0, 'L', 1);
         $pdf->Ln();
         //gramaticas
         $gram = new Vocabulario_gramatica();
-        $gram->leer($SgramI);
+        $gram->leer($Sgram);
         $pdf->Cell(47, 7, get_string('referencia', 'vocabulario') . ': ' . $gram->get('gramatica'), 'LR', 0, 'L', 1);
-        $gram->leer($adjetivo->get('gramaticaid'));
+        $gram->leer($Agram);
         $pdf->Cell(47, 7, get_string('referencia', 'vocabulario') . ': ' . $gram->get('gramatica'), 'R', 0, 'L', 1);
-        $gram->leer($verbo->get('gramaticaid'));
+        $gram->leer($Vpal);
         $pdf->Cell(47, 7, get_string('referencia', 'vocabulario') . ': ' . $gram->get('gramatica'), 'R', 0, 'L', 1);
-        $gram->leer($otro->get('gramaticaid'));
+        $gram->leer($Opal);
         $pdf->Cell(47, 7, get_string('referencia', 'vocabulario') . ': ' . $gram->get('gramatica'), 'R', 0, 'L', 1);
         $pdf->Ln();
         //observaciones
-        $pdf->Cell(47, 7, get_string('vease_pdf', 'vocabulario') . ': ' . $SobsI, 'LBR', 0, 'L', 1);
-        $pdf->Cell(47, 7, get_string('vease_pdf', 'vocabulario') . ': ' . $adjetivo->get('observaciones'), 'BR', 0, 'L', 1);
-        $pdf->Cell(47, 7, get_string('vease_pdf', 'vocabulario') . ': ' . $verbo->get('observaciones'), 'BR', 0, 'L', 1);
-        $pdf->Cell(47, 7, get_string('vease_pdf', 'vocabulario') . ': ' . $otro->get('observaciones'), 'RB', 0, 'L', 1);
+        $pdf->Cell(47, 7, get_string('vease_pdf', 'vocabulario') . ': ' . $Sobs, 'LBR', 0, 'L', 1);
+        $pdf->Cell(47, 7, get_string('vease_pdf', 'vocabulario') . ': ' . $Aobs, 'BR', 0, 'L', 1);
+        $pdf->Cell(47, 7, get_string('vease_pdf', 'vocabulario') . ': ' . $Vobs, 'BR', 0, 'L', 1);
+        $pdf->Cell(47, 7, get_string('vease_pdf', 'vocabulario') . ': ' . $Oobs, 'RB', 0, 'L', 1);
         $pdf->Ln();
 
 
