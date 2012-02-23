@@ -81,6 +81,7 @@ $string['vrb'] = 'Verbo';
 $string['otr'] = 'Otras palabras';
 $string['comen'] = 'Observaciones';
 $string['3per'] = 'Tercera persona del singular';
+$string['3perAv'] = '3ª Pers. sing.';           //Esto tiene que ser la abreviatura de la anterior
 $string['infi'] = 'Infinitivo';
 $string['pret'] = 'Pretérito';
 $string['part'] = 'Participio';
