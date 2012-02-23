@@ -832,7 +832,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $titulillos .= '<th>' . get_string('masculino', 'vocabulario') . '</th>';
                 $titulillos .= '<th>' . get_string('neutro', 'vocabulario') . '</th>';
                 $titulillos .= '<th>' . get_string('femenino', 'vocabulario') . '</th>';
-                $titulillos .= '<th>' . get_string('plural', 'vocabulario') . '</th>';
+                $titulillos .= '<th>' . get_string('pluralAl', 'vocabulario') . '</th>';
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
                 $titulillos = '<tr class="cell">';
@@ -912,7 +912,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $titulillos .= '<th>' . get_string('masculino', 'vocabulario') . '</th>';
                 $titulillos .= '<th>' . get_string('neutro', 'vocabulario') . '</th>';
                 $titulillos .= '<th>' . get_string('femenino', 'vocabulario') . '</th>';
-                $titulillos .= '<th>' . get_string('plural', 'vocabulario') . '</th>';
+                $titulillos .= '<th>' . get_string('pluralAl', 'vocabulario') . '</th>';
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
                 $titulillos = '<tr class="cell">';
@@ -993,7 +993,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $titulillos .= '<th>' . get_string('masculino', 'vocabulario') . '</th>';
                 $titulillos .= '<th>' . get_string('neutro', 'vocabulario') . '</th>';
                 $titulillos .= '<th>' . get_string('femenino', 'vocabulario') . '</th>';
-                $titulillos .= '<th>' . get_string('plural', 'vocabulario') . '</th>';
+                $titulillos .= '<th>' . get_string('pluralAl', 'vocabulario') . '</th>';
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
                 $titulillos = '<tr class="cell">';
@@ -1507,8 +1507,8 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                     $titulillos .= '<tr class="header">';
                     $titulillos .= '<th>&nbsp;</th>';
-                    $titulillos .= '<th colspan=5>'.get_string('sing','vocabulario').'</th>';
-                    $titulillos .= '<th colspan=3>'.get_string('plural','vocabulario').'</th>';
+                    $titulillos .= '<th colspan=5>'.get_string('singAl','vocabulario').'</th>';
+                    $titulillos .= '<th colspan=3>'.get_string('pluralAl','vocabulario').'</th>';
                     $titulillos .= '<th rowspan=3>'.get_string('sie','vocabulario').'</th>';
                     $titulillos .= '</tr>';
                     $titulillos .= '<tr class="header">';
@@ -1556,7 +1556,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $titulillos .= '<th>' . get_string('masculino', 'vocabulario') . '</th>';
                     $titulillos .= '<th>' . get_string('neutro', 'vocabulario') . '</th>';
                     $titulillos .= '<th>' . get_string('femenino', 'vocabulario') . '</th>';
-                    $titulillos .= '<th>' . get_string('plural', 'vocabulario') . '</th>';
+                    $titulillos .= '<th>' . get_string('pluralAl', 'vocabulario') . '</th>';
                     $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
                     $titulillos = '<tr class="cell">';
@@ -1610,7 +1610,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $titulillos .= '</tr>';
                 $titulillos .= '<tr class="header">';
                 $titulillos .= '<th>&nbsp;</th>';
-                $titulillos .= '<th colspan=5>'.get_string('sing','vocabulario').'</th>';
+                $titulillos .= '<th colspan=5>'.get_string('singAl','vocabulario').'</th>';
                 $titulillos .= '</tr>';
                 $titulillos .= '<tr class="header">';
                 $titulillos .= '<th>&nbsp;</th>';
@@ -1642,7 +1642,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 //titulillos de la tabla
                 $titulillos = '<tr class="header">';
                 $titulillos .= '<th>&nbsp;</th>';
-                $titulillos .= '<th colspan=3>'.get_string('plural','vocabulario').'</th>';
+                $titulillos .= '<th colspan=3>'.get_string('pluralAl','vocabulario').'</th>';
                 $titulillos .= '<th rowspan=2>'.get_string('sie','vocabulario').'</th>';
                 $titulillos .= '</tr>';
                 $titulillos .= '<tr class="header">';
@@ -1701,7 +1701,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $titulillos .= '<th>' . get_string('masculino', 'vocabulario') . '</th>';
                 $titulillos .= '<th>' . get_string('neutro', 'vocabulario') . '</th>';
                 $titulillos .= '<th>' . get_string('femenino', 'vocabulario') . '</th>';
-                $titulillos .= '<th>' . get_string('plural', 'vocabulario') . '</th>';
+                $titulillos .= '<th>' . get_string('pluralAl', 'vocabulario') . '</th>';
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
                 $titulillos = '<tr class="cell">';
@@ -1826,7 +1826,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $titulillos .= '<th>' . get_string('masculino', 'vocabulario') . '</th>';
                     $titulillos .= '<th>' . get_string('neutro', 'vocabulario') . '</th>';
                     $titulillos .= '<th>' . get_string('femenino', 'vocabulario') . '</th>';
-                    $titulillos .= '<th>' . get_string('plural', 'vocabulario') . '</th>';
+                    $titulillos .= '<th>' . get_string('pluralAl', 'vocabulario') . '</th>';
                     $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
                     $titulillos = '<tr class="cell">';
@@ -2114,7 +2114,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 //titulillos de la tabla
                 $titulillos = '<tr class="header">';
                 $titulillos .= '<th>&nbsp;</th>';
-                $titulillos .= '<th colspan=5>'.get_string('sing','vocabulario').'</th>';
+                $titulillos .= '<th colspan=5>'.get_string('singAl','vocabulario').'</th>';
                 $titulillos .= '</tr>';
                 $titulillos .= '<tr class="header">';
                 $titulillos .= '<th>&nbsp;</th>';
@@ -2172,7 +2172,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 //titulillos de la tabla
                 $titulillos = '<tr class="header">';
                 $titulillos .= '<th>&nbsp;</th>';
-                $titulillos .= '<th colspan=4>'.get_string('plural','vocabulario').'</th>';
+                $titulillos .= '<th colspan=4>'.get_string('pluralAl','vocabulario').'</th>';
                 $titulillos .= '</tr>';
                 $titulillos .= '<tr class="header">';
                 $titulillos .= '<th>&nbsp;</th>';
@@ -2281,8 +2281,8 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $titulillos .= '</tr>';
                 $titulillos .= '<tr class="header">';
                 $titulillos .= '<th></th>';
-                $titulillos .='<th colspan="3">'.get_string('sing','vocabulario').'</th>';
-                $titulillos .='<th colspan="3">'.get_string('plural','vocabulario').'</th>';
+                $titulillos .='<th colspan="3">'.get_string('singAl','vocabulario').'</th>';
+                $titulillos .='<th colspan="3">'.get_string('pluralAl','vocabulario').'</th>';
                 $titulillos .='<th>&nbsp;</th>';
                 $titulillos .= '</tr>';
                 $titulillos .= '<tr class="header">';
