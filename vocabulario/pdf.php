@@ -95,7 +95,7 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 
 //Portada
 $pdf->AddPage();
-
+$pdf->SetFont('', 'B', '12');
 $pdf->writeHTMLCell(0, 0, 50, 100, '<h1>'.get_string('cuad_digital_may','vocabulario').'</h1>', 0, 1, 0);
 $pdf->writeHTMLCell(0, 0, 20, 200, $USER->firstname . ' ' . $USER->lastname, 0, 1, 0);
 $pdf->writeHTMLCell(0, 0, 20, 205, $USER->email, 0, 1, 0);
@@ -103,18 +103,17 @@ $pdf->writeHTMLCell(0, 0, 20, 205, $USER->email, 0, 1, 0);
 if($impr_vocab == 1){
     //Portada vocabulario
     $pdf->AddPage();
+    $pdf->SetFont('', 'B', '12');
     $pdf->writeHTMLCell(0, 0, 50, 100, '<h1>'.get_string('vocabulario_may','vocabulario').'</h1>', 0, 1, 0);
-//    $pdf->writeHTMLCell(0, 0, 50, 150, '<h1>LA IMPRESIÓN DE VOCABULARIO ESTARÁ DISPONIBLE EN UNOS DÍAS</h1>', 0, 1, 0);
-//}
-//if(false){
-    $pdf->AddPage();
+
+//    $pdf->AddPage();
     //resto de paginas
     //palabras por campos
 
     $mis_palabras_aux = new Vocabulario_mis_palabras();
     $mis_palabras = $mis_palabras_aux->obtener_todas($usuario);
 
-    $mi_campo = 0;
+    $mi_campo = -1;
     $color = 1;
 
 
@@ -128,9 +127,10 @@ if($impr_vocab == 1){
             $pdf->AddPage();
             $mi_campo = $cosa->get('campo')->get('campo');
             $pdf->SetTextColor(TEXT_AUTO);
-            $pdf->SetFont('', 'B', '14');
-            $pdf->Cell(0, 7, $mi_campo, 0, 1, 'L', 0);
-            $pdf->Ln();
+            $pdf->SetFont('', 'B', '12');
+//            $pdf->Cell(0, 7, $mi_campo, 0, 1, 'L', 0);
+
+            $pdf->writeHTMLCell(0, 0, 0, 0, '<h2>'.$mi_campo.'</h2>', 0, 1, 0);
 
             //titulillos
             $pdf->SetFillColor(59, 89, 152); //azul oscuro
@@ -169,6 +169,7 @@ if($impr_vocab == 1){
             $Sic = $sustantivo->get('intencionid');         //7 linea
             $Stip = $sustantivo->get('tipologiaid');        //9 linea
             $Sobs = $sustantivo->get('observaciones');      //10 linea
+            $Seje = $sustantivo->get('ejemplo');
         $adjetivo = $cosa->get('adjetivo');
             $Apal = $adjetivo->get('sin_declinar');         //1 linea
             $Asig = $adjetivo->get('significado');          //2 linea
@@ -318,14 +319,12 @@ if($impr_vocab == 1){
         $pdf->Cell(47, 4, $Oobs, 'RB', 0, 'L', 1);
         $pdf->Ln();
 
-        /*//10 Linea -> observaciones
+        //10 Linea -> observaciones
         $pdf->SetFont('', 'I', '6');
-        $pdf->Cell(47, 7, $Sobs, 'LBR', 0, 'L', 1);
-        $pdf->Cell(47, 7, $Aobs, 'BR', 0, 'L', 1);
-        $pdf->Cell(47, 7, $Vobs, 'BR', 0, 'L', 1);
-        $pdf->Cell(47, 7, $Oobs, 'RB', 0, 'L', 1);
+        $pdf->Cell(47, 4, get_string('ejem','vocabulario'), 'LB', 0, 'L', 1);
+        $pdf->Cell(141, 4, $Seje, 'BR', 0, 'RBL', 1);
         $pdf->Ln();
-        */
+        
 
 
 
@@ -405,6 +404,7 @@ if($impr_gram == 1){
 
     //nueva pagina para las gramaticas
     $pdf->AddPage();
+    $pdf->SetFont('', 'B', '12');
     $pdf->writeHTMLCell(0, 0, 50, 100, '<h1>'.get_string('gramatica_may','vocabulario').'</h1>', 0, 1, 0);
 
     foreach ($gramaticas_usadas as $cosa) {
@@ -413,7 +413,7 @@ if($impr_gram == 1){
         if ($palabras) {
             //asigno el nombre de la gramatica
             $mi_gram = $cosa[0];
-            //$pdf->SetFont('', 'B', '12');
+
             
            // $pdf->Cell(0, 5, $mi_gram, 0, 1, 'L', 0);
 
@@ -432,6 +432,7 @@ if($impr_gram == 1){
 
                     if($pintartochaco){
                         $pdf->AddPage();
+                        $pdf->SetFont('', 'B', '12');
                         $pdf->writeHTMLCell(0, 0, 0, 0, '<h2>'.$mi_gram.'</h2>', 0, 1, 0);
 
                         $grid=$palabra->gramaticaid;
@@ -2262,6 +2263,7 @@ if($impr_tipol == 1){
     $todas = $tipologias->obtener_todas($USER->id);
     //nueva pagina para las tipologias
     $pdf->AddPage();
+    $pdf->SetFont('', 'B', '12');
     $pdf->writeHTMLCell(0, 0, 50, 100, '<h1>'.get_string('tipologias_may','vocabulario').'</h1>', 0, 1, 0);
 
     foreach ($todas as $cosa){
@@ -2285,7 +2287,7 @@ if($impr_tipol == 1){
                 $mtt = $tt->get('palabra');
 
                 $pdf->SetTextColor(TEXT_AUTO);
-                //$pdf->SetFont('', 'B', '12');
+                $pdf->SetFont('', 'B', '12');
 //                $pdf->Cell(0, 5, $mtt, 0, 1, 'L', 0);
                 $pdf->setLeftMargin(MARGIN);
                 $pdf->writeHTMLCell(0, 0, 0, 0, '<h2>'.$mtt.'</h2>', 0, 1, 0);
@@ -2431,6 +2433,7 @@ if($impr_inten == 1) {
     $todas = $intenciones->obtener_todas($USER->id);
     //nueva pagina para las estrategias
     $pdf->AddPage();
+    $pdf->SetFont('', 'B', '12');
     $pdf->writeHTMLCell(0, 0, 50, 100, '<h1>'.get_string('intenciones_may','vocabulario').'</h1>', 0, 1, 0);
 
 
@@ -2460,7 +2463,7 @@ if($impr_inten == 1) {
                     $pdf->setLeftMargin(MARGIN);
                     $pdf->SetFillColor(59, 89, 152); //#3B5998
                     $pdf->SetLineWidth(0.3);
-
+                    $pdf->SetFont('','B',12);
                     $pdf->writeHTMLCell(0, 0, 0, 0, '<h2>'.$mic.'</h2>', 0, 1, 0);
 
 
@@ -2594,6 +2597,7 @@ if($impr_estra == 1) {
     $todas = $estrategias->obtener_todas($USER->id);
     //nueva pagina para las estrategias
     $pdf->AddPage();
+    $pdf->SetFont('', 'B', '12');
     $pdf->writeHTMLCell(0, 0, 50, 100, '<h1>'.get_string('estrategias_may','vocabulario').'</h1>', 0, 1, 0);
 
     
@@ -2622,7 +2626,7 @@ if($impr_estra == 1) {
                     $pdf->setLeftMargin(MARGIN);
                     $pdf->SetFillColor(59, 89, 152); //#3B5998
                     $pdf->SetLineWidth(0.3);
-
+                    $pdf->SetFont('', 'B', '12');
                     $pdf->writeHTMLCell(0, 0, 0, 0, '<h2>'.$mea.'</h2>', 0, 1, 0);
 
                     $pdf->setLeftMargin(MARGIN_L2);
