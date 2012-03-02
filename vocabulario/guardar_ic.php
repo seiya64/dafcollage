@@ -63,8 +63,8 @@ for ($i = 1; $salir == false; $i = $i+$avance){
         optional_param('beisp'.$i, null, PARAM_TEXT) ||
         optional_param('siehe'.$i, null, PARAM_TEXT)){
 
-        $desc .= '&'.optional_param('mittel'.$i, null, PARAM_TEXT).'&'.optional_param('wortklase'.$i, null, PARAM_TEXT).'&';
-        $desc .= optional_param('beisp'.$i, null, PARAM_TEXT).'&'.optional_param('siehe'.$i, null, PARAM_TEXT);
+        $desc .= __SEPARADORCAMPOS__.optional_param('mittel'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__.optional_param('wortklase'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__;
+        $desc .= optional_param('beisp'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__.optional_param('siehe'.$i, null, PARAM_TEXT);
     }
     else{
         $salir = true;

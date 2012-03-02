@@ -419,7 +419,7 @@ if($impr_gram == 1){
 
             
             foreach ($palabras as $palabra) {
-                $descripcion_troceada = explode('&', $palabra->descripcion);
+                $descripcion_troceada = explode(__SEPARADORCAMPOS__, $palabra->descripcion);
                 
                 if ($descripcion_troceada) {
 
@@ -2144,7 +2144,7 @@ if($impr_gram == 1){
 
                                     $arrayAux1 = array();
                                     for($ind=0; $ind<count($descripcion_troceada)-2; $ind+=4){
-                                        $arrayAux1[]=$descripcion_troceada[$ind].'&'.$descripcion_troceada[$ind+1].'&'.$descripcion_troceada[$ind+2].'&'.$descripcion_troceada[$ind+3];
+                                        $arrayAux1[]=$descripcion_troceada[$ind].__SEPARADORCAMPOS__.$descripcion_troceada[$ind+1].__SEPARADORCAMPOS__.$descripcion_troceada[$ind+2].__SEPARADORCAMPOS__.$descripcion_troceada[$ind+3];
                                     }
 
                                     //se ordena el array
@@ -2152,7 +2152,7 @@ if($impr_gram == 1){
 
                                     $arrayAux = array();
                                     foreach($arrayAux1 as $cosa){
-                                        if($cosa[0]!='&'){
+                                        if($cosa[0]!=__SEPARADORCAMPOS__){
                                             $arrayAux[] = $cosa;
                                         }
                                     }
@@ -2165,7 +2165,7 @@ if($impr_gram == 1){
                                     $salidor = false;
                                     $anterior='';
                                     for ($j=0;$j<count($arrayAux) && $salidor==false;$j++) {
-                                        $desc_aux = explode('&',$arrayAux[$j]);
+                                        $desc_aux = explode(__SEPARADORCAMPOS__,$arrayAux[$j]);
                                         if(!$desc_aux[0]) {
                                             $salidor = true;
                                         }else{
@@ -2267,7 +2267,7 @@ if($impr_tipol == 1){
     $pdf->writeHTMLCell(0, 0, 50, 100, '<h1>'.get_string('tipologias_may','vocabulario').'</h1>', 0, 1, 0);
 
     foreach ($todas as $cosa){
-        $descripcion_troceada = explode('&', $cosa->descripcion);
+        $descripcion_troceada = explode(__SEPARADORCAMPOS__, $cosa->descripcion);
 
         if ($descripcion_troceada) {
             $pintartochaco = false;
@@ -2439,8 +2439,8 @@ if($impr_inten == 1) {
 
 
     foreach ($todas as $cosa) {
-        $descripcion_troceada = explode('&', $cosa->descripcion);
-//        $descripcion_troceada = explode ('&','&a&&asdfasdfa&&&&asdf&&&otra&&&&&&&');
+        $descripcion_troceada = explode(__SEPARADORCAMPOS__, $cosa->descripcion);
+//        $descripcion_troceada = explode (__SEPARADORCAMPOS__,'&a&&asdfasdfa&&&&asdf&&&otra&&&&&&&');
         $descripcion = $cosa->descripcion;
 
          if ($descripcion_troceada) {
@@ -2603,7 +2603,7 @@ if($impr_estra == 1) {
     
 
     foreach ($todas as $cosa) {
-        $descripcion = explode('&', $cosa->descripcion);
+        $descripcion = explode(__SEPARADORCAMPOS__, $cosa->descripcion);
 //        $descripcion = $cosa->descripcion;
 
          if ($descripcion) {

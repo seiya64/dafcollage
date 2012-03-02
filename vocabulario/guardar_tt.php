@@ -56,14 +56,14 @@ $tipologia = new Vocabulario_tipologias($user_object->id, required_param('campot
 //print_object($tipologia);
 $desc = '';
 for ($i = 1; $i < 6; $i++){
-    $desc .= optional_param('quien'.$i, null, PARAM_TEXT) . '&' . optional_param('finalidad'.$i, null, PARAM_TEXT) . '&';
-    $desc .= optional_param('a_quien'.$i, null, PARAM_TEXT) . '&' . optional_param('medio'.$i, null, PARAM_TEXT). '&';
-    $desc .= optional_param('donde'.$i, null, PARAM_TEXT) . '&' . optional_param('cuando'.$i, null, PARAM_TEXT). '&';
-    $desc .= optional_param('motivo'.$i, null, PARAM_TEXT) . '&' . optional_param('funcion'.$i, null, PARAM_TEXT). '&';
-    $desc .= optional_param('sobre_que'.$i, null, PARAM_TEXT) . '&' . optional_param('que'.$i, null, PARAM_TEXT). '&';
-    $desc .= optional_param('orden'.$i, null, PARAM_TEXT) . '&' . optional_param('medios_nonverbales'.$i, null, PARAM_TEXT). '&';
-    $desc .= optional_param('que_palabras'.$i, null, PARAM_TEXT) . '&' . optional_param('que_frases'.$i, null, PARAM_TEXT). '&';
-    $desc .= optional_param('que_tono'.$i, null, PARAM_TEXT).'&';
+    $desc .= optional_param('quien'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('finalidad'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+    $desc .= optional_param('a_quien'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('medio'.$i, null, PARAM_TEXT). __SEPARADORCAMPOS__;
+    $desc .= optional_param('donde'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('cuando'.$i, null, PARAM_TEXT). __SEPARADORCAMPOS__;
+    $desc .= optional_param('motivo'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('funcion'.$i, null, PARAM_TEXT). __SEPARADORCAMPOS__;
+    $desc .= optional_param('sobre_que'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('que'.$i, null, PARAM_TEXT). __SEPARADORCAMPOS__;
+    $desc .= optional_param('orden'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('medios_nonverbales'.$i, null, PARAM_TEXT). __SEPARADORCAMPOS__;
+    $desc .= optional_param('que_palabras'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('que_frases'.$i, null, PARAM_TEXT). __SEPARADORCAMPOS__;
+    $desc .= optional_param('que_tono'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__;
 }
 
 $desc .=  optional_param('miraren', null, PARAM_TEXT);

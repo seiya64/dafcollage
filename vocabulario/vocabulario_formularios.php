@@ -755,7 +755,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
         $gr = new Vocabulario_mis_gramaticas();
         $gr->leer($grid,$USER->id);
-        $descripcion_troceada = explode('&', $gr->get('descripcion'));
+        $descripcion_troceada = explode(__SEPARADORCAMPOS__, $gr->get('descripcion'));
         switch ($grid) {
             //cuando no hay ninguno
             default:
@@ -2582,10 +2582,10 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 //que agrupa los elementos de 4 en 4
                 $gr = new Vocabulario_mis_gramaticas();
                 $gr->leer('51',$USER->id);
-                $descripcion_troceada = explode('&', $gr->get('descripcion'));
+                $descripcion_troceada = explode(__SEPARADORCAMPOS__, $gr->get('descripcion'));
                 $arrayAux1 = array();
                 for($ind=0; $ind<count($descripcion_troceada)-2; $ind+=4){
-                    $arrayAux1[]=$descripcion_troceada[$ind].'&'.$descripcion_troceada[$ind+1].'&'.$descripcion_troceada[$ind+2].'&'.$descripcion_troceada[$ind+3];
+                    $arrayAux1[]=$descripcion_troceada[$ind].__SEPARADORCAMPOS__.$descripcion_troceada[$ind+1].__SEPARADORCAMPOS__.$descripcion_troceada[$ind+2].__SEPARADORCAMPOS__.$descripcion_troceada[$ind+3];
                 }
 
 
@@ -2632,7 +2632,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     elseif($caso != null){
                         $filaux='';
                         foreach($arrayAux1 as $cosa){
-                            $filaux = explode('&',$cosa);
+                            $filaux = explode(__SEPARADORCAMPOS__,$cosa);
                             if($filaux[2]==$caso && $filaux[0]!=null){
                                 $arrayAux[] = $cosa;
                             }
@@ -2640,7 +2640,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     }
                     elseif($caso == null && $letra == null){
                         foreach($arrayAux1 as $cosa){
-                            if($cosa[0]!='&'){
+                            if($cosa[0]!=__SEPARADORCAMPOS__){
                                 $arrayAux[] = $cosa;
                             }
                         }
@@ -2668,7 +2668,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 //si hay filas que mostrar las pinamos, en caso contrario solo se verá la cabecera de la tabla.
                 $salidor = false;
                 for ($j=0;$j<count($arrayAux) && $salidor==false;$j++) {
-                    $desc_aux = explode('&',$arrayAux[$j]);
+                    $desc_aux = explode(__SEPARADORCAMPOS__,$arrayAux[$j]);
                     if(!$desc_aux[0]) {
                         $salidor = true;
                     }else{
@@ -2849,7 +2849,7 @@ class mod_vocabulario_nuevo_ic_form extends moodleform {
         if($icid>1){
             $intencion = new Vocabulario_mis_intenciones();
             $intencion->leer($icid, $USER->id);
-            $descripcion_troceada = explode('&', $intencion->get('descripcion'));
+            $descripcion_troceada = explode(__SEPARADORCAMPOS__, $intencion->get('descripcion'));
             $mform->addElement('textarea', 'descripcion', get_string("desc", "vocabulario"), 'rows="5" cols="30"');
             $mform->setDefault('descripcion', $descripcion_troceada[0]);
 
@@ -2963,7 +2963,7 @@ class mod_vocabulario_nuevo_tipologia_form extends moodleform {
         if($ttid>1){
             $tt = new Vocabulario_mis_tipologias();
             $tt->leer($ttid);
-            $descripcion_troceada = explode('&', $tt->get('descripcion'));
+            $descripcion_troceada = explode(__SEPARADORCAMPOS__, $tt->get('descripcion'));
 
             for ($i = 1; $i < 6; $i++) {
                 if($i-1) {
@@ -3080,8 +3080,8 @@ class mod_vocabulario_nuevo_estrategia_form extends moodleform {
         if($eaid > 1){
             $ea = new Vocabulario_mis_estrategias();
             $ea->leer($eaid);
-            //$descripcion_troceada = explode('&', $ea->get('descripcion'));
-            $descripcion = explode('&', $ea->get('descripcion'));
+            //$descripcion_troceada = explode(__SEPARADORCAMPOS__, $ea->get('descripcion'));
+            $descripcion = explode(__SEPARADORCAMPOS__, $ea->get('descripcion'));
             //$descripcion = $ea->get('descripcion');
 
             //solucion de enlazar todo con todo

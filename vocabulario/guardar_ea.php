@@ -55,7 +55,7 @@ $estrategia = new Vocabulario_estrategias($user_object->id, required_param('camp
 
 
 
-$desc =  '&'.optional_param('miestrategia', null, PARAM_TEXT);
+$desc =  __SEPARADORCAMPOS__.optional_param('miestrategia', null, PARAM_TEXT);
 
 
 //vemos que botón hemos pulsado

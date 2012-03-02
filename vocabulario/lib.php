@@ -13,6 +13,8 @@
 require_once("$CFG->libdir/formslib.php");
 require_once("vocabulario_formularios.php");
 
+define('__SEPARADORCAMPOS__', '$FIELD$');
+
 /**
  * Given an object containing all the necessary data,
  * (defined by the form in mod.html) this function
