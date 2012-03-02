@@ -489,7 +489,7 @@ class mod_vocabulario_ver_form extends moodleform {
             $clex = $aux->obtener_hijos($usuarioid,0);
 
             $mform->addElement('hidden','tipo','cl');
-            $mform->addElement('select', 'campoid', get_string("campo_lex", "vocabulario"), $clex,"onChange='javascript:cargaContenido(this.id,\"clgeneraldinamico\",0)' style=\"min-height: 0;\"");
+            $mform->addElement('select', 'campoid', get_string("campo_lex", "vocabulario"), $clex, "onChange='javascript:cargaContenido(this.id,\"clgeneraldinamico\",0)' style=\"min-height: 0;\"");
             if ($valor_campoid) {
                 $mform->setDefault('campoid', $valor_campoid);
                 $mis_palabras = vocabulario_todas_palabras($usuarioid, $valor_campoid);

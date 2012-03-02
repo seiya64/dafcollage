@@ -38,6 +38,25 @@ function vocabulario_add_instance($vocabulario) {
 }
 
 /**
+ * Return a suffix depending on current user language
+ *
+ * @return string The suffix for tables according to the current language
+ * */
+function get_sufijo_lenguaje_tabla() {
+	
+	$lenguaje = current_language();
+	if ($lenguaje == "es_utf8") {
+		$sufijotabla = "es";
+	} else if ($lenguaje == "en_utf8") {
+		$sufijotabla = "en";
+	} else {
+		$sufijotabla = "es";
+	}
+	
+	return $sufijotabla;
+}
+
+/**
  * Given an object containing all the necessary data,
  * (defined by the form in mod.html) this function
  * will update an existing instance with new data.
@@ -379,9 +398,10 @@ function vocabulario_todas_palabras($usuarioid, $cl=null, $gram=null, $inten=nul
     else {
 	$sql .= '`mdl_vocabulario_otros` a ';
     }
+	$sufijotabla = get_sufijo_lenguaje_tabla();
     $sql .= 'WHERE `usuarioid` = '.$usuarioid.' and mp.`otroid` = a.`id` and a.`id` <> 1) ';
     $sql .= 'ORDER BY pal) todas,';
-    $sql .= '`mdl_vocabulario_camposlexicos` cl, `mdl_vocabulario_gramatica` gr, `mdl_vocabulario_intenciones` ic, `mdl_vocabulario_tipologias` tt ';
+    $sql .= "`mdl_vocabulario_camposlexicos_$sufijotabla` cl, `mdl_vocabulario_gramatica` gr, `mdl_vocabulario_intenciones_$sufijotabla` ic, `mdl_vocabulario_tipologias_$sufijotabla` tt ";
     $sql .= 'WHERE todas.clid = cl.id and todas.grid = gr.id and todas.icid = ic.id and todas.ttid = tt.id';
 
     if ($letra){
