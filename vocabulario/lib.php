@@ -401,7 +401,7 @@ function vocabulario_todas_palabras($usuarioid, $cl=null, $gram=null, $inten=nul
 	$sufijotabla = get_sufijo_lenguaje_tabla();
     $sql .= 'WHERE `usuarioid` = '.$usuarioid.' and mp.`otroid` = a.`id` and a.`id` <> 1) ';
     $sql .= 'ORDER BY pal) todas,';
-    $sql .= "`mdl_vocabulario_camposlexicos_$sufijotabla` cl, `mdl_vocabulario_gramatica` gr, `mdl_vocabulario_intenciones_$sufijotabla` ic, `mdl_vocabulario_tipologias_$sufijotabla` tt ";
+    $sql .= "`mdl_vocabulario_camposlexicos` cl, `mdl_vocabulario_gramatica` gr, `mdl_vocabulario_intenciones_$sufijotabla` ic, `mdl_vocabulario_tipologias` tt ";
     $sql .= 'WHERE todas.clid = cl.id and todas.grid = gr.id and todas.icid = ic.id and todas.ttid = tt.id';
 
     if ($letra){
