@@ -49,7 +49,11 @@ function get_sufijo_lenguaje_tabla() {
 		$sufijotabla = "es";
 	} else if ($lenguaje == "en_utf8") {
 		$sufijotabla = "en";
-	} else {
+        } else if ($lenguaje == "pl_utf8") {
+		$sufijotabla = "pl";
+        } else if ($lenguaje == "de_utf8") {
+		$sufijotabla = "de";
+	}else {
 		$sufijotabla = "es";
 	}
 	

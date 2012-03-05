@@ -114,7 +114,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         }
 
         //campo lexico
-        $mform->addElement('select', 'campoid', get_string("campo_lex", "vocabulario"), $clex,"onChange='javascript: cargaContenido(this.id,\"clgeneraldinamico\",0)'");
+        $mform->addElement('select', 'campoid', get_string("campo_lex", "vocabulario"), $clex,"onChange='javascript: if( options[indice].text == \"--\" ) { this.selectedIndex == 0; } else { cargaContenido(this.id,\"clgeneraldinamico\",0)}'");
         $mform->setDefault('campoid', 1);
         if ($leido) {
             $aux = new Vocabulario_campo_lexico();
@@ -130,7 +130,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
             $claux = $aux->obtener_hijos($USER->id, $clex[$i]);
             $campodinamico .= '<div class="fitemtitle"></div>';
             $campodinamico .= '<div class="felement fselect">';
-            $elselect = new MoodleQuickForm_select('campoid','Subcampo',$claux,"id=\"id_campoid".$clex[$i]."\" onChange='cargaContenido(this.id,\"".'campoid'."clgeneraldinamico".$clex[$i]."\",0)'");
+            $elselect = new MoodleQuickForm_select('campoid','Subcampo',$claux,"id=\"id_campoid".$clex[$i]."\" onChange='if( this.options[this.selectedIndex].text == \"--\" ) { this.selectedIndex == 0; } else { cargaContenido(this.id,\"".'campoid'."clgeneraldinamico".$clex[$i]."\",0)}'");
             $elselect->setSelected($clex[$i+1]);
             $campodinamico .= $elselect->toHtml();
             $campodinamico .= '</div>';
@@ -433,7 +433,8 @@ class mod_vocabulario_opciones_form extends moodleform {
         //4,1
         $tabla_menu .='<tr><td style="text-align:left"><p><a href="view.php?id=' . $id . '&opcion=9"><img src="./imagenes/tipologias_textuales.png" id="id_tt_im" name="tt_im"/></br>' . get_string('admin_tt', 'vocabulario') . '</a></p></td>';
         //4,2
-        $tabla_menu .='<td><p><a href="./ayudas/Ayudas_esp.pdf"><img src="./imagenes/ayuda.png" id="id_ayuda" name="ayuda"/></br>' . get_string('ayuda', 'vocabulario') . '</a></p></td>';
+        $sufijotabla = get_sufijo_lenguaje_tabla();
+        $tabla_menu .='<td><p><a href="./ayudas/Ayudas_'.$sufijotabla.'.pdf"><img src="./imagenes/ayuda.png" id="id_ayuda" name="ayuda"/></br>' . get_string('ayuda', 'vocabulario') . '</a></p></td>';
         //4,3
         $tabla_menu .='<td style="text-align:right"><p><a href="view.php?id=' . $id . '&opcion=10"><img src="./imagenes/nueva_tt.png" id="id_nueva_tt_im" name="nueva_tt_im"/></br>' . get_string('nueva_tt', 'vocabulario') . '</a></p></td></tr>';
 
@@ -489,7 +490,7 @@ class mod_vocabulario_ver_form extends moodleform {
             $clex = $aux->obtener_hijos($usuarioid,0);
 
             $mform->addElement('hidden','tipo','cl');
-            $mform->addElement('select', 'campoid', get_string("campo_lex", "vocabulario"), $clex, "onChange='javascript: cargaContenido(this.id,\"clgeneraldinamico\",0)' style=\"min-height: 0;\"");
+            $mform->addElement('select', 'campoid', get_string("campo_lex", "vocabulario"), $clex, "onChange='javascript: if( this.options[this.selectedIndex].text == \"--\" ) { this.selectedIndex == 0; } else { cargaContenido(this.id,\"clgeneraldinamico\",0)}' style=\"min-height: 0;\"");
             if ($valor_campoid) {
                 $mform->setDefault('campoid', $valor_campoid);
                 $mis_palabras = vocabulario_todas_palabras($usuarioid, $valor_campoid);
@@ -689,7 +690,7 @@ class mod_vocabulario_nuevo_cl_form extends moodleform {
         $mform->addElement('html','<h1>'.get_string('admin_cl','vocabulario').'</h1>');
 
         //campo lexico
-        $mform->addElement('select', 'campoid', get_string("campo_lex", "vocabulario"), $clex,"onChange='javascript: cargaContenido(this.id,\"clgeneraldinamico\",0);' style=\"min-height: 0;\"");
+        $mform->addElement('select', 'campoid', get_string("campo_lex", "vocabulario"), $clex,"onChange='javascript: if( this.options[this.selectedIndex].text == \"--\" || this.options[this.selectedIndex].text == \"Seleccionar\" ) { this.selectedIndex == 0; this.options[0].selected = true; document.getElementById(\"clgeneraldinamico\").style.display=\"none\";} else { cargaContenido(this.id,\"clgeneraldinamico\",0); document.getElementById(\"clgeneraldinamico\").style.display=\"\";}' style=\"min-height: 0;\"");
         //probar los campos dinamicos
         $campodinamico = "<div class=\"fitem\" id=\"clgeneraldinamico\"></div>";
         $mform->addElement('html', $campodinamico);
