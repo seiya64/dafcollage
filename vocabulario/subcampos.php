@@ -48,7 +48,7 @@ $claux = $claux->obtener_hijos($USER->id, $id);
 if (count($claux) > 1){
     echo '<div class="fitemtitle"></div>';
     echo '<div class="felement fselect">';
-    $elselect = new MoodleQuickForm_select($nombre,'Subcampo',$claux,"id=\"id_campoid".$id."\" onChange='javascript:cargaContenido(this.id,\"".$nombre."clgeneraldinamico".$id."\",0)'");
+    $elselect = new MoodleQuickForm_select($nombre,'Subcampo',$claux,"id=\"id_campoid".$id."\" onChange='javascript: cargaContenido(this.id,\"".$nombre."clgeneraldinamico".$id."\",0)'");
     echo $elselect->toHtml();
     echo '</div>';
     echo "<div class=\"fitem\" id=\"".$nombre."clgeneraldinamico".$id."\" style=\"min-height: 0;\"></div>";

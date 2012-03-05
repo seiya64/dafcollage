@@ -7,21 +7,21 @@ exercises in order to consolidate knowledge.
 Copyright (C) 2011
 
 Coordination:
-    Ruth Burbat
+Ruth Burbat
 
 Source code:
-    Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
-    Simeón Ruiz Romero (simeonruiz@gmail.com)
+Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
+Simeón Ruiz Romero (simeonruiz@gmail.com)
 
 Original idea and content design:
-    Ruth Burbat
-    Inmaculada Almahano Güeto
-    Andrea Bies
-    Julia Möller Runge
-    Blanca Rodríguez Gómez
-    Antonio Salmerón Matilla
-    María José Varela Salinas
-    Karin Vilar Sánchez
+Ruth Burbat
+Inmaculada Almahano Güeto
+Andrea Bies
+Julia Möller Runge
+Blanca Rodríguez Gómez
+Antonio Salmerón Matilla
+María José Varela Salinas
+Karin Vilar Sánchez
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -36,12 +36,12 @@ GNU General Public License for more details.
 
 /**
  * Busca una palabra en el diccionario online seleccionado
- * 
+ *
  * @param elemento Indice para seleccionar el elemento del que obtener la palabra
  */
-function traducir(elemento){
+function traducir(elemento) {
 	var palabra;
-	switch (elemento){
+	switch (elemento) {
 		case 1:
 			palabra = document.getElementById("id_palabra_sus").value;
 			break;
@@ -57,24 +57,20 @@ function traducir(elemento){
 		default:
 			break;
 	}
-        var url;
-        var dic = document.getElementById("id_diccionario").value;
-        if (dic == 1){
-            url = "http://dict.leo.org/esde?lp=esde&lang=de&search="+palabra;
-        }
-        else if (dic == 0){
-            url = "http://www.dwds.de/?qu="+palabra+"&view=1";
-        }
-        else if (dic == 2){
-            url = "http://de.pons.eu/dict/search/results/?q="+palabra+"&l=dees";
-        }
-        else if (dic == 3){
-            url = "http://www.openthesaurus.de/synonyme/"+palabra;
-        }
-        else if (dic == 4){
-            url = "http://www.duden.de/suchen/dudenonline/"+palabra;
-        }
-	window.open(url,'diccionario'); 
+	var url;
+	var dic = document.getElementById("id_diccionario").value;
+	if(dic == 1) {
+		url = "http://dict.leo.org/esde?lp=esde&lang=de&search=" + palabra;
+	} else if(dic == 0) {
+		url = "http://www.dwds.de/?qu=" + palabra + "&view=1";
+	} else if(dic == 2) {
+		url = "http://de.pons.eu/dict/search/results/?q=" + palabra + "&l=dees";
+	} else if(dic == 3) {
+		url = "http://www.openthesaurus.de/synonyme/" + palabra;
+	} else if(dic == 4) {
+		url = "http://www.duden.de/suchen/dudenonline/" + palabra;
+	}
+	window.open(url, 'diccionario');
 }
 
 /**
@@ -84,78 +80,75 @@ function traducir(elemento){
  * @param tipo
  */
 
-function cargaContenido(miselect,otroselect,tipo){
-    if (window.XMLHttpRequest)
-      {//para que se vea en IE7+, Firefox, Chrome, Opera, Safari
-      xmlhttp=new XMLHttpRequest();
-      }
-    else
-      {//para que se vea en IE6, IE5 y otros
-      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-      }
-    xmlhttp.onreadystatechange=function()
-      {
-      if (xmlhttp.readyState==4 && xmlhttp.status==200)
-        {
-        document.getElementById(otroselect).innerHTML=xmlhttp.responseText;
-        }
-      }
+function cargaContenido(miselect, otroselect, tipo) {
 
-      var elselect = document.getElementById(miselect).value;
-      var nombre = document.getElementById(miselect).name;
-    if (tipo == 0){ //campos lexicos
-        xmlhttp.open("GET","subcampos.php?id="+elselect+"&nombre="+nombre,true);
-    }
-    else if (tipo == 1){ //gramaticas
-        xmlhttp.open("GET","subgramaticas.php?id="+elselect+"&nombre="+nombre,true);
-    }
-    else if (tipo == 2){ //intenciones comunicativas
-        xmlhttp.open("GET","subintenciones.php?id="+elselect+"&nombre="+nombre,true);
-    }
-    xmlhttp.send();
+	var elselect = document.getElementById(miselect).value;
+	var nombre = document.getElementById(miselect).name;
+
+	if(elselect == 0 || elselect == 1) {
+		document.getElementById(otroselect).innerHTML = "";
+	} else {
+		document.getElementById(otroselect).innerHTML = '<p style="text-align: center;"><img src="./imagenes/loading.gif"/></p>';
+		if(window.XMLHttpRequest) {//para que se vea en IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp = new XMLHttpRequest();
+		} else {//para que se vea en IE6, IE5 y otros
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange = function() {
+			if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+				document.getElementById(otroselect).innerHTML = xmlhttp.responseText;
+			}
+		}
+		if(tipo == 0) {//campos lexicos
+			xmlhttp.open("GET", "subcampos.php?id=" + elselect + "&nombre=" + nombre, true);
+		} else if(tipo == 1) {//gramaticas
+			xmlhttp.open("GET", "subgramaticas.php?id=" + elselect + "&nombre=" + nombre, true);
+		} else if(tipo == 2) {//intenciones comunicativas
+			xmlhttp.open("GET", "subintenciones.php?id=" + elselect + "&nombre=" + nombre, true);
+		}
+		xmlhttp.send();
+	}
 }
 
 /**
  * Establece al valor "none" el atributo de estilo 'display' de todos aquellos
  * elementos que estén marcados en su id con el prefijo "ocultador_".
- * 
+ *
  * @param seccion Id de los elementos a ocultar (sin incluir el prefijo 'ocultador_')
  */
 
-function ocultar(seccion){
-    ocu = document.getElementById("ocultador_"+seccion);
-    ocu.style.display = "none";
-
-    enlace = document.getElementById("mc"+seccion);
-    enlace.href = "javascript:desocultar('"+seccion+"')";
+function ocultar(seccion) {
+	ocu = document.getElementById("ocultador_" + seccion);
+	ocu.style.display = "none";
+	enlace = document.getElementById("mc" + seccion);
+	enlace.href = "javascript:desocultar('" + seccion + "')";
 }
 
 /**
  * Elimina el contenido del atributo de estilo 'display' de todos aquellos
  * elementos que estén marcados en su id con el prefijo "ocultador_" para usar
  * el valor por defecto de este atributo.
- * 
+ *
  * @param seccion Id de los elementos a ocultar (sin incluir el prefijo 'ocultador_')
  */
 
-function desocultar(seccion){
-    ocu = document.getElementById("ocultador_"+seccion);
-    ocu.style.display = "";
-
-    enlace = document.getElementById("mc"+seccion);
-    enlace.href = "javascript:ocultar('"+seccion+"')";
+function desocultar(seccion) {
+	ocu = document.getElementById("ocultador_" + seccion);
+	ocu.style.display = "";
+	enlace = document.getElementById("mc" + seccion);
+	enlace.href = "javascript:ocultar('" + seccion + "')";
 }
 
 /**
  * Establece a "true" el valor del atributo 'disabled' de todos los elementos
  * de un formulario con id "mform1" desde un cierto índice hasta el final.
- * 
+ *
  * @param ini Índice a partir del cual se comienzan a deshabilitar elementos.
  */
 
-function desactivar_todo(ini){
-   for (i=ini;i<document.getElementById("mform1").elements.length-3;i++)
-      document.getElementById("mform1").elements[i].disabled=true;
+function desactivar_todo(ini) {
+	for( i = ini; i < document.getElementById("mform1").elements.length - 3; i++)
+	document.getElementById("mform1").elements[i].disabled = true;
 }
 
 /**
@@ -163,7 +156,7 @@ function desactivar_todo(ini){
  * de un formulario con id "mform1".
  */
 
-function activar_todo(){
-   for (i=0;i<document.getElementById("mform1").elements.length;i++)
-      document.getElementById("mform1").elements[i].disabled=false;
+function activar_todo() {
+	for( i = 0; i < document.getElementById("mform1").elements.length; i++)
+	document.getElementById("mform1").elements[i].disabled = false;
 }

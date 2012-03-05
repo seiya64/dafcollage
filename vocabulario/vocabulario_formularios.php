@@ -114,7 +114,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         }
 
         //campo lexico
-        $mform->addElement('select', 'campoid', get_string("campo_lex", "vocabulario"), $clex,"onChange='javascript:cargaContenido(this.id,\"clgeneraldinamico\",0)'");
+        $mform->addElement('select', 'campoid', get_string("campo_lex", "vocabulario"), $clex,"onChange='javascript: cargaContenido(this.id,\"clgeneraldinamico\",0)'");
         $mform->setDefault('campoid', 1);
         if ($leido) {
             $aux = new Vocabulario_campo_lexico();
@@ -130,7 +130,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
             $claux = $aux->obtener_hijos($USER->id, $clex[$i]);
             $campodinamico .= '<div class="fitemtitle"></div>';
             $campodinamico .= '<div class="felement fselect">';
-            $elselect = new MoodleQuickForm_select('campoid','Subcampo',$claux,"id=\"id_campoid".$clex[$i]."\" onChange='javascript:cargaContenido(this.id,\"".'campoid'."clgeneraldinamico".$clex[$i]."\",0)'");
+            $elselect = new MoodleQuickForm_select('campoid','Subcampo',$claux,"id=\"id_campoid".$clex[$i]."\" onChange='cargaContenido(this.id,\"".'campoid'."clgeneraldinamico".$clex[$i]."\",0)'");
             $elselect->setSelected($clex[$i+1]);
             $campodinamico .= $elselect->toHtml();
             $campodinamico .= '</div>';
@@ -489,7 +489,7 @@ class mod_vocabulario_ver_form extends moodleform {
             $clex = $aux->obtener_hijos($usuarioid,0);
 
             $mform->addElement('hidden','tipo','cl');
-            $mform->addElement('select', 'campoid', get_string("campo_lex", "vocabulario"), $clex, "onChange='javascript:cargaContenido(this.id,\"clgeneraldinamico\",0)' style=\"min-height: 0;\"");
+            $mform->addElement('select', 'campoid', get_string("campo_lex", "vocabulario"), $clex, "onChange='javascript: cargaContenido(this.id,\"clgeneraldinamico\",0)' style=\"min-height: 0;\"");
             if ($valor_campoid) {
                 $mform->setDefault('campoid', $valor_campoid);
                 $mis_palabras = vocabulario_todas_palabras($usuarioid, $valor_campoid);
@@ -689,7 +689,7 @@ class mod_vocabulario_nuevo_cl_form extends moodleform {
         $mform->addElement('html','<h1>'.get_string('admin_cl','vocabulario').'</h1>');
 
         //campo lexico
-        $mform->addElement('select', 'campoid', get_string("campo_lex", "vocabulario"), $clex,"onChange='javascript:cargaContenido(this.id,\"clgeneraldinamico\",0)' style=\"min-height: 0;\"");
+        $mform->addElement('select', 'campoid', get_string("campo_lex", "vocabulario"), $clex,"onChange='javascript: cargaContenido(this.id,\"clgeneraldinamico\",0);' style=\"min-height: 0;\"");
         //probar los campos dinamicos
         $campodinamico = "<div class=\"fitem\" id=\"clgeneraldinamico\"></div>";
         $mform->addElement('html', $campodinamico);
