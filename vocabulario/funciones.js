@@ -160,3 +160,14 @@ function activar_todo() {
 	for( i = 0; i < document.getElementById("mform1").elements.length; i++)
 	document.getElementById("mform1").elements[i].disabled = false;
 }
+
+/**
+ * Comprueba si tienes las cookies habilitadas, y en caso contrario te manda a un tutorial
+ */
+
+function comprobar_cookies(){
+if (navigator.cookieEnabled == 0) {
+        alert("Este sitio necesita tener habilitadas cookies. Pulse aceptar para saber cómo puede habilitarlas");
+		window.open('./habilitar_cookies.html','','location=no,directories=no, status=no,menubar=no,resizable=no');
+	}
+}
