@@ -61,6 +61,18 @@ function get_sufijo_lenguaje_tabla() {
 }
 
 /**
+ * Return all suffix for tables in database that depends on language
+ *
+ * @return array All suffix for tables in database
+ */
+
+function get_todos_sufijos_lenguaje(){
+    $sufijos = array('es','en','pl','de');
+
+    return $sufijos;
+}
+
+/**
  * Given an object containing all the necessary data,
  * (defined by the form in mod.html) this function
  * will update an existing instance with new data.
