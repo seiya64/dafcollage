@@ -58,16 +58,31 @@ if ($mform->is_cancelled()) {
     redirect('./view.php?id=' . $id_tocho);
 }
 
+
+$sufijos = get_todos_sufijos_lenguaje();
+
 if (optional_param('eliminar', 0, PARAM_INT) && $tip->get('padre') > 54) {
-    delete_records('vocabulario_tipologias', 'id', $tip->get('padre'));
+    //comenzamos una transacción para que en todas las tablas se haga seguido
+    // en caso de error en algun delete, no se hace ninguno
+    begin_sql();
+    foreach ($sufijos as $sufijo){
+        delete_records('vocabulario_tipologias_'.$sufijo, 'id', $tip->get('padre'));
+    }
+    //confirmamos la transacción
+    commit_sql();
     redirect('./view.php?id=' . $id_tocho . '&opcion=10');
 }
 
 if ($tip->get('tipo') != null) {
     $tip->set(null,null,'0');
-//    print_object($tip);
-    
-    $ttidaux = insert_record('vocabulario_tipologias', $tip, true);
+    //comenzamos una transacción para que todos los insert sean seguidos y produzcan el mismo id en todas las tablas
+    //en caso de error en uno, no se hace ninguno
+    begin_sql();
+    foreach ($sufijos as $sufijo){
+        $ttidaux = insert_record('vocabulario_tipologias_'.$sufijo, $tip, true);
+    }
+    //confirmamos la transacción
+    commit_sql();
 }
 redirect('./view.php?id=' . $id_tocho . '&opcion=10&ttid=' . $ttidaux);
 ?>
