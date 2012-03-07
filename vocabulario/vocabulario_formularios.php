@@ -53,7 +53,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         global $USER;
         $add = optional_param('add', null,PARAM_ALPHA);
         $act = optional_param('act',0, PARAM_INT);
-        if($add){
+        if($add) {
             $act=2;
         }
 
@@ -787,8 +787,8 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                 $mform->addElement('html','</fieldset>');   //cerramos el fieldset con header "neutro"
 
-               // $mform->closeHeaderBefore('hojas_default');
-                
+                // $mform->closeHeaderBefore('hojas_default');
+
                 break;
             //1.2 Numerus
             case 4:
@@ -1061,7 +1061,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
             //tablas verbos
             //3.1.1 Präsens
             case 21:
-            //3.1.2 Präteritum 
+            //3.1.2 Präteritum
             case 22:
             //tabla
                 $tope = 20;
@@ -1756,7 +1756,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
             case 11:
             //1.3 Deklination
             case 5:
-                //para decidir el titulo
+            //para decidir el titulo
                 $tabopcional = false;
                 //para restringir según la categoria
                 $tope = 1;
@@ -1987,7 +1987,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
             case 56:
             //8.2 Nebensatz
             case 57:
-                
+
             //tabla
                 $mform->addElement('html', '<p>');
                 $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
@@ -1996,14 +1996,14 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                 $avance = 1;
 
-                if($grid == 56){
+                if($grid == 56) {
                     $titulillos .= '<th>' . get_string('vorfeld', 'vocabulario') . '</th>';
                     $titulillos .= '<th>' . get_string('konjugier', 'vocabulario') . '</th>';
                     $titulillos .= '<th>' . get_string('mittelfeld', 'vocabulario') . '</th>';
                     $titulillos .= '<th>' . get_string('verb2', 'vocabulario') . '</th>';
                     $avance = 4;
 
-                }elseif($grid == 57){
+                }elseif($grid == 57) {
                     $titulillos .='<th>'.get_string('subjunktor','vocabulario').'</th>';
                     $titulillos .='<th>'.get_string('subjekt','vocabulario').'</th>';
                     $titulillos .='<th>'.get_string('konjugier','vocabulario').'</th>';
@@ -2015,19 +2015,19 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
-                
+
                 $totalfilas = ((count($descripcion_troceada)-2)/4);
-                if($grid ==  57){
+                if($grid ==  57) {
                     $totalfilas = ((count($descripcion_troceada)-2)/5);
                 }
-                if($totalfilas <=0){
+                if($totalfilas <=0) {
                     $totalfilas=1;
                 }
                 $i = 0;
                 for ($i = 0; $i < $totalfilas*$avance; $i = $i+$avance) {
                     $titulillos = '<tr class="cell">';
                     $titulillos .= '<td><input type="text" id="id_VORSUB'.$i.'" name="VORSUB'.$i.'" value="' . $descripcion_troceada[$i] . '"></td>';
-                    if($grid ==  57){
+                    if($grid ==  57) {
                         $titulillos .= '<td><input type="text" id="id_VER1'.$i.'" name="VER1'.$i.'" value="' . $descripcion_troceada[$i+4] . '"></td>';
                     }
                     $titulillos .= '<td style="background: #BDC7D8;"><input type="text" style="background: #BDC7D8;" id="id_KONSUB'.$i.'" name="KONSUB'.$i.'" value="' . $descripcion_troceada[$i+1] . '"></td>';
@@ -2458,11 +2458,11 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $titulillos .= '</tr>';
                 $mform->addElement('html',$titulillos);
 
-                if($totalfilas<0){
+                if($totalfilas<0) {
                     $totalfilas=0;
                 }
 
-                for($fila=0; $fila<$totalfilas+1; ++$fila){
+                for($fila=0; $fila<$totalfilas+1; ++$fila) {
 
                     //Esto que se hace a continuación es para meter datos en los campos de texto
                     //sólo en caso de que no sea la ultima fila, que deberá ser siempre en blanco
@@ -2472,7 +2472,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $valores = array($descripcion_troceada[((4*$fila)+0)], $descripcion_troceada[((4*$fila)+1)], $descripcion_troceada[((4*$fila)+2)], $descripcion_troceada[((4*$fila)+3)]);
                     if($fila == $totalfilas) $valores = null;
 
-                    
+
 
                     $titulillos = '<tr class="cell">';
                     $titulillos .= '<td><input size=8 type="text" id="id_PRA'.$fila.'" name="PRA'.$fila.'" value="' . $valores[0] . '"></td>';
@@ -2491,7 +2491,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $mform->addElement('html', $titulillos);
 
                 }
-                
+
                 $mform->addElement('html', '</table>');
                 $mform->addElement('html', '<p>');
 
@@ -2500,7 +2500,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
 
 
-                /*
+            /*
 
                 $kasus = array(get_string('acusativo','vocabulario'),get_string('dativo','vocabulario'),get_string('acudat','vocabulario'),get_string('genitivo','vocabulario'));
 
@@ -2575,7 +2575,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
             //6.2
             case 52:
 
-                //array para traducir el campo de caso, que al ser un entero se tiene que corresponder con un string
+            //array para traducir el campo de caso, que al ser un entero se tiene que corresponder con un string
                 $kasus = array(get_string('acusativo','vocabulario'),get_string('dativo','vocabulario'),get_string('acudat','vocabulario'),get_string('genitivo','vocabulario'));
 
 
@@ -2585,7 +2585,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $gr->leer('51',$USER->id);
                 $descripcion_troceada = explode(__SEPARADORCAMPOS__, $gr->get('descripcion'));
                 $arrayAux1 = array();
-                for($ind=0; $ind<count($descripcion_troceada)-2; $ind+=4){
+                for($ind=0; $ind<count($descripcion_troceada)-2; $ind+=4) {
                     $arrayAux1[]=$descripcion_troceada[$ind].__SEPARADORCAMPOS__.$descripcion_troceada[$ind+1].__SEPARADORCAMPOS__.$descripcion_troceada[$ind+2].__SEPARADORCAMPOS__.$descripcion_troceada[$ind+3];
                 }
 
@@ -2596,56 +2596,56 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                 //se ordena el array
                 sort($arrayAux1);
-                    // Se pinta el selector de letras
-                    $abecedario = '<h1 style="text-align:center;">';
-                    $l = 'a';
-                    for ($i = 1; $i < 27; $i++) {
-                        $abecedario .= '<a href="./view.php?id=' . $id_tocho . '&opcion=5&grid='.$grid.'&letra='.$l.'">[' . $l . ']</a>';
-                        $l++;
-                    }
-                    $abecedario .= '<a href="./view.php?id=' . $id_tocho . '&opcion=5&grid='.$grid.'">[Todas]</a>';
-                    $abecedario .= '</h1>';
-                    $mform -> addElement('html',$abecedario);
+                // Se pinta el selector de letras
+                $abecedario = '<h1 style="text-align:center;">';
+                $l = 'a';
+                for ($i = 1; $i < 27; $i++) {
+                    $abecedario .= '<a href="./view.php?id=' . $id_tocho . '&opcion=5&grid='.$grid.'&letra='.$l.'">[' . $l . ']</a>';
+                    $l++;
+                }
+                $abecedario .= '<a href="./view.php?id=' . $id_tocho . '&opcion=5&grid='.$grid.'">[Todas]</a>';
+                $abecedario .= '</h1>';
+                $mform -> addElement('html',$abecedario);
 
 
-                    //aqui se buscan por casos
-                    $kasos = '<h1 style="text-align:center;">';
-                    for ($i = 0; $i < 4; $i++) {
-                        $kasos .= '<a href="./view.php?id=' . $id_tocho . '&opcion=5&grid='.$grid.'&caso='.$i.'">[' . $kasus[$i] . ']</a>';
-                        $l++;
-                    }
-                    $kasos .= '<a href="./view.php?id=' . $id_tocho . '&opcion=5&grid='.$grid.'">[Todas]</a>';
-                    $kasos .= '</h1>';
-                    $mform -> addElement('html',$kasos);
+                //aqui se buscan por casos
+                $kasos = '<h1 style="text-align:center;">';
+                for ($i = 0; $i < 4; $i++) {
+                    $kasos .= '<a href="./view.php?id=' . $id_tocho . '&opcion=5&grid='.$grid.'&caso='.$i.'">[' . $kasus[$i] . ']</a>';
+                    $l++;
+                }
+                $kasos .= '<a href="./view.php?id=' . $id_tocho . '&opcion=5&grid='.$grid.'">[Todas]</a>';
+                $kasos .= '</h1>';
+                $mform -> addElement('html',$kasos);
 
 
-                    //si es necesario discriminamos por el caso seleccionado
+                //si es necesario discriminamos por el caso seleccionado
 
-                    $arrayAux = array();
+                $arrayAux = array();
 
-                    if($letra != null){
-                        foreach($arrayAux1 as $cosa){
-                            if($cosa[0]==$letra || $cosa[0]==strtoupper($letra)){
-                                $arrayAux[] = $cosa;
-                            }
+                if($letra != null) {
+                    foreach($arrayAux1 as $cosa) {
+                        if($cosa[0]==$letra || $cosa[0]==strtoupper($letra)) {
+                            $arrayAux[] = $cosa;
                         }
                     }
-                    elseif($caso != null){
-                        $filaux='';
-                        foreach($arrayAux1 as $cosa){
-                            $filaux = explode(__SEPARADORCAMPOS__,$cosa);
-                            if($filaux[2]==$caso && $filaux[0]!=null){
-                                $arrayAux[] = $cosa;
-                            }
+                }
+                elseif($caso != null) {
+                    $filaux='';
+                    foreach($arrayAux1 as $cosa) {
+                        $filaux = explode(__SEPARADORCAMPOS__,$cosa);
+                        if($filaux[2]==$caso && $filaux[0]!=null) {
+                            $arrayAux[] = $cosa;
                         }
                     }
-                    elseif($caso == null && $letra == null){
-                        foreach($arrayAux1 as $cosa){
-                            if($cosa[0]!=__SEPARADORCAMPOS__){
-                                $arrayAux[] = $cosa;
-                            }
+                }
+                elseif($caso == null && $letra == null) {
+                    foreach($arrayAux1 as $cosa) {
+                        if($cosa[0]!=__SEPARADORCAMPOS__) {
+                            $arrayAux[] = $cosa;
                         }
                     }
+                }
 //                }
 
 //aqui termina el ifelse de caso
@@ -2672,7 +2672,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $desc_aux = explode(__SEPARADORCAMPOS__,$arrayAux[$j]);
                     if(!$desc_aux[0]) {
                         $salidor = true;
-                    }else{
+                    }else {
                         $titulillos = '<tr class="cell" style="text-align:center;">';
                         $titulillos .= '<td style="padding:0px 10px 0px 10px;">'.$desc_aux[0].'</td>';
                         $titulillos .= '<td style="padding:0px 10px 0px 10px;">'.$desc_aux[1].'</td>';
@@ -2682,7 +2682,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                         $mform->addElement('html',$titulillos);
                     }
                 }
-                
+
 
                 $mform->addElement('html', '</table>');
                 $mform->addElement('html', '<p>');
@@ -2706,7 +2706,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
         //botones
         $buttonarray = array();
-        if($grid != 0 && $grid != 52){  //caso especial, si es el caso 52 no pinta el botón de guardar
+        if($grid != 0 && $grid != 52) {  //caso especial, si es el caso 52 no pinta el botón de guardar
             $buttonarray[] = &$mform->createElement('submit', 'desc_btn', get_string('guardesc','vocabulario'));
             //$mform->registerNoSubmitButton('desc_btn');
         }
@@ -2825,7 +2825,7 @@ class mod_vocabulario_nuevo_ic_form extends moodleform {
         $campodinamico .= "</div>";
         $mform->addElement('html', $campodinamico);
 
-        switch($icid){
+        switch($icid) {
             case 28:
                 $mform->addElement('static', 'intencion', '', get_string('desc_inten3.2','vocabulario'));
                 break;
@@ -2847,7 +2847,7 @@ class mod_vocabulario_nuevo_ic_form extends moodleform {
         }
 
 
-        if($icid>1){
+        if($icid>1) {
             $intencion = new Vocabulario_mis_intenciones();
             $intencion->leer($icid, $USER->id);
             $descripcion_troceada = explode(__SEPARADORCAMPOS__, $intencion->get('descripcion'));
@@ -2869,7 +2869,7 @@ class mod_vocabulario_nuevo_ic_form extends moodleform {
 
             $totalfilas = ((count($descripcion_troceada)-1)/4);
             $pintar = false;
-            if ($totalfilas == 0){
+            if ($totalfilas == 0) {
                 $pintar = true;
             }
             $avance = 4;
@@ -2881,7 +2881,7 @@ class mod_vocabulario_nuevo_ic_form extends moodleform {
                 $titulillos .= '<td><input type="text" id="id_beisp'.$i.'" name="beisp'.$i.'" value="' . $descripcion_troceada[$i+2] . '"></td>';
                 $titulillos .= '<td><input type="text" id="id_siehe'.$i.'" name="siehe'.$i.'" value="' . $descripcion_troceada[$i+3] . '"></td>';
                 $titulillos .= '</tr>';
-                
+
 //                $titulillos .= '<tr class="cell">'; 
 //                $titulillos .= '<td>BEISPIEL</td>';
 //                $titulillos .= '<td colspan=2><input type="text" id="id_beisp'.$i.'" name="beisp'.$i.'" value="' . $descripcion_troceada[$i+2] . '"></td>';
@@ -2961,7 +2961,7 @@ class mod_vocabulario_nuevo_tipologia_form extends moodleform {
             $mform->setDefault('campott', $ttid);
         }
 
-        if($ttid>1){
+        if($ttid>1) {
             $tt = new Vocabulario_mis_tipologias();
             $tt->leer($ttid);
             $descripcion_troceada = explode(__SEPARADORCAMPOS__, $tt->get('descripcion'));
@@ -3078,7 +3078,7 @@ class mod_vocabulario_nuevo_estrategia_form extends moodleform {
             $mform->setDefault('campoea', $eaid);
         }
 
-        if($eaid > 1){
+        if($eaid > 1) {
             $ea = new Vocabulario_mis_estrategias();
             $ea->leer($eaid);
             //$descripcion_troceada = explode(__SEPARADORCAMPOS__, $ea->get('descripcion'));
@@ -3089,15 +3089,15 @@ class mod_vocabulario_nuevo_estrategia_form extends moodleform {
             $mform->addElement('textarea', 'miestrategia', get_string('miestrategia','vocabulario'), 'rows="5" cols="30"');
             $mform->setDefault('miestrategia', $descripcion[1]);
         }
-            //botones
-            $buttonarray = array();
-            if($eaid>1)
-                $buttonarray[] = &$mform->createElement('submit', 'desc_btn', get_string('guardesc','vocabulario'));
-            $mform->registerNoSubmitButton('desc_btn');
-            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('verdesc','vocabulario'));
-            $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel','vocabulario'));
-            $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
-        
+        //botones
+        $buttonarray = array();
+        if($eaid>1)
+            $buttonarray[] = &$mform->createElement('submit', 'desc_btn', get_string('guardesc','vocabulario'));
+        $mform->registerNoSubmitButton('desc_btn');
+        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('verdesc','vocabulario'));
+        $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel','vocabulario'));
+        $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
+
     }
 
 }
@@ -3126,9 +3126,9 @@ class mod_vocabulario_estrategia_desc_form extends moodleform {
         $mform->addElement('checkbox', 'eliminar', get_string("eliminar", "vocabulario"));
         $mform->setDefault('eliminar', 0);
 
-        
 
-        
+
+
 
         $buttonarray = array();
         $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('guardesc','vocabulario'));
@@ -3154,7 +3154,7 @@ class mod_vocabulario_listado_form extends moodleform {
         //titulo de la seccion
         $mform->addElement('html','<h1>'.get_string('listado','vocabulario').'</h1>');
 
-        
+
         //campolexico
         $campolex = new Vocabulario_campo_lexico();
         $campolex = $campolex->obtener_todos($USER->id);
@@ -3162,8 +3162,8 @@ class mod_vocabulario_listado_form extends moodleform {
         $mform->addElement('static','listacl','','<a href="javascript:desocultar(\'listacl\')" id="mclistacl">'.get_string('campo_lex','vocabulario').'</a>');
         $mform->addElement('html','<div id="ocultador_listacl" style="display:none">');
         $mform->addElement('html','<ul>');
-        foreach ($campolex as $cosa){
-           $mform->addElement('html','<li>'.$cosa.'</li>');
+        foreach ($campolex as $cosa) {
+            $mform->addElement('html','<li>'.$cosa.'</li>');
         }
         $mform->addElement('html','</ul></div>');
         //gramaticas
@@ -3172,8 +3172,8 @@ class mod_vocabulario_listado_form extends moodleform {
         $mform->addElement('static','listagr','','<a href="javascript:desocultar(\'listagr\')" id="mclistagr">'.get_string('admin_gr','vocabulario').'</a>');
         $mform->addElement('html','<div id="ocultador_listagr" style="display:none">');
         $mform->addElement('html','<ul>');
-        foreach ($gramatica as $cosa){
-           $mform->addElement('html','<li>'.$cosa.'</li>');
+        foreach ($gramatica as $cosa) {
+            $mform->addElement('html','<li>'.$cosa.'</li>');
         }
         $mform->addElement('html','</ul></div>');
         //intenciones
@@ -3182,8 +3182,8 @@ class mod_vocabulario_listado_form extends moodleform {
         $mform->addElement('static','listaic','','<a href="javascript:desocultar(\'listaic\')" id="mclistaic">'.get_string('admin_ic','vocabulario').'</a>');
         $mform->addElement('html','<div id="ocultador_listaic" style="display:none">');
         $mform->addElement('html','<ul>');
-        foreach ($intenciones as $cosa){
-           $mform->addElement('html','<li>'.$cosa.'</li>');
+        foreach ($intenciones as $cosa) {
+            $mform->addElement('html','<li>'.$cosa.'</li>');
         }
         $mform->addElement('html','</ul></div>');
         //tipologias
@@ -3193,8 +3193,8 @@ class mod_vocabulario_listado_form extends moodleform {
         $mform->addElement('static','listatt','','<a href="javascript:desocultar(\'listatt\')" id="mclistatt">'.get_string('admin_tt','vocabulario').'</a>');
         $mform->addElement('html','<div id="ocultador_listatt" style="display:none">');
         $mform->addElement('html','<ul>');
-        foreach ($tipologias as $cosa){
-           $mform->addElement('html','<li>'.$cosa.'</li>');
+        foreach ($tipologias as $cosa) {
+            $mform->addElement('html','<li>'.$cosa.'</li>');
         }
         $mform->addElement('html','</ul></div>');
         //botones
@@ -3204,8 +3204,8 @@ class mod_vocabulario_listado_form extends moodleform {
     }
 }
 
-class mod_vocabulario_pdf_form extends moodleform{
-    function definition(){
+class mod_vocabulario_pdf_form extends moodleform {
+    function definition() {
         global $USER;
         $mform = & $this->_form;
 
