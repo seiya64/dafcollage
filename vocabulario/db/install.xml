@@ -158,7 +158,7 @@ GNU General Public License for more details.
                 <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="clave para el id del usuario" PREVIOUS="primary"/>
             </KEYS>
         </TABLE>
-        <TABLE NAME="vocabulario_camposlexicos_de" COMMENT="campos lexicos disponibles aleman" PREVIOUS="vocabulario_camposlexicos_pl" NEXT="vocabulario_gramatica_es">
+        <TABLE NAME="vocabulario_camposlexicos_de" COMMENT="campos lexicos disponibles aleman" PREVIOUS="vocabulario_camposlexicos_pl" NEXT="vocabulario_gramatica">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="usuarioid"/>
                 <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
@@ -817,7 +817,7 @@ GNU General Public License for more details.
                 <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','18.3 Denominaciones gramaticales','103)" />
             </SENTENCES>
         </STATEMENT>
-        <STATEMENT NAME="insert vocabulario_gramatica" TYPE="insert" TABLE="vocabulario_gramatica" COMMENT="gramaticas predefinidas" PREVIOUS="insertar campos lexicos_de" NEXT="insert vocabulario_gramatica_en">
+        <STATEMENT NAME="insert vocabulario_gramatica" TYPE="insert" TABLE="vocabulario_gramatica" COMMENT="gramaticas predefinidas" PREVIOUS="insertar campos lexicos_de" NEXT="insert vocabulario_intenciones_es">
             <SENTENCES>
                 <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','--','0)" />
                 <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','1 Nomen','0)" />
@@ -1578,7 +1578,7 @@ GNU General Public License for more details.
         <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Menu','0)" />
         <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Asking for a job','0)" />
         <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Advertising letter','0)" />
-        <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Reader's letter','0)" />
+        <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Reader\'s letter','0)" />
         <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Letter of recommendation','0)" />
         <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Menu','0)" />
         <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Poster with information','0)" />
