@@ -678,7 +678,7 @@ GNU General Public License for more details.
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','9.2 Pory roku/miesiące','75)" />
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','9.3 Dni tygodnia/pory dnia','75)" />
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','9.4 Godzina','75)" />
-        <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','10 Geografia/Natura','0)" />
+        <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','10 GEOGRAFIA/NATURA','0)" />
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','11 SPOŁECZEŃSTWO','0)" />
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','11.1 Kraj/Polityka','81)" />
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','11.2 Prawo/Normy/Administracja','81)" />
@@ -696,7 +696,7 @@ GNU General Public License for more details.
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','14.1 System edukacyjny','94)" />
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','14.2 KSZTAŁCENIE PROFESJONALNE','94)" />
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','14.3 Kształcenie uniwersyteckie','94)" />
-        <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','15 Informatyka','0)" />
+        <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','15 INFORMATYKA','0)" />
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','15.1 Hardware','98)" />
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','15.2 Software','98)" />
         <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','16 NAUKA I TECHNOLOGIA','0)" />
@@ -1679,10 +1679,10 @@ GNU General Public License for more details.
         <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Reportaż','0)" />
         <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Notatka','0)" />
         <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Tekst naukowy','0)" />
-        <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Texto opisowy','0)" />
-        <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Texto informacyjny-dziennikarski','0)" />
-        <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Texto narracyjny','0)" />
-        <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Texto stopka','0)" />
+        <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Tekst opisowy','0)" />
+        <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Tekst informacyjny-dziennikarski','0)" />
+        <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Tekst narracyjny','0)" />
+        <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Tekst stopka','0)" />
             </SENTENCES>
         </STATEMENT>
         <STATEMENT NAME="insert vocabulario_tipologias_de" TYPE="insert" TABLE="vocabulario_tipologias_de" COMMENT="tipologias textuales predefinidas" PREVIOUS="insert vocabulario_tipologias_pl" NEXT="insert vocabulario_estrategias">
