@@ -65,7 +65,7 @@ if (optional_param('eliminar', 0, PARAM_INT) && $tip->get('padre') > 54) {
     //comenzamos una transacción para que en todas las tablas se haga seguido
     // en caso de error en algun delete, no se hace ninguno
     begin_sql();
-    foreach ($sufijos as $sufijo){
+    foreach ($sufijos as $sufijo) {
         delete_records('vocabulario_tipologias_'.$sufijo, 'id', $tip->get('padre'));
     }
     //confirmamos la transacción
@@ -78,7 +78,7 @@ if ($tip->get('tipo') != null) {
     //comenzamos una transacción para que todos los insert sean seguidos y produzcan el mismo id en todas las tablas
     //en caso de error en uno, no se hace ninguno
     begin_sql();
-    foreach ($sufijos as $sufijo){
+    foreach ($sufijos as $sufijo) {
         $ttidaux = insert_record('vocabulario_tipologias_'.$sufijo, $tip, true);
     }
     //confirmamos la transacción
