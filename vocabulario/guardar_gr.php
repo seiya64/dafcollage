@@ -367,7 +367,7 @@ switch ($padre) {
                 $salir = true;
             }
         }
-        $desc .= '&&&&';
+        $desc .= __SEPARADORCAMPOS__.__SEPARADORCAMPOS__.__SEPARADORCAMPOS__.__SEPARADORCAMPOS__;
         if($padre==57){
             $desc .= __SEPARADORCAMPOS__;
         }
