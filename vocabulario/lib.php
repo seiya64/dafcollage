@@ -4,7 +4,7 @@
 /**
  * Library of functions and constants for module vocabulario
  *
- * @author 
+ * @author
  * @version $Id: lib.php,v 1.4 2006/08/28 16:41:20 mark-nielsen Exp $
  * @package vocabulario
  * */
@@ -43,21 +43,21 @@ function vocabulario_add_instance($vocabulario) {
  * @return string The suffix for tables according to the current language
  * */
 function get_sufijo_lenguaje_tabla() {
-	
-	$lenguaje = current_language();
-	if ($lenguaje == "es_utf8") {
-		$sufijotabla = "es";
-	} else if ($lenguaje == "en_utf8") {
-		$sufijotabla = "en";
-        } else if ($lenguaje == "pl_utf8") {
-		$sufijotabla = "pl";
-        } else if ($lenguaje == "de_utf8") {
-		$sufijotabla = "de";
-	}else {
-		$sufijotabla = "es";
-	}
-	
-	return $sufijotabla;
+
+    $lenguaje = current_language();
+    if ($lenguaje == "es_utf8") {
+        $sufijotabla = "es";
+    } else if ($lenguaje == "en_utf8") {
+        $sufijotabla = "en";
+    } else if ($lenguaje == "pl_utf8") {
+        $sufijotabla = "pl";
+    } else if ($lenguaje == "de_utf8") {
+        $sufijotabla = "de";
+    }else {
+        $sufijotabla = "es";
+    }
+
+    return $sufijotabla;
 }
 
 /**
@@ -140,7 +140,7 @@ function vocabulario_user_complete($course, $user, $mod, $vocabulario) {
 function vocabulario_print_recent_activity($course, $isteacher, $timestart) {
     global $CFG;
 
-    return false;  //  True if anything was printed, otherwise false 
+    return false;  //  True if anything was printed, otherwise false
 }
 
 /**
@@ -292,123 +292,123 @@ function vocabulario_obtener_alumnos($cursoid) {
     return $mis_alumnos;
 }
 
-function vocabulario_todas_palabras($usuarioid, $cl=null, $gram=null, $inten=null, $tipo=null, $letra=null){
+function vocabulario_todas_palabras($usuarioid, $cl=null, $gram=null, $inten=null, $tipo=null, $letra=null) {
     global $CFG;
     $sql = '';
-    if ($letra){
+    if ($letra) {
         $sql .= 'SELECT * FROM (';
     }
     $sql .= 'SELECT DISTINCT todas.pal, cl.campo, gr.gramatica, ic.intencion, tt.tipo, todas.mpid ';
     $sql .= 'FROM (';
     $sql .= '(SELECT mp.id mpid,`sustantivoid` id,`palabra` pal,`campoid` clid,`gramaticaid` grid,`intencionid` icid,`tipologiaid` ttid ';
     $sql .= 'FROM ';
-    if ($cl){
-	$sql .= 	'(SELECT * FROM `mdl_vocabulario_mis_palabras` WHERE campoid = '.$cl.') mp,';
+    if ($cl) {
+        $sql .= 	'(SELECT * FROM `mdl_vocabulario_mis_palabras` WHERE campoid = '.$cl.') mp,';
     }
     else {
         $sql .= 	'`mdl_vocabulario_mis_palabras` mp,';
     }
-    if($gram || $inten || $tipo){
+    if($gram || $inten || $tipo) {
         $sql .= '(SELECT * FROM `mdl_vocabulario_sustantivos` WHERE ';
-        if ($gram){
+        if ($gram) {
             $sql .= 'gramaticaid = '.$gram.' and ';
         }
-        if ($inten){
+        if ($inten) {
             $sql .= 'intencionid = '.$inten.' and ';
         }
-        if ($tipo){
+        if ($tipo) {
             $sql .= 'tipologiaid = '.$tipo.' and ';
         }
         $sql .= '1) s ';
     }
     else {
-	$sql .= '`mdl_vocabulario_sustantivos` s ';
+        $sql .= '`mdl_vocabulario_sustantivos` s ';
     }
     $sql .= 'WHERE `usuarioid` = '.$usuarioid.' and mp.`sustantivoid` = s.`id`) ';
     $sql .= 'UNION ';
     $sql .= '(SELECT mp.id mpid, `adjetivoid` id, `sin_declinar` pal, `campoid` clid, `gramaticaid` grid, `intencionid` icid, `tipologiaid` ttid ';
     $sql .= 'FROM ';
-    if ($cl){
-	$sql .= 	'(SELECT * FROM `mdl_vocabulario_mis_palabras` WHERE campoid = '.$cl.') mp,';
+    if ($cl) {
+        $sql .= 	'(SELECT * FROM `mdl_vocabulario_mis_palabras` WHERE campoid = '.$cl.') mp,';
     }
     else {
         $sql .= 	'`mdl_vocabulario_mis_palabras` mp,';
     }
-    if($gram || $inten || $tipo){
+    if($gram || $inten || $tipo) {
         $sql .= '(SELECT * FROM `mdl_vocabulario_adjetivos` WHERE ';
-        if ($gram){
+        if ($gram) {
             $sql .= 'gramaticaid = '.$gram.' and ';
         }
-        if ($inten){
+        if ($inten) {
             $sql .= 'intencionid = '.$inten.' and ';
         }
-        if ($tipo){
+        if ($tipo) {
             $sql .= 'tipologiaid = '.$tipo.' and ';
         }
         $sql .= '1) a ';
     }
     else {
-	$sql .= '`mdl_vocabulario_adjetivos` a ';
+        $sql .= '`mdl_vocabulario_adjetivos` a ';
     }
     $sql .= 'WHERE `usuarioid` = '.$usuarioid.' and mp.`adjetivoid` = a.`id` and a.`id` <> 1) ';
     $sql .= 'UNION ';
     $sql .= '(SELECT mp.id mpid, `verboid` id, `infinitivo` pal, `campoid` clid, `gramaticaid` grid, `intencionid` icid, `tipologiaid` ttid ';
     $sql .= 'FROM ';
-    if ($cl){
-	$sql .= 	'(SELECT * FROM `mdl_vocabulario_mis_palabras` WHERE campoid = '.$cl.') mp,';
+    if ($cl) {
+        $sql .= 	'(SELECT * FROM `mdl_vocabulario_mis_palabras` WHERE campoid = '.$cl.') mp,';
     }
     else {
         $sql .= 	'`mdl_vocabulario_mis_palabras` mp,';
     }
-    if($gram || $inten || $tipo){
+    if($gram || $inten || $tipo) {
         $sql .= '(SELECT * FROM `mdl_vocabulario_verbos` WHERE ';
-        if ($gram){
+        if ($gram) {
             $sql .= 'gramaticaid = '.$gram.' and ';
         }
-        if ($inten){
+        if ($inten) {
             $sql .= 'intencionid = '.$inten.' and ';
         }
-        if ($tipo){
+        if ($tipo) {
             $sql .= 'tipologiaid = '.$tipo.' and ';
         }
         $sql .= '1) a ';
     }
     else {
-	$sql .= '`mdl_vocabulario_verbos` a ';
+        $sql .= '`mdl_vocabulario_verbos` a ';
     }
     $sql .= 'WHERE `usuarioid` = '.$usuarioid.' and mp.`verboid` = a.`id` and a.`id` <> 1) ';
     $sql .= 'UNION ';
     $sql .= '(SELECT mp.id mpid, `otroid` id, `palabra` pal, `campoid` clid, `gramaticaid` grid, `intencionid` icid, `tipologiaid` ttid ';
     $sql .= 'FROM ';
-    if ($cl){
-	$sql .= 	'(SELECT * FROM `mdl_vocabulario_mis_palabras` WHERE campoid = '.$cl.') mp,';
+    if ($cl) {
+        $sql .= 	'(SELECT * FROM `mdl_vocabulario_mis_palabras` WHERE campoid = '.$cl.') mp,';
     }
     else {
         $sql .= 	'`mdl_vocabulario_mis_palabras` mp,';
     }
-    if($gram || $inten || $tipo){
+    if($gram || $inten || $tipo) {
         $sql .= '(SELECT * FROM `mdl_vocabulario_otros` WHERE ';
-        if ($gram){
+        if ($gram) {
             $sql .= 'gramaticaid = '.$gram.' and ';
         }
-        if ($inten){
+        if ($inten) {
             $sql .= 'intencionid = '.$inten.' and ';
         }
-        if ($tipo){
+        if ($tipo) {
             $sql .= 'tipologiaid = '.$tipo.' and ';
         }
         $sql .= '1) a ';
     }
     else {
-	$sql .= '`mdl_vocabulario_otros` a ';
+        $sql .= '`mdl_vocabulario_otros` a ';
     }
-	$sufijotabla = get_sufijo_lenguaje_tabla();
+    $sufijotabla = get_sufijo_lenguaje_tabla();
     $sql .= 'WHERE `usuarioid` = '.$usuarioid.' and mp.`otroid` = a.`id` and a.`id` <> 1) ';
     $sql .= 'ORDER BY pal) todas,';
     $sql .= "`mdl_vocabulario_camposlexicos` cl, `mdl_vocabulario_gramatica` gr, `mdl_vocabulario_intenciones_$sufijotabla` ic, `mdl_vocabulario_tipologias` tt ";
     $sql .= 'WHERE todas.clid = cl.id and todas.grid = gr.id and todas.icid = ic.id and todas.ttid = tt.id';
 
-    if ($letra){
+    if ($letra) {
         $sql .= ') p WHERE p.pal like \''.$letra.'%\'';
     }
 
