@@ -56,13 +56,19 @@ $campo['usuarioid'] = $user_object->id;
 $campo['padre'] = required_param('campoid', PARAM_TEXT);
 $campo['campo'] = optional_param('campo', PARAM_TEXT);
 
+$sufijos = get_todos_sufijos_lenguaje();
+
 if (optional_param('eliminar', 0, PARAM_INT) && $campo['padre'] > 106) {
-    delete_records('vocabulario_camposlexicos', 'id', $campo['padre']);
+    foreach ($sufijos as $sufijo){
+        delete_records('vocabulario_camposlexicos_'.$sufijo, 'id', $campo['padre']);
+    }
     //echo 'eliminado ' . $campo['padre'];
 }
 
 if ($campo['campo'] != null) {
-    insert_record('vocabulario_camposlexicos', $campo, true);
+    foreach($sufijos as $sufijo){
+        insert_record('vocabulario_camposlexicos_'.$sufijo, $campo, true);
+    }
 }
 
 //volvemos a donde veniamos
