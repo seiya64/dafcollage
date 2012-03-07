@@ -65,7 +65,7 @@ if (optional_param('eliminar', 0, PARAM_INT) && $intencion->get('padre') > 146) 
     //comenzamos una transacción para que en todas las tablas se haga seguido
     // en caso de error en algun delete, no se hace ninguno
     begin_sql();
-    foreach ($sufijos as $sufijo){
+    foreach ($sufijos as $sufijo) {
         delete_records('vocabulario_intenciones_'.$sufijo, 'id', $intencion->get('padre'));
     }
     //confirmamos la transacción
@@ -77,11 +77,11 @@ if ($intencion->get('intencion') != null) {
     //comenzamos una transacción para que todos los insert sean seguidos y produzcan el mismo id en todas las tablas
     //en caso de error en uno, no se hace ninguno
     begin_sql();
-    foreach ($sufijos as $sufijo){
+    foreach ($sufijos as $sufijo) {
         $icidaux = insert_record('vocabulario_intenciones_'.$sufijo, $intencion, true);
     }
     //confirmamos la transacción
     commit_sql();
 }
 redirect('./view.php?id=' . $id_tocho . '&opcion=8&icid=' . $icidaux)
-?>
+        ?>
