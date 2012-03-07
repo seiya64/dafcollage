@@ -64,8 +64,8 @@ GNU General Public License for more details.
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="gram_id"/>
                 <KEY NAME="gram_id" TYPE="foreign" FIELDS="gramaticaid" REFTABLE="vocabulario_gramatica" REFFIELDS="id" COMMENT="id de la gramatica" PREVIOUS="primary" NEXT="inten_id"/>
-                <KEY NAME="inten_id" TYPE="foreign" FIELDS="intencionid" REFTABLE="vocabulario_intenciones" REFFIELDS="id" COMMENT="id de la intencin" PREVIOUS="gram_id" NEXT="tipo_id"/>
-                <KEY NAME="tipo_id" TYPE="foreign" FIELDS="tipologiaid" REFTABLE="vocabulario_tipologias" REFFIELDS="id" COMMENT="id de la tipologia" PREVIOUS="inten_id"/>
+                <KEY NAME="inten_id" TYPE="foreign" FIELDS="intencionid" REFTABLE="vocabulario_intenciones_es" REFFIELDS="id" COMMENT="id de la intencin" PREVIOUS="gram_id" NEXT="tipo_id"/>
+                <KEY NAME="tipo_id" TYPE="foreign" FIELDS="tipologiaid" REFTABLE="vocabulario_tipologias_es" REFFIELDS="id" COMMENT="id de la tipologia" PREVIOUS="inten_id"/>
             </KEYS>
         </TABLE>
         <TABLE NAME="vocabulario_adjetivos" COMMENT="adjetivo" PREVIOUS="vocabulario_sustantivos" NEXT="vocabulario_verbos">
@@ -81,8 +81,8 @@ GNU General Public License for more details.
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="gram_id"/>
                 <KEY NAME="gram_id" TYPE="foreign" FIELDS="gramaticaid" REFTABLE="vocabulario_gramatica" REFFIELDS="id" COMMENT="id de la gramatica" PREVIOUS="primary" NEXT="inten_id"/>
-                <KEY NAME="inten_id" TYPE="foreign" FIELDS="intencionid" REFTABLE="vocabulario_intenciones" REFFIELDS="id" COMMENT="id de la intencin" PREVIOUS="gram_id" NEXT="tipo_id"/>
-                <KEY NAME="tipo_id" TYPE="foreign" FIELDS="tipologiaid" REFTABLE="vocabulario_tipologias" REFFIELDS="id" COMMENT="id de la tipologia" PREVIOUS="inten_id"/>
+                <KEY NAME="inten_id" TYPE="foreign" FIELDS="intencionid" REFTABLE="vocabulario_intenciones_es" REFFIELDS="id" COMMENT="id de la intencin" PREVIOUS="gram_id" NEXT="tipo_id"/>
+                <KEY NAME="tipo_id" TYPE="foreign" FIELDS="tipologiaid" REFTABLE="vocabulario_tipologias_es" REFFIELDS="id" COMMENT="id de la tipologia" PREVIOUS="inten_id"/>
             </KEYS>
         </TABLE>
         <TABLE NAME="vocabulario_verbos" COMMENT="verbos" PREVIOUS="vocabulario_adjetivos" NEXT="vocabulario_otros">
@@ -101,8 +101,8 @@ GNU General Public License for more details.
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="gram_id"/>
                 <KEY NAME="gram_id" TYPE="foreign" FIELDS="gramaticaid" REFTABLE="vocabulario_gramatica" REFFIELDS="id" COMMENT="id de la gramatica" PREVIOUS="primary" NEXT="inten_id"/>
-                <KEY NAME="inten_id" TYPE="foreign" FIELDS="intencionid" REFTABLE="vocabulario_intenciones" REFFIELDS="id" COMMENT="id de la intencin" PREVIOUS="gram_id" NEXT="tipo_id"/>
-                <KEY NAME="tipo_id" TYPE="foreign" FIELDS="tipologiaid" REFTABLE="vocabulario_tipologias" REFFIELDS="id" COMMENT="id de la tipologia" PREVIOUS="inten_id"/>
+                <KEY NAME="inten_id" TYPE="foreign" FIELDS="intencionid" REFTABLE="vocabulario_intenciones_es" REFFIELDS="id" COMMENT="id de la intencin" PREVIOUS="gram_id" NEXT="tipo_id"/>
+                <KEY NAME="tipo_id" TYPE="foreign" FIELDS="tipologiaid" REFTABLE="vocabulario_tipologias_es" REFFIELDS="id" COMMENT="id de la tipologia" PREVIOUS="inten_id"/>
             </KEYS>
         </TABLE>
         <TABLE NAME="vocabulario_otros" COMMENT="otro tipo de palabras" PREVIOUS="vocabulario_verbos" NEXT="vocabulario_camposlexicos_es">
@@ -118,11 +118,11 @@ GNU General Public License for more details.
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="gram_id"/>
                 <KEY NAME="gram_id" TYPE="foreign" FIELDS="gramaticaid" REFTABLE="vocabulario_gramatica" REFFIELDS="id" COMMENT="id de la gramatica" PREVIOUS="primary" NEXT="inten_id"/>
-                <KEY NAME="inten_id" TYPE="foreign" FIELDS="intencionid" REFTABLE="vocabulario_intenciones" REFFIELDS="id" COMMENT="id de la intencin" PREVIOUS="gram_id" NEXT="tipo_id"/>
-                <KEY NAME="tipo_id" TYPE="foreign" FIELDS="tipologiaid" REFTABLE="vocabulario_tipologias" REFFIELDS="id" COMMENT="id de la tipologia" PREVIOUS="inten_id"/>
+                <KEY NAME="inten_id" TYPE="foreign" FIELDS="intencionid" REFTABLE="vocabulario_intenciones_es" REFFIELDS="id" COMMENT="id de la intencin" PREVIOUS="gram_id" NEXT="tipo_id"/>
+                <KEY NAME="tipo_id" TYPE="foreign" FIELDS="tipologiaid" REFTABLE="vocabulario_tipologias_es" REFFIELDS="id" COMMENT="id de la tipologia" PREVIOUS="inten_id"/>
             </KEYS>
         </TABLE>
-        <TABLE NAME="vocabulario_camposlexicos_es" COMMENT="campos lexicos disponibles en español" PREVIOUS="vocabulario_otros" NEXT="vocabulario_gramatica_en">
+        <TABLE NAME="vocabulario_camposlexicos_es" COMMENT="campos lexicos disponibles en español" PREVIOUS="vocabulario_otros" NEXT="vocabulario_camposlexicos_en">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="usuarioid"/>
                 <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
@@ -146,7 +146,7 @@ GNU General Public License for more details.
                 <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="clave para el id del usuario" PREVIOUS="primary"/>
             </KEYS>
         </TABLE>
-        <TABLE NAME="vocabulario_camposlexicos_pl" COMMENT="campos lexicos disponibles en polaco" PREVIOUS="vocabulario_camposlexicos_en" NEXT="vocabulario_gramatica_de">
+        <TABLE NAME="vocabulario_camposlexicos_pl" COMMENT="campos lexicos disponibles en polaco" PREVIOUS="vocabulario_camposlexicos_en" NEXT="vocabulario_camposlexicos_de">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="usuarioid"/>
                 <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
@@ -170,7 +170,7 @@ GNU General Public License for more details.
                 <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="clave para el id del usuario" PREVIOUS="primary"/>
             </KEYS>
         </TABLE>
-        <TABLE NAME="vocabulario_gramatica_es" COMMENT="estructuras gramaticales" PREVIOUS="vocabulario_camposlexicos_de" NEXT="vocabulario_gramatica_en">
+        <TABLE NAME="vocabulario_gramatica" COMMENT="estructuras gramaticales" PREVIOUS="vocabulario_camposlexicos_de" NEXT="vocabulario_mis_palabras">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="usuarioid"/>
                 <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
@@ -182,43 +182,7 @@ GNU General Public License for more details.
                 <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
             </KEYS>
         </TABLE>
-        <TABLE NAME="vocabulario_gramatica_en" COMMENT="estructuras gramaticales" PREVIOUS="vocabulario_gramatica_es" NEXT="vocabulario_mis_palabras">
-            <FIELDS>
-                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="usuarioid"/>
-                <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
-                <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="padre en la jerarquía de gramáticas" PREVIOUS="usuarioid" NEXT="gramatica"/>
-                <FIELD NAME="gramatica" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="nombre para la estructura gramatical" PREVIOUS="padre"/>
-            </FIELDS>
-            <KEYS>
-                <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
-                <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
-            </KEYS>
-        </TABLE>
-        <TABLE NAME="vocabulario_gramatica_pl" COMMENT="estructuras gramaticales" PREVIOUS="vocabulario_gramatica_en" NEXT="vocabulario_gramatica_de">
-            <FIELDS>
-                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="usuarioid"/>
-                <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
-                <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="padre en la jerarquía de gramáticas" PREVIOUS="usuarioid" NEXT="gramatica"/>
-                <FIELD NAME="gramatica" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="nombre para la estructura gramatical" PREVIOUS="padre"/>
-            </FIELDS>
-            <KEYS>
-                <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
-                <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
-            </KEYS>
-        </TABLE>
-        <TABLE NAME="vocabulario_gramatica_de" COMMENT="estructuras gramaticales" PREVIOUS="vocabulario_gramatica_pl" NEXT="vocabulario_mis_palabras">
-            <FIELDS>
-                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="usuarioid"/>
-                <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
-                <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="padre en la jerarquía de gramáticas" PREVIOUS="usuarioid" NEXT="gramatica"/>
-                <FIELD NAME="gramatica" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="nombre para la estructura gramatical" PREVIOUS="padre"/>
-            </FIELDS>
-            <KEYS>
-                <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
-                <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
-            </KEYS>
-        </TABLE>
-        <TABLE NAME="vocabulario_mis_palabras" COMMENT="palabras que guarda cada usuario" PREVIOUS="vocabulario_gramatica" NEXT="vocabulario_mis_gramaticas">
+        <TABLE NAME="vocabulario_mis_palabras" COMMENT="palabras que guarda cada usuario" PREVIOUS="vocabulario_gramatica_de" NEXT="vocabulario_mis_gramaticas">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="usuarioid"/>
                 <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="id del usuario al que pertenece la palabra" PREVIOUS="id" NEXT="sustantivoid"/>
@@ -231,8 +195,8 @@ GNU General Public License for more details.
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
                 <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary" NEXT="clave_sustantivo"/>
-                <KEY NAME="clave_sustantivo" TYPE="foreign" FIELDS="sustantivoid" REFTABLE="vocabulario_camposlexicos" REFFIELDS="id" COMMENT="id del sustantivo" PREVIOUS="clave_usuario" NEXT="clave_campo"/>
-                <KEY NAME="clave_campo" TYPE="foreign" FIELDS="campoid" REFTABLE="vocabulario_camposlexicos" REFFIELDS="id" COMMENT="id del campo lexico" PREVIOUS="clave_sustantivo" NEXT="clave_adjetivo"/>
+                <KEY NAME="clave_sustantivo" TYPE="foreign" FIELDS="sustantivoid" REFTABLE="vocabulario_camposlexicos_es" REFFIELDS="id" COMMENT="id del sustantivo" PREVIOUS="clave_usuario" NEXT="clave_campo"/>
+                <KEY NAME="clave_campo" TYPE="foreign" FIELDS="campoid" REFTABLE="vocabulario_camposlexicos_es" REFFIELDS="id" COMMENT="id del campo lexico" PREVIOUS="clave_sustantivo" NEXT="clave_adjetivo"/>
                 <KEY NAME="clave_adjetivo" TYPE="foreign" FIELDS="adjetivoid" REFTABLE="vocabulario_adjetivos" REFFIELDS="id" COMMENT="id del adjetivo" PREVIOUS="clave_campo" NEXT="clave_verbo"/>
                 <KEY NAME="clave_verbo" TYPE="foreign" FIELDS="verboid" REFTABLE="vocabulario_verbos" REFFIELDS="id" COMMENT="id del verbo" PREVIOUS="clave_adjetivo" NEXT="clave_otro"/>
                 <KEY NAME="clave_otro" TYPE="foreign" FIELDS="otroid" REFTABLE="vocabulario_otros" REFFIELDS="id" COMMENT="id de la otra palabra" PREVIOUS="clave_verbo" NEXT="clave_norepetir"/>
@@ -303,7 +267,7 @@ GNU General Public License for more details.
                 <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
             </KEYS>
         </TABLE>
-        <TABLE NAME="vocabulario_mis_intenciones" COMMENT="descripcion de los alumnos de las intenciones comunicativas" PREVIOUS="vocabulario_intenciones" NEXT="vocabulario_tipologias_es">
+        <TABLE NAME="vocabulario_mis_intenciones" COMMENT="descripcion de los alumnos de las intenciones comunicativas" PREVIOUS="vocabulario_intenciones_de" NEXT="vocabulario_tipologias_es">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="usuarioid"/>
                 <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="id del usuario" PREVIOUS="id" NEXT="intencionesid"/>
@@ -314,7 +278,7 @@ GNU General Public License for more details.
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_intencion"/>
-                <KEY NAME="clave_intencion" TYPE="foreign" FIELDS="intencionesid" REFTABLE="vocabulario_intenciones" REFFIELDS="id" COMMENT="id de la intencion" PREVIOUS="primary" NEXT="clave_usuario"/>
+                <KEY NAME="clave_intencion" TYPE="foreign" FIELDS="intencionesid" REFTABLE="vocabulario_intenciones_es" REFFIELDS="id" COMMENT="id de la intencion" PREVIOUS="primary" NEXT="clave_usuario"/>
                 <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="clave_intencion" NEXT="clave_norepetir"/>
                 <KEY NAME="clave_norepetir" TYPE="unique" FIELDS="usuarioid, intencionesid" COMMENT="clave para no repetir intenciones" PREVIOUS="clave_usuario"/>
             </KEYS>
@@ -331,7 +295,43 @@ GNU General Public License for more details.
                 <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
             </KEYS>
         </TABLE>
-        <TABLE NAME="vocabulario_mis_tipologias" COMMENT="descripcion de los alumnos de las tipologias textuales" PREVIOUS="vocabulario_tipologias" NEXT="vocabulario_estrategias">
+        <TABLE NAME="vocabulario_tipologias_en" COMMENT="tipologias textuales" PREVIOUS="vocabulario_tipologias_es" NEXT="vocabulario_tipologias_pl">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="usuarioid"/>
+                <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
+                <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="padre en la jerarquía de gramáticas" PREVIOUS="usuarioid" NEXT="tipo"/>
+                <FIELD NAME="tipo" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="nombre para la tipología textual" PREVIOUS="padre"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+                <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="vocabulario_tipologias_pl" COMMENT="tipologias textuales" PREVIOUS="vocabulario_tipologias_en" NEXT="vocabulario_tipologias_de">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="usuarioid"/>
+                <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
+                <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="padre en la jerarquía de gramáticas" PREVIOUS="usuarioid" NEXT="tipo"/>
+                <FIELD NAME="tipo" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="nombre para la tipología textual" PREVIOUS="padre"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+                <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="vocabulario_tipologias_de" COMMENT="tipologias textuales" PREVIOUS="vocabulario_tipologias_pl" NEXT="vocabulario_mis_tipologias">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="usuarioid"/>
+                <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
+                <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="padre en la jerarquía de gramáticas" PREVIOUS="usuarioid" NEXT="tipo"/>
+                <FIELD NAME="tipo" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="nombre para la tipología textual" PREVIOUS="padre"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+                <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="vocabulario_mis_tipologias" COMMENT="descripcion de los alumnos de las tipologias textuales" PREVIOUS="vocabulario_tipologias_de" NEXT="vocabulario_estrategias">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="usuarioid"/>
                 <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="id del usuario" PREVIOUS="id" NEXT="tipoid"/>
@@ -342,7 +342,7 @@ GNU General Public License for more details.
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_tipo"/>
-                <KEY NAME="clave_tipo" TYPE="foreign" FIELDS="tipoid" REFTABLE="vocabulario_tipologias" REFFIELDS="id" COMMENT="id del tipo" PREVIOUS="primary" NEXT="clave_usuario"/>
+                <KEY NAME="clave_tipo" TYPE="foreign" FIELDS="tipoid" REFTABLE="vocabulario_tipologias_es" REFFIELDS="id" COMMENT="id del tipo" PREVIOUS="primary" NEXT="clave_usuario"/>
                 <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="clave_tipo" NEXT="clave_norepetir"/>
                 <KEY NAME="clave_norepetir" TYPE="unique" FIELDS="usuarioid, tipoid" COMMENT="clave para no repetir intenciones" PREVIOUS="clave_usuario"/>
             </KEYS>
@@ -359,8 +359,6 @@ GNU General Public License for more details.
                 <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
             </KEYS>
         </TABLE>
-
-
         <TABLE NAME="vocabulario_mis_estrategias" COMMENT="descripcion de los alumnos de las estrategias de aprendizaje" PREVIOUS="vocabulario_estrategias">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="usuarioid"/>
@@ -819,7 +817,7 @@ GNU General Public License for more details.
                 <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','18.3 Denominaciones gramaticales','103)" />
             </SENTENCES>
         </STATEMENT>
-        <STATEMENT NAME="insert vocabulario_gramatica_es" TYPE="insert" TABLE="vocabulario_gramatica_es" COMMENT="gramaticas predefinidas" PREVIOUS="insertar campos lexicos_de" NEXT="insert vocabulario_gramatica_en">
+        <STATEMENT NAME="insert vocabulario_gramatica" TYPE="insert" TABLE="vocabulario_gramatica" COMMENT="gramaticas predefinidas" PREVIOUS="insertar campos lexicos_de" NEXT="insert vocabulario_gramatica_en">
             <SENTENCES>
                 <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','--','0)" />
                 <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','1 Nomen','0)" />
@@ -893,229 +891,7 @@ GNU General Public License for more details.
                 <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','9.4 Abkürzungen','66)" />
             </SENTENCES>
         </STATEMENT>
-        <STATEMENT NAME="insert vocabulario_gramatica_en" TYPE="insert" TABLE="vocabulario_gramatica_en" COMMENT="gramaticas predefinidas" PREVIOUS="insert vocabulario_gramatica_es" NEXT="insert vocabulario_gramatica_pl">
-            <SENTENCES>
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','--','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','1 Nomen','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','1.1 Genus','2)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','1.2 Numerus','2)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','1.3 Deklination','2)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2 Pronomen','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.1 Personalpronomen','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.2 Interrogativpronomen','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.3 Demonstrativpronomen','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.4 Indefinitpronomen','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.4.1 Als Artikelwörter gebr. Indefinitpronomina','10)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.4.2 Nur substantivisch gebr. Indefinitpronomina','10)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.4.2.1 Pronomina, die nur Personen bezeichnen','12)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.4.2.2 Pron., die nur Nicht-Personen bezeichnen','12)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.5 Possessivpronomen','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.6 Relativpronomen','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.7 Pronominaladverbien','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.8 Funktionen von ES','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3 Verb','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.1 Zeitformen/Formensystem','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.1.1 Präsens','20)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.1.2 Präteritum','20)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.1.3 Perfekt/Partizip II','20)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.1.4 Partizip I','20)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.1.5 Futur I','20)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.1.6 Futur II','20)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.2 Modalverben','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.3 Trennbare Verben','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.4 Besondere Verben','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.5 Reflexive und reziproke Verben','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.6 Passiv','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.7 Konjunktiv','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.7.1 Konjunktiv I','32)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.7.2 Konjunktiv II','32)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.8 Imperativ','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4 Artikelwörter','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.1 Definitartikel','36)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.2 Indefinitartikel','36)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.3 Possessivartikel','36)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.4 Negationsartikel','36)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.5 Interrogativartikel','36)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.6 Demonstrativartikel','36)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.7 Gebrauch der Artikelwörter','36)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','5 Adjektive/ Adverbien','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','5.1 Kriterien zur Differenzierung','44)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','5.2 Adjektive','44)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','5.2.1 Deklination','46)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','5.2.2 Komparativ / Superlativ','46)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','5.3 Adverbien','44)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','6 Präpositionen','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','6.1 Neue Präposition hinzufügen','50)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','6.2 Präposition suchen','50)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','7 Modalpartikel','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','7.1 Beispiele und Funktionen','53)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8 Syntax','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.1 Hauptsatz','55)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.2 Nebensatz','55)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.3 Mittelfeld','55)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.3.1 Ergänzungen','58)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.3.2 Angaben','58)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.3.3 Position von NICHT','58)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.4 Konnektoren','55)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.4.1 Konjunktoren','62)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.4.2 Subjunktoren','62)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.4.3 Konjunktionaladverbien','62)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','9 Wortbildung','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','9.1 Komposition','66)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','9.2 Derivation','66)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','9.3 Diminution','66)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','9.4 Abkürzungen','66)" />
-            </SENTENCES>
-        </STATEMENT>
-        <STATEMENT NAME="insert vocabulario_gramatica_pl" TYPE="insert" TABLE="vocabulario_gramatica_pl" COMMENT="gramaticas predefinidas" PREVIOUS="insert vocabulario_gramatica_en" NEXT="insert vocabulario_gramatica_de">
-            <SENTENCES>
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','--','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','1 Nomen','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','1.1 Genus','2)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','1.2 Numerus','2)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','1.3 Deklination','2)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2 Pronomen','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.1 Personalpronomen','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.2 Interrogativpronomen','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.3 Demonstrativpronomen','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.4 Indefinitpronomen','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.4.1 Als Artikelwörter gebr. Indefinitpronomina','10)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.4.2 Nur substantivisch gebr. Indefinitpronomina','10)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.4.2.1 Pronomina, die nur Personen bezeichnen','12)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.4.2.2 Pron., die nur Nicht-Personen bezeichnen','12)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.5 Possessivpronomen','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.6 Relativpronomen','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.7 Pronominaladverbien','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.8 Funktionen von ES','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3 Verb','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.1 Zeitformen/Formensystem','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.1.1 Präsens','20)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.1.2 Präteritum','20)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.1.3 Perfekt/Partizip II','20)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.1.4 Partizip I','20)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.1.5 Futur I','20)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.1.6 Futur II','20)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.2 Modalverben','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.3 Trennbare Verben','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.4 Besondere Verben','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.5 Reflexive und reziproke Verben','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.6 Passiv','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.7 Konjunktiv','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.7.1 Konjunktiv I','32)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.7.2 Konjunktiv II','32)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.8 Imperativ','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4 Artikelwörter','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.1 Definitartikel','36)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.2 Indefinitartikel','36)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.3 Possessivartikel','36)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.4 Negationsartikel','36)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.5 Interrogativartikel','36)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.6 Demonstrativartikel','36)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.7 Gebrauch der Artikelwörter','36)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','5 Adjektive/ Adverbien','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','5.1 Kriterien zur Differenzierung','44)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','5.2 Adjektive','44)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','5.2.1 Deklination','46)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','5.2.2 Komparativ / Superlativ','46)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','5.3 Adverbien','44)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','6 Präpositionen','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','6.1 Neue Präposition hinzufügen','50)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','6.2 Präposition suchen','50)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','7 Modalpartikel','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','7.1 Beispiele und Funktionen','53)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8 Syntax','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.1 Hauptsatz','55)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.2 Nebensatz','55)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.3 Mittelfeld','55)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.3.1 Ergänzungen','58)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.3.2 Angaben','58)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.3.3 Position von NICHT','58)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.4 Konnektoren','55)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.4.1 Konjunktoren','62)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.4.2 Subjunktoren','62)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.4.3 Konjunktionaladverbien','62)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','9 Wortbildung','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','9.1 Komposition','66)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','9.2 Derivation','66)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','9.3 Diminution','66)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','9.4 Abkürzungen','66)" />
-            </SENTENCES>
-        </STATEMENT>
-        <STATEMENT NAME="insert vocabulario_gramatica_de" TYPE="insert" TABLE="vocabulario_gramatica_de" COMMENT="gramaticas predefinidas" PREVIOUS="insert vocabulario_gramatica_pl" NEXT="insert vocabulario_intenciones_es">
-            <SENTENCES>
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','--','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','1 Nomen','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','1.1 Genus','2)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','1.2 Numerus','2)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','1.3 Deklination','2)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2 Pronomen','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.1 Personalpronomen','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.2 Interrogativpronomen','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.3 Demonstrativpronomen','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.4 Indefinitpronomen','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.4.1 Als Artikelwörter gebr. Indefinitpronomina','10)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.4.2 Nur substantivisch gebr. Indefinitpronomina','10)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.4.2.1 Pronomina, die nur Personen bezeichnen','12)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.4.2.2 Pron., die nur Nicht-Personen bezeichnen','12)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.5 Possessivpronomen','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.6 Relativpronomen','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.7 Pronominaladverbien','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','2.8 Funktionen von ES','6)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3 Verb','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.1 Zeitformen/Formensystem','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.1.1 Präsens','20)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.1.2 Präteritum','20)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.1.3 Perfekt/Partizip II','20)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.1.4 Partizip I','20)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.1.5 Futur I','20)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.1.6 Futur II','20)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.2 Modalverben','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.3 Trennbare Verben','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.4 Besondere Verben','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.5 Reflexive und reziproke Verben','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.6 Passiv','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.7 Konjunktiv','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.7.1 Konjunktiv I','32)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.7.2 Konjunktiv II','32)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','3.8 Imperativ','19)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4 Artikelwörter','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.1 Definitartikel','36)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.2 Indefinitartikel','36)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.3 Possessivartikel','36)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.4 Negationsartikel','36)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.5 Interrogativartikel','36)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.6 Demonstrativartikel','36)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','4.7 Gebrauch der Artikelwörter','36)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','5 Adjektive/ Adverbien','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','5.1 Kriterien zur Differenzierung','44)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','5.2 Adjektive','44)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','5.2.1 Deklination','46)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','5.2.2 Komparativ / Superlativ','46)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','5.3 Adverbien','44)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','6 Präpositionen','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','6.1 Neue Präposition hinzufügen','50)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','6.2 Präposition suchen','50)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','7 Modalpartikel','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','7.1 Beispiele und Funktionen','53)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8 Syntax','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.1 Hauptsatz','55)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.2 Nebensatz','55)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.3 Mittelfeld','55)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.3.1 Ergänzungen','58)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.3.2 Angaben','58)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.3.3 Position von NICHT','58)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.4 Konnektoren','55)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.4.1 Konjunktoren','62)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.4.2 Subjunktoren','62)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','8.4.3 Konjunktionaladverbien','62)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','9 Wortbildung','0)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','9.1 Komposition','66)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','9.2 Derivation','66)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','9.3 Diminution','66)" />
-                <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','9.4 Abkürzungen','66)" />
-            </SENTENCES>
-        </STATEMENT>
-        <STATEMENT NAME="insert vocabulario_intenciones_es" TYPE="insert" TABLE="vocabulario_intenciones_es" COMMENT="intenciones predefinidas" PREVIOUS="insert vocabulario_gramatica_de" NEXT="insert vocabulario_intenciones_en">
+        <STATEMENT NAME="insert vocabulario_intenciones_es" TYPE="insert" TABLE="vocabulario_intenciones_es" COMMENT="intenciones predefinidas" PREVIOUS="insert vocabulario_gramatica" NEXT="insert vocabulario_intenciones_en">
             <SENTENCES>
                 <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','--','0)" />
                     <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','1 RELACIÓN CON PERSONAS','0)" />
@@ -1715,7 +1491,7 @@ GNU General Public License for more details.
                     <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','10.2.2 Medios léxicos','144)" />
             </SENTENCES>
         </STATEMENT>
-        <STATEMENT NAME="insert vocabulario_sustantivos" TYPE="insert" TABLE="vocabulario_sustantivos" COMMENT="sustantivo vacio" PREVIOUS="insert vocabulario_intenciones" NEXT="insert vocabulario_adjetivos">
+        <STATEMENT NAME="insert vocabulario_sustantivos" TYPE="insert" TABLE="vocabulario_sustantivos" COMMENT="sustantivo vacio" PREVIOUS="insert vocabulario_intenciones_de" NEXT="insert vocabulario_adjetivos">
             <SENTENCES>
                 <SENTENCE TEXT="(palabra) VALUES (' ')" />
             </SENTENCES>
@@ -1730,7 +1506,7 @@ GNU General Public License for more details.
                 <SENTENCE TEXT="(infinitivo) VALUES (' ')" />
             </SENTENCES>
         </STATEMENT>
-        <STATEMENT NAME="insert vocabulario_otros" TYPE="insert" TABLE="vocabulario_otros" COMMENT="otro vacio" PREVIOUS="insert vocabulario_verbos" NEXT="insert vocabulario_tipologias">
+        <STATEMENT NAME="insert vocabulario_otros" TYPE="insert" TABLE="vocabulario_otros" COMMENT="otro vacio" PREVIOUS="insert vocabulario_verbos" NEXT="insert vocabulario_tipologias_es">
             <SENTENCES>
                 <SENTENCE TEXT="(palabra) VALUES (' ')" />
             </SENTENCES>
@@ -1967,7 +1743,7 @@ GNU General Public License for more details.
                 <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Texto pie de imagen','0)" />
             </SENTENCES>
         </STATEMENT>
-        <STATEMENT NAME="insert vocabulario_estrategias" TYPE="insert" TABLE="vocabulario_estrategias" COMMENT="estrategias de aprendizaje predefinidas" PREVIOUS="insert vocabulario_tipologias">
+        <STATEMENT NAME="insert vocabulario_estrategias" TYPE="insert" TABLE="vocabulario_estrategias" COMMENT="estrategias de aprendizaje predefinidas" PREVIOUS="insert vocabulario_tipologias_de">
             <SENTENCES>
                 <SENTENCE TEXT="(usuarioid,estrategia,padre) VALUES ('0','--','0)" />
             </SENTENCES>
