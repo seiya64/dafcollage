@@ -108,6 +108,7 @@ $string['atras'] = 'Cofnij';
 $string['id'] = 'Identyfikator';
 $string['todo'] = 'Słownictwo całość';
 $string['alfabetico'] = 'Słownictwo alfabetycznie';
+$string['nube'] = 'Interaktywny stół';
 $string['pdf'] = 'Kopia pdf';
 $string['revert'] = 'Wyczyść';
 $string['vease_pdf'] = 'Uwagi';
