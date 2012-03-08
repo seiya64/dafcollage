@@ -104,6 +104,7 @@ $string['atras'] = 'Atrás';
 $string['id'] = 'Identificador';
 $string['todo'] = 'Todas las palabras';
 $string['alfabetico'] = 'Palabras por orden alfabético';
+$string['nube'] = 'Tabla interactiva';
 $string['pdf'] = 'Copia en pdf';
 $string['revert'] = 'Limpiar';
 $string['vease_pdf'] = '*Observaciones';
