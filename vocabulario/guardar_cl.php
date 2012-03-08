@@ -59,16 +59,26 @@ $campo['campo'] = optional_param('campo', PARAM_TEXT);
 $sufijos = get_todos_sufijos_lenguaje();
 
 if (optional_param('eliminar', 0, PARAM_INT) && $campo['padre'] > 106) {
+    //comenzamos una transacción para que en todas las tablas se haga seguido
+    // en caso de error en algun delete, no se hace ninguno
+    begin_sql();
     foreach ($sufijos as $sufijo){
         delete_records('vocabulario_camposlexicos_'.$sufijo, 'id', $campo['padre']);
     }
+    //confirmamos la transacción
+    commit_sql();
     //echo 'eliminado ' . $campo['padre'];
 }
 
 if ($campo['campo'] != null) {
+    //comenzamos una transacción para que todos los insert sean seguidos y produzcan el mismo id en todas las tablas
+    //en caso de error en uno, no se hace ninguno
+    begin_sql();
     foreach($sufijos as $sufijo){
         insert_record('vocabulario_camposlexicos_'.$sufijo, $campo, true);
     }
+    //confirmamos la transacción
+    commit_sql();
 }
 
 //volvemos a donde veniamos
