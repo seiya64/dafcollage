@@ -104,6 +104,7 @@ $string['atras'] = 'Go back';
 $string['id'] = 'Identifier';
 $string['todo'] = 'All words';
 $string['alfabetico'] = 'Words in alphabetical order';
+$string['nube'] = 'Interactive table';
 $string['pdf'] = 'Copy in pdf version';
 $string['revert'] = 'Clean';
 $string['vease_pdf'] = '*Notes';
