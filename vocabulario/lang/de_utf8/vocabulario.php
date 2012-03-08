@@ -106,6 +106,7 @@ $string['atras'] = 'Zurück';
 $string['id'] = 'Identifikator';
 $string['todo'] = 'Alle Wörter';
 $string['alfabetico'] = 'Wörter alphabetisch';
+$string['nube'] = 'Interaktiver tisch';
 $string['pdf'] = 'PDF Kopie erhalten';
 $string['revert'] = 'Reinigen';
 $string['vease_pdf'] = '*Notizen';
