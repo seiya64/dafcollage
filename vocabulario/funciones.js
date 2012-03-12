@@ -173,6 +173,10 @@ if (navigator.cookieEnabled == 0) {
 	}
 }
 
+/**
+ * @author Antonio Fernández Ares
+ */
+
 function la_tabla_nube() {
                var oTable = $('#palabras').dataTable({
                     "bJQueryUI": true,
