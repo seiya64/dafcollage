@@ -473,6 +473,7 @@ class mod_vocabulario_ver_form extends moodleform {
         $gr = optional_param('gr', '0', PARAM_INT);
         $ic = optional_param('ic', '0', PARAM_INT);
         $tt = optional_param('tt', '0', PARAM_INT);
+        $nube = optional_param('nube', '0', PARAM_INT);
         $valor_campoid = optional_param('campo', '0', PARAM_INT);
         $usuarioid = $USER->id;
         $mp = new Vocabulario_mis_palabras();
@@ -482,7 +483,7 @@ class mod_vocabulario_ver_form extends moodleform {
 
         $this->menu_opciones_visualizacion($mform, $usuarioid);
 
-        if (!$alfa && !$cl && !$gr && !$ic && !$tt ) {
+        if (!$alfa && !$cl && !$gr && !$ic && !$tt && !$nube ) {
             $mis_palabras = vocabulario_todas_palabras($usuarioid);
         } else if ($cl) {
 
@@ -585,50 +586,69 @@ class mod_vocabulario_ver_form extends moodleform {
             $mform->addElement('html', $abecedario);
             //$mis_palabras = $mp->obtener_todas($usuarioid, $valor_campoid, $letra);
             $mis_palabras = vocabulario_todas_palabras($usuarioid, null, null, null, null, $letra);
+        }else if($nube){
+
+            $mform->addElement('html', '<p>');
+            $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
+            $titulillos = '<thead>';
+            $titulillos .= '<tr class="header">';
+            $titulillos .= '<th>Sustantivo</th>';
+            $titulillos .= '<th>Adjetivo</th>';
+            $titulillos .= '<th>Verbo</th>';
+            $titulillos .= '<th>Otros</th>';
+            $titulillos .= '</tr>';
+            $titulillos .= '</thead>';
+            $mform->addElement('html', $titulillos);
+
+
+
+            $mform->addElement('html', '</table>');
+            $mform->addElement('html', '<p>');
         }
 
-        $mform->addElement('html', '<p>');
-        $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
+        if(!$nube) {
+            $mform->addElement('html', '<p>');
+            $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
 
-        //titulillos de la tabla
-        $titulillos = '<tr class="header">';
-        $titulillos .= '<th>' . get_string('pal', 'vocabulario') . '</th>';
-        $titulillos .= '<th>' . get_string('campo_lex', 'vocabulario') . '</th>';
-        $titulillos .= '<th>' . get_string('campo_gram', 'vocabulario') . '</th>';
-        $titulillos .= '<th>' . get_string('campo_intencion', 'vocabulario') . '</th>';
-        $titulillos .= '<th>' . get_string('campo_tipologia', 'vocabulario') . '</th>';
-        $titulillos .= '<th colspan=2>' . get_string('opciones', 'vocabulario') . '</th>';
-        $titulillos .= '</tr>';
+            //titulillos de la tabla
+            $titulillos = '<tr class="header">';
+            $titulillos .= '<th>' . get_string('pal', 'vocabulario') . '</th>';
+            $titulillos .= '<th>' . get_string('campo_lex', 'vocabulario') . '</th>';
+            $titulillos .= '<th>' . get_string('campo_gram', 'vocabulario') . '</th>';
+            $titulillos .= '<th>' . get_string('campo_intencion', 'vocabulario') . '</th>';
+            $titulillos .= '<th>' . get_string('campo_tipologia', 'vocabulario') . '</th>';
+            $titulillos .= '<th colspan=2>' . get_string('opciones', 'vocabulario') . '</th>';
+            $titulillos .= '</tr>';
 
-        $mform->addElement('html', $titulillos);
+            $mform->addElement('html', $titulillos);
 
-        //filas de la tabla
-        $color = 0;
-        //$mis_palabras = $mp->combinaciones_completas($USER->id);
-        foreach ($mis_palabras as $cosa) {
-            $fila = '<tr class="cell" style="text-align:center;';
-            if ($color % 2 == 0) {
-                $fila .= '">';
-                $color = 0;
-            } else {
-                $fila .= 'background:#BDC7D8;">';
+            //filas de la tabla
+            $color = 0;
+            //$mis_palabras = $mp->combinaciones_completas($USER->id);
+            foreach ($mis_palabras as $cosa) {
+                $fila = '<tr class="cell" style="text-align:center;';
+                if ($color % 2 == 0) {
+                    $fila .= '">';
+                    $color = 0;
+                } else {
+                    $fila .= 'background:#BDC7D8;">';
+                }
+                $fila .= '<td> ' . $cosa->pal . ' </td>';
+                $fila .= '<td> ' . $cosa->campo . ' </td>';
+                $fila .= '<td> ' . $cosa->gramatica . ' </td>';
+                $fila .= '<td> ' . $cosa->intencion . ' </td>';
+                $fila .= '<td> ' . $cosa->tipo . ' </td>';
+                $acciones = '<a href="./view.php?id=' . $this->id_tocho . '&opcion=4&act=1&id_mp=' . $cosa->mpid . '">[' . get_string('editar', 'vocabulario') . ']</a></td>';
+                $acciones .= '<td><a href="./guardar.php?id_tocho=' . $this->id_tocho . '&borrar=' . $cosa->mpid . '">[' . get_string('eliminar', 'vocabulario') . ']</a>';
+                $fila .= '<td> ' . $acciones . ' </td>';
+                $fila .= '</tr>';
+                $mform->addElement('html', $fila);
+                $color++;
             }
-            $fila .= '<td> ' . $cosa->pal . ' </td>';
-            $fila .= '<td> ' . $cosa->campo . ' </td>';
-            $fila .= '<td> ' . $cosa->gramatica . ' </td>';
-            $fila .= '<td> ' . $cosa->intencion . ' </td>';
-            $fila .= '<td> ' . $cosa->tipo . ' </td>';
-            $acciones = '<a href="./view.php?id=' . $this->id_tocho . '&opcion=4&act=1&id_mp=' . $cosa->mpid . '">[' . get_string('editar', 'vocabulario') . ']</a></td>';
-            $acciones .= '<td><a href="./guardar.php?id_tocho=' . $this->id_tocho . '&borrar=' . $cosa->mpid . '">[' . get_string('eliminar', 'vocabulario') . ']</a>';
-            $fila .= '<td> ' . $acciones . ' </td>';
-            $fila .= '</tr>';
-            $mform->addElement('html', $fila);
-            $color++;
+
+            $mform->addElement('html', '</table>');
+            $mform->addElement('html', '<p>');
         }
-
-        $mform->addElement('html', '</table>');
-        $mform->addElement('html', '<p>');
-
         //botones
         $buttonarray = array();
         $buttonarray[] = &$mform->createElement('submit', 'cancelbutton', get_string('cancel','vocabulario'));
@@ -654,7 +674,7 @@ class mod_vocabulario_ver_form extends moodleform {
             $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&gr=1&alid=' . $userid . '">[' . get_string('campo_gram', 'vocabulario') . ']</a>';
             $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&ic=1&alid=' . $userid . '">[' . get_string('campo_intencion', 'vocabulario') . ']</a>';
             $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&tt=1&alid=' . $userid . '">[' . get_string('campo_tipologia', 'vocabulario') . ']</a>';
-            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '$opcion=2&nube=1&alid='.$userid . '">[' . get_string('nube','vocabulario') . ']</a>';
+            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&nube=1&alid='.$userid . '">[' . get_string('nube','vocabulario') . ']</a>';
             //$atras .= '<a href="./pdf?id=' . $this->id_tocho . '&us=' . $userid . '">[' . get_string('pdf', 'vocabulario') . ']</a>';
             //$atras .= '<a href="./view.php?id=' . $this->id_tocho . '">[' . get_string('atras', 'vocabulario') . ']</a>';
             $atras .= '</h1>';
@@ -691,11 +711,11 @@ class mod_vocabulario_nuevo_cl_form extends moodleform {
         $mform->addElement('html','<h1>'.get_string('admin_cl','vocabulario').'</h1>');
 
         //campo lexico
-        $mform->addElement('select', 'campoid', get_string("campo_lex", "vocabulario"), $clex,"onChange='javascript: if( this.options[this.selectedIndex].text == \"--\" || this.options[this.selectedIndex].text == \"Seleccionar\" ) { this.selectedIndex == 0; this.options[0].selected = true; document.getElementById(\"clgeneraldinamico\").style.display=\"none\";} else { cargaContenido(this.id,\"clgeneraldinamico\",0); document.getElementById(\"clgeneraldinamico\").style.display=\"\";}' style=\"min-height: 0;\"");
+        $mform->addElement('select', 'campoid', get_string("nivel", "vocabulario"), $clex,"onChange='javascript: if( this.options[this.selectedIndex].text == \"--\" || this.options[this.selectedIndex].text == \"Seleccionar\" ) { this.selectedIndex == 0; this.options[0].selected = true; document.getElementById(\"clgeneraldinamico\").style.display=\"none\";} else { cargaContenido(this.id,\"clgeneraldinamico\",0); document.getElementById(\"clgeneraldinamico\").style.display=\"\";}' style=\"min-height: 0;\"");
         //probar los campos dinamicos
         $campodinamico = "<div class=\"fitem\" id=\"clgeneraldinamico\"></div>";
         $mform->addElement('html', $campodinamico);
-        $mform->addElement('text', 'campo', get_string("campo_lex", "vocabulario"));
+        $mform->addElement('text', 'campo', get_string("campo_lexico_nuevo", "vocabulario"));
 
         //opcion de eliminar un campo
         $mform->addElement('checkbox', 'eliminar', get_string("eliminar", "vocabulario"));
@@ -2738,7 +2758,7 @@ class mod_vocabulario_aniadir_gr_form extends moodleform {
         $mform->addElement('html','<h1>'.get_string('add_gram','vocabulario').'</h1>');
 
         //campo gramatical
-        $mform->addElement('select', 'campogr', get_string("campo_gram", "vocabulario"), $gramaticas,"onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico\",1)' style=\"min-height: 0;\"");
+        $mform->addElement('select', 'campogr', get_string("nivel", "vocabulario"), $gramaticas,"onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico\",1)' style=\"min-height: 0;\"");
         $mform->setDefault('campogr', $lista_padres[1]);
         //probar los campos dinamicos
         $i = 1;
@@ -2763,7 +2783,7 @@ class mod_vocabulario_aniadir_gr_form extends moodleform {
         $campodinamico .= "</div>";
         $mform->addElement('html', $campodinamico);
 
-        $mform->addElement('text', 'campo', get_string("campo_gram", "vocabulario"));
+        $mform->addElement('text', 'campo', get_string("campo_gramatica_nueva", "vocabulario"));
         //opcion de eliminar un campo
         $mform->addElement('checkbox', 'eliminar', get_string("eliminar", "vocabulario"));
         $mform->setDefault('eliminar', 0);
