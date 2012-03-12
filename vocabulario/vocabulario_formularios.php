@@ -466,7 +466,10 @@ class mod_vocabulario_ver_form extends moodleform {
         $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
         $mform = & $this->_form;
         //inclusion del javascript para las funciones
-        $mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
+        $script = '<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
+                    <script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
+                    <script type="text/javascript" language="javascript" src="funciones.js"></script>';
+        $mform->addElement('html', $script);
         $this->id_tocho = required_param('id', PARAM_INT);
         $alfa = optional_param('alfa', '0', PARAM_INT);
         $cl = optional_param('cl', '0', PARAM_INT);
@@ -588,14 +591,14 @@ class mod_vocabulario_ver_form extends moodleform {
             $mis_palabras = vocabulario_todas_palabras($usuarioid, null, null, null, null, $letra);
         }else if($nube){
 
-            $mform->addElement('html', '<p>');
-            $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
+            $mform->addElement('html', '<div  id ="palabras_container">');
+            $mform->addElement('html', '<table id="palabras" class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
             $titulillos = '<thead>';
             $titulillos .= '<tr class="header">';
-            $titulillos .= '<th>Sustantivo</th>';
-            $titulillos .= '<th>Adjetivo</th>';
-            $titulillos .= '<th>Verbo</th>';
-            $titulillos .= '<th>Otros</th>';
+            $titulillos .= '<th>'.get_string('sust','vocabulario').'</th>';
+            $titulillos .= '<th>'.get_string('adj','vocabulario').'</th>';
+            $titulillos .= '<th>'.get_string('vrb','vocabulario').'</th>';
+            $titulillos .= '<th>'.get_string('otr','vocabulario').'</th>';
             $titulillos .= '</tr>';
             $titulillos .= '</thead>';
             $mform->addElement('html', $titulillos);
@@ -615,9 +618,8 @@ class mod_vocabulario_ver_form extends moodleform {
 
             }
 
-
             $mform->addElement('html', '</table>');
-            $mform->addElement('html', '<p>');
+            $mform->addElement('html', '</div>');
         }
 
         if(!$nube) {
