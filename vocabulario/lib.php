@@ -417,7 +417,7 @@ function vocabulario_todas_palabras($usuarioid, $cl=null, $gram=null, $inten=nul
     $sufijotabla = get_sufijo_lenguaje_tabla();
     $sql .= 'WHERE `usuarioid` = '.$usuarioid.' and mp.`otroid` = a.`id` and a.`id` <> 1) ';
     $sql .= 'ORDER BY pal) todas,';
-    $sql .= "`mdl_vocabulario_camposlexicos` cl, `mdl_vocabulario_gramatica` gr, `mdl_vocabulario_intenciones_$sufijotabla` ic, `mdl_vocabulario_tipologias` tt ";
+    $sql .= '`mdl_vocabulario_camposlexicos_'.$sufijotabla.'` cl, `mdl_vocabulario_gramatica` gr, `mdl_vocabulario_intenciones_'.$sufijotabla.'` ic, `mdl_vocabulario_tipologias_'.$sufijotabla.'` tt ';
     $sql .= 'WHERE todas.clid = cl.id and todas.grid = gr.id and todas.icid = ic.id and todas.ttid = tt.id';
 
     if ($letra) {
@@ -426,6 +426,36 @@ function vocabulario_todas_palabras($usuarioid, $cl=null, $gram=null, $inten=nul
 
     $todas = get_records_sql($sql);
     return $todas;
+}
+
+function todas_palabras_nube($usrid){
+    $sql = "SELECT
+	sus.palabra as sus_lex,
+	adj.sin_declinar as adj_lex,
+	ver.infinitivo as ver_lex,
+	otros.palabra as otros_lex
+
+        FROM
+        `mdl_vocabulario_mis_palabras`	as frase ,
+	`mdl_vocabulario_sustantivos`	as sus,
+	`mdl_vocabulario_adjetivos`		as adj,
+	`mdl_vocabulario_verbos`		as ver,
+	`mdl_vocabulario_otros`			as otros
+
+        WHERE
+            frase.`usuarioid` = ".$usrid." AND 
+            frase.`sustantivoid` = sus.`id`
+            AND
+            frase.`adjetivoid` = adj.`id`
+            AND
+            frase.`verboid` = ver.`id`
+            AND
+            frase.`otroid` = otros.`id
+	";
+
+    $todas = get_records_sql($sql);
+    return $todas;
+
 }
 
 function vocabulario_rellenar_alumnos($cursoid) {
