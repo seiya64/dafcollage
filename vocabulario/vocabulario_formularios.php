@@ -600,6 +600,20 @@ class mod_vocabulario_ver_form extends moodleform {
             $titulillos .= '</thead>';
             $mform->addElement('html', $titulillos);
 
+            $palabrejas = todas_palabras_nube($usuarioid);
+
+            foreach ($palabrejas as $palabra){
+                $titulillos = '<tr class="cell" style="text-align:center;">';
+
+                $titulillos .= '<td>'.$palabra->sus_lex.'</td>';
+                $titulillos .= '<td>'.$palabra->adj_lex.'</td>';
+                $titulillos .= '<td>'.$palabra->ver_lex.'</td>';
+                $titulillos .= '<td>'.$palabra->otros_lex.'</td>';
+
+                $titulillos .= '</tr>';
+                $mform->addElement('html', $titulillos);
+
+            }
 
 
             $mform->addElement('html', '</table>');
