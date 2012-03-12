@@ -39,6 +39,7 @@ GNU General Public License for more details.
  *
  * @param elemento Indice para seleccionar el elemento del que obtener la palabra
  */
+
 function traducir(elemento) {
 	var palabra;
 	switch (elemento) {
@@ -170,4 +171,26 @@ if (navigator.cookieEnabled == 0) {
         alert("Este sitio necesita tener habilitadas cookies. Pulse aceptar para saber cómo puede habilitarlas");
 		window.open('./habilitar_cookies.html','','location=no,directories=no, status=no,menubar=no,resizable=no');
 	}
+}
+
+function la_tabla_nube() {
+               var oTable = $('#palabras').dataTable({
+                    "bJQueryUI": true,
+                    "oLanguage": {
+                        "sLengthMenu": "Mostrar _MENU_ entradas por página",
+                        "sZeroRecords": "No se encontró nada",
+                        "sInfo": "Mostrando _START_ de _END_ de un total de _TOTAL_ entradas",
+                        "sInfoEmpty": "Mostrando 0 de 0 de un total de 0 entradas",
+                        "sInfoFiltered": "(Filtrado de _MAX_ entradas)"
+                    }
+
+
+                });
+
+
+            $('#palabras tbody tr td').live('click', function (){
+                var nTds = $(this);
+                //alert (nTds.html());
+                oTable.fnFilter(nTds.html());
+               });
 }
