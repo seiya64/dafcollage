@@ -620,6 +620,9 @@ class mod_vocabulario_ver_form extends moodleform {
 
             $mform->addElement('html', '</table>');
             $mform->addElement('html', '</div>');
+
+            $script = '<script type="text/javascript" language="javascript">la_tabla_nube();</script>';
+            $mform->addElement('html',$script);
         }
 
         if(!$nube) {
