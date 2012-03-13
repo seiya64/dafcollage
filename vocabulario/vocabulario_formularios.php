@@ -98,6 +98,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $ctipologia = $aux->obtener_todos($USER->id);
 
         //inclusion del css para que salga en columnitas
+
         $mform->addElement('html','<link rel="stylesheet" type="text/css" href="./estilo.css">');
 
         //inclusion del javascript para las funciones
@@ -465,6 +466,8 @@ class mod_vocabulario_ver_form extends moodleform {
         global $CFG, $COURSE, $USER;
         $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
         $mform = & $this->_form;
+
+        $mform->addElement('html','<ling rel="stylesheet" type="text/css" href="./style.css">');
         //inclusion del javascript para las funciones
         $script = '<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
                     <script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
@@ -480,6 +483,7 @@ class mod_vocabulario_ver_form extends moodleform {
         $valor_campoid = optional_param('campo', '0', PARAM_INT);
         $usuarioid = $USER->id;
         $mp = new Vocabulario_mis_palabras();
+
 
         //titulo de la seccion
         $mform->addElement('html','<h1>'.get_string('ver','vocabulario').'</h1>');
@@ -589,7 +593,7 @@ class mod_vocabulario_ver_form extends moodleform {
             $mform->addElement('html', $abecedario);
             //$mis_palabras = $mp->obtener_todas($usuarioid, $valor_campoid, $letra);
             $mis_palabras = vocabulario_todas_palabras($usuarioid, null, null, null, null, $letra);
-        }else if($nube){
+        }else if($nube) {
 
             $mform->addElement('html', '<div id ="palabras_container">');
             $mform->addElement('html', '<table id="palabras" class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
@@ -605,7 +609,7 @@ class mod_vocabulario_ver_form extends moodleform {
 
             $palabrejas = todas_palabras_nube($usuarioid);
 
-            foreach ($palabrejas as $palabra){
+            foreach ($palabrejas as $palabra) {
                 $titulillos = '<tr class="cell" style="text-align:center;">';
 
                 $titulillos .= '<td>'.$palabra->sus_lex.'</td>';
@@ -624,7 +628,7 @@ class mod_vocabulario_ver_form extends moodleform {
             $mform->addElement('html', '</table>');
             $mform->addElement('html', '</div>');
 
-            
+
         }
 
         if(!$nube) {
