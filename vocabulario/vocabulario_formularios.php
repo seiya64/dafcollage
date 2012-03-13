@@ -467,7 +467,16 @@ class mod_vocabulario_ver_form extends moodleform {
         $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
         $mform = & $this->_form;
 
-        $mform->addElement('html','<ling rel="stylesheet" type="text/css" href="./style.css">');
+        $mform->addElement('html','<LINK rel="stylesheet" type="text/css" href="./style.css">');
+        $script = '<style type="text/css" title="currentStyle">
+
+
+            @import "css/demo_page.css";
+            @import "css/header.ccss";
+            @import "css/demo_table_jui.css";
+            @import "css/smoothness/jquery-ui-1.8.4.custom.css";
+        </style>';
+
         //inclusion del javascript para las funciones
         $script = '<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
                     <script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
