@@ -591,7 +591,7 @@ class mod_vocabulario_ver_form extends moodleform {
             $mis_palabras = vocabulario_todas_palabras($usuarioid, null, null, null, null, $letra);
         }else if($nube){
 
-            $mform->addElement('html', '<div  id ="palabras_container">');
+            $mform->addElement('html', '<div id ="palabras_container">');
             $mform->addElement('html', '<table id="palabras" class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
             $titulillos = '<thead>';
             $titulillos .= '<tr class="header">';
