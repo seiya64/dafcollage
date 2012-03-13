@@ -477,6 +477,8 @@ class mod_vocabulario_ver_form extends moodleform {
             @import "css/smoothness/jquery-ui-1.8.4.custom.css";
         </style>';
 
+        $mform->addElement('html', $script);
+
         //inclusion del javascript para las funciones
         $script = '<script type="text/javascript" language="javascript" src="js/jquery.js"></script>
                     <script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
