@@ -1,39 +1,39 @@
 <?php
 
 /*
-Daf-collage is made up of two Moodle modules which help in the process of
-German language learning. It facilitates the content organization like
-vocabulary or the main grammar features and gives the chance to create
-exercises in order to consolidate knowledge.
+  Daf-collage is made up of two Moodle modules which help in the process of
+  German language learning. It facilitates the content organization like
+  vocabulary or the main grammar features and gives the chance to create
+  exercises in order to consolidate knowledge.
 
-Copyright (C) 2011
+  Copyright (C) 2011
 
-Coordination:
-    Ruth Burbat
+  Coordination:
+  Ruth Burbat
 
-Source code:
-    Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
-    Simeón Ruiz Romero (simeonruiz@gmail.com)
+  Source code:
+  Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
+  Simeón Ruiz Romero (simeonruiz@gmail.com)
 
-Original idea and content design:
-    Ruth Burbat
-    Inmaculada Almahano Güeto
-    Andrea Bies
-    Julia Möller Runge
-    Blanca Rodríguez Gómez
-    Antonio Salmerón Matilla
-    María José Varela Salinas
-    Karin Vilar Sánchez
+  Original idea and content design:
+  Ruth Burbat
+  Inmaculada Almahano Güeto
+  Andrea Bies
+  Julia Möller Runge
+  Blanca Rodríguez Gómez
+  Antonio Salmerón Matilla
+  María José Varela Salinas
+  Karin Vilar Sánchez
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.*/
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details. */
 
 
 require_once("../../config.php");
@@ -56,10 +56,10 @@ $padre = required_param('campogr', PARAM_TEXT);
 
 //$gram = new Vocabulario_gramatica($user_object->id, required_param('campogr', PARAM_TEXT), optional_param('gramatica', PARAM_TEXT));
 
-/*if (optional_param('eliminar', 0, PARAM_INT) && $gram->get('padre') > 72) {
-    delete_records('vocabulario_gramatica', 'id', $gram->get('padre'));
-    redirect('./view.php?id=' . $id_tocho . '&opcion=5');
-}*/
+/* if (optional_param('eliminar', 0, PARAM_INT) && $gram->get('padre') > 72) {
+  delete_records('vocabulario_gramatica', 'id', $gram->get('padre'));
+  redirect('./view.php?id=' . $id_tocho . '&opcion=5');
+  } */
 
 //recogemos todos los datos de la gramatica
 switch ($padre) {
@@ -69,9 +69,9 @@ switch ($padre) {
         break;
     //1.1 Genus
     case 3:
-        $desc = optional_param('mascsemantico', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('mascformal', null, PARAM_TEXT). __SEPARADORCAMPOS__;
-        $desc .= optional_param('femsemantico', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('femformal', null, PARAM_TEXT). __SEPARADORCAMPOS__;
-        $desc .= optional_param('neutrosemantico', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('neutroformal', null, PARAM_TEXT). __SEPARADORCAMPOS__;
+        $desc = optional_param('mascsemantico', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('mascformal', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+        $desc .= optional_param('femsemantico', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('femformal', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+        $desc .= optional_param('neutrosemantico', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('neutroformal', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
         echo $desc;
         break;
     //1.2 Numerus
@@ -90,8 +90,8 @@ switch ($padre) {
         $desc .= optional_param('GP1', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
 
         $desc .= optional_param('idea1', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('despuesde1', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-        
-        
+
+
         $desc .= optional_param('NM2', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NN2', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
         $desc .= optional_param('NF2', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NP2', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AM2', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
         $desc .= optional_param('AN2', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AF2', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AP2', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
@@ -100,14 +100,14 @@ switch ($padre) {
         $desc .= optional_param('GF2', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('GP2', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
 
         $desc .= optional_param('idea2', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('despuesde2', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-        
+
         $desc .= optional_param('NM3', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
         $desc .= optional_param('NN3', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NF3', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NP3', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
         $desc .= optional_param('AM3', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AN3', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AF3', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
         $desc .= optional_param('AP3', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DM3', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DN3', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
         $desc .= optional_param('DF3', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DP3', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('GM3', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
         $desc .= optional_param('GN3', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('GF3', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('GP3', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-        
+
         $desc .= optional_param('idea3', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('despuesde3', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
 
         break;
@@ -116,18 +116,18 @@ switch ($padre) {
     case 21:
     //3.1.2 Präteritum
     case 22:
-        $tope=20;
-        $desc='';
-        for ($i=0; $i<$tope; $i++){
-            $desc .= optional_param('INFSC'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('S1SC'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('S2SC'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('S3SC'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('P1SC'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('P2SC'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('P3SC'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('INFST'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('S1ST'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('S2ST'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('S3ST'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('P1ST'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('P2ST'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('P3ST'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('INFGE'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('S1GE'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('S2GE'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('S3GE'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('P1GE'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('P2GE'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('P3GE'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+        $tope = 20;
+        $desc = '';
+        for ($i = 0; $i < $tope; $i++) {
+            $desc .= optional_param('INFSC' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('S1SC' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('S2SC' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('S3SC' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('P1SC' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('P2SC' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('P3SC' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('INFST' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('S1ST' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('S2ST' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('S3ST' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('P1ST' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('P2ST' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('P3ST' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('INFGE' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('S1GE' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('S2GE' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('S3GE' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('P1GE' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('P2GE' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('P3GE' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
         }
         break;
     //3.1.5 Futur I
@@ -140,8 +140,8 @@ switch ($padre) {
         break;
     //3.7.2 Konjunktiv II
     case 34:
-        $desc = optional_param('S1SC'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('S2SC'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('S3SC'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-        $desc .= optional_param('P1SC'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('P2SC'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('P3SC'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+        $desc = optional_param('S1SC' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('S2SC' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('S3SC' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+        $desc .= optional_param('P1SC' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('P2SC' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('P3SC' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
 
         $desc .= optional_param('S1P', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('S1K', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
         $desc .= optional_param('S2P', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('S2K', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
@@ -159,45 +159,44 @@ switch ($padre) {
     case 27:
     //3.4 Besondere Verben
     case 29:
-        if ($padre == 27){
+        if ($padre == 27) {
             $tope = 6;
-        }
-        elseif ($padre ==29){
+        } elseif ($padre == 29) {
             $tope = 10;
         }
-        $desc='';
-        for ($i=0; $i<$tope; $i++){
-            $desc .= optional_param('INF'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('S1PRA'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('S1PRE'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('S1PER'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('S1PC1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('S1PC2'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('S2PRA'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('S2PRE'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('S2PER'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('S2PC1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('S2PC2'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('S3PRA'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('S3PRE'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('S3PER'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('S3PC1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('S3PC2'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('P1PRA'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('P1PRE'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('P1PER'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('P1PC1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('P1PC2'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('P2PRA'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('P2PRE'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('P2PER'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('P2PC1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('P2PC2'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('P3PRA'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('P3PRE'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('P3PER'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('P3PC1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('P3PC2'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+        $desc = '';
+        for ($i = 0; $i < $tope; $i++) {
+            $desc .= optional_param('INF' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('S1PRA' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('S1PRE' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('S1PER' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('S1PC1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('S1PC2' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('S2PRA' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('S2PRE' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('S2PER' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('S2PC1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('S2PC2' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('S3PRA' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('S3PRE' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('S3PER' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('S3PC1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('S3PC2' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('P1PRA' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('P1PRE' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('P1PER' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('P1PC1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('P1PC2' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('P2PRA' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('P2PRE' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('P2PER' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('P2PC1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('P2PC2' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('P3PRA' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('P3PRE' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('P3PER' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('P3PC1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('P3PC2' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
         }
         echo $desc;
         break;
@@ -226,20 +225,20 @@ switch ($padre) {
     //2.5 Possessivpronomen
     case 15:
         $tope = 1;
-        $desc='';
+        $desc = '';
 
-        for ($i=0; $i<$tope; $i++){
+        for ($i = 0; $i < $tope; $i++) {
 
-            $desc = optional_param('NS1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NS2'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('NS3M'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NS3N'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NS3F'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('NP1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NP2'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NP3'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NSIE'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc = optional_param('NS1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NS2' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('NS3M' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NS3N' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NS3F' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('NP1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NP2' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NP3' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NSIE' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
 
-            $desc .= optional_param('NM'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NN'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NF'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('NP'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AM'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AN'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('AF'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AP'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DM'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('DN'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DF'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DP'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('GM'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('GN'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('GF'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('GP'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('NM' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NN' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NF' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('NP' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AM' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AN' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('AF' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AP' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DM' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('DN' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DF' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DP' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('GM' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('GN' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('GF' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('GP' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
             //. __SEPARADORCAMPOS__ . optional_param('descripcion', null, PARAM_TEXT);
         }
         break;
@@ -251,12 +250,12 @@ switch ($padre) {
 
         // los de la tabla opcional
 
-        $desc .= optional_param('NM'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NN'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NF'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-        $desc .= optional_param('NP'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AM'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AN'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-        $desc .= optional_param('AF'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AP'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DM'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-        $desc .= optional_param('DN'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DF'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DP'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-        $desc .= optional_param('GM'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('GN'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('GF'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-        $desc .= optional_param('GP'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+        $desc .= optional_param('NM' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NN' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NF' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+        $desc .= optional_param('NP' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AM' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AN' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+        $desc .= optional_param('AF' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AP' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DM' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+        $desc .= optional_param('DN' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DF' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DP' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+        $desc .= optional_param('GM' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('GN' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('GF' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+        $desc .= optional_param('GP' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
         break;
     //4.1 Bestimmte Artikel
     case 37:
@@ -278,7 +277,7 @@ switch ($padre) {
     case 5:
         //para restrngir según la categoria
         $tope = 1;
-        switch ($padre){
+        switch ($padre) {
             default:
                 $tope = 1;
                 break;
@@ -289,21 +288,21 @@ switch ($padre) {
                 $tope = 10;
                 break;
         }
-        $desc='';
-        for ($i=0; $i<$tope; $i++){
-            $desc .= optional_param('NM1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NN1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NF1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('NP1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AM1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AN1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('AF1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AP1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DM1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('DN1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DF1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DP1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('GM1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('GN1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('GF1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('GP1'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+        $desc = '';
+        for ($i = 0; $i < $tope; $i++) {
+            $desc .= optional_param('NM1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NN1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NF1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('NP1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AM1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AN1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('AF1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AP1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DM1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('DN1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DF1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DP1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('GM1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('GN1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('GF1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('GP1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
             //. __SEPARADORCAMPOS__ . optional_param('descripcion', null, PARAM_TEXT);
         }
         break;
     //4.7 Gebrauch der Artikelwörter
-    /*case 42:
-        $desc = optional_param('lista', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('scheinbare', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-        break;
+    /* case 42:
+      $desc = optional_param('lista', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('scheinbare', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+      break;
      */
     //7.1 Beispiele und Funktionen
     case 54:
@@ -313,11 +312,11 @@ switch ($padre) {
     //2.2 Interrogativpronomen
     case 8:
         $desc = '';
-        for($i = 0; $i < 3; $i++){
-        $desc .= optional_param('NP'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NNP'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-        $desc .= optional_param('AP'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('ANP'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-        $desc .= optional_param('DP'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DNP'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-        $desc .= optional_param('GP'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('GNP'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+        for ($i = 0; $i < 3; $i++) {
+            $desc .= optional_param('NP' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('NNP' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('AP' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('ANP' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('DP' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DNP' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('GP' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('GNP' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
         }
         break;
     //8.3.1 Ergänzungen
@@ -340,66 +339,62 @@ switch ($padre) {
         break;
     //8.1 Hauptsatz
     case 56:
-        
+
         $salir = false;
         $desc = '';
         $avance = 1;
 
         $avance = 4;
 
-        for ($i = 0; $salir == false; $i = $i+$avance){
-            if (optional_param('VORSUB'.$i, null, PARAM_TEXT) ||
-                optional_param('KONSUB'.$i, null, PARAM_TEXT) ||
-                optional_param('MIT'.$i, null, PARAM_TEXT) ||
-                optional_param('VER2'.$i, null, PARAM_TEXT) ||
-                optional_param('VER1'.$i, null, PARAM_TEXT)){
-                
-                $desc .= optional_param('VORSUB'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__.optional_param('KONSUB'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__;
-                $desc .= optional_param('MIT'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__.optional_param('VER2'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__;
+        for ($i = 0; $salir == false; $i = $i + $avance) {
+            if (optional_param('VORSUB' . $i, null, PARAM_TEXT) ||
+                    optional_param('KONSUB' . $i, null, PARAM_TEXT) ||
+                    optional_param('MIT' . $i, null, PARAM_TEXT) ||
+                    optional_param('VER2' . $i, null, PARAM_TEXT) ||
+                    optional_param('VER1' . $i, null, PARAM_TEXT)) {
 
-            }
-            else{
+                $desc .= optional_param('VORSUB' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('KONSUB' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+                $desc .= optional_param('MIT' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('VER2' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            } else {
                 $salir = true;
             }
         }
-        $desc .= __SEPARADORCAMPOS__.__SEPARADORCAMPOS__.__SEPARADORCAMPOS__.__SEPARADORCAMPOS__;
+        $desc .= __SEPARADORCAMPOS__ . __SEPARADORCAMPOS__ . __SEPARADORCAMPOS__ . __SEPARADORCAMPOS__;
 
         break;
-        
+
     //8.2 Nebensatz
     case 57:
         $salir = false;
         $desc = '';
 
         $avance = 5;
-        
-        for ($i = 0; $salir == false; $i = $i+$avance){
-            if (optional_param('VORSUB'.$i, null, PARAM_TEXT) ||
-                optional_param('KONSUB'.$i, null, PARAM_TEXT) ||
-                optional_param('MIT'.$i, null, PARAM_TEXT) ||
-                optional_param('VER2'.$i, null, PARAM_TEXT) ||
-                optional_param('VER1'.$i, null, PARAM_TEXT)){
-                
-                $desc .= optional_param('VORSUB'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__.optional_param('KONSUB'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__;
-                $desc .= optional_param('MIT'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__.optional_param('VER2'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__;
 
-                $desc .= optional_param('VER1'.$i,null,PARAM_TEXT).__SEPARADORCAMPOS__;
-                
-            }
-            else{
+        for ($i = 0; $salir == false; $i = $i + $avance) {
+            if (optional_param('VORSUB' . $i, null, PARAM_TEXT) ||
+                    optional_param('KONSUB' . $i, null, PARAM_TEXT) ||
+                    optional_param('MIT' . $i, null, PARAM_TEXT) ||
+                    optional_param('VER2' . $i, null, PARAM_TEXT) ||
+                    optional_param('VER1' . $i, null, PARAM_TEXT)) {
+
+                $desc .= optional_param('VORSUB' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('KONSUB' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+                $desc .= optional_param('MIT' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('VER2' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+
+                $desc .= optional_param('VER1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            } else {
                 $salir = true;
             }
         }
-        $desc .= __SEPARADORCAMPOS__.__SEPARADORCAMPOS__.__SEPARADORCAMPOS__.__SEPARADORCAMPOS__.__SEPARADORCAMPOS__;
+        $desc .= __SEPARADORCAMPOS__ . __SEPARADORCAMPOS__ . __SEPARADORCAMPOS__ . __SEPARADORCAMPOS__ . __SEPARADORCAMPOS__;
         break;
     //2.4.2.1 Pronomina, die nur Personen bezeichnen
     case 13:
         $tope = 5;
-        $desc='';
-        for ($i=0; $i<$tope; $i++){
-            $desc .= optional_param('DEFA'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__;
-            $desc .= optional_param('NOM'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__.optional_param('AKK'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__;
-            $desc .= optional_param('DAT'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__.optional_param('GEN'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__;
+        $desc = '';
+        for ($i = 0; $i < $tope; $i++) {
+            $desc .= optional_param('DEFA' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('NOM' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AKK' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            $desc .= optional_param('DAT' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('GEN' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
         }
         break;
     //2.1 Personalpronomen
@@ -423,18 +418,18 @@ switch ($padre) {
     //3.8 Imperativ
     case 35:
         $tope = 10;
-        $desc='';
-        for ($i=0; $i<$tope; $i++){
-            $desc .= optional_param('INF'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('S2'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('P2'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('SIE'.$i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+        $desc = '';
+        for ($i = 0; $i < $tope; $i++) {
+            $desc .= optional_param('INF' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('S2' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('P2' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('SIE' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
         }
         break;
     //3.5 Reflexive und reziproke Verben
     case 30:
-        $desc = optional_param('AS1', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AS2', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AS3', null, PARAM_TEXT). __SEPARADORCAMPOS__;
-        $desc .= optional_param('AP1', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AP2', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AP3', null, PARAM_TEXT). __SEPARADORCAMPOS__;
+        $desc = optional_param('AS1', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AS2', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AS3', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+        $desc .= optional_param('AP1', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AP2', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('AP3', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
         $desc .= optional_param('ASIE', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-        $desc .= optional_param('DS1', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DS2', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DS3', null, PARAM_TEXT). __SEPARADORCAMPOS__;
-        $desc .= optional_param('DP1', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DP2', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DP3', null, PARAM_TEXT). __SEPARADORCAMPOS__;
+        $desc .= optional_param('DS1', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DS2', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DS3', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+        $desc .= optional_param('DP1', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DP2', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('DP3', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
         $desc .= optional_param('DSIE', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
         break;
     //4.7 Gebrauch der Artikelwörter
@@ -442,17 +437,17 @@ switch ($padre) {
         $tope = 20;
         $tablas = 3;
         $desc = '';
-        for($t = 0; $t<$tablas; $t++){
-            for($f=0; $f<$tope; $f++){
-                $desc .= optional_param('BE'.$t.'_'.$f, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('GE'.$t.'_'.$f, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+        for ($t = 0; $t < $tablas; $t++) {
+            for ($f = 0; $f < $tope; $f++) {
+                $desc .= optional_param('BE' . $t . '_' . $f, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('GE' . $t . '_' . $f, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
             }
         }
         break;
     case 48:
         $tope = 10;
         $desc = '';
-        for($f=0; $f<$tope; $f++){
-            $desc .= optional_param('PO'.$f, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('KO'.$f, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('SU'.$f, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+        for ($f = 0; $f < $tope; $f++) {
+            $desc .= optional_param('PO' . $f, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('KO' . $f, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('SU' . $f, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
         }
         break;
     // 6.1
@@ -460,44 +455,42 @@ switch ($padre) {
         $salir = false;
         $desc = '';
 
-        for($f=0; $salir==false; $f++){
-            if(optional_param('PRA'.$f, null, PARAM_TEXT) ||
-               optional_param('FUN'.$f, null, PARAM_TEXT) ||
-               optional_param('KAS'.$f, null, PARAM_TEXT) ||
-               optional_param('BEI'.$f, null, PARAM_TEXT)
-               ){
+        for ($f = 0; $salir == false; $f++) {
+            if (optional_param('PRA' . $f, null, PARAM_TEXT) ||
+                    optional_param('FUN' . $f, null, PARAM_TEXT) ||
+                    optional_param('KAS' . $f, null, PARAM_TEXT) ||
+                    optional_param('BEI' . $f, null, PARAM_TEXT)
+            ) {
 
-            $desc .= optional_param('PRA'.$f, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('FUN'.$f, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('KAS'.$f, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('BEI'.$f, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-               }else{
-                   $salir=true;
-               }
+                $desc .= optional_param('PRA' . $f, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('FUN' . $f, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+                $desc .= optional_param('KAS' . $f, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('BEI' . $f, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            } else {
+                $salir = true;
+            }
         }
         break;
 
-        /*
-        $tope = 30;
-        $desc = '';
-        for($f=0; $f<$tope; $f++){
-            $desc .= optional_param('PRA'.$f, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('FUN'.$f, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-            $desc .= optional_param('KAS'.$f, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('BEI'.$f, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-        }
-        break;
+    /*
+      $tope = 30;
+      $desc = '';
+      for($f=0; $f<$tope; $f++){
+      $desc .= optional_param('PRA'.$f, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('FUN'.$f, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+      $desc .= optional_param('KAS'.$f, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('BEI'.$f, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+      }
+      break;
 
-         */
-
-
+     */
 }
 
 //soluciones varias
 $desc .= optional_param('descripcion', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('miraren', null, PARAM_TEXT);
 
 //vemos que botón hemos pulsado
-if ($mform->no_submit_button_pressed()){
+if ($mform->no_submit_button_pressed()) {
 
-    if(optional_param('desc_btn')){
+    if (optional_param('desc_btn')) {
         //$graux = new Vocabulario_mis_gramaticas($user_object->id,$gram->get('padre'),$desc);
-        $graux = new Vocabulario_mis_gramaticas($user_object->id,$padre,$desc);
+        $graux = new Vocabulario_mis_gramaticas($user_object->id, $padre, $desc);
         $graux->guardar();
     }
 }
