@@ -2086,36 +2086,32 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', '<p>');
                 $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
                 //titulillos de la tabla
-                $titulillos = '<tr class="header">';
-
+                
                 $avance = 5;
-
-
-                    $titulillos .='<th>'.get_string('subjunktor','vocabulario').'</th>';
-                    $titulillos .='<th>'.get_string('subjekt','vocabulario').'</th>';
-                    $titulillos .='<th>'.get_string('konjugier','vocabulario').'</th>';
-                    $titulillos .= '<th>' . get_string('mittelfeld', 'vocabulario') . '</th>';
-                    $titulillos .='<th>'.get_string('verb2','vocabulario').'</th>';
-
-
-
+                
+                $titulillos = '<tr class="header">';
+                $titulillos .='<th>'.get_string('subjunktor','vocabulario').'</th>';
+                $titulillos .='<th>'.get_string('subjekt','vocabulario').'</th>';
+                $titulillos .='<th>'.get_string('konjugier','vocabulario').'</th>';
+                $titulillos .= '<th>' . get_string('mittelfeld', 'vocabulario') . '</th>';
+                $titulillos .='<th>'.get_string('verb2','vocabulario').'</th>';
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
 
-                $totalfilas = ((count($descripcion_troceada)-2)/4);
-                if($grid ==  57) {
-                    $totalfilas = ((count($descripcion_troceada)-2)/5);
-                }
+
+                $totalfilas = ((count($descripcion_troceada)-2)/5);
+
                 if($totalfilas <=0) {
                     $totalfilas=1;
                 }
+                
                 $i = 0;
                 for ($i = 0; $i < $totalfilas*$avance; $i = $i+$avance) {
                     $titulillos = '<tr class="cell">';
                     $titulillos .= '<td><input type="text" id="id_VORSUB'.$i.'" name="VORSUB'.$i.'" value="' . $descripcion_troceada[$i] . '"></td>';
-                    if($grid ==  57) {
-                        $titulillos .= '<td><input type="text" id="id_VER1'.$i.'" name="VER1'.$i.'" value="' . $descripcion_troceada[$i+4] . '"></td>';
-                    }
+                    
+                    $titulillos .= '<td><input type="text" id="id_VER1'.$i.'" name="VER1'.$i.'" value="' . $descripcion_troceada[$i+4] . '"></td>';
+                    
                     $titulillos .= '<td style="background: #BDC7D8;"><input type="text" style="background: #BDC7D8;" id="id_KONSUB'.$i.'" name="KONSUB'.$i.'" value="' . $descripcion_troceada[$i+1] . '"></td>';
                     $titulillos .= '<td><input type="text" id="id_MIT'.$i.'" name="MIT'.$i.'" value="' . $descripcion_troceada[$i+2] . '"></td>';
                     $titulillos .= '<td style="background: #BDC7D8;"><input type="text" style="background: #BDC7D8;" id="id_VER2'.$i.'" name="VER2'.$i.'" value="' . $descripcion_troceada[$i+3] . '"></td>';
