@@ -2092,8 +2092,8 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $titulillos = '<tr class="header">';
                 $titulillos .='<th>'.get_string('subjunktor','vocabulario').'</th>';
                 $titulillos .='<th>'.get_string('subjekt','vocabulario').'</th>';
-                $titulillos .='<th>'.get_string('konjugier','vocabulario').'</th>';
                 $titulillos .= '<th>' . get_string('mittelfeld', 'vocabulario') . '</th>';
+                $titulillos .='<th>'.get_string('konjugier','vocabulario').'</th>';
                 $titulillos .='<th>'.get_string('verb2','vocabulario').'</th>';
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
@@ -2109,11 +2109,9 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 for ($i = 0; $i < $totalfilas*$avance; $i = $i+$avance) {
                     $titulillos = '<tr class="cell">';
                     $titulillos .= '<td><input type="text" id="id_VORSUB'.$i.'" name="VORSUB'.$i.'" value="' . $descripcion_troceada[$i] . '"></td>';
-                    
                     $titulillos .= '<td><input type="text" id="id_VER1'.$i.'" name="VER1'.$i.'" value="' . $descripcion_troceada[$i+4] . '"></td>';
-                    
-                    $titulillos .= '<td style="background: #BDC7D8;"><input type="text" style="background: #BDC7D8;" id="id_KONSUB'.$i.'" name="KONSUB'.$i.'" value="' . $descripcion_troceada[$i+1] . '"></td>';
                     $titulillos .= '<td><input type="text" id="id_MIT'.$i.'" name="MIT'.$i.'" value="' . $descripcion_troceada[$i+2] . '"></td>';
+                    $titulillos .= '<td style="background: #BDC7D8;"><input type="text" style="background: #BDC7D8;" id="id_KONSUB'.$i.'" name="KONSUB'.$i.'" value="' . $descripcion_troceada[$i+1] . '"></td>';
                     $titulillos .= '<td style="background: #BDC7D8;"><input type="text" style="background: #BDC7D8;" id="id_VER2'.$i.'" name="VER2'.$i.'" value="' . $descripcion_troceada[$i+3] . '"></td>';
                     $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
