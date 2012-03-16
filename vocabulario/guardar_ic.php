@@ -1,39 +1,39 @@
 <?php
 
 /*
-Daf-collage is made up of two Moodle modules which help in the process of
-German language learning. It facilitates the content organization like
-vocabulary or the main grammar features and gives the chance to create
-exercises in order to consolidate knowledge.
+  Daf-collage is made up of two Moodle modules which help in the process of
+  German language learning. It facilitates the content organization like
+  vocabulary or the main grammar features and gives the chance to create
+  exercises in order to consolidate knowledge.
 
-Copyright (C) 2011
+  Copyright (C) 2011
 
-Coordination:
-    Ruth Burbat
+  Coordination:
+  Ruth Burbat
 
-Source code:
-    Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
-    Simeón Ruiz Romero (simeonruiz@gmail.com)
+  Source code:
+  Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
+  Simeón Ruiz Romero (simeonruiz@gmail.com)
 
-Original idea and content design:
-    Ruth Burbat
-    Inmaculada Almahano Güeto
-    Andrea Bies
-    Julia Möller Runge
-    Blanca Rodríguez Gómez
-    Antonio Salmerón Matilla
-    María José Varela Salinas
-    Karin Vilar Sánchez
+  Original idea and content design:
+  Ruth Burbat
+  Inmaculada Almahano Güeto
+  Andrea Bies
+  Julia Möller Runge
+  Blanca Rodríguez Gómez
+  Antonio Salmerón Matilla
+  María José Varela Salinas
+  Karin Vilar Sánchez
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.*/
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details. */
 
 
 require_once("../../config.php");
@@ -57,16 +57,15 @@ $desc = optional_param('descripcion', PARAM_TEXT);
 
 $salir = false;
 $avance = 4;
-for ($i = 1; $salir == false; $i = $i+$avance){
-    if (optional_param('mittel'.$i, null, PARAM_TEXT) ||
-        optional_param('wortklase'.$i, null, PARAM_TEXT) ||
-        optional_param('beisp'.$i, null, PARAM_TEXT) ||
-        optional_param('siehe'.$i, null, PARAM_TEXT)){
+for ($i = 1; $salir == false; $i = $i + $avance) {
+    if (optional_param('mittel' . $i, null, PARAM_TEXT) ||
+            optional_param('wortklase' . $i, null, PARAM_TEXT) ||
+            optional_param('beisp' . $i, null, PARAM_TEXT) ||
+            optional_param('siehe' . $i, null, PARAM_TEXT)) {
 
-        $desc .= __SEPARADORCAMPOS__.optional_param('mittel'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__.optional_param('wortklase'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__;
-        $desc .= optional_param('beisp'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__.optional_param('siehe'.$i, null, PARAM_TEXT);
-    }
-    else{
+        $desc .= __SEPARADORCAMPOS__ . optional_param('mittel' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('wortklase' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+        $desc .= optional_param('beisp' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('siehe' . $i, null, PARAM_TEXT);
+    } else {
         $salir = true;
     }
 }
@@ -77,8 +76,8 @@ $desc .= '&&&&';
 //    redirect('./view.php?id=' . $id_tocho . '&opcion=7');
 //}
 
-if ($mform->no_submit_button_pressed()){
-    if(optional_param('desc_btn')){
+if ($mform->no_submit_button_pressed()) {
+    if (optional_param('desc_btn')) {
         redirect('./view.php?id=' . $id_tocho . '&opcion=7&icid=' . $intencion->get('padre'));
     }
 }
@@ -87,13 +86,13 @@ if ($mform->no_submit_button_pressed()){
 //    $icidaux = insert_record('vocabulario_intenciones', $intencion, true);
 //}
 //else{
-    $icidaux = required_param('campoic', PARAM_TEXT);
+$icidaux = required_param('campoic', PARAM_TEXT);
 //}
 
 if ($desc != null) {
     $mintencion = new Vocabulario_mis_intenciones();
-    $mintencion->leer($icidaux,$USER->id);
-    $mintencion->set($USER->id,$icidaux,$desc);
+    $mintencion->leer($icidaux, $USER->id);
+    $mintencion->set($USER->id, $icidaux, $desc);
     $mintencion->guardar();
 }
 
