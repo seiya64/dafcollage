@@ -58,10 +58,7 @@ if ($course->category) {
 $strvocabularios = get_string("modulenameplural", "vocabulario");
 $strvocabulario = get_string("modulename", "vocabulario");
 
-print_header("$course->shortname: $vocabulario->name", "$course->fullname",
-        "$navigation <a href=index.php?id=$course->id>$strvocabularios</a> -> $vocabulario->name",
-        "", "", true, update_module_button($cm->id, $course->id, $strvocabulario),
-        navmenu($course, $cm));
+print_header("$course->shortname: $vocabulario->name", "$course->fullname", "$navigation <a href=index.php?id=$course->id>$strvocabularios</a> -> $vocabulario->name", "", "", true, update_module_button($cm->id, $course->id, $strvocabulario), navmenu($course, $cm));
 
 /// Print the main part of the page
 vocabulario_view($cm->id, $opcion, $id_mp);
