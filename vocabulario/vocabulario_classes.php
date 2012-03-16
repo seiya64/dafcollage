@@ -629,7 +629,7 @@ class Vocabulario_campo_lexico {
         $sufijotabla = get_sufijo_lenguaje_tabla();
         $campos_lexicos = get_records_select("vocabulario_camposlexicos_$sufijotabla", '(usuarioid=' . $usuarioid . ' or usuarioid=0) and padre=' . $padreid);
         $clex = array();
-        $clex[$padreid] = 'Seleccionar';
+        $clex[$padreid] = get_string('seleccionar','vocabulario');
         $orden = $this->ordena($campos_lexicos, $padreid);
         foreach ($orden as $i) {
             $clex[$campos_lexicos[$i]->id] = $campos_lexicos[$i]->campo;
@@ -1113,7 +1113,7 @@ class Vocabulario_gramatica {
     function obtener_hijos($usuarioid, $padreid) {
         $gramaticas = get_records_select('vocabulario_gramatica', '(usuarioid=' . $usuarioid . ' or usuarioid=0) and padre=' . $padreid);
         $gr = array();
-        $gr[$padreid] = 'Seleccionar';
+        $gr[$padreid] = get_string('seleccionar','vocabulario');
         $orden = $this->ordena($gramaticas, $padreid);
         foreach ($orden as $i) {
             $gr[$gramaticas[$i]->id] = $gramaticas[$i]->gramatica;
@@ -1351,7 +1351,7 @@ class Vocabulario_intenciones {
         $sufijotabla = get_sufijo_lenguaje_tabla();
         $intenciones = get_records_select("vocabulario_intenciones_$sufijotabla", '(usuarioid=' . $usuarioid . ' or usuarioid=0) and padre=' . $padreid);
         $ic = array();
-        $ic[$padreid] = 'Seleccionar';
+        $ic[$padreid] = get_string('seleccionar','vocabulario');
         $orden = $this->ordena($intenciones, $padreid);
         foreach ($orden as $i) {
             $ic[$intenciones[$i]->id] = $intenciones[$i]->intencion;
