@@ -340,16 +340,13 @@ switch ($padre) {
         break;
     //8.1 Hauptsatz
     case 56:
-    //8.2 Nebensatz
-    case 57:
+        
         $salir = false;
         $desc = '';
         $avance = 1;
-        if($padre == 56){
-            $avance = 4;
-        }elseif($padre == 57){
-            $avance = 5;
-        }
+
+        $avance = 4;
+
         for ($i = 0; $salir == false; $i = $i+$avance){
             if (optional_param('VORSUB'.$i, null, PARAM_TEXT) ||
                 optional_param('KONSUB'.$i, null, PARAM_TEXT) ||
@@ -359,18 +356,41 @@ switch ($padre) {
                 
                 $desc .= optional_param('VORSUB'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__.optional_param('KONSUB'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__;
                 $desc .= optional_param('MIT'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__.optional_param('VER2'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__;
-                if($padre == 57){
-                    $desc .= optional_param('VER1'.$i,null,PARAM_TEXT).__SEPARADORCAMPOS__;
-                }
+
             }
             else{
                 $salir = true;
             }
         }
         $desc .= __SEPARADORCAMPOS__.__SEPARADORCAMPOS__.__SEPARADORCAMPOS__.__SEPARADORCAMPOS__;
-        if($padre==57){
-            $desc .= __SEPARADORCAMPOS__;
+
+        break;
+        
+    //8.2 Nebensatz
+    case 57:
+        $salir = false;
+        $desc = '';
+
+        $avance = 5;
+        
+        for ($i = 0; $salir == false; $i = $i+$avance){
+            if (optional_param('VORSUB'.$i, null, PARAM_TEXT) ||
+                optional_param('KONSUB'.$i, null, PARAM_TEXT) ||
+                optional_param('MIT'.$i, null, PARAM_TEXT) ||
+                optional_param('VER2'.$i, null, PARAM_TEXT) ||
+                optional_param('VER1'.$i, null, PARAM_TEXT)){
+                
+                $desc .= optional_param('VORSUB'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__.optional_param('KONSUB'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__;
+                $desc .= optional_param('MIT'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__.optional_param('VER2'.$i, null, PARAM_TEXT).__SEPARADORCAMPOS__;
+
+                $desc .= optional_param('VER1'.$i,null,PARAM_TEXT).__SEPARADORCAMPOS__;
+                
+            }
+            else{
+                $salir = true;
+            }
         }
+        $desc .= __SEPARADORCAMPOS__.__SEPARADORCAMPOS__.__SEPARADORCAMPOS__.__SEPARADORCAMPOS__.__SEPARADORCAMPOS__;
         break;
     //2.4.2.1 Pronomina, die nur Personen bezeichnen
     case 13:
