@@ -49,6 +49,7 @@ $string['add_gram'] = 'Add new grammar';
 $string['modulenameplural'] = 'vocabulary';
 $string['modulename'] = 'vocabulary';
 $string['buttonlabel'] = 'Save';
+$string['seleccionar'] = 'Select';
 $string['campo_lex'] = 'Thematic fields';
 $string['pal_campo_lex'] = 'Words classified by thematic fields';
 $string['campo_gram'] = 'Grammar';
