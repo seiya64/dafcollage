@@ -1317,6 +1317,7 @@ class Vocabulario_intenciones {
     }
 
     function leer($intencionid, $usuarioid) {
+        $sufijotabla = get_sufijo_lenguaje_tabla();
         $ic = get_record("vocabulario_intenciones_$sufijotabla", 'id', $intencionid);
         $this->usuarioid = $ic->usuarioid;
         $this->padre = $ic->padre;
