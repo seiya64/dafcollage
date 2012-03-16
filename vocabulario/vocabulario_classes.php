@@ -1,39 +1,39 @@
 <?php
 
 /*
-Daf-collage is made up of two Moodle modules which help in the process of
-German language learning. It facilitates the content organization like
-vocabulary or the main grammar features and gives the chance to create
-exercises in order to consolidate knowledge.
+  Daf-collage is made up of two Moodle modules which help in the process of
+  German language learning. It facilitates the content organization like
+  vocabulary or the main grammar features and gives the chance to create
+  exercises in order to consolidate knowledge.
 
-Copyright (C) 2011
+  Copyright (C) 2011
 
-Coordination:
-    Ruth Burbat
+  Coordination:
+  Ruth Burbat
 
-Source code:
-    Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
-    Simeón Ruiz Romero (simeonruiz@gmail.com)
+  Source code:
+  Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
+  Simeón Ruiz Romero (simeonruiz@gmail.com)
 
-Original idea and content design:
-    Ruth Burbat
-    Inmaculada Almahano Güeto
-    Andrea Bies
-    Julia Möller Runge
-    Blanca Rodríguez Gómez
-    Antonio Salmerón Matilla
-    María José Varela Salinas
-    Karin Vilar Sánchez
+  Original idea and content design:
+  Ruth Burbat
+  Inmaculada Almahano Güeto
+  Andrea Bies
+  Julia Möller Runge
+  Blanca Rodríguez Gómez
+  Antonio Salmerón Matilla
+  María José Varela Salinas
+  Karin Vilar Sánchez
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.*/
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details. */
 
 class Vocabulario_sustantivo {
 
@@ -63,7 +63,7 @@ class Vocabulario_sustantivo {
      * @param type $ejemplo
      * @param type $id
      */
-    function Vocabulario_sustantivo($pal=' ', $gen=2, $plu='', $sig='', $obs='', $grid=1, $inid = 1, $tipid=1, $ejemplo='', $id=1) {
+    function Vocabulario_sustantivo($pal = ' ', $gen = 2, $plu = '', $sig = '', $obs = '', $grid = 1, $inid = 1, $tipid = 1, $ejemplo = '', $id = 1) {
         $this->palabra = $pal;
         $this->genero = $gen;
         $this->plural = $plu;
@@ -91,7 +91,7 @@ class Vocabulario_sustantivo {
      * @param type $ejemplo
      * @param type $id
      */
-    function set($pal=null, $gen=null, $plu=null, $sig=null, $obs=null, $grid=null, $inid=null, $tipid=null, $ejemplo=null, $id=null) {
+    function set($pal = null, $gen = null, $plu = null, $sig = null, $obs = null, $grid = null, $inid = null, $tipid = null, $ejemplo = null, $id = null) {
         if ($pal != null && $pal != $this->palabra) {
             $this->palabra = $pal;
         }
@@ -123,7 +123,6 @@ class Vocabulario_sustantivo {
             $this->id = $id;
         }
     }
-
 
     /**
      * Obtiene el valor de un parámetro indicado
@@ -168,7 +167,6 @@ class Vocabulario_sustantivo {
         }
     }
 
-
     /**
      * Extraer un sustantivo de la base de datos
      *
@@ -189,7 +187,6 @@ class Vocabulario_sustantivo {
     }
 
 }
-
 
 class Vocabulario_verbo {
 
@@ -219,7 +216,7 @@ class Vocabulario_verbo {
      * @param type $tipid
      * @param type $id
      */
-    function Vocabulario_verbo($infi=' ', $ter='', $pre='', $par='', $sig='', $obs='', $grid=1, $inid=1, $tipid=1, $id=1) {
+    function Vocabulario_verbo($infi = ' ', $ter = '', $pre = '', $par = '', $sig = '', $obs = '', $grid = 1, $inid = 1, $tipid = 1, $id = 1) {
         $this->infinitivo = $infi;
         $this->ter_pers_sing = $ter;
         $this->preterito = $pre;
@@ -231,7 +228,6 @@ class Vocabulario_verbo {
         $this->tipologiaid = $tipid;
         $this->id = $id;
     }
-
 
     /**
      * Establece el valor de uno o varios atributos del verbo
@@ -247,7 +243,7 @@ class Vocabulario_verbo {
      * @param type $tipid
      * @param type $id
      */
-    function set($infi=null, $ter=null, $pre=null, $par=null, $sig=null, $obs=null, $grid=null, $inid=null, $tipid=null, $id=null) {
+    function set($infi = null, $ter = null, $pre = null, $par = null, $sig = null, $obs = null, $grid = null, $inid = null, $tipid = null, $id = null) {
         if ($infi != null && $infi != $this->infinitivo) {
             $this->infinitivo = $infi;
         }
@@ -279,7 +275,6 @@ class Vocabulario_verbo {
             $this->id = $id;
         }
     }
-
 
     /**
      * Obtiene el valor de un parámetro indicado
@@ -370,7 +365,7 @@ class Vocabulario_adjetivo {
      * @param type $tipid
      * @param type $id
      */
-    function Vocabulario_adjetivo($sin=' ', $sig='', $obs='', $grid=1, $inid=1, $tipid=1, $id=1) {
+    function Vocabulario_adjetivo($sin = ' ', $sig = '', $obs = '', $grid = 1, $inid = 1, $tipid = 1, $id = 1) {
         $this->sin_declinar = $sin;
         $this->significado = $sig;
         $this->observaciones = $obs;
@@ -391,7 +386,7 @@ class Vocabulario_adjetivo {
      * @param type $tipid
      * @param type $id
      */
-    function set($sin=null, $sig=null, $obs=null, $grid=null, $inid=null, $tipid=null, $id=null) {
+    function set($sin = null, $sig = null, $obs = null, $grid = null, $inid = null, $tipid = null, $id = null) {
         if ($sin != null && $sin != $this->sin_declinar) {
             $this->sin_declinar = $sin;
         }
@@ -486,7 +481,7 @@ class Vocabulario_otro {
      *
      * @param type $
      */
-    function Vocabulario_otro($pal=' ', $sig='', $obs='', $grid=1, $inid=1, $tipid=1, $id=1) {
+    function Vocabulario_otro($pal = ' ', $sig = '', $obs = '', $grid = 1, $inid = 1, $tipid = 1, $id = 1) {
         $this->palabra = $pal;
         $this->significado = $sig;
         $this->observaciones = $obs;
@@ -497,7 +492,7 @@ class Vocabulario_otro {
     }
 
     //set cambia uno o varios de los atributos del sustantivo
-    function set($pal=null, $sig=null, $obs=null, $grid=null, $inid=null, $tipid=null, $id=null) {
+    function set($pal = null, $sig = null, $obs = null, $grid = null, $inid = null, $tipid = null, $id = null) {
         if ($pal != null && $pal != $this->palabra) {
             $this->palabra = $pal;
         }
@@ -570,14 +565,14 @@ class Vocabulario_campo_lexico {
     var $padre;
     var $campo;
 
-    function Vocabulario_campo_lexico($id=null, $usuarioid=null, $padre=null, $campo=null) {
+    function Vocabulario_campo_lexico($id = null, $usuarioid = null, $padre = null, $campo = null) {
         $this->id = $id;
         $this->usuarioid = $usuarioid;
         $this->padre = $padre;
         $this->campo = $campo;
     }
 
-    function set($id=null, $usuarioid=null, $padre=null, $campo=null) {
+    function set($id = null, $usuarioid = null, $padre = null, $campo = null) {
         if ($id != null && $id != $this->id) {
             $this->id = $id;
         }
@@ -658,7 +653,7 @@ class Vocabulario_campo_lexico {
         return $clex;
     }
 
-    function ordena($lista, $padre='0', $salida='') {
+    function ordena($lista, $padre = '0', $salida = '') {
         $milista = array();
         foreach ($lista as $cosa) {
             $milista[$cosa->id] = $cosa->padre;
@@ -688,7 +683,7 @@ class Vocabulario_mis_palabras {
     var $otro;
     var $campo;
 
-    function Vocabulario_mis_palabras($usuarioid, $sustantivo, $verbo, $adjetivo, $otro, $campoid=1, $id=null) {
+    function Vocabulario_mis_palabras($usuarioid, $sustantivo, $verbo, $adjetivo, $otro, $campoid = 1, $id = null) {
         $this->usuarioid = $usuarioid;
         $this->sustantivo = $sustantivo;
         $this->sustantivoid = $sustantivo->id;
@@ -705,7 +700,7 @@ class Vocabulario_mis_palabras {
         $this->id = $id;
     }
 
-    function set($sustantivo=null, $verbo=null, $adjetivo=null, $otro=null) {
+    function set($sustantivo = null, $verbo = null, $adjetivo = null, $otro = null) {
         if ($sustantivo != null && $sustantivo != $this->sustantivo) {
             $this->sustantivo = $sustantivo;
         }
@@ -795,7 +790,7 @@ class Vocabulario_mis_palabras {
         $this->id = $mp->id;
     }
 
-    function obtener_todas($usuarioid, $campo=null, $letra=null) {
+    function obtener_todas($usuarioid, $campo = null, $letra = null) {
         if ($campo) {
             $todas = get_records_select('vocabulario_mis_palabras', 'usuarioid=' . $usuarioid . ' and campoid=' . $campo, '', 'id');
         } else if ($letra) {
@@ -869,7 +864,7 @@ class Vocabulario_mis_palabras {
         //de las palabras que tengo guardadas miro a ver cual esta de antes
         foreach ($todas as $cosa) {
             if ($cosa->get('sustantivo')->get('palabra') == $this->sustantivo->get('palabra') && $insertar_sustantivo) {
-                $this->sustantivo->set(null, null, null, null, null, null,null, null, null, $cosa->get('sustantivo')->get('id'));
+                $this->sustantivo->set(null, null, null, null, null, null, null, null, null, $cosa->get('sustantivo')->get('id'));
                 update_record('vocabulario_sustantivos', $this->sustantivo, true);
                 $insertar_sustantivo = false;
             }
@@ -1042,7 +1037,7 @@ class Vocabulario_mis_palabras {
     }
 
     function combinaciones_completas($usuarioid) {
-        $combinaciones = get_records_sql('call todas_palabras('.$usuarioid.')');
+        $combinaciones = get_records_sql('call todas_palabras(' . $usuarioid . ')');
         return $combinaciones;
     }
 
@@ -1056,7 +1051,7 @@ class Vocabulario_gramatica {
     var $gramatica;
     var $descripcion;
 
-    function Vocabulario_gramatica($usuarioid=null, $padre=null, $gramatica=null, $descripcion=null, $id=null) {
+    function Vocabulario_gramatica($usuarioid = null, $padre = null, $gramatica = null, $descripcion = null, $id = null) {
         $this->id = $id;
         $this->usuarioid = $usuarioid;
         $this->padre = $padre;
@@ -1064,7 +1059,7 @@ class Vocabulario_gramatica {
         $this->descripcion = $descripcion;
     }
 
-    function set($id=null, $usuarioid=null, $padre=null, $gramatica=null, $descripcion=null) {
+    function set($id = null, $usuarioid = null, $padre = null, $gramatica = null, $descripcion = null) {
         if ($id != null && $id != $this->id) {
             $this->id = $id;
         }
@@ -1100,7 +1095,7 @@ class Vocabulario_gramatica {
                 return $this->gramatica;
                 break;
             case 'descripcion':
-            //return 'aqui va una descripcion de '.$this->gramatica;
+                //return 'aqui va una descripcion de '.$this->gramatica;
                 return $this->descripcion;
                 break;
         }
@@ -1162,7 +1157,7 @@ class Vocabulario_gramatica {
         return $gr;
     }
 
-    function ordena($lista, $padre='0', $salida='') {
+    function ordena($lista, $padre = '0', $salida = '') {
         $milista = array();
         foreach ($lista as $cosa) {
             $milista[$cosa->id] = $cosa->padre;
@@ -1186,7 +1181,7 @@ class Vocabulario_mis_gramaticas {
     var $tipo_palabra;
     var $palabra_id;
 
-    function Vocabulario_mis_gramaticas($usuarioid=null, $gramaticaid=null, $descripcion=null, $tipo_palabra=null, $palabraid=null, $id=null) {
+    function Vocabulario_mis_gramaticas($usuarioid = null, $gramaticaid = null, $descripcion = null, $tipo_palabra = null, $palabraid = null, $id = null) {
         $this->id = $id;
         $this->usuarioid = $usuarioid;
         $this->gramaticaid = $gramaticaid;
@@ -1195,7 +1190,7 @@ class Vocabulario_mis_gramaticas {
         $this->palabra_id = $palabraid;
     }
 
-    function set($usuarioid=null, $gramaticaid=null, $descripcion=null, $tipo_palabra=null, $palabraid=null, $id=null) {
+    function set($usuarioid = null, $gramaticaid = null, $descripcion = null, $tipo_palabra = null, $palabraid = null, $id = null) {
         if ($id != null && $id != $this->id) {
             $this->id = $id;
         }
@@ -1242,11 +1237,10 @@ class Vocabulario_mis_gramaticas {
     }
 
     function guardar() {
-        $gr = get_record_select('vocabulario_mis_gramaticas', 'usuarioid=' . $this->usuarioid . ' and gramaticaid=\'' . $this->gramaticaid .'\'');
+        $gr = get_record_select('vocabulario_mis_gramaticas', 'usuarioid=' . $this->usuarioid . ' and gramaticaid=\'' . $this->gramaticaid . '\'');
         if ($gr->id == null) {
             $this->id = insert_record('vocabulario_mis_gramaticas', $this, true);
-        }
-        else {
+        } else {
             $this->id = $gr->id;
             update_record('vocabulario_mis_gramaticas', $this, true);
         }
@@ -1254,10 +1248,9 @@ class Vocabulario_mis_gramaticas {
 
     function actualizar() {
         update_record('vocabulario_mis_gramaticas', $this, true);
-
     }
 
-    function leer($grid,$usuarioid=null) {
+    function leer($grid, $usuarioid = null) {
         $gr = get_record('vocabulario_mis_gramaticas', 'gramaticaid', $grid, 'usuarioid', $usuarioid);
         $this->usuarioid = $gr->usuarioid;
         $this->descripcion = $gr->descripcion;
@@ -1281,14 +1274,14 @@ class Vocabulario_intenciones {
     var $padre;
     var $intencion;
 
-    function Vocabulario_intenciones($usuarioid=null, $padre=null, $intencion=null, $id=null) {
+    function Vocabulario_intenciones($usuarioid = null, $padre = null, $intencion = null, $id = null) {
         $this->id = $id;
         $this->usuarioid = $usuarioid;
         $this->padre = $padre;
         $this->intencion = $intencion;
     }
 
-    function set($id=null, $usuarioid=null, $padre=null, $intencion=null) {
+    function set($id = null, $usuarioid = null, $padre = null, $intencion = null) {
         if ($id != null && $id != $this->id) {
             $this->id = $id;
         }
@@ -1374,7 +1367,7 @@ class Vocabulario_intenciones {
         while ($padre != 0) {
             $cl = new Vocabulario_intenciones();
             //pongo 0 porque el usarioid no es necesario, ya que no se usa en la funcion
-            $cl->leer($padre,0);
+            $cl->leer($padre, 0);
             $padre = $cl->get('padre');
             $clex[] = $padre;
         }
@@ -1382,7 +1375,7 @@ class Vocabulario_intenciones {
         return $clex;
     }
 
-    function ordena($lista, $padre='0', $salida='') {
+    function ordena($lista, $padre = '0', $salida = '') {
         $milista = array();
         foreach ($lista as $cosa) {
             $milista[$cosa->id] = $cosa->padre;
@@ -1406,7 +1399,7 @@ class Vocabulario_mis_intenciones {
     var $tipo_palabra;
     var $palabra_id;
 
-    function Vocabulario_mis_intenciones($usuarioid=null, $intencionesid=null, $descripcion=null, $tipo_palabra=null, $palabraid=null, $id=null) {
+    function Vocabulario_mis_intenciones($usuarioid = null, $intencionesid = null, $descripcion = null, $tipo_palabra = null, $palabraid = null, $id = null) {
         $this->id = $id;
         $this->usuarioid = $usuarioid;
         $this->intencionesid = $intencionesid;
@@ -1415,7 +1408,7 @@ class Vocabulario_mis_intenciones {
         $this->palabra_id = $palabraid;
     }
 
-    function set($usuarioid=null, $intencionesid=null, $descripcion=null, $tipo_palabra=null, $palabraid=null, $id=null) {
+    function set($usuarioid = null, $intencionesid = null, $descripcion = null, $tipo_palabra = null, $palabraid = null, $id = null) {
         if ($id != null && $id != $this->id) {
             $this->id = $id;
         }
@@ -1462,11 +1455,10 @@ class Vocabulario_mis_intenciones {
     }
 
     function guardar() {
-        $ic = get_record_select('vocabulario_mis_intenciones', 'usuarioid=' . $this->usuarioid . ' and intencionesid=\'' . $this->intencionesid .'\'');
+        $ic = get_record_select('vocabulario_mis_intenciones', 'usuarioid=' . $this->usuarioid . ' and intencionesid=\'' . $this->intencionesid . '\'');
         if ($ic->id == null) {
             $this->id = insert_record('vocabulario_mis_intenciones', $this, true);
-        }
-        else {
+        } else {
             $this->id = $ic->id;
             update_record('vocabulario_mis_intenciones', $this, true);
         }
@@ -1485,8 +1477,7 @@ class Vocabulario_mis_intenciones {
             $this->id = $gr->id;
             $this->tipo_palabra = $gr->tipo_palabra;
             $this->palabra_id = $gr->palabra_id;
-        }
-        else {
+        } else {
             $gr = get_record_select('vocabulario_mis_intenciones', 'usuarioid=' . $usuarioid . ' and intencionesid=' . $icid);
             $this->usuarioid = $gr->usuarioid;
             $this->descripcion = $gr->descripcion;
@@ -1503,7 +1494,7 @@ class Vocabulario_mis_intenciones {
     }
 
     function obtener_todas($usuarioid) {
-        $ic = get_records_select('vocabulario_mis_intenciones', 'usuarioid='. $usuarioid);
+        $ic = get_records_select('vocabulario_mis_intenciones', 'usuarioid=' . $usuarioid);
         return $ic;
     }
 
@@ -1517,7 +1508,7 @@ class Vocabulario_tipologias {
     var $tipo;
     var $descripcion;
 
-    function Vocabulario_tipologias($usuarioid=null, $padre=null, $tipo=null, $descripcion=null, $id=null) {
+    function Vocabulario_tipologias($usuarioid = null, $padre = null, $tipo = null, $descripcion = null, $id = null) {
         $this->id = $id;
         $this->usuarioid = $usuarioid;
         $this->padre = $padre;
@@ -1525,7 +1516,7 @@ class Vocabulario_tipologias {
         $this->descripcion = $descripcion;
     }
 
-    function set($id=null, $usuarioid=null, $padre=null, $tipo=null, $descripcion=null) {
+    function set($id = null, $usuarioid = null, $padre = null, $tipo = null, $descripcion = null) {
         if ($id != null && $id != $this->id) {
             $this->id = $id;
         }
@@ -1598,7 +1589,7 @@ class Vocabulario_tipologias {
         return $ic;
     }
 
-    function ordena($lista, $padre='0', $salida='') {
+    function ordena($lista, $padre = '0', $salida = '') {
         $milista = array();
         foreach ($lista as $cosa) {
             $milista[$cosa->id] = $cosa->padre;
@@ -1622,7 +1613,7 @@ class Vocabulario_mis_tipologias {
     var $tipo_palabra;
     var $palabra_id;
 
-    function Vocabulario_mis_tipologias($usuarioid=null, $tipoid=null, $descripcion=null, $tipo_palabra=null, $palabraid=null, $id=null) {
+    function Vocabulario_mis_tipologias($usuarioid = null, $tipoid = null, $descripcion = null, $tipo_palabra = null, $palabraid = null, $id = null) {
         $this->id = $id;
         $this->usuarioid = $usuarioid;
         $this->tipoid = $tipoid;
@@ -1631,7 +1622,7 @@ class Vocabulario_mis_tipologias {
         $this->palabra_id = $palabraid;
     }
 
-    function set($usuarioid=null, $tipoid=null, $descripcion=null, $tipo_palabra=null, $palabraid=null, $id=null) {
+    function set($usuarioid = null, $tipoid = null, $descripcion = null, $tipo_palabra = null, $palabraid = null, $id = null) {
         if ($id != null && $id != $this->id) {
             $this->id = $id;
         }
@@ -1678,15 +1669,15 @@ class Vocabulario_mis_tipologias {
     }
 
     function guardar() {
-        /*$this->id = insert_record('vocabulario_mis_tipologias', $this, true);
-        if (!$this->id) {
-            $ic = get_record_select('vocabulario_mis_tipologias', 'usuarioid=' . $this->usuarioid . ' and tipo_palabra=\'' . $this->tipo_palabra . '\' and palabra_id=' . $this->palabra_id);
-            $this->id = $ic->id;
-            if ($this->tipoid != $ic->tipoid) {
-                $this->descripcion = $ic->descripcion;
-                update_record('vocabulario_mis_tipologias', $this, true);
-            }
-        }*/
+        /* $this->id = insert_record('vocabulario_mis_tipologias', $this, true);
+          if (!$this->id) {
+          $ic = get_record_select('vocabulario_mis_tipologias', 'usuarioid=' . $this->usuarioid . ' and tipo_palabra=\'' . $this->tipo_palabra . '\' and palabra_id=' . $this->palabra_id);
+          $this->id = $ic->id;
+          if ($this->tipoid != $ic->tipoid) {
+          $this->descripcion = $ic->descripcion;
+          update_record('vocabulario_mis_tipologias', $this, true);
+          }
+          } */
         $this->id = insert_record('vocabulario_mis_tipologias', $this, true);
         if (!$this->id) {
             $ic = get_record_select('vocabulario_mis_tipologias', 'usuarioid=' . $this->usuarioid . ' and tipoid=' . $this->tipoid);
@@ -1700,7 +1691,6 @@ class Vocabulario_mis_tipologias {
 
     function actualizar() {
         update_record('vocabulario_mis_tipologias', $this, true);
-
     }
 
     function leer($icid) {
@@ -1711,7 +1701,6 @@ class Vocabulario_mis_tipologias {
         $this->id = $gr->id;
         $this->tipo_palabra = $gr->tipo_palabra;
         $this->palabra_id = $gr->palabra_id;
-
     }
 
     function relacionadas($usuarioid, $tipologiaid) {
@@ -1720,7 +1709,7 @@ class Vocabulario_mis_tipologias {
     }
 
     function obtener_todas($usuarioid) {
-        $tt = get_records_select('vocabulario_mis_tipologias', 'usuarioid='. $usuarioid);
+        $tt = get_records_select('vocabulario_mis_tipologias', 'usuarioid=' . $usuarioid);
         return $tt;
     }
 
@@ -1734,7 +1723,7 @@ class Vocabulario_estrategias {
     var $estrategia;
     var $descripcion;
 
-    function Vocabulario_estrategias($usuarioid=null, $padre=null, $estrategia=null, $descripcion=null, $id=null) {
+    function Vocabulario_estrategias($usuarioid = null, $padre = null, $estrategia = null, $descripcion = null, $id = null) {
         $this->id = $id;
         $this->usuarioid = $usuarioid;
         $this->padre = $padre;
@@ -1742,7 +1731,7 @@ class Vocabulario_estrategias {
         $this->descripcion = $descripcion;
     }
 
-    function set($id=null, $usuarioid=null, $padre=null, $estrategia=null, $descripcion=null) {
+    function set($id = null, $usuarioid = null, $padre = null, $estrategia = null, $descripcion = null) {
         if ($id != null && $id != $this->id) {
             $this->id = $id;
         }
@@ -1812,7 +1801,7 @@ class Vocabulario_estrategias {
         return $ea;
     }
 
-    function ordena($lista, $padre='0', $salida='') {
+    function ordena($lista, $padre = '0', $salida = '') {
         $milista = array();
         foreach ($lista as $cosa) {
             $milista[$cosa->id] = $cosa->padre;
@@ -1836,7 +1825,7 @@ class Vocabulario_mis_estrategias {
     var $tipo_palabra;
     var $palabra_id;
 
-    function Vocabulario_mis_estrategias($usuarioid=null, $estrategiaid=null, $descripcion=null, $tipo_palabra=null, $palabraid=null, $id=null) {
+    function Vocabulario_mis_estrategias($usuarioid = null, $estrategiaid = null, $descripcion = null, $tipo_palabra = null, $palabraid = null, $id = null) {
         $this->id = $id;
         $this->usuarioid = $usuarioid;
         $this->estrategiaid = $estrategiaid;
@@ -1845,7 +1834,7 @@ class Vocabulario_mis_estrategias {
         $this->palabra_id = $palabraid;
     }
 
-    function set($usuarioid=null, $estrategiaid=null, $descripcion=null, $tipo_palabra=null, $palabraid=null, $id=null) {
+    function set($usuarioid = null, $estrategiaid = null, $descripcion = null, $tipo_palabra = null, $palabraid = null, $id = null) {
         if ($id != null && $id != $this->id) {
             $this->id = $id;
         }
@@ -1903,7 +1892,6 @@ class Vocabulario_mis_estrategias {
 
     function actualizar() {
         update_record('vocabulario_mis_estrategias', $this, true);
-
     }
 
     function leer($eaid) {
@@ -1914,7 +1902,6 @@ class Vocabulario_mis_estrategias {
         $this->id = $gr->id;
         $this->tipo_palabra = $gr->tipo_palabra;
         $this->palabra_id = $gr->palabra_id;
-
     }
 
     function relacionadas($usuarioid, $estrategiaid) {
@@ -1923,13 +1910,10 @@ class Vocabulario_mis_estrategias {
     }
 
     function obtener_todas($usuarioid) {
-        $tt = get_records_select('vocabulario_mis_estrategias', 'usuarioid='. $usuarioid);
+        $tt = get_records_select('vocabulario_mis_estrategias', 'usuarioid=' . $usuarioid);
         return $tt;
     }
 
 }
-
-
-
 
 ?>
