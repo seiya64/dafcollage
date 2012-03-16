@@ -37,7 +37,7 @@ GNU General Public License for more details.
 <XMLDB PATH="mod/vocabulario/db" VERSION="20110504" COMMENT="XMLDB file for Moodle mod/vocabulario"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
-       >
+>
     <TABLES>
         <TABLE NAME="vocabulario" COMMENT="Default comment for vocabulario, please edit me" NEXT="vocabulario_sustantivos">
             <FIELDS>
