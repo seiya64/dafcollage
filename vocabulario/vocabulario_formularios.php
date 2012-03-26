@@ -600,6 +600,11 @@ class mod_vocabulario_ver_form extends moodleform {
             //$mis_palabras = $mp->obtener_todas($usuarioid, $valor_campoid, $letra);
             $mis_palabras = vocabulario_todas_palabras($usuarioid, null, null, null, null, $letra);
         } else if ($nube) {
+            
+            $titulillos = '<p>'.get_string('instr_nube1','vocabulario').'<br/>';
+            $titulillos .= get_string('instr_nube2','vocabulario').'</p>';
+
+            $mform->addElement('html',$titulillos);
 
             $mform->addElement('html', '<div id ="palabras_container">');
             $mform->addElement('html', '<table id="palabras" class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
