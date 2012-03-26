@@ -181,6 +181,9 @@ $string['desc_inten4.1'] = 'Se refiere a acciones realizadas por seres vivos / i
 $string['desc_inten4.2'] = 'Se refiere a recursos / instrumentos que se utilizan con un determinado fin.';
 $string['desc_inten5.1'] = 'Se refiere a una consecuencia que se ha esperado y que finalmente se ha realizado.';
 $string['desc_inten5.2'] = 'Se refiere a una consecuencia que se ha esperado pero que no se ha realizado.';
+// instrucciones de uso de la Tabla Interactiva(nube)
+$string['instr_nube1'] = 'Haz clic en una palabra para conocer con cuáles se puede relacionar o búscala en el campo \"Search\"';
+$string['instr_nube2'] = 'Para volver a mostrar todas las palabras borra el campo \"Search\"';
 
 ///////////////////////////////////////////////////////////
 //a partir de aqui cosas en aleman que NO SE DEBEN TRADUCIR
