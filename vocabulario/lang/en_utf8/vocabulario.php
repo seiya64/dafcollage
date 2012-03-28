@@ -181,6 +181,9 @@ $string['desc_inten4.1'] = 'It refers to actions made by living things, institut
 $string['desc_inten4.2'] = 'It refers to instruments that are used to achieve something specific.';
 $string['desc_inten5.1'] = 'It refers to a consequence that has been waited for and in the end has happened.';
 $string['desc_inten5.2'] = 'It refers to a consequence that has been waited for but has not happened.';
+// instrucciones de uso de la Tabla Interactiva(nube)
+$string['instr_nube1'] = 'Click a word to find the collocations or search it in the option field \"Search\"';
+$string['instr_nube2'] = 'To go back to complete vocabulary delete the option field  \"Search\"'; 
 
 ///////////////////////////////////////////////////////////
 //a partir de aqui cosas en aleman que NO SE DEBEN TRADUCIR
