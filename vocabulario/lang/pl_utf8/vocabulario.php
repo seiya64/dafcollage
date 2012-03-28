@@ -183,6 +183,9 @@ $string['desc_inten4.1'] = 'Odnosi się do zrealizowanych czynów przez istoty �
 $string['desc_inten4.2'] = 'Odnosi się do zasobów/środków użytych w konkretnym celu.';
 $string['desc_inten5.1'] = 'Odnosi się do oczekiwanego efektu, który nie został osiągnięty.';
 $string['desc_inten5.2'] = 'Odnosi się do oczekiwanego efektu, który ostatecznie nie został osiągnięty.';
+// instrucciones de uso de la Tabla Interactiva(nube)
+$string['instr_nube1'] = 'Kilnij na słowo aby zobaczyć kolokacje lub użyj  pola \"Search\"';
+$string['instr_nube2'] = 'Aby ponownie pokazać listę usuń pole \"Search\"';
 
 ///////////////////////////////////////////////////////////
 //a partir de aqui cosas en aleman que NO SE DEBEN TRADUCIR
