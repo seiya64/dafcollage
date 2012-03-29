@@ -616,7 +616,8 @@ class Vocabulario_campo_lexico {
     }
 
     function obtener_todos($usuarioid) {
-        $campos_lexicos = get_records_select('vocabulario_camposlexicos', 'usuarioid=' . $usuarioid . ' or usuarioid=0');
+        $sufijotabla = get_sufijo_lenguaje_tabla();
+        $campos_lexicos = get_records_select('vocabulario_camposlexicos_'.$sufijotabla, 'usuarioid=' . $usuarioid . ' or usuarioid=0');
         $clex = array();
         $orden = $this->ordena($campos_lexicos);
         foreach ($orden as $i) {
@@ -627,7 +628,7 @@ class Vocabulario_campo_lexico {
 
     function obtener_hijos($usuarioid, $padreid) {
         $sufijotabla = get_sufijo_lenguaje_tabla();
-        $campos_lexicos = get_records_select("vocabulario_camposlexicos_$sufijotabla", '(usuarioid=' . $usuarioid . ' or usuarioid=0) and padre=' . $padreid);
+        $campos_lexicos = get_records_select('vocabulario_camposlexicos_'.$sufijotabla, '(usuarioid=' . $usuarioid . ' or usuarioid=0) and padre=' . $padreid);
         $clex = array();
         $clex[$padreid] = get_string('seleccionar','vocabulario');
         $orden = $this->ordena($campos_lexicos, $padreid);
@@ -1318,7 +1319,7 @@ class Vocabulario_intenciones {
 
     function leer($intencionid, $usuarioid) {
         $sufijotabla = get_sufijo_lenguaje_tabla();
-        $ic = get_record("vocabulario_intenciones_$sufijotabla", 'id', $intencionid);
+        $ic = get_record('vocabulario_intenciones_'.$sufijotabla, 'id', $intencionid);
         $this->usuarioid = $ic->usuarioid;
         $this->padre = $ic->padre;
         $this->intencion = $ic->intencion;
@@ -1327,7 +1328,7 @@ class Vocabulario_intenciones {
 
     function obtener_todos($usuarioid) {
         $sufijotabla = get_sufijo_lenguaje_tabla();
-        $intenciones = get_records_select("vocabulario_intenciones_$sufijotabla", 'usuarioid=' . $usuarioid . ' or usuarioid=0');
+        $intenciones = get_records_select('vocabulario_intenciones_'.$sufijotabla, 'usuarioid=' . $usuarioid . ' or usuarioid=0');
         $ic = array();
         $orden = $this->ordena($intenciones);
         foreach ($orden as $i) {
@@ -1338,7 +1339,7 @@ class Vocabulario_intenciones {
 
     function obtener_todos_ids($usuarioid) {
         $sufijotabla = get_sufijo_lenguaje_tabla();
-        $intenciones = get_records_select("vocabulario_intenciones_$sufijotabla", 'usuarioid=' . $usuarioid . ' or usuarioid=0');
+        $intenciones = get_records_select('vocabulario_intenciones_'.$sufijotabla, 'usuarioid=' . $usuarioid . ' or usuarioid=0');
         $ic = array();
         $orden = $this->ordena($intenciones);
         foreach ($orden as $i) {
@@ -1349,7 +1350,7 @@ class Vocabulario_intenciones {
 
     function obtener_hijos($usuarioid, $padreid) {
         $sufijotabla = get_sufijo_lenguaje_tabla();
-        $intenciones = get_records_select("vocabulario_intenciones_$sufijotabla", '(usuarioid=' . $usuarioid . ' or usuarioid=0) and padre=' . $padreid);
+        $intenciones = get_records_select('vocabulario_intenciones_'.$sufijotabla, '(usuarioid=' . $usuarioid . ' or usuarioid=0) and padre=' . $padreid);
         $ic = array();
         $ic[$padreid] = get_string('seleccionar','vocabulario');
         $orden = $this->ordena($intenciones, $padreid);
@@ -1560,7 +1561,7 @@ class Vocabulario_tipologias {
 
     function leer($tipoid, $usuarioid) {
         $sufijotabla = get_sufijo_lenguaje_tabla();
-        $ic = get_record("vocabulario_tipologias_$sufijotabla", 'id', $tipoid);
+        $ic = get_record('vocabulario_tipologias_'.$sufijotabla, 'id', $tipoid);
         $this->usuarioid = $ic->usuarioid;
         $this->padre = $ic->padre;
         $this->tipo = $ic->tipo;
@@ -1570,7 +1571,7 @@ class Vocabulario_tipologias {
 
     function obtener_todos($usuarioid) {
         $sufijotabla = get_sufijo_lenguaje_tabla();
-        $tipo = get_records_select("vocabulario_tipologias_$sufijotabla", 'usuarioid=' . $usuarioid . ' or usuarioid=0');
+        $tipo = get_records_select('vocabulario_tipologias_'.$sufijotabla, 'usuarioid=' . $usuarioid . ' or usuarioid=0');
         $ic = array();
         $orden = $this->ordena($tipo);
         foreach ($orden as $i) {
@@ -1581,7 +1582,7 @@ class Vocabulario_tipologias {
 
     function obtener_todos_ids($usuarioid) {
         $sufijotabla = get_sufijo_lenguaje_tabla();
-        $tipo = get_records_select("vocabulario_tipologias_$sufijotabla", 'usuarioid=' . $usuarioid . ' or usuarioid=0');
+        $tipo = get_records_select('vocabulario_tipologias_'.$sufijotabla, 'usuarioid=' . $usuarioid . ' or usuarioid=0');
         $ic = array();
         $orden = $this->ordena($tipo);
         foreach ($orden as $i) {
