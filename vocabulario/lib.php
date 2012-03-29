@@ -414,7 +414,7 @@ function vocabulario_todas_palabras($usuarioid, $cl = null, $gram = null, $inten
     if ($letra) {
         $sql .= ') p WHERE p.pal like \'' . $letra . '%\'';
     }
-
+    
     $todas = get_records_sql($sql);
     return $todas;
 }
@@ -429,9 +429,9 @@ function todas_palabras_nube($usrid) {
         FROM
         `mdl_vocabulario_mis_palabras`	as frase ,
 	`mdl_vocabulario_sustantivos`	as sus,
-	`mdl_vocabulario_adjetivos`		as adj,
-	`mdl_vocabulario_verbos`		as ver,
-	`mdl_vocabulario_otros`			as otros
+	`mdl_vocabulario_adjetivos`	as adj,
+	`mdl_vocabulario_verbos`	as ver,
+	`mdl_vocabulario_otros`		as otros
 
         WHERE
             frase.`usuarioid` = " . $usrid . " AND 
