@@ -112,8 +112,9 @@ class mod_vocabulario_rellenar_form extends moodleform {
             $mform->addElement('hidden', 'idleido', $leido);
         }
 
-        //campo lexico
-        $mform->addElement('select', 'campoid', get_string("campo_lex", "vocabulario"), $clex, "onChange='javascript: if( options[indice].text == \"--\" ) { this.selectedIndex == 0; } else { cargaContenido(this.id,\"clgeneraldinamico\",0)}'");
+//        //campo lexico
+//        $mform->addElement('select', 'campoid', get_string("campo_lex", "vocabulario"), $clex, "onChange='javascript: if( options[indice].text == \"--\" ) { this.selectedIndex == 0; } else { cargaContenido(this.id,\"clgeneraldinamico\",0)}'");
+        $mform->addElement('select', 'campoid', get_string("nivel", "vocabulario"), $clex, "onChange='javascript: if( this.options[this.selectedIndex].text == \"--\" || this.options[this.selectedIndex].text == \"Seleccionar\" ) { this.selectedIndex == 0; this.options[0].selected = true; document.getElementById(\"clgeneraldinamico\").style.display=\"none\";} else { cargaContenido(this.id,\"clgeneraldinamico\",0); document.getElementById(\"clgeneraldinamico\").style.display=\"\";}' style=\"min-height: 0;\"");
         $mform->setDefault('campoid', 1);
         if ($leido) {
             $aux = new Vocabulario_campo_lexico();
@@ -129,7 +130,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
             $claux = $aux->obtener_hijos($USER->id, $clex[$i]);
             $campodinamico .= '<div class="fitemtitle"></div>';
             $campodinamico .= '<div class="felement fselect">';
-            $elselect = new MoodleQuickForm_select('campoid', 'Subcampo', $claux, "id=\"id_campoid" . $clex[$i] . "\" onChange='if( this.options[this.selectedIndex].text == \"--\" ) { this.selectedIndex == 0; } else { cargaContenido(this.id,\"" . 'campoid' . "clgeneraldinamico" . $clex[$i] . "\",0)}'");
+            $elselect = new MoodleQuickForm_select('campoid', 'Subcampo', $claux, "id=\"id_campoid" . $clex[$i] . "\" onChange='javascript: if( this.options[this.selectedIndex].text == \"--\" ) { this.selectedIndex == 0; } else { cargaContenido(this.id,\"" . 'campoid' . "clgeneraldinamico" . $clex[$i] . "\",0)}'");
             $elselect->setSelected($clex[$i + 1]);
             $campodinamico .= $elselect->toHtml();
             $campodinamico .= '</div>';
@@ -138,8 +139,6 @@ class mod_vocabulario_rellenar_form extends moodleform {
         }
         $campodinamico .= "</div>";
         $mform->addElement('html', $campodinamico);
-        $mform->addElement('hidden', 'act', $act);
-
         //diccionario
         $dic = Array();
         $dic[0] = "DWDS";
