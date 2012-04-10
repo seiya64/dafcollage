@@ -1,4 +1,4 @@
-&----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
 DESCRIPCIÓN DEL PROYECTO
 
 Al ser algo extensa para un archivo de texto plano, la descripción del proyecto se encuentra en un pdf publicado
