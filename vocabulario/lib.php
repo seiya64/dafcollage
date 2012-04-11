@@ -420,18 +420,21 @@ function vocabulario_todas_palabras($usuarioid, $cl = null, $gram = null, $inten
 }
 
 function todas_palabras_nube($usrid) {
+    $sufijotabla = get_sufijo_lenguaje_tabla();
     $sql = "SELECT
 	sus.palabra as sus_lex,
 	adj.sin_declinar as adj_lex,
 	ver.infinitivo as ver_lex,
-	otros.palabra as otros_lex
+	otros.palabra as otros_lex,
+        campos.campo as campo_lex
 
         FROM
         `mdl_vocabulario_mis_palabras`	as frase ,
 	`mdl_vocabulario_sustantivos`	as sus,
 	`mdl_vocabulario_adjetivos`	as adj,
 	`mdl_vocabulario_verbos`	as ver,
-	`mdl_vocabulario_otros`		as otros
+	`mdl_vocabulario_otros`		as otros,
+        `mdl_vocabulario_camposlexicos_".$sufijotabla."` as campos
 
         WHERE
             frase.`usuarioid` = " . $usrid . " AND 
@@ -441,7 +444,9 @@ function todas_palabras_nube($usrid) {
             AND
             frase.`verboid` = ver.`id`
             AND
-            frase.`otroid` = otros.`id
+            frase.`otroid` = otros.`id`
+            AND
+            frase.`campoid` = campos.`id`
 	";
 
     $todas = get_records_sql($sql);
