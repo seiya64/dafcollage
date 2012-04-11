@@ -863,28 +863,28 @@ class Vocabulario_mis_palabras {
         $id_actualizable = 0;
 
         //de las palabras que tengo guardadas miro a ver cual esta de antes
-        foreach ($todas as $cosa) {
-            if ($cosa->get('sustantivo')->get('palabra') == $this->sustantivo->get('palabra') && $insertar_sustantivo) {
-                $this->sustantivo->set(null, null, null, null, null, null, null, null, null, $cosa->get('sustantivo')->get('id'));
-                update_record('vocabulario_sustantivos', $this->sustantivo, true);
-                $insertar_sustantivo = false;
-            }
-            if ($cosa->get('adjetivo')->get('sin_declinar') == $this->adjetivo->get('sin_declinar') && $insertar_adjetivo) {
-                $this->adjetivo->set(null, null, null, null, null, null, $cosa->get('adjetivo')->get('id'));
-                update_record('vocabulario_adjetivos', $this->adjetivo, true);
-                $insertar_adjetivo = false;
-            }
-            if ($cosa->get('verbo')->get('infinitivo') == $this->verbo->get('infinitivo') && $insertar_verbo) {
-                $this->verbo->set(null, null, null, null, null, null, null, null, null, $cosa->get('verbo')->get('id'));
-                update_record('vocabulario_verbos', $this->verbo, true);
-                $insertar_verbo = false;
-            }
-            if ($cosa->get('otro')->get('palabra') == $this->otro->get('palabra') && $insertar_otro) {
-                $this->otro->set(null, null, null, null, null, null, $cosa->get('otro')->get('id'));
-                update_record('vocabulario_otros', $this->otro, true);
-                $insertar_otro = false;
-            }
-        }
+//        foreach ($todas as $cosa) {
+//            if ($cosa->get('sustantivo')->get('palabra') == $this->sustantivo->get('palabra') && $insertar_sustantivo) {
+//                $this->sustantivo->set(null, null, null, null, null, null, null, null, null, $cosa->get('sustantivo')->get('id'));
+//                update_record('vocabulario_sustantivos', $this->sustantivo, true);
+//                $insertar_sustantivo = false;
+//            }
+//            if ($cosa->get('adjetivo')->get('sin_declinar') == $this->adjetivo->get('sin_declinar') && $insertar_adjetivo) {
+//                $this->adjetivo->set(null, null, null, null, null, null, $cosa->get('adjetivo')->get('id'));
+//                update_record('vocabulario_adjetivos', $this->adjetivo, true);
+//                $insertar_adjetivo = false;
+//            }
+//            if ($cosa->get('verbo')->get('infinitivo') == $this->verbo->get('infinitivo') && $insertar_verbo) {
+//                $this->verbo->set(null, null, null, null, null, null, null, null, null, $cosa->get('verbo')->get('id'));
+//                update_record('vocabulario_verbos', $this->verbo, true);
+//                $insertar_verbo = false;
+//            }
+//            if ($cosa->get('otro')->get('palabra') == $this->otro->get('palabra') && $insertar_otro) {
+//                $this->otro->set(null, null, null, null, null, null, $cosa->get('otro')->get('id'));
+//                update_record('vocabulario_otros', $this->otro, true);
+//                $insertar_otro = false;
+//            }
+//        }
 
         //inserto nuevas las que tenga que insertar
         if ($insertar_sustantivo && $this->get('sustantivo')->get('palabra')) {
