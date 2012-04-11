@@ -613,6 +613,7 @@ class mod_vocabulario_ver_form extends moodleform {
             $titulillos .= '<th>' . get_string('adj', 'vocabulario') . '</th>';
             $titulillos .= '<th>' . get_string('vrb', 'vocabulario') . '</th>';
             $titulillos .= '<th>' . get_string('otr', 'vocabulario') . '</th>';
+            $titulillos .= '<th>' . get_string('campo_lex', 'vocabulario') . '</th>';
             $titulillos .= '</tr>';
             $titulillos .= '</thead>';
             $mform->addElement('html', $titulillos);
@@ -626,6 +627,7 @@ class mod_vocabulario_ver_form extends moodleform {
                 $titulillos .= '<td>' . $palabra->adj_lex . '</td>';
                 $titulillos .= '<td>' . $palabra->ver_lex . '</td>';
                 $titulillos .= '<td>' . $palabra->otros_lex . '</td>';
+                $titulillos .= '<td>' . $palabra->campo_lex . '</td>';
 
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
