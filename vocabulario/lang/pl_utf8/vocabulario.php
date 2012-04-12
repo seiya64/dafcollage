@@ -35,8 +35,6 @@
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details. */
 
-
-
 //TRADUCIDO POR KINGA NOWIK
 //lo que aqui aparece en aleman es porque tiene que ser asi
 //traducir esas partes al idioma que se quiere ense√±ar para que sirva para cualquiera
