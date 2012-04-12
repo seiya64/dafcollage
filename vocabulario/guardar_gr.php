@@ -470,16 +470,24 @@ switch ($padre) {
         }
         break;
 
-    /*
-      $tope = 30;
-      $desc = '';
-      for($f=0; $f<$tope; $f++){
-      $desc .= optional_param('PRA'.$f, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('FUN'.$f, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-      $desc .= optional_param('KAS'.$f, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('BEI'.$f, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-      }
-      break;
+    case 69:
+        $salir = false;
+        $desc = '';
 
-     */
+        for ($f = 0; $salir == false; $f++) {
+            if (optional_param('PRA' . $f, null, PARAM_TEXT) ||
+                    optional_param('SUF' . $f, null, PARAM_TEXT) ||
+                    optional_param('BEI' . $f, null, PARAM_TEXT) ||
+                    optional_param('BED' . $f, null, PARAM_TEXT)
+            ) {
+
+                $desc .= optional_param('PRA' . $f, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('SUF' . $f, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+                $desc .= optional_param('BEI' . $f, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('BED' . $f, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
+            } else {
+                $salir = true;
+            }
+        }
+        break;
 }
 
 //soluciones varias
