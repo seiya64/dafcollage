@@ -2198,6 +2198,52 @@ if ($impr_gram == 1) {
                                 }
                                 $pdf->Ln();
                                 break;
+                                
+                            case 69:
+                                $pdf->setLeftMargin(MARGIN);
+                                $pdf->SetTextColor(TEXT_WHITE);
+                                $pdf->SetFillColor(59, 89, 152); //#3B5998 Azul oscuro
+                                $pdf->setLineWidth(0.3);
+                                //cabeceras
+                                $pdf->SetFont('', 'B', 10);
+
+                                $pdf->Cell(33, 5, get_string('prafix', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(33, 5, get_string('suffix', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(62, 5, get_string('beisp', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(62, 5, get_string('bedeutung', 'vocabulario'), 1, 1, 'C', 1);
+
+                                $pdf->SetTextColor(TEXT_AUTO);
+                                $pdf->SetFont('', '', 9);
+
+                                //se calcula el nº de filas totales
+                                $totalfilas = ((count($descripcion_troceada) - 2) / 4);
+
+                                $todovacio = true;
+
+                                for ($f = 0; $f < $totalfilas; $f++) {
+                                    $pintar = false;
+
+                                    if ($f == $totalfilas - 1 && $todovacio) {
+                                        $pintar = true;
+                                    }
+
+                                    for ($j = 0; $j < 5 && $pintar == false; $j++) {
+                                        if ($descripcion_troceada[(5 * $f) + $j]) {
+                                            $todovacio = false;
+                                            $pintar = true;
+                                        }
+                                    }
+
+                                    if ($pintar) {
+
+                                        $pdf->Cell(33, 5, $descripcion_troceada[($f * 4) + 0], 1, 0, 'C', 0);
+                                        $pdf->Cell(33, 5, $descripcion_troceada[($f * 4) + 1], 1, 0, 'C', 0);
+                                        $pdf->Cell(62, 5, $descripcion_troceada[($f * 4) + 2], 1, 0, 'C', 0);
+                                        $pdf->Cell(62, 5, $descripcion_troceada[($f * 4) + 3], 1, 1, 'C', 0);
+                                    }
+                                }
+                                $pdf->Ln();
+                                break;
                         }
 
 
