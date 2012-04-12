@@ -25,8 +25,6 @@
   María José Varela Salinas
   Karin Vilar Sánchez
 
-  Traducido por Alicia Casado Valenzuela
-
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
   as published by the Free Software Foundation; either version 2
@@ -37,7 +35,7 @@
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details. */
 
-
+//  Traducido por Alicia Casado Valenzuela
 //lo que aqui aparece en aleman es porque tiene que ser asi
 //traducir esas partes al idioma que se quiere enseñar para que sirva para cualquiera
 $string['vocabulario'] = 'Wortschatz';
