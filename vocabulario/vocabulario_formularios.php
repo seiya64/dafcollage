@@ -2752,6 +2752,59 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', '<p>');
 
                 break;
+                
+            case 69:
+                
+                $totalfilas = (count($descripcion_troceada)-2)/4;
+                
+                $mform->addElement('html', '<p>');
+                $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter">');
+
+                //titulillos de la tabla
+                $titulillos = '<tr class="head">';
+                $titulillos .='<th>Präfix</th>';
+                $titulillos .='<th>Suffix</th>';
+                $titulillos .='<th>' . get_string('beisp', 'vocabulario') . '</th>';
+                $titulillos .='<th>Bedeutung</th>';
+                $titulillos .= '</tr>';
+                $mform->addElement('html', $titulillos);
+
+                
+                
+                if ($totalfilas < 0) {
+                    $totalfilas = 0;
+                }
+
+                for ($fila = 0; $fila < $totalfilas + 1; ++$fila) {
+
+                    //Esto que se hace a continuación es para meter datos en los campos de texto
+                    //sólo en caso de que no sea la ultima fila, que deberá ser siempre en blanco
+                    //si no se hace esto, en los dos primero campos pondrá el contenido de las hojas
+                    //en blanco que se muestran al final
+
+                    $valores = array($descripcion_troceada[((4 * $fila) + 0)], $descripcion_troceada[((4 * $fila) + 1)], $descripcion_troceada[((4 * $fila) + 2)], $descripcion_troceada[((4 * $fila) + 3)]);
+                    
+                    if ($fila == $totalfilas)
+                        $valores = null;
+
+
+
+                    $titulillos = '<tr class="cell">';
+                    $titulillos .= '<td><input size=15 type="text" id="id_PRA' . $fila . '" name="PRA' . $fila . '" value="' . $valores[0] . '"></td>';
+                    $titulillos .= '<td><input size=15 type="text" id="id_SUF' . $fila . '" name="SUF' . $fila . '" value="' . $valores[1] . '"></td>';
+                    $titulillos .= '<td><input size=35 type="text" id="id_BEI' . $fila . '" name="BEI' . $fila . '" value="' . $valores[2] . '"></td>';
+                    $titulillos .= '<td><input size=30 type="text" id="id_BED' . $fila . '" name="BED' . $fila . '" value="' . $valores[3] . '"></td>';
+                    $titulillos .= '</tr>';
+                    $mform->addElement('html', $titulillos);
+                }
+                
+
+
+                $mform->addElement('html', '</table>');
+                $mform->addElement('html', '<p>');
+                
+                break;
+                    
         }
 
         if ($grid) {
