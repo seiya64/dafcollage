@@ -415,8 +415,18 @@ function vocabulario_todas_palabras($usuarioid, $cl = null, $gram = null, $inten
         $sql .= ') p WHERE p.pal like \'' . $letra . '%\'';
     }
     
-    $todas = get_records_sql($sql);
-    return $todas;
+
+//    $todas = get_records_sql($sql);
+    
+    $todas = mysql_query($sql);
+    $palabras = array();
+    
+    while($palabra = mysql_fetch_assoc($todas)){
+        $palabras[] = $palabra;
+    }
+    
+    
+    return $palabras;
 }
 
 function todas_palabras_nube($usrid) {
