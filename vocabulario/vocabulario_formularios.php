@@ -2762,10 +2762,10 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                 //titulillos de la tabla
                 $titulillos = '<tr class="head">';
-                $titulillos .='<th>Präfix</th>';
-                $titulillos .='<th>Suffix</th>';
+                $titulillos .='<th>'.get_string('prafix','vocabulario').'</th>';
+                $titulillos .='<th>'.get_string('suffix','vocabulario').'</th>';
                 $titulillos .='<th>' . get_string('beisp', 'vocabulario') . '</th>';
-                $titulillos .='<th>Bedeutung</th>';
+                $titulillos .='<th>'.get_string('bedeutung','vocabulario').'</th>';
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
 
