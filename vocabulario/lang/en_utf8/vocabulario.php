@@ -302,4 +302,7 @@ $string['par_star'] = '(= Verben mit bestimmten gemeinsamen Unregelmäβigkeiten
 $string['par_gemis'] = '(= Unregelmäβige Verben)';
 $string['kas'] = 'Kasus';
 $string['preposiciones'] = 'Präpositionen';
+$string['prafix'] = 'Präfix';
+$string['suffix'] = 'Suffix';
+$string['bedeutung'] = 'Bedeutung';
 ?>
