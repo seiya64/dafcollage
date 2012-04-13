@@ -432,6 +432,7 @@ function vocabulario_todas_palabras($usuarioid, $cl = null, $gram = null, $inten
 function todas_palabras_nube($usrid) {
     $sufijotabla = get_sufijo_lenguaje_tabla();
     $sql = "SELECT
+        frase.id as mpid,
 	sus.palabra as sus_lex,
 	adj.sin_declinar as adj_lex,
 	ver.infinitivo as ver_lex,
