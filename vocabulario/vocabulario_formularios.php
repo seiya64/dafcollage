@@ -106,8 +106,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         //inclusion del css para que se vean en dos columnas
         //$mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
         //titulo de la seccion
-        $mform->addElement('html', '<h1>' . get_string('guardar', 'vocabulario') . '</h1>');
-
+        $mform->addElement('html', '<h1>' . get_string('guardar', 'vocabulario') . '<a href="view.php" onclick="skipClientValidation = true; return true;" id="id_cancellink">Menú principal</a></h1>');
         if ($leido) {
             $mform->addElement('hidden', 'idleido', $leido);
         }
