@@ -394,56 +394,58 @@ class mod_vocabulario_opciones_form extends moodleform {
         //Los iconos están sacados del tema de gnome que viene con ubuntu 11.04
         //No se si habrá que poner alguna referencia o algo raro por el tema de licencias
         $mform = & $this->_form;
-        $tabla_menu = '<br><table class="flexible generaltable boxaligncenter boxwidthwide" style="text-align:center;">';
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
+        $tabla_menu = '<div class="menu flexible generaltable boxaligncenter boxwidthwide" style="text-align:center;">';
         //if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false)) {
         //no ve la opcion de guardar palabras
         //} else {
         //0,1
-        $tabla_menu .='<tr><td style="text-align:left"><p>' . get_string('anotar', 'vocabulario') . '</p></td>';
+        $tabla_menu .='<div class="menurow"><div class="menuitem left" style="text-align:left"><div class="texto">' . get_string('anotar', 'vocabulario') . '</div></div>';
         //}
-        //0,2
-        $tabla_menu .='<td><p>' . get_string('busc', 'vocabulario') . '</p></td>';
         //0,3
-        $tabla_menu .='<td style="text-align:right"><p>' . get_string('nuevos', 'vocabulario') . '</td></tr>';
+        $tabla_menu .='<div class="menuitem right" style="text-align:right"><div class="texto">' . get_string('nuevos', 'vocabulario') . '</div></div>';
+        //0,2
+        $tabla_menu .='<div class="menuitem center"><div class="texto">' . get_string('busc', 'vocabulario') . '</div></div></div>';
 
         //1,1
-        $tabla_menu .='<tr><td style="text-align:left"><p><a href="view.php?id=' . $id . '&opcion=1"><img src="./imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im"/></br>' . get_string('guardar', 'vocabulario') . '</a></p></td>';
+        $tabla_menu .='<div class="menurow"><div class="menuitem left" style="text-align:left"><a href="view.php?id=' . $id . '&opcion=1"><img src="./imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im"/><div class="texto">' . get_string('guardar', 'vocabulario') . '</div></a></div>';
         //}
-        //1,2
-        $tabla_menu .='<td><p><a href="view.php?id=' . $id . '&opcion=2"><img src="./imagenes/ver_palabras.png" id="id_ver_im" name="ver_im"/></br>' . get_string('ver', 'vocabulario') . '</a></p></td>';
         //1,3
-        $tabla_menu .='<td style="text-align:right"><p><a href="view.php?id=' . $id . '&opcion=3"><img src="./imagenes/campos_lexicos.png" id="id_campos_im" name="campos_im"/></br>' . get_string('admin_cl', 'vocabulario') . '</a></p></td></tr>';
+        $tabla_menu .='<div class="menuitem right" style="text-align:right"><a href="view.php?id=' . $id . '&opcion=3"><img src="./imagenes/campos_lexicos.png" id="id_campos_im" name="campos_im"/><div class="texto">' . get_string('admin_cl', 'vocabulario') . '</div></a></div>';
+        //1,2
+        $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=2"><img src="./imagenes/ver_palabras.png" id="id_ver_im" name="ver_im"/><div class="texto">' . get_string('ver', 'vocabulario') . '</div></a></div></div>';
 
         //2,1
-        $tabla_menu .='<tr><td style="text-align:left"><p><a href="view.php?id=' . $id . '&opcion=5"><img src="./imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im"/></br>' . get_string('admin_gr', 'vocabulario') . '</a></p></td>';
-        //2,2
-        $tabla_menu .='<td><p><a href="view.php?id=' . $id . '&opcion=13"><img src="./imagenes/listado.png" id="id_listado" name="listado"/></br>' . get_string('listado', 'vocabulario') . '</a></p></td>';
+        $tabla_menu .='<div class="menurow"><div class="menuitem left" style="text-align:left"><a href="view.php?id=' . $id . '&opcion=5"><img src="./imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im"/><div class="texto">' . get_string('admin_gr', 'vocabulario') . '</div></a></div>';
         //2,3
-        $tabla_menu .='<td style="text-align:right"><p><a href="view.php?id=' . $id . '&opcion=15"><img src="./imagenes/nueva_gramatica.png" id="id_gram_im" name="gram_im"/></br>' . get_string('add_gram', 'vocabulario') . '</a></p></td></tr>';
+        $tabla_menu .='<div class="menuitem right" style="text-align:right"><a href="view.php?id=' . $id . '&opcion=15"><img src="./imagenes/nueva_gramatica.png" id="id_gram_im" name="gram_im"/><div class="texto">' . get_string('add_gram', 'vocabulario') . '</div></a></div>';
+        //2,2
+        $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=13"><img src="./imagenes/listado.png" id="id_listado" name="listado"/><div class="texto">' . get_string('listado', 'vocabulario') . '</div></a></div></div>';
 
         //3,1
-        $tabla_menu .='<tr><td style="text-align:left"><p><a href="view.php?id=' . $id . '&opcion=7"><img src="./imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im"/></br>' . get_string('admin_ic', 'vocabulario') . '</a></p></td>';
-        //3,2
-        $tabla_menu .='<td><p><a href="view.php?id=' . $id . '&opcion=14"><img src="./imagenes/pdf.png" id="id_pdf" name="pdf"/></br>' . get_string('pdf', 'vocabulario') . '</a></p></td>';
+        $tabla_menu .='<div class="menurow"><div class="menuitem left" style="text-align:left"><a href="view.php?id=' . $id . '&opcion=7"><img src="./imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im"/><div class="texto">' . get_string('admin_ic', 'vocabulario') . '</div></a></div>';
         //3,3
-        $tabla_menu .='<td style="text-align:right"><p><a href="view.php?id=' . $id . '&opcion=8"><img src="./imagenes/nueva_ic.png" id="id_nueva_ic" name="nueva_ic"/></br>' . get_string('nueva_ic', 'vocabulario') . '</a></p></td></tr>';
+        $tabla_menu .='<div class="menuitem right" style="text-align:right"><a href="view.php?id=' . $id . '&opcion=8"><img src="./imagenes/nueva_ic.png" id="id_nueva_ic" name="nueva_ic"/><div class="texto">' . get_string('nueva_ic', 'vocabulario') . '</div></a></div>';
+        //3,2
+        $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=14"><img src="./imagenes/pdf.png" id="id_pdf" name="pdf"/><div class="texto">' . get_string('pdf', 'vocabulario') . '</div></a></div></div>';
 
         //4,1
-        $tabla_menu .='<tr><td style="text-align:left"><p><a href="view.php?id=' . $id . '&opcion=9"><img src="./imagenes/tipologias_textuales.png" id="id_tt_im" name="tt_im"/></br>' . get_string('admin_tt', 'vocabulario') . '</a></p></td>';
+        $tabla_menu .='<div class="menurow"><div class="menuitem left" style="text-align:left"><a href="view.php?id=' . $id . '&opcion=9"><img src="./imagenes/tipologias_textuales.png" id="id_tt_im" name="tt_im"/><div class="texto">' . get_string('admin_tt', 'vocabulario') . '</div></a></div>';
+        //4,3
+        $tabla_menu .='<div class="menuitem right" style="text-align:right"><a href="view.php?id=' . $id . '&opcion=10"><img src="./imagenes/nueva_tt.png" id="id_nueva_tt_im" name="nueva_tt_im"/><div class="texto">' . get_string('nueva_tt', 'vocabulario') . '</div></a></div>';
         //4,2
         $sufijotabla = get_sufijo_lenguaje_tabla();
-        $tabla_menu .='<td><p><a href="./ayudas/Ayudas_' . $sufijotabla . '.pdf"><img src="./imagenes/ayuda.png" id="id_ayuda" name="ayuda"/></br>' . get_string('ayuda', 'vocabulario') . '</a></p></td>';
-        //4,3
-        $tabla_menu .='<td style="text-align:right"><p><a href="view.php?id=' . $id . '&opcion=10"><img src="./imagenes/nueva_tt.png" id="id_nueva_tt_im" name="nueva_tt_im"/></br>' . get_string('nueva_tt', 'vocabulario') . '</a></p></td></tr>';
+        $tabla_menu .='<div class="menuitem center"><a href="./ayudas/Ayudas_' . $sufijotabla . '.pdf"><img src="./imagenes/ayuda.png" id="id_ayuda" name="ayuda"/><div class="texto">' . get_string('ayuda', 'vocabulario') . '</div></a></div></div>';
 
         //5,1
-        $tabla_menu .='<tr><td style="text-align:left"><p><a href="view.php?id=' . $id . '&opcion=11"><img src="./imagenes/estrategias_icon.png" id="id_ea_im" name="ea_im"/></br>' . get_string('admin_ea', 'vocabulario') . '</a></p></td>';
-        //5,2
-        $tabla_menu .='<td><p><a href=""></br></a></p></td>';
+        $tabla_menu .='<div class="menurow"><div class="menuitem left" style="text-align:left"><a href="view.php?id=' . $id . '&opcion=11"><img src="./imagenes/estrategias_icon.png" id="id_ea_im" name="ea_im"/><div class="texto">' . get_string('admin_ea', 'vocabulario') . '</div></a></div>';
         //5,3
-        $tabla_menu .='<td style="text-align:right"><p><a href="view.php?id=' . $id . '&opcion=12"><img src="./imagenes/nueva_ea.png" id="id_nueva_ea_im" name="nueva_ea_im"/></br>' . get_string('nueva_ea', 'vocabulario') . '</a></p></td></tr>';
+        $tabla_menu .='<div class="menuitem right" style="text-align:right"><a href="view.php?id=' . $id . '&opcion=12"><img src="./imagenes/nueva_ea.png" id="id_nueva_ea_im" name="nueva_ea_im"/><div class="texto">' . get_string('nueva_ea', 'vocabulario') . '</div></a></div>';
+        //5,2
+        $tabla_menu .='<div class="menuitem center"><a href=""><div class="texto"></div></a></div></div>';
 
-        $tabla_menu .='</table>';
+        $tabla_menu .='</div>';
+        
         $mform->addElement('html', $tabla_menu);
     }
 
