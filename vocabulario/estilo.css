@@ -76,3 +76,12 @@ guardar palabras por columnas
     display: table-cell;
 }
 
+.menu{ padding-top:10px;}
+.menurow{ clear:none; padding-top:15px;}
+.menurow a {text-decoration:none;}
+.menuitem {opacity:0.8;}
+.menuitem:hover {opacity:1;}
+.menuitem{ clear:none;  width:32%; }
+.menurow .left{ float:left; }
+.menurow .center{ margin-right:auto; margin-left:auto;}
+.menurow .right{ float:right; }
