@@ -305,11 +305,16 @@ function vocabulario_obtener_alumnos($cursoid) {
 
 function vocabulario_todas_palabras($usuarioid, $cl = null, $gram = null, $inten = null, $tipo = null, $letra = null) {
     global $CFG;
+    
+    $sql = 'SET @a:=0;';
+    
+    get_records_sql($sql);
+    
     $sql = '';
     if ($letra) {
         $sql .= 'SELECT * FROM (';
     }
-    $sql .= 'SELECT DISTINCT todas.pal, cl.campo, gr.gramatica, ic.intencion, tt.tipo, todas.mpid ';
+    $sql .= 'SELECT DISTINCT @a:=@a+1, todas.pal, cl.campo, gr.gramatica, ic.intencion, tt.tipo, todas.mpid ';
     $sql .= 'FROM (';
     $sql .= '(SELECT mp.id mpid,`sustantivoid` id,`palabra` pal,`campoid` clid,`gramaticaid` grid,`intencionid` icid,`tipologiaid` ttid ';
     $sql .= 'FROM ';
@@ -414,19 +419,9 @@ function vocabulario_todas_palabras($usuarioid, $cl = null, $gram = null, $inten
     if ($letra) {
         $sql .= ') p WHERE p.pal like \'' . $letra . '%\'';
     }
-    
 
-//    $todas = get_records_sql($sql);
-    
-    $todas = mysql_query($sql);
-    $palabras = array();
-    
-    while($palabra = mysql_fetch_assoc($todas)){
-        $palabras[] = $palabra;
-    }
-    
-    
-    return $palabras;
+    $todas = get_records_sql($sql);
+    return $todas;
 }
 
 function todas_palabras_nube($usrid) {
