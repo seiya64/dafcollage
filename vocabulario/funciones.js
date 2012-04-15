@@ -83,10 +83,15 @@ function traducir(elemento) {
 
 function cargaContenido(miselect, otroselect, tipo) {
 
-    var elselect = document.getElementById(miselect).value;
-    var nombre = document.getElementById(miselect).name;
+    var objeto = document.getElementById(miselect);
+    var elselect = objeto.value;
+    var nombre = objeto.name;
+    var eltxt = objeto.options[objeto.selectedIndex].text;
 
-    if(elselect == 0 || elselect == 1) {
+    oculto = document.getElementById('id_desc_btn'); // Ocultar
+    if (oculto) oculto.disabled = true;
+
+    if(elselect == 0 || elselect == 1 || eltxt == "Seleccionar") {
         document.getElementById(otroselect).innerHTML = "";
     } else {
         document.getElementById(otroselect).innerHTML = '<p style="text-align: center;"><img src="./imagenes/loading.gif"/></p>';
@@ -102,9 +107,9 @@ function cargaContenido(miselect, otroselect, tipo) {
         }
         if(tipo == 0) {//campos lexicos
             xmlhttp.open("GET", "subcampos.php?id=" + elselect + "&nombre=" + nombre, true);
-        } else if(tipo == 1) {//gramaticas
+        } else if(tipo == 1 && eltxt != "Seleccionar") {//gramaticas
             xmlhttp.open("GET", "subgramaticas.php?id=" + elselect + "&nombre=" + nombre, true);
-        } else if(tipo == 2) {//intenciones comunicativas
+        } else if(tipo == 2 && eltxt != "Seleccionar") {//intenciones comunicativas
             xmlhttp.open("GET", "subintenciones.php?id=" + elselect + "&nombre=" + nombre, true);
         }
         xmlhttp.send();
