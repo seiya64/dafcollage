@@ -667,13 +667,18 @@ class mod_vocabulario_ver_form extends moodleform {
                 } else {
                     $fila .= 'background:#BDC7D8;">';
                 }
-                $fila .= '<td> ' . $cosa['pal'] . ' </td>';
-                $fila .= '<td> ' . $cosa['campo'] . ' </td>';
-                $fila .= '<td> ' . $cosa['gramatica'] . ' </td>';
-                $fila .= '<td> ' . $cosa['intencion'] . ' </td>';
-                $fila .= '<td> ' . $cosa['tipo'] . ' </td>';
-                $acciones = '<a href="./view.php?id=' . $this->id_tocho . '&opcion=4&act=1&id_mp=' . $cosa['mpid'] . '">[' . get_string('editar', 'vocabulario') . ']</a></td>';
-                $acciones .= '<td><a href="./guardar.php?id_tocho=' . $this->id_tocho . '&borrar=' . $cosa['mpid'] . '">[' . get_string('eliminar', 'vocabulario') . ']</a>';
+//                $fila .= '<td> ' . $cosa['pal'] . ' </td>';
+//                $fila .= '<td> ' . $cosa['campo'] . ' </td>';
+//                $fila .= '<td> ' . $cosa['gramatica'] . ' </td>';
+//                $fila .= '<td> ' . $cosa['intencion'] . ' </td>';
+//                $fila .= '<td> ' . $cosa['tipo'] . ' </td>';
+                $fila .= '<td> ' . $cosa->pal . ' </td>';
+                $fila .= '<td> ' . $cosa->campo . ' </td>';
+                $fila .= '<td> ' . $cosa->gramatica . ' </td>';
+                $fila .= '<td> ' . $cosa->intencion . ' </td>';
+                $fila .= '<td> ' . $cosa->tipo . ' </td>';
+                $acciones = '<a href="./view.php?id=' . $this->id_tocho . '&opcion=4&act=1&id_mp=' . $cosa->mpid . '">[' . get_string('editar', 'vocabulario') . ']</a></td>';
+                $acciones .= '<td><a href="./guardar.php?id_tocho=' . $this->id_tocho . '&borrar=' . $cosa->mpid . '">[' . get_string('eliminar', 'vocabulario') . ']</a>';
                 $fila .= '<td> ' . $acciones . ' </td>';
                 $fila .= '</tr>';
                 $mform->addElement('html', $fila);
@@ -3080,7 +3085,7 @@ class mod_vocabulario_nuevo_tipologia_form extends moodleform {
 
         if ($ttid > 1) {
             $tt = new Vocabulario_mis_tipologias();
-            $tt->leer($ttid);
+            $tt->leer($ttid,$USER->id);
             $descripcion_troceada = explode(__SEPARADORCAMPOS__, $tt->get('descripcion'));
 
             for ($i = 1; $i < 6; $i++) {
