@@ -72,7 +72,7 @@ switch ($padre) {
         $desc = optional_param('mascsemantico', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('mascformal', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
         $desc .= optional_param('femsemantico', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('femformal', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
         $desc .= optional_param('neutrosemantico', null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('neutroformal', null, PARAM_TEXT) . __SEPARADORCAMPOS__;
-        echo $desc;
+        //echo $desc;
         break;
     //1.2 Numerus
     case 4:
@@ -198,7 +198,7 @@ switch ($padre) {
             $desc .= optional_param('P3PC1' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
             $desc .= optional_param('P3PC2' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
         }
-        echo $desc;
+        //echo $desc;
         break;
     //3.7.1 Konjunktiv I
     case 33:
