@@ -105,7 +105,7 @@ function cargaContenido(miselect, otroselect, tipo) {
                 document.getElementById(otroselect).innerHTML = xmlhttp.responseText;
             }
         }
- 
+       
         if(tipo == 0) {//campos lexicos
             xmlhttp.open("GET", "subcampos.php?id=" + elselect + "&nombre=" + nombre, true);
         } else if(tipo == 1 && eltxt != "Seleccionar") {//gramaticas
