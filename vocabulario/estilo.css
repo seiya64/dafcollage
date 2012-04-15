@@ -85,3 +85,9 @@ guardar palabras por columnas
 .menurow .left{ float:left; }
 .menurow .center{ margin-right:auto; margin-left:auto;}
 .menurow .right{ float:right; }
+
+#id_cancellink{ 
+float: right;
+color: #EEE;
+font-size: 0.9em;
+}
