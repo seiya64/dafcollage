@@ -3020,9 +3020,9 @@ class mod_vocabulario_nuevo_ic_form extends moodleform {
         //botones
         $buttonarray = array();
         if ($icid > 1)
-            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('guardesc', 'vocabulario'));
-        $buttonarray[] = &$mform->createElement('submit', 'desc_btn', get_string('verdesc', 'vocabulario'));
+            $buttonarray[] = &$mform->createElement('submit', 'desc_btn', get_string('guardesc', 'vocabulario'));
         $mform->registerNoSubmitButton('desc_btn');
+        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('verdesc', 'vocabulario'));
         $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
         $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
     }
