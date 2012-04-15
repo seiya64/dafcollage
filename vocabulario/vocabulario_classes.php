@@ -1695,14 +1695,24 @@ class Vocabulario_mis_tipologias {
         update_record('vocabulario_mis_tipologias', $this, true);
     }
 
-    function leer($icid) {
-        $gr = get_record('vocabulario_mis_tipologias', 'tipoid', $icid);
-        $this->usuarioid = $gr->usuarioid;
-        $this->descripcion = $gr->descripcion;
-        $this->tipoid = $gr->tipoid;
-        $this->id = $gr->id;
-        $this->tipo_palabra = $gr->tipo_palabra;
-        $this->palabra_id = $gr->palabra_id;
+    function leer($icid, $usrid = null) {
+        if($usrid == null){
+            $gr = get_record('vocabulario_mis_tipologias', 'tipoid', $icid);
+            $this->usuarioid = $gr->usuarioid;
+            $this->descripcion = $gr->descripcion;
+            $this->tipoid = $gr->tipoid;
+            $this->id = $gr->id;
+            $this->tipo_palabra = $gr->tipo_palabra;
+            $this->palabra_id = $gr->palabra_id;
+        }else{
+            $gr = get_record_select('vocabulario_mis_tipologias', 'usuarioid=' . $usrid . ' and tipoid=' . $icid);
+            $this->usuarioid = $gr->usuarioid;
+            $this->descripcion = $gr->descripcion;
+            $this->tipoid = $gr->tipoid;
+            $this->id = $gr->id;
+            $this->tipo_palabra = $gr->tipo_palabra;
+            $this->palabra_id = $gr->palabra_id;
+        }
     }
 
     function relacionadas($usuarioid, $tipologiaid) {
