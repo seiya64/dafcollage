@@ -69,7 +69,7 @@ for ($i = 1; $salir == false; $i = $i + $avance) {
         $salir = true;
     }
 }
-$desc .= '&&&&';
+$desc .= __SEPARADORCAMPOS__ . __SEPARADORCAMPOS__ . __SEPARADORCAMPOS__ . __SEPARADORCAMPOS__;
 
 //if (optional_param('eliminar', 0, PARAM_INT) && $intencion->get('padre') > 145) {
 //    delete_records('vocabulario_intenciones', 'id', $intencion->get('padre'));
