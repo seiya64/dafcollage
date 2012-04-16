@@ -105,8 +105,10 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
         //inclusion del css para que se vean en dos columnas
         //$mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
+
         //titulo de la seccion
-        $mform->addElement('html', '<h1>' . get_string('guardar', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">Menú principal</a></h1>');
+        $mform->addElement('html', '<h1>' . get_string('guardar', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
         if ($leido) {
             $mform->addElement('hidden', 'idleido', $leido);
         }
@@ -526,7 +528,9 @@ class mod_vocabulario_ver_form extends moodleform {
 
 
         //titulo de la seccion
-        $mform->addElement('html', '<h1>' . get_string('ver', 'vocabulario') . '</h1>');
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
+
+        $mform->addElement('html', '<h1>' . get_string('ver', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
 
         $this->menu_opciones_visualizacion($mform, $usuarioid);
 
@@ -777,8 +781,10 @@ class mod_vocabulario_nuevo_cl_form extends moodleform {
         $aux = new Vocabulario_campo_lexico();
         $clex = $aux->obtener_hijos($USER->id, 0);
 
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
+
         //titulo de la seccion
-        $mform->addElement('html', '<h1>' . get_string('admin_cl', 'vocabulario') . '</h1>');
+        $mform->addElement('html', '<h1>' . get_string('admin_cl', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
 
         //campo lexico
         $mform->addElement('select', 'campoid', get_string("nivel", "vocabulario"), $clex, "onChange='javascript: if( this.options[this.selectedIndex].text == \"--\" || this.options[this.selectedIndex].text == \"Seleccionar\" ) { this.selectedIndex == 0; this.options[0].selected = true; document.getElementById(\"clgeneraldinamico\").style.display=\"none\";} else { cargaContenido(this.id,\"clgeneraldinamico\",0); document.getElementById(\"clgeneraldinamico\").style.display=\"\";}' style=\"min-height: 0;\"");
@@ -816,8 +822,10 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
         $gramaticas = $aux->obtener_hijos($USER->id, 0);
         $lista_padres = $aux->obtener_padres($USER->id, $grid);
 
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
+
         //titulo de la seccion
-        $mform->addElement('html', '<h1>' . get_string('admin_gr', 'vocabulario') . '</h1>');
+        $mform->addElement('html', '<h1>' . get_string('admin_gr', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
 
         //campo gramatical
         $mform->addElement('select', 'campogr', get_string("campo_gram", "vocabulario"), $gramaticas, "onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico\",1)' style=\"min-height: 0;\"");
@@ -2887,8 +2895,10 @@ class mod_vocabulario_aniadir_gr_form extends moodleform {
         $gramaticas = $aux->obtener_hijos($USER->id, 0);
         $lista_padres = $aux->obtener_padres($USER->id, $grid);
 
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
+
         //titulo de la seccion
-        $mform->addElement('html', '<h1>' . get_string('add_gram', 'vocabulario') . '</h1>');
+        $mform->addElement('html', '<h1>' . get_string('add_gram', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
 
         //campo gramatical
         $mform->addElement('select', 'campogr', get_string("nivel", "vocabulario"), $gramaticas, "onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico\",1)' style=\"min-height: 0;\"");
@@ -2951,8 +2961,10 @@ class mod_vocabulario_nuevo_ic_form extends moodleform {
         $icom = $aux->obtener_hijos($USER->id, 0);
         $lista_padres = $aux->obtener_padres($icid);
 
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
+
         //titulo de la seccion
-        $mform->addElement('html', '<h1>' . get_string('admin_ic', 'vocabulario') . '</h1>');
+        $mform->addElement('html', '<h1>' . get_string('admin_ic', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
 
         //campo gramatical
         $mform->addElement('select', 'campoic', get_string("nivel", "vocabulario"), $icom, "onChange='javascript:cargaContenido(this.id,\"icgeneraldinamico\",2)' style=\"min-height: 0;\"");
@@ -3071,8 +3083,10 @@ class mod_vocabulario_intencion_desc_form extends moodleform {
         $aux = new Vocabulario_intenciones();
         $icom = $aux->obtener_hijos($USER->id, 0);
 
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
+
         //titulo de la seccion
-        $mform->addElement('html', '<h1>' . get_string('nueva_ic', 'vocabulario') . '</h1>');
+        $mform->addElement('html', '<h1>' . get_string('nueva_ic', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
 
         //intencion comunicativa
         $mform->addElement('select', 'campoic', get_string("nivel", "vocabulario"), $icom, "onChange='javascript:cargaContenido(this.id,\"icgeneraldinamico\",2)' style=\"min-height: 0;\"");
@@ -3105,8 +3119,10 @@ class mod_vocabulario_nuevo_tipologia_form extends moodleform {
         $ttid = optional_param('ttid', 1, PARAM_INT);
         $id_tocho = optional_param('id', 0, PARAM_INT);
 
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
+
         //titulo de la seccion
-        $mform->addElement('html', '<h1>' . get_string('admin_tt', 'vocabulario') . '</h1>');
+        $mform->addElement('html', '<h1>' . get_string('admin_tt', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
 
         $aux = new Vocabulario_tipologias();
         $tipologias = $aux->obtener_todos($USER->id);
@@ -3186,8 +3202,10 @@ class mod_vocabulario_tipologia_desc_form extends moodleform {
         $ttid = optional_param('ttid', 0, PARAM_INT);
         $id_tocho = optional_param('id', 0, PARAM_INT);
 
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
+
         //titulo de la seccion
-        $mform->addElement('html', '<h1>' . get_string('nueva_tt', 'vocabulario') . '</h1>');
+        $mform->addElement('html', '<h1>' . get_string('nueva_tt', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
 
         $aux = new Vocabulario_tipologias();
         $tipologias = $aux->obtener_todos($USER->id);
@@ -3221,8 +3239,10 @@ class mod_vocabulario_nuevo_estrategia_form extends moodleform {
         $eaid = optional_param('eaid', 1, PARAM_INT);
         $id_tocho = optional_param('id', 0, PARAM_INT);
 
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
+
         //titulo de la seccion
-        $mform->addElement('html', '<h1>' . get_string('admin_ea', 'vocabulario') . '</h1>');
+        $mform->addElement('html', '<h1>' . get_string('admin_ea', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
 
         $aux = new Vocabulario_estrategias();
         $estrategias = $aux->obtener_todos($USER->id);
@@ -3261,9 +3281,10 @@ class mod_vocabulario_estrategia_desc_form extends moodleform {
 
         $eaid = optional_param('eaid', 0, PARAM_INT);
         $id_tocho = optional_param('id', 0, PARAM_INT);
-
+ 
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
         //titulo de la seccion
-        $mform->addElement('html', '<h1>' . get_string('nueva_ea', 'vocabulario') . '</h1>');
+        $mform->addElement('html', '<h1>' . get_string('nueva_ea', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
 
         $mform->addElement('text', 'estrategia', get_string("campo_estrategia_nuevo", "vocabulario"));
         $aux = new Vocabulario_estrategias();
@@ -3296,8 +3317,10 @@ class mod_vocabulario_listado_form extends moodleform {
         $mform = & $this->_form;
         $mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
 
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
+        
         //titulo de la seccion
-        $mform->addElement('html', '<h1>' . get_string('listado', 'vocabulario') . '</h1>');
+        $mform->addElement('html', '<h1>' . get_string('listado', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
 
 
         //campolexico
@@ -3356,8 +3379,10 @@ class mod_vocabulario_pdf_form extends moodleform {
         global $USER;
         $mform = & $this->_form;
 
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
+
         //titulo de la seccion
-        $mform->addElement('html', '<h1>' . get_string('imprcuaderno', 'vocabulario') . '</h1>');
+        $mform->addElement('html', '<h1>' . get_string('imprcuaderno', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
 
         //opcion de eliminar un campo
         $mform->addElement('checkbox', 'impr_vocab', get_string('impr_vocab', 'vocabulario'));
