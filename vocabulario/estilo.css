@@ -40,7 +40,6 @@ guardar palabras por columnas
 */
 
 #mform1 {
-    width: 100%;
     display: table;
 }
 
@@ -76,16 +75,20 @@ guardar palabras por columnas
     display: table-cell;
 }
 
-.menu{ padding-top:10px;}
-.menurow{ clear:none; padding-top:15px;}
+#viewcanvas{ padding-top:10px;}
+.menurow{ clear:both; padding-top:15px;}
 .menurow a {text-decoration:none;}
 .menuitem {opacity:0.8;}
 .menuitem:hover {opacity:1;}
-.menuitem{ clear:none;  width:32%; }
-.menurow .left{ float:left; }
-.menurow .center{ margin-right:auto; margin-left:auto;}
-.menurow .right{ float:right; }
+.menuitem{ clear:none;  width:30%; }
+.left{ float:left; }
+.center{ margin-right:auto; margin-left:auto;}
+.right{ float:right; }
 
+.boxwidthwide { width: 65%; }
+.twitter{ width: 252px; padding-left: 10px;}
+#mform1 { width:90%; }
+          
 #id_cancellink{ 
 float: right;
 color: #EEE;
