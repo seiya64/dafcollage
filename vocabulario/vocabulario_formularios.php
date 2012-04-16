@@ -394,7 +394,7 @@ class mod_vocabulario_opciones_form extends moodleform {
         //No se si habrá que poner alguna referencia o algo raro por el tema de licencias
         $mform = & $this->_form;
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
-        $tabla_menu = '<div class="menu flexible generaltable boxaligncenter boxwidthwide" style="text-align:center;">';
+        $tabla_menu = '<div id="viewcanvas" class="boxaligncenter"><div class="menu left flexible generaltable boxwidthwide" style="text-align:center;">';
         //if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false)) {
         //no ve la opcion de guardar palabras
         //} else {
@@ -405,7 +405,6 @@ class mod_vocabulario_opciones_form extends moodleform {
         $tabla_menu .='<div class="menuitem right" style="text-align:right"><div class="texto">' . get_string('nuevos', 'vocabulario') . '</div></div>';
         //0,2
         $tabla_menu .='<div class="menuitem center"><div class="texto">' . get_string('busc', 'vocabulario') . '</div></div></div>';
-
         //1,1
         $tabla_menu .='<div class="menurow"><div class="menuitem left" style="text-align:left"><a href="view.php?id=' . $id . '&opcion=1"><img src="./imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im"/><div class="texto">' . get_string('guardar', 'vocabulario') . '</div></a></div>';
         //}
@@ -444,6 +443,38 @@ class mod_vocabulario_opciones_form extends moodleform {
         $tabla_menu .='<div class="menuitem center"><a href=""><div class="texto"></div></a></div></div>';
 
         $tabla_menu .='</div>';
+        
+        $Mitwitter = "<script charset=\"utf-8\" src=\"http://widgets.twimg.com/j/2/widget.js\"></script><script>
+            new TWTR.Widget({
+              version: 2,
+              type: 'profile',
+              rpp: 6,
+              interval: 30000,
+              width: 250,
+              height: 300,
+              theme: {
+                shell: {
+                  background: '#3b5898',
+                  color: '#ffffff'
+                },
+                tweets: {
+                  background: '#ffffff',
+                  color: '#000000',
+                  links: '#3b5898'
+                }
+              },
+              features: {
+                scrollbar: false,
+                loop: false,
+                live: false,
+                behavior: 'all'
+              }
+            }).render().setUser('dafcollage').start();
+            </script>";
+        $tabla_menu .='<div class="right twitter">'.$Mitwitter.'</div>';
+
+        $tabla_menu .='</div>';
+
         
         $mform->addElement('html', $tabla_menu);
     }
