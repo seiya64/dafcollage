@@ -396,7 +396,7 @@ class mod_vocabulario_opciones_form extends moodleform {
         //No se si habrá que poner alguna referencia o algo raro por el tema de licencias
         $mform = & $this->_form;
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
-        $tabla_menu = '<div id="viewcanvas" class="boxaligncenter"><div class="menu left flexible generaltable boxwidthwide" style="text-align:center;">';
+        $tabla_menu = '<div id="viewcanvas" class="boxaligncenter"><div class="menu left flexible generaltable cajagranancho" style="text-align:center;">';
         //if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false)) {
         //no ve la opcion de guardar palabras
         //} else {
