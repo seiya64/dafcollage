@@ -76,9 +76,20 @@ $desc .= __SEPARADORCAMPOS__ . __SEPARADORCAMPOS__ . __SEPARADORCAMPOS__ . __SEP
 //    redirect('./view.php?id=' . $id_tocho . '&opcion=7');
 //}
 
+$icidaux = $intencion->get('padre');
+
 if ($mform->no_submit_button_pressed()) {
     if (optional_param('desc_btn')) {
-        redirect('./view.php?id=' . $id_tocho . '&opcion=7&icid=' . $intencion->get('padre'));
+//        redirect('./view.php?id=' . $id_tocho . '&opcion=7&icid=' . $intencion->get('padre'));
+        $icidaux = required_param('campoic', PARAM_TEXT);
+
+        if ($desc != null) {
+            $mintencion = new Vocabulario_mis_intenciones();
+            $mintencion->leer($icidaux, $USER->id);
+            $mintencion->set($USER->id, $icidaux, $desc);
+            $mintencion->guardar();
+        }
+        
     }
 }
 
@@ -86,15 +97,7 @@ if ($mform->no_submit_button_pressed()) {
 //    $icidaux = insert_record('vocabulario_intenciones', $intencion, true);
 //}
 //else{
-$icidaux = required_param('campoic', PARAM_TEXT);
 //}
-
-if ($desc != null) {
-    $mintencion = new Vocabulario_mis_intenciones();
-    $mintencion->leer($icidaux, $USER->id);
-    $mintencion->set($USER->id, $icidaux, $desc);
-    $mintencion->guardar();
-}
 
 //volvemos a donde veniamos
 //redirect('./view.php?id=' . $id_tocho . '&opcion=7&icid=' . $intencion->get('padre'));
