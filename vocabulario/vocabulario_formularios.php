@@ -3409,23 +3409,53 @@ class mod_vocabulario_colaboradores_form extends moodleform {
     function definition(){
         global $USER;
         $mform = & $this->_form;
+        
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
+        
+        $mform->addElement('html', '<h1>' . get_string('colaboradores', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
+
+        
         $mform->addElement('static', 'colaboradores', '<strong>III Hackathon</strong>', '');
-        $mform->addElement('static', 'colaboradores', 'Premio productividad', "Álvaro López Martínez @arsuceno");
-        $mform->addElement('static', 'colaboradores', '', "Ana María Ruiz Jiménez");
-        $mform->addElement('static', 'colaboradores', '', "Antonio Fernández Ares @antaress");
-        $mform->addElement('static', 'colaboradores', '', "Serafina Molina Soto @finamolina86");
-        $mform->addElement('static', 'colaboradores', '', "Marta García Luzón");
-        $mform->addElement('static', 'colaboradores', '', "David Medina Godoy @davidasce");
-        $mform->addElement('static', 'colaboradores', '', "Alicia Casado Valenzuela");
-        $mform->addElement('static', 'colaboradores', '', "Kinga Nowik");
+        $mform->addElement('static', 'colaboradores', 'Premio productividad', 'Álvaro López Martínez <a href="http://twitter.com/#!/arsuceno" target="_blank">@arsuceno </a>');
+        $mform->addElement('static', 'colaboradores', '', 'Ana María Ruiz Jiménez');
+        $mform->addElement('static', 'colaboradores', '', 'Antonio Fernández Ares <a href="http://twitter.com/#!/antaress" target="_blank">@antaress </a>');
+        $mform->addElement('static', 'colaboradores', '', 'Serafina Molina Soto <a href="http://twitter.com/#!/finamolina86" target="_blank">@finamolina86 </a>');
+        $mform->addElement('static', 'colaboradores', '', 'Marta García Luzón');
+        $mform->addElement('static', 'colaboradores', '', 'David Medina Godoy <a href="http://twitter.com/#!/davidasce" target="_blank">@davidasce </a>');
+        $mform->addElement('static', 'colaboradores', '', 'Alicia Casado Valenzuela');
+        $mform->addElement('static', 'colaboradores', '', 'Kinga Nowik');
         $mform->addElement('static', 'colaboradores', '', '');
         $mform->addElement('static', 'colaboradores', '<strong>IV Hackathon</strong>', '');
-        $mform->addElement('static', 'colaboradores', 'Premio productividad', "Francisco R. Torres Fernández @frantorres");
-        $mform->addElement('static', 'colaboradores', '', "Serafina Molina Soto @finamolina86");
-        $mform->addElement('static', 'colaboradores', '', "Francisco Javier Marín López @xavitux");
-        $mform->addElement('static', 'colaboradores', '', "Manuel de la Rosa Morales @flubbers");
-        $mform->addElement('static', 'colaboradores', '', "Luisa Sánchez Avivar");
-        $mform->addElement('static', 'colaboradores', '', "Marina Torres Anaya");
+        $mform->addElement('static', 'colaboradores', 'Premio productividad', 'Francisco R. Torres Fernández <a href="http://twitter.com/#!/frantorres" target="_blank">@frantorres </a>');
+        $mform->addElement('static', 'colaboradores', '', 'Serafina Molina Soto <a href="http://twitter.com/#!/finamolina86" target="_blank">@finamolina86 </a>');
+        $mform->addElement('static', 'colaboradores', '', 'Francisco Javier Marín López <a href="http://twitter.com/#!/xavitux" target="_blank">@xavitux </a>');
+        $mform->addElement('static', 'colaboradores', '', 'Manuel de la Rosa Morales <a href="http://twitter.com/#!/flubbers" target="_blank">@flubbers </a>');
+        $mform->addElement('static', 'colaboradores', '', 'Luisa Sánchez Avivar');
+        $mform->addElement('static', 'colaboradores', '', 'Marina Torres Anaya');
+        $mform->addElement('static', 'colaboradores', '', '');
+        $mform->addElement('static', 'colaboradores', '', 'A todos ellos por la colaboración en el desarrollo de daf-collage y los buenos ratos pasados');
+        $mform->addElement('static', 'colaboradores', '', '');
+        $mform->addElement('static', 'colaboradores', '<strong>Centro de Enseñanzas Virtuales de la Universidad de Granada (CEVUG)</strong>', '');
+        $mform->addElement('static', 'colaboradores', '', 'Miguel Gea');
+        $mform->addElement('static', 'colaboradores', '', 'Antonio Cañas');
+        $mform->addElement('static', 'colaboradores', '', 'Ignacio Blanco');
+        $mform->addElement('static', 'colaboradores', '', 'Rosana Montes');
+        $mform->addElement('static', 'colaboradores', '', 'Emilio Arjona');
+        $mform->addElement('static', 'colaboradores', '', 'Miguel González');
+        $mform->addElement('static', 'colaboradores', '', 'Jose María de Córdoba');
+        $mform->addElement('static', 'colaboradores', '', 'Antonio Rabanedas');
+        $mform->addElement('static', 'colaboradores', '', 'Felipe Samblás');
+        $mform->addElement('static', 'colaboradores', '', 'José Antonio Bautista');
+        $mform->addElement('static', 'colaboradores', '', 'Belén Rojas');
+        $mform->addElement('static', 'colaboradores', '', 'Olga Ruano');
+        $mform->addElement('static', 'colaboradores', '', 'María José Álvarez');
+        $mform->addElement('static', 'colaboradores', '', 'Antonio Fernández (otra vez)');
+        $mform->addElement('static', 'colaboradores', '', 'María José Parejo');
+        $mform->addElement('static', 'colaboradores', '', 'María González');
+        $mform->addElement('static', 'colaboradores', '', '');
+        $mform->addElement('static', 'colaboradores', '', 'Al centro en general por darnos un lugar donde trabajar y a todos ellos por los buenos ratos y los desayunos compartidos');
+        $mform->addElement('static', 'colaboradores', '', '');
+        $mform->addElement('static', 'colaboradores', '', '<strong>Muchas gracias y Abrazos para todos!!</strong>');
         $mform->addElement('static', 'colaboradores', '', '');
         $buttonarray = array();
         $buttonarray[] = &$mform->createElement('submit', 'cancelbutton', get_string('cancel', 'vocabulario'));
