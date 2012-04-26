@@ -51,6 +51,7 @@ $string['modulename'] = 'słownictwo';
 $string['buttonlabel'] = 'Zapisz';
 $string['seleccionar'] = 'Wybierz';
 $string['campo_lex'] = 'Grupy tematyczne';
+$string['colaboradores'] = 'współpracownicy';
 $string['pal_campo_lex'] = 'Słownictwo według tematów';
 $string['campo_gram'] = 'Gramatyka';
 $string['gramatica_may'] = 'GRAMATYKA';
