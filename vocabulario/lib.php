@@ -277,6 +277,9 @@ function vocabulario_view($id, $opcion = 0, $id_mp = null) {
         case 15: //añadir gramatica
             $mform = new mod_vocabulario_aniadir_gr_form('guardar_gr_desc.php?id_tocho=' . $id);
             break;
+        case 16: // colaboradores
+            $mform = new mod_vocabulario_colaboradores_form('listado.php?id_tocho=' . $id);
+            break;
     }
 
     $mform->display();
