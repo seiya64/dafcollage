@@ -51,6 +51,7 @@ $string['modulename'] = 'vocabulary';
 $string['buttonlabel'] = 'Save';
 $string['seleccionar'] = 'Select';
 $string['campo_lex'] = 'Thematic field';
+$string['colaboradores'] = 'Collaborators';
 $string['pal_campo_lex'] = 'Words classified by thematic fields';
 $string['campo_gram'] = 'Grammar';
 $string['gramatica_may'] = 'GRAMMAR';
