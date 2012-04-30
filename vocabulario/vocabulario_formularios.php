@@ -522,6 +522,7 @@ class mod_vocabulario_ver_form extends moodleform {
         $ic = optional_param('ic', '0', PARAM_INT);
         $tt = optional_param('tt', '0', PARAM_INT);
         $nube = optional_param('nube', '0', PARAM_INT);
+        $todasp = optional_param('todasp', '0', PARAM_INT);
         $valor_campoid = optional_param('campo', '0', PARAM_INT);
         $usuarioid = $USER->id;
         $mp = new Vocabulario_mis_palabras();
@@ -533,8 +534,12 @@ class mod_vocabulario_ver_form extends moodleform {
         $mform->addElement('html', '<h1>' . get_string('ver', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
 
         $this->menu_opciones_visualizacion($mform, $usuarioid);
+        
+        if(!$alfa && !$cl && !$gr && !$ic && !$tt && !$todasp && !$nube){
+            $nube=1;
+        }
 
-        if (!$alfa && !$cl && !$gr && !$ic && !$tt && !$nube) {
+        if ($todasp) {
             $mis_palabras = vocabulario_todas_palabras($usuarioid);
         } else if ($cl) {
 
@@ -743,7 +748,7 @@ class mod_vocabulario_ver_form extends moodleform {
         //elegir la visualizacion
         if ($userid) {
             $atras = '<h1 class="main">';
-            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&alid=' . $userid . '">[' . get_string('todo', 'vocabulario') . ']</a>';
+            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&todasp=1&alid=' . $userid . '">[' . get_string('todo', 'vocabulario') . ']</a>';
             $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&alfa=1&alid=' . $userid . '">[' . get_string('alfabetico', 'vocabulario') . ']</a>';
             $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&cl=1&alid=' . $userid . '">[' . get_string('pal_campo_lex', 'vocabulario') . ']</a></br>';
             $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&gr=1&alid=' . $userid . '">[' . get_string('campo_gram', 'vocabulario') . ']</a>';
