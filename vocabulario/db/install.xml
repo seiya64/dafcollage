@@ -777,7 +777,7 @@ GNU General Public License for more details.
                 <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','7.2 Unterkünfte','60)" />
                 <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','7.2.1 Unterkunftsformen','66)" />
                 <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','7.2.2 Leistungen und Unterkunftsservice ','66)" />
-                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','8 TRASLADO/ ORIENTACIÓN','0)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','8 WEGBESCHREIBUNG/ ORIENTIERUNG','0)" />
                 <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','8.1 Transportmittel','69)" />
                 <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','8.2 Verkehr','69)" />
                 <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','8.3 Orientierung','69)" />
