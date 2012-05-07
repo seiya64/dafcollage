@@ -13,15 +13,15 @@ Read this README file.
 
 Make sure you have read this file :-)
 
-Rename the NEWMODULE folder into a lower case name of your module. Make sure
+Rename the ejercicios folder into a lower case name of your module. Make sure
 your name is not used by any standard or contributed modules (see
 http://cvs.moodle.org/contrib/plugins/mod/ for the list of currently
 contributed modules).  
 
 Edit all the files in this directory and its subdirectories and change all the
-instances of string "newmodule" to your new module name (eg "widget").
+instances of string "ejercicios" to your new module name (eg "widget").
    
-Rename the file lang/en_utf8/newmodule.php to widget.php or whatever your
+Rename the file lang/en_utf8/ejercicios.php to widget.php or whatever your
 module name is.
 
 Place the widget folder into the /mod folder of your development moodle
@@ -44,7 +44,7 @@ Visit the admin Notifications page (admin/index.php). The module tables should
 get installed.
 
 You can go to Modules > Activities in the Site Administration block. You
-should find that this newmodule has been added to the list of recognized
+should find that this ejercicios has been added to the list of recognized
 modules.  
 
 You may now proceed to run your own code in an attempt to develop for moodle.
@@ -69,7 +69,7 @@ fresh installations), increase the version number and go to admin/index.php
 again. During upgrade, Moodle calls a function in db/upgrade.php to perform
 the DB changes.
 
-Credits for work on this NEWMODULE template
+Credits for work on this ejercicios template
 -------------------------------------------
 Martin Dougiamas for the original work
 Chris B Stones (http://www.welcometochrisworld.com) for revision of the code
