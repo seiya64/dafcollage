@@ -2803,7 +2803,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                 break;
                 
-            case 69:
+            case 68:
                 
                 $totalfilas = (count($descripcion_troceada)-2)/4;
                 

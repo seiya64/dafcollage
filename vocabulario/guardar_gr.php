@@ -470,7 +470,7 @@ switch ($padre) {
         }
         break;
 
-    case 69:
+    case 68:
         $salir = false;
         $desc = '';
 
