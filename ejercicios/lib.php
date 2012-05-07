@@ -1,11 +1,11 @@
 <?php  // $Id: lib.php,v 1.7.2.5 2009/04/22 21:30:57 skodak Exp $
 
 /**
- * Library of functions and constants for module ejercicio
+ * Library of functions and constants for module newmodule
  * This file should have two well differenced parts:
  *   - All the core Moodle functions, neeeded to allow
  *     the module to work integrated in Moodle.
- *   - All the ejercicio specific functions, needed
+ *   - All the newmodule specific functions, needed
  *     to implement all the module logic. Please, note
  *     that, if the module become complex and this lib
  *     grows a lot, it's HIGHLY recommended to move all
@@ -15,9 +15,9 @@
  *     actions across all modules.
  */
 
-/// (replace ejercicio with the name of your module and delete this line)
+/// (replace newmodule with the name of your module and delete this line)
 
-$ejercicio_EXAMPLE_CONSTANT = 42;     /// for example
+$newmodule_EXAMPLE_CONSTANT = 42;     /// for example
 
 
 /**
@@ -26,16 +26,16 @@ $ejercicio_EXAMPLE_CONSTANT = 42;     /// for example
  * will create a new instance and return the id number
  * of the new instance.
  *
- * @param object $ejercicio An object from the form in mod_form.php
- * @return int The id of the newly inserted ejercicio record
+ * @param object $newmodule An object from the form in mod_form.php
+ * @return int The id of the newly inserted newmodule record
  */
-function ejercicio_add_instance($ejercicio) {
+function newmodule_add_instance($newmodule) {
 
-    $ejercicio->timecreated = time();
+    $newmodule->timecreated = time();
 
     # You may have to add extra stuff in here #
 
-    return insert_record('ejercicio', $ejercicio);
+    return insert_record('newmodule', $newmodule);
 }
 
 
@@ -44,17 +44,17 @@ function ejercicio_add_instance($ejercicio) {
  * (defined by the form in mod_form.php) this function
  * will update an existing instance with new data.
  *
- * @param object $ejercicio An object from the form in mod_form.php
+ * @param object $newmodule An object from the form in mod_form.php
  * @return boolean Success/Fail
  */
-function ejercicio_update_instance($ejercicio) {
+function newmodule_update_instance($newmodule) {
 
-    $ejercicio->timemodified = time();
-    $ejercicio->id = $ejercicio->instance;
+    $newmodule->timemodified = time();
+    $newmodule->id = $newmodule->instance;
 
     # You may have to add extra stuff in here #
 
-    return update_record('ejercicio', $ejercicio);
+    return update_record('newmodule', $newmodule);
 }
 
 
@@ -66,9 +66,9 @@ function ejercicio_update_instance($ejercicio) {
  * @param int $id Id of the module instance
  * @return boolean Success/Failure
  */
-function ejercicio_delete_instance($id) {
+function newmodule_delete_instance($id) {
 
-    if (! $ejercicio = get_record('ejercicio', 'id', $id)) {
+    if (! $newmodule = get_record('newmodule', 'id', $id)) {
         return false;
     }
 
@@ -76,7 +76,7 @@ function ejercicio_delete_instance($id) {
 
     # Delete any dependent records here #
 
-    if (! delete_records('ejercicio', 'id', $ejercicio->id)) {
+    if (! delete_records('newmodule', 'id', $newmodule->id)) {
         $result = false;
     }
 
@@ -94,7 +94,7 @@ function ejercicio_delete_instance($id) {
  * @return null
  * @todo Finish documenting this function
  */
-function ejercicio_user_outline($course, $user, $mod, $ejercicio) {
+function newmodule_user_outline($course, $user, $mod, $newmodule) {
     return $return;
 }
 
@@ -106,20 +106,20 @@ function ejercicio_user_outline($course, $user, $mod, $ejercicio) {
  * @return boolean
  * @todo Finish documenting this function
  */
-function ejercicio_user_complete($course, $user, $mod, $ejercicio) {
+function newmodule_user_complete($course, $user, $mod, $newmodule) {
     return true;
 }
 
 
 /**
  * Given a course and a time, this module should find recent activity
- * that has occurred in ejercicio activities and print it out.
+ * that has occurred in newmodule activities and print it out.
  * Return true if there was output, or false is there was none.
  *
  * @return boolean
  * @todo Finish documenting this function
  */
-function ejercicio_print_recent_activity($course, $isteacher, $timestart) {
+function newmodule_print_recent_activity($course, $isteacher, $timestart) {
     return false;  //  True if anything was printed, otherwise false
 }
 
@@ -132,39 +132,39 @@ function ejercicio_print_recent_activity($course, $isteacher, $timestart) {
  * @return boolean
  * @todo Finish documenting this function
  **/
-function ejercicio_cron () {
+function newmodule_cron () {
     return true;
 }
 
 
 /**
  * Must return an array of user records (all data) who are participants
- * for a given instance of ejercicio. Must include every user involved
+ * for a given instance of newmodule. Must include every user involved
  * in the instance, independient of his role (student, teacher, admin...)
  * See other modules as example.
  *
- * @param int $ejercicioid ID of an instance of this module
+ * @param int $newmoduleid ID of an instance of this module
  * @return mixed boolean/array of students
  */
-function ejercicio_get_participants($ejercicioid) {
+function newmodule_get_participants($newmoduleid) {
     return false;
 }
 
 
 /**
- * This function returns if a scale is being used by one ejercicio
+ * This function returns if a scale is being used by one newmodule
  * if it has support for grading and scales. Commented code should be
  * modified if necessary. See forum, glossary or journal modules
  * as reference.
  *
- * @param int $ejercicioid ID of an instance of this module
+ * @param int $newmoduleid ID of an instance of this module
  * @return mixed
  * @todo Finish documenting this function
  */
-function ejercicio_scale_used($ejercicioid, $scaleid) {
+function newmodule_scale_used($newmoduleid, $scaleid) {
     $return = false;
 
-    //$rec = get_record("ejercicio","id","$ejercicioid","scale","-$scaleid");
+    //$rec = get_record("newmodule","id","$newmoduleid","scale","-$scaleid");
     //
     //if (!empty($rec) && !empty($scaleid)) {
     //    $return = true;
@@ -175,15 +175,15 @@ function ejercicio_scale_used($ejercicioid, $scaleid) {
 
 
 /**
- * Checks if scale is being used by any instance of ejercicio.
+ * Checks if scale is being used by any instance of newmodule.
  * This function was added in 1.9
  *
  * This is used to find out if scale used anywhere
  * @param $scaleid int
- * @return boolean True if the scale is used by any ejercicio
+ * @return boolean True if the scale is used by any newmodule
  */
-function ejercicio_scale_used_anywhere($scaleid) {
-    if ($scaleid and record_exists('ejercicio', 'grade', -$scaleid)) {
+function newmodule_scale_used_anywhere($scaleid) {
+    if ($scaleid and record_exists('newmodule', 'grade', -$scaleid)) {
         return true;
     } else {
         return false;
@@ -197,7 +197,7 @@ function ejercicio_scale_used_anywhere($scaleid) {
  *
  * @return boolean true if success, false on error
  */
-function ejercicio_install() {
+function newmodule_install() {
     return true;
 }
 
@@ -208,14 +208,14 @@ function ejercicio_install() {
  *
  * @return boolean true if success, false on error
  */
-function ejercicio_uninstall() {
+function newmodule_uninstall() {
     return true;
 }
 
 
 //////////////////////////////////////////////////////////////////////////////////////
-/// Any other ejercicio functions go here.  Each of them must have a name that
-/// starts with ejercicio_
+/// Any other newmodule functions go here.  Each of them must have a name that
+/// starts with newmodule_
 /// Remember (see note in first lines) that, if this section grows, it's HIGHLY
 /// recommended to move all funcions below to a new "localib.php" file.
 
