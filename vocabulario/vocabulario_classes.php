@@ -608,7 +608,8 @@ class Vocabulario_campo_lexico {
     }
 
     function leer($campoid) {
-        $cl = get_record('vocabulario_camposlexicos', 'id', $campoid);
+        $sufijotabla = get_sufijo_lenguaje_tabla();
+        $cl = get_record('vocabulario_camposlexicos_'.$sufijotabla, 'id', $campoid);
         $this->usuarioid = $cl->usuarioid;
         $this->padre = $cl->padre;
         $this->campo = $cl->campo;
