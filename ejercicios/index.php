@@ -1,14 +1,14 @@
 <?php // $Id: index.php,v 1.7.2.3 2009/08/31 22:00:00 mudrd8mz Exp $
 
 /**
- * This page lists all the instances of ejercicio in a particular course
+ * This page lists all the instances of newmodule in a particular course
  *
  * @author  Your Name <your@email.address>
  * @version $Id: index.php,v 1.7.2.3 2009/08/31 22:00:00 mudrd8mz Exp $
- * @package mod/ejercicio
+ * @package mod/newmodule
  */
 
-/// Replace ejercicio with the name of your module and remove this line
+/// Replace newmodule with the name of your module and remove this line
 
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__).'/lib.php');
@@ -21,27 +21,27 @@ if (! $course = get_record('course', 'id', $id)) {
 
 require_course_login($course);
 
-add_to_log($course->id, 'ejercicio', 'view all', "index.php?id=$course->id", '');
+add_to_log($course->id, 'newmodule', 'view all', "index.php?id=$course->id", '');
 
 
-/// Get all required stringsejercicio
+/// Get all required stringsnewmodule
 
-$strejercicios = get_string('modulenameplural', 'ejercicio');
-$strejercicio  = get_string('modulename', 'ejercicio');
+$strnewmodules = get_string('modulenameplural', 'newmodule');
+$strnewmodule  = get_string('modulename', 'newmodule');
 
 
 /// Print the header
 
 $navlinks = array();
-$navlinks[] = array('name' => $strejercicios, 'link' => '', 'type' => 'activity');
+$navlinks[] = array('name' => $strnewmodules, 'link' => '', 'type' => 'activity');
 $navigation = build_navigation($navlinks);
 
-print_header_simple($strejercicios, '', $navigation, '', '', true, '', navmenu($course));
+print_header_simple($strnewmodules, '', $navigation, '', '', true, '', navmenu($course));
 
 /// Get all the appropriate data
 
-if (! $ejercicios = get_all_instances_in_course('ejercicio', $course)) {
-    notice('There are no instances of ejercicio', "../../course/view.php?id=$course->id");
+if (! $newmodules = get_all_instances_in_course('newmodule', $course)) {
+    notice('There are no instances of newmodule', "../../course/view.php?id=$course->id");
     die;
 }
 
@@ -63,23 +63,23 @@ if ($course->format == 'weeks') {
     $table->align = array ('left', 'left', 'left');
 }
 
-foreach ($ejercicios as $ejercicio) {
-    if (!$ejercicio->visible) {
+foreach ($newmodules as $newmodule) {
+    if (!$newmodule->visible) {
         //Show dimmed if the mod is hidden
-        $link = '<a class="dimmed" href="view.php?id='.$ejercicio->coursemodule.'">'.format_string($ejercicio->name).'</a>';
+        $link = '<a class="dimmed" href="view.php?id='.$newmodule->coursemodule.'">'.format_string($newmodule->name).'</a>';
     } else {
         //Show normal if the mod is visible
-        $link = '<a href="view.php?id='.$ejercicio->coursemodule.'">'.format_string($ejercicio->name).'</a>';
+        $link = '<a href="view.php?id='.$newmodule->coursemodule.'">'.format_string($newmodule->name).'</a>';
     }
 
     if ($course->format == 'weeks' or $course->format == 'topics') {
-        $table->data[] = array ($ejercicio->section, $link);
+        $table->data[] = array ($newmodule->section, $link);
     } else {
         $table->data[] = array ($link);
     }
 }
 
-print_heading($strejercicios);
+print_heading($strnewmodules);
 print_table($table);
 
 /// Finish the page
