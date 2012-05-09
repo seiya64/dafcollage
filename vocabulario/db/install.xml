@@ -1019,7 +1019,7 @@ GNU General Public License for more details.
                 <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','8.1 Ordenar','123)" />
                 <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','8.1.1 Comunicación formal','124)" />
                 <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','8.1.2 Comunicación informal (oral)','124)" />
-                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','8.2 Advertir','123)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','8.2 Avisar','123)" />
                 <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','8.3 Pedir','123)" />
                 <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','8.4 Llamar','123)" />
                 <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','8.5 Proponer','123)" />
