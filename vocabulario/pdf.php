@@ -117,13 +117,8 @@ if ($impr_vocab == 1) {
     $mis_campos = new Vocabulario_campo_lexico();
     $todos_mis_campos = $mis_campos->obtener_todos($usuario);
 
-    $losindicesdecampos = array_keys($todos_mis_campos);
-
 
     $genero = array(get_string('masc', 'vocabulario'), get_string('fem', 'vocabulario'), get_string('neu', 'vocabulario'));
-    
-    
-    
     
     foreach ($todos_mis_campos as $mic) {
         $primera = true;
@@ -332,233 +327,6 @@ if ($impr_vocab == 1) {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-   /* foreach ($losindicesdecampos as $numerodecampo) {
-        $primera = false;
-        foreach ($mis_palabras as $cosa) {
-            if ($cosa->get('campo')->get('campo') != $mi_campo) {
-
-                //imprimo el campolexico
-                $pdf->AddPage();
-                $mi_campo = $cosa->get('campo')->get('campo');
-                $pdf->SetTextColor(TEXT_AUTO);
-                $pdf->SetFont('', 'B', '12');
-                //            $pdf->Cell(0, 7, $mi_campo, 0, 1, 'L', 0);
-
-                $pdf->writeHTMLCell(0, 0, 0, 0, '<h2>' . $mi_campo . '</h2>', 0, 1, 0);
-
-                //titulillos
-                $pdf->SetFillColor(59, 89, 152); //azul oscuro
-                $pdf->SetTextColor(TEXT_WHITE);
-                $pdf->SetLineWidth(0.3);
-                $pdf->SetFont('', 'B', '12');
-
-
-                $pdf->Cell(47, 7, get_string('sust', 'vocabulario'), 1, 0, 'C', 1);
-                $pdf->Cell(47, 7, get_string('adj', 'vocabulario'), 1, 0, 'C', 1);
-                $pdf->Cell(47, 7, get_string('vrb', 'vocabulario'), 1, 0, 'C', 1);
-                $pdf->Cell(47, 7, get_string('otr', 'vocabulario'), 1, 0, 'C', 1);
-                $pdf->Ln();
-                $color = 1;
-            }
-
-            //palabras
-            if ($color % 2 == 0) {
-                $pdf->SetFillColor(189, 199, 216);  //azul clarito
-            } else {
-                $pdf->SetFillColor(255, 255, 255); //blanco
-            }
-
-            $sustantivo = $cosa->get('sustantivo');
-            $Spal = $sustantivo->get('palabra');            //1 linea
-            $Ssig = $sustantivo->get('significado');        //2 linea
-            $Sgen = $genero[$sustantivo->get('genero')];    //3 linea
-            $Splu = $sustantivo->get('plural');             //4 linea
-            $Sgram = $sustantivo->get('gramaticaid');       //6 linea
-            $Sic = $sustantivo->get('intencionid');         //7 linea
-            $Stip = $sustantivo->get('tipologiaid');        //9 linea
-            $Sobs = $sustantivo->get('observaciones');      //10 linea
-            $Seje = $sustantivo->get('ejemplo');
-            $adjetivo = $cosa->get('adjetivo');
-            $Apal = $adjetivo->get('sin_declinar');         //1 linea
-            $Asig = $adjetivo->get('significado');          //2 linea
-            $Agen = '';                                     //3 linea
-            $Aplu = '';                                     //4 linea
-            $Agram = $adjetivo->get('gramaticaid');         //6 linea
-            $Aic = $adjetivo->get('intencionid');           //7 linea
-            $Atip = $adjetivo->get('tipologiaid');          //9 linea
-            $Aobs = $adjetivo->get('observaciones');        //10 linea
-            $verbo = $cosa->get('verbo');
-            $Vpal = $verbo->get('infinitivo');              //1 linea
-            $Vsig = $verbo->get('significado');             //2 linea
-            $Vter = $verbo->get('ter_pers_sing');           //3 linea
-            $Vpret = $verbo->get('preterito');              //4 linea
-            $Vpart = $verbo->get('participio');             //4 linea
-            $Vgram = $verbo->get('gramaticaid');            //6 linea
-            $Vic = $verbo->get('intencionid');              //7 linea
-            $Vtip = $verbo->get('tipologiaid');             //9 linea
-            $Vobs = $verbo->get('observaciones');           //10 linea
-            $otro = $cosa->get('otro');
-            $Opal = $otro->get('palabra');                  //1 linea
-            $Osig = $otro->get('significado');              //2 linea
-            $Ogen = '';                                     //3 linea
-            $Oplu = '';                                     //4 linea
-            $Ogram = $otro->get('gramaticaid');             //6 linea
-            $Oic = $otro->get('intencionid');               //7 linea
-            $Otip = $otro->get('tipologiaid');              //9 linea
-            $Oobs = $otro->get('observaciones');            //10 linea
-            //1 Linea -> Palabra/verbo/adjetivo/otra
-            $pdf->SetTextColor(TEXT_AUTO);
-            $pdf->SetFont('', 'B', '10');
-            $pdf->Cell(47, 5, $Spal, 'LTR', 0, 'C', 1);
-            $pdf->Cell(47, 5, $Apal, 'RT', 0, 'C', 1);
-            $pdf->Cell(47, 5, $Vpal, 'TR', 0, 'C', 1);
-            $pdf->Cell(47, 5, $Opal, 'RT', 0, 'C', 1);
-            $pdf->Ln();
-
-            //2 Linea -> significados
-            $pdf->SetFont('', 'I', '7');
-            $pdf->Cell(47, 3, $Ssig, 'LR', 0, 'R', 1);
-            $pdf->Cell(47, 3, $Asig, 'R', 0, 'R', 1);
-            $pdf->Cell(47, 3, $Vsig, 'R', 0, 'R', 1);
-            $pdf->Cell(47, 3, $Osig, 'R', 0, 'R', 1);
-            $pdf->Ln();
-
-            //3 Linea -> genero/ter_pers
-            $pdf->SetFont('', '', '7');
-            $pdf->Cell(47, 4, $Sgen, 'LR', 0, 'L', 1);
-            $pdf->Cell(47, 4, $Agen, 'R', 0, 'L', 1);
-            $pdf->Cell(47, 4, get_string('3perAv', 'vocabulario') . ': ' . $Vter, 'R', 0, 'L', 1);
-            $pdf->Cell(47, 4, $Ogen, 'R', 0, 'L', 1);
-            $pdf->Ln();
-
-            //4 Linea -> plural/pret&participio
-            $pdf->SetFont('', '', '7');
-            $pdf->Cell(23, 4, get_string('plural', 'vocabulario') . ':', 'L', 0, 'R', 1);  //sustantivo
-            $pdf->SetFont('', 'I', '7');
-            $pdf->Cell(24, 4, $Splu, 'R', 0, 'L', 1);                                    //sustantivo
-            $pdf->Cell(47, 4, $Aplu, 'R', 0, 'L', 1);
-            $pdf->SetFont('', '', '6');
-            $pdf->Cell(24, 4, get_string('pretAv', 'vocabulario') . ': ' . $Vpret, 0, 0, 'L', 1);      //verbo
-            $pdf->Cell(23, 4, get_string('partAv', 'vocabulario') . ': ' . $Vpart, 'R', 0, 'L', 1);     //verbo
-            $pdf->SetFont('', '', '7');
-            $pdf->Cell(47, 4, $Ogen, 'R', 0, 'L', 1);
-            $pdf->Ln();
-
-
-            //5 Linea -> Referencias:
-            $pdf->SetFont('', '', '7');
-            $pdf->Cell(47, 4, get_string('referencias', 'vocabulario') . ':', 'LR', 0, 'I', 1);
-            $pdf->Cell(47, 4, get_string('referencias', 'vocabulario') . ':', 'R', 0, 'I', 1);
-            $pdf->Cell(47, 4, get_string('referencias', 'vocabulario') . ':', 'R', 0, 'I', 1);
-            $pdf->Cell(47, 4, get_string('referencias', 'vocabulario') . ':', 'R', 0, 'I', 1);
-            $pdf->Ln();
-
-            //6 Linea Referencias gramaticas
-            $gram = new Vocabulario_gramatica();
-            $gram->leer($Sgram);
-            $numRef = explode(' ', $gram->get('gramatica'));
-            $pdf->Cell(47, 4, '   -' . get_string('impr_gram', 'vocabulario') . ': ' . $numRef[0], 'LR', 0, 'L', 1);
-            $gram->leer($Agram);
-            $numRef = explode(' ', $gram->get('gramatica'));
-            $pdf->Cell(47, 4, '   -' . get_string('impr_gram', 'vocabulario') . ': ' . $numRef[0], 'R', 0, 'L', 1);
-            $gram->leer($Vpal);
-            $numRef = explode(' ', $gram->get('gramatica'));
-            $pdf->Cell(47, 4, '   -' . get_string('impr_gram', 'vocabulario') . ': ' . $numRef[0], 'R', 0, 'L', 1);
-            $gram->leer($Opal);
-            $numRef = explode(' ', $gram->get('gramatica'));
-            $pdf->Cell(47, 4, '   -' . get_string('impr_gram', 'vocabulario') . ': ' . $numRef[0], 'R', 0, 'L', 1);
-            $pdf->Ln();
-
-
-            //7 Linea -> Referencias intenciones
-            $inte = new Vocabulario_intenciones();
-            $inte->leer($Sic);
-            $numRef = explode(' ', $inte->get('intencion'));
-            $pdf->Cell(47, 4, '   -' . get_string('campo_intencion', 'vocabulario') . ': ' . $numRef[0], 'LR', 0, 'L', 1);
-            $inte->leer($Aic);
-            $numRef = explode(' ', $inte->get('intencion'));
-            $pdf->Cell(47, 4, '   -' . get_string('campo_intencion', 'vocabulario') . ': ' . $numRef[0], 'R', 0, 'L', 1);
-            $inte->leer($Vic);
-            $numRef = explode(' ', $inte->get('intencion'));
-            $pdf->Cell(47, 4, '   -' . get_string('campo_intencion', 'vocabulario') . ': ' . $numRef[0], 'R', 0, 'L', 1);
-            $inte->leer($Oic);
-            $numRef = explode(' ', $inte->get('intencion'));
-            $pdf->Cell(47, 4, '   -' . get_string('campo_intencion', 'vocabulario') . ': ' . $numRef[0], 'R', 0, 'L', 1);
-            $pdf->Ln();
-
-            //8 Linea -> Tipologia:
-            $pdf->SetFont('', '', '7');
-            $pdf->Cell(47, 4, '   -' . get_string('campo_tipologia', 'vocabulario') . ': ', 'LR', 0, 'I', 1);
-            $pdf->Cell(47, 4, '   -' . get_string('campo_tipologia', 'vocabulario') . ': ', 'R', 0, 'I', 1);
-            $pdf->Cell(47, 4, '   -' . get_string('campo_tipologia', 'vocabulario') . ': ', 'R', 0, 'I', 1);
-            $pdf->Cell(47, 4, '   -' . get_string('campo_tipologia', 'vocabulario') . ': ', 'R', 0, 'I', 1);
-            $pdf->Ln();
-
-            //9 Linea -> Referencias Tipologia:
-            $pdf->SetFont('', 'I', '6');
-            $tipo = new Vocabulario_tipologias();
-            $tipo->leer($Stip);
-            $pdf->Cell(47, 4, '        ' . $tipo->get('tipo'), 'LR', 0, 'I', 1);
-            $tipo->leer($Atip);
-            $pdf->Cell(47, 4, '        ' . $tipo->get('tipo'), 'R', 0, 'I', 1);
-            $tipo->leer($Vtip);
-            $pdf->Cell(47, 4, '        ' . $tipo->get('tipo'), 'R', 0, 'I', 1);
-            $tipo->leer($Otip);
-            $pdf->Cell(47, 4, '        ' . $tipo->get('tipo'), 'R', 0, 'I', 1);
-            $pdf->Ln();
-
-
-            //9 Linea -> observaciones
-            $pdf->SetFont('', '', '7');
-            $pdf->Cell(47, 4, get_string('vease_pdf', 'vocabulario') . ': ', 'LR', 0, 'L', 1);
-            $pdf->Cell(47, 4, get_string('vease_pdf', 'vocabulario') . ': ', 'R', 0, 'L', 1);
-            $pdf->Cell(47, 4, get_string('vease_pdf', 'vocabulario') . ': ', 'R', 0, 'L', 1);
-            $pdf->Cell(47, 4, get_string('vease_pdf', 'vocabulario') . ': ', 'R', 0, 'L', 1);
-            $pdf->Ln();
-
-            //10 Linea -> observaciones
-            $pdf->SetFont('', 'I', '6');
-            $pdf->Cell(47, 4, $Sobs, 'LBR', 0, 'L', 1);
-            $pdf->Cell(47, 4, $Aobs, 'BR', 0, 'L', 1);
-            $pdf->Cell(47, 4, $Vobs, 'BR', 0, 'L', 1);
-            $pdf->Cell(47, 4, $Oobs, 'RB', 0, 'L', 1);
-            $pdf->Ln();
-
-            //10 Linea -> observaciones
-            $pdf->SetFont('', 'I', '6');
-            $pdf->Cell(47, 4, get_string('ejem', 'vocabulario'), 'LB', 0, 'L', 1);
-            $pdf->Cell(141, 4, $Seje, 'BR', 0, 'RBL', 1);
-            $pdf->Ln();
-
-            $color++;
-        }
-    }*/
     if ($mi_campo != '0') {
         $pdf->Ln();
     }
@@ -571,9 +339,11 @@ if ($impr_gram == 1) {
     $gr_pal = $gramaticas->obtener_todos($usuario);
     $gr_num = $gramaticas->obtener_todos_ids($usuario);
 
-
+    
     $pdf->SetTextColor(TEXT_AUTO);
-
+    
+    
+    /*
     for ($i = 0; $i < count($gr_pal); $i++) {
         //Caso especial para las preposiciones:
         //Si es la gramatica 51(añadir preposicion)
@@ -582,10 +352,27 @@ if ($impr_gram == 1) {
             //$gr_pal[$i] = $gr_pal[$i+1];
             $gr_pal[$i] = '6.2 ' . get_string('preposiciones', 'vocabulario');
         }
-
+        
         $gramaticas_usadas[$i] = array($gr_pal[$i], $gr_num[$i]);
     }
-
+*/
+    $i=0;
+    foreach ($gr_pal as $titulico){
+        $gramaticas_usadas[$i] = array($titulico,0);
+        ++$i;
+    }
+    
+    $i=0;
+    foreach ($gr_num as $numerico){
+        $gramaticas_usadas[$i][1] = $numerico;
+        ++$i;
+    }
+    for($i = 0; $i<count($gramaticas_usadas); ++$i){
+        if($gramaticas_usadas[$i][1] == 51){
+            $gramaticas_usadas[$i][0]='6.2 ' . get_string('preposiciones', 'vocabulario');
+        }
+    }    
+    
     //nueva pagina para las gramaticas
     $pdf->AddPage();
     $pdf->SetFont('', 'B', '12');
@@ -600,7 +387,6 @@ if ($impr_gram == 1) {
 
 
             // $pdf->Cell(0, 5, $mi_gram, 0, 1, 'L', 0);
-
 
             foreach ($palabras as $palabra) {
                 $descripcion_troceada = explode(__SEPARADORCAMPOS__, $palabra->descripcion);
