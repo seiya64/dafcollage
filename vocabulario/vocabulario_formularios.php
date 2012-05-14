@@ -592,7 +592,7 @@ class mod_vocabulario_ver_form extends moodleform {
             $mform->addElement('select', 'campoid', get_string("campo_tipologia", "vocabulario"), $clex, "style=\"min-height: 0;\"");
             if ($valor_campoid) {
                 $mform->setDefault('campoid', $valor_campoid);
-                $mis_palabras = vocabulario_todas_palabras($usuarioid, null, null, $valor_campoid);
+                $mis_palabras = vocabulario_todas_palabras($usuarioid, null, null, null, $valor_campoid);
             }
 
             //probar los campos dinamicos
@@ -613,7 +613,7 @@ class mod_vocabulario_ver_form extends moodleform {
             $mform->addElement('select', 'campoid', get_string("campo_intencion", "vocabulario"), $clex, "style=\"min-height: 0;\"");
             if ($valor_campoid) {
                 $mform->setDefault('campoid', $valor_campoid);
-                $mis_palabras = vocabulario_todas_palabras($usuarioid, null, null, null, $valor_campoid);
+                $mis_palabras = vocabulario_todas_palabras($usuarioid, null, null, $valor_campoid);
             }
 
             //probar los campos dinamicos
