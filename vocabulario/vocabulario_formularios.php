@@ -442,7 +442,7 @@ class mod_vocabulario_opciones_form extends moodleform {
         //5,3
         $tabla_menu .='<div class="menuitem right" style="text-align:right"><a href="view.php?id=' . $id . '&opcion=12"><img src="./imagenes/nueva_ea.png" id="id_nueva_ea_im" name="nueva_ea_im"/><div class="texto">' . get_string('nueva_ea', 'vocabulario') . '</div></a></div>';
         //5,2
-        $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=16"><img src="./imagenes/colaboradores.png" id="id_colaboradores_im" name="colaboradores_im"/><div class="texto">' . get_string('colaboradores', 'vocabulario') . '</div></a></div></div>';
+       $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=16"><img src="./imagenes/colaboradores.png" id="id_colaboradores_im" name="colaboradores_im"/><div class="texto">' . get_string('colaboradores', 'vocabulario') . '</div></a></div></div>';
 
         $tabla_menu .='</div>';
         
