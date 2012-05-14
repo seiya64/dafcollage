@@ -543,7 +543,7 @@ class mod_vocabulario_ver_form extends moodleform {
             $mis_palabras = vocabulario_todas_palabras($usuarioid);
         } else if ($cl) {
 
-            $aux = new Vocabulario_campo_lexico();
+            /*$aux = new Vocabulario_campo_lexico();
             $clex = $aux->obtener_hijos($usuarioid, 0);
 
             $mform->addElement('hidden', 'tipo', 'cl');
@@ -562,7 +562,7 @@ class mod_vocabulario_ver_form extends moodleform {
             $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('ver', 'vocabulario'));
             $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
 
-            $mform->addElement('html', '</br>');
+            $mform->addElement('html', '</br>');*/
         } else if ($gr) {
 
             $aux = new Vocabulario_gramatica();
@@ -747,11 +747,11 @@ class mod_vocabulario_ver_form extends moodleform {
         global $USER;
         //elegir la visualizacion
         if ($userid) {
-            $atras = '<h1 class="main">';
+            $atras = '<h1 style="text-align: center;" class="main">';
             $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&todasp=1&alid=' . $userid . '">[' . get_string('todo', 'vocabulario') . ']</a>';
             $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&alfa=1&alid=' . $userid . '">[' . get_string('alfabetico', 'vocabulario') . ']</a>';
-            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&cl=1&alid=' . $userid . '">[' . get_string('pal_campo_lex', 'vocabulario') . ']</a></br>';
-            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&gr=1&alid=' . $userid . '">[' . get_string('campo_gram', 'vocabulario') . ']</a>';
+//            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&cl=1&alid=' . $userid . '">[' . get_string('pal_campo_lex', 'vocabulario') . ']</a></br>';
+            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&gr=1&alid=' . $userid . '">[' . get_string('campo_gram', 'vocabulario') . ']</a></br>';
             $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&ic=1&alid=' . $userid . '">[' . get_string('campo_intencion', 'vocabulario') . ']</a>';
             $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&tt=1&alid=' . $userid . '">[' . get_string('campo_tipologia', 'vocabulario') . ']</a>';
             $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&nube=1&alid=' . $userid . '">[' . get_string('nube', 'vocabulario') . ']</a>';
@@ -761,7 +761,7 @@ class mod_vocabulario_ver_form extends moodleform {
             $mform->addElement('html', $atras);
             $mform->addElement('html', '</br>');
         } else {
-            $atras = '<h1 class="main">';
+            $atras = '<h1 style="text-align: center;" class="main">';
             $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2">[' . get_string('todo', 'vocabulario') . ']</a>';
             $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&alfa=1">[' . get_string('alfabetico', 'vocabulario') . ']</a>';
             $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&cl=1">[' . get_string('campo_lex', 'vocabulario') . ']</a>';
