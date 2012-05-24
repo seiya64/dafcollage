@@ -3433,7 +3433,7 @@ class mod_vocabulario_colaboradores_form extends moodleform {
         $mform->addElement('static', 'colaboradores', '<strong>IV Hackathon</strong>', '');
         $mform->addElement('static', 'colaboradores', 'Premio productividad', 'Francisco R. Torres Fernández <a href="http://twitter.com/#!/frantorres" target="_blank">@frantorres </a>');
         $mform->addElement('static', 'colaboradores', '', 'Serafina Molina Soto <a href="http://twitter.com/#!/finamolina86" target="_blank">@finamolina86 </a>');
-        $mform->addElement('static', 'colaboradores', '', 'Francisco Javier Marín López <a href="http://twitter.com/#!/xavitux" target="_blank">@xavitux </a>');
+        $mform->addElement('static', 'colaboradores', '', 'Francisco Javier Marín Gómez <a href="http://twitter.com/#!/xavitux" target="_blank">@xavitux </a>');
         $mform->addElement('static', 'colaboradores', '', 'Manuel de la Rosa Morales <a href="http://twitter.com/#!/flubbers" target="_blank">@flubbers </a>');
         $mform->addElement('static', 'colaboradores', '', 'Luisa Sánchez Avivar');
         $mform->addElement('static', 'colaboradores', '', 'Marina Torres Anaya');
