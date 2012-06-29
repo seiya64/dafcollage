@@ -1,46 +1,26 @@
 <?php  // $Id: lib.php,v 1.7.2.5 2009/04/22 21:30:57 skodak Exp $
 
-/*
-  Daf-collage is made up of two Moodle modules which help in the process of
-  German language learning. It facilitates the content organization like
-  vocabulary or the main grammar features and gives the chance to create
-  exercises in order to consolidate knowledge.
+/**
+ * Library of functions and constants for module ejercicios
+ * This file should have two well differenced parts:
+ *   - All the core Moodle functions, neeeded to allow
+ *     the module to work integrated in Moodle.
+ *   - All the ejercicios specific functions, needed
+ *     to implement all the module logic. Please, note
+ *     that, if the module become complex and this lib
+ *     grows a lot, it's HIGHLY recommended to move all
+ *     these module specific functions to a new php file,
+ *     called "locallib.php" (see forum, quiz...). This will
+ *     help to save some memory when Moodle is performing
+ *     actions across all modules.
+ */
 
-  Copyright (C) 2011
-
-  Coordination:
-  Ruth Burbat
-
-  Source code:
-  Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
-  Simeón Ruiz Romero (simeonruiz@gmail.com)
-  Serafina Molina Soto (finamolinasoto@gmail.com)
- 
-  Original idea and content design:
-  Ruth Burbat
-  Andrea Bies
-  Julia Möller Runge
-  Antonio Salmerón Matilla
-  Karin Vilar Sánchez
-  Inmaculada Almahano Güeto
-  Blanca Rodríguez Gómez
-  María José Varela Salinas
-
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details. */
-
-require_once(dirname(__FILE__).'/mod_form.php');
 /// (replace ejercicios with the name of your module and delete this line)
 
 $ejercicios_EXAMPLE_CONSTANT = 42;     /// for example
 
+require_once('ejercicios_form.php');
+require_once('ejercicios_form_creacion.php');
 
 /**
  * Given an object containing all the necessary data,
@@ -240,63 +220,58 @@ function ejercicios_uninstall() {
 /// starts with ejercicios_
 /// Remember (see note in first lines) that, if this section grows, it's HIGHLY
 /// recommended to move all funcions below to a new "localib.php" file.
-
-function vocabulario_view($id, $opcion = 0, $id_mp = null) {
+function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p=1,$r=2,$c=1,$id_ejercicio=0) {
     global $CFG, $COURSE, $USER;
 
     $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
     
-     
-     
-      switch ($opcion) {
+      switch ($op) {
         default:
         case 0: //ver las opciones
-            $mform = new mod_ejercicios_opciones_form();
-            $mform->aniadircosas($id);
+            $mform = new mod_ejercicios_mod_form($id);
+            $mform->pintaropciones($id);
             break;
         case 1: //primer ejercicio (Puzzle Doble)
-            echo "has elegido ejercicio 1";
-            $mform = new COSA();
+            $mform= new mod_ejercicios_puzzle_form($id);//llama a gestion_asociacion1.php
+            $mform->pintarinterfaz($id,$error);
+             break;
+        case 2: //mostrar ejercicio creado(Puzzle Doble)
+           
+            $mform= new mod_ejercicios_hacer_puzzle_form($id,$name_ej,$tipo);//llama a gestion.php
+            $mform->pintarejercicio($id,$name_ej,$tipo);
             break;
-      
-    }
-
-
-     $mform->display();
+       case 3: //segundo paso del formulario
+       
+            $mform= new mod_ejercicios_puzzle_form_paso2($id,$name_ej);//llama a gestion.php
+            $mform->pintarinterfaz2($id,$name_ej);
+            break;
+        case 4: //creando ejercicio por tema gramatica
+            $mform= new  mod_vocabulario_creando_tema_palabras($id);
+            break;
+        case 5:// Pulsado botón crear por profesor 
+            $mform= new  mod_ejercicios_creando_ejercicio($id);
+            $mform->pintarformulario($id,$tipocreacion);
+            break;
+        case 6:// Pulsado botón Buscar tanto por alumno como por profesor
+            echo "hola boton buscar";
+            break;
+        case 7:// Segundo paso del formulario caso texto-texto
+           /* echo "segundo paso";
+            echo "preguntas".$p;
+            echo "resputestas".$r;
+            echo "correctas".$c;
+            echo "id_ejercicio".$id_ejercicio;*/
+            $mform= new mod_ejercicios_creando_ejercicio_texto($id,$p,$r,$c,$id_ejercicio);
+            $mform->pintarformulariotexto($id,$p,$r,$c,$id_ejercicio);
+           
+            break;
+        
+      }
+    
+    
+         $mform->display();
+    return true;
 }
 
-/**
- * Return a suffix depending on current user language
- *
- * @return string The suffix for tables according to the current language
- * */
-function get_sufijo_lenguaje_tabla() {
-
-    $lenguaje = current_language();
-    if ($lenguaje == "es_utf8") {
-        $sufijotabla = "es";
-    } else if ($lenguaje == "en_utf8") {
-        $sufijotabla = "en";
-    } else if ($lenguaje == "pl_utf8") {
-        $sufijotabla = "pl";
-    } else if ($lenguaje == "de_utf8") {
-        $sufijotabla = "de";
-    } else {
-        $sufijotabla = "es";
-    }
-
-    return $sufijotabla;
-}
-
-/**
- * Return all suffix for tables in database that depends on language
- *
- * @return array All suffix for tables in database
- */
-function get_todos_sufijos_lenguaje() {
-    $sufijos = array('es', 'en', 'pl', 'de');
-
-    return $sufijos;
-}
 
 ?>

@@ -12,7 +12,6 @@ Coordination:
 Source code:
     Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
     Simeón Ruiz Romero (simeonruiz@gmail.com)
-    Serafina Molina Soto (finamolinasoto@hotmail.com)
 
 Original idea and content design:
     Ruth Burbat
@@ -40,50 +39,11 @@ Ahora mismo está en desuso, pero volverá a estar activo para ver la parte de
 guardar palabras por columnas
 */
 
-
-
 #mform1 {
     display: table;
 }
 
-#sus {
-    width: 48%;
-    float: left;
-    min-height: 250px;
-    display: table-cell;
-    clear: left;
-}
 
-#vrb {
-    width: 48%;
-    float: right;
-    min-height: 250px;
-    display: table-cell;
-}
-
-
-#adj {
-    width: 48%;
-    float: left;
-    min-height: 250px;
-    vertical-align: 20px;
-    display: table-cell;
-    clear: left;
-}
-
-#otr {
-    width: 48%;
-    float: right;
-    min-height: 250px;
-    display: table-cell;
-}
-
-#viewcanvas{ padding-top:10px;}
-.menurow{ clear:both; padding-top:15px;}
-.menurow a {text-decoration:none;}
-.menuitem {opacity:0.8;}
-.menuitem:hover {opacity:1;}
-.menuitem{ clear:none;  width:30%; }
 .left{ float:left; }
 .center{ margin-right:auto; margin-left:auto;}
 .right{ float:right; }
@@ -91,10 +51,108 @@ guardar palabras por columnas
 .cajagranancho { width: 65%; }
 .twitter{ width: 252px; padding-left: 10px;}
 #mform1 { width:90%; }
-          
-#id_cancellink{ 
-float: right;
-color: #EEE;
-font-size: 0.9em;
+
+
+.titulo{
+    margin-left: 0px;
 }
-          
+
+
+#menubuscar{
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	-webkit-box-shadow:1px 1px 3px #888;
+	-moz-box-shadow:1px 1px 3px #888;
+         margin-left: 0px;
+         
+}
+#menubuscar .lilista {border-bottom:1px solid #FFF;}
+#menubuscar .ullista .lilista, #menu .ullista:last-child{border:none}	
+#enlacemenu{
+	display:block;
+	color:#FFF;
+	text-decoration:none;
+	font-family:'Helvetica', Arial, sans-serif;
+	font-size:13px;
+	padding:3px 5px;
+	text-shadow:1px 1px 1px #325179;
+}
+
+
+ #enlacemenu:hover{
+	background-color:#FFF;
+	color:#2961A9;
+	text-shadow:none;
+	-webkit-transition: color, background-color 0.2s linear;
+}
+.ullista{
+	
+	margin-top: 20px;
+	padding:0;
+	width:400px;
+	list-style:none;
+        
+}
+
+.lilista{
+	
+	background-color:#6594D1;
+        
+	
+}
+.selectbuscar{
+        margin-top:20px;
+        margin-left: 10px;
+      
+}
+.id_campoid{
+        margin-top:20px;
+        margin-left: 10px;
+}
+
+#divflotanteizq {
+		float:left;
+		width: 20%;
+}
+#divflotantederecha {
+                float:right;
+		width: 20%;
+}
+
+#parteejercicio{
+    border: 1px solid #6594D1;
+    margin-top: 150px;
+    float:left;
+    width:300px;
+    margin-left: 300px;
+    height: 300px;
+    
+}
+#parteejercicioalumno{
+    border: 1px solid #6594D1;
+    margin-top: 50px;
+    float:left;
+    width:300px;
+    margin-left: 300px;
+    height: 300px;
+    
+}
+
+#partevocabulario{
+   
+    margin-top: 100px;
+    float:left;
+    width:8%;
+    height: 70%;
+    
+}
+
+
+#formulario{
+   
+    margin-left: 60px;
+    margin-right: 60px;
+}
+	
+	

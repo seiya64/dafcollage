@@ -1,0 +1,62 @@
+/* 
+    Document   : style
+    Created on : 21-may-2012, 9:34:09
+    Author     : finamolina
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+#mform1 {
+    display: table;
+}
+
+
+#viewcanvas{ padding-top:10px;}
+.menurow{ clear:both; padding-top:15px;}
+.menurow a {text-decoration:none;}
+.menuitem {opacity:0.8;}
+.menuitem:hover {opacity:1;}
+.menuitem{ clear:none;  width:30%; }
+.left{ float:left; }
+.center{ margin-right:auto; margin-left:auto;}
+.right{ float:right; }
+
+.cajagranancho { width: 65%; }
+.twitter{ width: 252px; padding-left: 10px;}
+#mform1 { width:90%; }
+
+.imagen {
+	width: 100px;
+	height: 100px;
+	background-color: #808080;
+	border: 1px solid #999999;
+}
+
+.marquito {
+	width: 100px;
+	height: 100px;
+	background-color: blue;
+	border: 1px solid #999999;
+}
+
+
+.marquitoaceptado {
+	width: 100px;
+	height: 100px;
+
+}
+
+.colocado {
+	width: 0px;
+	height: 0px;
+}
+
+.descripcion{ 
+    width:400px;
+    margin-left:15px;
+}
+
