@@ -158,7 +158,7 @@ GNU General Public License for more details.
                 <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="clave para el id del usuario" PREVIOUS="primary"/>
             </KEYS>
         </TABLE>
-        <TABLE NAME="vocabulario_camposlexicos_de" COMMENT="campos lexicos disponibles aleman" PREVIOUS="vocabulario_camposlexicos_pl" NEXT="vocabulario_gramatica">
+        <TABLE NAME="vocabulario_camposlexicos_de" COMMENT="campos lexicos disponibles aleman" PREVIOUS="vocabulario_camposlexicos_pl" NEXT="vocabulario_camposlexicos_fr">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="usuarioid"/>
                 <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
@@ -170,7 +170,19 @@ GNU General Public License for more details.
                 <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="clave para el id del usuario" PREVIOUS="primary"/>
             </KEYS>
         </TABLE>
-        <TABLE NAME="vocabulario_gramatica" COMMENT="estructuras gramaticales" PREVIOUS="vocabulario_camposlexicos_de" NEXT="vocabulario_mis_palabras">
+        <TABLE NAME="vocabulario_camposlexicos_fr" COMMENT="campos lexicos disponibles frances" PREVIOUS="vocabulario_camposlexicos_de" NEXT="vocabulario_gramatica">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="usuarioid"/>
+                <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
+                <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="numeros que corresponden al campo y subcampos" PREVIOUS="usuarioid" NEXT="campo"/>
+                <FIELD NAME="campo" TYPE="char" LENGTH="60" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="nombre del campo lexico" PREVIOUS="padre"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+                <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="clave para el id del usuario" PREVIOUS="primary"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="vocabulario_gramatica" COMMENT="estructuras gramaticales" PREVIOUS="vocabulario_camposlexicos_fr" NEXT="vocabulario_mis_palabras">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="usuarioid"/>
                 <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
@@ -255,7 +267,7 @@ GNU General Public License for more details.
                 <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
             </KEYS>
         </TABLE>
-        <TABLE NAME="vocabulario_intenciones_de" COMMENT="intenciones comunicativas" PREVIOUS="vocabulario_intenciones_pl" NEXT="vocabulario_mis_intenciones">
+        <TABLE NAME="vocabulario_intenciones_de" COMMENT="intenciones comunicativas" PREVIOUS="vocabulario_intenciones_pl" NEXT="vocabulario_intenciones_fr">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="usuarioid"/>
                 <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
@@ -267,7 +279,19 @@ GNU General Public License for more details.
                 <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
             </KEYS>
         </TABLE>
-        <TABLE NAME="vocabulario_mis_intenciones" COMMENT="descripcion de los alumnos de las intenciones comunicativas" PREVIOUS="vocabulario_intenciones_de" NEXT="vocabulario_tipologias_es">
+        <TABLE NAME="vocabulario_intenciones_fr" COMMENT="intenciones comunicativas" PREVIOUS="vocabulario_intenciones_de" NEXT="vocabulario_mis_intenciones">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="usuarioid"/>
+                <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
+                <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="padre en la jerarquía de gramáticas" PREVIOUS="usuarioid" NEXT="intencion"/>
+                <FIELD NAME="intencion" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="nombre para la estructura gramatical" PREVIOUS="padre"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+                <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="vocabulario_mis_intenciones" COMMENT="descripcion de los alumnos de las intenciones comunicativas" PREVIOUS="vocabulario_intenciones_fr" NEXT="vocabulario_tipologias_es">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="usuarioid"/>
                 <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="id del usuario" PREVIOUS="id" NEXT="intencionesid"/>
@@ -319,7 +343,7 @@ GNU General Public License for more details.
                 <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
             </KEYS>
         </TABLE>
-        <TABLE NAME="vocabulario_tipologias_de" COMMENT="tipologias textuales" PREVIOUS="vocabulario_tipologias_pl" NEXT="vocabulario_mis_tipologias">
+        <TABLE NAME="vocabulario_tipologias_de" COMMENT="tipologias textuales" PREVIOUS="vocabulario_tipologias_pl" NEXT="vocabulario_tipologias_fr">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="usuarioid"/>
                 <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
@@ -331,7 +355,19 @@ GNU General Public License for more details.
                 <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
             </KEYS>
         </TABLE>
-        <TABLE NAME="vocabulario_mis_tipologias" COMMENT="descripcion de los alumnos de las tipologias textuales" PREVIOUS="vocabulario_tipologias_de" NEXT="vocabulario_estrategias">
+        <TABLE NAME="vocabulario_tipologias_fr" COMMENT="tipologias textuales" PREVIOUS="vocabulario_tipologias_de" NEXT="vocabulario_mis_tipologias">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="usuarioid"/>
+                <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
+                <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="padre en la jerarquía de gramáticas" PREVIOUS="usuarioid" NEXT="tipo"/>
+                <FIELD NAME="tipo" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false" ENUM="false" COMMENT="nombre para la tipología textual" PREVIOUS="padre"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+                <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="vocabulario_mis_tipologias" COMMENT="descripcion de los alumnos de las tipologias textuales" PREVIOUS="vocabulario_tipologias_fr" NEXT="vocabulario_estrategias">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="usuarioid"/>
                 <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="id del usuario" PREVIOUS="id" NEXT="tipoid"/>
@@ -707,7 +743,7 @@ GNU General Public License for more details.
                 <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','18.3 Określenia gramatyczne','103)" />
             </SENTENCES>
         </STATEMENT>
-        <STATEMENT NAME="insertar campos lexicos_de" TYPE="insert" TABLE="vocabulario_camposlexicos_de" COMMENT="Se insertan inicialmente los campos lexicos" PREVIOUS="insertar campos lexicos_pl" NEXT="insert vocabulario_gramatica">
+        <STATEMENT NAME="insertar campos lexicos_de" TYPE="insert" TABLE="vocabulario_camposlexicos_de" COMMENT="Se insertan inicialmente los campos lexicos" PREVIOUS="insertar campos lexicos_pl" NEXT="insertar campos lexicos_fr">
             <SENTENCES>
                 <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','--','0)" />
                 <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','1 LEBEWESEN','0)" />
@@ -817,7 +853,117 @@ GNU General Public License for more details.
                 <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','18.3 Grammatikalische Bezeichnungen','103)" />
             </SENTENCES>
         </STATEMENT>
-        <STATEMENT NAME="insert vocabulario_gramatica" TYPE="insert" TABLE="vocabulario_gramatica" COMMENT="gramaticas predefinidas" PREVIOUS="insertar campos lexicos_de" NEXT="insert vocabulario_intenciones_es">
+        <STATEMENT NAME="insertar campos lexicos_fr" TYPE="insert" TABLE="vocabulario_camposlexicos_fr" COMMENT="Se insertan inicialmente los campos lexicos" PREVIOUS="insertar campos lexicos_de" NEXT="insert vocabulario_gramatica">
+            <SENTENCES>
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','--','﻿0)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','1 L’ÊTRE HUMAIN','0)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','1.1 Données personnelles','2)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','1.2 Rapports avec d’autres personnes','2)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','1.3 Aspect physique','2)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','1.4 Qualités / Caractéristiques','2)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','1.5 Émotions','2)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','1.6 Santé','2)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','2 L’ALIMENTATION / LA GASTRONOMIE','0)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','2.1 Aliments','9)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','2.2 Plats ','9)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','2.2.1 Recettes de cuisine','11)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','2.2.2 Restaurants/ Bars, etc.','11)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','2.3 Ustensiles de cuisine','9)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','3 LE LOGEMENT/ LE DOMAINE DE L’INMOBILIÈRE','0)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','3.1 Types de logement/ Bâtiments/ Parties de la maison','15)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','3.2 Décoration/ Fourniture','15)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','3.3 Location/ Vente','15)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','4 LE CENTRE COMMERCIAL / DANS LES MAGASINS / FAIRE LES COURSES','0)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','4.1 Mode/ Vêtements','19)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','4.2 Accessoires','19)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','4.3 Parfumerie et soins personnels ','19)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5 LES LOISIRS/ LA CULTURE/ L’ART','0)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.1 Hobbies ','23)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.1.1 Sports','24)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.1.1.1 Activités sportives','25)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.1.1.2 Événements sportifs','25)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.2 Événements','23)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.2.1 Événements privés','28)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.2.2 Événements publiques','28)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.3 Musique','23)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.3.1 Types','31)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.3.2 Instruments','31)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.4 Littérature','23)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.4.1 Genres de littérature','34)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.4.2 Périodes','34)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.5 Théâtre/ Cinéma','23)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.5.1 Affiches et programmes','37)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.5.2 Genres','37)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.6 Photographie','23)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.7 Peinture','23)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.7.1 Couleurs','41)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','5.7.2 Mouvements','41)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','6 LA COMMUNICATION: LA FORME ET LES MÉDIAS','0)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','6.1 Communication orale','44)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','6.1.1 Communication orale dans la sphère privée','45)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','6.1.1.1 Interactive','46)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','6.1.1.2 Dans un discours','46)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','6.1.2 Communication orale dans la sphère publique','45)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','6.1.2.1 Interactive','49)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','6.1.2.2 Dans un discours','49)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','6.2 Courrier','44)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','6.2.1 Courrier privé','52)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','6.2.2 Courrier formel','52)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','6.3 Presse','44)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','6.3.1 Sondages','55)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','6.4 Radio/ Télévision','44)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','6.5 Téléphone','44)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','6.6 Internet','44)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','7 LES VOYAGES/ LE TOURISME','0)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','7.1 Façons de voyager','60)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','7.1.1 Voyages de luxe','61)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','7.1.2 Voyages en backpack','61)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','7.1.3 Voyages culturels','61)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','7.1.4 Voyages en famille','61)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','7.2 Accommodation','60)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','7.2.1 Lieux d’accommodation','66)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','7.2.2 Services d’accommodation','66)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','8 LES TRANSPORTS/ L’ORIENTATION','0)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','8.1 Moyens de transport','69)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','8.2 Circulation','69)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','8.3 Orientation','69)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','8.3.1 Points cardinaux','72)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','8.3.2 D’autres indicateurs de la direction','72)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','9 LES DIVISIONS DU TEMPS','0)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','9.1 Termes généraux','75)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','9.2 Saisons/ Mois ','75)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','9.3 Jours de la semaine et parties du jour','75)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','9.4 L’heure','75)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','10 LA GÉOGRAPHIE/ L’ENVIRONEMMENT','0)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','11 LA SOCIÉTÉ','0)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','11.1 État/ Politique','81)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','11.2 Droit/ Réglementations/ Administration','81)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','11.3 Idéologies/ Religions','81)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','12 LE MONDE DU TRAVAIL','0)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','12.1 Professions et métiers','85)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','12.2 Lieu de travail','85)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','12.3 Conditions du travail','85)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','13 LE MONDE DE L’ENTREPRISE / ÉCONOMIE','0)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','13.1 Entreprises et commerces','89)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','13.2 Industrie','89)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','13.3 Aspects économiques et financiers','89)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','13.4 Publicité/ Marketing','89)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','14 LA FORMATION ET L’ENSEIGNEMENT','0)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','14.1 Système éducatif','94)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','14.2 Formation professionnel','94)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','14.3 Formation universitaire','94)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','15 L’INFORMATIQUE','0)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','15.1 Hardware','98)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','15.2 Software','98)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','16 LA SCIENCE/ LA TECHNOLOGIE','0)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','17 LA MÉDECINE/ LA SANTÉ','0)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','18 LA LANGUE','0)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','18.1 Langues','103)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','18.2 Aspects linguistiques (Ex.: FACHCHINESISCH)','103)" />
+                <SENTENCE TEXT="(usuarioid,campo,padre) VALUES ('0','18.3 Dénomination en grammaire','103)" />
+            </SENTENCES>
+        </STATEMENT>
+        <STATEMENT NAME="insert vocabulario_gramatica" TYPE="insert" TABLE="vocabulario_gramatica" COMMENT="gramaticas predefinidas" PREVIOUS="insertar campos lexicos_fr" NEXT="insert vocabulario_intenciones_es">
             <SENTENCES>
                 <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','--','0)" />
                 <SENTENCE TEXT="(usuarioid,gramatica,padre) VALUES ('0','1 Nomen','0)" />
@@ -1341,7 +1487,7 @@ GNU General Public License for more details.
                 <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','10.2.2 Środki językowe','144)" />
             </SENTENCES>
         </STATEMENT>
-        <STATEMENT NAME="insert vocabulario_intenciones_de" TYPE="insert" TABLE="vocabulario_intenciones_de" COMMENT="intenciones predefinidas" PREVIOUS="insert vocabulario_intenciones_pl" NEXT="insert vocabulario_sustantivos">
+        <STATEMENT NAME="insert vocabulario_intenciones_de" TYPE="insert" TABLE="vocabulario_intenciones_de" COMMENT="intenciones predefinidas" PREVIOUS="insert vocabulario_intenciones_pl" NEXT="insert vocabulario_intenciones_fr">
             <SENTENCES>
                 <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','--','0)" />
                 <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','1 MIT PERSONEN UMGEHEN','0)" />
@@ -1491,7 +1637,157 @@ GNU General Public License for more details.
                 <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','10.2.2 Lexikalische Sprachmittel','144)" />
             </SENTENCES>
         </STATEMENT>
-        <STATEMENT NAME="insert vocabulario_sustantivos" TYPE="insert" TABLE="vocabulario_sustantivos" COMMENT="sustantivo vacio" PREVIOUS="insert vocabulario_intenciones_de" NEXT="insert vocabulario_adjetivos">
+        <STATEMENT NAME="insert vocabulario_intenciones_fr" TYPE="insert" TABLE="vocabulario_intenciones_fr" COMMENT="intenciones predefinidas" PREVIOUS="insert vocabulario_intenciones_de" NEXT="insert vocabulario_sustantivos">
+            <SENTENCES>
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','--','﻿0)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','1 RAPPORTS ENTRE LES PERSONNES','0)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','1.1 Façons de s’adresser à quelqu’un','2)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','1.1.1 S’adresser à quelqu’un de façon non verbale','3)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','1.1.2 S’adresser à quelqu’un de façon verbale','3)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','1.2 Dénominations pour les personnes','2)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','1.2.1 Dénominations non verbaux','6)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','1.2.2 Dénominations verbaux','6)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','2 JUSTIFIER (EXPRIMER LA CAUSE)','0)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','2.1 Moyens grammaticaux','9)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','2.1.1 Phrases complexes','10)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','2.1.1.1 Conjonctions de coordination','11)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','2.1.1.2 Conjonctions de subordination','11)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','2.1.2 Prépositions','10)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','2.2 Moyens lexicaux','9)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','2.2.1 Formation des mots','15)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','2.2.2 Types de mots','15)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3 EXPRIMER LA CONDITION','0)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.1 Condition réalisable','18)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.1.1 Moyens grammaticaux','19)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.1.1.1 Phrases complexes','20)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.1.1.1.1 Conjonctions de coordination','21)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.1.1.1.2 Conjonctions de subordination','21)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.1.1.2 Prépositions','20)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.1.2 Moyens lexicaux','19)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.1.2.1 Formation des mots','25)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.1.2.2 Types de mots','25)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.2 Condition hypothétique','18)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.2.1 Moyens grammaticaux','28)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.2.1.1 Phrases complexes','29)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.2.1.1.1 Conjonctions de coordination','30)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.2.1.1.2 Conjonctions de subordination','30)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.2.1.2 Prépositions','29)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.2.2 Moyens lexicaux','28)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.2.2.1 Formation des mots','34)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.2.2.2 Type de mots','34)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.3 Condition non réalisable','18)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.3.1 Moyens grammaticaux','37)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.3.1.1 Phrases complexes','38)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.3.1.1.1 Conjonctions de coordination','39)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.3.1.1.2 Conjonctions de subordination','39)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.3.1.2 Prépositions','38)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.3.2 Moyens lexicaux','37)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.3.2.1 Formation des mots','43)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','3.3.2.2 Types de mots','43)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','4 OBTENIR QUELQUE CHOSE (EXPRIMER LE BUT)','0)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','4.1 Atteindre l’objectif à travers certaines actions','46)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','4.1.1 Moyens grammaticaux','47)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','4.1.1.1 Phrases complexes','48)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','4.1.1.1.1 Conjonctions de coordination','49)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','4.1.1.1.2 Conjonctions de subordination','49)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','4.1.1.2 Prépositions','48)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','4.1.2 Moyens lexicaux','47)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','4.1.2.1 Formation des mots','53)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','4.1.2.2 Types de mots','53)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','4.2 Atteindre l’objectif à travers certains instruments','46)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','4.2.1 Moyens grammaticaux','56)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','4.2.1.1 Phrases complexes','57)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','4.2.1.1.1 Conjonctions de coordination','58)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','4.2.1.1.2 Conjonctions de subordination','58)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','4.2.1.2 Prépositions','57)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','4.2.2 Moyens lexicaux','56)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','4.2.2.1 Formation des mots','62)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','4.2.2.2 Types de mots','62)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','5 EXPRIMER LA CONSÉQUENCE  ET LE RÉSULTAT','0)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','5.1 Conséquence réalisée','65)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','5.1.1 Moyens grammaticaux','66)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','5.1.1.1 Phrases complexes','67)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','5.1.1.1.1 Conjonctions de coordination','68)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','5.1.1.1.2 Conjonctions de subordination','68)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','5.1.1.2 Prépositions','67)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','5.1.2 Moyens lexicaux','66)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','5.1.2.1 Formation des mots','72)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','5.1.2.2 Types de mots','72)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','5.2 Conséquence non réalisée','65)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','5.2.1 Moyens grammaticaux','75)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','5.2.1.1 Phrases complexes','76)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','5.2.1.1.1 Conjonctions de coordination','77)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','5.2.1.1.2 Conjonctions de subordination','77)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','5.2.1.2 Prépositions','76)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','5.2.2 Moyens lexicaux','75)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','5.2.2.1 Formation des mots','81)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','5.2.2.2 Types de mots','81)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','6 CONTREDIRE','0)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','6.1 Moyens grammaticaux','84)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','6.1.1 Phrases complexes','85)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','6.1.1.1 Conjonctions de coordination','86)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','6.1.1.2 Conjonctions de subordination','86)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','6.1.2 Prépositions','85)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','6.2 Moyens lexicaux','84)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','6.2.1 Formation des mots','90)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','6.2.2 Types de mots','90)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7 Faire une comparaison','0)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.1 Rapport d’égalité','93)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.1.1 Moyens grammaticaux','94)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.1.1.1 Phrases complexes','95)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.1.1.1.1 Conjonctions de coordination','96)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.1.1.1.2 Conjonctions de subordination','96)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.1.1.2 Prépositions','95)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.1.2 Moyens lexicaux','94)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.1.2.1 Formation des mots','100)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.1.2.2 Types de mots','100)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.2 Rapport de proportionnalité','93)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.2.1 Moyens grammaticaux','103)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.2.2 Moyens lexicaux','103)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.3 Rapport d’identité','93)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.3.1 Moyens grammaticaux','106)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.3.2 Moyens lexicaux','106)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.4 Rapport de différence','93)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.4.1 Moyens grammaticaux','109)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.4.1.1 Conjonctions','110)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.4.1.2 Prépositions','110)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.4.2 Moyens lexicaux','109)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.5 Rapport d’opposition','93)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.5.1 Moyens grammaticaux','114)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.5.1.1 Phrases complexes','115)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.5.1.1.1 Conjonctions de coordination','116)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.5.1.1.2 Conjonctions de subordination','116)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.5.1.2 Prépositions','115)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.5.2 Moyens lexicaux','114)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.5.2.1 Formation des mots','120)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','7.5.2.2 Types de mots','120)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','8 PERSUADER QUELQU’UN ','0)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','8.1 Donner des ordres','123)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','8.1.1 Situation formelle','124)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','8.1.2 Situation informelle (expression orale)','124)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','8.2 Avertir','123)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','8.3 Demander','123)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','8.4 Appeler','123)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','8.5 Proposer','123)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','8.6 Offrir','123)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','8.7 Recommander ','123)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','8.8 Donner des instructions','123)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','8.9 Prévenir','123)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','8.9.1 Situation formelle','134)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','8.9.2 Situation informelle','134)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','9 DÉSIRER','0)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','10 EXPRIMER UNE SUPPOSITION','0)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','10.1 avec certitude','138)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','10.1.1 Moyens grammaticaux','139)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','10.1.1.1 Temps verbaux','140)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','10.1.1.2 Verbes modaux','140)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','10.1.2 Moyens lexicaux','139)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','10.2 Sans certitude','138)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','10.2.1 Moyens grammaticaux','144)" />
+                <SENTENCE TEXT="(usuarioid,intencion,padre) VALUES ('0','10.2.2 Moyens lexicaux','144)" />
+            </SENTENCES>
+        </STATEMENT>
+        <STATEMENT NAME="insert vocabulario_sustantivos" TYPE="insert" TABLE="vocabulario_sustantivos" COMMENT="sustantivo vacio" PREVIOUS="insert vocabulario_intenciones_fr" NEXT="insert vocabulario_adjetivos">
             <SENTENCES>
                 <SENTENCE TEXT="(palabra) VALUES (' ')" />
             </SENTENCES>
@@ -1511,7 +1807,7 @@ GNU General Public License for more details.
                 <SENTENCE TEXT="(palabra) VALUES (' ')" />
             </SENTENCES>
         </STATEMENT>
-        <STATEMENT NAME="insert vocabulario_tipologias_es" TYPE="insert" TABLE="vocabulario_tipologias_es" COMMENT="tipologias textuales predefinidas" PREVIOUS="insert vocabulario_otros" NEXT="insert vocabulario_tipologias_en">
+         <STATEMENT NAME="insert vocabulario_tipologias_es" TYPE="insert" TABLE="vocabulario_tipologias_es" COMMENT="tipologias textuales predefinidas" PREVIOUS="insert vocabulario_otros" NEXT="insert vocabulario_tipologias_en">
             <SENTENCES>
                 <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','--','0)" />
                 <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Anuncio publicitario','0)" />
@@ -1685,7 +1981,7 @@ GNU General Public License for more details.
                 <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Tekst stopka','0)" />
             </SENTENCES>
         </STATEMENT>
-        <STATEMENT NAME="insert vocabulario_tipologias_de" TYPE="insert" TABLE="vocabulario_tipologias_de" COMMENT="tipologias textuales predefinidas" PREVIOUS="insert vocabulario_tipologias_pl" NEXT="insert vocabulario_estrategias">
+        <STATEMENT NAME="insert vocabulario_tipologias_de" TYPE="insert" TABLE="vocabulario_tipologias_de" COMMENT="tipologias textuales predefinidas" PREVIOUS="insert vocabulario_tipologias_pl" NEXT="insert vocabulario_tipologias_fr">
             <SENTENCES>
                 <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','--','0)" />
                 <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Werbeanzeige','0)" />
@@ -1743,7 +2039,65 @@ GNU General Public License for more details.
                 <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Bildunterschrift','0)" />
             </SENTENCES>
         </STATEMENT>
-        <STATEMENT NAME="insert vocabulario_estrategias" TYPE="insert" TABLE="vocabulario_estrategias" COMMENT="estrategias de aprendizaje predefinidas" PREVIOUS="insert vocabulario_tipologias_de">
+        <STATEMENT NAME="insert vocabulario_tipologias_fr" TYPE="insert" TABLE="vocabulario_tipologias_fr" COMMENT="tipologias textuales predefinidas" PREVIOUS="insert vocabulario_tipologias_de" NEXT="insert vocabulario_estrategias">
+            <SENTENCES>
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','--','﻿0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Message publicitaire','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Biographie','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Lettre commerciale','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Menu d’un restaurant','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Lettre de motivation pour un emploi','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Lettre publicitaire','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Lettre de lecteur','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Lettre de recommandation','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Affiche du menu','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Affiche informatif','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Les films à l’affiche: programmation du cinéma','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Programmation d’événements','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Certification académique','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Conférence','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Contrat de travail','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Conversation','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Curriculum Vitae','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Sondage','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Entretien','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Slogan','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Schéma informatif','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Stadistique','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Facture','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Formulaire','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Brochure touristique','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Garantie','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Emploi du temps','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Information sur un produit','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Rapport','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Rapport d’évaluation','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Carte','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Fiche de paie','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Liste des prix','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Liste des offres immobiliers','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Liste de classement','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Manuel d’utilisation','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Narration','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Offre d’emploi','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Commande','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Poème','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Notice d’un médicament','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Publireportage','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Recette de cuisine','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Reclamations','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Faire-part','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Reglamentation','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Reportage','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Compte rendu','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Texte scientifique','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Texte descriptif','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Texte informatif et journalistique','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Texte narratif','0)" />
+                <SENTENCE TEXT="(usuarioid,tipo,padre) VALUES ('0','Note en bas de page','0)" />
+            </SENTENCES>
+        </STATEMENT>
+        <STATEMENT NAME="insert vocabulario_estrategias" TYPE="insert" TABLE="vocabulario_estrategias" COMMENT="estrategias de aprendizaje predefinidas" PREVIOUS="insert vocabulario_tipologias_fr">
             <SENTENCES>
                 <SENTENCE TEXT="(usuarioid,estrategia,padre) VALUES ('0','--','0)" />
             </SENTENCES>
