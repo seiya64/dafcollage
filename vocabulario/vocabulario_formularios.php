@@ -57,7 +57,11 @@ class mod_vocabulario_rellenar_form extends moodleform {
         }
 
         //creo los objetos
-        $sustantivo = new Vocabulario_sustantivo();
+        if ( $palabra=optional_param('palabra', "", PARAM_TEXT)) {
+            $sustantivo = new Vocabulario_sustantivo($palabra);
+        }else{
+          $sustantivo = new Vocabulario_sustantivo();
+        }
         $adjetivo = new Vocabulario_adjetivo();
         $verbo = new Vocabulario_verbo();
         $otro = new Vocabulario_otro();
@@ -442,8 +446,8 @@ class mod_vocabulario_opciones_form extends moodleform {
         //5,3
         $tabla_menu .='<div class="menuitem right" style="text-align:right"><a href="view.php?id=' . $id . '&opcion=12"><img src="./imagenes/nueva_ea.png" id="id_nueva_ea_im" name="nueva_ea_im"/><div class="texto">' . get_string('nueva_ea', 'vocabulario') . '</div></a></div>';
         //5,2
-       $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=16"><img src="./imagenes/colaboradores.png" id="id_colaboradores_im" name="colaboradores_im"/><div class="texto">' . get_string('colaboradores', 'vocabulario') . '</div></a></div></div>';
-
+     #  $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=16"><img src="./imagenes/colaboradores.png" id="id_colaboradores_im" name="colaboradores_im"/><div class="texto">' . get_string('colaboradores', 'vocabulario') . '</div></a></div></div>';
+        $tabla_menu .='</div>';
         $tabla_menu .='</div>';
         
         $Mitwitter = "<script charset=\"utf-8\" src=\"http://widgets.twimg.com/j/2/widget.js\"></script><script>
@@ -655,6 +659,7 @@ class mod_vocabulario_ver_form extends moodleform {
             $titulillos .= '<th>' . get_string('vrb', 'vocabulario') . '</th>';
             $titulillos .= '<th>' . get_string('otr', 'vocabulario') . '</th>';
             $titulillos .= '<th>' . get_string('campo_lex', 'vocabulario') . '</th>';
+            $titulillos .= '<th>' . get_string('opciones', 'vocabulario') . '</th>';
             $titulillos .= '</tr>';
             $titulillos .= '</thead>';
             $mform->addElement('html', $titulillos);
@@ -669,7 +674,9 @@ class mod_vocabulario_ver_form extends moodleform {
                 $titulillos .= '<td>' . $palabra->ver_lex . '</td>';
                 $titulillos .= '<td>' . $palabra->otros_lex . '</td>';
                 $titulillos .= '<td>' . $palabra->campo_lex . '</td>';
-
+              //  $titulillos .= '<td>' . $palabra->mpid . '</td>';
+               $titulillos .= '<td> <a href="./view.php?id=' . $this->id_tocho . '&opcion=4&act=1&id_mp=' . $palabra->mpid . '">[' . get_string('editar', 'vocabulario') . ']</a></td>';
+             //   $titulillos .= '<td> <a href="./guardar.php?id_tocho=' . $this->id_tocho . '&borrar=' . $palabra->mpid . '">[' . get_string('eliminar', 'vocabulario') . ']</a></td>';
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
             }
@@ -678,6 +685,7 @@ class mod_vocabulario_ver_form extends moodleform {
             $mform->addElement('html', $script);
 
             $mform->addElement('html', '</table>');
+            
             $mform->addElement('html', '</div>');
         }
 
@@ -2088,14 +2096,14 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 //tabla
                 $mform->addElement('html', '<p>');
                 $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
-                //titulillos de la tabla
+               //titulillos de la tabla
 
                 $avance = 4;
 
                 $titulillos = '<tr class="header">';
                 $titulillos .= '<th>' . get_string('vorfeld', 'vocabulario') . '</th>';
                 $titulillos .= '<th>' . get_string('konjugier', 'vocabulario') . '</th>';
-                $titulillos .= '<th>' . get_string('mittelfeld', 'vocabulario') . '</th>';
+                $titulillos .= '<th style="width: 500 px;">' . get_string('mittelfeld', 'vocabulario') . '</th>';
                 $titulillos .= '<th>' . get_string('verb2', 'vocabulario') . '</th>';
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
@@ -2112,7 +2120,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $titulillos = '<tr class="cell">';
                     $titulillos .= '<td><input type="text" id="id_VORSUB' . $i . '" name="VORSUB' . $i . '" value="' . $descripcion_troceada[$i] . '"></td>';
                     $titulillos .= '<td style="background: #BDC7D8;"><input type="text" style="background: #BDC7D8;" id="id_KONSUB' . $i . '" name="KONSUB' . $i . '" value="' . $descripcion_troceada[$i + 1] . '"></td>';
-                    $titulillos .= '<td><input type="text" id="id_MIT' . $i . '" name="MIT' . $i . '" value="' . $descripcion_troceada[$i + 2] . '"></td>';
+                    $titulillos .= '<td style="width: 500 px;"><input style="width:495px;" type="text" id="id_MIT' . $i . '" name="MIT' . $i . '" value="' . $descripcion_troceada[$i + 2] . '"></td>';
                     $titulillos .= '<td style="background: #BDC7D8;"><input type="text" style="background: #BDC7D8;" id="id_VER2' . $i . '" name="VER2' . $i . '" value="' . $descripcion_troceada[$i + 3] . '"></td>';
                     $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
@@ -2132,11 +2140,12 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $avance = 5;
 
                 $titulillos = '<tr class="header">';
-                $titulillos .='<th>' . get_string('subjunktor', 'vocabulario') . '</th>';
+                $titulillos .='<th style="width: 80px;">' . get_string('subjunktor', 'vocabulario') . '</th>';
                 $titulillos .='<th>' . get_string('subjekt', 'vocabulario') . '</th>';
-                $titulillos .= '<th>' . get_string('mittelfeld', 'vocabulario') . '</th>';
-                $titulillos .='<th>' . get_string('konjugier', 'vocabulario') . '</th>';
+                $titulillos .= '<th style="width: 500 px;">' . get_string('mittelfeld', 'vocabulario') . '</th>';
                 $titulillos .='<th>' . get_string('verb2', 'vocabulario') . '</th>';
+                $titulillos .='<th>' . get_string('konjugier', 'vocabulario') . '</th>';
+            
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
 
@@ -2150,11 +2159,11 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $i = 0;
                 for ($i = 0; $i < $totalfilas * $avance; $i = $i + $avance) {
                     $titulillos = '<tr class="cell">';
-                    $titulillos .= '<td><input type="text" id="id_VORSUB' . $i . '" name="VORSUB' . $i . '" value="' . $descripcion_troceada[$i] . '"></td>';
+                    $titulillos .= '<td style="width: 80px;"><input style="width: 80px;" type="text" id="id_VORSUB' . $i . '" name="VORSUB' . $i . '" value="' . $descripcion_troceada[$i] . '"></td>';
                     $titulillos .= '<td><input type="text" id="id_VER1' . $i . '" name="VER1' . $i . '" value="' . $descripcion_troceada[$i + 4] . '"></td>';
-                    $titulillos .= '<td><input type="text" id="id_MIT' . $i . '" name="MIT' . $i . '" value="' . $descripcion_troceada[$i + 2] . '"></td>';
-                    $titulillos .= '<td style="background: #BDC7D8;"><input type="text" style="background: #BDC7D8;" id="id_KONSUB' . $i . '" name="KONSUB' . $i . '" value="' . $descripcion_troceada[$i + 1] . '"></td>';
+                    $titulillos .= '<td style="width: 500px;"><input style="width: 500px;" type="text" id="id_MIT' . $i . '" name="MIT' . $i . '" value="' . $descripcion_troceada[$i + 2] . '"></td>';
                     $titulillos .= '<td style="background: #BDC7D8;"><input type="text" style="background: #BDC7D8;" id="id_VER2' . $i . '" name="VER2' . $i . '" value="' . $descripcion_troceada[$i + 3] . '"></td>';
+                     $titulillos .= '<td style="background: #BDC7D8;"><input type="text" style="background: #BDC7D8;" id="id_KONSUB' . $i . '" name="KONSUB' . $i . '" value="' . $descripcion_troceada[$i + 1] . '"></td>';
                     $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
                 }
@@ -3457,6 +3466,9 @@ class mod_vocabulario_colaboradores_form extends moodleform {
         $mform->addElement('static', 'colaboradores', '', 'Antonio Fernández (otra vez)');
         $mform->addElement('static', 'colaboradores', '', 'María José Parejo');
         $mform->addElement('static', 'colaboradores', '', 'María González');
+        $mform->addElement('static', 'colaboradores', '', '');
+        $mform->addElement('static', 'colaboradores', '<strong>Beca de investigación</strong>', '');
+        $mform->addElement('static', 'colaboradores', '', 'Sara Fuentes López');
         $mform->addElement('static', 'colaboradores', '', '');
         $mform->addElement('static', 'colaboradores', '', 'Al centro en general por darnos un lugar donde trabajar y a todos ellos por los buenos ratos y los desayunos compartidos');
         $mform->addElement('static', 'colaboradores', '', '');
