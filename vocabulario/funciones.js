@@ -193,7 +193,8 @@ function la_tabla_nube() {
             "sInfoEmpty": "Mostrando 0 de 0 de un total de 0 entradas",
             "sInfoFiltered": "(Filtrado de _MAX_ entradas)"
         }
-
+          
+       
 
     });
 
@@ -201,6 +202,9 @@ function la_tabla_nube() {
     $('#palabras tbody tr td').live('click', function (){
         var nTds = $(this);
         //alert (nTds.html());
-        oTable.fnFilter(nTds.html());
+        if (nTds.html().search("<a") == -1){
+            oTable.fnFilter(nTds.html());
+        }
+        
     });
 }
