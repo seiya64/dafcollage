@@ -1611,10 +1611,10 @@ if ($impr_gram == 1) {
                                 //cabeceras
                                 $pdf->SetFont('', 'B', 10);
 
-                                $pdf->Cell(47, 5, get_string('vorfeld', 'vocabulario'), 1, 0, 'C', 1);
-                                $pdf->Cell(48, 5, get_string('konjugier', 'vocabulario'), 1, 0, 'C', 1);
-                                $pdf->Cell(48, 5, get_string('mittelfeld', 'vocabulario'), 1, 0, 'C', 1);
-                                $pdf->Cell(47, 5, get_string('verb2', 'vocabulario'), 1, 1, 'C', 1);
+                                $pdf->Cell(40, 5, get_string('vorfeld', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(30, 5, get_string('konjugier_resumen', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(90, 5, get_string('mittelfeld', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(37, 5, get_string('verb2', 'vocabulario'), 1, 1, 'C', 1);
 
                                 $pdf->SetTextColor(TEXT_AUTO);
                                 $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
@@ -1641,10 +1641,10 @@ if ($impr_gram == 1) {
 
                                     if ($pintar) {
 
-                                        $pdf->Cell(47, 5, $descripcion_troceada[($f * 4)], 1, 0, 'C', 0);
-                                        $pdf->Cell(48, 5, $descripcion_troceada[($f * 4) + 1], 1, 0, 'C', 1);
-                                        $pdf->Cell(48, 5, $descripcion_troceada[($f * 4) + 2], 1, 0, 'C', 0);
-                                        $pdf->Cell(47, 5, $descripcion_troceada[($f * 4) + 3], 1, 1, 'C', 1);
+                                        $pdf->Cell(40, 5, $descripcion_troceada[($f * 4)], 1, 0, 'C', 0);
+                                        $pdf->Cell(30, 5, $descripcion_troceada[($f * 4) + 1], 1, 0, 'C', 1);
+                                        $pdf->Cell(90, 5, $descripcion_troceada[($f * 4) + 2], 1, 0, 'C', 0);
+                                        $pdf->Cell(37, 5, $descripcion_troceada[($f * 4) + 3], 1, 1, 'C', 1);
                                     }
                                 }
                                 $pdf->Ln();
@@ -1658,12 +1658,13 @@ if ($impr_gram == 1) {
                                 //cabeceras
                                 $pdf->SetFont('', 'B', 10);
 
-                                $pdf->Cell(38, 5, get_string('subjunktor', 'vocabulario'), 1, 0, 'C', 1);
-                                $pdf->Cell(38, 5, get_string('subjekt', 'vocabulario'), 1, 0, 'C', 1);
-                                $pdf->Cell(38, 5, get_string('konjugier', 'vocabulario'), 1, 0, 'C', 1);
-                                $pdf->Cell(38, 5, get_string('mittelfeld', 'vocabulario'), 1, 0, 'C', 1);
-                                $pdf->Cell(38, 5, get_string('verb2', 'vocabulario'), 1, 1, 'C', 1);
-
+                                $pdf->Cell(20, 5, get_string('subjunktor', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(20, 5, get_string('subjekt', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(90, 5, get_string('mittelfeld', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(30, 5, get_string('verb2', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(25, 5, get_string('konjugier_resumen', 'vocabulario'), 1, 1, 'C', 1);
+                               
+                                
                                 $pdf->SetTextColor(TEXT_AUTO);
                                 $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
                                 $pdf->SetFont('', '', 10);
@@ -1689,14 +1690,18 @@ if ($impr_gram == 1) {
 
                                     if ($pintar) {
 
-                                        $pdf->Cell(38, 5, $descripcion_troceada[($f * 5)], 1, 0, 'C', 0);
-                                        $pdf->Cell(38, 5, $descripcion_troceada[($f * 5) + 4], 1, 0, 'C', 0);
-                                        $pdf->Cell(38, 5, $descripcion_troceada[($f * 5) + 1], 1, 0, 'C', 1);
-                                        $pdf->Cell(38, 5, $descripcion_troceada[($f * 5) + 2], 1, 0, 'C', 0);
-                                        $pdf->Cell(38, 5, $descripcion_troceada[($f * 5) + 3], 1, 1, 'C', 1);
+                                        $pdf->Cell(20, 5, $descripcion_troceada[($f * 5)], 1, 0, 'C', 0);
+                                        $pdf->Cell(20, 5, $descripcion_troceada[($f * 5) + 4], 1, 0, 'C', 0);
+                                        $pdf->Cell(90, 5, $descripcion_troceada[($f * 5) + 2], 1, 0, 'C', 0);
+                                        $pdf->Cell(30, 5, $descripcion_troceada[($f * 5) + 3], 1, 0, 'C', 1);
+                                        $pdf->Cell(25, 5, $descripcion_troceada[($f * 5) + 1], 1, 1, 'C', 1);
+                                        
                                     }
                                 }
-                                $pdf->Ln();
+                                
+
+                  
+
                                 break;
                             //2.4.2.1 Pronomina, die nur Personen bezeichnen
                             case 13:
