@@ -53,7 +53,9 @@ function get_sufijo_lenguaje_tabla() {
         $sufijotabla = "pl";
     } else if ($lenguaje == "de_utf8") {
         $sufijotabla = "de";
-    } else {
+    }else if ($lenguaje == "fr_utf8") {
+        $sufijotabla = "fr";
+    }else {
         $sufijotabla = "es";
     }
 
@@ -221,7 +223,7 @@ function vocabulario_scale_used($vocabularioid, $scaleid) {
     return $return;
 }
 
-function vocabulario_view($id, $opcion = 0, $id_mp = null) {
+function vocabulario_view($id, $opcion = 0, $id_mp = null,$palabra="") {
     global $CFG, $COURSE, $USER;
 
     $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
@@ -233,7 +235,7 @@ function vocabulario_view($id, $opcion = 0, $id_mp = null) {
             $mform->aniadircosas($id);
             break;
         case 1: //rellenar el formulario
-            $mform = new mod_vocabulario_rellenar_form('guardar.php?id_tocho=' . $id);
+            $mform = new mod_vocabulario_rellenar_form('guardar.php?id_tocho=' . $id.'?'.$palabra);
             break;
         case 2: //ver las palabras
             $mform = new mod_vocabulario_ver_form('ver.php?id_tocho=' . $id);
