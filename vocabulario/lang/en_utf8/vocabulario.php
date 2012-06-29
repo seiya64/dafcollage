@@ -272,6 +272,7 @@ $string['siehe'] = 'Siehe auch';
 $string['satzstruktur'] = 'SATZSTRUKTUR';
 $string['vorfeld'] = 'Vorfeld';
 $string['konjugier'] = 'Konjugiertes Verb';
+$string['konjugier_resumen'] = 'Konj. Verb';
 $string['mittelfeld'] = 'Mittelfeld';
 $string['mittel'] = 'Mittel';
 $string['wortklase'] = 'Theoretische Beschreibung';
