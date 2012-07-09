@@ -191,7 +191,7 @@ function botonBuscar(id_curso){
   
 }
 
-function Comprobacionesform(){
+/*function Comprobacionesform(){
     
        var objeto = document.getElementById('id_numerorespuestas');
       
@@ -208,7 +208,7 @@ function Comprobacionesform(){
        
         
     
-}
+}*/
 
 function botonMasRespuestas(i){
     alert("boton");
@@ -219,15 +219,16 @@ function botonMasRespuestas(i){
     var radioInput = document.createElement('input');
     radioInput.type="radio";
     radioInput.value="Si";
-   // radioInput.checked;
     radioInput.text="Si";
+    radioInput.checked=true;
    
     var radioInput2 = document.createElement('input');
     radioInput2.type="radio";
     radioInput2.value="No";
-  //  radio = document.createElement("<INPUT TYPE='RADIO' NAME='RADIOTEST' VALUE='Si'>");
-  //  radio2 = document.createElement("<INPUT TYPE='RADIO' NAME='RADIOTEST' VALUE='No'>");
+    radioInput2.text="No";
+    
     var br = document.createElement('br');
+    var br1 = document.createElement('br');
     switch(i){
         case 1:
              alert("llega");
@@ -235,31 +236,242 @@ function botonMasRespuestas(i){
             ultimarespuesta = document.getElementById('respuesta'+j1+'_'+i);
             j1=j1+1;
             textarea.id='respuesta'+j1+'_'+i;
+            textarea.name='respuesta'+j1+'_'+i;
             radioInput.id='correcta'+j1+'_'+i;
-            radioInput2.id='incorrecta'+j1+'_'+i;
+            radioInput.name='correcta'+j1+'_'+i;
+            radioInput2.id='correcta'+j1+'_'+i;
+            radioInput2.name='correcta'+j1+'_'+i;
+
             ultimarespuesta.parentNode.appendChild(textarea);
-            ultimarespuesta.parentNode.appendChild(br);
-             ultimarespuesta.parentNode.appendChild(document.createTextNode('Correcta: '));
+            ultimarespuesta.parentNode.appendChild(br1);
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('Correcta: '));
             ultimarespuesta.parentNode.appendChild(radioInput);
-           // NodoradioInput = document.getElementById('correcta'+j1+'_'+i);
+           
             ultimarespuesta.parentNode.appendChild(document.createTextNode('Si'));
             ultimarespuesta.parentNode.appendChild(radioInput2);
-            //NodoradioInput2 = document.getElementById('incorrecta'+j1+'_'+i);
+
             ultimarespuesta.parentNode.appendChild(document.createTextNode('No'));
-            
+            ultimarespuesta.parentNode.appendChild(br);
+           
+            // replaceChild(numrespuetas1, hijoAntiguo); reemplazamos el hijo hijoAntiguo del nodo por el nodo nuevoHijo
+            numrespuesta = document.getElementById('numerorespuestas_'+i);
+            numrespuesta.value=j1;
+             
+             break;
         case 2:
+        
+            alert("llega2");
+            alert('respuesta'+j2+'_'+i);
+            ultimarespuesta = document.getElementById('respuesta'+j2+'_'+i);
+            j2=j2+1;
+            textarea.id='respuesta'+j2+'_'+i;
+            textarea.name='respuesta'+j2+'_'+i;
+            radioInput.id='correcta'+j2+'_'+i;
+            radioInput.name='correcta'+j2+'_'+i;
+            radioInput2.id='correcta'+j2+'_'+i;
+            radioInput2.name='correcta'+j2+'_'+i;
+
+            ultimarespuesta.parentNode.appendChild(textarea);
+            ultimarespuesta.parentNode.appendChild(br1);
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('Correcta: '));
+            ultimarespuesta.parentNode.appendChild(radioInput);
+           
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('Si'));
+            ultimarespuesta.parentNode.appendChild(radioInput2);
+
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('No'));
+            ultimarespuesta.parentNode.appendChild(br);
+            
+            numrespuesta = document.getElementById('numerorespuestas_'+i);
+            numrespuesta.value=j2;
+            break;
         case 3:
+           alert("llega3");
+            alert('respuesta'+j3+'_'+i);
+            ultimarespuesta = document.getElementById('respuesta'+j3+'_'+i);
+            j3=j3+1;
+            textarea.id='respuesta'+j3+'_'+i;
+            textarea.name='respuesta'+j3+'_'+i;
+            radioInput.id='correcta'+j3+'_'+i;
+            radioInput.name='correcta'+j3+'_'+i;
+            radioInput2.id='correcta'+j3+'_'+i;
+            radioInput2.name='correcta'+j3+'_'+i;
+
+            ultimarespuesta.parentNode.appendChild(textarea);
+            ultimarespuesta.parentNode.appendChild(br1);
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('Correcta: '));
+            ultimarespuesta.parentNode.appendChild(radioInput);
+           
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('Si'));
+            ultimarespuesta.parentNode.appendChild(radioInput2);
+
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('No'));
+            ultimarespuesta.parentNode.appendChild(br);
+            numrespuesta = document.getElementById('numerorespuestas_'+i);
+            numrespuesta.value=j3;
+            
+            break;
         case 4:
+           alert("llega2");
+            alert('respuesta'+j4+'_'+i);
+            ultimarespuesta = document.getElementById('respuesta'+j4+'_'+i);
+            j4=j4+1;
+            textarea.id='respuesta'+j4+'_'+i;
+            textarea.name='respuesta'+j4+'_'+i;
+            radioInput.id='correcta'+j4+'_'+i;
+            radioInput.name='correcta'+j4+'_'+i;
+            radioInput2.id='correcta'+j4+'_'+i;
+            radioInput2.name='correcta'+j4+'_'+i;
+
+            ultimarespuesta.parentNode.appendChild(textarea);
+            ultimarespuesta.parentNode.appendChild(br1);
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('Correcta: '));
+            ultimarespuesta.parentNode.appendChild(radioInput);
+           
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('Si'));
+            ultimarespuesta.parentNode.appendChild(radioInput2);
+
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('No'));
+            ultimarespuesta.parentNode.appendChild(br);
+            
+            numrespuesta = document.getElementById('numerorespuestas_'+i);
+            numrespuesta.value=j4;
+            
+            break;
         case 5:
+           alert("llega2");
+            alert('respuesta'+j5+'_'+i);
+            ultimarespuesta = document.getElementById('respuesta'+j5+'_'+i);
+            j5=j5+1;
+            textarea.id='respuesta'+j5+'_'+i;
+            textarea.name='respuesta'+j5+'_'+i;
+            radioInput.id='correcta'+j5+'_'+i;
+            radioInput.name='correcta'+j5+'_'+i;
+            radioInput2.id='correcta'+j5+'_'+i;
+            radioInput2.name='correcta'+j5+'_'+i;
+
+            ultimarespuesta.parentNode.appendChild(textarea);
+            ultimarespuesta.parentNode.appendChild(br1);
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('Correcta: '));
+            ultimarespuesta.parentNode.appendChild(radioInput);
+           
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('Si'));
+            ultimarespuesta.parentNode.appendChild(radioInput2);
+
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('No'));
+            ultimarespuesta.parentNode.appendChild(br);
+             numrespuesta = document.getElementById('numerorespuestas_'+i);
+            numrespuesta.value=j5;
+            break;
         case 6:
+           alert("llega2");
+            alert('respuesta'+j6+'_'+i);
+            ultimarespuesta = document.getElementById('respuesta'+j6+'_'+i);
+            j6=j6+1;
+            textarea.id='respuesta'+j6+'_'+i;
+            textarea.name='respuesta'+j6+'_'+i;
+            radioInput.id='correcta'+j6+'_'+i;
+            radioInput.name='correcta'+j6+'_'+i;
+            radioInput2.id='correcta'+j6+'_'+i;
+            radioInput2.name='correcta'+j6+'_'+i;
+
+            ultimarespuesta.parentNode.appendChild(textarea);
+            ultimarespuesta.parentNode.appendChild(br1);
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('Correcta: '));
+            ultimarespuesta.parentNode.appendChild(radioInput);
+           
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('Si'));
+            ultimarespuesta.parentNode.appendChild(radioInput2);
+
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('No'));
+            ultimarespuesta.parentNode.appendChild(br);
+            
+             numrespuesta = document.getElementById('numerorespuestas_'+i);
+            numrespuesta.value=j6;
+            break;
         case 7:
+           alert("llega2");
+            alert('respuesta'+j7+'_'+i);
+            ultimarespuesta = document.getElementById('respuesta'+j7+'_'+i);
+            j7=j7+1;
+            textarea.id='respuesta'+j7+'_'+i;
+            textarea.name='respuesta'+j7+'_'+i;
+            radioInput.id='correcta'+j7+'_'+i;
+            radioInput.name='correcta'+j7+'_'+i;
+            radioInput2.id='correcta'+j7+'_'+i;
+            radioInput2.name='correcta'+j7+'_'+i;
+
+            ultimarespuesta.parentNode.appendChild(textarea);
+            ultimarespuesta.parentNode.appendChild(br1);
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('Correcta: '));
+            ultimarespuesta.parentNode.appendChild(radioInput);
+           
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('Si'));
+            ultimarespuesta.parentNode.appendChild(radioInput2);
+
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('No'));
+            ultimarespuesta.parentNode.appendChild(br);
+            
+             numrespuesta = document.getElementById('numerorespuestas_'+i);
+            numrespuesta.value=j7;
+            break;
         case 8:
+           alert("llega2");
+            alert('respuesta'+j8+'_'+i);
+            ultimarespuesta = document.getElementById('respuesta'+j8+'_'+i);
+            j8=j8+1;
+            textarea.id='respuesta'+j8+'_'+i;
+            textarea.name='respuesta'+j8+'_'+i;
+            radioInput.id='correcta'+j8+'_'+i;
+            radioInput.name='correcta'+j8+'_'+i;
+            radioInput2.id='correcta'+j8+'_'+i;
+            radioInput2.name='correcta'+j8+'_'+i;
+
+            ultimarespuesta.parentNode.appendChild(textarea);
+            ultimarespuesta.parentNode.appendChild(br1);
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('Correcta: '));
+            ultimarespuesta.parentNode.appendChild(radioInput);
+           
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('Si'));
+            ultimarespuesta.parentNode.appendChild(radioInput2);
+
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('No'));
+            ultimarespuesta.parentNode.appendChild(br);
+            
+            numrespuesta = document.getElementById('numerorespuestas_'+i);
+            numrespuesta.value=j8;
+            
+            break;
         case 9:
+               alert("llega2");
+            alert('respuesta'+j9+'_'+i);
+            
+            ultimarespuesta = document.getElementById('respuesta'+j9+'_'+i);
+            j9=j9+1;
+            textarea.id='respuesta'+j9+'_'+i;
+             textarea.name='respuesta'+j9+'_'+i;
+            radioInput.id='correcta'+j9+'_'+i;
+            radioInput.name='correcta'+j9+'_'+i;
+            radioInput2.id='correcta'+j9+'_'+i;
+            radioInput2.name='correcta'+j9+'_'+i;
+            
+            ultimarespuesta.parentNode.appendChild(textarea);
+            ultimarespuesta.parentNode.appendChild(br1);
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('Correcta: '));
+            ultimarespuesta.parentNode.appendChild(radioInput);
+           
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('Si'));
+            ultimarespuesta.parentNode.appendChild(radioInput2);
+
+            ultimarespuesta.parentNode.appendChild(document.createTextNode('No'));
+            ultimarespuesta.parentNode.appendChild(br);
+            
+            numrespuesta = document.getElementById('numerorespuestas_'+i);
+            numrespuesta.value=j9;
+            break;
     }
  
     
-     
-     
       
     
       
@@ -268,28 +480,10 @@ function botonMasRespuestas(i){
 }
 
  
-function botonAñadirRespuesta(i){
-    alert("añadiendo");
-    alert(i);
-     j=j+1;
-    
-    alert("j vale" +j);
-    respuesta = document.createElement('text');
-    respuesta.appendChild(document.createTextNode('Respuesta'+j));
-    
-    otro=document.getElementById('id_añadiendo'+i);
-    otro.appendChild(respuesta);
-    
-    elemento1 = document.createElement('textarea');
-    elemento1.id = 'id_añadiendo'+j;
-    elemento1.rows = 5;
-    elemento1.cols = 50;
-   
-    
-    elemento2 = document.getElementById('id_añadiendo'+i);
-    elemento2.parentNode.insertBefore(elemento1,elemento2);
-   
-    alert(j);
-}
 
+
+function obtenernumeroRespuestas(numpreg){
+  
+    alert("fin");
+}
 
