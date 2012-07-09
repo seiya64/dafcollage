@@ -56,7 +56,7 @@ class Ejercicios_general {
        var $descripcion;
        //Contructor
        function Ejercicios_general($id=NULL,$id_curso=NULL,$id_creador=NULL,$TipoActividad=NULL,$TipoArchivoPregunta=NULL,$TipoArchivoRespuesta=NULL,$visible=NULL,$privado=NULL,$carpeta=NULL,$CampoTematico=NULL,$Destreza=NULL,$TemaGramatical=NULL,$IntencionComunicativa=NULL,$TipologiaTextual=NULL,$name=NULL,$descripcion=NULL){
-                    
+               
            
                 $this->id=$id;
                 $this->id_curso=$id_curso;
@@ -74,7 +74,7 @@ class Ejercicios_general {
                 $this->TipologiaTextual=$TipologiaTextual;
                 $this->name=$name;
                 $this->descripcion=$descripcion;
-                    
+                  
         }
     
        
@@ -476,7 +476,6 @@ class Ejercicios_texto_texto {
     
        //Contructor
        function Ejercicios_texto_texto($id=NULL,$id_ejercicio=NULL,$numeropregunta=NULL,$Pregunta=NULL,$Respuesta=NULL,$Correcta=NULL){
-                    
            
                 $this->id=$id;
                 $this->id_ejercicio=$id_ejercicio;
@@ -519,9 +518,9 @@ class Ejercicios_texto_texto {
     
      function insertar(){
        
-        
          $id=insert_record('ejercicios_texto_texto', $this, true);
          //Devuelve el identificador del ejercicios creado
+ 
          return $id;
     }
     
@@ -564,7 +563,7 @@ class Ejercicios_texto_texto {
       function obtener_todos() {
         
       
-        $sql = 'SELECT * FROM  ejercicios_texto_texto';
+        $sql = 'SELECT * FROM  mdl_ejercicios_texto_texto';
       
         $todos = get_records_sql($sql);
         
@@ -572,7 +571,7 @@ class Ejercicios_texto_texto {
 
                foreach ($todos as $cosa) {
                     
-                     $mp = new Ejercicios_general();
+                     $mp = new Ejercicios_texto_texto();
                      
                      $mp->obtener_uno($cosa->id);
                      
@@ -587,6 +586,62 @@ class Ejercicios_texto_texto {
               
  
     }
+
+      function obtener_ejercicios_texto_id_ejercicicio($id_ejercicio) {
+        
+      
+        $sql = 'SELECT * FROM  mdl_ejercicios_texto_texto WHERE id_ejercicio='.$id_ejercicio;
+      
+        $todos = get_records_sql($sql);
+        
+         $todos_mis_ejercicios = array();
+
+               foreach ($todos as $cosa) {
+                    
+                     $mp = new Ejercicios_texto_texto();
+                     
+                     $mp->obtener_uno($cosa->id);
+                     
+                    $todos_mis_ejercicios[] = $mp;
+                    
+                  
+                }
+              
+                
+        return $todos_mis_ejercicios;
+               
+              
+ 
+    }
+
+       function obtener_ejercicios_texto_id_ejercicicio_numpreguntas($id_ejercicio,$numeropregunta) {
+        
+          
+      
+         $sql = 'SELECT * FROM  mdl_ejercicios_texto_texto WHERE id_ejercicio='.$id_ejercicio.' and numeropregunta='.$numeropregunta;
+      
+         $todos = get_records_sql($sql);
+        
+         $todos_mis_ejercicios = array();
+
+               foreach ($todos as $cosa) {
+                    
+                     $mp = new Ejercicios_texto_texto();
+                     
+                     $mp->obtener_uno($cosa->id);
+                   
+                    $todos_mis_ejercicios[] = $mp;
+                   
+                  
+                }
+              
+                
+        return $todos_mis_ejercicios;
+               
+              
+ 
+    }
+
 
         
 }
