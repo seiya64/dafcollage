@@ -21,6 +21,7 @@ $ejercicios_EXAMPLE_CONSTANT = 42;     /// for example
 
 require_once('ejercicios_form.php');
 require_once('ejercicios_form_creacion.php');
+require_once('ejercicios_form_mostrar.php');
 
 /**
  * Given an object containing all the necessary data,
@@ -220,7 +221,7 @@ function ejercicios_uninstall() {
 /// starts with ejercicios_
 /// Remember (see note in first lines) that, if this section grows, it's HIGHLY
 /// recommended to move all funcions below to a new "localib.php" file.
-function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p=1,$r=2,$c=1,$id_ejercicio=0) {
+function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p=1,$id_ejercicio=0) {
     global $CFG, $COURSE, $USER;
 
     $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
@@ -261,8 +262,15 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
             echo "resputestas".$r;
             echo "correctas".$c;
             echo "id_ejercicio".$id_ejercicio;*/
-            $mform= new mod_ejercicios_creando_ejercicio_texto($id,$p,$r,$c,$id_ejercicio);
-            $mform->pintarformulariotexto($id,$p,$r,$c,$id_ejercicio);
+            $mform= new mod_ejercicios_creando_ejercicio_texto($id,$p,$id_ejercicio);
+            $mform->pintarformulariotexto($id,$p,$id_ejercicio);
+           
+            break;
+        
+         case 8:// Mostrando ejercicio Multichoice texto-texto
+               
+             $mform= new mod_ejercicios_mostrar_ejercicio($id,$id_ejercicio);
+             $mform->mostrar_ejercicio($id,$id_ejercicio);
            
             break;
         
