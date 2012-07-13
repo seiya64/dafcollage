@@ -105,7 +105,7 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
            $mform->addGroup($radioarray, 'radiorespuesta',  get_string('tiporespuesta', 'ejercicios'), array(' '), false);
            $mform->setDefault('radiorespuesta',"Texto");
            
-           
+          /* 
             //Seleccione el número total de archivos respuesta
             $numimagenes=array();
             for($i=0;$i<9;$i++){
@@ -120,7 +120,7 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
               $numimagenes[] = $i+1;
              }
            $mform->addElement('select', 'numerorespuestascorrectas',get_string('numerorespuestascorrectas', 'ejercicios'), $numimagenes,"onchange=JavaScript:Comprobacionesform()");
-           
+           */
            //Clasificacion
            
            $clasi='</br><div"></br></center>Asigne una o varias categorías de búsqueda de los siguientes menús desplegables:</center></br></br>';
@@ -264,10 +264,10 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
 
 class mod_ejercicios_creando_ejercicio_texto extends moodleform_mod {
 
-    function mod_ejercicios_creando_ejercicio_texto($id,$p,$r,$c,$id_ejercicio)
+    function mod_ejercicios_creando_ejercicio_texto($id,$p,$id_ejercicio)
         {
          // El fichero que procesa el formulario es gestion.php
-         parent::moodleform('ejercicios_gestion_creacion.php?id_curso='.$id.'&tipocreacion='.$tipocreacion);
+         parent::moodleform('ejercicios_creacion_texto_texto.php?id_curso='.$id.'&id_ejercicio='.$id_ejercicio);
        }
        
      function definition() {
@@ -284,7 +284,7 @@ class mod_ejercicios_creando_ejercicio_texto extends moodleform_mod {
      * @param $c numero de respuestas correctas
      * @param $id_ejercicio id del ejercicio que estamos creando 
      */
-     function pintarformulariotexto($id,$p,$r,$c,$id_ejercicio){
+     function pintarformulariotexto($id,$p,$id_ejercicio){
          
          global $CFG, $COURSE, $USER;
         $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
@@ -306,25 +306,36 @@ class mod_ejercicios_creando_ejercicio_texto extends moodleform_mod {
             $mform->addElement('textarea', 'pregunta'.$aux, get_string('pregunta', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
             $mform->addRule('descripcion', "Pregunta Necesaria", 'required', null, 'client');
          
+           // $mform->addElement('hidden','numerorespuestas_'.$aux,3);
            
             $textarea='</br><div id="titulorespuestas" style="margin-left:130px;">Respuestas:</div>'; 
             $textarea.='<div style="margin-left:280px;" id="respuestas_pregunta"'.$aux.'"> ';
-            $textarea.='<textarea id="respuesta'.$aux.'_'.'1'.'" rows="5" cols="50"> </textarea>';
-            $textarea.='</br><div id="correctarespuesta"">'.get_string('Correcta', 'ejercicios'); 
-            $textarea.='<input type="radio"  id="correctarespuesta'.$aux.'_'.'1'.'" value="Si" checked> Si </input>';
-            $textarea.='<input type="radio"" id="correctarespuesta'.$aux.'_'.'1'.'" value="No"> No </input>';
+            $textarea.='<textarea name="respuesta1_'.$aux.'" id="respuesta1_'.$aux.'" rows="5" cols="50"></textarea>';
+            $textarea.='</br><div id="correctarespuesta">'.get_string('Correcta', 'ejercicios'); 
+            $textarea.='<input type="radio"  name="correcta1_'.$aux.'" id="correcta1_'.$aux.'" value="Si" checked> Si </input>';
+            $textarea.='<input type="radio" name="correcta1_'.$aux.'"  id="correcta1_'.$aux.'" value="No"> No </input>';
             $textarea.='</br>';
             $textarea.='</div>';
+            
+          
+            $textarea.='<input type="hidden" name="numerorespuestas_'.$aux.'" id="numerorespuestas_'.$aux.'" value="1"/>';
             $textarea.='</div>';
             $mform->addElement('html',$textarea);
    
-   
+           // $mform->addElement('text', 'numerorespuestas_'.$aux,"hola");
             $botonañadir='<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestas('.$aux.');"></center>';
          
             $mform->addElement('html', $botonañadir);
             
                       
         }
+        
+           $mform->addElement('hidden','numeropreguntas',$p);
+          
+            $buttonarray = array();
+            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"onclick=obtenernumeroRespuestas('$p');");
+            $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
+        
      }
 }
 
