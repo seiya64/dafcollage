@@ -7,6 +7,7 @@
  var j7=1;
  var j8=1;
  var j9=1;
+
 $(document).ready(function(){
     
  
@@ -479,11 +480,172 @@ function botonMasRespuestas(i){
     
 }
 
- 
 
-
-function obtenernumeroRespuestas(numpreg){
+function BotonRadio(botonradio){
   
-    alert("fin");
+
+  
+    if(botonradio.value=="0"){
+        botonradio.value="1";
+    }else{
+        if(botonradio.checked){
+            botonradio.checked=false;
+            botonradio.value="0";
+        }else{
+            botonradio.checked=true;
+        }
+    }
+}
+
+
+function EliminarRespuesta(respuesta,numpreg){
+  
+
+   padre=respuesta.parentNode;
+   padre.removeChild(respuesta.nextSibling);
+   padre.removeChild(respuesta);
+   
+    var k=padre.childNodes.length;
+     
+    j=0;
+   
+    for(i=0;i<k;i=i+2){
+        j=j+1;
+  
+        padre.childNodes[i].setAttribute("id",'tablarespuesta'+j+'_'+numpreg);
+        padre.childNodes[i].childNodes[0].childNodes[0].setAttribute("id",'trrespuesta'+j+'_'+numpreg);
+        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[0].setAttribute("name",'crespuesta'+j+'_'+numpreg);
+        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[0].setAttribute("value",'crespuesta'+j+'_'+numpreg);
+        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[1].setAttribute("id",'respuesta'+j+'_'+numpreg);
+        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes[0].setAttribute("onclick",'EliminarRespuesta(tablarespuesta'+j+'_'+numpreg+','+numpreg+")");
+       
+            
+        
+    }
+    
+   
+}
+
+function anadirRespuesta(respuesta){
+  
+    alert("Añadiendo respuesta");
+    alert(respuesta.id);
+  
+    var idrespuesta=respuesta.id;
+    alert(idrespuesta);
+    switch(idrespuesta){
+        case 'respuestas1':
+            
+            numpreg="1";
+           
+            break;
+        case 'respuestas2':
+            
+            numpreg="2";
+            
+            break;
+        case 'respuestas3':
+            
+            numpreg="3";
+           
+            break;
+        case 'respuestas4':
+            
+            numpreg="4";
+            
+            break;
+        case 'respuestas5':
+            
+            numpreg="5";
+           
+            break;
+        case 'respuestas6':
+            
+            numpreg="6";
+            
+            break;
+            
+        case 'respuestas7':
+            
+            numpreg="7";
+           
+            break;
+        case 'respuestas8':
+            
+            numpreg="8";
+            
+            break;
+         case 'respuestas9':
+            
+            numpreg="9";
+            
+            break;
+    }
+    
+           var table = document.createElement("table");
+           var tr = document.createElement("tr");
+            alert(respuesta.childNodes.length);
+            
+      
+            //-1 por el text del div
+            var numresp=(respuesta.childNodes.length/2) +1;
+          
+            table.width="100%";
+            table.id="tablarespuesta"+numresp+"_"+numpreg;
+            alert("fin");
+            var tbody = document.createElement("tbody");
+          
+            alert("numerooooooooooo" +numresp);
+           
+            tr.id="trrespuesta"+numresp+"_"+numpreg;
+            var td = document.createElement("td");
+            td.style.width="80%";
+            var radioInput = document.createElement("input");
+            radioInput.setAttribute("class","over");
+            radioInput.type="radio";
+            radioInput.name="crespuesta"+numresp+"_"+numpreg;
+            radioInput.value="0";  
+            radioInput.setAttribute("onclick","BotonRadio(crespuesta"+numresp+"_"+numpreg+")");  
+            var div = document.createElement("div");
+            div.setAttribute("class","resp");
+            div.id="respuesta"+numresp+"_"+numpreg;
+            var text = document.createTextNode("Introduzca su respuesta..");
+            div.contentEditable=true;
+            div.appendChild(text);
+            
+            var td2 = document.createElement("td");
+            td2.style.width="5%"
+         
+         
+            var img= document.createElement("img");
+            img.src="./imagenes/delete.gif";
+            img.style.height="10px";
+            img.style.width="10px";
+            img.setAttribute("onclick","EliminarRespuesta(tablarespuesta"+numresp+"_"+numpreg+","+numpreg+")");
+            img.title="Eliminar Respuesta";
+            
+            
+            var img2= document.createElement("img");
+            img2.src="./imagenes/incorrecto.png";
+            img2.style.height="15px";
+            img2.style.width="15x";
+            img2.setAttribute("onclick","InvertirRespuesta()");
+            img2.title="Cambiar a Correcta";
+     
+            td2.appendChild(img);
+            td2.appendChild(img2);
+            td.appendChild(radioInput);
+            td.appendChild(div);
+            tr.appendChild(document.createTextNode(""));
+            tr.appendChild(td);
+            tr.appendChild(document.createTextNode(""));
+            tr.appendChild(td2);
+            tbody.appendChild(tr);
+            table.appendChild(tbody);
+            
+    respuesta.appendChild(table);
+    respuesta.appendChild(document.createTextNode(""));
+        alert("fin2");
+   // respuesta.parentNode.addChild(respuesta);
 }
 
