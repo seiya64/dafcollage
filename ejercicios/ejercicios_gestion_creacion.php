@@ -117,7 +117,7 @@ if($tipo_pregunta == "Texto" && $tipo_respuesta == "Texto"){
     $ejercicio_profesor->insertar();
     
     //La comprobacion de errores esta en el javascript
-     redirect('./view.php?id=' . $id_curso . '&opcion=7'. '&p='.$numeropreguntas. '&r='.$numerorespuestas .'&c='.$numerorespuestascorrectas.'&id_ejercicio='.$id_ejercicio);
+     redirect('./view.php?id=' . $id_curso . '&opcion=7'. '&p='.$numeropreguntas. '&id_ejercicio='.$id_ejercicio);
         
     
  
