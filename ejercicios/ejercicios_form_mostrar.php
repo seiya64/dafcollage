@@ -101,7 +101,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
          //Veo que clasificación TipoActividad tiene
          $tipoactividad=$ejercicios_leido->get('TipoActividad');
          
-        
+        echo "pintando";
          switch ($tipoactividad) {
              case 0: //es multichoice
 
@@ -114,7 +114,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                  if($numero != 0){ //Si es de tipo texto-texto
                           
                             //lo pinto+
-                       
+                        echo "a";
                             
                              $terminar=false;
                              for($i=1;$i<10&&$terminar==false;$i++){
@@ -128,14 +128,17 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                       
                                       $terminar=true;
                                   }else{
-                                     
+                                     echo"aki";
                                      
                                       //Obtengo la pregunta
-                                         $divpregunta='<div id="tabpregunta'.$i.'" >';
+                                                $divpregunta='<div id="tabpregunta'.$i.'" >';
                                                $divpregunta.='<br/><br/>';
                                                $divpregunta.='<table style="width:100%;">';
                                                $divpregunta.=' <td style="width:80%;">';
-                                               $divpregunta.='<div contentEditable="true" class=pregunta>';
+                                               $divpregunta.='<div id="id_pregunta1" name="pregunta1" contentEditable="true" class=pregunta>';
+                                                // $divpregunta.='<input size="110" name="pregunta1" type="text" id="id_pregunta1" value="'.$preguntas[0]->get('Pregunta').'"></input>';
+                                              
+                                              // $divpregunta.='<input name="pregunta1" type="text" style="width:80%; height:100%; margin:1%;">ssss</input>';
                                                $divpregunta.=$preguntas[0]->get('Pregunta');
                                                $divpregunta.='</div>';
                                                
@@ -166,21 +169,22 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                                     $divpregunta.='<input class=over type="radio" name="crespuesta'.$q.'_'.$i.'" value="0" onclick="BotonRadio(crespuesta'.$q.'_'.$i.')"/>';
                                                }
                                                
-                                               $divpregunta.='<div class="resp" id="respuesta'.$q."_".$i.'" contentEditable=true>';
+                                               $divpregunta.='<div class="resp" name="respuesta'.$q."_".$i.'" id="respuesta'.$q."_".$i.'" contentEditable=true>';
                                                $divpregunta.=$preguntas[$p]->get('Respuesta');
                                                $divpregunta.='</div>';
                                                
                                                $divpregunta.=' </td>';
                                                $divpregunta.=' <td style="width:5%;">';
                                               
+                                               //La imagen para eliminar las respuestas
                                                $divpregunta.='<img src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarRespuesta(tablarespuesta'.$q.'_'.$i.','.$i.')" title="Eliminar Respuesta"></img>';
                                                
                                                
                                                //La imagen para cambiar las respuestas
                                                if($correc){
-                                                   $divpregunta.='<img src="./imagenes/correcto.png" alt="respuesta correcta"  height="15px"  width="15px" onClick="InvertirRespuesta()" title="Cambiar a Incorrecta"></img>';
+                                                   $divpregunta.='<img src="./imagenes/correcto.png" id="correcta'.$q.'_'.$i.'" alt="respuesta correcta"  height="15px"  width="15px" onClick="InvertirRespuesta(correcta'.$q.'_'.$i.',1)" title="Cambiar a Incorrecta"></img>';
                                                }else{
-                                                    $divpregunta.='<img src="./imagenes/incorrecto.png" alt="respuesta correcta"  height="15px"  width="15px" onClick="InvertirRespuesta()" title="Cambiar a Correcta"></img>';
+                                                    $divpregunta.='<img src="./imagenes/incorrecto.png" id="correcta'.$q.'_'.$i.'" alt="respuesta correcta"  height="15px"  width="15px" onClick="InvertirRespuesta(correcta'.$q.'_'.$i.',0)" title="Cambiar a Correcta"></img>';
                                                }
                                                
                                                $divpregunta.='</td> ';
@@ -204,17 +208,11 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                              
                              
                              //Pinto los botones
-                             //  $buttonarray = array();
+                              $buttonarray = array();
                               $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('BotonGuardar','ejercicios'));
                              // $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('BotonCorregir','ejercicios'));
                               $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
-            
-                         //   $boton='<br/><input type="button" style="height:30px; width:140px; margin-left:250px; float:left" value="'.get_string('BotonGuardar','ejercicios').'"">';
-
-                         //   $boton.='<input type="button" style="height:30px; width:140px; margin-left:20px;" value="'.get_string('BotonCorregir','ejercicios').'"">';
-         
-                         //   $mform->addElement('html', $boton);
-            
+                  
                        
                      
                  }
