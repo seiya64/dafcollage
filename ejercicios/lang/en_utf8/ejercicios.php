@@ -95,5 +95,7 @@ $string["respuesta"]="Respuesta ";
 $string["Correcta"]="Correcta ";
 $string["BotonAñadirRespuesta"]="Añadir otra Respuesta";
 
+$string["BotonCorregir"]="Corregir";
+$string["BotonGuardar"]="Guardar";
 
 ?>
