@@ -192,24 +192,7 @@ function botonBuscar(id_curso){
   
 }
 
-/*function Comprobacionesform(){
-    
-       var objeto = document.getElementById('id_numerorespuestas');
-      
-       
-       var objeto1 = document.getElementById('id_numerorespuestascorrectas');
-   
-       //El número de respuestas correctas es mayor que el de respuestas
-       if(objeto.selectedIndex< objeto1.selectedIndex ){
-      
-             alert("El número de respuesta correctas debe ser menor o igual que el número de respuestas");
-            
-             
-       }
-       
-        
-    
-}*/
+
 
 function botonMasRespuestas(i){
     alert("boton");
@@ -629,7 +612,8 @@ function anadirRespuesta(respuesta){
             img2.src="./imagenes/incorrecto.png";
             img2.style.height="15px";
             img2.style.width="15x";
-            img2.setAttribute("onclick","InvertirRespuesta()");
+            img2.id="correcta"+numresp+"_"+numpreg;
+            img2.setAttribute("onclick","InvertirRespuesta(correcta"+numresp+"_"+numpreg+",0)");
             img2.title="Cambiar a Correcta";
      
             td2.appendChild(img);
@@ -649,3 +633,14 @@ function anadirRespuesta(respuesta){
    // respuesta.parentNode.addChild(respuesta);
 }
 
+function InvertirRespuesta(correcta,valor){
+    
+    alert("Invertir respuestas");
+    alert(correcta.src);
+    alert(valor);
+    if(valor=="0"){
+        correcta.src="./imagenes/correcto.png";
+    }else{
+        correcta.src="./imagenes/incorrecto.png";
+    }
+}
