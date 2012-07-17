@@ -101,8 +101,7 @@ $(document).ready(function(){
    
      function sele($id) { 
     
-        
-    alert("seleccionado");
+ 
     var txt =''; 
  
     if (window.getSelection) 
@@ -119,7 +118,6 @@ $(document).ready(function(){
     } 
     else return; 
 
-      alert(txt);
        window.open("../vocabulario/view.php?id=" + $id + "&opcion=1&palabra="+txt,'popup','width=600,height=600');
    }
    
@@ -176,8 +174,7 @@ function botonCrear(id_curso){
         if(objeto.selectedIndex!=0){
          var eltxt = objeto.options[objeto.selectedIndex].text;
       
-        alert(eltxt);
-        
+     
         location.href="view.php?id=" + id_curso + "&opcion=5&tipocreacion=" + objeto.selectedIndex ;
         
         }else{ //No hay nada seleccionado en crear
@@ -195,7 +192,7 @@ function botonBuscar(id_curso){
 
 
 function botonMasRespuestas(i){
-    alert("boton");
+  
   
     textarea = document.createElement('textarea');
     textarea.rows = 5;
@@ -215,8 +212,7 @@ function botonMasRespuestas(i){
     var br1 = document.createElement('br');
     switch(i){
         case 1:
-             alert("llega");
-             alert('respuesta'+j1+'_'+i);
+          
             ultimarespuesta = document.getElementById('respuesta'+j1+'_'+i);
             j1=j1+1;
             textarea.id='respuesta'+j1+'_'+i;
@@ -244,8 +240,7 @@ function botonMasRespuestas(i){
              break;
         case 2:
         
-            alert("llega2");
-            alert('respuesta'+j2+'_'+i);
+           
             ultimarespuesta = document.getElementById('respuesta'+j2+'_'+i);
             j2=j2+1;
             textarea.id='respuesta'+j2+'_'+i;
@@ -270,8 +265,7 @@ function botonMasRespuestas(i){
             numrespuesta.value=j2;
             break;
         case 3:
-           alert("llega3");
-            alert('respuesta'+j3+'_'+i);
+         
             ultimarespuesta = document.getElementById('respuesta'+j3+'_'+i);
             j3=j3+1;
             textarea.id='respuesta'+j3+'_'+i;
@@ -296,8 +290,7 @@ function botonMasRespuestas(i){
             
             break;
         case 4:
-           alert("llega2");
-            alert('respuesta'+j4+'_'+i);
+          
             ultimarespuesta = document.getElementById('respuesta'+j4+'_'+i);
             j4=j4+1;
             textarea.id='respuesta'+j4+'_'+i;
@@ -323,8 +316,7 @@ function botonMasRespuestas(i){
             
             break;
         case 5:
-           alert("llega2");
-            alert('respuesta'+j5+'_'+i);
+         
             ultimarespuesta = document.getElementById('respuesta'+j5+'_'+i);
             j5=j5+1;
             textarea.id='respuesta'+j5+'_'+i;
@@ -348,8 +340,7 @@ function botonMasRespuestas(i){
             numrespuesta.value=j5;
             break;
         case 6:
-           alert("llega2");
-            alert('respuesta'+j6+'_'+i);
+         
             ultimarespuesta = document.getElementById('respuesta'+j6+'_'+i);
             j6=j6+1;
             textarea.id='respuesta'+j6+'_'+i;
@@ -374,8 +365,7 @@ function botonMasRespuestas(i){
             numrespuesta.value=j6;
             break;
         case 7:
-           alert("llega2");
-            alert('respuesta'+j7+'_'+i);
+          
             ultimarespuesta = document.getElementById('respuesta'+j7+'_'+i);
             j7=j7+1;
             textarea.id='respuesta'+j7+'_'+i;
@@ -400,8 +390,7 @@ function botonMasRespuestas(i){
             numrespuesta.value=j7;
             break;
         case 8:
-           alert("llega2");
-            alert('respuesta'+j8+'_'+i);
+         
             ultimarespuesta = document.getElementById('respuesta'+j8+'_'+i);
             j8=j8+1;
             textarea.id='respuesta'+j8+'_'+i;
@@ -427,8 +416,7 @@ function botonMasRespuestas(i){
             
             break;
         case 9:
-               alert("llega2");
-            alert('respuesta'+j9+'_'+i);
+            
             
             ultimarespuesta = document.getElementById('respuesta'+j9+'_'+i);
             j9=j9+1;
@@ -458,8 +446,6 @@ function botonMasRespuestas(i){
     
       
     
-      
-      alert("fin");
     
 }
 
@@ -499,23 +485,31 @@ function EliminarRespuesta(respuesta,numpreg){
         padre.childNodes[i].childNodes[0].childNodes[0].setAttribute("id",'trrespuesta'+j+'_'+numpreg);
         padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[0].setAttribute("name",'crespuesta'+j+'_'+numpreg);
         padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[0].setAttribute("value",'crespuesta'+j+'_'+numpreg);
+        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[0].setAttribute("onclick",'BotonRadio(crespuesta'+j+'_'+numpreg+')');
         padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[1].setAttribute("id",'respuesta'+j+'_'+numpreg);
+        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[1].setAttribute("name",'respuesta'+j+'_'+numpreg);
         padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes[0].setAttribute("onclick",'EliminarRespuesta(tablarespuesta'+j+'_'+numpreg+','+numpreg+")");
-       
+        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes[1].setAttribute("id",'correcta'+j+'_'+numpreg);
+        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes[1].setAttribute("onclick",'InvertirRespuesta(correcta'+j+'_'+numpreg+','+numpreg+")");
+        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes[2].setAttribute("id",'valorcorrecta'+j+'_'+numpreg);
+        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes[2].setAttribute("name",'valorcorrecta'+j+'_'+numpreg);
             
         
     }
+        //Tengo una respuesta menos
+        numerorespuestas = document.getElementById('num_res_preg'+numpreg);
+       
+        numerorespuestas.value=parseInt(numerorespuestas.value)-1;
+    
+    
     
    
 }
 
 function anadirRespuesta(respuesta){
   
-    alert("Añadiendo respuesta");
-    alert(respuesta.id);
-  
     var idrespuesta=respuesta.id;
-    alert(idrespuesta);
+  
     switch(idrespuesta){
         case 'respuestas1':
             
@@ -567,7 +561,7 @@ function anadirRespuesta(respuesta){
     
            var table = document.createElement("table");
            var tr = document.createElement("tr");
-            alert(respuesta.childNodes.length);
+         
             
       
             //-1 por el text del div
@@ -575,10 +569,10 @@ function anadirRespuesta(respuesta){
           
             table.width="100%";
             table.id="tablarespuesta"+numresp+"_"+numpreg;
-            alert("fin");
+        
             var tbody = document.createElement("tbody");
           
-            alert("numerooooooooooo" +numresp);
+            
            
             tr.id="trrespuesta"+numresp+"_"+numpreg;
             var td = document.createElement("td");
@@ -589,11 +583,12 @@ function anadirRespuesta(respuesta){
             radioInput.name="crespuesta"+numresp+"_"+numpreg;
             radioInput.value="0";  
             radioInput.setAttribute("onclick","BotonRadio(crespuesta"+numresp+"_"+numpreg+")");  
-            var div = document.createElement("div");
+            var div = document.createElement("textarea");
             div.setAttribute("class","resp");
             div.id="respuesta"+numresp+"_"+numpreg;
+            div.name="respuesta"+numresp+"_"+numpreg;
             var text = document.createTextNode("Introduzca su respuesta..");
-            div.contentEditable=true;
+           
             div.appendChild(text);
             
             var td2 = document.createElement("td");
@@ -615,9 +610,15 @@ function anadirRespuesta(respuesta){
             img2.id="correcta"+numresp+"_"+numpreg;
             img2.setAttribute("onclick","InvertirRespuesta(correcta"+numresp+"_"+numpreg+",0)");
             img2.title="Cambiar a Correcta";
-     
+             var hidden= document.createElement("input");
+             hidden.type="hidden";
+             hidden.value="0";
+             hidden.id="valorcorrecta"+numresp+"_"+numpreg;
+             hidden.name="valorcorrecta"+numresp+"_"+numpreg;
+             //$divpregunta.='<input type="hidden" value="0"  id="valorcorrecta'.$q.'_'.$i.'" name="valorcorrecta'.$q.'_'.$i.'" />';
             td2.appendChild(img);
             td2.appendChild(img2);
+            td2.appendChild(hidden);
             td.appendChild(radioInput);
             td.appendChild(div);
             tr.appendChild(document.createTextNode(""));
@@ -629,18 +630,27 @@ function anadirRespuesta(respuesta){
             
     respuesta.appendChild(table);
     respuesta.appendChild(document.createTextNode(""));
-        alert("fin2");
+     
+        //Sumo 1 al número de respuesas
+        numerorespuestas = document.getElementById('num_res_preg'+numpreg);
+       
+        numerorespuestas.value=parseInt(numerorespuestas.value)+1;
+ 
    // respuesta.parentNode.addChild(respuesta);
 }
 
 function InvertirRespuesta(correcta,valor){
     
-    alert("Invertir respuestas");
-    alert(correcta.src);
-    alert(valor);
+
     if(valor=="0"){
         correcta.src="./imagenes/correcto.png";
+        
+        correcta.setAttribute("onclick",'InvertirRespuesta('+correcta.id+",1)");
+
+       correcta.parentNode.childNodes[2].value="1";
     }else{
         correcta.src="./imagenes/incorrecto.png";
+        correcta.setAttribute("onclick",'InvertirRespuesta('+correcta.id+",0)");
+        correcta.parentNode.childNodes[2].value="0";
     }
 }
