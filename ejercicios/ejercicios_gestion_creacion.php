@@ -107,8 +107,9 @@ if($tipo_pregunta == "Texto" && $tipo_respuesta == "Texto"){
     $descripcion=required_param('descripcion', PARAM_TEXT);
     
     
-    $ejercicio_general= new Ejercicios_general($id,$id_curso,$id_creador,$TipoActividad,$TipoArchivoPregunta,$TipoArchivoRespuesta,$visible,$privado,$carpeta,$CampoTematico,$Destreza,$TemaGramatical,$IntencionComunicativa,$TipologiaTextual,$name,$descripcion);
+    $ejercicio_general= new Ejercicios_general($id,$id_curso,$id_creador,$TipoActividad,$TipoArchivoPregunta,$TipoArchivoRespuesta,$visible,$privado,$carpeta,$CampoTematico,$Destreza,$TemaGramatical,$IntencionComunicativa,$TipologiaTextual,$name,$descripcion,$numeropreguntas);
     $id_ejercicio=$ejercicio_general->insertar();
+    
     
     //Tengo que asignarle el ejercico al profesor 
     $carpeta=required_param('carpeta_ejercicio', PARAM_TEXT);
