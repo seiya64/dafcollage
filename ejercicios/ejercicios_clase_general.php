@@ -54,8 +54,9 @@ class Ejercicios_general {
        var $TipologiaTextual;
        var $name;
        var $descripcion;
+       var $numpreg;
        //Contructor
-       function Ejercicios_general($id=NULL,$id_curso=NULL,$id_creador=NULL,$TipoActividad=NULL,$TipoArchivoPregunta=NULL,$TipoArchivoRespuesta=NULL,$visible=NULL,$privado=NULL,$carpeta=NULL,$CampoTematico=NULL,$Destreza=NULL,$TemaGramatical=NULL,$IntencionComunicativa=NULL,$TipologiaTextual=NULL,$name=NULL,$descripcion=NULL){
+       function Ejercicios_general($id=NULL,$id_curso=NULL,$id_creador=NULL,$TipoActividad=NULL,$TipoArchivoPregunta=NULL,$TipoArchivoRespuesta=NULL,$visible=NULL,$privado=NULL,$carpeta=NULL,$CampoTematico=NULL,$Destreza=NULL,$TemaGramatical=NULL,$IntencionComunicativa=NULL,$TipologiaTextual=NULL,$name=NULL,$descripcion=NULL,$numpreg=NULL){
                
            
                 $this->id=$id;
@@ -74,6 +75,7 @@ class Ejercicios_general {
                 $this->TipologiaTextual=$TipologiaTextual;
                 $this->name=$name;
                 $this->descripcion=$descripcion;
+                $this->numpreg=$numpreg;
                   
         }
     
@@ -122,7 +124,9 @@ class Ejercicios_general {
             case 'descripcion':
                return $this->descripcion;
                 break;
-     
+            case 'numpreg':
+               return $this->numpreg;
+                break;
         }
     }
     
@@ -160,6 +164,7 @@ class Ejercicios_general {
          $this->TipologiaTextual=$ejer->TipologiaTextual;
          $this->name=$ejer->name;
          $this->descripcion=$ejer->descripcion;
+         $this->numpreg=$ejer->numpreg;
           return $this;
 
     }
@@ -183,6 +188,7 @@ class Ejercicios_general {
          $this->TipologiaTextual=$ejer->TipologiaTextual;
          $this->name=$ejer->name;
          $this->descripcion=$ejer->descripcion;
+         $this->numpreg=$ejer->numpreg;
          return $this;
           
     }
