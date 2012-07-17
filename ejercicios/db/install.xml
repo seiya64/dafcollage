@@ -70,7 +70,8 @@
         <FIELD NAME="IntencionComunicativa" TYPE="int" LENGTH="11" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Clasificacion por Intencion comunicativa" PREVIOUS="TemaGramatical" NEXT="TipologiaTextual"/>
         <FIELD NAME="TipologiaTextual" TYPE="int" LENGTH="11" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Clasificacion Tipologia Textual" PREVIOUS="IntencionComunicativa"  NEXT="name"/>
         <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="Nombre del ejercicio" PREVIOUS="TipologiaTextual" NEXT="descripcion"/>
-        <FIELD NAME="descripcion" TYPE="char" LENGTH="500" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="Descripcion del ejercicio" PREVIOUS="name"/>
+        <FIELD NAME="descripcion" TYPE="char" LENGTH="500" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="Descripcion del ejercicio" PREVIOUS="name" NEXT="numpreg"/>
+        <FIELD NAME="numpreg" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="Numero de preguntas del ejercicio" PREVIOUS="descripcion"/>
     </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id" />
