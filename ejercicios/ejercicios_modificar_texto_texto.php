@@ -49,6 +49,11 @@ $id_ejercicio = optional_param('id_ejercicio', 0, PARAM_INT);
 $mform = new  mod_ejercicios_mostrar_ejercicio($id_curso,$id_ejercicio);
 $mform->mostrar_ejercicio($id_curso,$id_ejercicio);
 
+ $ejercicio_general = new Ejercicios_general();
+ $miejercicio=$ejercicio_general->obtener_uno($id_ejercicio);
+   
+ $numpreg=$miejercicio->get("numpreg"); 
+
 if ($mform->is_submitted()) {  //Boton Guardar
    
     #borro todas las respuestas y preguntas y las vuelvo a insertar
@@ -57,19 +62,31 @@ if ($mform->is_submitted()) {  //Boton Guardar
     
     //leo un ejercicio y lo guardo
     
-    for($i=0;$i<1;$i++){
+    for($i=0;$i<$numpreg;$i++){
     //Obtengo el numero de respuestas a cada pregunta
-    echo required_param('crespuesta1_1',PARAM_INT);
-    echo required_param('pregunta1',PARAM_TEXT);
-    
     $j=$i+1;
-   // $pregunta = required_param('pregunta'.$j,PARAM_TEXT);
-     echo "pregunta".$pregunta;
+   
+    $preg=required_param('pregunta'.$j,PARAM_TEXT);
+    echo "la pregunta".$i."   ".required_param('pregunta'.$j,PARAM_TEXT);
+    $numresp=required_param('num_res_preg'.$j,PARAM_TEXT);
+    echo "numero respuestas ". required_param('num_res_preg'.$j,PARAM_TEXT)."<br>";
+    for($k=0;$k<$numresp;$k++){
+        $l=$k+1;
+        $resp=required_param('respuesta'.$l."_".$j,PARAM_TEXT);
+        echo "la respuesta  numero " .$l."es".$resp;
+        echo "correcta". required_param('valorcorrecta'.$l."_".$j,PARAM_INT).' <br>';
+        $correcta=required_param('valorcorrecta'.$l."_".$j,PARAM_INT);
+       $ejercicio_texto = new Ejercicios_texto_texto(NULL,$id_ejercicio,$j,$preg,$resp,$correcta);
+
+       $ejercicio_texto->insertar();
+
+    }
+    
+   // echo required_param('crespuesta1_1',PARAM_INT);
+  
+   
     }
    
-    $ejercicio_texto = new Ejercicios_texto_texto();
-
-    $ejercicio_texto->insertar();
 
 }
 
