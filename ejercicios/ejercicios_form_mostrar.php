@@ -82,6 +82,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
          $ejercicios_leido =$ejercicios_bd->obtener_uno($id_ejercicio);
    
          $nombre=$ejercicios_leido->get('name');
+          $npreg=$ejercicios_leido->get('numpreg');
          
           $titulo= '<h1>' . $nombre . '</h1>';
           $mform->addElement('html',$titulo);
@@ -101,7 +102,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
          //Veo que clasificación TipoActividad tiene
          $tipoactividad=$ejercicios_leido->get('TipoActividad');
          
-        echo "pintando";
+       
          switch ($tipoactividad) {
              case 0: //es multichoice
 
@@ -114,33 +115,29 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                  if($numero != 0){ //Si es de tipo texto-texto
                           
                             //lo pinto+
-                        echo "a";
+                       
                             
-                             $terminar=false;
-                             for($i=1;$i<10&&$terminar==false;$i++){
+                             for($i=1;$i<=$npreg;$i++){
                                
                                 $preguntas= array();
                                 
                                 $preguntas=$ejercicios_texto->obtener_ejercicios_texto_id_ejercicicio_numpreguntas($id_ejercicio,$i);
                                 $numero_respuestas= sizeof($preguntas);
                                
-                                  if($numero_respuestas==0){
-                                      
-                                      $terminar=true;
-                                  }else{
-                                     echo"aki";
+                                  
+                                   
                                      
                                       //Obtengo la pregunta
                                                 $divpregunta='<div id="tabpregunta'.$i.'" >';
                                                $divpregunta.='<br/><br/>';
                                                $divpregunta.='<table style="width:100%;">';
                                                $divpregunta.=' <td style="width:80%;">';
-                                               $divpregunta.='<div id="id_pregunta1" name="pregunta1" contentEditable="true" class=pregunta>';
-                                                // $divpregunta.='<input size="110" name="pregunta1" type="text" id="id_pregunta1" value="'.$preguntas[0]->get('Pregunta').'"></input>';
+                                            //   $divpregunta.='<div id="id_pregunta1" name="pregunta1">';
+                                               $divpregunta.='<textarea style="width: 900px;" class="pregunta" name="pregunta'.$i.'" id="pregunta'.$i.'">'.$preguntas[0]->get('Pregunta').'</textarea>';
                                               
-                                              // $divpregunta.='<input name="pregunta1" type="text" style="width:80%; height:100%; margin:1%;">ssss</input>';
-                                               $divpregunta.=$preguntas[0]->get('Pregunta');
-                                               $divpregunta.='</div>';
+                                           // $divpregunta.='<input name="pregunta1" type="text" style="width:80%; height:100%; margin:1%;">ssss</input>';
+                                           //  $divpregunta.=$preguntas[0]->get('Pregunta');
+                                           //$divpregunta.='</div>';
                                                
                                                $divpregunta.=' </td>';
                                                $divpregunta.=' <td style="width:5%;">';
@@ -169,10 +166,10 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                                     $divpregunta.='<input class=over type="radio" name="crespuesta'.$q.'_'.$i.'" value="0" onclick="BotonRadio(crespuesta'.$q.'_'.$i.')"/>';
                                                }
                                                
-                                               $divpregunta.='<div class="resp" name="respuesta'.$q."_".$i.'" id="respuesta'.$q."_".$i.'" contentEditable=true>';
-                                               $divpregunta.=$preguntas[$p]->get('Respuesta');
-                                               $divpregunta.='</div>';
-                                               
+                                            //   $divpregunta.='<div class="resp" name="respuesta'.$q."_".$i.'" id="respuesta'.$q."_".$i.'" contentEditable=true>';
+                                            //   $divpregunta.=$preguntas[$p]->get('Respuesta');
+                                            //   $divpregunta.='</div>';
+                                               $divpregunta.='<textarea style="width: 700px;" class="resp" name="respuesta'.$q."_".$i.'" id="respuesta'.$q."_".$i.'" value="'.$preguntas[$p]->get('Respuesta').'"></textarea>'; 
                                                $divpregunta.=' </td>';
                                                $divpregunta.=' <td style="width:5%;">';
                                               
@@ -183,15 +180,17 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                                //La imagen para cambiar las respuestas
                                                if($correc){
                                                    $divpregunta.='<img src="./imagenes/correcto.png" id="correcta'.$q.'_'.$i.'" alt="respuesta correcta"  height="15px"  width="15px" onClick="InvertirRespuesta(correcta'.$q.'_'.$i.',1)" title="Cambiar a Incorrecta"></img>';
-                                               }else{
+                                                   $divpregunta.='<input type="hidden" value="1"  id="valorcorrecta'.$q.'_'.$i.'" name="valorcorrecta'.$q.'_'.$i.'" />';
+                                                }else{
                                                     $divpregunta.='<img src="./imagenes/incorrecto.png" id="correcta'.$q.'_'.$i.'" alt="respuesta correcta"  height="15px"  width="15px" onClick="InvertirRespuesta(correcta'.$q.'_'.$i.',0)" title="Cambiar a Correcta"></img>';
-                                               }
+                                                    $divpregunta.='<input type="hidden" value="0"  id="valorcorrecta'.$q.'_'.$i.'" name="valorcorrecta'.$q.'_'.$i.'" />';
+                                                }
                                                
                                                $divpregunta.='</td> ';
                                                $divpregunta.='<tr>';
                              
                                                $divpregunta.='</table> ';
-                                              
+                                               
                                              
                                             }
                                            
@@ -199,9 +198,13 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                             $divpregunta.='</div>';
                                          
                                             $divpregunta.='</div>';
+                                            
+                                            $divpregunta.='<input type="hidden" value='.$numero_respuestas.' id="num_res_preg'.$i.'" name="num_res_preg'.$i.'" />';
                                             $mform->addElement('html',$divpregunta);
+                                            //Introduzco el número de respuestas de la pregunta
+                                            //$mform->addElement('hidden', 'num_res_preg'.$i,$numero_respuestas);
 
-                                  }
+                                  
                                   
                                
                              }
