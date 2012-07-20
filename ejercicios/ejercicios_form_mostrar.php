@@ -158,7 +158,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                                $divpregunta.='<tr id="trrespuesta'.$q."_".$i.'"> ';
                                                $divpregunta.=' <td style="width:80%;">';
                                                
-                                               $correc=$preguntas[0]->get('Correcta');
+                                               $correc=$preguntas[$p]->get('Correcta');
                                                
                                                if($correc){
                                                    $divpregunta.='<input class=over type="radio" name="crespuesta'.$q.'_'.$i.'" value="1" onclick="BotonRadio(crespuesta'.$q.'_'.$i.')" checked="true"/>';
@@ -169,7 +169,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                             //   $divpregunta.='<div class="resp" name="respuesta'.$q."_".$i.'" id="respuesta'.$q."_".$i.'" contentEditable=true>';
                                             //   $divpregunta.=$preguntas[$p]->get('Respuesta');
                                             //   $divpregunta.='</div>';
-                                               $divpregunta.='<textarea style="width: 700px;" class="resp" name="respuesta'.$q."_".$i.'" id="respuesta'.$q."_".$i.'" value="'.$preguntas[$p]->get('Respuesta').'"></textarea>'; 
+                                               $divpregunta.='<textarea style="width: 700px;" class="resp" name="respuesta'.$q."_".$i.'" id="respuesta'.$q."_".$i.'" value="'.$preguntas[$p]->get('Respuesta').'">'.$preguntas[$p]->get('Respuesta').'</textarea>'; 
                                                $divpregunta.=' </td>';
                                                $divpregunta.=' <td style="width:5%;">';
                                               

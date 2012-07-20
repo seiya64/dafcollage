@@ -387,10 +387,12 @@ class Ejercicios_profesor_actividad{
                 return $this->id_profesor;
                 break;
             case 'id_ejercicio':
+                echo  "con get".$this->id_ejercicio;
                 return $this->id_ejercicio;
                 break;
              case 'carpeta':
-                return $this->carepta;
+                
+                return $this->carpeta;
                 break;
             
      
@@ -421,8 +423,9 @@ class Ejercicios_profesor_actividad{
      function obtener_uno($id){
          $ejer = get_record('ejercicios_profesor_actividad', 'id', $id);
          $this->id=$ejer->id;
-         $this->id_profespr=$ejer->id_profesor;
-         $this->id_ejercicio=$ejer->id_ejericio;
+         $this->id_profesor=$ejer->id_profesor;
+         $this->id_ejercicio=$ejer->id_ejercicio;
+   
          $this->carpeta=$ejer->carpeta;
          
           return $this;
@@ -433,7 +436,7 @@ class Ejercicios_profesor_actividad{
         
          $ejer = get_record('ejercicios_profesor_actividad', 'id_ejrecicio', $id_ejercicio);
          $this->id=$ejer->id;
-         $this->id_profespr=$ejer->id_profesor;
+         $this->id_profesor=$ejer->id_profesor;
          $this->id_ejercicio=$ejer->id_ejericio;
          $this->carpeta=$ejer->carpeta;
          
@@ -443,8 +446,9 @@ class Ejercicios_profesor_actividad{
     
       function obtener_ejercicos_del_profesor($id_profesor) {
         
+              //  echo "entra".$id_profesor;
 
-                $sql = 'SELECT * FROM  ejercicios_profesor_actividad WHERE id_profesor='.$id_profesor;
+                $sql = 'SELECT * FROM  mdl_ejercicios_profesor_actividad WHERE id_profesor='.$id_profesor;
 
                 $todos = get_records_sql($sql);
 
@@ -455,12 +459,65 @@ class Ejercicios_profesor_actividad{
                             $mp = new Ejercicios_profesor_actividad();
 
                             $mp->obtener_uno($cosa->id);
-
+                 //           echo $cosa->id." aaa";
                             $todos_mis_ejercicios[] = $mp;
 
 
                         }
+              //  echo "sale";
+                return $todos_mis_ejercicios;
+               
+      }
+      
+          function obtener_ejercicos_del_profesor_carpeta($id_profesor) {
+        
+                //echo "entra".$id_profesor;
 
+                $sql = 'SELECT DISTINCT(carpeta) FROM mdl_ejercicios_profesor_actividad WHERE id_profesor='.$id_profesor;
+
+                $todos = get_records_sql($sql);
+
+                $todos_mis_ejercicios = array();
+
+                    foreach ($todos as $cosa) {
+
+                            $mp = new Ejercicios_profesor_actividad();
+
+                            $mp->carpeta=$cosa->carpeta;
+                  
+                            $todos_mis_ejercicios[] = $mp;
+
+
+
+                        }
+              //  echo "sale";
+                return $todos_mis_ejercicios;
+               
+      }
+      
+           function obtener_ejercicos_del_profesor_por_carpetas($id_profesor,$carpeta) {
+        
+          
+               
+
+                $sql = 'SELECT * FROM  mdl_ejercicios_profesor_actividad WHERE id_profesor='.$id_profesor.' and carpeta="'.$carpeta.'"';
+
+                $todos = get_records_sql($sql);
+
+                $todos_mis_ejercicios = array();
+
+                    foreach ($todos as $cosa) {
+                        
+                            $mp = new Ejercicios_profesor_actividad();
+
+                            $mp->obtener_uno($cosa->id);
+                          
+                            $todos_mis_ejercicios[] = $mp;
+
+
+                        }
+             
+            
                 return $todos_mis_ejercicios;
                
       }
