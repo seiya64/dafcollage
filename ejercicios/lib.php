@@ -22,7 +22,7 @@ $ejercicios_EXAMPLE_CONSTANT = 42;     /// for example
 require_once('ejercicios_form.php');
 require_once('ejercicios_form_creacion.php');
 require_once('ejercicios_form_mostrar.php');
-
+require_once('ejercicios_form_misejercicios.php');
 /**
  * Given an object containing all the necessary data,
  * (defined by the form in mod_form.php) this function
@@ -271,6 +271,14 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
                
              $mform= new mod_ejercicios_mostrar_ejercicio($id,$id_ejercicio);
              $mform->mostrar_ejercicio($id,$id_ejercicio);
+           
+            break;
+        
+         case 9:// Mostrando mis ejercicios (ejercicios profesor)
+             echo "id vale".$id;
+             $mform= new mod_ejercicios_mis_ejercicios($id);
+             $mform->pintaropciones($id);
+             
            
             break;
         
