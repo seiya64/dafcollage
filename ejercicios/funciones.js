@@ -94,9 +94,21 @@ $(document).ready(function(){
 
     });
  
+   $('#menuaux li #classa').click(function(){
+        alert("pulsado");
+    var elem = $(this).next().next();
+    alert(elem);
+        if(elem.is('ul')){
+            event.preventDefault();
+            $('#menuaux ul:visible').not(elem).slideUp();
+            elem.slideToggle();
+        }
+    });
 
-});
 
+  });
+
+ 
 
    
      function sele($id) { 
