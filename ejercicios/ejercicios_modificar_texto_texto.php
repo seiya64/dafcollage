@@ -67,14 +67,13 @@ if ($mform->is_submitted()) {  //Boton Guardar
     $j=$i+1;
    
     $preg=required_param('pregunta'.$j,PARAM_TEXT);
-    echo "la pregunta".$i."   ".required_param('pregunta'.$j,PARAM_TEXT);
+  
     $numresp=required_param('num_res_preg'.$j,PARAM_TEXT);
-    echo "numero respuestas ". required_param('num_res_preg'.$j,PARAM_TEXT)."<br>";
+  
     for($k=0;$k<$numresp;$k++){
         $l=$k+1;
         $resp=required_param('respuesta'.$l."_".$j,PARAM_TEXT);
-        echo "la respuesta  numero " .$l."es".$resp;
-        echo "correcta". required_param('valorcorrecta'.$l."_".$j,PARAM_INT).' <br>';
+    
         $correcta=required_param('valorcorrecta'.$l."_".$j,PARAM_INT);
        $ejercicio_texto = new Ejercicios_texto_texto(NULL,$id_ejercicio,$j,$preg,$resp,$correcta);
 
@@ -89,5 +88,11 @@ if ($mform->is_submitted()) {  //Boton Guardar
    
 
 }
+
+//Muestro mis ejercicios
+
+     redirect('./view.php?id=' . $id_curso . '&opcion=9'. '&id='.$id_curso);
+        
+    
 
 ?>
