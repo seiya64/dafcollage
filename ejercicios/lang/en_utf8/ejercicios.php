@@ -98,4 +98,9 @@ $string["BotonAñadirRespuesta"]="Añadir otra Respuesta";
 $string["BotonCorregir"]="Corregir";
 $string["BotonGuardar"]="Guardar";
 
+
+
+//Mis ejercicios(Ejercicios profesor)
+$string["MisEjercicios"]="Mis Ejercicios";
+
 ?>
