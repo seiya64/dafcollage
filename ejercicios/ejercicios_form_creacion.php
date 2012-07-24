@@ -309,7 +309,7 @@ class mod_ejercicios_creando_ejercicio_texto extends moodleform_mod {
            // $mform->addElement('hidden','numerorespuestas_'.$aux,3);
            
             $textarea='</br><div id="titulorespuestas" style="margin-left:130px;">Respuestas:</div>'; 
-            $textarea.='<div style="margin-left:280px;" id="respuestas_pregunta"'.$aux.'"> ';
+            $textarea.='<div style="margin-left:310px;" id="respuestas_pregunta"'.$aux.'"> ';
             $textarea.='<textarea name="respuesta1_'.$aux.'" id="respuesta1_'.$aux.'" rows="5" cols="50"></textarea>';
             $textarea.='</br><div id="correctarespuesta">'.get_string('Correcta', 'ejercicios'); 
             $textarea.='<input type="radio"  name="correcta1_'.$aux.'" id="correcta1_'.$aux.'" value="Si" checked> Si </input>';
