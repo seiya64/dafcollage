@@ -228,7 +228,7 @@ class mod_ejercicios_mod_form extends moodleform_mod {
 
             #incluyo la parte de vocabulario
            
-            #buscando por tema de palbras
+            #buscando por tema de palabras
             
            $mform->addElement('html', $tabla_menu);
                     
@@ -341,7 +341,64 @@ class mod_ejercicios_mod_form extends moodleform_mod {
 
      
             $tabla_menu='</ul>';
+            
+            //Buscando por Intencion comunicativa
+             $tabla_menu.='<ul class="ullista">';
+             
+            $tabla_menu.='<li class="lilista"><a id="enlacemenu" href="#">'.get_string('Intencion','ejercicios').'</a></li>';
+            $mform->addElement('html', $tabla_menu);
+           // $grid = optional_param('grid', 0, PARAM_INT);
+             
+
+             
+            $aux = new Vocabulario_intenciones();
+            $icom = $aux->obtener_hijos($USER->id, 0);
+            $lista_padres = $aux->obtener_padres($icid);
+            
+            $mform->addElement('select', 'campoic',"", $icom, "onChange='javascript:cargaContenido(this.id,\"icgeneraldinamico\",2)' style=\"min-height: 0;\"");
+            $mform->setDefault('campoic', $lista_padres[1]);
+            //probar los campos dinamicos
+            $i = 1;
+            $divparacerrar = 0;
+            $campodinamico = "<div class=\"fitem\" id=\"icgeneraldinamico\"  style=\"min-height: 0;\">";
+            while ($lista_padres[$i + 1]) {
+                $aux = new Vocabulario_intenciones();
+                $icaux = $aux->obtener_hijos($USER->id, $lista_padres[$i]);
+                $campodinamico .= '<div class="fitemtitle"></div>';
+                $campodinamico .= '<div class="felement fselect">';
+                $elselect = new MoodleQuickForm_select('campoic', 'Subcampo', $icaux, "id=\"id_campoic" . $lista_padres[$i] . "\" onChange='javascript:cargaContenido(this.id,\"" . 'campoic' . "icgeneraldinamico" . $lista_padres[$i] . "\",2)'");
+                $elselect->setSelected($lista_padres[$i + 1]);
+                $campodinamico .= $elselect->toHtml();
+                $campodinamico .= '</div>';
+                $campodinamico .= "<div class=\"fitem\" id=\"" . 'campoic' . "icgeneraldinamico" . $lista_padres[$i] . "\" style=\"min-height: 0;\">";
+                $i = $i + 1;
+                $divparacerrar++;
+            }
+            for ($i = 0; $i < $divparacerrar; $i++) {
+                $campodinamico .= "</div>";
+            }
+            $campodinamico .= "</div>";
+            $mform->addElement('html', $campodinamico);
+
+     
+            $tabla_menu='</ul>';
           
+            //Buscando por Tipologia textual
+            $tabla_menu.='<ul class="ullista">';
+             
+            $tabla_menu.='<li class="lilista"><a id="enlacemenu" href="#">'.get_string("campo_tipologia", "vocabulario").'</a></li>';
+            $mform->addElement('html', $tabla_menu);
+           // $grid = optional_param('grid', 0, PARAM_INT);
+             
+            $aux = new Vocabulario_tipologias();
+            $tipologias = $aux->obtener_todos($USER->id);
+            $mform->addElement('select', 'campott', "", $tipologias);
+           
+            $mform->addElement('html', $campodinamico);
+
+     
+            $tabla_menu='</ul>';
+            
             $tabla_menu.='</ul>';
                  
             $tabla_menu.='<center><input id="id_buscando" type="button" style="height:30px; width:60px; margin-left:175px;" value="'.get_string('Boton_Buscar', 'ejercicios').'" onclick="botonBuscar('.$id.');"></center>';
@@ -374,10 +431,11 @@ class mod_ejercicios_mod_form extends moodleform_mod {
             
             $tabla_menu.='</ul>';
             
+            
             $tabla_menu.='<center><input id="id_creando" type="button" style="height:30px; width:60px; margin-left:175px;" value="'.get_string('Boton_Crear','ejercicios').'" onclick="botonCrear('.$id.');"></center>';
             $tabla_menu.='</div>';
             
-     
+         
             //parte del ejercicio
          
             $tabla_menu .='<div id="parteejercicio">';
@@ -414,6 +472,9 @@ class mod_ejercicios_mod_form extends moodleform_mod {
 
             $tabla_menu .='</div>';
             
+            $tabla_menu.=  '<h2 class="titulomisactividades">'.get_string('MisActividades', 'ejercicios').'</h2>';
+
+            $tabla_menu.='<center><a href="./view.php?id=' . $id . '&opcion=9"><img  class="misactividades" src="./imagenes/activ.svg" id="id_MisActividades" name="MisActividades" title="'. get_string('MisActividades', 'ejercicios') . '"/></a></center>';
             /*$tabla_menu .=  '<div id="divflotantederecha">';
             $tabla_menu .=  '<h2 class="titulo">'.get_string('Crear', 'ejercicios').'</h2>';
             $tabla_menu .=  '<div style="height:20px"></div>';
