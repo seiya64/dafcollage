@@ -138,6 +138,14 @@ class Ejercicios_general {
          return $id;
     }
     
+        
+     function borrar($id){   
+            //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
+        
+            delete_records('ejercicios_general','id', $id);
+          
+     }
+    
       function alterar(){
         
         //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
@@ -384,10 +392,11 @@ class Ejercicios_profesor_actividad{
                 return $this->id;
                 break;
             case 'id_profesor':
+                echo "id_profesor".$this->id_profesor;
                 return $this->id_profesor;
                 break;
             case 'id_ejercicio':
-                echo  "con get".$this->id_ejercicio;
+               
                 return $this->id_ejercicio;
                 break;
              case 'carpeta':
@@ -411,7 +420,11 @@ class Ejercicios_profesor_actividad{
             delete_record('ejercicios_profesor_actividad', $this, true);
 
      }
-    
+      function borrar_id_ejercicio($id_ejercicio,$id_profesor){   
+            //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
+        
+           delete_records('ejercicios_profesor_actividad', 'id_profesor',$id_profesor,'id_ejercicio', $id_ejercicio);
+     }
       function alterar(){
         
         //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
@@ -443,6 +456,31 @@ class Ejercicios_profesor_actividad{
          return $this;
           
     }
+    
+       function obtener_todos_idejercicio($id_ejercicio){
+        
+              //  echo "entra".$id_profesor;
+
+                $sql = 'SELECT * FROM  mdl_ejercicios_profesor_actividad WHERE id_ejercicio='.$id_ejercicio;
+
+                $todos = get_records_sql($sql);
+
+                $todos_mis_ejercicios = array();
+
+                    foreach ($todos as $cosa) {
+
+                            $mp = new Ejercicios_profesor_actividad();
+
+                            $mp->obtener_uno($cosa->id);
+                 //           echo $cosa->id." aaa";
+                            $todos_mis_ejercicios[] = $mp;
+
+
+                        }
+              //  echo "sale";
+                return $todos_mis_ejercicios;
+               
+      }
     
       function obtener_ejercicos_del_profesor($id_profesor) {
         
@@ -594,6 +632,12 @@ class Ejercicios_texto_texto {
 
  
      }
+     
+        function borrar_id_ejercicio($id_ejercicio){   
+                //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
+
+            delete_records('ejercicios_texto_texto', 'id_ejercicio', $id_ejercicio);
+        }
     
        function obtener_uno($id){
          $ejer = get_record('ejercicios_texto_texto', 'id', $id);
