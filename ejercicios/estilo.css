@@ -50,14 +50,23 @@ guardar palabras por columnas
 
 .cajagranancho { width: 65%; }
 .twitter{ width: 252px; padding-left: 10px;}
-#mform1 { width:90%; }
+#mform1 { width:100%; }
 
 
 .titulo{
     margin-left: 0px;
 }
 
+.titulomisactividades{
+    margin-top: 450px;
+    margin-left: 550px;
+}
 
+.misactividades{
+    margin-left:300px;
+    margin-top:20px;
+    width:45px;
+}
 #menubuscar{
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
@@ -90,7 +99,7 @@ guardar palabras por columnas
 	
 	margin-top: 20px;
 	padding:0;
-	width:400px;
+	width:450px;
 	list-style:none;
         
 }
@@ -108,12 +117,20 @@ guardar palabras por columnas
 }
 .id_campoid{
         margin-top:20px;
-        margin-left: 10px;
+        margin-left: 20px;
 }
 
 #divflotanteizq {
 		float:left;
 		width: 20%;
+}
+
+#divflotanteizq .fitemtitle{
+                
+                width: 0%;
+}
+#clgeneraldinamico{
+            margin-left: 14px;
 }
 #divflotantederecha {
                 float:right;
@@ -122,10 +139,10 @@ guardar palabras por columnas
 
 #parteejercicio{
     border: 1px solid #6594D1;
-    margin-top: 150px;
+    margin-top: 65px;
     float:left;
     width:300px;
-    margin-left: 300px;
+    margin-left: 390px;
     height: 300px;
     
 }
@@ -141,7 +158,7 @@ guardar palabras por columnas
 
 #partevocabulario{
    
-    margin-top: 100px;
+    margin-top: 10px;
     float:left;
     width:8%;
     height: 70%;
