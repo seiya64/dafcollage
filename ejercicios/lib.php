@@ -275,7 +275,7 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
             break;
         
          case 9:// Mostrando mis ejercicios (ejercicios profesor)
-             echo "id vale".$id;
+             
              $mform= new mod_ejercicios_mis_ejercicios($id);
              $mform->pintaropciones($id);
              
