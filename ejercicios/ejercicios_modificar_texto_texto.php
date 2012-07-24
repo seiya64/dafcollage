@@ -57,6 +57,9 @@ $mform->mostrar_ejercicio($id_curso,$id_ejercicio);
 if ($mform->is_submitted()) {  //Boton Guardar
    
     #borro todas las respuestas y preguntas y las vuelvo a insertar
+      //comenzamos una transacción para que en todas las tablas se haga seguido
+    // en caso de error en algun delete, no se hace ninguno
+    begin_sql();
     delete_records('ejercicios_texto_texto', 'id_ejercicio', $id_ejercicio);
     
     
@@ -80,7 +83,7 @@ if ($mform->is_submitted()) {  //Boton Guardar
        $ejercicio_texto->insertar();
 
     }
-    
+    commit_sql();
    // echo required_param('crespuesta1_1',PARAM_INT);
   
    
