@@ -257,7 +257,7 @@ class Ejercicios_mis_puzzledoble {
        
     }
      function alterar(){
-        echo "alterando";
+     
         
         //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
         update_record('ejercicios_tipo_puzzle', $this, false);
@@ -320,7 +320,7 @@ class Ejercicios_mis_puzzledoble {
          $this->texto8=$ejer->texto8;
          $this->texto9=$ejer->texto9;
          return $this;
-          echo "obtenido".$this->name.$this->nrespuestas.$this->elemaso;
+         
     }
 
     function obtener_todos() {
