@@ -20,7 +20,7 @@ class mod_ejercicios_mis_ejercicios extends moodleform_mod {
      function mod_ejercicios_mis_ejercicios($id)
       {
          // El fichero que procesa el formulario es gestion.php
-         parent::moodleform('mostrar_ejercicio.php?id_curso='.$id);
+         parent::moodleform('eliminar_carpetas_ejercicios.php?id_curso='.$id);
        }
      /**
      * Function that add a table to the forma to show the main menu
@@ -47,9 +47,9 @@ class mod_ejercicios_mis_ejercicios extends moodleform_mod {
         //Obtengo mis ejercicios a partir de la tabla ejercicios_profesor_actividad 
         
         $ejercicios_prof = new Ejercicios_profesor_actividad();
-        $mis_ej=$ejercicios_prof->obtener_ejercicos_del_profesor($USER->id);
+     //   $mis_ej=$ejercicios_prof->obtener_ejercicos_del_profesor($USER->id);
         
-        $num=sizeof($mis_ej);
+       
         
         $mis_ej_car=$ejercicios_prof->obtener_ejercicos_del_profesor_carpeta($USER->id);
         $numcarpetas=sizeof($mis_ej_car);
@@ -60,7 +60,7 @@ class mod_ejercicios_mis_ejercicios extends moodleform_mod {
          for($i=0;$i<$numcarpetas;$i++){
         
         //imprimo la carpeta
-        $carpeta.='<li><a id="classa" href="#">'.$mis_ej_car[$i]->get('carpeta').'</a><a><img src="./imagenes/delete.gif"/></a>';
+        $carpeta.='<li><a id="classa" href="#">'.$mis_ej_car[$i]->get('carpeta').'</a><a></a>';
         $carpeta.='<ul id="classul">';
        
         
@@ -78,19 +78,10 @@ class mod_ejercicios_mis_ejercicios extends moodleform_mod {
             
             $nombre_ejercicio=$mi_ejercicio->get('name');
             //Añado un enlace por cada ejercicio dentro de la carpeta
-            echo $id;
-            $carpeta.='<li><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'">'. $nombre_ejercicio.'</a><a href=""><img src="./imagenes/delete.gif"/></a></li>';
+           
+            $carpeta.='<li><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'">'. $nombre_ejercicio.'</a><a href="eliminar_carpetas_ejercicios.php?id_curso='.$id.'&id_ejercicio='.$id_ejercicio.'""><img src="./imagenes/delete.gif"/></a></li>';
                 
             
-             /*     
-            $carpeta.='<li><a id="classa" href="#">'.$ejercicios_prof_carp[$j]->get('carpeta').'</a></li>';
-            
-            $carpeta.='<li><a id="classa" href="#">Submenu 3</a></li>';
-            $carpeta.='<li><a id="classa" href="#">Submenu 4</a></li>';
-            $carpeta.='<li><a id="classa" href="#">Submenu 5</a></li>';
-            $carpeta.='<li><a id="classa" href="#">Submenu 6</a></li>';
-            $carpeta.='<li><a id="classa" href="#">Submenu 7</a></li>';
-            $carpeta.='<li><a id="classa" href="#">Submenu 8</a></li>';*/
             
          }
         $carpeta.='</ul>';
@@ -102,7 +93,16 @@ class mod_ejercicios_mis_ejercicios extends moodleform_mod {
          }
          
            $carpeta.='</ul>';
+           
+           
         $mform->addElement('html',$carpeta);
+        
+           
+          //Pinto los botones
+           $buttonarray = array();
+           $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Reset','ejercicios'));
+          // $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('BotonCorregir','ejercicios'));
+           $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
         
      }
 }
