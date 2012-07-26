@@ -23,6 +23,7 @@ require_once('ejercicios_form.php');
 require_once('ejercicios_form_creacion.php');
 require_once('ejercicios_form_mostrar.php');
 require_once('ejercicios_form_misejercicios.php');
+require_once('ejercicios_form_buscar.php');
 /**
  * Given an object containing all the necessary data,
  * (defined by the form in mod_form.php) this function
@@ -221,7 +222,7 @@ function ejercicios_uninstall() {
 /// starts with ejercicios_
 /// Remember (see note in first lines) that, if this section grows, it's HIGHLY
 /// recommended to move all funcions below to a new "localib.php" file.
-function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p=1,$id_ejercicio=0) {
+function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p=1,$id_ejercicio=0,$ccl,$cta ,$cdc,$cgr,$cic,$ctt,$buscar) {
     global $CFG, $COURSE, $USER;
 
     $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
@@ -255,6 +256,8 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
             break;
         case 6:// Pulsado botón Buscar tanto por alumno como por profesor
             echo "hola boton buscar";
+             $mform= new mod_ejercicios_mostrar_ejercicios_buscados($id);
+             $mform->mostrar_ejercicios_buscados($id,$ccl,$cta ,$cdc,$cgr,$cic,$ctt);
             break;
         case 7:// Segundo paso del formulario caso texto-texto
            /* echo "segundo paso";
@@ -268,9 +271,9 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
             break;
         
          case 8:// Mostrando ejercicio Multichoice texto-texto
-               
+          
              $mform= new mod_ejercicios_mostrar_ejercicio($id,$id_ejercicio);
-             $mform->mostrar_ejercicio($id,$id_ejercicio);
+             $mform->mostrar_ejercicio($id,$id_ejercicio,$buscar);
            
             break;
         
