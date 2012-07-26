@@ -34,10 +34,10 @@ class mod_ejercicios_mis_ejercicios extends moodleform_mod {
             global $CFG, $COURSE, $USER;
         $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
     
-        $mform = &$this->_form;
+        $mform =& $this->_form;
        
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilos2.css">');
-                $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>');
+        $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>');
     	$mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js"></script>');
         $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
         //titulo
