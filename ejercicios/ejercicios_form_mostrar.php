@@ -57,13 +57,13 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
      * @param $id id for the course
      * @param $id_ejercicio id del ejercicio a mostrar
      */
-     function mostrar_ejercicio($id,$id_ejercicio){
+     function mostrar_ejercicio($id,$id_ejercicio,$buscar){
          
          
         global $CFG, $COURSE, $USER;
         $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
 
-    
+        
         //Los iconos están sacados del tema de gnome que viene con ubuntu 11.04
        
        //inclusion del javascript para las funciones
@@ -82,7 +82,14 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
          $ejercicios_leido =$ejercicios_bd->obtener_uno($id_ejercicio);
    
          $nombre=$ejercicios_leido->get('name');
-          $npreg=$ejercicios_leido->get('numpreg');
+         $npreg=$ejercicios_leido->get('numpreg');
+         $creador=$ejercicios_leido->get('id_creador');
+         
+         if($creador==$USER->id){
+             $modificable=true;
+         }else{
+             $modificable=false;
+         }
          
           $titulo= '<h1>' . $nombre . '</h1>';
           $mform->addElement('html',$titulo);
@@ -123,28 +130,32 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                 
                                 $preguntas=$ejercicios_texto->obtener_ejercicios_texto_id_ejercicicio_numpreguntas($id_ejercicio,$i);
                                 $numero_respuestas= sizeof($preguntas);
-                               
-                                  
-                                   
+                        
                                      
                                       //Obtengo la pregunta
-                                                $divpregunta='<div id="tabpregunta'.$i.'" >';
+                                               $divpregunta='<div id="tabpregunta'.$i.'" >';
                                                $divpregunta.='<br/><br/>';
                                                $divpregunta.='<table style="width:100%;">';
                                                $divpregunta.=' <td style="width:80%;">';
                                             //   $divpregunta.='<div id="id_pregunta1" name="pregunta1">';
-                                               $divpregunta.='<textarea style="width: 900px;" class="pregunta" name="pregunta'.$i.'" id="pregunta'.$i.'">'.$preguntas[0]->get('Pregunta').'</textarea>';
-                                              
+                                               if($buscar==1 || $modificable==false){ //Para que no pueda editarlo
+                                                    $divpregunta.='<div style="width: 900px;" class="pregunta" name="pregunta'.$i.'" id="pregunta'.$i.'">'.$preguntas[0]->get('Pregunta').'</div>';
+                                               }else{
+                                                     $divpregunta.='<textarea style="width: 900px;" class="pregunta" name="pregunta'.$i.'" id="pregunta'.$i.'">'.$preguntas[0]->get('Pregunta').'</textarea>';
+                                               }
                                            // $divpregunta.='<input name="pregunta1" type="text" style="width:80%; height:100%; margin:1%;">ssss</input>';
                                            //  $divpregunta.=$preguntas[0]->get('Pregunta');
                                            //$divpregunta.='</div>';
                                                
                                                $divpregunta.=' </td>';
+                                               
+                                               if($buscar!=1 && $modificable==true){
                                                $divpregunta.=' <td style="width:5%;">';
                                                $divpregunta.='<img src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarRespuesta(tabpregunta'.$i.','.$i.')" title="Eliminar Pregunta"></img>';
                                                $divpregunta.='</br><img src="./imagenes/añadir.gif" alt="eliminar respuesta"  height="15px"  width="15px" onClick="anadirRespuesta(respuestas'.$i.')" title="Añadir Respuesta"></img>';
                                                $divpregunta.='</td> ';
                                                $divpregunta.='</br> ';
+                                               }
                                                $divpregunta.='</table> ';
                                          
                                            // $divpregunta.='</div>';
@@ -169,21 +180,28 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                             //   $divpregunta.='<div class="resp" name="respuesta'.$q."_".$i.'" id="respuesta'.$q."_".$i.'" contentEditable=true>';
                                             //   $divpregunta.=$preguntas[$p]->get('Respuesta');
                                             //   $divpregunta.='</div>';
-                                               $divpregunta.='<textarea style="width: 700px;" class="resp" name="respuesta'.$q."_".$i.'" id="respuesta'.$q."_".$i.'" value="'.$preguntas[$p]->get('Respuesta').'">'.$preguntas[$p]->get('Respuesta').'</textarea>'; 
+                                                if($buscar==1 || $modificable==false){ 
+                                                  $divpregunta.='<div style="width: 700px;" class="resp" name="respuesta'.$q."_".$i.'" id="respuesta'.$q."_".$i.'" value="'.$preguntas[$p]->get('Respuesta').'">'.$preguntas[$p]->get('Respuesta').'</div>'; 
+                                                }else{
+                                                 $divpregunta.='<textarea style="width: 700px;" class="resp" name="respuesta'.$q."_".$i.'" id="respuesta'.$q."_".$i.'" value="'.$preguntas[$p]->get('Respuesta').'">'.$preguntas[$p]->get('Respuesta').'</textarea>'; 
+                                                }
                                                $divpregunta.=' </td>';
                                                $divpregunta.=' <td style="width:5%;">';
                                               
+                                               if($buscar!=1 && $modificable==true){ 
                                                //La imagen para eliminar las respuestas
                                                $divpregunta.='<img src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarRespuesta(tablarespuesta'.$q.'_'.$i.','.$i.')" title="Eliminar Respuesta"></img>';
                                                
                                                
                                                //La imagen para cambiar las respuestas
-                                               if($correc){
-                                                   $divpregunta.='<img src="./imagenes/correcto.png" id="correcta'.$q.'_'.$i.'" alt="respuesta correcta"  height="15px"  width="15px" onClick="InvertirRespuesta(correcta'.$q.'_'.$i.',1)" title="Cambiar a Incorrecta"></img>';
-                                                   $divpregunta.='<input type="hidden" value="1"  id="valorcorrecta'.$q.'_'.$i.'" name="valorcorrecta'.$q.'_'.$i.'" />';
-                                                }else{
-                                                    $divpregunta.='<img src="./imagenes/incorrecto.png" id="correcta'.$q.'_'.$i.'" alt="respuesta correcta"  height="15px"  width="15px" onClick="InvertirRespuesta(correcta'.$q.'_'.$i.',0)" title="Cambiar a Correcta"></img>';
-                                                    $divpregunta.='<input type="hidden" value="0"  id="valorcorrecta'.$q.'_'.$i.'" name="valorcorrecta'.$q.'_'.$i.'" />';
+                                                
+                                                    if($correc){
+                                                        $divpregunta.='<img src="./imagenes/correcto.png" id="correcta'.$q.'_'.$i.'" alt="respuesta correcta"  height="15px"  width="15px" onClick="InvertirRespuesta(correcta'.$q.'_'.$i.',1)" title="Cambiar a Incorrecta"></img>';
+                                                        $divpregunta.='<input type="hidden" value="1"  id="valorcorrecta'.$q.'_'.$i.'" name="valorcorrecta'.$q.'_'.$i.'" />';
+                                                        }else{
+                                                            $divpregunta.='<img src="./imagenes/incorrecto.png" id="correcta'.$q.'_'.$i.'" alt="respuesta correcta"  height="15px"  width="15px" onClick="InvertirRespuesta(correcta'.$q.'_'.$i.',0)" title="Cambiar a Correcta"></img>';
+                                                            $divpregunta.='<input type="hidden" value="0"  id="valorcorrecta'.$q.'_'.$i.'" name="valorcorrecta'.$q.'_'.$i.'" />';
+                                                        }
                                                 }
                                                
                                                $divpregunta.='</td> ';
@@ -209,13 +227,27 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                
                              }
                              
-                             
+                              if($buscar!=1 && $modificable==true){ 
                              //Pinto los botones
                               $buttonarray = array();
                               $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('BotonGuardar','ejercicios'));
                              // $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('BotonCorregir','ejercicios'));
                               $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
-                  
+                              
+                              
+                              }else{
+                                  if($buscar==1){
+                                    $buttonarray = array();
+                                    $buttonarray[] = &$mform->createElement('reset', 'resetbutton', get_string('BotonAñadir','ejercicios'));
+                                    // $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('BotonCorregir','ejercicios'));
+                                    $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
+                                  }else{
+                                      
+                                    $boton='<center></br><input type="button" style="height:20px; width:120px; margin-left:175px;" id="id_botonMenuPrincipal" value="'.get_string("Misejercicios","ejercicios").'" onClick="botonMenuPrincipal('.$id.');"></center>';
+                                    $mform->addElement('html',$boton);
+                                    
+                                  }
+                              }
                        
                      
                  }
