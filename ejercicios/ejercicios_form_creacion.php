@@ -212,7 +212,8 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
             $campodinamico .= "</div>";
             $mform->addElement('html', $campodinamico);
             
-            
+   
+           
             //Tipo de texto (Tipologías textuales)
             
             $aux = new Vocabulario_tipologias();
@@ -220,7 +221,21 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
             $mform->addElement('select', 'campott', get_string("campo_tipologia", "vocabulario"), $tipologias);
            
              $mform->addElement('html','</br></div></br>');
-           //Titule su ejercicio para facilitar la identificación o búsqueda
+           
+             //marco teorico
+             
+            $marcoteorico=array();
+            $marcoteorico[]="--";
+            $marcoteorico[]="A1";
+            $marcoteorico[]="A2";
+            $marcoteorico[]="B1";
+            $marcoteorico[]="B2";
+            $marcoteorico[]="C1";
+            $marcoteorico[]="C2";
+            $mform->addElement('select', 'marcoteorico', get_string("marcoteorico", "ejercicios"), $marcoteorico);
+
+
+            //Titule su ejercicio para facilitar la identificación o búsqueda
             $attributes='size="40"';
             $mform->addElement('text', 'nombre_ejercicio',get_string('nombre', 'ejercicios') , $attributes);
             $mform->addRule('nombre_ejercicio', "Titulo Necesario", 'required', null, 'client');
@@ -242,13 +257,13 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
            $radioarray[] = &MoodleQuickForm::createElement('radio', 'radioprivado', '', "Si","Si", null);
            $radioarray[] = &MoodleQuickForm::createElement('radio', 'radioprivado', '', "No", "No", null);
               
-           $mform->addGroup($radioarray, 'radioprivado',  get_string('privado', 'ejercicios'), array(' '), false);
+           $mform->addGroup($radioarray, 'radioprivado',  get_string('publico', 'ejercicios'), array(' '), false);
            $mform->setDefault('radioprivado',"Si");
            
            
             $attributes='size="40"';
             $mform->addElement('text', 'carpeta_ejercicio',get_string('carpeta', 'ejercicios') , $attributes);
-            $mform->addRule('carpeta_ejercicio', "Titulo Necesario", 'required', null, 'client');
+            $mform->addRule('carpeta_ejercicio', "Carpeta Necesaria", 'required', null, 'client');
            
             $buttonarray = array();
             $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'));
@@ -289,7 +304,7 @@ class mod_ejercicios_creando_ejercicio_texto extends moodleform_mod {
          global $CFG, $COURSE, $USER;
         $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
   
-        $mform = &$this->_form;
+        $mform =& $this->_form;
        
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
         $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
