@@ -58,7 +58,7 @@ class mod_ejercicios_hacer_puzzle_form extends moodleform_mod {
        //inclusion del javascript para las funciones
     
           
-        $mform = $this->_form;
+        $mform =& $this->_form;
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./style.css">');
         $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>');
     	$mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js"></script>');
@@ -234,14 +234,7 @@ class mod_ejercicios_mod_form extends moodleform_mod {
                     
            $aux = new Vocabulario_campo_lexico();
            $clex = $aux->obtener_hijos($USER->id, 0);
-     
-      /*     echo sizeof($clex);
-          $tabla_menu='<select id="id_campoid"  onChange="javascript: subgram(this.id)">';
-            foreach ($clex as $opcion) {
-                 $tabla_menu.='<option value="'.$opcion.'">'.$opcion.'</option>';
-             }
-           $tabla_menu.='</select>';
-           $mform->addElement('html', $tabla_menu);*/
+  
         
             //campo lexico
            $mform->addElement('select', 'campoid', null, $clex, "onChange='javascript: if( this.options[this.selectedIndex].text == \"--\" || this.options[this.selectedIndex].text == \"Seleccionar\" ) { this.selectedIndex == 0; this.options[0].selected = true; document.getElementById(\"clgeneraldinamico\").style.display=\"none\";} else { cargaContenido(this.id,\"clgeneraldinamico\",0); document.getElementById(\"clgeneraldinamico\").style.display=\"\";}' style=\"min-height: 0;\"");
@@ -473,6 +466,11 @@ class mod_ejercicios_mod_form extends moodleform_mod {
             $tabla_menu .='</div>';
             
             $tabla_menu.=  '<h2 class="titulomisactividades">'.get_string('MisActividades', 'ejercicios').'</h2>';
+
+            $tabla_menu.='<center><a href="./view.php?id=' . $id . '&opcion=9"><img  class="misactividades" src="./imagenes/activ.svg" id="id_MisActividades" name="MisActividades" title="'. get_string('MisActividades', 'ejercicios') . '"/></a></center>';
+            
+            
+              $tabla_menu.=  '<h2 class="componeractividades">'.get_string('componerActividades', 'ejercicios').'</h2>';
 
             $tabla_menu.='<center><a href="./view.php?id=' . $id . '&opcion=9"><img  class="misactividades" src="./imagenes/activ.svg" id="id_MisActividades" name="MisActividades" title="'. get_string('MisActividades', 'ejercicios') . '"/></a></center>';
             /*$tabla_menu .=  '<div id="divflotantederecha">';
