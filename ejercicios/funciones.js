@@ -196,10 +196,47 @@ function botonCrear(id_curso){
 }
 
 function botonBuscar(id_curso){
-   
-      location.href="view.php?id=" + id_curso + "&opcion=6";
+    //cojo el indice de campolexico
+     var campolexico=document.getElementsByName("campoid");
+    // alert("hola");
+    // alert(campolexico.options[campolexico.selectedIndex].value);
+     var clascampolexico=campolexico.item(campolexico.length-1).value;
+    //cojo el indice de tipoActividad
+     var tipoActividad=document.getElementById("TipoActividad");
+     var clastipoActividad=tipoActividad.selectedIndex;
+     //cojo el indice de destreza comunicativa
+     var dc=document.getElementById("DestrezaComunicativa");
+     var clasdc=dc.selectedIndex;
+     //cojo el indice de tema gramatical
+     var gr=document.getElementsByName("campogr");
+     var clasgr=gr.item(gr.length-1).value;
+      //cojo el indice de intencion comunicativa
+     var ic=document.getElementsByName("campoic");
+     var clasic=ic.item(ic.length-1).value;
+       //cojo el indice de tipologiatextual
+     var tt=document.getElementById("id_campott");
+     var clastt=tt.selectedIndex;
+  
+    if(clastipoActividad>=2){
+        location.href="view.php?id=" + id_curso + "&opcion=6"+ "&ccl="+clascampolexico+ "&cta="+clastipoActividad+"&cdc="+clasdc+"&cgr="+clasgr+"&cic="+clasic+"&ctt="+clastt;
+    }else{
+        alert("Debe seleccionar al menos un Tipo de Actividad")
+    }
+    
+     
   
 }
+
+
+function botonMenuPrincipal(id_curso){
+
+      
+        location.href="view.php?id=" + id_curso + "&opcion=9";
+ 
+  
+}
+
+
 
 
 
