@@ -472,7 +472,7 @@ class mod_ejercicios_mod_form extends moodleform_mod {
             
               $tabla_menu.=  '<h2 class="componeractividades">'.get_string('componerActividades', 'ejercicios').'</h2>';
 
-            $tabla_menu.='<center><a href="./view.php?id=' . $id . '&opcion=9"><img  class="misactividades" src="./imagenes/activ.svg" id="id_MisActividades" name="MisActividades" title="'. get_string('MisActividades', 'ejercicios') . '"/></a></center>';
+            $tabla_menu.='<center><a href="./view.php?id=' . $id . '&opcion=9"><img  class="misactividades" src="./imagenes/componer.png" id="id_MisActividades" name="MisActividades" title="'. get_string('MisActividades', 'ejercicios') . '"/></a></center>';
             /*$tabla_menu .=  '<div id="divflotantederecha">';
             $tabla_menu .=  '<h2 class="titulo">'.get_string('Crear', 'ejercicios').'</h2>';
             $tabla_menu .=  '<div style="height:20px"></div>';
