@@ -41,39 +41,39 @@ class Ejercicios_general {
     var $id;
     var $id_curso;
     var $id_creador;
-    var $TipoActividad;
-    var $TipoArchivoPregunta;
-    var $TipoArchivoRespuesta;
+    var $tipoactividad;
+    var $tipoarchivopregunta;
+    var $tipoarchivorespuesta;
     var $visible;
     var $publico;
     var $carpeta;
-    var $CampoTematico;
-    var $Destreza;
-    var $TemaGramatical;
-    var $IntencionComunicativa;
-    var $TipologiaTextual;
+    var $campotematico;
+    var $destreza;
+    var $temagramatical;
+    var $intencioncomunicativa;
+    var $tipologiatextual;
     var $name;
     var $descripcion;
     var $numpreg;
 
     //Contructor
-    function Ejercicios_general($id = NULL, $id_curso = NULL, $id_creador = NULL, $TipoActividad = NULL, $TipoArchivoPregunta = NULL, $TipoArchivoRespuesta = NULL, $visible = NULL, $publico = NULL, $carpeta = NULL, $CampoTematico = NULL, $Destreza = NULL, $TemaGramatical = NULL, $IntencionComunicativa = NULL, $TipologiaTextual = NULL, $name = NULL, $descripcion = NULL, $numpreg = NULL) {
+    function Ejercicios_general($id = NULL, $id_curso = NULL, $id_creador = NULL, $tipoactividad = NULL, $tipoarchivopregunta = NULL, $tipoarchivorespuesta = NULL, $visible = NULL, $publico = NULL, $carpeta = NULL, $campotematico = NULL, $destreza = NULL, $temagramatical = NULL, $intencioncomunicativa = NULL, $tipologiatextual = NULL, $name = NULL, $descripcion = NULL, $numpreg = NULL) {
 
 
         $this->id = $id;
         $this->id_curso = $id_curso;
         $this->id_creador = $id_creador;
-        $this->TipoActividad = $TipoActividad;
-        $this->TipoArchivoPregunta = $TipoArchivoPregunta;
-        $this->TipoArchivoRespuesta = $TipoArchivoRespuesta;
+        $this->tipoactividad = $tipoactividad;
+        $this->tipoarchivopregunta = $tipoarchivopregunta;
+        $this->tipoarchivorespuesta = $tipoarchivorespuesta;
         $this->visible = $visible;
         $this->publico = $publico;
         $this->carpeta = $carpeta;
-        $this->CampoTematico = $CampoTematico;
-        $this->Destreza = $Destreza;
-        $this->TemaGramatical = $TemaGramatical;
-        $this->IntencionComunicativa = $IntencionComunicativa;
-        $this->TipologiaTextual = $TipologiaTextual;
+        $this->campotematico = $campotematico;
+        $this->destreza = $destreza;
+        $this->temagramatical = $temagramatical;
+        $this->intencioncomunicativa = $intencioncomunicativa;
+        $this->tipologiatextual = $tipologiatextual;
         $this->name = $name;
         $this->descripcion = $descripcion;
         $this->numpreg = $numpreg;
@@ -93,29 +93,29 @@ class Ejercicios_general {
             case 'id_creador':
                 return $this->id_creador;
                 break;
-            case 'TipoActividad':
-                return $this->TipoActividad;
+            case 'tipoactividad':
+                return $this->tipoactividad;
                 break;
-            case 'TipoArchivoPregunta':
-                return $this->TipoArchivoPregunta;
+            case 'tipoarchivopregunta':
+                return $this->tipoarchivopregunta;
                 break;
             case 'visible':
                 return $this->visible;
                 break;
-            case 'CampoTematico':
-                return $this->CampoTematico;
+            case 'campotematico':
+                return $this->campotematico;
                 break;
-            case 'Destreza':
-                return $this->Destreza;
+            case 'destreza':
+                return $this->destreza;
                 break;
-            case 'TemaGramatical':
-                return $this->TemaGramatical;
+            case 'temagramatical':
+                return $this->temagramatical;
                 break;
-            case 'IntencionComunicativa':
-                return $this->IntencionComunicativa;
+            case 'intencioncomunicativa':
+                return $this->intencioncomunicativa;
                 break;
-            case 'TipologiaTextual':
-                return $this->TipologiaTextual;
+            case 'tipologiatextual':
+                return $this->tipologiatextual;
                 break;
             case 'name':
                 return $this->name;
@@ -154,17 +154,17 @@ class Ejercicios_general {
         $this->id = $ejer->id;
         $this->id_curso = $ejer->id_curso;
         $this->id_creador = $ejer->id_creador;
-        $this->TipoActividad = $ejer->TipoActividad;
-        $this->TipoArchivoPregunta = $ejer->TipoArchivoPregunta;
-        $this->TipoArchivoRespuesta = $ejer->TipoArchivoRespuesta;
+        $this->tipoactividad = $ejer->tipoactividad;
+        $this->tipoarchivopregunta = $ejer->tipoarchivopregunta;
+        $this->tipoarchivorespuesta = $ejer->tipoarchivorespuesta;
         $this->visible = $ejer->visible;
         $this->publico = $ejer->publico;
         $this->carpeta = $ejer->carpeta;
-        $this->CampoTematico = $ejer->CampoTematico;
-        $this->Destreza = $ejer->Destreza;
-        $this->TemaGramatical = $ejer->TemaGramatical;
-        $this->IntencionComunicativa = $ejer->IntencionComunicativa;
-        $this->TipologiaTextual = $ejer->TipologiaTextual;
+        $this->campotematico = $ejer->campotematico;
+        $this->destreza = $ejer->destreza;
+        $this->temagramatical = $ejer->temagramatical;
+        $this->intencioncomunicativa = $ejer->intencioncomunicativa;
+        $this->tipologiatextual = $ejer->tipologiatextual;
         $this->name = $ejer->name;
         $this->descripcion = $ejer->descripcion;
         $this->numpreg = $ejer->numpreg;
@@ -177,17 +177,17 @@ class Ejercicios_general {
         $this->id = $ejer->id;
         $this->id_curso = $ejer->id_curso;
         $this->id_creador = $ejer->id_creador;
-        $this->TipoActividad = $ejer->TipoActividad;
-        $this->TipoArchivoPregunta = $ejer->TipoArchivoPregunta;
-        $this->TipoArchivoRespuesta = $ejer->TipoArchivoRespuesta;
+        $this->tipoactividad = $ejer->tipoactividad;
+        $this->tipoarchivopregunta = $ejer->tipoarchivopregunta;
+        $this->tipoarchivorespuesta = $ejer->tipoarchivorespuesta;
         $this->visible = $ejer->visible;
         $this->publico = $ejer->publico;
         $this->carpeta = $ejer->carpeta;
-        $this->CampoTematico = $ejer->CampoTematico;
-        $this->Destreza = $ejer->Destreza;
-        $this->TemaGramatical = $ejer->TemaGramatical;
-        $this->IntencionComunicativa = $ejer->IntencionComunicativa;
-        $this->TipologiaTextual = $ejer->TipologiaTextual;
+        $this->campotematico = $ejer->campotematico;
+        $this->destreza = $ejer->destreza;
+        $this->temagramatical = $ejer->temagramatical;
+        $this->intencioncomunicativa = $ejer->intencioncomunicativa;
+        $this->tipologiatextual = $ejer->tipologiatextual;
         $this->name = $ejer->name;
         $this->descripcion = $ejer->descripcion;
         $this->numpreg = $ejer->numpreg;
@@ -197,7 +197,7 @@ class Ejercicios_general {
     function buscar_campotematico($campotematico) {
 
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE CampoTematico=' . $campotematico;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE campotematico=' . $campotematico;
 
         $todos = get_records_sql($sql);
 
@@ -216,32 +216,10 @@ class Ejercicios_general {
         return $todos_mis_ejercicios;
     }
 
-    function buscar_Destreza($Destreza) {
+    function buscar_destreza($destreza) {
 
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE Destreza=' . $Destreza;
-
-        $todos = get_records_sql($sql);
-
-        $todos_mis_ejercicios = array();
-
-        foreach ($todos as $cosa) {
-
-            $mp = new Ejercicios_general();
-
-            $mp->obtener_uno($cosa->id);
-
-            $todos_mis_ejercicios[] = $mp;
-        }
-
-
-        return $todos_mis_ejercicios;
-    }
-
-    function buscar_TemaGramatical($TemaGramatical) {
-
-
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE Destreza=' . $TemaGramatical;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE destreza=' . $destreza;
 
         $todos = get_records_sql($sql);
 
@@ -260,10 +238,10 @@ class Ejercicios_general {
         return $todos_mis_ejercicios;
     }
 
-    function buscar_IntencionComunicativa($IntencionComunicativa) {
+    function buscar_temagramatical($temagramatical) {
 
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE IntencionComunicativa=' . $IntencionComunicativa;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE destreza=' . $temagramatical;
 
         $todos = get_records_sql($sql);
 
@@ -282,10 +260,32 @@ class Ejercicios_general {
         return $todos_mis_ejercicios;
     }
 
-    function buscar_TipologiaTextual($TipologiaTextual) {
+    function buscar_intencioncomunicativa($intencioncomunicativa) {
 
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE TipologiaTextual=' . $TipologiaTextual;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE intencioncomunicativa=' . $intencioncomunicativa;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_tipologiatextual($tipologiatextual) {
+
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE tipologiatextual=' . $tipologiatextual;
 
         $todos = get_records_sql($sql);
 
@@ -307,7 +307,7 @@ class Ejercicios_general {
     function buscar_todas_clasificaciones($ccl, $cta, $cdc, $cgr, $cic, $ctt, $userid) {
 
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND tipoactividad=' . $cta . ' AND destreza=' . $cdc . ' AND temagramatical=' . $cgr . ' AND intencioncomunicativa=' . $cic . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -328,7 +328,7 @@ class Ejercicios_general {
 
     function buscar_sin_ta($ccl, $cdc, $cgr, $cic, $ctt) {
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND destreza=' . $cdc . ' AND temagramatical=' . $cgr . ' AND intencioncomunicativa=' . $cic . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -349,7 +349,7 @@ class Ejercicios_general {
     
     function clasif_sin_ta_dc($ccl,$cgr,$cic,$ctt){
         
-         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND temagramatical=' . $cgr . ' AND intencioncomunicativa=' . $cic . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -371,7 +371,7 @@ class Ejercicios_general {
     
     function buscar_sin_ta_dc_gr($ccl,$cic,$ctt){
         
-             $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+             $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND intencioncomunicativa=' . $cic . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -393,7 +393,8 @@ class Ejercicios_general {
     
     
     function buscar_clasif_sin_ta_dc_gr_tt($ccl,$cic){
-               $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND IntencionComunicativa=' . $cic;
+        
+               $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND intencioncomunicativa=' . $cic;
 
         $todos = get_records_sql($sql);
 
@@ -414,7 +415,7 @@ class Ejercicios_general {
     }
     
     function buscar_clasif_sin_ta_dc_gr_ic($ccl,$ctt){
-         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipologiaTextual=' . $ctt;
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -434,7 +435,8 @@ class Ejercicios_general {
     }
     
     function buscar_clasif_sin_ta_dc_gr_ic_tt($ccl){
-               $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl;
+        
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl;
 
         $todos = get_records_sql($sql);
 
@@ -455,7 +457,7 @@ class Ejercicios_general {
     
     function buscar_clasif_sin_ta_cl($cdc,$cgr,$cic,$ctt){
         
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'destreza=' . $cdc . ' AND temagramatical=' . $cgr . ' AND intencioncomunicativa=' . $cic . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -476,7 +478,7 @@ class Ejercicios_general {
     
     function buscar_clasif_sin_ta_cl_tt($cdc,$cgr,$cic){
         
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'destreza=' . $cdc . ' AND temagramatical=' . $cgr . ' AND intencioncomunicativa=' . $cic;
 
         $todos = get_records_sql($sql);
 
@@ -497,7 +499,7 @@ class Ejercicios_general {
     
     
     function buscar_clasif_sin_ta_cl_ic($cdc,$cgr,$ctt){
-         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND TipologiaTextual=' . $ctt;
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'destreza=' . $cdc . ' AND temagramatical=' . $cgr . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -517,7 +519,7 @@ class Ejercicios_general {
     }
     
     function buscar_sin_ta_cl_gr($cdc,$cic,$ctt){
-         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'Destreza=' . $cdc . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'destreza=' . $cdc . ' AND intencioncomunicativa=' . $cic . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -538,7 +540,7 @@ class Ejercicios_general {
     
     
     function buscar_clasif_sin_ta_cl_gr_tt($cdc,$cic){
-         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'Destreza=' . $cdc . ' AND IntencionComunicativa=' . $cic;
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'destreza=' . $cdc . ' AND intencioncomunicativa=' . $cic;
 
         $todos = get_records_sql($sql);
 
@@ -558,7 +560,7 @@ class Ejercicios_general {
     }
     
     function buscar_clasif_sin_ta_cl_gr_ic($cdc,$ctt){
-         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'Destreza=' . $cdc . ' AND TipologiaTextual=' . $ctt;
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'destreza=' . $cdc . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -576,9 +578,9 @@ class Ejercicios_general {
 
         return $todos_mis_ejercicios;
     }
-    function buscar_clasif_sin_ta_cl_gr_ic_tt(){
-        
-         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'Destreza=' . $cdc;
+    function buscar_clasif_sin_ta_cl_gr_ic_tt($cdc){
+        echo "cdc vale".$cdc;
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'destreza=' . $cdc;
 
         $todos = get_records_sql($sql);
 
@@ -600,7 +602,7 @@ class Ejercicios_general {
     
     function buscar_clasif_sin_ta_cl_dc($cgr,$cic,$ctt){
         
-          $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' .'TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+          $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' .'temagramatical=' . $cgr . ' AND intencioncomunicativa=' . $cic . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -621,7 +623,7 @@ class Ejercicios_general {
     
     function buscar_clasif_sin_ta_cl_dc_tt($cgr,$cic){
         
-               $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' .'TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic;
+               $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' .'temagramatical=' . $cgr . ' AND intencioncomunicativa=' . $cic;
 
         $todos = get_records_sql($sql);
 
@@ -643,7 +645,7 @@ class Ejercicios_general {
     
     function buscar_clasif_sin_ta_cl_dc_ic($cgr,$ctt){
         
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' .'TemaGramatical=' . $cgr . ' AND TipologiaTextual=' . $ctt;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' .'temagramatical=' . $cgr . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -664,7 +666,7 @@ class Ejercicios_general {
     
     function buscar_clasif_sin_ta_cl_dc_ic_tt($cgr){
         
-         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' .'TemaGramatical=' . $cgr;
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' .'temagramatical=' . $cgr;
 
         $todos = get_records_sql($sql);
 
@@ -685,7 +687,9 @@ class Ejercicios_general {
     
     function buscar_sin_ta_cl_dc_gr($cic,$ctt){
         
-          $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' .'IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+        echo "int".$cic." tt".$ctt;
+        
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' .'intencioncomunicativa=' . $cic . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -707,7 +711,7 @@ class Ejercicios_general {
     
     function buscar_clasif_sin_ta_cl_dc_gr_tt($cic){
         
-          $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' .'IntencionComunicativa=' . $cic;
+          $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' .'intencioncomunicativa=' . $cic;
 
         $todos = get_records_sql($sql);
 
@@ -729,7 +733,7 @@ class Ejercicios_general {
     
     function buscar_clasif_sin_ta_cl_dc_gr_ic($ctt){
         
-           $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'TipologiaTextual=' . $ctt;
+           $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -751,7 +755,30 @@ class Ejercicios_general {
     function buscar_clasif_sin_ta_dc_ic($ccl,$cgr,$ctt){
         
         
-         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TemaGramatical=' . $cgr .' AND TipologiaTextual=' . $ctt;
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND temagramatical=' . $cgr .' AND tipologiatextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+        
+    }
+    
+    function buscar_clasif_sin_ta_dc_ic_tt($ccl,$cgr){
+        
+                
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND temagramatical=' . $cgr;
 
         $todos = get_records_sql($sql);
 
@@ -773,7 +800,7 @@ class Ejercicios_general {
     
     function buscar_clasif_sin_ta_dc_tt($ccl,$cgr,$cic){
         
-          $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic;
+          $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND temagramatical=' . $cgr . ' AND intencioncomunicativa=' . $cic;
 
         $todos = get_records_sql($sql);
 
@@ -795,7 +822,7 @@ class Ejercicios_general {
     
     function buscar_clasif_sin_ta_ic($ccl,$cdc,$cgr,$ctt){
         
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND TipologiaTextual=' . $ctt;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND destreza=' . $cdc . ' AND temagramatical=' . $cgr . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -816,7 +843,7 @@ class Ejercicios_general {
 
     function buscar_clasif_sin_ta_ic_tt($ccl,$cdc,$cgr){
         
-         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr ;
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND destreza=' . $cdc . ' AND temagramatical=' . $cgr ;
 
         $todos = get_records_sql($sql);
 
@@ -837,7 +864,7 @@ class Ejercicios_general {
     }
     
     function buscar_sin_ta_gr($ccl,$cdc,$cic,$ctt){
-         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND Destreza=' . $cdc . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND destreza=' . $cdc . ' AND intencioncomunicativa=' . $cic . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -858,7 +885,7 @@ class Ejercicios_general {
     
     function buscar_clasif_sin_ta_gr_tt($ccl,$cdc,$cic){
         
-             $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND Destreza=' . $cdc . ' AND IntencionComunicativa=' . $cic;
+             $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND destreza=' . $cdc . ' AND intencioncomunicativa=' . $cic;
 
         $todos = get_records_sql($sql);
 
@@ -879,7 +906,7 @@ class Ejercicios_general {
     
     function buscar_clasif_sin_ta_gr_ic($ccl,$cdc,$ctt){
         
-      $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND Destreza=' . $cdc . ' AND TipologiaTextual=' . $ctt;
+      $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND destreza=' . $cdc . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -901,7 +928,7 @@ class Ejercicios_general {
     function buscar_clasif_sin_ta_gr_ic_tt($ccl,$cdc){
         
                 
-      $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND Destreza=' . $cdc;
+      $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND destreza=' . $cdc;
 
         $todos = get_records_sql($sql);
 
@@ -924,7 +951,8 @@ class Ejercicios_general {
     
     function buscar_clasif_sin_ta_tt($ccl,$cdc,$cgr,$cic){
         
-          $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic;
+       // echo "".$ccl
+          $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND destreza=' . $cdc . ' AND temagramatical=' . $cgr . ' AND intencioncomunicativa=' . $cic;
 
         $todos = get_records_sql($sql);
 
@@ -946,7 +974,7 @@ class Ejercicios_general {
     function buscar_clasif_sin_tt($ccl, $cta, $cdc, $cgr, $cic) {
 
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND tipoactividad=' . $cta . ' AND destreza=' . $cdc . ' AND temagramatical=' . $cgr . ' AND intencioncomunicativa=' . $cic;
 
         $todos = get_records_sql($sql);
 
@@ -968,7 +996,7 @@ class Ejercicios_general {
     function buscar_clasif_sin_ic($ccl, $cta, $cdc, $cgr, $ctt) {
 
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND TipologiaTextual=' . $ctt;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND tipoactividad=' . $cta . ' AND destreza=' . $cdc . ' AND temagramatical=' . $cgr . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -990,7 +1018,7 @@ class Ejercicios_general {
     function buscar_clasif_sin_ic_tt($ccl, $cta, $cdc, $cgr) {
 
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND tipoactividad=' . $cta . ' AND destreza=' . $cdc . ' AND temagramatical=' . $cgr;
 
         $todos = get_records_sql($sql);
 
@@ -1012,7 +1040,7 @@ class Ejercicios_general {
     function buscar_sin_gr($ccl, $cta, $cdc, $cic, $ctt) {
 
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND tipoactividad=' . $cta . ' AND destreza=' . $cdc . ' AND intencioncomunicativa=' . $cic . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -1033,7 +1061,7 @@ class Ejercicios_general {
 
     function buscar_clasif_sin_gr_tt($ccl, $cta, $cdc, $cic) {
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND IntencionComunicativa=' . $cic;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND tipoactividad=' . $cta . ' AND destreza=' . $cdc . ' AND intencioncomunicativa=' . $cic;
 
         $todos = get_records_sql($sql);
 
@@ -1054,7 +1082,7 @@ class Ejercicios_general {
 
     function buscar_clasif_sin_gr_ic($ccl, $cta, $cdc, $ctt) {
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND TipologiaTextual=' . $ctt;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND tipoactividad=' . $cta . ' AND destreza=' . $cdc . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -1075,7 +1103,7 @@ class Ejercicios_general {
 
     function buscar_clasif_sin_gr_ic_tt($ccl, $cta, $cdc) {
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND Destreza=' . $cdc;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND tipoactividad=' . $cta . ' AND destreza=' . $cdc;
 
         $todos = get_records_sql($sql);
 
@@ -1096,7 +1124,7 @@ class Ejercicios_general {
 
     function clasif_sin_dc($ccl, $cta, $cgr, $cic, $ctt) {
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND tipoactividad=' . $cta . ' AND temagramatical=' . $cgr . ' AND intencioncomunicativa=' . $cic . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -1117,7 +1145,8 @@ class Ejercicios_general {
 
     function buscar_clasif_sin_dc_tt($ccl, $cta, $cgr, $cic) {
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic;
+    
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND tipoactividad=' . $cta . ' AND temagramatical=' . $cgr . ' AND intencioncomunicativa=' . $cic;
 
         $todos = get_records_sql($sql);
 
@@ -1137,7 +1166,7 @@ class Ejercicios_general {
     }
 
     function buscar_clasif_sin_dc_ic($ccl, $cta, $cgr, $ctt) {
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND TemaGramatical=' . $cgr . ' AND TipologiaTextual=' . $ctt;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND tipoactividad=' . $cta . ' AND temagramatical=' . $cgr . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -1158,7 +1187,7 @@ class Ejercicios_general {
 
     function buscar_clasif_sin_dc_ic_tt($ccl, $cta, $cgr) {
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND TemaGramatical=' . $cgr;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND tipoactividad=' . $cta . ' AND temagramatical=' . $cgr;
 
         $todos = get_records_sql($sql);
 
@@ -1178,7 +1207,7 @@ class Ejercicios_general {
     }
 
     function buscar_sin_dc_gr($ccl, $cta, $cic, $ctt) {
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND tipoactividad=' . $cta . ' AND intencioncomunicativa=' . $cic . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -1199,7 +1228,7 @@ class Ejercicios_general {
 
     function buscar_clasif_sin_dc_gr_tt($ccl, $cta, $cic) {
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND IntencionComunicativa=' . $cic;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND tipoactividad=' . $cta . ' AND intencioncomunicativa=' . $cic;
 
         $todos = get_records_sql($sql);
 
@@ -1219,7 +1248,7 @@ class Ejercicios_general {
     }
 
     function buscar_clasif_sin_dc_gr_ic($ccl, $cta, $ctt) {
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND TipologiaTextual=' . $ctt;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND tipoactividad=' . $cta . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -1240,7 +1269,7 @@ class Ejercicios_general {
 
     function buscar_clasif_sin_dc_gr_ic_tt($ccl, $cta) {
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND tipoactividad=' . $cta;
 
         $todos = get_records_sql($sql);
 
@@ -1261,7 +1290,7 @@ class Ejercicios_general {
 
     function buscar_clasif_sin_cl($cta, $cdc, $cgr, $cic, $ctt) {
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  tipoactividad=' . $cta . ' AND destreza=' . $cdc . ' AND temagramatical=' . $cgr . ' AND intencioncomunicativa=' . $cic . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -1282,7 +1311,7 @@ class Ejercicios_general {
 
     function buscar_clasif_sin_cl_tt($cta, $cdc, $cgr, $cic) {
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  tipoactividad=' . $cta . ' AND destreza=' . $cdc . ' AND temagramatical=' . $cgr . ' AND intencioncomunicativa=' . $cic;
 
         $todos = get_records_sql($sql);
 
@@ -1302,7 +1331,7 @@ class Ejercicios_general {
     }
 
     function buscar_clasif_sin_cl_ic($cta, $cdc, $cgr, $ctt) {
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND TipologiaTextual=' . $ctt;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  tipoactividad=' . $cta . ' AND destreza=' . $cdc . ' AND temagramatical=' . $cgr . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -1323,7 +1352,7 @@ class Ejercicios_general {
 
     function buscar_clasif_sin_cl_ic_tt($cta, $cdc, $cgr) {
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  tipoactividad=' . $cta . ' AND destreza=' . $cdc . ' AND temagramatical=' . $cgr;
 
         $todos = get_records_sql($sql);
 
@@ -1343,7 +1372,7 @@ class Ejercicios_general {
     }
 
     function buscar_sin_cl_gr($cta, $cdc, $cic, $ctt) {
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE tipoactividad=' . $cta . ' AND destreza=' . $cdc . ' AND intencioncomunicativa=' . $cic . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -1364,7 +1393,7 @@ class Ejercicios_general {
 
     function buscar_clasif_sin_cl_gr_tt($cta, $cdc, $cic) {
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND IntencionComunicativa=' . $cic;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE tipoactividad=' . $cta . ' AND destreza=' . $cdc . ' AND intencioncomunicativa=' . $cic;
 
         $todos = get_records_sql($sql);
 
@@ -1385,7 +1414,7 @@ class Ejercicios_general {
 
     function buscar_clasif_sin_cl_gr_ic($cta, $cdc, $ctt) {
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND TipologiaTextual=' . $ctt;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE tipoactividad=' . $cta . ' AND destreza=' . $cdc . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -1407,8 +1436,8 @@ class Ejercicios_general {
     function buscar_clasif_sin_cl_gr_ic_tt($cta, $cdc, $userid) {
 
         echo "user id" . $userid;
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND (publico=1 OR id_creador=' . $userid . ')';
-        echo 'SELECT * FROM  mdl_ejercicios_general WHERE TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND (publico=1 OR id_creador=' . $userid . ')';
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE tipoactividad=' . $cta . ' AND destreza=' . $cdc . ' AND (publico=1 OR id_creador=' . $userid . ')';
+        echo 'SELECT * FROM  mdl_ejercicios_general WHERE tipoactividad=' . $cta . ' AND destreza=' . $cdc . ' AND (publico=1 OR id_creador=' . $userid . ')';
 
         $todos = get_records_sql($sql);
 
@@ -1429,7 +1458,7 @@ class Ejercicios_general {
 
     function buscar_clasif_sin_cl_dc($cta, $cgr, $cic, $ctt) {
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  tipoactividad=' . $cta . ' AND temagramatical=' . $cgr . ' AND intencioncomunicativa=' . $cic . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -1450,7 +1479,7 @@ class Ejercicios_general {
 
     function buscar_clasif_sin_cl_dc_tt($cta, $cgr, $cic) {
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  tipoactividad=' . $cta . ' AND temagramatical=' . $cgr . ' AND intencioncomunicativa=' . $cic;
 
         $todos = get_records_sql($sql);
 
@@ -1471,7 +1500,7 @@ class Ejercicios_general {
 
     function buscar_clasif_sin_cl_dc_ic($cta, $cgr, $ctt) {
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta . ' AND TemaGramatical=' . $cgr . ' AND TipologiaTextual=' . $ctt;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  tipoactividad=' . $cta . ' AND temagramatical=' . $cgr . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -1492,7 +1521,7 @@ class Ejercicios_general {
 
     function buscar_clasif_sin_cl_dc_ic_tt($cta, $cgr) {
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta . ' AND TemaGramatical=' . $cgr;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  tipoactividad=' . $cta . ' AND temagramatical=' . $cgr;
 
         $todos = get_records_sql($sql);
 
@@ -1513,7 +1542,7 @@ class Ejercicios_general {
 
     function buscar_sin_cl_dc_gr($cta, $cic, $ctt) {
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  tipoactividad=' . $cta . ' AND intencioncomunicativa=' . $cic . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -1534,7 +1563,7 @@ class Ejercicios_general {
 
     function buscar_clasif_sin_cl_dc_gr_tt($cta, $cic) {
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta . ' AND IntencionComunicativa=' . $cic;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  tipoactividad=' . $cta . ' AND intencioncomunicativa=' . $cic;
 
         $todos = get_records_sql($sql);
 
@@ -1556,7 +1585,7 @@ class Ejercicios_general {
     function buscar_clasif_sin_cl_dc_gr_ic($cta, $ctt) {
 
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta . ' AND TipologiaTextual=' . $ctt;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  tipoactividad=' . $cta . ' AND tipologiatextual=' . $ctt;
 
         $todos = get_records_sql($sql);
 
@@ -1577,7 +1606,7 @@ class Ejercicios_general {
 
     function buscar_clasif_sin_cl_dc_gr_ic_tt($cta) {
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  tipoactividad=' . $cta;
 
         $todos = get_records_sql($sql);
 
