@@ -237,14 +237,23 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                               
                               }else{
                                   if($buscar==1){
-                                    $buttonarray = array();
-                                    $buttonarray[] = &$mform->createElement('reset', 'resetbutton', get_string('BotonAñadir','ejercicios'));
-                                    // $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('BotonCorregir','ejercicios'));
-                                    $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
-                                  }else{
                                       
-                                    $boton='<center></br><input type="button" style="height:20px; width:120px; margin-left:175px;" id="id_botonMenuPrincipal" value="'.get_string("Misejercicios","ejercicios").'" onClick="botonMenuPrincipal('.$id.');"></center>';
-                                    $mform->addElement('html',$boton);
+                                           
+                                    $attributes='size="40"';
+                                    $mform->addElement('text', 'carpeta_ejercicio',get_string('carpeta', 'ejercicios') , $attributes);
+                                    $mform->addRule('carpeta_ejercicio', "Carpeta Necesaria", 'required', null, 'client');
+                                    
+                                                                      
+                                    $buttonarray = array();
+                                    $buttonarray[] = &$mform->createElement('submit', 'submitbutton2', get_string('BotonAñadir','ejercicios'));
+                                    // $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('BotonCorregir','ejercicios'));
+                                    $mform->addGroup($buttonarray, 'botones2', '', array(' '), false);
+                                 
+                                    
+                                    }else{
+                                      
+                                        $tabla_menu='<center><input type="button" style="height:30px; width:60px; margin-left:175px;" id="botonMenuPrincipal">'.getstring("Reset","ejercicios").'</center>';
+                                        $mform->addElement('html',$tabla_menu);
                                     
                                   }
                               }
