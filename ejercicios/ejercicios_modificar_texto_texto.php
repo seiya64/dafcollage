@@ -51,13 +51,25 @@ $mform->mostrar_ejercicio($id_curso,$id_ejercicio);
 
  $ejercicio_general = new Ejercicios_general();
  $miejercicio=$ejercicio_general->obtener_uno($id_ejercicio);
-   
- $numpreg=$miejercicio->get("numpreg"); 
 
-if ($mform->is_submitted()) {  //Boton Guardar
-   
-    #borro todas las respuestas y preguntas y las vuelvo a insertar
-      //comenzamos una transacción para que en todas las tablas se haga seguido
+ $numpreg=$miejercicio->get("numpreg"); 
+ 
+if(optional_param("submitbutton2")){ //boton para añadir a mis ejercicos visible desde la busqueda
+     
+    global $USER;
+    echo "añadiendo";
+    echo "id_ejercicio".$id_ejercicio;
+    //inserto el ejercicio en profesor_actividades
+        $ejercicio_profesor = new Ejercicios_profesor_actividad(NULL,$USER->id,$id_ejercicio,optional_param("carpeta_ejercicio"));
+        $ejercicio_profesor->insertar();
+    
+    //Muestro mis ejercicios
+     redirect('./view.php?id=' . $id_curso . '&opcion=9');
+    
+}else{
+    if(optional_param("submitbutton")){ //boton para guardar los ejercicios visible desde mis ejercicios
+     #borro todas las respuestas y preguntas y las vuelvo a insertar
+    //comenzamos una transacción para que en todas las tablas se haga seguido
     // en caso de error en algun delete, no se hace ninguno
     begin_sql();
     delete_records('ejercicios_texto_texto', 'id_ejercicio', $id_ejercicio);
@@ -88,14 +100,14 @@ if ($mform->is_submitted()) {  //Boton Guardar
   
    
     }
-   
-
+    
+    
+       redirect('./view.php?id=' . $id_curso . '&opcion=9');
+    }
 }
 
-//Muestro mis ejercicios
 
-     redirect('./view.php?id=' . $id_curso . '&opcion=9'. '&id='.$id_curso);
-        
+
     
 
 ?>
