@@ -102,7 +102,7 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
         $ejercicios_general = new Ejercicios_general();
       
         //Busco todos los ejercicios que son públicos(visibles tambien por los profesores)
-        
+        if($cta>=0){//Si he seleccionado el tipo de actividad
         if($ccl>0){ //Si he seleccionado alguna opcion de campo temático
             if($cdc>=0){ //Si he seleccionado alguna opción de destreza
                 if($cgr>0){//Si he seleccionado alguna opción de tema gramatical
@@ -243,6 +243,160 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
             }
         }
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        }else{
+             if($ccl>0){ //Si he seleccionado alguna opcion de campo temático
+            if($cdc>=0){ //Si he seleccionado alguna opción de destreza
+                if($cgr>0){//Si he seleccionado alguna opción de tema gramatical
+                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                        if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
+                             $buscados=$ejercicios_general->buscar_sin_ta($ccl,$cdc,$cgr,$cic,$ctt);
+                        }else{
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_tt($ccl,$cdc,$cgr,$cic);
+                        }
+                    }else{
+                       if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_ic($ccl,$cdc,$cgr,$ctt);
+                        }else{
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_ic_tt($ccl,$cdc,$cgr);
+                        } 
+                    }
+                }else{
+                    
+                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                        if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
+                             $buscados=$ejercicios_general->buscar_sin_ta_gr($ccl,$cdc,$cic,$ctt);
+                        }else{
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_gr_tt($ccl,$cdc,$cic);
+                        }
+                    }else{
+                       if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_gr_ic($ccl,$cdc,$ctt);
+                        }else{
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_gr_ic_tt($ccl,$cdc);
+                        } 
+                    }
+                    
+                }
+                
+            }else{
+                
+                if($cgr>0){//Si he seleccionado alguna opción de tema gramatical
+                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                        if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
+                             $buscados=$ejercicios_general->clasif_sin_ta_dc($ccl,$cgr,$cic,$ctt);
+                        }else{
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_dc_tt($ccl,$cgr,$cic);
+                        }
+                    }else{
+                       if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_dc_ic($ccl,$cgr,$ctt);
+                        }else{
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_dc_ic_tt($ccl,$cgr);
+                        } 
+                    }
+                }else{
+                    
+                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                        if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
+                             $buscados=$ejercicios_general->buscar_sin_ta_dc_gr($ccl,$cic,$ctt);
+                        }else{
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_dc_gr_tt($ccl,$cic);
+                        }
+                    }else{
+                       if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_dc_gr_ic($ccl,$ctt);
+                        }else{
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_dc_gr_ic_tt($ccl);
+                        } 
+                    }
+                    
+                }
+                
+            }
+        }else{
+               if($cdc>=0){ //Si he seleccionado alguna opción de destreza
+                if($cgr>0){//Si he seleccionado alguna opción de tema gramatical
+                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                        if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_cl($cdc,$cgr,$cic,$ctt);
+                        }else{
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_cl_tt($cdc,$cgr,$cic);
+                        }
+                    }else{
+                       if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_cl_ic($cdc,$cgr,$ctt);
+                        }else{
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_cl_ic_tt($cdc,$cgr);
+                        } 
+                    }
+                }else{
+                    
+                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                        if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
+                             $buscados=$ejercicios_general->buscar_sin_ta_cl_gr($cdc,$cic,$ctt);
+                        }else{
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_cl_gr_tt($cdc,$cic);
+                        }
+                    }else{
+                       if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_cl_gr_ic($cdc,$ctt);
+                        }else{
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_cl_gr_ic_tt($cdc,$USER->id);
+                        } 
+                    }
+                    
+                }
+                
+            }else{
+                
+                if($cgr>0){//Si he seleccionado alguna opción de tema gramatical
+                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                        if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_cl_dc($cgr,$cic,$ctt);
+                        }else{
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_cl_dc_tt($cgr,$cic);
+                        }
+                    }else{
+                       if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_cl_dc_ic($cgr,$ctt);
+                        }else{
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_cl_dc_ic_tt($cgr);
+                        } 
+                    }
+                }else{
+                    
+                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                        if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
+                             $buscados=$ejercicios_general->buscar_sin_ta_cl_dc_gr($cic,$ctt);
+                        }else{
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_cl_dc_gr_tt($cic);
+                        }
+                    }else{
+                       if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
+                             $buscados=$ejercicios_general->buscar_clasif_sin_ta_cl_dc_gr_ic($ctt);
+                        }else{
+                             //no hay criterio de busqueda
+                        } 
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        }
 
       
         $numencontrados=sizeof($buscados);
