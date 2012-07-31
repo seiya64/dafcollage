@@ -15,7 +15,7 @@
   Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
   Simeón Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto (finamolinasoto@gmail.com)
- 
+
   Original idea and content design:
   Ruth Burbat
   Inmaculada Almahano Güeto
@@ -37,52 +37,51 @@
   GNU General Public License for more details. */
 
 class Ejercicios_general {
-    
-       var $id;
-       var $id_curso;
-       var $id_creador;
-       var $TipoActividad;
-       var $TipoArchivoPregunta;
-       var $TipoArchivoRespuesta;
-       var $visible;
-       var $publico;
-       var $carpeta;
-       var $CampoTematico;
-       var $Destreza;
-       var $TemaGramatical;
-       var $IntencionComunicativa;
-       var $TipologiaTextual;
-       var $name;
-       var $descripcion;
-       var $numpreg;
-       //Contructor
-       function Ejercicios_general($id=NULL,$id_curso=NULL,$id_creador=NULL,$TipoActividad=NULL,$TipoArchivoPregunta=NULL,$TipoArchivoRespuesta=NULL,$visible=NULL,$publico=NULL,$carpeta=NULL,$CampoTematico=NULL,$Destreza=NULL,$TemaGramatical=NULL,$IntencionComunicativa=NULL,$TipologiaTextual=NULL,$name=NULL,$descripcion=NULL,$numpreg=NULL){
-               
-           
-                $this->id=$id;
-                $this->id_curso=$id_curso;
-                $this->id_creador=$id_creador;
-                $this->TipoActividad=$TipoActividad;
-                $this->TipoArchivoPregunta=$TipoArchivoPregunta;
-                $this->TipoArchivoRespuesta=$TipoArchivoRespuesta;
-                $this->visible=$visible;
-                $this->publico=$publico;
-                $this->carpeta=$carpeta;
-                $this->CampoTematico=$CampoTematico;
-                $this->Destreza=$Destreza;
-                $this->TemaGramatical=$TemaGramatical;
-                $this->IntencionComunicativa=$IntencionComunicativa;
-                $this->TipologiaTextual=$TipologiaTextual;
-                $this->name=$name;
-                $this->descripcion=$descripcion;
-                $this->numpreg=$numpreg;
-                  
-        }
-    
-       
+
+    var $id;
+    var $id_curso;
+    var $id_creador;
+    var $TipoActividad;
+    var $TipoArchivoPregunta;
+    var $TipoArchivoRespuesta;
+    var $visible;
+    var $publico;
+    var $carpeta;
+    var $CampoTematico;
+    var $Destreza;
+    var $TemaGramatical;
+    var $IntencionComunicativa;
+    var $TipologiaTextual;
+    var $name;
+    var $descripcion;
+    var $numpreg;
+
+    //Contructor
+    function Ejercicios_general($id = NULL, $id_curso = NULL, $id_creador = NULL, $TipoActividad = NULL, $TipoArchivoPregunta = NULL, $TipoArchivoRespuesta = NULL, $visible = NULL, $publico = NULL, $carpeta = NULL, $CampoTematico = NULL, $Destreza = NULL, $TemaGramatical = NULL, $IntencionComunicativa = NULL, $TipologiaTextual = NULL, $name = NULL, $descripcion = NULL, $numpreg = NULL) {
+
+
+        $this->id = $id;
+        $this->id_curso = $id_curso;
+        $this->id_creador = $id_creador;
+        $this->TipoActividad = $TipoActividad;
+        $this->TipoArchivoPregunta = $TipoArchivoPregunta;
+        $this->TipoArchivoRespuesta = $TipoArchivoRespuesta;
+        $this->visible = $visible;
+        $this->publico = $publico;
+        $this->carpeta = $carpeta;
+        $this->CampoTematico = $CampoTematico;
+        $this->Destreza = $Destreza;
+        $this->TemaGramatical = $TemaGramatical;
+        $this->IntencionComunicativa = $IntencionComunicativa;
+        $this->TipologiaTextual = $TipologiaTextual;
+        $this->name = $name;
+        $this->descripcion = $descripcion;
+        $this->numpreg = $numpreg;
+    }
+
     function get($param) {
-     
-       // $param = strtolower($param);
+
+        // $param = strtolower($param);
         switch ($param) {
             default:
             case 'id':
@@ -94,10 +93,10 @@ class Ejercicios_general {
             case 'id_creador':
                 return $this->id_creador;
                 break;
-             case 'TipoActividad':
+            case 'TipoActividad':
                 return $this->TipoActividad;
                 break;
-             case 'TipoArchivoPregunta':
+            case 'TipoArchivoPregunta':
                 return $this->TipoArchivoPregunta;
                 break;
             case 'visible':
@@ -109,1258 +108,1724 @@ class Ejercicios_general {
             case 'Destreza':
                 return $this->Destreza;
                 break;
-             case 'TemaGramatical':
+            case 'TemaGramatical':
                 return $this->TemaGramatical;
                 break;
-             case 'IntencionComunicativa':
+            case 'IntencionComunicativa':
                 return $this->IntencionComunicativa;
                 break;
-              case 'TipologiaTextual':
+            case 'TipologiaTextual':
                 return $this->TipologiaTextual;
                 break;
             case 'name':
-               return $this->name;
+                return $this->name;
                 break;
             case 'descripcion':
-               return $this->descripcion;
+                return $this->descripcion;
                 break;
             case 'numpreg':
-               return $this->numpreg;
+                return $this->numpreg;
                 break;
         }
     }
-    
-     function insertar(){
-       
+
+    function insertar() {
+
         //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
-         $id=insert_record('ejercicios_general', $this, true);
-         //Devuelve el identificador del ejercicios creado
-         return $id;
+        $id = insert_record('ejercicios_general', $this, true);
+        //Devuelve el identificador del ejercicios creado
+        return $id;
     }
-    
-        
-     function borrar($id){   
-            //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
-        
-            delete_records('ejercicios_general','id', $id);
-          
-     }
-    
-      function alterar(){
-        
+
+    function borrar($id) {
+        //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
+
+        delete_records('ejercicios_general', 'id', $id);
+    }
+
+    function alterar() {
+
         //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
         update_record('ejercicios_general', $this, false);
-
- 
-     }
-    
-       function obtener_uno($id){
-         $ejer = get_record('ejercicios_general', 'id', $id);
-         $this->id=$ejer->id;
-         $this->id_curso=$ejer->id_curso;
-         $this->id_creador=$ejer->id_creador;
-         $this->TipoActividad=$ejer->TipoActividad;
-         $this->TipoArchivoPregunta=$ejer->TipoArchivoPregunta;
-         $this->TipoArchivoRespuesta=$ejer->TipoArchivoRespuesta;
-         $this->visible=$ejer->visible;
-         $this->publico=$ejer->publico;
-         $this->carpeta=$ejer->carpeta;
-         $this->CampoTematico=$ejer->CampoTematico;
-         $this->Destreza=$ejer->Destreza;
-         $this->TemaGramatical=$ejer->TemaGramatical;
-         $this->IntencionComunicativa=$ejer->IntencionComunicativa;
-         $this->TipologiaTextual=$ejer->TipologiaTextual;
-         $this->name=$ejer->name;
-         $this->descripcion=$ejer->descripcion;
-         $this->numpreg=$ejer->numpreg;
-          return $this;
-
     }
-    
-     function obtener_uno_name($name){
-        
-         $ejer = get_record('ejercicios_general', 'name', $name);
-         $this->id=$ejer->id;
-         $this->id_curso=$ejer->id_curso;
-         $this->id_creador=$ejer->id_creador;
-         $this->TipoActividad=$ejer->TipoActividad;
-         $this->TipoArchivoPregunta=$ejer->TipoArchivoPregunta;
-         $this->TipoArchivoRespuesta=$ejer->TipoArchivoRespuesta;
-         $this->visible=$ejer->visible;
-         $this->publico=$ejer->publico;
-         $this->carpeta=$ejer->carpeta;
-         $this->CampoTematico=$ejer->CampoTematico;
-         $this->Destreza=$ejer->Destreza;
-         $this->TemaGramatical=$ejer->TemaGramatical;
-         $this->IntencionComunicativa=$ejer->IntencionComunicativa;
-         $this->TipologiaTextual=$ejer->TipologiaTextual;
-         $this->name=$ejer->name;
-         $this->descripcion=$ejer->descripcion;
-         $this->numpreg=$ejer->numpreg;
-         return $this;
-          
+
+    function obtener_uno($id) {
+        $ejer = get_record('ejercicios_general', 'id', $id);
+        $this->id = $ejer->id;
+        $this->id_curso = $ejer->id_curso;
+        $this->id_creador = $ejer->id_creador;
+        $this->TipoActividad = $ejer->TipoActividad;
+        $this->TipoArchivoPregunta = $ejer->TipoArchivoPregunta;
+        $this->TipoArchivoRespuesta = $ejer->TipoArchivoRespuesta;
+        $this->visible = $ejer->visible;
+        $this->publico = $ejer->publico;
+        $this->carpeta = $ejer->carpeta;
+        $this->CampoTematico = $ejer->CampoTematico;
+        $this->Destreza = $ejer->Destreza;
+        $this->TemaGramatical = $ejer->TemaGramatical;
+        $this->IntencionComunicativa = $ejer->IntencionComunicativa;
+        $this->TipologiaTextual = $ejer->TipologiaTextual;
+        $this->name = $ejer->name;
+        $this->descripcion = $ejer->descripcion;
+        $this->numpreg = $ejer->numpreg;
+        return $this;
     }
-    
-        function buscar_campotematico($campotematico){
-        
-     
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE CampoTematico='.$campotematico;
-      
+
+    function obtener_uno_name($name) {
+
+        $ejer = get_record('ejercicios_general', 'name', $name);
+        $this->id = $ejer->id;
+        $this->id_curso = $ejer->id_curso;
+        $this->id_creador = $ejer->id_creador;
+        $this->TipoActividad = $ejer->TipoActividad;
+        $this->TipoArchivoPregunta = $ejer->TipoArchivoPregunta;
+        $this->TipoArchivoRespuesta = $ejer->TipoArchivoRespuesta;
+        $this->visible = $ejer->visible;
+        $this->publico = $ejer->publico;
+        $this->carpeta = $ejer->carpeta;
+        $this->CampoTematico = $ejer->CampoTematico;
+        $this->Destreza = $ejer->Destreza;
+        $this->TemaGramatical = $ejer->TemaGramatical;
+        $this->IntencionComunicativa = $ejer->IntencionComunicativa;
+        $this->TipologiaTextual = $ejer->TipologiaTextual;
+        $this->name = $ejer->name;
+        $this->descripcion = $ejer->descripcion;
+        $this->numpreg = $ejer->numpreg;
+        return $this;
+    }
+
+    function buscar_campotematico($campotematico) {
+
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE CampoTematico=' . $campotematico;
+
         $todos = get_records_sql($sql);
-        
-         $todos_mis_ejercicios = array();
 
-               foreach ($todos as $cosa) {
-                    
-                     $mp = new Ejercicios_general();
-                     
-                     $mp->obtener_uno($cosa->id);
-                     
-                    $todos_mis_ejercicios[] = $mp;
-                    
-                  
-                }
-              
-                
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
         return $todos_mis_ejercicios;
-               
-          
     }
-    
-       function buscar_Destreza($Destreza){
-        
-     
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE Destreza='.$Destreza;
-      
+
+    function buscar_Destreza($Destreza) {
+
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE Destreza=' . $Destreza;
+
         $todos = get_records_sql($sql);
-        
-         $todos_mis_ejercicios = array();
 
-               foreach ($todos as $cosa) {
-                    
-                     $mp = new Ejercicios_general();
-                     
-                     $mp->obtener_uno($cosa->id);
-                     
-                    $todos_mis_ejercicios[] = $mp;
-                    
-                  
-                }
-              
-                
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
         return $todos_mis_ejercicios;
-               
-          
+    }
+
+    function buscar_TemaGramatical($TemaGramatical) {
+
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE Destreza=' . $TemaGramatical;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_IntencionComunicativa($IntencionComunicativa) {
+
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE IntencionComunicativa=' . $IntencionComunicativa;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_TipologiaTextual($TipologiaTextual) {
+
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE TipologiaTextual=' . $TipologiaTextual;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_todas_clasificaciones($ccl, $cta, $cdc, $cgr, $cic, $ctt, $userid) {
+
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_sin_ta($ccl, $cdc, $cgr, $cic, $ctt) {
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
     }
     
-         function buscar_TemaGramatical($TemaGramatical){
+    function clasif_sin_ta_dc($ccl,$cgr,$cic,$ctt){
+        
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
 
+        $todos = get_records_sql($sql);
 
-            $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE Destreza='.$TemaGramatical;
+        $todos_mis_ejercicios = array();
 
-            $todos = get_records_sql($sql);
+        foreach ($todos as $cosa) {
 
-            $todos_mis_ejercicios = array();
+            $mp = new Ejercicios_general();
 
-                foreach ($todos as $cosa) {
+            $mp->obtener_uno($cosa->id);
 
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-
-
-      }
-      
-        function buscar_IntencionComunicativa($IntencionComunicativa){
-
-
-            $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE IntencionComunicativa='.$IntencionComunicativa;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-
-
-      }
-      
-        function buscar_TipologiaTextual($TipologiaTextual){
-
-
-            $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE TipologiaTextual='.$TipologiaTextual;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-
-
-      }
-      
-       function buscar_todas_clasificaciones($ccl,$cta ,$cdc,$cgr,$cic,$ctt,$userid){
-          
-
-            $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico='.$ccl.' AND TipoActividad='.$cta.' AND Destreza='.$cdc.' AND TemaGramatical='.$cgr.' AND IntencionComunicativa='.$cic.' AND TipologiaTextual='.$ctt;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-
-
-      }
-      
-         function buscar_clasif_sin_tt($ccl,$cta ,$cdc,$cgr,$cic){
-
-
-            $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico='.$ccl.' AND TipoActividad='.$cta.' AND Destreza='.$cdc.' AND TemaGramatical='.$cgr.' AND IntencionComunicativa='.$cic;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-
-
-      }
-      
-      function buscar_clasif_sin_ic($ccl,$cta ,$cdc,$cgr,$ctt){
-
-
-            $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico='.$ccl.' AND TipoActividad='.$cta.' AND Destreza='.$cdc.' AND TemaGramatical='.$cgr.' AND TipologiaTextual='.$ctt;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-
-
-      }
-      
-       function buscar_clasif_sin_ic_tt($ccl,$cta ,$cdc,$cgr){
-
-
-            $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico='.$ccl.' AND TipoActividad='.$cta.' AND Destreza='.$cdc.' AND TemaGramatical='.$cgr;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-
-
-      }
-      
-      
-     
-      
-       function buscar_sin_gr($ccl,$cta ,$cdc,$cic,$ctt){
-
-
-             $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico='.$ccl.' AND TipoActividad='.$cta.' AND Destreza='.$cdc.' AND IntencionComunicativa='.$cic.' AND TipologiaTextual='.$ctt;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-
-
-      }
-      
-        function buscar_clasif_sin_gr_tt($ccl,$cta ,$cdc,$cic){
-            
-            $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico='.$ccl.' AND TipoActividad='.$cta.' AND Destreza='.$cdc.' AND IntencionComunicativa='.$cic;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-            
+            $todos_mis_ejercicios[] = $mp;
         }
+
+
+        return $todos_mis_ejercicios;
         
-        function buscar_clasif_sin_gr_ic($ccl,$cta ,$cdc,$ctt){
-        
-           $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico='.$ccl.' AND TipoActividad='.$cta.' AND Destreza='.$cdc.' AND TipologiaTextual='.$ctt;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-        }
-            
-        
-      function buscar_clasif_sin_gr_ic_tt($ccl,$cta ,$cdc){
-          
-            $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico='.$ccl.' AND TipoActividad='.$cta.' AND Destreza='.$cdc;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-          
-      }
-      
-      
-      
-      function clasif_sin_dc($ccl,$cta,$cgr,$cic,$ctt){
-          
-            $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico='.$ccl.' AND TipoActividad='.$cta.' AND TemaGramatical='.$cgr.' AND IntencionComunicativa='.$cic.' AND TipologiaTextual='.$ctt;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-      }
-      
-      function buscar_clasif_sin_dc_tt($ccl,$cta,$cgr,$cic){
-          
-            $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico='.$ccl.' AND TipoActividad='.$cta.' AND TemaGramatical='.$cgr.' AND IntencionComunicativa='.$cic;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-      }
-      
-      function buscar_clasif_sin_dc_ic($ccl,$cta,$cgr,$ctt){
-           $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico='.$ccl.' AND TipoActividad='.$cta.' AND TemaGramatical='.$cgr.' AND TipologiaTextual='.$ctt;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-      }
-      
-      function buscar_clasif_sin_dc_ic_tt($ccl,$cta,$cgr){
-          
-               $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico='.$ccl.' AND TipoActividad='.$cta.' AND TemaGramatical='.$cgr;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-          
-      }
-      
-      function buscar_sin_dc_gr($ccl,$cta,$cic,$ctt){
-            $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico='.$ccl.' AND TipoActividad='.$cta.' AND IntencionComunicativa='.$cic.' AND TipologiaTextual='.$ctt;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-      }
-      
-     function buscar_clasif_sin_dc_gr_tt($ccl,$cta,$cic){
-         
-              $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico='.$ccl.' AND TipoActividad='.$cta.' AND IntencionComunicativa='.$cic;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-         
-     }
-     
-     function buscar_clasif_sin_dc_gr_ic($ccl,$cta,$ctt){
-                   $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico='.$ccl.' AND TipoActividad='.$cta.' AND TipologiaTextual='.$ctt;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-     }
-     
-     function buscar_clasif_sin_dc_gr_ic_tt($ccl,$cta){
-         
-            $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico='.$ccl.' AND TipoActividad='.$cta;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-         
-     }
-     
-     function buscar_clasif_sin_cl($cta,$cdc,$cgr,$cic,$ctt){
-         
-            $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad='.$cta.' AND Destreza='.$cdc.' AND TemaGramatical='.$cgr.' AND IntencionComunicativa='.$cic.' AND TipologiaTextual='.$ctt;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-     }
-     
-     
-     function buscar_clasif_sin_cl_tt($cta ,$cdc,$cgr,$cic){
-         
-                   $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad='.$cta.' AND Destreza='.$cdc.' AND TemaGramatical='.$cgr.' AND IntencionComunicativa='.$cic;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-         
-     }
-     
-     function buscar_clasif_sin_cl_ic($cta ,$cdc,$cgr,$ctt){
-                $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad='.$cta.' AND Destreza='.$cdc.' AND TemaGramatical='.$cgr.' AND TipologiaTextual='.$ctt;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-     }
-     
-     function buscar_clasif_sin_cl_ic_tt($cta,$cdc,$cgr){
-         
-                  $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad='.$cta.' AND Destreza='.$cdc.' AND TemaGramatical='.$cgr;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-         
-     }
-     
-   function buscar_sin_cl_gr($cta,$cdc,$cic,$ctt){
-       $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE TipoActividad='.$cta.' AND Destreza='.$cdc.' AND IntencionComunicativa='.$cic.' AND TipologiaTextual='.$ctt;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-  }
-  
-  function buscar_clasif_sin_cl_gr_tt($cta,$cdc,$cic){
-      
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE TipoActividad='.$cta.' AND Destreza='.$cdc.' AND IntencionComunicativa='.$cic;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-      
-  }
+    }
     
-  function buscar_clasif_sin_cl_gr_ic($cta,$cdc,$ctt){
-      
-       $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE TipoActividad='.$cta.' AND Destreza='.$cdc.' AND TipologiaTextual='.$ctt;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-  }
-  
-  function buscar_clasif_sin_cl_gr_ic_tt($cta,$cdc,$userid){
-         
-      echo "user id".$userid;
-       $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE TipoActividad='.$cta.' AND Destreza='.$cdc. ' AND (publico=1 OR id_creador='.$userid.')';
-       echo 'SELECT * FROM  mdl_ejercicios_general WHERE TipoActividad='.$cta.' AND Destreza='.$cdc. ' AND (publico=1 OR id_creador='.$userid.')';
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-            echo "tamano".sizeof($todos_mis_ejercicios);
-            return $todos_mis_ejercicios;
-  }
-  
-    function buscar_clasif_sin_cl_dc($cta,$cgr,$cic,$ctt){
+    function buscar_sin_ta_dc_gr($ccl,$cic,$ctt){
         
-           $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad='.$cta.' AND TemaGramatical='.$cgr.' AND IntencionComunicativa='.$cic.' AND TipologiaTextual='.$ctt;
+             $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
 
-            $todos = get_records_sql($sql);
+        $todos = get_records_sql($sql);
 
-            $todos_mis_ejercicios = array();
+        $todos_mis_ejercicios = array();
 
-                foreach ($todos as $cosa) {
+        foreach ($todos as $cosa) {
 
-                        $mp = new Ejercicios_general();
+            $mp = new Ejercicios_general();
 
-                        $mp->obtener_uno($cosa->id);
+            $mp->obtener_uno($cosa->id);
 
-                        $todos_mis_ejercicios[] = $mp;
+            $todos_mis_ejercicios[] = $mp;
+        }
 
 
-                    }
-
-
-            return $todos_mis_ejercicios;
-  }
-  
-  function buscar_clasif_sin_cl_dc_tt($cta,$cgr,$cic){
-      
-          $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad='.$cta.' AND TemaGramatical='.$cgr.' AND IntencionComunicativa='.$cic;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-  }
-  
-  function buscar_clasif_sin_cl_dc_ic($cta,$cgr,$ctt){
-       
-           $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad='.$cta.' AND TemaGramatical='.$cgr.' AND TipologiaTextual='.$ctt;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-  }
-  
-  function buscar_clasif_sin_cl_dc_ic_tt($cta,$cgr){
-      
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad='.$cta.' AND TemaGramatical='.$cgr;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-      
-  }
-  
-  function buscar_sin_cl_dc_gr($cta,$cic,$ctt){
-      
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad='.$cta.' AND IntencionComunicativa='.$cic.' AND TipologiaTextual='.$ctt;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-      
-  }
-  
-  function buscar_clasif_sin_cl_dc_gr_tt($cta,$cic){
-      
-    $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad='.$cta.' AND IntencionComunicativa='.$cic;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-      
-  }
-  
-  function buscar_clasif_sin_cl_dc_gr_ic($cta,$ctt){
-      
-      
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad='.$cta.' AND TipologiaTextual='.$ctt;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-      
-  }
-  
-  function buscar_clasif_sin_cl_dc_gr_ic_tt($cta){
-      
-       $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad='.$cta;
-
-            $todos = get_records_sql($sql);
-
-            $todos_mis_ejercicios = array();
-
-                foreach ($todos as $cosa) {
-
-                        $mp = new Ejercicios_general();
-
-                        $mp->obtener_uno($cosa->id);
-
-                        $todos_mis_ejercicios[] = $mp;
-
-
-                    }
-
-
-            return $todos_mis_ejercicios;
-      
-  }
-     
-      function obtener_todos() {
+        return $todos_mis_ejercicios;
         
-      
+    }
+    
+    
+    function buscar_clasif_sin_ta_dc_gr_tt($ccl,$cic){
+               $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND IntencionComunicativa=' . $cic;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+        
+    }
+    
+    function buscar_clasif_sin_ta_dc_gr_ic($ccl,$ctt){
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+    
+    function buscar_clasif_sin_ta_dc_gr_ic_tt($ccl){
+               $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+    
+    function buscar_clasif_sin_ta_cl($cdc,$cgr,$cic,$ctt){
+        
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+    
+    function buscar_clasif_sin_ta_cl_tt($cdc,$cgr,$cic){
+        
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+    
+    
+    function buscar_clasif_sin_ta_cl_ic($cdc,$cgr,$ctt){
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+    
+    function buscar_sin_ta_cl_gr($cdc,$cic,$ctt){
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'Destreza=' . $cdc . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+    
+    
+    function buscar_clasif_sin_ta_cl_gr_tt($cdc,$cic){
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'Destreza=' . $cdc . ' AND IntencionComunicativa=' . $cic;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+    
+    function buscar_clasif_sin_ta_cl_gr_ic($cdc,$ctt){
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'Destreza=' . $cdc . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+    function buscar_clasif_sin_ta_cl_gr_ic_tt(){
+        
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'Destreza=' . $cdc;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+        
+    }
+    
+    function buscar_clasif_sin_ta_cl_dc($cgr,$cic,$ctt){
+        
+          $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' .'TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+    
+    function buscar_clasif_sin_ta_cl_dc_tt($cgr,$cic){
+        
+               $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' .'TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+        
+    }
+    
+    function buscar_clasif_sin_ta_cl_dc_ic($cgr,$ctt){
+        
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' .'TemaGramatical=' . $cgr . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+    
+    function buscar_clasif_sin_ta_cl_dc_ic_tt($cgr){
+        
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' .'TemaGramatical=' . $cgr;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+    
+    function buscar_sin_ta_cl_dc_gr($cic,$ctt){
+        
+          $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' .'IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+    
+    
+    function buscar_clasif_sin_ta_cl_dc_gr_tt($cic){
+        
+          $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' .'IntencionComunicativa=' . $cic;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+        
+    }
+    
+    function buscar_clasif_sin_ta_cl_dc_gr_ic($ctt){
+        
+           $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+        
+    }
+    function buscar_clasif_sin_ta_dc_ic($ccl,$cgr,$ctt){
+        
+        
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TemaGramatical=' . $cgr .' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+        
+    }
+    
+    function buscar_clasif_sin_ta_dc_tt($ccl,$cgr,$cic){
+        
+          $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+        
+    }
+    
+    function buscar_clasif_sin_ta_ic($ccl,$cdc,$cgr,$ctt){
+        
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_ta_ic_tt($ccl,$cdc,$cgr){
+        
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr ;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+        
+    }
+    
+    function buscar_sin_ta_gr($ccl,$cdc,$cic,$ctt){
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND Destreza=' . $cdc . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+    
+    function buscar_clasif_sin_ta_gr_tt($ccl,$cdc,$cic){
+        
+             $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND Destreza=' . $cdc . ' AND IntencionComunicativa=' . $cic;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+    
+    function buscar_clasif_sin_ta_gr_ic($ccl,$cdc,$ctt){
+        
+      $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND Destreza=' . $cdc . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+    
+    function buscar_clasif_sin_ta_gr_ic_tt($ccl,$cdc){
+        
+                
+      $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND Destreza=' . $cdc;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+        
+    }
+    
+    
+    function buscar_clasif_sin_ta_tt($ccl,$cdc,$cgr,$cic){
+        
+          $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+    
+    function buscar_clasif_sin_tt($ccl, $cta, $cdc, $cgr, $cic) {
+
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_ic($ccl, $cta, $cdc, $cgr, $ctt) {
+
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_ic_tt($ccl, $cta, $cdc, $cgr) {
+
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_sin_gr($ccl, $cta, $cdc, $cic, $ctt) {
+
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_gr_tt($ccl, $cta, $cdc, $cic) {
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND IntencionComunicativa=' . $cic;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_gr_ic($ccl, $cta, $cdc, $ctt) {
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_gr_ic_tt($ccl, $cta, $cdc) {
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND Destreza=' . $cdc;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function clasif_sin_dc($ccl, $cta, $cgr, $cic, $ctt) {
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_dc_tt($ccl, $cta, $cgr, $cic) {
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_dc_ic($ccl, $cta, $cgr, $ctt) {
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND TemaGramatical=' . $cgr . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_dc_ic_tt($ccl, $cta, $cgr) {
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND TemaGramatical=' . $cgr;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_sin_dc_gr($ccl, $cta, $cic, $ctt) {
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_dc_gr_tt($ccl, $cta, $cic) {
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND IntencionComunicativa=' . $cic;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_dc_gr_ic($ccl, $cta, $ctt) {
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_dc_gr_ic_tt($ccl, $cta) {
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  CampoTematico=' . $ccl . ' AND TipoActividad=' . $cta;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_cl($cta, $cdc, $cgr, $cic, $ctt) {
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_cl_tt($cta, $cdc, $cgr, $cic) {
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_cl_ic($cta, $cdc, $cgr, $ctt) {
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_cl_ic_tt($cta, $cdc, $cgr) {
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND TemaGramatical=' . $cgr;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_sin_cl_gr($cta, $cdc, $cic, $ctt) {
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_cl_gr_tt($cta, $cdc, $cic) {
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND IntencionComunicativa=' . $cic;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_cl_gr_ic($cta, $cdc, $ctt) {
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_cl_gr_ic_tt($cta, $cdc, $userid) {
+
+        echo "user id" . $userid;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND (publico=1 OR id_creador=' . $userid . ')';
+        echo 'SELECT * FROM  mdl_ejercicios_general WHERE TipoActividad=' . $cta . ' AND Destreza=' . $cdc . ' AND (publico=1 OR id_creador=' . $userid . ')';
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+        echo "tamano" . sizeof($todos_mis_ejercicios);
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_cl_dc($cta, $cgr, $cic, $ctt) {
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_cl_dc_tt($cta, $cgr, $cic) {
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta . ' AND TemaGramatical=' . $cgr . ' AND IntencionComunicativa=' . $cic;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_cl_dc_ic($cta, $cgr, $ctt) {
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta . ' AND TemaGramatical=' . $cgr . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_cl_dc_ic_tt($cta, $cgr) {
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta . ' AND TemaGramatical=' . $cgr;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_sin_cl_dc_gr($cta, $cic, $ctt) {
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta . ' AND IntencionComunicativa=' . $cic . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_cl_dc_gr_tt($cta, $cic) {
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta . ' AND IntencionComunicativa=' . $cic;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_cl_dc_gr_ic($cta, $ctt) {
+
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta . ' AND TipologiaTextual=' . $ctt;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function buscar_clasif_sin_cl_dc_gr_ic_tt($cta) {
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  TipoActividad=' . $cta;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+    function obtener_todos() {
+
+
         $sql = 'SELECT * FROM  mdl_ejercicios_general';
-      
-        $todos = get_records_sql($sql);
-        
-         $todos_mis_ejercicios = array();
 
-               foreach ($todos as $cosa) {
-                    
-                     $mp = new Ejercicios_general();
-                     
-                     $mp->obtener_uno($cosa->id);
-                     
-                    $todos_mis_ejercicios[] = $mp;
-                    
-                  
-                }
-              
-                
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
         return $todos_mis_ejercicios;
-               
-              
- 
     }
 
-        
 }
 
-
 /**
- *Clase que gestiona la tabla de la base de datos mdl_ejercicios_profesor_actividad
+ * Clase que gestiona la tabla de la base de datos mdl_ejercicios_profesor_actividad
  */
-class Ejercicios_profesor_actividad{
-    
-       var $id;
-       var $id_profesor;
-       var $id_ejercicio;
-       var $carpeta;
-      
-       //Contructor
-       function Ejercicios_profesor_actividad($id=NULL,$id_profesor=NULL,$id_ejercicio=NULL,$carpeta=NULL){
-           
-                $this->id=$id;
-                $this->id_profesor=$id_profesor;
-                $this->id_ejercicio=$id_ejercicio;
-                $this->carpeta=$carpeta;
-               // return $this;
-        }
-    
-       
+class Ejercicios_profesor_actividad {
+
+    var $id;
+    var $id_profesor;
+    var $id_ejercicio;
+    var $carpeta;
+
+    //Contructor
+    function Ejercicios_profesor_actividad($id = NULL, $id_profesor = NULL, $id_ejercicio = NULL, $carpeta = NULL) {
+
+        $this->id = $id;
+        $this->id_profesor = $id_profesor;
+        $this->id_ejercicio = $id_ejercicio;
+        $this->carpeta = $carpeta;
+        // return $this;
+    }
+
     function get($param) {
-     
-       // $param = strtolower($param);
+
+        // $param = strtolower($param);
         switch ($param) {
             default:
             case 'id':
                 return $this->id;
                 break;
             case 'id_profesor':
-                echo "id_profesor".$this->id_profesor;
+                echo "id_profesor" . $this->id_profesor;
                 return $this->id_profesor;
                 break;
             case 'id_ejercicio':
-               
+
                 return $this->id_ejercicio;
                 break;
-             case 'carpeta':
-                
+            case 'carpeta':
+
                 return $this->carpeta;
                 break;
-            
-     
         }
     }
-    
-    
-     function insertar(){   
-        //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
-         insert_record('ejercicios_profesor_actividad', $this, true);
-      
-     }
-     
-     function borrar(){   
-            //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
-            delete_record('ejercicios_profesor_actividad', $this, true);
 
-     }
-      function borrar_id_ejercicio($id_ejercicio,$id_profesor){   
-            //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
-        
-           delete_records('ejercicios_profesor_actividad', 'id_profesor',$id_profesor,'id_ejercicio', $id_ejercicio);
-     }
-      function alterar(){
-        
+    function insertar() {
+        //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
+        insert_record('ejercicios_profesor_actividad', $this, true);
+    }
+
+    function borrar() {
+        //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
+        delete_record('ejercicios_profesor_actividad', $this, true);
+    }
+
+    function borrar_id_ejercicio($id_ejercicio, $id_profesor) {
+        //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
+
+        delete_records('ejercicios_profesor_actividad', 'id_profesor', $id_profesor, 'id_ejercicio', $id_ejercicio);
+    }
+
+    function alterar() {
+
         //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
         update_record('ejercicios_profesor_actividad', $this, false);
-
- 
-     }
-    
-     function obtener_uno($id){
-         $ejer = get_record('ejercicios_profesor_actividad', 'id', $id);
-         $this->id=$ejer->id;
-         $this->id_profesor=$ejer->id_profesor;
-         $this->id_ejercicio=$ejer->id_ejercicio;
-   
-         $this->carpeta=$ejer->carpeta;
-         
-          return $this;
-
     }
-    
-     function obtener_uno_idejercicio($id_ejercicio){
-        
-         $ejer = get_record('ejercicios_profesor_actividad', 'id_ejrecicio', $id_ejercicio);
-         $this->id=$ejer->id;
-         $this->id_profesor=$ejer->id_profesor;
-         $this->id_ejercicio=$ejer->id_ejericio;
-         $this->carpeta=$ejer->carpeta;
-         
-         return $this;
-          
+
+    function obtener_uno($id) {
+        $ejer = get_record('ejercicios_profesor_actividad', 'id', $id);
+        $this->id = $ejer->id;
+        $this->id_profesor = $ejer->id_profesor;
+        $this->id_ejercicio = $ejer->id_ejercicio;
+
+        $this->carpeta = $ejer->carpeta;
+
+        return $this;
     }
-    
-       function obtener_todos_idejercicio($id_ejercicio){
-        
-              //  echo "entra".$id_profesor;
 
-                $sql = 'SELECT * FROM  mdl_ejercicios_profesor_actividad WHERE id_ejercicio='.$id_ejercicio;
+    function obtener_uno_idejercicio($id_ejercicio) {
 
-                $todos = get_records_sql($sql);
+        $ejer = get_record('ejercicios_profesor_actividad', 'id_ejrecicio', $id_ejercicio);
+        $this->id = $ejer->id;
+        $this->id_profesor = $ejer->id_profesor;
+        $this->id_ejercicio = $ejer->id_ejericio;
+        $this->carpeta = $ejer->carpeta;
 
-                $todos_mis_ejercicios = array();
+        return $this;
+    }
 
-                    foreach ($todos as $cosa) {
+    function obtener_todos_idejercicio($id_ejercicio) {
 
-                            $mp = new Ejercicios_profesor_actividad();
+        //  echo "entra".$id_profesor;
 
-                            $mp->obtener_uno($cosa->id);
-                 //           echo $cosa->id." aaa";
-                            $todos_mis_ejercicios[] = $mp;
+        $sql = 'SELECT * FROM  mdl_ejercicios_profesor_actividad WHERE id_ejercicio=' . $id_ejercicio;
 
+        $todos = get_records_sql($sql);
 
-                        }
-              //  echo "sale";
-                return $todos_mis_ejercicios;
-               
-      }
-    
-      function obtener_ejercicos_del_profesor($id_profesor) {
-        
-              //  echo "entra".$id_profesor;
+        $todos_mis_ejercicios = array();
 
-                $sql = 'SELECT * FROM  mdl_ejercicios_profesor_actividad WHERE id_profesor='.$id_profesor;
+        foreach ($todos as $cosa) {
 
-                $todos = get_records_sql($sql);
+            $mp = new Ejercicios_profesor_actividad();
 
-                $todos_mis_ejercicios = array();
+            $mp->obtener_uno($cosa->id);
+            //           echo $cosa->id." aaa";
+            $todos_mis_ejercicios[] = $mp;
+        }
+        //  echo "sale";
+        return $todos_mis_ejercicios;
+    }
 
-                    foreach ($todos as $cosa) {
+    function obtener_ejercicos_del_profesor($id_profesor) {
 
-                            $mp = new Ejercicios_profesor_actividad();
+        //  echo "entra".$id_profesor;
 
-                            $mp->obtener_uno($cosa->id);
-                 //           echo $cosa->id." aaa";
-                            $todos_mis_ejercicios[] = $mp;
+        $sql = 'SELECT * FROM  mdl_ejercicios_profesor_actividad WHERE id_profesor=' . $id_profesor;
 
+        $todos = get_records_sql($sql);
 
-                        }
-              //  echo "sale";
-                return $todos_mis_ejercicios;
-               
-      }
-      
-          function obtener_ejercicos_del_profesor_carpeta($id_profesor) {
-        
-                //echo "entra".$id_profesor;
+        $todos_mis_ejercicios = array();
 
-                $sql = 'SELECT DISTINCT(carpeta) FROM mdl_ejercicios_profesor_actividad WHERE id_profesor='.$id_profesor;
+        foreach ($todos as $cosa) {
 
-                $todos = get_records_sql($sql);
+            $mp = new Ejercicios_profesor_actividad();
 
-                $todos_mis_ejercicios = array();
+            $mp->obtener_uno($cosa->id);
+            //           echo $cosa->id." aaa";
+            $todos_mis_ejercicios[] = $mp;
+        }
+        //  echo "sale";
+        return $todos_mis_ejercicios;
+    }
 
-                    foreach ($todos as $cosa) {
+    function obtener_ejercicos_del_profesor_carpeta($id_profesor) {
 
-                            $mp = new Ejercicios_profesor_actividad();
+        //echo "entra".$id_profesor;
 
-                            $mp->carpeta=$cosa->carpeta;
-                  
-                            $todos_mis_ejercicios[] = $mp;
+        $sql = 'SELECT DISTINCT(carpeta) FROM mdl_ejercicios_profesor_actividad WHERE id_profesor=' . $id_profesor;
 
+        $todos = get_records_sql($sql);
 
+        $todos_mis_ejercicios = array();
 
-                        }
-              //  echo "sale";
-                return $todos_mis_ejercicios;
-               
-      }
-      
-           function obtener_ejercicos_del_profesor_por_carpetas($id_profesor,$carpeta) {
-        
-          
-               
+        foreach ($todos as $cosa) {
 
-                $sql = 'SELECT * FROM  mdl_ejercicios_profesor_actividad WHERE id_profesor='.$id_profesor.' and carpeta="'.$carpeta.'"';
+            $mp = new Ejercicios_profesor_actividad();
 
-                $todos = get_records_sql($sql);
+            $mp->carpeta = $cosa->carpeta;
 
-                $todos_mis_ejercicios = array();
+            $todos_mis_ejercicios[] = $mp;
+        }
+        //  echo "sale";
+        return $todos_mis_ejercicios;
+    }
 
-                    foreach ($todos as $cosa) {
-                        
-                            $mp = new Ejercicios_profesor_actividad();
-
-                            $mp->obtener_uno($cosa->id);
-                          
-                            $todos_mis_ejercicios[] = $mp;
+    function obtener_ejercicos_del_profesor_por_carpetas($id_profesor, $carpeta) {
 
 
-                        }
-             
-            
-                return $todos_mis_ejercicios;
-               
-      }
-    
-    
+
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_profesor_actividad WHERE id_profesor=' . $id_profesor . ' and carpeta="' . $carpeta . '"';
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_profesor_actividad();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
 }
 
 /*
  * Clase que gestiona la tabla mdl_ejercicios_texto_texto de la bd
  */
+
 class Ejercicios_texto_texto {
-    
-       var $id;
-       var $id_ejercicio;
-       var $numeropregunta;
-       var $Pregunta;
-       var $Respuesta;
-       var $Correcta;
-    
-       //Contructor
-       function Ejercicios_texto_texto($id=NULL,$id_ejercicio=NULL,$numeropregunta=NULL,$Pregunta=NULL,$Respuesta=NULL,$Correcta=NULL){
-           
-                $this->id=$id;
-                $this->id_ejercicio=$id_ejercicio;
-                $this->numeropregunta=$numeropregunta;
-                $this->Pregunta=$Pregunta;
-                $this->Respuesta=$Respuesta;
-                $this->Correcta=$Correcta;
-                
-                    
-        }
-    
-       
+
+    var $id;
+    var $id_ejercicio;
+    var $numeropregunta;
+    var $Pregunta;
+    var $Respuesta;
+    var $Correcta;
+
+    //Contructor
+    function Ejercicios_texto_texto($id = NULL, $id_ejercicio = NULL, $numeropregunta = NULL, $Pregunta = NULL, $Respuesta = NULL, $Correcta = NULL) {
+
+        $this->id = $id;
+        $this->id_ejercicio = $id_ejercicio;
+        $this->numeropregunta = $numeropregunta;
+        $this->Pregunta = $Pregunta;
+        $this->Respuesta = $Respuesta;
+        $this->Correcta = $Correcta;
+    }
+
     function get($param) {
-     
-       // $param = strtolower($param);
+
+        // $param = strtolower($param);
         switch ($param) {
             default:
             case 'id':
@@ -1372,157 +1837,130 @@ class Ejercicios_texto_texto {
             case 'numeropregunta':
                 return $this->numeropregunta;
                 break;
-             case 'Pregunta':
+            case 'Pregunta':
                 return $this->Pregunta;
                 break;
-             case 'Respuesta':
+            case 'Respuesta':
                 return $this->Respuesta;
                 break;
             case 'Correcta':
                 return $this->Correcta;
                 break;
-
-     
         }
     }
-    
-     function insertar(){
-       
-         $id=insert_record('ejercicios_texto_texto', $this, true);
-         //Devuelve el identificador del ejercicios creado
- 
-         return $id;
+
+    function insertar() {
+
+        $id = insert_record('ejercicios_texto_texto', $this, true);
+        //Devuelve el identificador del ejercicios creado
+
+        return $id;
     }
-    
-      function alterar(){
-        
+
+    function alterar() {
+
         //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
         update_record('ejercicios_texto_texto', $this, false);
-
- 
-     }
-     
-        function borrar_id_ejercicio($id_ejercicio){   
-                //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
-
-            delete_records('ejercicios_texto_texto', 'id_ejercicio', $id_ejercicio);
-        }
-    
-       function obtener_uno($id){
-         $ejer = get_record('ejercicios_texto_texto', 'id', $id);
-         $this->id=$ejer->id;
-         $this->id_ejercicio=$ejer->id_ejercicio;
-         $this->numeropregunta=$ejer->numeropregunta;
-         $this->Pregunta=$ejer->Pregunta;
-         $this->Respuesta=$ejer->Respuesta;
-         $this->Correcta=$ejer->Correcta;
-        
-          return $this;
-
     }
-    
-     function obtener_uno_name($name){
-        
-         $ejer = get_record('ejercicios_texto_texto', 'name', $name);
-         $this->id=$ejer->id;
-         $this->id_ejercicio=$ejer->id_ejercicio;
-         $this->numeropregunta=$ejer->numeropregunta;
-         $this->Pregunta=$ejer->Pregunta;
-         $this->Respuesta=$ejer->Respuesta;
-         $this->Correcta=$ejer->Correcta;
-         
-         return $this;
-          
+
+    function borrar_id_ejercicio($id_ejercicio) {
+        //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
+
+        delete_records('ejercicios_texto_texto', 'id_ejercicio', $id_ejercicio);
     }
-    
-      
-      function obtener_todos() {
-        
-      
+
+    function obtener_uno($id) {
+        $ejer = get_record('ejercicios_texto_texto', 'id', $id);
+        $this->id = $ejer->id;
+        $this->id_ejercicio = $ejer->id_ejercicio;
+        $this->numeropregunta = $ejer->numeropregunta;
+        $this->Pregunta = $ejer->Pregunta;
+        $this->Respuesta = $ejer->Respuesta;
+        $this->Correcta = $ejer->Correcta;
+
+        return $this;
+    }
+
+    function obtener_uno_name($name) {
+
+        $ejer = get_record('ejercicios_texto_texto', 'name', $name);
+        $this->id = $ejer->id;
+        $this->id_ejercicio = $ejer->id_ejercicio;
+        $this->numeropregunta = $ejer->numeropregunta;
+        $this->Pregunta = $ejer->Pregunta;
+        $this->Respuesta = $ejer->Respuesta;
+        $this->Correcta = $ejer->Correcta;
+
+        return $this;
+    }
+
+    function obtener_todos() {
+
+
         $sql = 'SELECT * FROM  mdl_ejercicios_texto_texto';
-      
+
         $todos = get_records_sql($sql);
-        
-         $todos_mis_ejercicios = array();
 
-               foreach ($todos as $cosa) {
-                    
-                     $mp = new Ejercicios_texto_texto();
-                     
-                     $mp->obtener_uno($cosa->id);
-                     
-                    $todos_mis_ejercicios[] = $mp;
-                    
-                  
-                }
-              
-                
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_texto_texto();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
         return $todos_mis_ejercicios;
-               
-              
- 
     }
 
-      function obtener_ejercicios_texto_id_ejercicicio($id_ejercicio) {
-        
-      
-        $sql = 'SELECT * FROM  mdl_ejercicios_texto_texto WHERE id_ejercicio='.$id_ejercicio;
-      
+    function obtener_ejercicios_texto_id_ejercicicio($id_ejercicio) {
+
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_texto_texto WHERE id_ejercicio=' . $id_ejercicio;
+
         $todos = get_records_sql($sql);
-        
-         $todos_mis_ejercicios = array();
 
-               foreach ($todos as $cosa) {
-                    
-                     $mp = new Ejercicios_texto_texto();
-                     
-                     $mp->obtener_uno($cosa->id);
-                     
-                    $todos_mis_ejercicios[] = $mp;
-                    
-                  
-                }
-              
-                
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_texto_texto();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
         return $todos_mis_ejercicios;
-               
-              
- 
     }
 
-       function obtener_ejercicios_texto_id_ejercicicio_numpreguntas($id_ejercicio,$numeropregunta) {
-        
-          
-      
-         $sql = 'SELECT * FROM  mdl_ejercicios_texto_texto WHERE id_ejercicio='.$id_ejercicio.' and numeropregunta='.$numeropregunta;
-      
-         $todos = get_records_sql($sql);
-        
-         $todos_mis_ejercicios = array();
+    function obtener_ejercicios_texto_id_ejercicicio_numpreguntas($id_ejercicio, $numeropregunta) {
 
-               foreach ($todos as $cosa) {
-                    
-                     $mp = new Ejercicios_texto_texto();
-                     
-                     $mp->obtener_uno($cosa->id);
-                   
-                    $todos_mis_ejercicios[] = $mp;
-                   
-                  
-                }
-              
-                
+
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_texto_texto WHERE id_ejercicio=' . $id_ejercicio . ' and numeropregunta=' . $numeropregunta;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_texto_texto();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
         return $todos_mis_ejercicios;
-               
-              
- 
     }
 
-
-        
 }
-
-
-
 
 ?>
