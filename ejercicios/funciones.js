@@ -94,19 +94,25 @@ $(document).ready(function(){
 
     });
  
-   $('#menuaux li #classa').click(function(){
+   $('#menuaux li #classa').click(function(event){
         alert("pulsado");
     var elem = $(this).next().next();
     alert(elem);
         if(elem.is('ul')){
-            event.preventDefault();
+             alert("abriendo");
+            event.preventDefault(event);
+             alert("abriendo2");
             $('#menuaux ul:visible').not(elem).slideUp();
+           
             elem.slideToggle();
         }
     });
 
 
   });
+  
+
+
 
  
 
@@ -217,7 +223,7 @@ function botonBuscar(id_curso){
      var tt=document.getElementById("id_campott");
      var clastt=tt.selectedIndex;
   
-    if(clastipoActividad>=2){
+    if(clastipoActividad>=2 || clascampolexico>0 ||clasdc>=2 || clasgr>0 || clasic >0 || clastt>1){
         location.href="view.php?id=" + id_curso + "&opcion=6"+ "&ccl="+clascampolexico+ "&cta="+clastipoActividad+"&cdc="+clasdc+"&cgr="+clasgr+"&cic="+clasic+"&ctt="+clastt;
     }else{
         alert("Debe seleccionar al menos un Tipo de Actividad")
@@ -703,3 +709,4 @@ function InvertirRespuesta(correcta,valor){
         correcta.parentNode.childNodes[2].value="0";
     }
 }
+
