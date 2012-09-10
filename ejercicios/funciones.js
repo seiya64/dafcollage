@@ -183,6 +183,52 @@ function cargaContenido(miselect, otroselect, tipo) {
     }
 }
 
+/**
+ * Carga la descripcion de un copyright
+ */
+
+function cargaDescripcion() {
+
+    var objeto = document.getElementById("id_copyright");
+  
+    var eltxt =objeto.selectedIndex;
+    
+    alert(eltxt);
+   
+     switch(eltxt){
+         
+         case 0:
+             var descripcion = document.getElementById("descrip");
+             descripcion.parentNode.removeChild(descripcion);
+ 
+            objeto.parentNode.removeChild();
+            break;
+            
+         case 1: //Reconocimiento (CC-BY)
+          
+            textarea = document.createElement('textarea');
+            textarea.rows = 5;
+            textarea.cols = 50;
+            textarea.id="descrip";
+            textarea.readOnly=true;
+            textarea.setAttribute("style","background-color:#FFE8D2");
+            textarea.setAttribute("style","border:none");
+         
+            objeto.parentNode.appendChild(textarea);
+      
+             
+             break;
+        case 2:
+        
+           
+          
+    }
+ 
+    
+    
+
+}
+
 function botonCrear(id_curso){
    
       
