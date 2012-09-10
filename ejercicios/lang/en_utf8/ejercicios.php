@@ -9,6 +9,7 @@ $string['ejerciciosfieldset'] = 'Custom example fieldset';
 $string['ejerciciosintro'] = 'ejercicios Intro';
 $string['ejerciciosname'] = 'ejercicios Name';
 
+
 $string['Puzzledoble'] = 'Asociación';
 $string['CrearEjercicioPuzzle'] = 'Crear Ejercicio Asociación';
 $string['tituloeliminar'] = 'Crear Ejercicio Puzzle Doble';
@@ -36,8 +37,11 @@ $string['Realizar']='Realizar';
 $string['Crear']='Crear Actividades:';
 $string['creando']='Creando ejercicio por Tema:';
 $string['Boton_Crear']='Crear';
+$string['MisActividades']='Mis Actividades';
+$string['ActividadesCurso']='Actividades de mi Curso';
+$string['EjerciciosCurso']='Ejercicios propuestos';
 
-
+$string['Volver']='Atrás';
 $string['Intencion']='Intención Comunicativa';
 
 
@@ -69,7 +73,7 @@ $string['Destreza5']="EXPRESIÓN ORAL";
 $string['Destreza6']="TRADUCCIÓN";
 
 
-
+$string['componerActividades']="Componer Actividades";
 
 //CREANDO EJERICIO FORMULARIO GENERICO
 
@@ -82,8 +86,9 @@ $string["numerorespuestascorrectas"]="Número de archivos respuesta correctos:";
 $string["nombre"]="Titule su ejercicio para facilitar la identificación o búsqueda:";
 $string["descripcion"]="Añade una breve introducción al ejercicio:";
 $string["visible"]="Visible (accesible por sus alumnos)";
-$string["privado"]="Privado (accesible por otro profesores)";
+$string["publico"]="Público (accesible por otros profesores y alumnos)";
 $string["carpeta"]="Introduzca la ruta del ejercicio";
+$string["copyright"]="Seleccione el copyright de sus archivos o texto";
 
 
 
@@ -102,5 +107,10 @@ $string["BotonGuardar"]="Guardar";
 
 //Mis ejercicios(Ejercicios profesor)
 $string["MisEjercicios"]="Mis Ejercicios";
+$string["Ejercicios"]="Ejercicios";
 
+//Buscando
+$string["BotonAñadir"]="Añadir a mis ejercicios";
+$string['Misejercicios']='Mis Actividades';
+$string["marcoteorico"]="Seleccionar el nivel según el marco europeo de referecia";
 ?>
