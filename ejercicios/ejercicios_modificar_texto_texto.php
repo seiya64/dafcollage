@@ -60,7 +60,7 @@ if(optional_param("submitbutton2")){ //boton para añadir a mis ejercicos visibl
     echo "añadiendo";
     echo "id_ejercicio".$id_ejercicio;
     //inserto el ejercicio en profesor_actividades
-        $ejercicio_profesor = new Ejercicios_profesor_actividad(NULL,$USER->id,$id_ejercicio,optional_param("carpeta_ejercicio"));
+        $ejercicio_profesor = new Ejercicios_prof_actividad(NULL,$USER->id,$id_ejercicio,optional_param("carpeta_ejercicio"));
         $ejercicio_profesor->insertar();
     
     //Muestro mis ejercicios

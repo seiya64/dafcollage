@@ -73,19 +73,18 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
         $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>');
     	$mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js"></script>');
-        $mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
-        
+ $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');       
          //Cojo el ejercicio  de la bd a partir de su id (id_ejercicio)
       
-       
+     
          $ejercicios_bd = new Ejercicios_general();
          $ejercicios_leido =$ejercicios_bd->obtener_uno($id_ejercicio);
    
          $nombre=$ejercicios_leido->get('name');
          $npreg=$ejercicios_leido->get('numpreg');
          $creador=$ejercicios_leido->get('id_creador');
-         
-         if($creador==$USER->id){
+     
+         if($creador==$USER->id && has_capability('moodle/legacy:editingteacher', $context, $USER->id, false)){
              $modificable=true;
          }else{
              $modificable=false;
@@ -98,7 +97,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
           
           $divdescripcion='<div class=descover>';
                             
-          //Lo separo en partes por si es muy larga
+          
         
           $divdescripcion.=$ejercicios_leido->get('descripcion');
           $divdescripcion.=$parte.'<br/>';
@@ -107,13 +106,13 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
          
          $mform->addElement('html',$divdescripcion);
          //Veo que clasificación TipoActividad tiene
-         $tipoactividad=$ejercicios_leido->get('TipoActividad');
+         $tipoactividad=$ejercicios_leido->get('tipoactividad');
          
-       
+        
          switch ($tipoactividad) {
              case 0: //es multichoice
 
-              
+             
                  $ejercicios_texto = new Ejercicios_texto_texto();
                  $todos_mis_texto_id_ejercicio= array();
                  $todos_mis_texto_id_ejercicio=$ejercicios_texto->obtener_ejercicios_texto_id_ejercicicio($id_ejercicio);
@@ -132,16 +131,16 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                 $numero_respuestas= sizeof($preguntas);
                         
                                      
-                                      //Obtengo la pregunta
+					  //Obtengo la pregunta
                                                $divpregunta='<div id="tabpregunta'.$i.'" >';
                                                $divpregunta.='<br/><br/>';
                                                $divpregunta.='<table style="width:100%;">';
                                                $divpregunta.=' <td style="width:80%;">';
                                             //   $divpregunta.='<div id="id_pregunta1" name="pregunta1">';
                                                if($buscar==1 || $modificable==false){ //Para que no pueda editarlo
-                                                    $divpregunta.='<div style="width: 900px;" class="pregunta" name="pregunta'.$i.'" id="pregunta'.$i.'">'.$preguntas[0]->get('Pregunta').'</div>';
+                                                    $divpregunta.='<div style="width: 900px;" class="pregunta" name="pregunta'.$i.'" id="pregunta'.$i.'">'.$preguntas[0]->get('pregunta').'</div>';
                                                }else{
-                                                     $divpregunta.='<textarea style="width: 900px;" class="pregunta" name="pregunta'.$i.'" id="pregunta'.$i.'">'.$preguntas[0]->get('Pregunta').'</textarea>';
+                                                     $divpregunta.='<textarea style="width: 900px;" class="pregunta" name="pregunta'.$i.'" id="pregunta'.$i.'">'.$preguntas[0]->get('pregunta').'</textarea>';
                                                }
                                            // $divpregunta.='<input name="pregunta1" type="text" style="width:80%; height:100%; margin:1%;">ssss</input>';
                                            //  $divpregunta.=$preguntas[0]->get('Pregunta');
@@ -169,7 +168,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                                $divpregunta.='<tr id="trrespuesta'.$q."_".$i.'"> ';
                                                $divpregunta.=' <td style="width:80%;">';
                                                
-                                               $correc=$preguntas[$p]->get('Correcta');
+                                               $correc=$preguntas[$p]->get('correcta');
                                                
                                                if($correc){
                                                    $divpregunta.='<input class=over type="radio" name="crespuesta'.$q.'_'.$i.'" value="1" onclick="BotonRadio(crespuesta'.$q.'_'.$i.')" checked="true"/>';
@@ -181,9 +180,9 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                             //   $divpregunta.=$preguntas[$p]->get('Respuesta');
                                             //   $divpregunta.='</div>';
                                                 if($buscar==1 || $modificable==false){ 
-                                                  $divpregunta.='<div style="width: 700px;" class="resp" name="respuesta'.$q."_".$i.'" id="respuesta'.$q."_".$i.'" value="'.$preguntas[$p]->get('Respuesta').'">'.$preguntas[$p]->get('Respuesta').'</div>'; 
+                                                  $divpregunta.='<div style="width: 700px;" class="resp" name="respuesta'.$q."_".$i.'" id="respuesta'.$q."_".$i.'" value="'.$preguntas[$p]->get('respuesta').'">'.$preguntas[$p]->get('respuesta').'</div>'; 
                                                 }else{
-                                                 $divpregunta.='<textarea style="width: 700px;" class="resp" name="respuesta'.$q."_".$i.'" id="respuesta'.$q."_".$i.'" value="'.$preguntas[$p]->get('Respuesta').'">'.$preguntas[$p]->get('Respuesta').'</textarea>'; 
+                                                 $divpregunta.='<textarea style="width: 700px;" class="resp" name="respuesta'.$q."_".$i.'" id="respuesta'.$q."_".$i.'" value="'.$preguntas[$p]->get('respuesta').'">'.$preguntas[$p]->get('respuesta').'</textarea>'; 
                                                 }
                                                $divpregunta.=' </td>';
                                                $divpregunta.=' <td style="width:5%;">';
@@ -238,22 +237,38 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                               }else{
                                   if($buscar==1){
                                       
-                                           
-                                    $attributes='size="40"';
-                                    $mform->addElement('text', 'carpeta_ejercicio',get_string('carpeta', 'ejercicios') , $attributes);
-                                    $mform->addRule('carpeta_ejercicio', "Carpeta Necesaria", 'required', null, 'client');
                                     
-                                                                      
-                                    $buttonarray = array();
-                                    $buttonarray[] = &$mform->createElement('submit', 'submitbutton2', get_string('BotonAñadir','ejercicios'));
-                                    // $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('BotonCorregir','ejercicios'));
-                                    $mform->addGroup($buttonarray, 'botones2', '', array(' '), false);
-                                 
+                                    //compruebo si soy profesor
+				    if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false) && $modificalbe==false){
+
+					  $attributes='size="40"';
+					  $mform->addElement('text', 'carpeta_ejercicio',get_string('carpeta', 'ejercicios') , $attributes);
+					  $mform->addRule('carpeta_ejercicio', "Carpeta Necesaria", 'required', null, 'client');                             
+					  $buttonarray = array();
+					  $buttonarray[] = &$mform->createElement('submit', 'submitbutton2', get_string('BotonAñadir','ejercicios'));
+					  // $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('BotonCorregir','ejercicios'));
+					  $mform->addGroup($buttonarray, 'botones2', '', array(' '), false);
+					}else{
+
+					  $buttonarray[] = &$mform->createElement('submit', 'submitbutton7', get_string('BotonCorregir','ejercicios'));
+					  // $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('BotonCorregir','ejercicios'));
+					  $mform->addGroup($buttonarray, 'botones2', '', array(' '), false);
+
+				      
+					}
                                     
                                     }else{
-                                      
-                                        $tabla_menu='<center><input type="button" style="height:30px; width:60px; margin-left:175px;" id="botonMenuPrincipal">'.getstring("Reset","ejercicios").'</center>';
-                                        $mform->addElement('html',$tabla_menu);
+                                           
+                                    //compruebo si soy profesor
+					if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false)){
+					     $tabla_menu='<center><input type="button" style="height:30px; width:60px; margin-left:175px;" id="botonMenuPrincipal">'.getstring("Reset","ejercicios").'</center>';
+					     $mform->addElement('html',$tabla_menu);
+					}else{
+					      $tabla_menu='<center><input type="button" style="height:30px; width:100px; margin-left:175px;"  value="Corregir" onClick="javascript:botonCorregirMultiChoice('.$id.')"/> <input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Atras" value="Atrás" onClick="javascript:botonAtras('.$id.')" /><input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal('.$id.')" /></center>';
+				
+					 
+					     $mform->addElement('html',$tabla_menu);
+					}
                                     
                                   }
                               }

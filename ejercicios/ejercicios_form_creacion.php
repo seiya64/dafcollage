@@ -265,6 +265,19 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
             $mform->addElement('text', 'carpeta_ejercicio',get_string('carpeta', 'ejercicios') , $attributes);
             $mform->addRule('carpeta_ejercicio', "Carpeta Necesaria", 'required', null, 'client');
            
+            //Copyright
+            
+            $Copyright=array();
+            $Copyright="--";
+            $Copyright="A1";
+            $Copyright="A2";
+            $Copyright="B1";
+            $Copyright="B2";
+            $Copyright="C1";
+            $Copyright="C2";
+            $mform->addElement('select', 'copyright', get_string("copyright", "ejercicios"), $Copyright);
+            $mform->addRule('nombre_ejercicio', "Titulo Necesario", 'required', null, 'client');
+
             $buttonarray = array();
             $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'));
             $mform->addGroup($buttonarray, 'botones', '', array(' '), false);

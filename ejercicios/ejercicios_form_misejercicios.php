@@ -7,9 +7,10 @@
 
 require_once($CFG->dirroot.'/course/moodleform_mod.php');
 require_once("ejercicios_clases.php");
+require_once("ejercicios_clase_general.php");
 /*Para poder acceder a los tipos de gramatica*/
-require_once("../vocabulario/vocabulario_classes.php");
-require_once("../vocabulario/lib.php");
+require_once($CFG->dirroot.'/mod/vocabulario/vocabulario_classes.php');
+require_once($CFG->dirroot.'/mod/vocabulario/lib.php');
 
 
 class mod_ejercicios_mis_ejercicios extends moodleform_mod {
@@ -41,21 +42,23 @@ class mod_ejercicios_mis_ejercicios extends moodleform_mod {
     	$mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js"></script>');
         $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
         //titulo
+	
         $titulo= '<h2>' . get_string('MisEjercicios', 'ejercicios') . '</h2>';
         $mform->addElement('html',$titulo);
-        
+       
         //Obtengo mis ejercicios a partir de la tabla ejercicios_profesor_actividad 
-        
-        $ejercicios_prof = new Ejercicios_profesor_actividad();
+       
+        $ejercicios_prof = new Ejercicios_prof_actividad();
      //   $mis_ej=$ejercicios_prof->obtener_ejercicos_del_profesor($USER->id);
         
-       
+  
         
-        $mis_ej_car=$ejercicios_prof->obtener_ejercicos_del_profesor_carpeta($USER->id);
+        $mis_ej_car=$ejercicios_prof->obtener_ejercicios_del_profesor_carpeta($USER->id);
+
         $numcarpetas=sizeof($mis_ej_car);
         
         
-     
+       
          $carpeta='<ul id="menuaux">';
          for($i=0;$i<$numcarpetas;$i++){
         
@@ -68,7 +71,7 @@ class mod_ejercicios_mis_ejercicios extends moodleform_mod {
         
         $ejercicios_prof_carp=$ejercicios_prof->obtener_ejercicos_del_profesor_por_carpetas($USER->id,$mis_ej_car[$i]->get('carpeta'));
         $numejercicios_prof_carp=sizeof($ejercicios_prof_carp);
-       
+     
          for($j=0;$j<$numejercicios_prof_carp;$j++){
         
             $general = new Ejercicios_general();

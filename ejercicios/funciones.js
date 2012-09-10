@@ -189,9 +189,9 @@ function botonCrear(id_curso){
       
         var objeto = document.getElementById('TipoActividadCrear');
  
-        if(objeto.selectedIndex!=0){
+        if(objeto.selectedIndex!=0 && objeto.selectedIndex!=1){
          var eltxt = objeto.options[objeto.selectedIndex].text;
-      
+       alert( objeto.selectedIndex);
      
         location.href="view.php?id=" + id_curso + "&opcion=5&tipocreacion=" + objeto.selectedIndex ;
         
@@ -242,8 +242,31 @@ function botonMenuPrincipal(id_curso){
   
 }
 
+function botonAtras(id_curso){
+
+      
+        location.href="view.php?id=" + id_curso + "&opcion=10";
+ 
+  
+}
+
+function botonPrincipal(id_curso){
+
+      
+        location.href="view.php?id=" + id_curso;
+ 
+  
+}
 
 
+
+function botonCorregirMultiChoice(id_curso){
+
+      alert("Corrigiendo");
+      //  location.href="view.php?id=" + id_curso;
+ 
+  
+}
 
 
 function botonMasRespuestas(i){

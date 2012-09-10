@@ -22,9 +22,8 @@ $tipo  = optional_param('tipo', 1, PARAM_INT);
 $tipocreacion  = optional_param('tipocreacion', 0, PARAM_INT);
 $p  = optional_param('p', 0, PARAM_INT);
 $buscar= optional_param('buscar', 0, PARAM_INT);
-//$r  = optional_param('r', 0, PARAM_INT);
-//$c  = optional_param('c', 0, PARAM_INT);
 $id_ejercicio  = optional_param('id_ejercicio', 0, PARAM_INT);
+
 
 //Para busqueda
 
@@ -34,7 +33,6 @@ $cdc  = optional_param('cdc',-1, PARAM_INT);
 $cgr  = optional_param('cgr',-1, PARAM_INT);
 $cic  = optional_param('cic',-1, PARAM_INT);
 $ctt  = optional_param('ctt',-1, PARAM_INT);
-
 
 if ($id) {
     if (! $cm = get_coursemodule_from_id('ejercicios', $id)) {
@@ -83,8 +81,7 @@ print_header_simple(format_string($ejercicios->name), '', $navigation, '', '', t
 
 /// Print the main part of the page
 
-/// Print the main part of the page
-ejercicios_vista($cm->id, $op,$error,$name_ej,$tipo,$tipocreacion,$p,$id_ejercicio,$ccl,$cta ,$cdc,$cgr,$cic,$ctt,$buscar);
+ejercicios_vista($cm->id,$op,$error,$name_ej,$tipo,$tipocreacion,$p,$id_ejercicio,$ccl,$cta ,$cdc,$cgr,$cic,$ctt,$buscar);
 
 
 /// Finish the page

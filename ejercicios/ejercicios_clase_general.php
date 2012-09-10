@@ -134,6 +134,7 @@ class Ejercicios_general {
         //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
         $id = insert_record('ejercicios_general', $this, true);
         //Devuelve el identificador del ejercicios creado
+	echo $id;
         return $id;
     }
 
@@ -192,6 +193,27 @@ class Ejercicios_general {
         $this->descripcion = $ejer->descripcion;
         $this->numpreg = $ejer->numpreg;
         return $this;
+    }
+
+    function obtener_ejercicios_curso($id) {
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  id_curso=' . $id;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
     }
 
     function buscar_campotematico($campotematico) {
@@ -1650,9 +1672,9 @@ class Ejercicios_general {
 }
 
 /**
- * Clase que gestiona la tabla de la base de datos mdl_ejercicios_profesor_actividad
+ * Clase que gestiona la tabla de la base de datos mdl_ejercicios_prof_actividad
  */
-class Ejercicios_profesor_actividad {
+class Ejercicios_prof_actividad {
 
     var $id;
     var $id_profesor;
@@ -1660,7 +1682,7 @@ class Ejercicios_profesor_actividad {
     var $carpeta;
 
     //Contructor
-    function Ejercicios_profesor_actividad($id = NULL, $id_profesor = NULL, $id_ejercicio = NULL, $carpeta = NULL) {
+    function Ejercicios_prof_actividad($id = NULL, $id_profesor = NULL, $id_ejercicio = NULL, $carpeta = NULL) {
 
         $this->id = $id;
         $this->id_profesor = $id_profesor;
@@ -1694,28 +1716,28 @@ class Ejercicios_profesor_actividad {
 
     function insertar() {
         //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
-        insert_record('ejercicios_profesor_actividad', $this, true);
+        insert_record('ejercicios_prof_actividad', $this, true);
     }
 
     function borrar() {
         //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
-        delete_record('ejercicios_profesor_actividad', $this, true);
+        delete_record('ejercicios_prof_actividad', $this, true);
     }
 
     function borrar_id_ejercicio($id_ejercicio, $id_profesor) {
         //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
 
-        delete_records('ejercicios_profesor_actividad', 'id_profesor', $id_profesor, 'id_ejercicio', $id_ejercicio);
+        delete_records('ejercicios_prof_actividad', 'id_profesor', $id_profesor, 'id_ejercicio', $id_ejercicio);
     }
 
     function alterar() {
 
         //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
-        update_record('ejercicios_profesor_actividad', $this, false);
+        update_record('ejercicios_prof_actividad', $this, false);
     }
 
     function obtener_uno($id) {
-        $ejer = get_record('ejercicios_profesor_actividad', 'id', $id);
+        $ejer = get_record('ejercicios_prof_actividad', 'id', $id);
         $this->id = $ejer->id;
         $this->id_profesor = $ejer->id_profesor;
         $this->id_ejercicio = $ejer->id_ejercicio;
@@ -1727,7 +1749,7 @@ class Ejercicios_profesor_actividad {
 
     function obtener_uno_idejercicio($id_ejercicio) {
 
-        $ejer = get_record('ejercicios_profesor_actividad', 'id_ejrecicio', $id_ejercicio);
+        $ejer = get_record('ejercicios_prof_actividad', 'id_ejercicio', $id_ejercicio);
         $this->id = $ejer->id;
         $this->id_profesor = $ejer->id_profesor;
         $this->id_ejercicio = $ejer->id_ejericio;
@@ -1740,7 +1762,7 @@ class Ejercicios_profesor_actividad {
 
         //  echo "entra".$id_profesor;
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_profesor_actividad WHERE id_ejercicio=' . $id_ejercicio;
+        $sql = 'SELECT * FROM  mdl_ejercicios_prof_actividad WHERE id_ejercicio=' . $id_ejercicio;
 
         $todos = get_records_sql($sql);
 
@@ -1748,7 +1770,7 @@ class Ejercicios_profesor_actividad {
 
         foreach ($todos as $cosa) {
 
-            $mp = new Ejercicios_profesor_actividad();
+            $mp = new Ejercicios_prof_actividad();
 
             $mp->obtener_uno($cosa->id);
             //           echo $cosa->id." aaa";
@@ -1760,9 +1782,9 @@ class Ejercicios_profesor_actividad {
 
     function obtener_ejercicos_del_profesor($id_profesor) {
 
-        //  echo "entra".$id_profesor;
+          echo "entra".$id_profesor;
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_profesor_actividad WHERE id_profesor=' . $id_profesor;
+        $sql = 'SELECT * FROM  mdl_ejercicios_prof_actividad WHERE id_profesor=' . $id_profesor;
 
         $todos = get_records_sql($sql);
 
@@ -1770,7 +1792,7 @@ class Ejercicios_profesor_actividad {
 
         foreach ($todos as $cosa) {
 
-            $mp = new Ejercicios_profesor_actividad();
+            $mp = new Ejercicios_prof_actividad();
 
             $mp->obtener_uno($cosa->id);
             //           echo $cosa->id." aaa";
@@ -1780,25 +1802,25 @@ class Ejercicios_profesor_actividad {
         return $todos_mis_ejercicios;
     }
 
-    function obtener_ejercicos_del_profesor_carpeta($id_profesor) {
+    function obtener_ejercicios_del_profesor_carpeta($id_profesor) {
 
-        //echo "entra".$id_profesor;
+       // echo "entra".$id_profesor;
 
-        $sql = 'SELECT DISTINCT(carpeta) FROM mdl_ejercicios_profesor_actividad WHERE id_profesor=' . $id_profesor;
+        $sql = 'SELECT DISTINCT(carpeta) FROM mdl_ejercicios_prof_actividad WHERE id_profesor=' . $id_profesor;
 
         $todos = get_records_sql($sql);
 
         $todos_mis_ejercicios = array();
-
+	
         foreach ($todos as $cosa) {
 
-            $mp = new Ejercicios_profesor_actividad();
+            $mp = new Ejercicios_prof_actividad();
 
             $mp->carpeta = $cosa->carpeta;
 
             $todos_mis_ejercicios[] = $mp;
         }
-        //  echo "sale";
+        // echo "sale";
         return $todos_mis_ejercicios;
     }
 
@@ -1807,7 +1829,7 @@ class Ejercicios_profesor_actividad {
 
 
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_profesor_actividad WHERE id_profesor=' . $id_profesor . ' and carpeta="' . $carpeta . '"';
+        $sql = 'SELECT * FROM  mdl_ejercicios_prof_actividad WHERE id_profesor=' . $id_profesor . ' and carpeta="' . $carpeta . '"';
 
         $todos = get_records_sql($sql);
 
@@ -1815,7 +1837,7 @@ class Ejercicios_profesor_actividad {
 
         foreach ($todos as $cosa) {
 
-            $mp = new Ejercicios_profesor_actividad();
+            $mp = new Ejercicios_prof_actividad();
 
             $mp->obtener_uno($cosa->id);
 
@@ -1837,19 +1859,19 @@ class Ejercicios_texto_texto {
     var $id;
     var $id_ejercicio;
     var $numeropregunta;
-    var $Pregunta;
-    var $Respuesta;
-    var $Correcta;
+    var $pregunta;
+    var $respuesta;
+    var $correcta;
 
     //Contructor
-    function Ejercicios_texto_texto($id = NULL, $id_ejercicio = NULL, $numeropregunta = NULL, $Pregunta = NULL, $Respuesta = NULL, $Correcta = NULL) {
+    function Ejercicios_texto_texto($id = NULL, $id_ejercicio = NULL, $numeropregunta = NULL, $pregunta = NULL, $respuesta = NULL, $correcta = NULL) {
 
         $this->id = $id;
         $this->id_ejercicio = $id_ejercicio;
         $this->numeropregunta = $numeropregunta;
-        $this->Pregunta = $Pregunta;
-        $this->Respuesta = $Respuesta;
-        $this->Correcta = $Correcta;
+        $this->pregunta = $pregunta;
+        $this->respuesta = $respuesta;
+        $this->correcta = $correcta;
     }
 
     function get($param) {
@@ -1866,14 +1888,14 @@ class Ejercicios_texto_texto {
             case 'numeropregunta':
                 return $this->numeropregunta;
                 break;
-            case 'Pregunta':
-                return $this->Pregunta;
+            case 'pregunta':
+                return $this->pregunta;
                 break;
-            case 'Respuesta':
-                return $this->Respuesta;
+            case 'respuesta':
+                return $this->respuesta;
                 break;
-            case 'Correcta':
-                return $this->Correcta;
+            case 'correcta':
+                return $this->correcta;
                 break;
         }
     }
@@ -1903,9 +1925,9 @@ class Ejercicios_texto_texto {
         $this->id = $ejer->id;
         $this->id_ejercicio = $ejer->id_ejercicio;
         $this->numeropregunta = $ejer->numeropregunta;
-        $this->Pregunta = $ejer->Pregunta;
-        $this->Respuesta = $ejer->Respuesta;
-        $this->Correcta = $ejer->Correcta;
+        $this->pregunta = $ejer->pregunta;
+        $this->respuesta = $ejer->respuesta;
+        $this->correcta = $ejer->correcta;
 
         return $this;
     }
@@ -1916,9 +1938,9 @@ class Ejercicios_texto_texto {
         $this->id = $ejer->id;
         $this->id_ejercicio = $ejer->id_ejercicio;
         $this->numeropregunta = $ejer->numeropregunta;
-        $this->Pregunta = $ejer->Pregunta;
-        $this->Respuesta = $ejer->Respuesta;
-        $this->Correcta = $ejer->Correcta;
+        $this->pregunta = $ejer->pregunta;
+        $this->respuesta = $ejer->respuesta;
+        $this->correcta = $ejer->correcta;
 
         return $this;
     }

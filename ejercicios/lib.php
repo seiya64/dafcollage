@@ -19,11 +19,12 @@
 
 $ejercicios_EXAMPLE_CONSTANT = 42;     /// for example
 
-require_once('ejercicios_form.php');
+require_once('mod_form.php');
 require_once('ejercicios_form_creacion.php');
-require_once('ejercicios_form_mostrar.php');
 require_once('ejercicios_form_misejercicios.php');
 require_once('ejercicios_form_buscar.php');
+require_once('ejercicios_form_mostrar.php');
+require_once('ejercicios_form_curso.php');
 /**
  * Given an object containing all the necessary data,
  * (defined by the form in mod_form.php) this function
@@ -222,75 +223,74 @@ function ejercicios_uninstall() {
 /// starts with ejercicios_
 /// Remember (see note in first lines) that, if this section grows, it's HIGHLY
 /// recommended to move all funcions below to a new "localib.php" file.
+
 function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p=1,$id_ejercicio=0,$ccl,$cta ,$cdc,$cgr,$cic,$ctt,$buscar) {
     global $CFG, $COURSE, $USER;
 
     $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
-    
+  
       switch ($op) {
         default:
-        case 0: //ver las opciones
-            $mform = new mod_ejercicios_mod_form($id);
-            $mform->pintaropciones($id);
-            break;
-        case 1: //primer ejercicio (Puzzle Doble)
-            $mform= new mod_ejercicios_puzzle_form($id);//llama a gestion_asociacion1.php
-            $mform->pintarinterfaz($id,$error);
-             break;
-        case 2: //mostrar ejercicio creado(Puzzle Doble)
-           
-            $mform= new mod_ejercicios_hacer_puzzle_form($id,$name_ej,$tipo);//llama a gestion.php
-            $mform->pintarejercicio($id,$name_ej,$tipo);
-            break;
-       case 3: //segundo paso del formulario
-       
-            $mform= new mod_ejercicios_puzzle_form_paso2($id,$name_ej);//llama a gestion.php
-            $mform->pintarinterfaz2($id,$name_ej);
-            break;
-        case 4: //creando ejercicio por tema gramatica
-            $mform= new  mod_vocabulario_creando_tema_palabras($id);
-            break;
-        case 5:// Pulsado botón crear por profesor 
+        case 0: //Interfaz principal de ejercicios tanto para alumno como para profesor
+	  
+          $mform = new mod_ejercicios_mod_formulario($id);
+	  
+          $mform->pintaropciones($id);
+	
+           break;
+
+	case 5:// Pulsado botón crear por profesor en la Interfaz principal
+	    echo "Creando ejercicio";
+	    echo $tipocreacion;
+	   
             $mform= new  mod_ejercicios_creando_ejercicio($id);
+	    //Tipo creación indica el tipo, si es Elección multiple (0) o asociación simple (1)...etc
             $mform->pintarformulario($id,$tipocreacion);
             break;
-        case 6:// Pulsado botón Buscar tanto por alumno como por profesor
-            echo "hola boton buscar";
-             $mform= new mod_ejercicios_mostrar_ejercicios_buscados($id);
-             $mform->mostrar_ejercicios_buscados($id,$ccl,$cta ,$cdc,$cgr,$cic,$ctt);
-            break;
-        case 7:// Segundo paso del formulario caso texto-texto
+
+	case 7:// Segundo paso del formulario de creación caso texto-texto
            /* echo "segundo paso";
             echo "preguntas".$p;
             echo "resputestas".$r;
             echo "correctas".$c;
             echo "id_ejercicio".$id_ejercicio;*/
+	    echo "segundo paso";
+	  
             $mform= new mod_ejercicios_creando_ejercicio_texto($id,$p,$id_ejercicio);
             $mform->pintarformulariotexto($id,$p,$id_ejercicio);
            
             break;
-        
-         case 8:// Mostrando ejercicio Multichoice texto-texto
-          
+
+      case 6:// Pulsado botón Buscar tanto por alumno como por profesor
+            echo "hola boton buscar";
+	    echo "cta".$cta;
+             $mform= new mod_ejercicios_mostrar_ejercicios_buscados($id);
+             $mform->mostrar_ejercicios_buscados($id,$ccl,$cta,$cdc,$cgr,$cic,$ctt);
+            break;
+
+      case 8:// Mostrando ejercicio Multichoice texto-texto a profesores o a alumnos
+            
              $mform= new mod_ejercicios_mostrar_ejercicio($id,$id_ejercicio);
              $mform->mostrar_ejercicio($id,$id_ejercicio,$buscar);
+	    break;
+       case 9:// Mostrando mis ejercicios (ejercicios profesor) 
            
-            break;
-        
-         case 9:// Mostrando mis ejercicios (ejercicios profesor)
-             
              $mform= new mod_ejercicios_mis_ejercicios($id);
              $mform->pintaropciones($id);
              
            
             break;
-        
+      case 10://  Mostrando los ejercicios del curso (INTERFAZ DEL ALUMNO)
+             echo "mostrando ejercicos curso";
+             $mform= new mod_ejercicios_curso($id);
+             $mform->pintarejercicios($id);
+             
+           
+            break;
       }
     
     
          $mform->display();
     return true;
 }
-
-
 ?>

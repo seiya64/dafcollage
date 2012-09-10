@@ -52,7 +52,6 @@ $mform->pintaropciones($id_curso);
 
 
 
-
 //Elimino el ejercicio de profesor_actividad
 //puesto que ya no lo estoy usando
 
@@ -61,7 +60,7 @@ if ($mform->is_submitted()) {  //Boton Menu Principal
      redirect('./view.php?id=' . $id_curso );
   
 }else{
-$ejercicio_profesor_actividad = new Ejercicios_profesor_actividad();
+$ejercicio_profesor_actividad = new Ejercicios_prof_actividad();
 
   $id_profesor=$USER->id;
  
@@ -70,7 +69,8 @@ $ejercicio_profesor_actividad = new Ejercicios_profesor_actividad();
   for($i=0;$i<sizeof($los_ejercicios);$i++){
      
       $id_bd_ej=$los_ejercicios[$i]->get('id_ejercicio');
-    
+
+
       //Si estoy usando el ejercicio lo elimino
       
       if($id_bd_ej == $id_ejercicio){

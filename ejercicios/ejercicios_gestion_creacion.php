@@ -98,8 +98,9 @@ if($tipo_pregunta == "Texto" && $tipo_respuesta == "Texto"){
     }
     
     $CampoTematico=optional_param('campoid', PARAM_INT);
+   
     $Destreza=optional_param('DestrezaComunicativa', PARAM_INT);
-    $Destreza=$Destreza-1; //Hago esto porque la clasificación la voy a comenzar en 1 y los de antes son select y --
+    $Destreza=$Destreza-2; //Hago esto porque la clasificación la voy a comenzar en 1 y los de antes son select y --
     $TemaGramatical= required_param('campogr', PARAM_INT);
     $IntencionComunicativa=required_param('campoic', PARAM_INT);
     $TipologiaTextual=required_param('campott', PARAM_INT);
@@ -110,13 +111,16 @@ if($tipo_pregunta == "Texto" && $tipo_respuesta == "Texto"){
     $ejercicio_general= new Ejercicios_general($id,$id_curso,$id_creador,$TipoActividad,$TipoArchivoPregunta,$TipoArchivoRespuesta,$visible,$privado,$carpeta,$CampoTematico,$Destreza,$TemaGramatical,$IntencionComunicativa,$TipologiaTextual,$name,$descripcion,$numeropreguntas);
     $id_ejercicio=$ejercicio_general->insertar();
     
-    
+   
     //Tengo que asignarle el ejercico al profesor 
     $carpeta=required_param('carpeta_ejercicio', PARAM_TEXT);
-    $ejercicio_profesor = new Ejercicios_profesor_actividad($id,$id_creador,$id_ejercicio,$carpeta);
+    $ejercicio_profesor = new Ejercicios_prof_actividad($id,$id_creador,$id_ejercicio,$carpeta);
    
     $ejercicio_profesor->insertar();
-    
+
+  
+  
+    //die;
     //La comprobacion de errores esta en el javascript
      redirect('./view.php?id=' . $id_curso . '&opcion=7'. '&p='.$numeropreguntas. '&id_ejercicio='.$id_ejercicio);
         
