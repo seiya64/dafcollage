@@ -264,19 +264,20 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
             $attributes='size="40"';
             $mform->addElement('text', 'carpeta_ejercicio',get_string('carpeta', 'ejercicios') , $attributes);
             $mform->addRule('carpeta_ejercicio', "Carpeta Necesaria", 'required', null, 'client');
-           
-            //Copyright
+                 //Copyright
             
-            $Copyright=array();
-            $Copyright="--";
-            $Copyright="A1";
-            $Copyright="A2";
-            $Copyright="B1";
-            $Copyright="B2";
-            $Copyright="C1";
-            $Copyright="C2";
-            $mform->addElement('select', 'copyright', get_string("copyright", "ejercicios"), $Copyright);
-            $mform->addRule('nombre_ejercicio', "Titulo Necesario", 'required', null, 'client');
+            $cright=array();
+            $cright[]="--";
+            $cright[]="Reconocimiento (CC-BY)";
+            $cright[]="Reconocimiento-CompartirIgual (CC-BY-SA)";
+            $cright[]="Reconocimiento-NoDerivadas (CC-BY-ND)";
+            $cright[]="Reconocimiento-NoComercial (CC-BY-NC)";
+            $cright[]="Reconocimiento-NoComercial-CompartirIgual (CC-BY-NC-SA)";
+            $cright[]="Reconocimiento-NoComercial-NoDerivadas (CC-BY-NC-ND)";
+            
+            $mform->addElement('select', 'copyright', get_string("copyright", "ejercicios"), $cright,"onChange='javascript:cargaDescripcion()'");
+  //$mform->addElement('select','copyrights', get_string("copyright", "ejercicios"),$copyright);
+            //$mform->addRule('copyright', "Copyright necesario", 'required', null, 'client');
 
             $buttonarray = array();
             $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'));
