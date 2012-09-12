@@ -73,7 +73,7 @@ $string['Destreza5']="EXPRESIÓN ORAL";
 $string['Destreza6']="TRADUCCIÓN";
 
 
-$string['componerActividades']="Componer Actividades";
+$string['componerActividades']="Crear Conjunto de Actividades";
 
 //CREANDO EJERICIO FORMULARIO GENERICO
 
@@ -88,8 +88,8 @@ $string["descripcion"]="Añade una breve introducción al ejercicio:";
 $string["visible"]="Visible (accesible por sus alumnos)";
 $string["publico"]="Público (accesible por otros profesores y alumnos)";
 $string["carpeta"]="Introduzca la ruta del ejercicio";
-$string["copyright"]="Seleccione el copyright de sus archivos o texto";
-
+$string["copyright"]="Seleccione el copyright de sus archivos respuesta";
+$string["copyrightresp"]="Seleccione el copyright de sus archivos pregunta";
 
 
 //Formulario de creacion texto-texto
@@ -112,5 +112,5 @@ $string["Ejercicios"]="Ejercicios";
 //Buscando
 $string["BotonAñadir"]="Añadir a mis ejercicios";
 $string['Misejercicios']='Mis Actividades';
-$string["marcoteorico"]="Seleccionar el nivel según el marco europeo de referecia";
+$string["marcoteorico"]="Seleccionar el nivel según el marco europeo de referecia(OPCIONAL)";
 ?>
