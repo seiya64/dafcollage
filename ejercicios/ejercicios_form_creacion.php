@@ -275,12 +275,22 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
             $cright[]="Reconocimiento-NoComercial-CompartirIgual (CC-BY-NC-SA)";
             $cright[]="Reconocimiento-NoComercial-NoDerivadas (CC-BY-NC-ND)";
             
-            $mform->addElement('select', 'copyright', get_string("copyright", "ejercicios"), $cright,"onChange='javascript:cargaDescripcion()'");
-  //$mform->addElement('select','copyrights', get_string("copyright", "ejercicios"),$copyright);
-            //$mform->addRule('copyright', "Copyright necesario", 'required', null, 'client');
+            $mform->addElement('select', 'copyright', get_string("copyright", "ejercicios"), $cright,"onChange='javascript:cargaDescripcion(1)'");
 
+            $cright=array();
+            $cright[]="--";
+            $cright[]="Reconocimiento (CC-BY)";
+            $cright[]="Reconocimiento-CompartirIgual (CC-BY-SA)";
+            $cright[]="Reconocimiento-NoDerivadas (CC-BY-ND)";
+            $cright[]="Reconocimiento-NoComercial (CC-BY-NC)";
+            $cright[]="Reconocimiento-NoComercial-CompartirIgual (CC-BY-NC-SA)";
+            $cright[]="Reconocimiento-NoComercial-NoDerivadas (CC-BY-NC-ND)";
+            
+            $mform->addElement('select', 'copyrightresp', get_string("copyrightresp", "ejercicios"), $cright,"onChange='javascript:cargaDescripcion(2)'");
+
+            
             $buttonarray = array();
-            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'));
+            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"onClick='javascript:compruebaCopyright(".$id.",".$tipocreacion.")'");
             $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
         
              
