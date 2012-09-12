@@ -193,9 +193,22 @@ function compruebaCopyright(id_curso,tipocreacion){
    var objeto2 = document.getElementById("id_copyrightresp");
   
    var eltxtresp =objeto2.selectedIndex;
+   
+   var campotematico = document.getElementById("id_campoid");
+  
+   var valorct =campotematico.selectedIndex;
+   
+   var temagramatical = document.getElementById("id_campogr");
+  
+   var valorgr =temagramatical.selectedIndex;
     
-    if(eltxt==0 || eltxtresp==0){
-        alert("Error: Debe seleccionar un tipo de copyright");
+    if(eltxt==0 || eltxtresp==0 || (valorct==0 && valorgr==0 )){
+        
+        if(eltxt==0 || eltxtresp==0){
+            alert("Error: Debe seleccionar un tipo de copyright");
+        }else{
+            alert("Error: Debe realizar una clasificación al menos por Campo Temático o Por Tema Gramatical");
+        }
         var hidden= document.createElement("input");
         hidden.type="hidden";
         hidden.value="1";
@@ -207,7 +220,7 @@ function compruebaCopyright(id_curso,tipocreacion){
             
         //location.href="view.php?id=" + id_curso + "&opcion=5&tipocreacion=" + tipocreacion ;
     }else{
-        
+         
         var hidden= document.createElement("input");
         hidden.type="hidden";
         hidden.value="0";
