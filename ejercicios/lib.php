@@ -224,7 +224,7 @@ function ejercicios_uninstall() {
 /// Remember (see note in first lines) that, if this section grows, it's HIGHLY
 /// recommended to move all funcions below to a new "localib.php" file.
 
-function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p=1,$id_ejercicio=0,$ccl,$cta ,$cdc,$cgr,$cic,$ctt,$buscar) {
+function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p=1,$id_ejercicio,$ccl,$cta ,$cdc,$cgr,$cic,$ctt,$buscar) {
     global $CFG, $COURSE, $USER;
 
     $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
@@ -252,10 +252,10 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
            /* echo "segundo paso";
             echo "preguntas".$p;
             echo "resputestas".$r;
-            echo "correctas".$c;
-            echo "id_ejercicio".$id_ejercicio;*/
+            echo "correctas".$c;*/
+            echo "id_ejercicio".$id_ejercicio;
 	    echo "segundo paso";
-	  
+	 
             $mform= new mod_ejercicios_creando_ejercicio_texto($id,$p,$id_ejercicio);
             $mform->pintarformulariotexto($id,$p,$id_ejercicio);
            
