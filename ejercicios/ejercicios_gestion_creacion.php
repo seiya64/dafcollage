@@ -113,20 +113,20 @@ if($tipo_pregunta == "Texto" && $tipo_respuesta == "Texto"){
     $TipologiaTextual=required_param('campott', PARAM_INT);
     $name=required_param('nombre_ejercicio', PARAM_TEXT);
     $descripcion=required_param('descripcion', PARAM_TEXT);
+    $copyrightpreg =required_param('copyright', PARAM_INT);
+    $copyrightresp = required_param('copyrightresp', PARAM_INT);
     
-    
-    $ejercicio_general= new Ejercicios_general(NULL,$id_curso,$id_creador,$TipoActividad,$TipoArchivoPregunta,$TipoArchivoRespuesta,$visible,$privado,$carpeta,$CampoTematico,$Destreza,$TemaGramatical,$IntencionComunicativa,$TipologiaTextual,$name,$descripcion,$numeropreguntas);
+ 
+    $ejercicio_general= new Ejercicios_general(NULL,$id_curso,$id_creador,$TipoActividad,$TipoArchivoPregunta,$TipoArchivoRespuesta,$visible,$privado,$carpeta,$CampoTematico,$Destreza,$TemaGramatical,$IntencionComunicativa,$TipologiaTextual,$name,$descripcion,$numeropreguntas,$copyrightpreg,$copyrightresp);
     $id_ejercicio=$ejercicio_general->insertar();
     
-   echo "entra".$id_ejercicio;
-   
+ 
     //Tengo que asignarle el ejercico al profesor 
     $carpeta=required_param('carpeta_ejercicio', PARAM_TEXT);
     $ejercicio_profesor = new Ejercicios_prof_actividad($id,$id_creador,$id_ejercicio,$carpeta);
    
     $ejercicio_profesor->insertar();
 
-  echo "entra".$id_ejercicio;
   
     //La comprobacion de errores esta en el javascript
      redirect('./view.php?id=' . $id_curso . '&opcion=7'. '&p='.$numeropreguntas. '&id_ejercicio=' .$id_ejercicio);
