@@ -183,44 +183,188 @@ function cargaContenido(miselect, otroselect, tipo) {
     }
 }
 
+
+function compruebaCopyright(id_curso,tipocreacion){
+   
+   var objeto = document.getElementById("id_copyright");
+  
+   var eltxt =objeto.selectedIndex;
+   
+   var objeto2 = document.getElementById("id_copyrightresp");
+  
+   var eltxtresp =objeto2.selectedIndex;
+    
+    if(eltxt==0 || eltxtresp==0){
+        alert("Error: Debe seleccionar un tipo de copyright");
+        var hidden= document.createElement("input");
+        hidden.type="hidden";
+        hidden.value="1";
+        hidden.id="id_error";
+        hidden.name="error";
+         objeto = document.getElementById("id_submitbutton");
+         objeto.appendChild(hidden);
+           
+            
+        //location.href="view.php?id=" + id_curso + "&opcion=5&tipocreacion=" + tipocreacion ;
+    }else{
+        
+         var hidden= document.createElement("input");
+        hidden.type="hidden";
+        hidden.value="0";
+        hidden.id="id_error";
+        hidden.name="error";
+         objeto = document.getElementById("id_submitbutton");
+         objeto.appendChild(hidden);
+        
+    }
+}
+
 /**
  * Carga la descripcion de un copyright
  */
 
-function cargaDescripcion() {
+function cargaDescripcion(i) {
 
-    var objeto = document.getElementById("id_copyright");
-  
+    if(i==1){
+        objeto = document.getElementById("id_copyright");
+        descrip="descrip";
+    }else{
+        objeto = document.getElementById("id_copyrightresp");
+        descrip="descripresp"
+    }
     var eltxt =objeto.selectedIndex;
     
-    alert(eltxt);
+    
    
      switch(eltxt){
          
          case 0:
-             var descripcion = document.getElementById("descrip");
+             descripcion = document.getElementById(descrip);
              descripcion.parentNode.removeChild(descripcion);
  
-            objeto.parentNode.removeChild();
+            //objeto.parentNode.removeChild();
             break;
             
          case 1: //Reconocimiento (CC-BY)
-          
+             
+            descripcion = document.getElementById(descrip);
+            
+            if(descripcion!=null){
+                descripcion.parentNode.removeChild(descripcion);
+            }
             textarea = document.createElement('textarea');
             textarea.rows = 5;
-            textarea.cols = 50;
-            textarea.id="descrip";
+            textarea.cols = 70;
+            textarea.id=descrip;
             textarea.readOnly=true;
-            textarea.setAttribute("style","background-color:#FFE8D2");
-            textarea.setAttribute("style","border:none");
+            textarea.setAttribute("style","resize:none; border:none");
+           // textarea.setAttribute("style","border:none");
+            
+            textarea.appendChild(document.createTextNode("Esta licencia permite a otros distribuir, remezclar, retocar, y crear a partir de tu obra, incluso con fines comerciales, siempre y cuando te den crédito por la creación original. Esta es la más flexible de las licencias ofrecidas. Se recomienda para la máxima difusión y utilización de los materiales licenciados."));
          
             objeto.parentNode.appendChild(textarea);
       
              
              break;
-        case 2:
-        
+        case 2: //Reconocimiento-CompartirIgual (CC-BY-SA)"
+             descripcion = document.getElementById(descrip);
+            if(descripcion!=null){
+               
+                descripcion.parentNode.removeChild(descripcion);
+            }
            
+           
+            textarea = document.createElement('textarea');
+            textarea.rows = 9;
+            textarea.cols = 70;
+            textarea.id=descrip;
+            textarea.readOnly=true;
+            textarea.setAttribute("style","resize:none; border:none");
+          
+            textarea.appendChild(document.createTextNode("Esta licencia permite a otros remezclar, retocar, y crear a partir de tu obra, incluso con fines comerciales, siempre y cuando te den crédito y licencien sus nuevas creaciones bajo condiciones idénticas. Esta licencia suele ser comparada con las licencias copyleft de software libre y de código abierto. Todas las nuevas obras basadas en la tuya portarán la misma licencia, así que cualesquiera obras derivadas permitirán también uso comercial. Esa es la licencia que usa Wikipedia, y se recomienda para materiales que se beneficiarían de incorporar contenido de Wikipedia y proyectos con licencias similares."));
+         
+            objeto.parentNode.appendChild(textarea);
+            break;
+         case 3: //Reconocimiento-NoDerivadas (CC-BY-ND)
+            
+            descripcion = document.getElementById(descrip);
+            if(descripcion!=null){
+                 descripcion.parentNode.removeChild(descripcion);
+            }
+           
+           
+            textarea = document.createElement('textarea');
+            textarea.rows = 4;
+            textarea.cols = 70;
+            textarea.id=descrip;
+            textarea.readOnly=true;
+            textarea.setAttribute("style","resize:none; border:none");
+          
+            textarea.appendChild(document.createTextNode("Esta licencia permite la redistribución, comercial o no comercial, siempre y cuando la obra circule íntegra y sin cambios, dándote crédito."));
+         
+            objeto.parentNode.appendChild(textarea);
+            break;
+            
+         case 4: //Reconocimiento-NoComercial (CC-BY-NC)
+            
+            descripcion = document.getElementById(descrip);
+            if(descripcion!=null){
+                 descripcion.parentNode.removeChild(descripcion);
+            }
+           
+           
+            textarea = document.createElement('textarea');
+            textarea.rows = 5;
+            textarea.cols = 70;
+            textarea.id=descrip;
+            textarea.readOnly=true;
+            textarea.setAttribute("style","resize:none; border:none");
+          
+            textarea.appendChild(document.createTextNode("Esta licencia permite a otros distribuir, remezclar, retocar, y crear a partir de tu obra de modo no comercial, y a pesar de que sus nuevas obras deben siempre mencionarte y mantenerse sin fines comerciales, no están obligados a licenciar sus obras derivadas bajo las mismas condiciones."));
+         
+            objeto.parentNode.appendChild(textarea);
+            break;
+            
+                  
+         case 5: //Reconocimiento-NoComercial-CompartirIgual (CC-BY-NC-SA)
+            
+            descripcion = document.getElementById(descrip);
+            if(descripcion!=null){
+                 descripcion.parentNode.removeChild(descripcion);
+            }
+           
+           
+            textarea = document.createElement('textarea');
+            textarea.rows = 5;
+            textarea.cols = 70;
+            textarea.id=descrip;
+            textarea.readOnly=true;
+            textarea.setAttribute("style","resize:none; border:none");
+          
+            textarea.appendChild(document.createTextNode("Esta licencia permite a otros distribuir, remezclar, retocar, y crear a partir de tu obra de modo no comercial, siempre y cuando te den crédito y licencien sus nuevas creaciones bajo condiciones idénticas."));
+         
+            objeto.parentNode.appendChild(textarea);
+            break;
+            
+          case 6: //Reconocimiento-NoComercial-NoDerivadas (CC-BY-NC-ND)
+            
+            descripcion = document.getElementById(descrip);
+            if(descripcion!=null){
+                 descripcion.parentNode.removeChild(descripcion);
+            }
+           
+           
+            textarea = document.createElement('textarea');
+            textarea.rows = 5;
+            textarea.cols = 70;
+            textarea.id=descrip;
+            textarea.readOnly=true;
+            textarea.setAttribute("style","resize:none; border:none");
+          
+            textarea.appendChild(document.createTextNode("Esta licencia es la más restrictiva de nuestras seis licencias principales, permitiendo a otros descargar tus obras y compartirlas con otros siempre y cuando te den crédito, pero no permiten cambiarlas de forma alguna ni usarlas comercialmente."));
+         
+            objeto.parentNode.appendChild(textarea);
+            break;
           
     }
  
