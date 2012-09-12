@@ -55,9 +55,11 @@ class Ejercicios_general {
     var $name;
     var $descripcion;
     var $numpreg;
+    var $copyrightpreg;
+    var $copyrightresp;
 
     //Contructor
-    function Ejercicios_general($id = NULL, $id_curso = NULL, $id_creador = NULL, $tipoactividad = NULL, $tipoarchivopregunta = NULL, $tipoarchivorespuesta = NULL, $visible = NULL, $publico = NULL, $carpeta = NULL, $campotematico = NULL, $destreza = NULL, $temagramatical = NULL, $intencioncomunicativa = NULL, $tipologiatextual = NULL, $name = NULL, $descripcion = NULL, $numpreg = NULL) {
+    function Ejercicios_general($id = NULL, $id_curso = NULL, $id_creador = NULL, $tipoactividad = NULL, $tipoarchivopregunta = NULL, $tipoarchivorespuesta = NULL, $visible = NULL, $publico = NULL, $carpeta = NULL, $campotematico = NULL, $destreza = NULL, $temagramatical = NULL, $intencioncomunicativa = NULL, $tipologiatextual = NULL, $name = NULL, $descripcion = NULL, $numpreg = NULL,$copyrightpreg=NULL,$copyrightresp=NULL) {
 
 
         $this->id = $id;
@@ -77,6 +79,9 @@ class Ejercicios_general {
         $this->name = $name;
         $this->descripcion = $descripcion;
         $this->numpreg = $numpreg;
+        $this->copyrightpreg=$copyrightpreg;
+        $this->copyrightresp=$copyrightresp;
+       
     }
 
     function get($param) {
@@ -126,11 +131,19 @@ class Ejercicios_general {
             case 'numpreg':
                 return $this->numpreg;
                 break;
+            case 'copyrightresp':
+                return $this->copyrightresp;
+                break;
+            case 'copyrightpreg':
+                return $this->copyrightpreg;
+                break;
         }
     }
 
     function insertar() {
-           
+        
+       
+        
         //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
         $this->id = insert_record('ejercicios_general', $this, true);
         //Devuelve el identificador del ejercicios creado
@@ -169,6 +182,8 @@ class Ejercicios_general {
         $this->name = $ejer->name;
         $this->descripcion = $ejer->descripcion;
         $this->numpreg = $ejer->numpreg;
+         $this->copyrightpreg = $ejer->copyrightpreg;
+        $this->copyrightresp = $ejer->copyrightresp;
         return $this;
     }
 
@@ -192,6 +207,8 @@ class Ejercicios_general {
         $this->name = $ejer->name;
         $this->descripcion = $ejer->descripcion;
         $this->numpreg = $ejer->numpreg;
+        $this->copyrightpreg = $ejer->copyrightpreg;
+        $this->copyrightresp = $ejer->copyrightresp;
         return $this;
     }
 
