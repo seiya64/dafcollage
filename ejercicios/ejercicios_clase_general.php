@@ -130,12 +130,12 @@ class Ejercicios_general {
     }
 
     function insertar() {
-
+           
         //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
-        $id = insert_record('ejercicios_general', $this, true);
+        $this->id = insert_record('ejercicios_general', $this, true);
         //Devuelve el identificador del ejercicios creado
-	echo $id;
-        return $id;
+	
+        return $this->id;
     }
 
     function borrar($id) {
