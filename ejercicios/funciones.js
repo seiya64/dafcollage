@@ -208,13 +208,13 @@ function compruebaCopyright(id_curso,tipocreacion){
         //location.href="view.php?id=" + id_curso + "&opcion=5&tipocreacion=" + tipocreacion ;
     }else{
         
-         var hidden= document.createElement("input");
+        var hidden= document.createElement("input");
         hidden.type="hidden";
         hidden.value="0";
         hidden.id="id_error";
         hidden.name="error";
-         objeto = document.getElementById("id_submitbutton");
-         objeto.appendChild(hidden);
+        objeto = document.getElementById("id_submitbutton");
+        objeto.appendChild(hidden);
         
     }
 }
