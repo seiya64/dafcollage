@@ -54,6 +54,13 @@ $mform->pintarformulario($id_curso);
 $tipo_pregunta = optional_param('radiopregunta', PARAM_TEXT);
 $numeropreguntas = optional_param('numeropreguntas', PARAM_INT);
 
+
+$error = optional_param('error', PARAM_TEXT);
+echo "error".$error;
+
+if($error=='0'){
+    
+    
 //Le sumo uno porque me coge los indices
 $numeropreguntas=$numeropreguntas+1;
 
@@ -70,7 +77,7 @@ $numerorespuestascorrectas=$numerorespuestascorrectas+1;
 if($tipo_pregunta == "Texto" && $tipo_respuesta == "Texto"){
     
     echo "PREGUNTA".$tipo_pregunta.$numeropreguntas;
-    echo "RESPUESTA".$tipo_pregunta.$numerorespuestas;
+    echo "RESPUESTA".$tipo_respuesta.$numerorespuestas;
     
     //Guardar el ejercicio en la BD
     //leo un ejercicio y lo guardo
@@ -108,9 +115,10 @@ if($tipo_pregunta == "Texto" && $tipo_respuesta == "Texto"){
     $descripcion=required_param('descripcion', PARAM_TEXT);
     
     
-    $ejercicio_general= new Ejercicios_general($id,$id_curso,$id_creador,$TipoActividad,$TipoArchivoPregunta,$TipoArchivoRespuesta,$visible,$privado,$carpeta,$CampoTematico,$Destreza,$TemaGramatical,$IntencionComunicativa,$TipologiaTextual,$name,$descripcion,$numeropreguntas);
+    $ejercicio_general= new Ejercicios_general(NULL,$id_curso,$id_creador,$TipoActividad,$TipoArchivoPregunta,$TipoArchivoRespuesta,$visible,$privado,$carpeta,$CampoTematico,$Destreza,$TemaGramatical,$IntencionComunicativa,$TipologiaTextual,$name,$descripcion,$numeropreguntas);
     $id_ejercicio=$ejercicio_general->insertar();
     
+   echo "entra".$id_ejercicio;
    
     //Tengo que asignarle el ejercico al profesor 
     $carpeta=required_param('carpeta_ejercicio', PARAM_TEXT);
@@ -118,15 +126,16 @@ if($tipo_pregunta == "Texto" && $tipo_respuesta == "Texto"){
    
     $ejercicio_profesor->insertar();
 
+  echo "entra".$id_ejercicio;
   
-  
-    //die;
     //La comprobacion de errores esta en el javascript
-     redirect('./view.php?id=' . $id_curso . '&opcion=7'. '&p='.$numeropreguntas. '&id_ejercicio='.$id_ejercicio);
+     redirect('./view.php?id=' . $id_curso . '&opcion=7'. '&p='.$numeropreguntas. '&id_ejercicio=' .$id_ejercicio);
         
-    
+}
  
     
+}else{
+    redirect("view.php?id=". $id_curso . "&opcion=5&tipocreacion=".$tipocreacion) ;
 }
 
 
