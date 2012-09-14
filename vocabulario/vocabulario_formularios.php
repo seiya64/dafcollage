@@ -475,7 +475,7 @@ class mod_vocabulario_opciones_form extends moodleform {
                 live: false,
                 behavior: 'all'
               }
-            }).render().setUser('dafcollage').start();
+            }).render().setUser('daf_collage').start();
             </script>";
         $tabla_menu .='<div class="right twitter">'.$Mitwitter.'</div>';
 
