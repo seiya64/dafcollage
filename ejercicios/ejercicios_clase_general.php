@@ -232,6 +232,28 @@ class Ejercicios_general {
 
         return $todos_mis_ejercicios;
     }
+    
+       function obtener_ejercicios_tipo_publicos($tipoactividad) {
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  tipoactividad=' . $tipoactividad . ' AND publico=1';
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
 
     function buscar_campotematico($campotematico) {
 

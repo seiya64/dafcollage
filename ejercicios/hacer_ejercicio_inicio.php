@@ -49,28 +49,19 @@ $mform->pintaropciones($id_curso);
 
 
 
-$name_ej = optional_param('oculto1',PARAM_TEXT);
+$id_ej = optional_param('oculto1',PARAM_TEXT);
 
 
-$tipo1= new Ejercicios_mis_puzzledoble();
+$tipo= new Ejercicios_general();
 #selecciono los ejercicios para generar uno aleatorio a mostrar
-$ejercicio= $tipo1->obtener_uno_name($name_ej);
-$nomtipo= $ejercicio->get('ctipo');
+$ejercicio= $tipo1->obtener_uno($id_ej);
+$nomtipo= $ejercicio->get('tipoactividad');
 
 if ($mform->is_submitted()) { //Boton realizar (el boton buscar y crear estan en el javascript)
    
-       if($nomtipo=="Asociacion Simple"){
-           $tipo=1;
-       }//falta el resto de tipos
-       if($tipo==1){
+      
+       if($tipo==0){ // Ejercicio tipo multichoice
            redirect('./view.php?id=' . $id_curso . '&opcion=2&name_ej='.$name_ej.'&tipo=1');
-       }else{
-           if($tipo==2){
-           redirect('./view.php?id=' . $id_curso . '&opcion=2&name_ej='.$name_ej.'&tipo=2');
-           }else{
-             redirect('./view.php?id=' . $id_curso . '&opcion=2&name_ej='.$name_ej.'&tipo=3');
-              
-           }
        }
      
 }

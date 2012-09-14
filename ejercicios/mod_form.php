@@ -85,12 +85,12 @@ class mod_ejercicios_mod_form extends moodleform_mod {
 
 class mod_ejercicios_mod_formulario extends moodleform_mod {
     
-  /*  function mod_ejercicios_mod_form($id)
+    function mod_ejercicios_mod_form($id)
        {
          // El fichero que procesa el formulario es gestion.php
         parent::moodleform('hacer_ejercicio_inicio.php?id_curso='.$id);
        }
-*/
+
      function definition() {
      }
      /**
@@ -326,27 +326,35 @@ class mod_ejercicios_mod_formulario extends moodleform_mod {
             
          
             //parte del ejercicio
-     /*    
+         
             $tabla_menu .='<div id="parteejercicio">';
            
-            $tipo1= new Ejercicios_mis_puzzledoble();
+           // $tipo1= new Ejercicios_mis_puzzledoble();
             #selecciono los ejercicios para generar uno aleatorio a mostrar
-            $ej_tipo1= $tipo1->obtener_todos();
-            $tam1=sizeof($ej_tipo1);
+           // $ej_tipo1= $tipo1->obtener_todos();
+           // $tam1=sizeof($ej_tipo1);
             //alimentamos el generador de aleatorios
+            
+            $tipoej=0; //variable que indica el tipo de ejercicio a mostrar 0 Multichoice
+            
+            $ej_tipo= new Ejercicios_general();
+            $todos_ej_tipo=$ej_tipo->obtener_ejercicios_tipo_publicos($tipoej);
+            $tam1=sizeof($todos_ej_tipo);
             srand (time());
             //generamos un número aleatorio
-             $numero_aleatorio = rand(1,$tam1);
+            $numero_aleatorio = rand(1,$tam1);
+            
+          
              
             if($tam1!=0){
-               $nombre=$ej_tipo1[$numero_aleatorio-1];
-               $nombre=$nombre->get('name');
+               $seleccionado=$todos_ej_tipo[$numero_aleatorio-1];
+               $nombre=$seleccionado->get('name');
                
                $tabla_menu.= '<h2 id="name">'.$nombre.'</h2>';
-               $mform->addElement('hidden', 'oculto1',$nombre);
+               $mform->addElement('hidden', 'oculto1',$seleccionado->get('id'));
              
                //$mform->addElement('hidden', 'oculto2',$ctipo);
-               $tabla_menu.='<center><img src="./imagenes/'.$nombre.'_1" alt="imagen de un ejercicio"  height="70%"  width="70%px"/></center>';
+               $tabla_menu.='<center><img src="./imagenes/fotosgenericas/'.$tipoej.'.png" alt="imagen de un ejercicio"  height="70%"  width="70%px"/></center>';
                $tabla_menu.='<center><input type="submit" style="height:30px; width:60px;" id="botonRealizar" value="'.get_string('Realizar','ejercicios').'"/></center>';
             }
             $tabla_menu .='</div>';
@@ -360,7 +368,9 @@ class mod_ejercicios_mod_formulario extends moodleform_mod {
             $tabla_menu .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=11"><img src="../vocabulario/imagenes/estrategias_icon.png" id="id_ea_im" name="ea_im" title="'. get_string('admin_ea', 'vocabulario') .'"/> </a></div>';
 
             $tabla_menu .='</div>';
-            */
+            
+            //fin ejercicios
+            
             $tabla_menu.=  '<h2 class="titulomisactividades">'.get_string('MisActividades', 'ejercicios').'</h2>';
 
             $tabla_menu.='<center><a href="./view.php?id=' . $id . '&opcion=9"><img  class="misactividades" src="./imagenes/activ.svg" id="id_MisActividades" name="MisActividades" title="'. get_string('MisActividades', 'ejercicios') . '"/></a></center>';
