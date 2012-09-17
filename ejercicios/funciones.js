@@ -95,13 +95,13 @@ $(document).ready(function(){
     });
  
    $('#menuaux li #classa').click(function(event){
-        alert("pulsado");
+       
     var elem = $(this).next().next();
-    alert(elem);
+   
         if(elem.is('ul')){
-             alert("abriendo");
+           
             event.preventDefault(event);
-             alert("abriendo2");
+         
             $('#menuaux ul:visible').not(elem).slideUp();
            
             elem.slideToggle();
@@ -394,7 +394,7 @@ function botonCrear(id_curso){
  
         if(objeto.selectedIndex!=0 && objeto.selectedIndex!=1){
          var eltxt = objeto.options[objeto.selectedIndex].text;
-       alert( objeto.selectedIndex);
+     
      
         location.href="view.php?id=" + id_curso + "&opcion=5&tipocreacion=" + objeto.selectedIndex ;
         
@@ -407,8 +407,7 @@ function botonCrear(id_curso){
 function botonBuscar(id_curso){
     //cojo el indice de campolexico
      var campolexico=document.getElementsByName("campoid");
-    // alert("hola");
-    // alert(campolexico.options[campolexico.selectedIndex].value);
+    
      var clascampolexico=campolexico.item(campolexico.length-1).value;
     //cojo el indice de tipoActividad
      var tipoActividad=document.getElementById("TipoActividad");
@@ -426,7 +425,7 @@ function botonBuscar(id_curso){
      var tt=document.getElementById("id_campott");
      var clastt=tt.selectedIndex;
   
-    if(clastipoActividad>=2 || clascampolexico>0 ||clasdc>=2 || clasgr>0 || clasic >0 || clastt>1){
+    if(clastipoActividad>=2 || clascampolexico>0 ||clasdc>=2 || clasgr>0 || clasic >0 || clastt>0){
         location.href="view.php?id=" + id_curso + "&opcion=6"+ "&ccl="+clascampolexico+ "&cta="+clastipoActividad+"&cdc="+clasdc+"&cgr="+clasgr+"&cic="+clasic+"&ctt="+clastt;
     }else{
         alert("Debe seleccionar al menos un Tipo de Actividad")
