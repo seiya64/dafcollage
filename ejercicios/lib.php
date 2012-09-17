@@ -240,8 +240,8 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
            break;
 
 	case 5:// Pulsado botón crear por profesor en la Interfaz principal
-	    echo "Creando ejercicio";
-	    echo $tipocreacion;
+	   
+	
 	   
             $mform= new  mod_ejercicios_creando_ejercicio($id);
 	    //Tipo creación indica el tipo, si es Elección multiple (0) o asociación simple (1)...etc
@@ -249,21 +249,14 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
             break;
 
 	case 7:// Segundo paso del formulario de creación caso texto-texto
-           /* echo "segundo paso";
-            echo "preguntas".$p;
-            echo "resputestas".$r;
-            echo "correctas".$c;*/
-            echo "id_ejercicio".$id_ejercicio;
-	    echo "segundo paso";
-	 
+           
             $mform= new mod_ejercicios_creando_ejercicio_texto($id,$p,$id_ejercicio);
             $mform->pintarformulariotexto($id,$p,$id_ejercicio);
            
             break;
 
       case 6:// Pulsado botón Buscar tanto por alumno como por profesor
-            echo "hola boton buscar";
-	    echo "cta".$cta;
+           
              $mform= new mod_ejercicios_mostrar_ejercicios_buscados($id);
              $mform->mostrar_ejercicios_buscados($id,$ccl,$cta,$cdc,$cgr,$cic,$ctt);
             break;
@@ -281,7 +274,7 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
            
             break;
       case 10://  Mostrando los ejercicios del curso (INTERFAZ DEL ALUMNO)
-             echo "mostrando ejercicos curso";
+           
              $mform= new mod_ejercicios_curso($id);
              $mform->pintarejercicios($id);
              
