@@ -68,37 +68,27 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
         $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
  
         //titulo
-        $titulo= '<h2>' . get_string('Tipo'.$cta, 'ejercicios') . '</h2>';
+        $titulo= '<h2>' . get_string('MiBusqueda', 'ejercicios') . '</h2>';
         $mform->addElement('html',$titulo);
         
        //clasificación por campo temático.
        //Si es 1 es -- y 0 Select
-       echo "Clasificacion por campo tematico".$ccl.'</br>';
+   
 
        //clasificación por tipo de ejercicio
        //le resto 2 ya que el primero es -- y select
         
         $cta=$cta-2;
-        echo "Clasificacion por tipo".$cta.'</br>';
+    
         
        //clasificación por destreza comunicativa
        //le resto 2 ya que el primero es -- y select
         $cdc=$cdc-2;
-        echo "Clasificacion por destreza".$cdc.'</br>';
-        
-        //clasificación por tema gramatical
-            
-        echo "Clasificacion por tema gramatical".$cgr.'</br>';
-        
-        
-           //clasificación por tema gramatical
-            
-        echo "Clasificacion por intencion comunicativa".$cic.'</br>';
-        //
+ 
         //clasificación por tipologia textual
         //le sumo 1 puesto que en la tabla los id comienzan por 1 y el primero es --
         $ctt=$ctt+1;
-        echo "Clasificacion por tipologia textual".$ctt.'</br>';
+   
         $ejercicios_general = new Ejercicios_general();
       
         //Busco todos los ejercicios que son públicos(visibles tambien por los profesores)
