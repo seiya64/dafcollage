@@ -76,9 +76,12 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
          
            $radioarray=array();
            $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Texto","Texto", null);
-           $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Audio", "Audio", null);
-           $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Video", "Video", null);
-           $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Foto", "Video", null);
+          
+           
+           //volver a añadir estos tres
+           //$radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Audio", "Audio", null);
+           //$radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Video", "Video", null);
+           //$radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Foto", "Video", null);
            
            $titulo= '</br>';
            $mform->addElement('html',$titulo);
@@ -98,9 +101,11 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
        
            $radioarray=array();
            $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Texto","Texto", null);
-           $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Audio", "Audio", null);
-           $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Video", "Video", null);
-           $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Foto", "Video", null);
+         
+           //volver a añadir estos 3
+          // $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Audio", "Audio", null);
+          // $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Video", "Video", null);
+          // $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Foto", "Video", null);
            
            $mform->addGroup($radioarray, 'radiorespuesta',  get_string('tiporespuesta', 'ejercicios'), array(' '), false);
            $mform->setDefault('radiorespuesta',"Texto");
