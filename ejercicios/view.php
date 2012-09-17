@@ -80,9 +80,7 @@ print_header_simple(format_string($ejercicios->name), '', $navigation, '', '', t
               update_module_button($cm->id, $course->id, $strejercicios), navmenu($course, $cm));
 
 /// Print the main part of the page
-if($op==7){
-echo "en view".$id_ejercicio;
-}
+
 ejercicios_vista($cm->id,$op,$error,$name_ej,$tipo,$tipocreacion,$p,$id_ejercicio,$ccl,$cta ,$cdc,$cgr,$cic,$ctt,$buscar);
 
 
