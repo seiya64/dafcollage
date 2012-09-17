@@ -108,6 +108,8 @@ $string["BotonGuardar"]="Guardar";
 //Mis ejercicios(Ejercicios profesor)
 $string["MisEjercicios"]="Mis Ejercicios";
 $string["Ejercicios"]="Ejercicios";
+$string["MiBusqueda"]="Mi Busqueda";
+
 
 //Buscando
 $string["BotonAñadir"]="Añadir a mis ejercicios";
