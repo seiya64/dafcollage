@@ -47,7 +47,7 @@ $id_curso = optional_param('id_curso', 0, PARAM_INT);
 $tipocreacion = optional_param('tipocreacion', 0, PARAM_INT);
 $id_ejercicio = optional_param('id_ejercicio', 0, PARAM_INT);
 
-echo "iddddd_ejercicioooooo".$id_ejercicio;
+
 
 $mform = new  mod_ejercicios_creando_ejercicio_texto($id_curso);
 $mform->pintarformulariotexto($id_curso);
