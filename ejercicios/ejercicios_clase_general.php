@@ -579,6 +579,26 @@ class Ejercicios_general {
         return $todos_mis_ejercicios;
     }
     
+        function buscar_clasif_sin_ta_cl_ic_tt($cdc,$cgr){
+         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'destreza=' . $cdc . ' AND temagramatical=' . $cgr;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_general();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+    
     function buscar_sin_ta_cl_gr($cdc,$cic,$ctt){
          $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'destreza=' . $cdc . ' AND intencioncomunicativa=' . $cic . ' AND tipologiatextual=' . $ctt;
 
@@ -640,7 +660,7 @@ class Ejercicios_general {
         return $todos_mis_ejercicios;
     }
     function buscar_clasif_sin_ta_cl_gr_ic_tt($cdc){
-        echo "cdc vale".$cdc;
+       
          $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'destreza=' . $cdc;
 
         $todos = get_records_sql($sql);
@@ -748,7 +768,7 @@ class Ejercicios_general {
     
     function buscar_sin_ta_cl_dc_gr($cic,$ctt){
         
-        echo "int".$cic." tt".$ctt;
+     
         
         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' .'intencioncomunicativa=' . $cic . ' AND tipologiatextual=' . $ctt;
 
@@ -1011,8 +1031,7 @@ class Ejercicios_general {
     
     
     function buscar_clasif_sin_ta_tt($ccl,$cdc,$cgr,$cic){
-        
-       // echo "".$ccl
+       
           $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  campotematico=' . $ccl . ' AND destreza=' . $cdc . ' AND temagramatical=' . $cgr . ' AND intencioncomunicativa=' . $cic;
 
         $todos = get_records_sql($sql);
@@ -1496,10 +1515,9 @@ class Ejercicios_general {
 
     function buscar_clasif_sin_cl_gr_ic_tt($cta, $cdc, $userid) {
 
-        echo "user id" . $userid;
+       
         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE tipoactividad=' . $cta . ' AND destreza=' . $cdc . ' AND (publico=1 OR id_creador=' . $userid . ')';
-        echo 'SELECT * FROM  mdl_ejercicios_general WHERE tipoactividad=' . $cta . ' AND destreza=' . $cdc . ' AND (publico=1 OR id_creador=' . $userid . ')';
-
+       
         $todos = get_records_sql($sql);
 
         $todos_mis_ejercicios = array();
@@ -1513,7 +1531,7 @@ class Ejercicios_general {
             $todos_mis_ejercicios[] = $mp;
         }
 
-        echo "tamano" . sizeof($todos_mis_ejercicios);
+    
         return $todos_mis_ejercicios;
     }
 
@@ -1739,7 +1757,7 @@ class Ejercicios_prof_actividad {
                 return $this->id;
                 break;
             case 'id_profesor':
-                echo "id_profesor" . $this->id_profesor;
+              
                 return $this->id_profesor;
                 break;
             case 'id_ejercicio':
@@ -1799,7 +1817,7 @@ class Ejercicios_prof_actividad {
 
     function obtener_todos_idejercicio($id_ejercicio) {
 
-        //  echo "entra".$id_profesor;
+       
 
         $sql = 'SELECT * FROM  mdl_ejercicios_prof_actividad WHERE id_ejercicio=' . $id_ejercicio;
 
@@ -1812,16 +1830,16 @@ class Ejercicios_prof_actividad {
             $mp = new Ejercicios_prof_actividad();
 
             $mp->obtener_uno($cosa->id);
-            //           echo $cosa->id." aaa";
+           
             $todos_mis_ejercicios[] = $mp;
         }
-        //  echo "sale";
+       
         return $todos_mis_ejercicios;
     }
 
     function obtener_ejercicos_del_profesor($id_profesor) {
 
-          echo "entra".$id_profesor;
+        
 
         $sql = 'SELECT * FROM  mdl_ejercicios_prof_actividad WHERE id_profesor=' . $id_profesor;
 
@@ -1834,16 +1852,16 @@ class Ejercicios_prof_actividad {
             $mp = new Ejercicios_prof_actividad();
 
             $mp->obtener_uno($cosa->id);
-            //           echo $cosa->id." aaa";
+           
             $todos_mis_ejercicios[] = $mp;
         }
-        //  echo "sale";
+       
         return $todos_mis_ejercicios;
     }
 
     function obtener_ejercicios_del_profesor_carpeta($id_profesor) {
 
-       // echo "entra".$id_profesor;
+     
 
         $sql = 'SELECT DISTINCT(carpeta) FROM mdl_ejercicios_prof_actividad WHERE id_profesor=' . $id_profesor;
 
@@ -1859,7 +1877,7 @@ class Ejercicios_prof_actividad {
 
             $todos_mis_ejercicios[] = $mp;
         }
-        // echo "sale";
+        
         return $todos_mis_ejercicios;
     }
 
