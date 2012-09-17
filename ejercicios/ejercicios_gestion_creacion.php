@@ -56,7 +56,6 @@ $numeropreguntas = optional_param('numeropreguntas', PARAM_INT);
 
 
 $error = optional_param('error', PARAM_TEXT);
-echo "error".$error;
 
 if($error=='0'){
     
@@ -76,8 +75,7 @@ $numerorespuestascorrectas=$numerorespuestascorrectas+1;
  //Si hemos elegido Texto - Texto
 if($tipo_pregunta == "Texto" && $tipo_respuesta == "Texto"){
     
-    echo "PREGUNTA".$tipo_pregunta.$numeropreguntas;
-    echo "RESPUESTA".$tipo_respuesta.$numerorespuestas;
+   
     
     //Guardar el ejercicio en la BD
     //leo un ejercicio y lo guardo
@@ -108,6 +106,9 @@ if($tipo_pregunta == "Texto" && $tipo_respuesta == "Texto"){
    
     $Destreza=optional_param('DestrezaComunicativa', PARAM_INT);
     $Destreza=$Destreza-2; //Hago esto porque la clasificación la voy a comenzar en 1 y los de antes son select y --
+    if($Destreza<0){
+        $Destreza=null;
+    }
     $TemaGramatical= required_param('campogr', PARAM_INT);
     $IntencionComunicativa=required_param('campoic', PARAM_INT);
     $TipologiaTextual=required_param('campott', PARAM_INT);
@@ -117,9 +118,10 @@ if($tipo_pregunta == "Texto" && $tipo_respuesta == "Texto"){
     $copyrightresp = required_param('copyrightresp', PARAM_INT);
     
  
+ 
     $ejercicio_general= new Ejercicios_general(NULL,$id_curso,$id_creador,$TipoActividad,$TipoArchivoPregunta,$TipoArchivoRespuesta,$visible,$privado,$carpeta,$CampoTematico,$Destreza,$TemaGramatical,$IntencionComunicativa,$TipologiaTextual,$name,$descripcion,$numeropreguntas,$copyrightpreg,$copyrightresp);
     $id_ejercicio=$ejercicio_general->insertar();
-    
+   
  
     //Tengo que asignarle el ejercico al profesor 
     $carpeta=required_param('carpeta_ejercicio', PARAM_TEXT);
