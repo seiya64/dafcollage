@@ -38,12 +38,16 @@
 
 require_once("../../config.php");
 require_once("lib.php");
+
 require_once("ejercicios_clases.php");
-require_once("ejercicios_form.php");
+require_once("mod_form.php");
 
 global $CFG;
-$id_curso = optional_param('id_curso', 0, PARAM_INT);
-$mform = new   mod_ejercicios_mod_form($id_curso);
+
+
+
+$id_curso = optional_param('id', 0, PARAM_INT);
+$mform = new   mod_ejercicios_mod_formulario($id_curso);
 $mform->pintaropciones($id_curso);
 
 
@@ -52,16 +56,16 @@ $mform->pintaropciones($id_curso);
 $id_ej = optional_param('oculto1',PARAM_TEXT);
 
 
-$tipo= new Ejercicios_general();
+$tipo1= new Ejercicios_general();
 #selecciono los ejercicios para generar uno aleatorio a mostrar
 $ejercicio= $tipo1->obtener_uno($id_ej);
-$nomtipo= $ejercicio->get('tipoactividad');
+$tipo= $ejercicio->get('tipoactividad');
 
 if ($mform->is_submitted()) { //Boton realizar (el boton buscar y crear estan en el javascript)
    
-      
+     
        if($tipo==0){ // Ejercicio tipo multichoice
-           redirect('./view.php?id=' . $id_curso . '&opcion=2&name_ej='.$name_ej.'&tipo=1');
+           redirect('./view.php?opcion=8&id='.$id_curso.'&id_ejercicio='.$id_ej.'&buscar=1');
        }
      
 }
