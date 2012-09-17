@@ -43,7 +43,6 @@ require_once("ejercicios_form.php");
 
 $id_curso = optional_param('id_curso', 0, PARAM_INT);
 $name_ej = optional_param('name', 0, PARAM_TEXT);
-echo "Entra";
 
 global $CFG;
 $mform = new  mod_ejercicios_puzzle_form_paso2($id_curso,$name_ej);
@@ -66,7 +65,7 @@ global $CFG;
   if(required_param('oculto', PARAM_INT)!=3){   #si el ejercicio es de imagenes o video
      //subida de ficheros
     if(count($_FILES)>0) {
-      echo count($_FILES);
+     
       $i=1;
             //obtenemos todos los archivos uno por uno
             foreach($_FILES as $name => $values){
