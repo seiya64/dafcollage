@@ -57,8 +57,7 @@ $mform->mostrar_ejercicio($id_curso,$id_ejercicio);
 if(optional_param("submitbutton2")){ //boton para añadir a mis ejercicos visible desde la busqueda
      
     global $USER;
-    echo "añadiendo";
-    echo "id_ejercicio".$id_ejercicio;
+   
     //inserto el ejercicio en profesor_actividades
         $ejercicio_profesor = new Ejercicios_prof_actividad(NULL,$USER->id,$id_ejercicio,optional_param("carpeta_ejercicio"));
         $ejercicio_profesor->insertar();
@@ -96,7 +95,7 @@ if(optional_param("submitbutton2")){ //boton para añadir a mis ejercicos visibl
 
     }
     commit_sql();
-   // echo required_param('crespuesta1_1',PARAM_INT);
+   
   
    
     }
