@@ -77,7 +77,7 @@ class mod_ejercicios_curso extends moodleform_mod{
          $todos_ejer_curso=$ejercicios_curso->obtener_ejercicios_curso($id);
          $numeroencontrados= sizeof($todos_ejer_curso);
         
-         echo $numeroencontrados;
+       
         
          for($i=0;$i<$numeroencontrados;$i++){
    
