@@ -171,7 +171,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                                $correc=$preguntas[$p]->get('correcta');
                                                
                                                if($correc){
-                                                   $divpregunta.='<input class=over type="radio" name="crespuesta'.$q.'_'.$i.'" value="1" onclick="BotonRadio(crespuesta'.$q.'_'.$i.')" checked="true"/>';
+                                                   $divpregunta.='<input class=over type="radio" name="crespuesta'.$q.'_'.$i.'" value="1" onclick="BotonRadio(crespuesta'.$q.'_'.$i.')"/>';
                                                }else{
                                                     $divpregunta.='<input class=over type="radio" name="crespuesta'.$q.'_'.$i.'" value="0" onclick="BotonRadio(crespuesta'.$q.'_'.$i.')"/>';
                                                }
@@ -226,51 +226,55 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                
                              }
                              
+                             
+                             //Si soy el dueño del ejercicio y no estoy buscando boton guardar
                               if($buscar!=1 && $modificable==true){ 
                              //Pinto los botones
                               $buttonarray = array();
                               $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('BotonGuardar','ejercicios'));
-                             // $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('BotonCorregir','ejercicios'));
-                              $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
+                               $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
                               
                               
                               }else{
-                                  if($buscar==1){
-                                      
-                                    
-                                    //compruebo si soy profesor
-				    if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false) && $modificalbe==false){
-
+                                  if($buscar==1){ //Si estoy buscand
+                                                                            
+                                        //compruebo si soy profesor
+                                        if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false) && $modificable==false){
+                                        //boton añadir a mis ejercicios
 					  $attributes='size="40"';
 					  $mform->addElement('text', 'carpeta_ejercicio',get_string('carpeta', 'ejercicios') , $attributes);
-					  $mform->addRule('carpeta_ejercicio', "Carpeta Necesaria", 'required', null, 'client');                             
-					  $buttonarray = array();
+					  $mform->addRule('carpeta_ejercicio', "Carpeta Necesaria", 'required', null, 'client');                                     
+                                          $buttonarray = array();
 					  $buttonarray[] = &$mform->createElement('submit', 'submitbutton2', get_string('BotonAñadir','ejercicios'));
-					  // $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('BotonCorregir','ejercicios'));
 					  $mform->addGroup($buttonarray, 'botones2', '', array(' '), false);
-					}else{
-
-					  $buttonarray[] = &$mform->createElement('submit', 'submitbutton7', get_string('BotonCorregir','ejercicios'));
-					  // $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('BotonCorregir','ejercicios'));
-					  $mform->addGroup($buttonarray, 'botones2', '', array(' '), false);
-
-				      
-					}
-                                    
-                                    }else{
-                                           
-                                    //compruebo si soy profesor
+                                          //boton menu principal
+                                            $tabla_menu='<center><input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal('.$id.')" /></center>';
+				
+                                            $mform->addElement('html',$tabla_menu);
+                                        }else{
+                                            
+                                            if($modificable==true){ // Si el ejercicio era mio y estoy buscando
+                                                  $tabla_menu='<center><input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal('.$id.')" /></center>';
+				
+                                                  $mform->addElement('html',$tabla_menu);
+                                            }else{//soy alumno
+                                                 $tabla_menu='<center><input type="button" style="height:30px; width:100px; margin-left:175px;"  value="Corregir" onClick="javascript:botonCorregirMultiChoice('.$id.')"/> <input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal('.$id.')" /></center>';
+				
+                                                 $mform->addElement('html',$tabla_menu);
+                                            }
+                                        }
+                                  }else{ //Estoy buscando o no
+                                      // compruebo si soy profesor
 					if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false)){
-					     $tabla_menu='<center><input type="button" style="height:30px; width:60px; margin-left:175px;" id="botonMenuPrincipal">'.getstring("Reset","ejercicios").'</center>';
-					     $mform->addElement('html',$tabla_menu);
+					     
 					}else{
 					      $tabla_menu='<center><input type="button" style="height:30px; width:100px; margin-left:175px;"  value="Corregir" onClick="javascript:botonCorregirMultiChoice('.$id.')"/> <input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Atras" value="Atrás" onClick="javascript:botonAtras('.$id.')" /><input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal('.$id.')" /></center>';
 				
-					 
-					     $mform->addElement('html',$tabla_menu);
+					      $mform->addElement('html',$tabla_menu);
 					}
-                                    
                                   }
+                    
+                                  
                               }
                        
                      
