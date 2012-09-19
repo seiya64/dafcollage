@@ -90,8 +90,7 @@ $string["publico"]="Público (accesible por otros profesores y alumnos)";
 $string["carpeta"]="Introduzca la ruta del ejercicio";
 $string["copyright"]="Seleccione el copyright de sus archivos respuesta";
 $string["copyrightresp"]="Seleccione el copyright de sus archivos pregunta";
-
-
+$string["textoclasej"]="Asigne una o varias categorías de búsqueda de los siguientes menús desplegables(Obligatorio Campo Temático o Tema gramatical):";
 //Formulario de creacion texto-texto
 
 $string["FormularioCreacionTextos"]="Introduzca las preguntas y respuestas del ejercicio";
