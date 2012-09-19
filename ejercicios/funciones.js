@@ -462,12 +462,64 @@ function botonPrincipal(id_curso){
 
 
 
-function botonCorregirMultiChoice(id_curso){
+function botonCorregirMultiChoice(id_curso,npreg){
 
-      alert("Corrigiendo");
+
+     // alert("Corrigiendo");
+      var rep1_1=document.getElementById("id_crespuesta1_1");
+    
+      //location.href="ejercicios_corregir_ejercicio.php";
       //  location.href="view.php?id=" + id_curso;
- 
-  
+      var nrep_preg=document.getElementById("num_res_preg1");
+    
+     var resp1_1=document.getElementById("res1_1");
+     
+      var resp2_1=document.getElementById("res2_1");
+        
+        
+        for (i=1; i<=npreg; i++) //para cada pregunta
+        {
+            
+            var nombre="num_res_preg"+i;
+            
+            //obtengo el numero de respuestas de la pregunta
+             var nrep_preg=document.getElementById(nombre);
+           
+              for (j=1; j<=nrep_preg.value; j++){ //Para cad respuesta
+                  //obtengo el valor correcto
+                 
+                   var respcorrecta=document.getElementById("res"+j+"_"+i);
+                 
+                   //obtengo el valor marcado
+                   var miresp=document.getElementById("id_crespuesta"+j+"_"+i);
+                   
+                   //obtengo el div donde voy a insertar la imagen
+                   
+                   var midiv=document.getElementById("respuesta"+j+"_"+i);
+                   
+                   if(respcorrecta.value==miresp.value){
+                    
+                    imagen = document.createElement("img");
+                   
+                    imagen.src='./imagenes/correcto.png';
+                    imagen.style.height="15px";
+                    imagen.style.width="15px";
+                    midiv.appendChild(imagen);
+                   }else{
+                     
+                    imagen = document.createElement("img");
+                    imagen.style.height="15px";
+                    imagen.style.width="15px";
+                    imagen.src='./imagenes/incorrecto.png';
+               
+                    midiv.appendChild(imagen);
+                   }
+                   
+              }
+        }
+
+
+
 }
 
 
