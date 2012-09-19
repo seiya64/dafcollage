@@ -171,10 +171,13 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                                $correc=$preguntas[$p]->get('correcta');
                                                
                                                if($correc){
-                                                   $divpregunta.='<input class=over type="radio" name="crespuesta'.$q.'_'.$i.'" value="1" onclick="BotonRadio(crespuesta'.$q.'_'.$i.')"/>';
+                                                   $divpregunta.='<input type="hidden" value=1 id="res'.$q."_".$i.'" name="num_res_preg'.$i.'" />';
                                                }else{
-                                                    $divpregunta.='<input class=over type="radio" name="crespuesta'.$q.'_'.$i.'" value="0" onclick="BotonRadio(crespuesta'.$q.'_'.$i.')"/>';
+                                                   $divpregunta.='<input type="hidden" value=0 id="res'.$q."_".$i.'" name="num_res_preg'.$i.'" />';
+                                             
                                                }
+                                               $divpregunta.='<input class=over type="radio" name="crespuesta'.$q.'_'.$i.'" id="id_crespuesta'.$q.'_'.$i.'" value="0" onclick="BotonRadio(crespuesta'.$q.'_'.$i.')"/>';
+                                              
                                                
                                             //   $divpregunta.='<div class="resp" name="respuesta'.$q."_".$i.'" id="respuesta'.$q."_".$i.'" contentEditable=true>';
                                             //   $divpregunta.=$preguntas[$p]->get('Respuesta');
@@ -258,7 +261,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
 				
                                                   $mform->addElement('html',$tabla_menu);
                                             }else{//soy alumno
-                                                 $tabla_menu='<center><input type="button" style="height:30px; width:100px; margin-left:175px;"  value="Corregir" onClick="javascript:botonCorregirMultiChoice('.$id.')"/> <input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal('.$id.')" /></center>';
+                                                 $tabla_menu='<center><input type="button" style="height:30px; width:100px; margin-left:175px;"  value="Corregir" onClick="javascript:botonCorregirMultiChoice('.$id.','.$npreg.')"/> <input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal('.$id.')" /></center>';
 				
                                                  $mform->addElement('html',$tabla_menu);
                                             }
@@ -268,7 +271,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
 					if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false)){
 					     
 					}else{
-					      $tabla_menu='<center><input type="button" style="height:30px; width:100px; margin-left:175px;"  value="Corregir" onClick="javascript:botonCorregirMultiChoice('.$id.')"/> <input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Atras" value="Atrás" onClick="javascript:botonAtras('.$id.')" /><input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal('.$id.')" /></center>';
+					      $tabla_menu='<center><input type="button" style="height:30px; width:100px; margin-left:175px;"  value="Corregir" onClick="javascript:botonCorregirMultiChoice('.$id.','.$npreg.')"/> <input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Atras" value="Atrás" onClick="javascript:botonAtras('.$id.')" /><input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal('.$id.')" /></center>';
 				
 					      $mform->addElement('html',$tabla_menu);
 					}
