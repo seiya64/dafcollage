@@ -128,7 +128,7 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
            */
            //Clasificacion
            
-           $clasi='</br><div"></br></center>Asigne una o varias categorías de búsqueda de los siguientes menús desplegables:</center></br></br>';
+           $clasi='</br><div"></br></center>'.get_string('textoclasej','ejercicios').'</center></br></br>';
            $mform->addElement('html',$clasi);
            //Campo tematico
            
