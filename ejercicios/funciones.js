@@ -8,8 +8,28 @@
  var j8=1;
  var j9=1;
 
+ function  setTextareaHeight(textarea) {
+   textarea.bind('keypress blur', function() {
+     var t = $(this),
+     padding = parseInt(t.css('padding-top')) + parseInt(t.css('padding-bottom')); // to set total height - padding size
+
+     t.css('overflow-y','auto');
+
+     var newHeight = textarea.get(0).scrollHeight;
+     if (newHeight > t.height()) {  // only change height if content is bigger than current height
+       if ($.browser.webkit) {
+         newHeight = textarea.get(0).scrollHeight - padding; // because chrome set scrollHeight in a different way
+       }
+       t.css('overflow-y','hidden') // hide againg textarea scroll
+        .height(newHeight + 'px'); // set textarea height to content height
+     }
+  });
+}
+
+
+
 $(document).ready(function(){
-    
+     setTextareaHeight($('.adaptHeightInput'));
  
 
 
@@ -425,7 +445,7 @@ function botonBuscar(id_curso){
      var tt=document.getElementById("id_campott");
      var clastt=tt.selectedIndex;
   
-    if(clastipoActividad>=2 || clascampolexico>0 ||clasdc>=2 || clasgr>0 || clasic >0 || clastt>0){
+    if(clastipoActividad>=2 || clascampolexico>1 ||clasdc>=2 || clasgr>1 || clasic >0 || clastt>0){
         location.href="view.php?id=" + id_curso + "&opcion=6"+ "&ccl="+clascampolexico+ "&cta="+clastipoActividad+"&cdc="+clasdc+"&cgr="+clasgr+"&cic="+clasic+"&ctt="+clastt;
     }else{
         alert("Debe seleccionar al menos un Tipo de Actividad")
@@ -816,10 +836,14 @@ function EliminarRespuesta(respuesta,numpreg){
         padre.childNodes[i].setAttribute("id",'tablarespuesta'+j+'_'+numpreg);
         padre.childNodes[i].childNodes[0].childNodes[0].setAttribute("id",'trrespuesta'+j+'_'+numpreg);
         padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[0].setAttribute("name",'crespuesta'+j+'_'+numpreg);
+        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[0].setAttribute("id",'res'+j+'_'+numpreg);
         padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[0].setAttribute("value",'crespuesta'+j+'_'+numpreg);
         padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[0].setAttribute("onclick",'BotonRadio(crespuesta'+j+'_'+numpreg+')');
         padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[1].setAttribute("id",'respuesta'+j+'_'+numpreg);
         padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[1].setAttribute("name",'respuesta'+j+'_'+numpreg);
+        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[1].setAttribute("onclick",'BotonRadio(crespuesta'+j+'_'+numpreg+')');
+
+
         padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes[0].setAttribute("onclick",'EliminarRespuesta(tablarespuesta'+j+'_'+numpreg+','+numpreg+")");
         padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes[1].setAttribute("id",'correcta'+j+'_'+numpreg);
         padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes[1].setAttribute("onclick",'InvertirRespuesta(correcta'+j+'_'+numpreg+','+numpreg+")");

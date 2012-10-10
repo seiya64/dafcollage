@@ -224,7 +224,7 @@ function ejercicios_uninstall() {
 /// Remember (see note in first lines) that, if this section grows, it's HIGHLY
 /// recommended to move all funcions below to a new "localib.php" file.
 
-function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p=1,$id_ejercicio,$ccl,$cta ,$cdc,$cgr,$cic,$ctt,$buscar) {
+function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p=1,$id_ejercicio,$ccl,$cta ,$cdc,$cgr,$cic,$ctt,$buscar,$tipo_origen=null) {
     global $CFG, $COURSE, $USER;
 
     $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
@@ -250,8 +250,8 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
 
 	case 7:// Segundo paso del formulario de creación caso texto-texto
            
-            $mform= new mod_ejercicios_creando_ejercicio_texto($id,$p,$id_ejercicio);
-            $mform->pintarformulariotexto($id,$p,$id_ejercicio);
+            $mform= new mod_ejercicios_creando_ejercicio_texto($id,$p,$id_ejercicio,$tipo_origen);
+            $mform->pintarformulariotexto($id,$p,$id_ejercicio,$tipo_origen);
            
             break;
 
@@ -263,8 +263,8 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
 
       case 8:// Mostrando ejercicio Multichoice texto-texto a profesores o a alumnos
             
-             $mform= new mod_ejercicios_mostrar_ejercicio($id,$id_ejercicio);
-             $mform->mostrar_ejercicio($id,$id_ejercicio,$buscar);
+             $mform= new mod_ejercicios_mostrar_ejercicio($id,$id_ejercicio,$tipo_origen);
+             $mform->mostrar_ejercicio($id,$id_ejercicio,$buscar,$tipo_origen);
 	    break;
        case 9:// Mostrando mis ejercicios (ejercicios profesor) 
            

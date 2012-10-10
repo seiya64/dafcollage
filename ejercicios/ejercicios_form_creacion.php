@@ -76,6 +76,7 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
          
            $radioarray=array();
            $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Texto","Texto", null);
+           $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Audio", "Audio", null);
           
            
            //volver a añadir estos tres
@@ -308,10 +309,10 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
 
 class mod_ejercicios_creando_ejercicio_texto extends moodleform_mod {
 
-    function mod_ejercicios_creando_ejercicio_texto($id,$p,$id_ejercicio)
+    function mod_ejercicios_creando_ejercicio_texto($id,$p,$id_ejercicio,$tipo_origen)
         {
          // El fichero que procesa el formulario es gestion.php
-         parent::moodleform('ejercicios_creacion_texto_texto.php?id_curso='.$id.'&id_ejercicio='.$id_ejercicio);
+         parent::moodleform('ejercicios_creacion_texto_texto.php?id_curso='.$id.'&id_ejercicio='.$id_ejercicio.'&tipo_origen='.$tipo_origen);
        }
        
      function definition() {
@@ -328,7 +329,7 @@ class mod_ejercicios_creando_ejercicio_texto extends moodleform_mod {
      * @param $c numero de respuestas correctas
      * @param $id_ejercicio id del ejercicio que estamos creando 
      */
-     function pintarformulariotexto($id,$p,$id_ejercicio){
+     function pintarformulariotexto($id,$p,$id_ejercicio,$tipoorigen){
          
          global $CFG, $COURSE, $USER;
         $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
@@ -340,18 +341,32 @@ class mod_ejercicios_creando_ejercicio_texto extends moodleform_mod {
         //titulo
         $titulo= '<h1>' . get_string('FormularioCreacionTextos', 'ejercicios') . '</h1>';
         $mform->addElement('html',$titulo);
-       
+
+        switch($tipoorigen){
+            case 1: //El archivo de origen es un texto
+                //Añade una breve introducción al ejercicio
+
+            $mform->addElement('textarea', 'archivoorigen', get_string('textoorigen', 'ejercicios'), 'wrap="virtual" rows="10" cols="50"');
+            $mform->addRule('archivoorigen', "Texto Origen Necesario", 'required', null, 'client');
+
+            break;
+            case 2: //El archivo de origen es un audio
+                echo "el archivo origen es un audio";
+                die;
+            break;
+        }
+      
+     
         //Para cada pregunta
         for($i=0;$i<$p;$i++){
+            
              $aux=$i+1;
              $titulo= '<h3> Pregunta ' .$aux. '</h3>';
              $mform->addElement('html',$titulo);
            
             $mform->addElement('textarea', 'pregunta'.$aux, get_string('pregunta', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
-            $mform->addRule('descripcion', "Pregunta Necesaria", 'required', null, 'client');
-         
-           // $mform->addElement('hidden','numerorespuestas_'.$aux,3);
            
+          
             $textarea='</br><div id="titulorespuestas" style="margin-left:130px;">Respuestas:</div>'; 
             $textarea.='<div style="margin-left:310px;" id="respuestas_pregunta"'.$aux.'"> ';
             $textarea.='<textarea name="respuesta1_'.$aux.'" id="respuesta1_'.$aux.'" rows="5" cols="50"></textarea>';
@@ -375,10 +390,12 @@ class mod_ejercicios_creando_ejercicio_texto extends moodleform_mod {
         }
         
            $mform->addElement('hidden','numeropreguntas',$p);
+           
           
             $buttonarray = array();
             $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"onclick=obtenernumeroRespuestas('$p');");
             $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
+            
         
      }
 }

@@ -46,11 +46,22 @@ require_once("ejercicios_form_creacion.php");
 $id_curso = optional_param('id_curso', 0, PARAM_INT);
 $tipocreacion = optional_param('tipocreacion', 0, PARAM_INT);
 $id_ejercicio = optional_param('id_ejercicio', 0, PARAM_INT);
-
-
+$tipo_origen = optional_param('tipo_origen', 0, PARAM_INT);
 
 $mform = new  mod_ejercicios_creando_ejercicio_texto($id_curso);
 $mform->pintarformulariotexto($id_curso);
+
+
+//Obtengo el archivo origen
+if($tipo_origen==1){ //Es un texto
+    $texto_origen=optional_param('archivoorigen', NULL, PARAM_TEXT);
+    $mitexto= new Ejercicios_textos(NULL,$id_ejercicio,$texto_origen);
+    $mitexto->insertar();
+    echo "texto insertado";
+    
+}else{
+    echo "es un audio si es 2 y un video si es 3";
+}
 
 
 
@@ -60,18 +71,19 @@ $numero_preguntas = optional_param('numeropreguntas', PARAM_INT);
 
 //Echo "\n";
 for($i=0;$i<$numero_preguntas;$i++){
-    //Obtengo el numero de respuestas a cada pregunta
+    //Obtengo la pregunta
     
     $j=$i+1;
     $pregunta = optional_param('pregunta'.$j,PARAM_TEXT);
-  //  echo "Respuesta 1_1 de la pregunta ".$j." es:".$respuesta;
-  //  echo "Pregunta".$j." es:".$pregunta;
-  //  echo "\n";   
+
+    //Inserto la pregunta
+    $mispreguntas= new Ejercicios_texto_texto_preg(NULL,$id_ejercicio,$pregunta);
+    $id_preg=$mispreguntas->insertar();
+
     //Obtengo el numero de respuestas a cada pregunta
-    
+
     $numero_respuestas = optional_param('numerorespuestas_'.$j,0,PARAM_INT);
-   // echo "El numero de respuestas de la pregunta ".$j." es:".$numero_respuestas;
-   // echo "\n";
+   
     //Obtengo la respuesta
     for($k=0;$k<$numero_respuestas;$k++){
         $l=$k+1;
@@ -89,9 +101,9 @@ for($i=0;$i<$numero_preguntas;$i++){
              $rcorrecta=0;
         }
       
-        $ejercicio_texto = new Ejercicios_texto_texto(NULL,$id_ejercicio,$j,$pregunta,$respuesta,$rcorrecta);
+        $mi_respuesta = new Ejercicios_texto_texto_resp(NULL,$id_preg,$respuesta,$rcorrecta);
    
-       $ejercicio_texto->insertar();
+        $mi_respuesta->insertar();
     
      
     }
@@ -100,10 +112,9 @@ for($i=0;$i<$numero_preguntas;$i++){
    // Echo "\n";
 }
 
-    
     //Muestro el ejercicio
   
-     redirect('./view.php?id=' . $id_curso . '&opcion=8'. '&id_ejercicio='.$id_ejercicio);
+     redirect('./view.php?id=' . $id_curso . '&opcion=8'. '&id_ejercicio='.$id_ejercicio. '&tipo_origen='.$tipo_origen);
         
     
  

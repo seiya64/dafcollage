@@ -73,6 +73,7 @@ $numerorespuestascorrectas = optional_param('numerorespuestascorrectas', PARAM_I
 $numerorespuestascorrectas=$numerorespuestascorrectas+1;
    global $CFG, $COURSE, $USER;
  //Si hemos elegido Texto - Texto
+   echo "tipo_pregunta".$tipo_pregunta;
 if($tipo_pregunta == "Texto" && $tipo_respuesta == "Texto"){
     
    
@@ -88,7 +89,17 @@ if($tipo_pregunta == "Texto" && $tipo_respuesta == "Texto"){
     $TipoArchivoRespuesta=1; //1 va a ser texto
 
     
-   
+}else{
+
+    if($tipo_pregunta == "Audio" && $tipo_respuesta == "Texto"){
+         $id=NULL;
+            $id_creador=$USER->id;
+            $TipoActividad=$tipocreacion;//Comienza en 0
+            $TipoArchivoPregunta=2; // 2 va a ser audio
+            $TipoArchivoRespuesta=1; //1 va a ser texto
+    }
+
+}
   
    
     if(optional_param('radiovisible', PARAM_TEXT)=="Si"){
@@ -118,7 +129,8 @@ if($tipo_pregunta == "Texto" && $tipo_respuesta == "Texto"){
     $copyrightresp = required_param('copyrightresp', PARAM_INT);
     
  
- 
+  //  $descripcion=htmlspecialchars( mysql_real_escape_string($descripcion));
+    
     $ejercicio_general= new Ejercicios_general(NULL,$id_curso,$id_creador,$TipoActividad,$TipoArchivoPregunta,$TipoArchivoRespuesta,$visible,$privado,$carpeta,$CampoTematico,$Destreza,$TemaGramatical,$IntencionComunicativa,$TipologiaTextual,$name,$descripcion,$numeropreguntas,$copyrightpreg,$copyrightresp);
     $id_ejercicio=$ejercicio_general->insertar();
    
@@ -131,15 +143,14 @@ if($tipo_pregunta == "Texto" && $tipo_respuesta == "Texto"){
 
   
     //La comprobacion de errores esta en el javascript
-     redirect('./view.php?id=' . $id_curso . '&opcion=7'. '&p='.$numeropreguntas. '&id_ejercicio=' .$id_ejercicio);
+     redirect('./view.php?id=' . $id_curso . '&opcion=7'. '&p='.$numeropreguntas. '&id_ejercicio=' .$id_ejercicio.'&tipo_origen='.$TipoArchivoPregunta);
         
-}
- 
+
     
 }else{
+  
     redirect("view.php?id=". $id_curso . "&opcion=5&tipocreacion=".$tipocreacion) ;
 }
-
 
 
 ?>

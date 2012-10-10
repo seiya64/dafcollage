@@ -23,7 +23,7 @@ $tipocreacion  = optional_param('tipocreacion', 0, PARAM_INT);
 $p  = optional_param('p', 0, PARAM_INT);
 $buscar= optional_param('buscar', 0, PARAM_INT);
 $id_ejercicio  = optional_param('id_ejercicio', PARAM_INT);
-
+$tipo_origen  = optional_param('tipo_origen', PARAM_INT);
 
 //Para busqueda
 
@@ -81,7 +81,7 @@ print_header_simple(format_string($ejercicios->name), '', $navigation, '', '', t
 
 /// Print the main part of the page
 
-ejercicios_vista($cm->id,$op,$error,$name_ej,$tipo,$tipocreacion,$p,$id_ejercicio,$ccl,$cta ,$cdc,$cgr,$cic,$ctt,$buscar);
+ejercicios_vista($cm->id,$op,$error,$name_ej,$tipo,$tipocreacion,$p,$id_ejercicio,$ccl,$cta ,$cdc,$cgr,$cic,$ctt,$buscar,$tipo_origen);
 
 
 /// Finish the page

@@ -14,7 +14,7 @@
   Source code:
   Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
   Simeón Ruiz Romero (simeonruiz@gmail.com)
-  Serafina Molina Soto(finamolina@gmail.com)
+  Serafina Molina Soto(finamolinasoto@gmail.com)
  
   Original idea and content design:
   Ruth Burbat
@@ -66,32 +66,61 @@ if(optional_param("submitbutton2")){ //boton para añadir a mis ejercicos visibl
      redirect('./view.php?id=' . $id_curso . '&opcion=9');
     
 }else{
+
     if(optional_param("submitbutton")){ //boton para guardar los ejercicios visible desde mis ejercicios
      #borro todas las respuestas y preguntas y las vuelvo a insertar
     //comenzamos una transacción para que en todas las tablas se haga seguido
     // en caso de error en algun delete, no se hace ninguno
     begin_sql();
-    delete_records('ejercicios_texto_texto', 'id_ejercicio', $id_ejercicio);
+
+    //obtengo el texto
+     $textos= new Ejercicios_textos();
+     $texto=$textos->obtener_uno_id_ejercicio($id_ejercicio);
+     //borro el texto
+     delete_records('ejercicios_textos', 'id',$texto->get('id'));
+     //vuelvo a insertarlo
+     $elmodificado=required_param('texto',PARAM_TEXT);
+     $nuevotexto= new Ejercicios_textos(NULL,$id_ejercicio,$elmodificado);
+     $nuevotexto->insertar();
+    //obtengo los id de las preguntas del ejercicio
+    $id_preguntas=array();
     
+    $mis_preguntas= new Ejercicios_texto_texto_preg();
+   
+    $id_preguntas=$mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
+    //borro las respuestas
+ 
+    for($s=0;$s<sizeof($id_preguntas);$s++){
+            delete_records('ejercicios_texto_texto_resp', 'id_pregunta', $id_preguntas[$s]->get('id'));
+
+    }
+  
+    //borro las preguntas
+    delete_records('ejercicios_texto_texto_preg', 'id_ejercicio', $id_ejercicio);
     
+  
     //leo un ejercicio y lo guardo
-    
+  
     for($i=0;$i<$numpreg;$i++){
     //Obtengo el numero de respuestas a cada pregunta
     $j=$i+1;
-   
+
     $preg=required_param('pregunta'.$j,PARAM_TEXT);
   
     $numresp=required_param('num_res_preg'.$j,PARAM_TEXT);
-  
+    //Añado la pregunta
+    $ejercicio_texto_preg = new Ejercicios_texto_texto_preg(NULL,$id_ejercicio,$preg);
+    $id_pregunta= $ejercicio_texto_preg->insertar();
+
     for($k=0;$k<$numresp;$k++){
         $l=$k+1;
         $resp=required_param('respuesta'.$l."_".$j,PARAM_TEXT);
     
         $correcta=required_param('valorcorrecta'.$l."_".$j,PARAM_INT);
-       $ejercicio_texto = new Ejercicios_texto_texto(NULL,$id_ejercicio,$j,$preg,$resp,$correcta);
 
-       $ejercicio_texto->insertar();
+   
+       $ejercicio_texto_resp = new Ejercicios_texto_texto_resp(NULL,$id_pregunta,$resp,$correcta);
+       $ejercicio_texto_resp->insertar();
 
     }
     commit_sql();

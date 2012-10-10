@@ -104,6 +104,9 @@ class Ejercicios_general {
             case 'tipoarchivopregunta':
                 return $this->tipoarchivopregunta;
                 break;
+             case 'tipoarchivorespuesta':
+                return $this->tipoarchivorespuesta;
+                break;
             case 'visible':
                 return $this->visible;
                 break;
@@ -142,7 +145,7 @@ class Ejercicios_general {
 
     function insertar() {
         
-       
+      // nl2br
         
         //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
         $this->id = insert_record('ejercicios_general', $this, true);
@@ -1908,27 +1911,24 @@ class Ejercicios_prof_actividad {
 }
 
 /*
- * Clase que gestiona la tabla mdl_ejercicios_texto_texto de la bd
+ * Clase que gestiona la tabla mdl_ejercicios_texto_texto_resp de la bd
  */
 
-class Ejercicios_texto_texto {
+class Ejercicios_texto_texto_resp{
 
     var $id;
-    var $id_ejercicio;
-    var $numeropregunta;
-    var $pregunta;
+    var $id_pregunta;
     var $respuesta;
     var $correcta;
 
     //Contructor
-    function Ejercicios_texto_texto($id = NULL, $id_ejercicio = NULL, $numeropregunta = NULL, $pregunta = NULL, $respuesta = NULL, $correcta = NULL) {
+    function Ejercicios_texto_texto_resp($id = NULL, $id_pregunta = NULL, $respuesta = NULL, $correcta = NULL) {
 
         $this->id = $id;
-        $this->id_ejercicio = $id_ejercicio;
-        $this->numeropregunta = $numeropregunta;
-        $this->pregunta = $pregunta;
+        $this->id_pregunta = $id_pregunta;
         $this->respuesta = $respuesta;
         $this->correcta = $correcta;
+   
     }
 
     function get($param) {
@@ -1939,14 +1939,8 @@ class Ejercicios_texto_texto {
             case 'id':
                 return $this->id;
                 break;
-            case 'id_ejercicio':
-                return $this->id_ejercicio;
-                break;
-            case 'numeropregunta':
-                return $this->numeropregunta;
-                break;
-            case 'pregunta':
-                return $this->pregunta;
+            case 'id_respuesta':
+                return $this->id_respuesta;
                 break;
             case 'respuesta':
                 return $this->respuesta;
@@ -1954,12 +1948,13 @@ class Ejercicios_texto_texto {
             case 'correcta':
                 return $this->correcta;
                 break;
+          
         }
     }
 
     function insertar() {
 
-        $id = insert_record('ejercicios_texto_texto', $this, true);
+        $id = insert_record('ejercicios_texto_texto_resp', $this, true);
         //Devuelve el identificador del ejercicios creado
 
         return $id;
@@ -1968,44 +1963,33 @@ class Ejercicios_texto_texto {
     function alterar() {
 
         //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
-        update_record('ejercicios_texto_texto', $this, false);
+        update_record('ejercicios_texto_texto_resp', $this, false);
     }
 
     function borrar_id_ejercicio($id_ejercicio) {
         //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
 
-        delete_records('ejercicios_texto_texto', 'id_ejercicio', $id_ejercicio);
+        delete_records('ejercicios_texto_texto_resp', 'id_ejercicio', $id_ejercicio);
     }
 
     function obtener_uno($id) {
-        $ejer = get_record('ejercicios_texto_texto', 'id', $id);
+        
+        $ejer = get_record('ejercicios_texto_texto_resp', 'id', $id);
         $this->id = $ejer->id;
-        $this->id_ejercicio = $ejer->id_ejercicio;
-        $this->numeropregunta = $ejer->numeropregunta;
-        $this->pregunta = $ejer->pregunta;
+        $this->id_respuesta = $ejer->id_respuesta;
         $this->respuesta = $ejer->respuesta;
         $this->correcta = $ejer->correcta;
+     
 
         return $this;
     }
 
-    function obtener_uno_name($name) {
-
-        $ejer = get_record('ejercicios_texto_texto', 'name', $name);
-        $this->id = $ejer->id;
-        $this->id_ejercicio = $ejer->id_ejercicio;
-        $this->numeropregunta = $ejer->numeropregunta;
-        $this->pregunta = $ejer->pregunta;
-        $this->respuesta = $ejer->respuesta;
-        $this->correcta = $ejer->correcta;
-
-        return $this;
-    }
-
-    function obtener_todos() {
 
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_texto_texto';
+    function obtener_todas_respuestas_pregunta($id_pregunta) {
+
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_texto_texto_resp WHERE id_pregunta=' . $id_pregunta;
 
         $todos = get_records_sql($sql);
 
@@ -2013,7 +1997,7 @@ class Ejercicios_texto_texto {
 
         foreach ($todos as $cosa) {
 
-            $mp = new Ejercicios_texto_texto();
+            $mp = new Ejercicios_texto_texto_resp();
 
             $mp->obtener_uno($cosa->id);
 
@@ -2024,51 +2008,7 @@ class Ejercicios_texto_texto {
         return $todos_mis_ejercicios;
     }
 
-    function obtener_ejercicios_texto_id_ejercicicio($id_ejercicio) {
-
-
-        $sql = 'SELECT * FROM  mdl_ejercicios_texto_texto WHERE id_ejercicio=' . $id_ejercicio;
-
-        $todos = get_records_sql($sql);
-
-        $todos_mis_ejercicios = array();
-
-        foreach ($todos as $cosa) {
-
-            $mp = new Ejercicios_texto_texto();
-
-            $mp->obtener_uno($cosa->id);
-
-            $todos_mis_ejercicios[] = $mp;
-        }
-
-
-        return $todos_mis_ejercicios;
-    }
-
-    function obtener_ejercicios_texto_id_ejercicicio_numpreguntas($id_ejercicio, $numeropregunta) {
-
-
-
-        $sql = 'SELECT * FROM  mdl_ejercicios_texto_texto WHERE id_ejercicio=' . $id_ejercicio . ' and numeropregunta=' . $numeropregunta;
-
-        $todos = get_records_sql($sql);
-
-        $todos_mis_ejercicios = array();
-
-        foreach ($todos as $cosa) {
-
-            $mp = new Ejercicios_texto_texto();
-
-            $mp->obtener_uno($cosa->id);
-
-            $todos_mis_ejercicios[] = $mp;
-        }
-
-
-        return $todos_mis_ejercicios;
-    }
-
+  
 }
 
 
@@ -2082,12 +2022,191 @@ class Ejercicios_texto_texto {
 
 
 
+/*
+ * Clase que gestiona la tabla mdl_ejercicios_textos de la BD, es decir si el arichivo origen
+ * es texto en el formulario de creación estará almacenado en esta tabla.
+ */
+
+class Ejercicios_textos {
+
+    var $id;
+    var $id_ejercicio;
+    var $texto;
+
+
+    //Contructor por defecto y con parametros
+    function Ejercicios_textos($id = NULL,$id_ejercicio=NULL,$texto = NULL) {
+
+        $this->id = $id;
+        $this->id_ejercicio = $id_ejercicio;
+        $this->texto = $texto;
+       
+    }
+
+    //Obtener cada uno de los atributos de la tabla
+    function get($param) {
+
+        // $param = strtolower($param);
+        switch ($param) {
+            default:
+            case 'id':
+                return $this->id;
+                break;
+
+            case 'id_ejercicio':
+                return $this->id_ejercicio;
+                break;
+            
+            case 'texto':
+                return $this->texto;
+                break;
+        }
+    }
+
+    //Inserta en la bd la instancia correspondiente a la clase y devuelve el identificador
+    //de la nueva instancia creada
+    function insertar() {
+
+        $id = insert_record('ejercicios_textos', $this, true);
+        //Devuelve el identificador del ejercicios creado
+
+        return $id;
+    }
+
+    //Modifica una instacia
+    function alterar() {
+
+        update_record('ejercicios_textos', $this, false);
+    }
+
+    //Borra la fila que tiene como id_ejercicio el que se le pasa como parametro
+    function borrar_id_ejercicio($id_ejercicio) {
+        delete_records('ejercicios_textos', 'id_ejercicio', $id_ejercicio);
+    }
+
+    //Obtiene el texto por id
+    function obtener_uno($id) {
+        $ejer = get_record('ejercicios_textos', 'id', $id);
+        $this->id = $ejer->id;
+        $this->id_ejercicio = $ejer->id_ejercicio;
+        $this->texto = $ejer->$texto;
+     
+        return $this;
+    }
+
+    function obtener_uno_id_ejercicio($id_ejercicio) {
+
+        $ejer = get_record('ejercicios_textos', 'id_ejercicio', $id_ejercicio);
+        $this->id = $ejer->id;
+        $this->id_ejercicio = $ejer->id_ejercicio;
+        $this->texto=$ejer->texto;
+      
+
+        return $this;
+    }
+
+   
+
+
+}
 
 
 
 
 
 
+/*
+ * Clase que gestiona la tabla mdl_ejercicios_texto_texto de la bd
+ */
+
+class Ejercicios_texto_texto_preg{
+
+    var $id;
+    var $id_ejercicio;
+    var $pregunta;
+ 
+
+    //Contructor
+    function Ejercicios_texto_texto_preg($id = NULL, $id_ejercicio = NULL, $pregunta = NULL) {
+
+        $this->id = $id;
+        $this->id_ejercicio = $id_ejercicio;
+        $this->pregunta = $pregunta;
+       
+    }
+
+    function get($param) {
+
+        // $param = strtolower($param);
+        switch ($param) {
+            default:
+            case 'id':
+                return $this->id;
+                break;
+            case 'id_ejercicio':
+                return $this->id_ejercicio;
+                break;
+            case 'pregunta':
+                return $this->pregunta;
+                break;
+          
+        }
+    }
+
+    function insertar() {
+
+        $id = insert_record('ejercicios_texto_texto_preg', $this, true);
+        //Devuelve el identificador del ejercicios creado
+
+        return $id;
+    }
+
+    function alterar() {
+
+        //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
+        update_record('ejercicios_texto_texto_preg', $this, false);
+    }
+
+    function borrar_id_ejercicio($id_ejercicio) {
+        //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
+
+        delete_records('ejercicios_texto_texto_preg', 'id_ejercicio', $id_ejercicio);
+    }
+
+    function obtener_uno($id) {
+        $ejer = get_record('ejercicios_texto_texto_preg', 'id', $id);
+        $this->id = $ejer->id;
+        $this->id_ejercicio = $ejer->id_ejercicio;
+        $this->pregunta = $ejer->pregunta;
+       
+        return $this;
+    }
+
+  
+
+    function obtener_todas_preguntas_ejercicicio($id_ejercicio) {
+
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_texto_texto_preg WHERE id_ejercicio=' . $id_ejercicio;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_texto_texto_preg();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+}
 
 
 ?>

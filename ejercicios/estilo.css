@@ -220,5 +220,28 @@ guardar palabras por columnas
 .descover{
 	overflow:auto;
         margin-bottom: 10px;
+        width: 80%;
+        margin-left: 100px;
+        text-align: justify;
+      
+}
+.desctextos{
+	overflow:auto;
+        margin-bottom: 10px;
+        width: 60%;
+        margin-left: 100px;
+        text-align: justify;
+        background-color: #AFAFAF;
+        margin-left: 200px;
 }
 
+
+.adaptHeightInput {
+
+    resize: none;
+    overflow-y:hidden;
+    margin-bottom: 10px;
+    width: 80%;
+    margin-left: 100px;
+    text-align: justify;
+ }

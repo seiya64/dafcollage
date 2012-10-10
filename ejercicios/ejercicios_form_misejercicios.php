@@ -82,7 +82,7 @@ class mod_ejercicios_mis_ejercicios extends moodleform_mod {
             $nombre_ejercicio=$mi_ejercicio->get('name');
             //Añado un enlace por cada ejercicio dentro de la carpeta
            
-            $carpeta.='<li><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'">'. $nombre_ejercicio.'</a><a href="eliminar_carpetas_ejercicios.php?id_curso='.$id.'&id_ejercicio='.$id_ejercicio.'""><img src="./imagenes/delete.gif"/></a></li>';
+            $carpeta.='<li><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'&tipo_origen='.$mi_ejercicio->get('tipoarchivopregunta').'">'. $nombre_ejercicio.'</a><a href="eliminar_carpetas_ejercicios.php?id_curso='.$id.'&id_ejercicio='.$id_ejercicio.'""><img src="./imagenes/delete.gif"/></a></li>';
                 
             
             
