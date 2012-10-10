@@ -74,6 +74,12 @@ function traducir(elemento) {
     window.open(url, 'diccionario');
 }
 
+function eliminandonube(idtocho,idpalabra){
+    if(confirm('Está seguro que desea eliminar?')){
+        document.location='./guardar.php?id_tocho=' + idtocho +'&viene=0&borrar='+idpalabra;
+    }else{ alert('Operacion Cancelada');}
+   //location.href="./guardar.php?id_tocho=" + idtocho +"&viene=0&borrar="+idpalabra;
+}
 /**
  * Carga el contenido de un fichero php
  * @param miselect

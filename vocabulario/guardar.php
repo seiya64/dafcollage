@@ -46,7 +46,12 @@ $mform = new mod_vocabulario_rellenar_form();
 $id_tocho = optional_param('id_tocho', 0, PARAM_INT);
 $borrar = optional_param('borrar', 0, PARAM_INT);
 $act = optional_param('act', 0, PARAM_INT);
+$añadiendo= optional_param('añadiendo', 0, PARAM_INT);
+$viene= optional_param('viene', 0, PARAM_INT);
 
+if($añadiendo){ //Si estoy añadiendo desde tabla interactiva
+    $act=2; //quiero añadir no actualizar
+}
 if ($mform->is_cancelled()) {
     redirect('./view.php?id=' . $id_tocho);
 }
@@ -200,12 +205,35 @@ if ($mform->no_submit_button_pressed()) {
 }
 
 //volvemos a donde veniamos
-if ($act == 1) {
+
+/*Quitado por mi fina
+if ($act == 1) { //vamos a la tabla interactiva
     redirect('./view.php?id=' . $id_tocho . '&opcion=2');
-    //redirect('./view.php?id='.$id_tocho.'&opcion=1&act=2&id_mp='.$cosa_leida->get('id'));
-} else if ($act == 2) {
-    redirect('./view.php?id=' . $id_tocho . '&opcion=1&act=2&id_mp=' . $leido . '&add=' . optional_param('add', PARAM_TEXT));
+   
+} else if ($act == 2) { //vamos a la tabla interactiva
+  redirect('./view.php?id=' . $id_tocho . '&opcion=1&act=2&id_mp=' . $leido . '&add=' . optional_param('add', PARAM_TEXT));
 } else {
-    redirect('./view.php?id=' . $id_tocho . '&opcion=1&act=2&id_mp=' . $cosa_leida->get('id'));
+     redirect('./view.php?id=' . $id_tocho . '&opcion=2');
+}*/
+switch($viene){
+  case 0:    //por defecto me voy a la tabla nube
+       redirect('./view.php?id=' . $id_tocho . '&opcion=2');
+       break;
+  case 1: //Relacion con otros campos
+      redirect('./view.php?id=' . $id_tocho . '&opcion=2&todasp=1');
+       break;
+  case 2: //Por orden alfabetico
+      redirect('./view.php?id=' . $id_tocho . '&opcion=2&alfa=1');
+      break;
+  case 3: //Por gramatica
+       redirect('./view.php?id=' . $id_tocho . '&opcion=2&gr=1&campo='.$campo);
+       break;
+  case 4: //Por Intencioncomunicativa
+       redirect('./view.php?id=' . $id_tocho . '&opcion=2&ic=1&campo='.$campo);
+       break;
+  case 5: //Por tipologia textual
+       redirect('./view.php?id=' . $id_tocho . '&opcion=2&tt=1&campo='.$campo);
+       break;
 }
+
 ?>

@@ -223,7 +223,7 @@ function vocabulario_scale_used($vocabularioid, $scaleid) {
     return $return;
 }
 
-function vocabulario_view($id, $opcion = 0, $id_mp = null,$palabra="") {
+function vocabulario_view($id, $opcion = 0, $id_mp = null,$palabra="",$viene=0) {
     global $CFG, $COURSE, $USER;
 
     $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
@@ -244,7 +244,7 @@ function vocabulario_view($id, $opcion = 0, $id_mp = null,$palabra="") {
             $mform = new mod_vocabulario_nuevo_cl_form('guardar_cl.php?id_tocho=' . $id);
             break;
         case 4: //actualizar el formulario
-            $mform = new mod_vocabulario_rellenar_form('guardar.php?id_tocho=' . $id . '&act=1');
+            $mform = new mod_vocabulario_rellenar_form('guardar.php?id_tocho=' . $id . '&act=1&viene='.$viene);
             break;
         case 5: //guardar gramatica
             $mform = new mod_vocabulario_nuevo_gr_form('guardar_gr.php?id_tocho=' . $id);
@@ -319,9 +319,10 @@ function vocabulario_todas_palabras($usuarioid, $cl = null, $gram = null, $inten
     if ($letra) {
         $sql .= 'SELECT * FROM (';
     }
-    $sql .= 'SELECT DISTINCT @a:=@a+1, todas.pal, cl.campo, gr.gramatica, ic.intencion, tt.tipo, todas.mpid ';
+   
+    $sql .= 'SELECT @a:=@a+1, todas.pal, cl.campo, gr.gramatica, ic.intencion, tt.tipo, todas.mpid ';
     $sql .= 'FROM (';
-    $sql .= '(SELECT mp.id mpid,`sustantivoid` id,`palabra` pal,`campoid` clid,`gramaticaid` grid,`intencionid` icid,`tipologiaid` ttid ';
+    $sql .= '(SELECT  mp.id mpid,`sustantivoid` id,`palabra` pal,`campoid` clid,`gramaticaid` grid,`intencionid` icid,`tipologiaid` ttid ';
     $sql .= 'FROM ';
     if ($cl) {
         $sql .= '(SELECT * FROM `mdl_vocabulario_mis_palabras` WHERE campoid = ' . $cl . ') mp,';
@@ -329,7 +330,7 @@ function vocabulario_todas_palabras($usuarioid, $cl = null, $gram = null, $inten
         $sql .= '`mdl_vocabulario_mis_palabras` mp,';
     }
     if ($gram || $inten || $tipo) {
-        $sql .= '(SELECT * FROM `mdl_vocabulario_sustantivos` WHERE ';
+        $sql .= '(SELECT  * FROM `mdl_vocabulario_sustantivos` WHERE ';
         if ($gram) {
             $sql .= 'gramaticaid = ' . $gram . ' and ';
         }
@@ -344,7 +345,7 @@ function vocabulario_todas_palabras($usuarioid, $cl = null, $gram = null, $inten
         $sql .= '`mdl_vocabulario_sustantivos` s ';
     }
     $sql .= 'WHERE `usuarioid` = ' . $usuarioid . ' and mp.`sustantivoid` = s.`id`) ';
-    $sql .= 'UNION ';
+    $sql .= 'UNION ALL ';
     $sql .= '(SELECT mp.id mpid, `adjetivoid` id, `sin_declinar` pal, `campoid` clid, `gramaticaid` grid, `intencionid` icid, `tipologiaid` ttid ';
     $sql .= 'FROM ';
     if ($cl) {
@@ -368,7 +369,7 @@ function vocabulario_todas_palabras($usuarioid, $cl = null, $gram = null, $inten
         $sql .= '`mdl_vocabulario_adjetivos` a ';
     }
     $sql .= 'WHERE `usuarioid` = ' . $usuarioid . ' and mp.`adjetivoid` = a.`id` and a.`id` <> 1) ';
-    $sql .= 'UNION ';
+    $sql .= 'UNION ALL ';
     $sql .= '(SELECT mp.id mpid, `verboid` id, `infinitivo` pal, `campoid` clid, `gramaticaid` grid, `intencionid` icid, `tipologiaid` ttid ';
     $sql .= 'FROM ';
     if ($cl) {
@@ -392,7 +393,7 @@ function vocabulario_todas_palabras($usuarioid, $cl = null, $gram = null, $inten
         $sql .= '`mdl_vocabulario_verbos` a ';
     }
     $sql .= 'WHERE `usuarioid` = ' . $usuarioid . ' and mp.`verboid` = a.`id` and a.`id` <> 1) ';
-    $sql .= 'UNION ';
+    $sql .= 'UNION ALL ';
     $sql .= '(SELECT mp.id mpid, `otroid` id, `palabra` pal, `campoid` clid, `gramaticaid` grid, `intencionid` icid, `tipologiaid` ttid ';
     $sql .= 'FROM ';
     if ($cl) {
@@ -424,10 +425,11 @@ function vocabulario_todas_palabras($usuarioid, $cl = null, $gram = null, $inten
     if ($letra) {
         $sql .= ') p WHERE p.pal like \'' . $letra . '%\'';
     }
-
+   
     $todas = get_records_sql($sql);
     return $todas;
 }
+
 
 function todas_palabras_nube($usrid) {
     $sufijotabla = get_sufijo_lenguaje_tabla();

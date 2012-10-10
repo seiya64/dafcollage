@@ -19,6 +19,7 @@ $a = optional_param('a', 0, PARAM_INT);  // vocabulario
 $opcion = optional_param('opcion', 0, PARAM_INT); //para saber lo que hay que enseñar
 $id_mp = optional_param('id_mp', null, PARAM_INT); //para saber de donde vengo
 $palabra = optional_param('palabra',"", PARAM_TEXT); //para saber de donde vengo
+$viene = optional_param('viene',0, PARAM_INT); //para saber de donde vengo en modificar,añadir,eliminar
 if ($id) {
     if (!$cm = get_record("course_modules", "id", $id)) {
         error("Course Module ID was incorrect");
@@ -61,7 +62,7 @@ $strvocabulario = get_string("modulename", "vocabulario");
 print_header("$course->shortname: $vocabulario->name", "$course->fullname", "$navigation <a href=index.php?id=$course->id>$strvocabularios</a> -> $vocabulario->name", "", "", true, update_module_button($cm->id, $course->id, $strvocabulario), navmenu($course, $cm));
 
 /// Print the main part of the page
-vocabulario_view($cm->id, $opcion, $id_mp,$palabra);
+vocabulario_view($cm->id, $opcion, $id_mp,$palabra,$viene);
 /// Finish the page
 print_footer($course);
 ?>

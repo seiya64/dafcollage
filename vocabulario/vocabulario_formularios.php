@@ -52,6 +52,9 @@ class mod_vocabulario_rellenar_form extends moodleform {
         global $USER;
         $add = optional_param('add', null, PARAM_ALPHA);
         $act = optional_param('act', 0, PARAM_INT);
+        $op = optional_param('op', 0, PARAM_INT);
+
+        
         if ($add) {
             $act = 2;
         }
@@ -176,35 +179,78 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $enlace_diccionario = '<a href="javascript:traducir(1)">[' . get_string("Tpal", "vocabulario") . ']</a>';
         $mform->addElement('text', 'significado_sus', $enlace_diccionario, 'value="' . $sustantivo->get('significado') . '"');
 
-        //Comentarios
-        $ocultador = "<div id=\"ocultador_sus\" style=\"display:none\">";
-        $mform->addElement('html', $ocultador);
-        $mform->addElement('text', 'observaciones_sus', get_string("comen", "vocabulario"), 'value="' . $sustantivo->get('observaciones') . '"');
 
-        //ejemplo
-        $mform->addElement('text', 'ejemplo_sus', get_string("ejem", "vocabulario"), 'value="' . $sustantivo->get('ejemplo') . '"');
+        //añadido por mi
+        if($op){ //estoy añadiendo sustantivo
+          //Comentarios
+                $ocultador = '<div id=\"ocultador_sus\" style=\"display:""\">';
 
-        //campo gramatical
-        $mform->addElement('select', 'gramatica_sus', get_string("campo_gram", "vocabulario"), $cgra, "onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico\",1)'");
-        //probar los campos dinamicos
-        $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico\"  style=\"min-height: 0;\"></div>";
-        $mform->addElement('html', $campodinamico);
-        $mform->setDefault('gramatica_sus', $sustantivo->get('gramaticaid'));
-        $mform->addElement('hidden', 'descripcion_grsus');
+                $mform->addElement('html', $ocultador);
+                $mform->addElement('text', 'observaciones_sus', get_string("comen", "vocabulario"), 'value="' . $sustantivo->get('observaciones') . '"');
 
-        //intencion comunicativa
-        $mform->addElement('select', 'intencion_sus', get_string("campo_intencion", "vocabulario"), $cintencion);
-        $mform->setDefault('intencion_sus', $sustantivo->get('intencionid'));
-        $mform->addElement('hidden', 'descripcion_intensus');
+                //ejemplo
+                $mform->addElement('text', 'ejemplo_sus', get_string("ejem", "vocabulario"), 'value="' . $sustantivo->get('ejemplo') . '"');
 
-        //tipologia textual
-        $mform->addElement('select', 'tipologia_sus', get_string("campo_tipologia", "vocabulario"), $ctipologia);
-        $mform->setDefault('tipologia_sus', $sustantivo->get('tipologiaid'));
-        $mform->addElement('hidden', 'descripcion_tiposus');
-        $ocultador = "</div>";
-        $mform->addElement('html', $ocultador);
-        $ops = '<a href=\'javascript:desocultar("sus")\' id="mcsus">[' . get_string('mascampos', 'vocabulario') . ']</a>';
-        $mform->addElement('static', 'opciones_adj', get_string("opciones", "vocabulario"), $ops);
+                //campo gramatical
+                $mform->addElement('select', 'gramatica_sus', get_string("campo_gram", "vocabulario"), $cgra, "onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico\",1)'");
+                //probar los campos dinamicos
+                $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico\"  style=\"min-height: 0;\"></div>";
+                $mform->addElement('html', $campodinamico);
+                $mform->setDefault('gramatica_sus', $sustantivo->get('gramaticaid'));
+                $mform->addElement('hidden', 'descripcion_grsus');
+
+                //intencion comunicativa
+                $mform->addElement('select', 'intencion_sus', get_string("campo_intencion", "vocabulario"), $cintencion);
+                $mform->setDefault('intencion_sus', $sustantivo->get('intencionid'));
+                $mform->addElement('hidden', 'descripcion_intensus');
+
+                //tipologia textual
+                $mform->addElement('select', 'tipologia_sus', get_string("campo_tipologia", "vocabulario"), $ctipologia);
+                $mform->setDefault('tipologia_sus', $sustantivo->get('tipologiaid'));
+                $mform->addElement('hidden', 'descripcion_tiposus');
+                $ocultador = "</div>";
+                $mform->addElement('html', $ocultador);
+
+
+              
+        }else{
+                //Comentarios
+                $ocultador = "<div id=\"ocultador_sus\" style=\"display:none\">";
+
+                $mform->addElement('html', $ocultador);
+                $mform->addElement('text', 'observaciones_sus', get_string("comen", "vocabulario"), 'value="' . $sustantivo->get('observaciones') . '"');
+
+                //ejemplo
+                $mform->addElement('text', 'ejemplo_sus', get_string("ejem", "vocabulario"), 'value="' . $sustantivo->get('ejemplo') . '"');
+
+                //campo gramatical
+                $mform->addElement('select', 'gramatica_sus', get_string("campo_gram", "vocabulario"), $cgra, "onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico\",1)'");
+                //probar los campos dinamicos
+                $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico\"  style=\"min-height: 0;\"></div>";
+                $mform->addElement('html', $campodinamico);
+                $mform->setDefault('gramatica_sus', $sustantivo->get('gramaticaid'));
+                $mform->addElement('hidden', 'descripcion_grsus');
+
+                //intencion comunicativa
+                $mform->addElement('select', 'intencion_sus', get_string("campo_intencion", "vocabulario"), $cintencion);
+                $mform->setDefault('intencion_sus', $sustantivo->get('intencionid'));
+                $mform->addElement('hidden', 'descripcion_intensus');
+
+                //tipologia textual
+                $mform->addElement('select', 'tipologia_sus', get_string("campo_tipologia", "vocabulario"), $ctipologia);
+                $mform->setDefault('tipologia_sus', $sustantivo->get('tipologiaid'));
+                $mform->addElement('hidden', 'descripcion_tiposus');
+                $ocultador = "</div>";
+                $mform->addElement('html', $ocultador);
+
+
+                $ops = '<a href=\'javascript:desocultar("sus")\' id="mcsus">[' . get_string('mascampos', 'vocabulario') . ']</a>';
+                $mform->addElement('static', 'opciones_adj', get_string("opciones", "vocabulario"), $ops);
+         } //fin ocultar sustantivo
+
+
+
+       
 
         //$mform->addElement('submit', 'submitbutton', get_string('savechanges'));
         $mform->closeHeaderBefore('vrb');
@@ -229,34 +275,65 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $mform->addElement('text', 'significado_vrb', $enlace_diccionario, 'value="' . $verbo->get('significado') . '"');
 
         //Comentarios
-        $ocultador = "<div id=\"ocultador_verb\" style=\"display:none\">";
-        $mform->addElement('html', $ocultador);
-        $mform->addElement('text', 'observaciones_vrb', get_string("comen", "vocabulario"), 'value="' . $verbo->get('observaciones') . '"');
 
-        //campo gramatical
-        $mform->addElement('select', 'gramatica_vrb', get_string("campo_gram", "vocabulario"), $cgra, "onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_vrb\",1)'");
-        //probar los campos dinamicos
-        $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_vrb\" style=\"min-height: 0;\"></div>";
-        $mform->addElement('html', $campodinamico);
-        $mform->setDefault('gramatica_vrb', $verbo->get('gramaticaid'));
-        $mform->addElement('hidden', 'descripcion_grvrb');
+        if($op){ //opcion añadir desde nube
+                $ocultador = '<div id=\"ocultador_verb\" style=\"display:""\">';
+                $mform->addElement('html', $ocultador);
+                $mform->addElement('text', 'observaciones_vrb', get_string("comen", "vocabulario"), 'value="' . $verbo->get('observaciones') . '"');
 
-        //intencion comunicativa
-        $mform->addElement('select', 'intencion_vrb', get_string("campo_intencion", "vocabulario"), $cintencion);
-        $mform->setDefault('intencion_vrb', $verbo->get('intencionid'));
-        $mform->addElement('hidden', 'descripcion_intenvrb');
+                //campo gramatical
+                $mform->addElement('select', 'gramatica_vrb', get_string("campo_gram", "vocabulario"), $cgra, "onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_vrb\",1)'");
+                //probar los campos dinamicos
+                $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_vrb\" style=\"min-height: 0;\"></div>";
+                $mform->addElement('html', $campodinamico);
+                $mform->setDefault('gramatica_vrb', $verbo->get('gramaticaid'));
+                $mform->addElement('hidden', 'descripcion_grvrb');
 
-        //tipologia textual
-        $mform->addElement('select', 'tipologia_vrb', get_string("campo_tipologia", "vocabulario"), $ctipologia);
-        $mform->setDefault('tipologia_vrb', $verbo->get('tipologiaid'));
-        $mform->addElement('hidden', 'descripcion_tipovrb');
+                //intencion comunicativa
+                $mform->addElement('select', 'intencion_vrb', get_string("campo_intencion", "vocabulario"), $cintencion);
+                $mform->setDefault('intencion_vrb', $verbo->get('intencionid'));
+                $mform->addElement('hidden', 'descripcion_intenvrb');
 
-        //opciones
-        $ocultador = "</div>";
-        $mform->addElement('html', $ocultador);
-        $ops = '<a href="view.php?id=' . optional_param('id', 0, PARAM_INT) . '&opcion=1&add=v&id_mp=' . $leido . '">[' . get_string('advrb', 'vocabulario') . ']</a>';
-        $ops .= '<a href=\'javascript:desocultar("verb")\' id="mcverb">[' . get_string('mascampos', 'vocabulario') . ']</a>';
-        $mform->addElement('static', 'opciones_vrb', get_string("opciones", "vocabulario"), $ops);
+                //tipologia textual
+                $mform->addElement('select', 'tipologia_vrb', get_string("campo_tipologia", "vocabulario"), $ctipologia);
+                $mform->setDefault('tipologia_vrb', $verbo->get('tipologiaid'));
+                $mform->addElement('hidden', 'descripcion_tipovrb');
+
+                //opciones
+                $ocultador = "</div>";
+                $mform->addElement('html', $ocultador);
+        }else{
+                $ocultador = "<div id=\"ocultador_verb\" style=\"display:none\">";
+                $mform->addElement('html', $ocultador);
+                $mform->addElement('text', 'observaciones_vrb', get_string("comen", "vocabulario"), 'value="' . $verbo->get('observaciones') . '"');
+
+                //campo gramatical
+                $mform->addElement('select', 'gramatica_vrb', get_string("campo_gram", "vocabulario"), $cgra, "onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_vrb\",1)'");
+                //probar los campos dinamicos
+                $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_vrb\" style=\"min-height: 0;\"></div>";
+                $mform->addElement('html', $campodinamico);
+                $mform->setDefault('gramatica_vrb', $verbo->get('gramaticaid'));
+                $mform->addElement('hidden', 'descripcion_grvrb');
+
+                //intencion comunicativa
+                $mform->addElement('select', 'intencion_vrb', get_string("campo_intencion", "vocabulario"), $cintencion);
+                $mform->setDefault('intencion_vrb', $verbo->get('intencionid'));
+                $mform->addElement('hidden', 'descripcion_intenvrb');
+
+                //tipologia textual
+                $mform->addElement('select', 'tipologia_vrb', get_string("campo_tipologia", "vocabulario"), $ctipologia);
+                $mform->setDefault('tipologia_vrb', $verbo->get('tipologiaid'));
+                $mform->addElement('hidden', 'descripcion_tipovrb');
+
+                //opciones
+                $ocultador = "</div>";
+                $mform->addElement('html', $ocultador);
+        //quitado por mi(fina)     //   $ops = '<a href="view.php?id=' . optional_param('id', 0, PARAM_INT) . '&opcion=1&add=v&id_mp=' . $leido . '">[' . get_string('advrb', 'vocabulario') . ']</a>';
+                $ops = '<a href=\'javascript:desocultar("verb")\' id="mcverb">[' . get_string('mascampos', 'vocabulario') . ']</a>';
+                $mform->addElement('static', 'opciones_vrb', get_string("opciones", "vocabulario"), $ops);
+        }
+
+      
 
         //$mform->addElement('submit', 'submitbutton', get_string('savechanges'));
         $mform->closeHeaderBefore('adj');
@@ -272,33 +349,65 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $mform->addElement('text', 'significado_adj', $enlace_diccionario, 'value="' . $adjetivo->get('significado') . '"');
 
         //Comentarios
-        $ocultador = "<div id=\"ocultador_adj\" style=\"display:none\">";
-        $mform->addElement('html', $ocultador);
-        $mform->addElement('text', 'observaciones_adj', get_string("comen", "vocabulario"), 'value="' . $adjetivo->get('observaciones') . '"');
 
-        //campo gramatical
-        $mform->addElement('select', 'gramatica_adj', get_string("campo_gram", "vocabulario"), $cgra, "onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_adj\",1)'");
-        //probar los campos dinamicos
-        $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_adj\" style=\"min-height: 0;\"></div>";
-        $mform->addElement('html', $campodinamico);
-        $mform->setDefault('gramatica_adj', $adjetivo->get('gramaticaid'));
-        $mform->addElement('hidden', 'descripcion_gradj');
+        if($op){ //opcion añadir desde nube
+            $ocultador = '<div id=\"ocultador_adj\" style=\"display:""\">';
+            $mform->addElement('html', $ocultador);
+            $mform->addElement('text', 'observaciones_adj', get_string("comen", "vocabulario"), 'value="' . $adjetivo->get('observaciones') . '"');
 
-        //intencion comunicativa
-        $mform->addElement('select', 'intencion_adj', get_string("campo_intencion", "vocabulario"), $cintencion);
-        $mform->setDefault('intencion_adj', $adjetivo->get('intencionid'));
-        $mform->addElement('hidden', 'descripcion_intenadj');
+            //campo gramatical
+            $mform->addElement('select', 'gramatica_adj', get_string("campo_gram", "vocabulario"), $cgra, "onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_adj\",1)'");
+            //probar los campos dinamicos
+            $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_adj\" style=\"min-height: 0;\"></div>";
+            $mform->addElement('html', $campodinamico);
+            $mform->setDefault('gramatica_adj', $adjetivo->get('gramaticaid'));
+            $mform->addElement('hidden', 'descripcion_gradj');
 
-        //tipologia textual
-        $mform->addElement('select', 'tipologia_adj', get_string("campo_tipologia", "vocabulario"), $ctipologia);
-        $mform->setDefault('tipologia_adj', $adjetivo->get('tipologiaid'));
-        $mform->addElement('hidden', 'descripcion_tipoadj');
+            //intencion comunicativa
+            $mform->addElement('select', 'intencion_adj', get_string("campo_intencion", "vocabulario"), $cintencion);
+            $mform->setDefault('intencion_adj', $adjetivo->get('intencionid'));
+            $mform->addElement('hidden', 'descripcion_intenadj');
 
-        //opciones
-        $ocultador = "</div>";
-        $mform->addElement('html', $ocultador);
-        $ops = '<a href="view.php?id=' . optional_param('id', 0, PARAM_INT) . '&opcion=1&add=a&id_mp=' . $leido . '">[' . get_string('adadj', 'vocabulario') . ']</a>';
-        $ops .= '<a href=\'javascript:desocultar("adj")\' id="mcadj">[' . get_string('mascampos', 'vocabulario') . ']</a>';
+            //tipologia textual
+            $mform->addElement('select', 'tipologia_adj', get_string("campo_tipologia", "vocabulario"), $ctipologia);
+            $mform->setDefault('tipologia_adj', $adjetivo->get('tipologiaid'));
+            $mform->addElement('hidden', 'descripcion_tipoadj');
+
+            //opciones
+            $ocultador = "</div>";
+            $mform->addElement('html', $ocultador);
+          }else{
+                $ocultador = "<div id=\"ocultador_adj\" style=\"display:none\">";
+                $mform->addElement('html', $ocultador);
+                $mform->addElement('text', 'observaciones_adj', get_string("comen", "vocabulario"), 'value="' . $adjetivo->get('observaciones') . '"');
+
+                //campo gramatical
+                $mform->addElement('select', 'gramatica_adj', get_string("campo_gram", "vocabulario"), $cgra, "onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_adj\",1)'");
+                //probar los campos dinamicos
+                $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_adj\" style=\"min-height: 0;\"></div>";
+                $mform->addElement('html', $campodinamico);
+                $mform->setDefault('gramatica_adj', $adjetivo->get('gramaticaid'));
+                $mform->addElement('hidden', 'descripcion_gradj');
+
+                //intencion comunicativa
+                $mform->addElement('select', 'intencion_adj', get_string("campo_intencion", "vocabulario"), $cintencion);
+                $mform->setDefault('intencion_adj', $adjetivo->get('intencionid'));
+                $mform->addElement('hidden', 'descripcion_intenadj');
+
+                //tipologia textual
+                $mform->addElement('select', 'tipologia_adj', get_string("campo_tipologia", "vocabulario"), $ctipologia);
+                $mform->setDefault('tipologia_adj', $adjetivo->get('tipologiaid'));
+                $mform->addElement('hidden', 'descripcion_tipoadj');
+
+                //opciones
+                $ocultador = "</div>";
+                $mform->addElement('html', $ocultador);
+        //quitado por mi (fina)       $ops = '<a href="view.php?id=' . optional_param('id', 0, PARAM_INT) . '&opcion=1&add=a&id_mp=' . $leido . '">[' . get_string('adadj', 'vocabulario') . ']</a>';
+                $ops = '<a href=\'javascript:desocultar("adj")\' id="mcadj">[' . get_string('mascampos', 'vocabulario') . ']</a>';
+
+            }
+
+
         $mform->addElement('static', 'opciones_adj', get_string("opciones", "vocabulario"), $ops);
 
         //$mform->addElement('submit', 'submitbutton', get_string('savechanges'));
@@ -315,42 +424,82 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $mform->addElement('text', 'significado_otr', $enlace_diccionario, 'value="' . $otro->get('significado') . '"');
 
         //Comentarios
-        $ocultador = "<div id=\"ocultador_otr\" style=\"display:none\">";
-        $mform->addElement('html', $ocultador);
-        $mform->addElement('text', 'observaciones_otr', get_string("comen", "vocabulario"), 'value="' . $otro->get('observaciones') . '"');
 
-        //campo gramatical
-        $mform->addElement('select', 'gramatica_otr', get_string("campo_gram", "vocabulario"), $cgra, "onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_otr\",1)'");
-        //probar los campos dinamicos
-        $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_otr\" style=\"min-height: 0;\"></div>";
-        $mform->addElement('html', $campodinamico);
-        $mform->setDefault('gramatica_otr', $otro->get('gramaticaid'));
-        $mform->addElement('hidden', 'descripcion_grotr');
+        if($op){
+                $ocultador = '<div id=\"ocultador_otr\" style=\"display:""\">';
+                $mform->addElement('html', $ocultador);
+                $mform->addElement('text', 'observaciones_otr', get_string("comen", "vocabulario"), 'value="' . $otro->get('observaciones') . '"');
 
-        //intencion comunicativa
-        $mform->addElement('select', 'intencion_otr', get_string("campo_intencion", "vocabulario"), $cintencion);
-        $mform->setDefault('intencion_otr', $otro->get('intencionid'));
-        $mform->addElement('hidden', 'descripcion_intenotr');
+                //campo gramatical
+                $mform->addElement('select', 'gramatica_otr', get_string("campo_gram", "vocabulario"), $cgra, "onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_otr\",1)'");
+                //probar los campos dinamicos
+                $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_otr\" style=\"min-height: 0;\"></div>";
+                $mform->addElement('html', $campodinamico);
+                $mform->setDefault('gramatica_otr', $otro->get('gramaticaid'));
+                $mform->addElement('hidden', 'descripcion_grotr');
 
-        //tipologia textual
-        $mform->addElement('select', 'tipologia_otr', get_string("campo_tipologia", "vocabulario"), $ctipologia);
-        $mform->setDefault('tipologia_otr', $otro->get('tipologiaid'));
-        $mform->addElement('hidden', 'descripcion_tipootr');
+                //intencion comunicativa
+                $mform->addElement('select', 'intencion_otr', get_string("campo_intencion", "vocabulario"), $cintencion);
+                $mform->setDefault('intencion_otr', $otro->get('intencionid'));
+                $mform->addElement('hidden', 'descripcion_intenotr');
 
-        //opciones
-        $ocultador = "</div>";
-        $mform->addElement('html', $ocultador);
-        $ops = '<a href="view.php?id=' . optional_param('id', 0, PARAM_INT) . '&opcion=1&add=o&id_mp=' . $leido . '">[' . get_string('adotr', 'vocabulario') . ']</a>';
-        $ops .= '<a href=\'javascript:desocultar("otr")\' id="mcotr">[' . get_string('mascampos', 'vocabulario') . ']</a>';
-        $mform->addElement('static', 'opciones_otr', get_string("opciones", "vocabulario"), $ops);
+                //tipologia textual
+                $mform->addElement('select', 'tipologia_otr', get_string("campo_tipologia", "vocabulario"), $ctipologia);
+                $mform->setDefault('tipologia_otr', $otro->get('tipologiaid'));
+                $mform->addElement('hidden', 'descripcion_tipootr');
 
+                //opciones
+                $ocultador = "</div>";
+                $mform->addElement('html', $ocultador);
+    // quitado por mi fina       $ops = '<a href="view.php?id=' . optional_param('id', 0, PARAM_INT) . '&opcion=1&add=o&id_mp=' . $leido . '">[' . get_string('adotr', 'vocabulario') . ']</a>';
+
+            }else{
+                    $ocultador = "<div id=\"ocultador_otr\" style=\"display:none\">";
+                    $mform->addElement('html', $ocultador);
+                    $mform->addElement('text', 'observaciones_otr', get_string("comen", "vocabulario"), 'value="' . $otro->get('observaciones') . '"');
+
+                    //campo gramatical
+                    $mform->addElement('select', 'gramatica_otr', get_string("campo_gram", "vocabulario"), $cgra, "onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_otr\",1)'");
+                    //probar los campos dinamicos
+                    $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_otr\" style=\"min-height: 0;\"></div>";
+                    $mform->addElement('html', $campodinamico);
+                    $mform->setDefault('gramatica_otr', $otro->get('gramaticaid'));
+                    $mform->addElement('hidden', 'descripcion_grotr');
+
+                    //intencion comunicativa
+                    $mform->addElement('select', 'intencion_otr', get_string("campo_intencion", "vocabulario"), $cintencion);
+                    $mform->setDefault('intencion_otr', $otro->get('intencionid'));
+                    $mform->addElement('hidden', 'descripcion_intenotr');
+
+                    //tipologia textual
+                    $mform->addElement('select', 'tipologia_otr', get_string("campo_tipologia", "vocabulario"), $ctipologia);
+                    $mform->setDefault('tipologia_otr', $otro->get('tipologiaid'));
+                    $mform->addElement('hidden', 'descripcion_tipootr');
+
+                    //opciones
+                    $ocultador = "</div>";
+                    $mform->addElement('html', $ocultador);
+            // quitado por mi fina       $ops = '<a href="view.php?id=' . optional_param('id', 0, PARAM_INT) . '&opcion=1&add=o&id_mp=' . $leido . '">[' . get_string('adotr', 'vocabulario') . ']</a>';
+                    $ops = '<a href=\'javascript:desocultar("otr")\' id="mcotr">[' . get_string('mascampos', 'vocabulario') . ']</a>';
+                    $mform->addElement('static', 'opciones_otr', get_string("opciones", "vocabulario"), $ops);
+
+            }
 
         //$mform->addElement('submit', 'submitbutton', get_string('savechanges'));
         $mform->closeHeaderBefore('botones');
         ////------ otros
         //botones
         $buttonarray = array();
-        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('savechanges'));
+              if($op){
+             $mform->addElement('hidden', 'añadiendo',1);
+
+             $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('AñadirNuevo','vocabulario'));
+
+         }else{
+             $mform->addElement('hidden', 'añadiendo',0);
+             $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('savechanges'));
+
+         }
         //$buttonarray[] = &$mform->createElement('reset', 'resetbutton', get_string('revert', 'vocabulario'));
         $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
         $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
@@ -475,7 +624,7 @@ class mod_vocabulario_opciones_form extends moodleform {
                 live: false,
                 behavior: 'all'
               }
-            }).render().setUser('daf_collage').start();
+            }).render().setUser('dafcollage').start();
             </script>";
         $tabla_menu .='<div class="right twitter">'.$Mitwitter.'</div>';
 
@@ -545,6 +694,7 @@ class mod_vocabulario_ver_form extends moodleform {
 
         if ($todasp) {
             $mis_palabras = vocabulario_todas_palabras($usuarioid);
+            $viene=1;
         } else if ($cl) {
 
             /*$aux = new Vocabulario_campo_lexico();
@@ -568,7 +718,7 @@ class mod_vocabulario_ver_form extends moodleform {
 
             $mform->addElement('html', '</br>');*/
         } else if ($gr) {
-
+            $viene=3;
             $aux = new Vocabulario_gramatica();
             $clex = $aux->obtener_hijos($usuarioid, 0);
             $mform->addElement('hidden', 'tipo', 'gr');
@@ -589,7 +739,7 @@ class mod_vocabulario_ver_form extends moodleform {
 
             $mform->addElement('html', '</br>');
         } else if ($tt) {
-
+            $viene=5;
             $aux = new Vocabulario_tipologias();
             $clex = $aux->obtener_todos($usuarioid);
             $mform->addElement('hidden', 'tipo', 'tt');
@@ -610,7 +760,7 @@ class mod_vocabulario_ver_form extends moodleform {
 
             $mform->addElement('html', '</br>');
         } else if ($ic) {
-
+            $viene=4;
             $aux = new Vocabulario_intenciones();
             $clex = $aux->obtener_todos($usuarioid);
             $mform->addElement('hidden', 'tipo', 'ic');
@@ -631,7 +781,7 @@ class mod_vocabulario_ver_form extends moodleform {
 
             $mform->addElement('html', '</br>');
         } else if ($alfa) {
-
+            $viene=2;
             $letra = optional_param('letra', 'a', PARAM_ALPHA);
             $abecedario = '<h1 style="text-align:center;">';
             $l = 'a';
@@ -644,7 +794,7 @@ class mod_vocabulario_ver_form extends moodleform {
             //$mis_palabras = $mp->obtener_todas($usuarioid, $valor_campoid, $letra);
             $mis_palabras = vocabulario_todas_palabras($usuarioid, null, null, null, null, $letra);
         } else if ($nube) {
-            
+            //TABLA NUBE
             $titulillos = '<p>'.get_string('instr_nube1','vocabulario').'<br/>';
             $titulillos .= get_string('instr_nube2','vocabulario').'</p>';
 
@@ -654,11 +804,14 @@ class mod_vocabulario_ver_form extends moodleform {
             $mform->addElement('html', '<table id="palabras" class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
             $titulillos = '<thead>';
             $titulillos .= '<tr class="header">';
+         
             $titulillos .= '<th>' . get_string('sust', 'vocabulario') . '</th>';
             $titulillos .= '<th>' . get_string('adj', 'vocabulario') . '</th>';
             $titulillos .= '<th>' . get_string('vrb', 'vocabulario') . '</th>';
             $titulillos .= '<th>' . get_string('otr', 'vocabulario') . '</th>';
             $titulillos .= '<th>' . get_string('campo_lex', 'vocabulario') . '</th>';
+            $titulillos .= '<th>' . get_string('opciones', 'vocabulario') . '</th>';
+            $titulillos .= '<th>' . get_string('opciones', 'vocabulario') . '</th>';
             $titulillos .= '<th>' . get_string('opciones', 'vocabulario') . '</th>';
             $titulillos .= '</tr>';
             $titulillos .= '</thead>';
@@ -669,14 +822,19 @@ class mod_vocabulario_ver_form extends moodleform {
             foreach ($palabrejas as $palabra) {
                 $titulillos = '<tr class="cell" style="text-align:center;">';
 
+               
                 $titulillos .= '<td>' . $palabra->sus_lex . '</td>';
                 $titulillos .= '<td>' . $palabra->adj_lex . '</td>';
                 $titulillos .= '<td>' . $palabra->ver_lex . '</td>';
                 $titulillos .= '<td>' . $palabra->otros_lex . '</td>';
                 $titulillos .= '<td>' . $palabra->campo_lex . '</td>';
               //  $titulillos .= '<td>' . $palabra->mpid . '</td>';
-               $titulillos .= '<td> <a href="./view.php?id=' . $this->id_tocho . '&opcion=4&act=1&id_mp=' . $palabra->mpid . '">[' . get_string('editar', 'vocabulario') . ']</a></td>';
-             //   $titulillos .= '<td> <a href="./guardar.php?id_tocho=' . $this->id_tocho . '&borrar=' . $palabra->mpid . '">[' . get_string('eliminar', 'vocabulario') . ']</a></td>';
+
+                //modificado o quitado por mi fina (cambiado editar por modificar)
+               $titulillos .= '<td> <a href="./view.php?id=' . $this->id_tocho . '&opcion=4&viene=0&act=1&id_mp=' . $palabra->mpid . '">[' . get_string('modificar', 'vocabulario') . ']</a></td>';
+               $titulillos .= '<td> <a href="./view.php?id=' . $this->id_tocho . '&opcion=4&op=1&viene=0&act=1&id_mp=' . $palabra->mpid . '">[' . get_string('Añadir', 'vocabulario') . ']</a></td>';
+               $titulillos .= '<td> <a href="#" style="color:#CC0000;" onclick="javascript:eliminandonube('.$this->id_tocho.','. $palabra->mpid . ')" >[' . get_string('eliminar', 'vocabulario') . ']</a></td>';
+
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
             }
@@ -690,6 +848,8 @@ class mod_vocabulario_ver_form extends moodleform {
         }
 
         if (!$nube) {
+
+            
             $mform->addElement('html', '<p>');
             $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
 
@@ -700,7 +860,8 @@ class mod_vocabulario_ver_form extends moodleform {
             $titulillos .= '<th>' . get_string('campo_gram', 'vocabulario') . '</th>';
             $titulillos .= '<th>' . get_string('campo_intencion', 'vocabulario') . '</th>';
             $titulillos .= '<th>' . get_string('campo_tipologia', 'vocabulario') . '</th>';
-            $titulillos .= '<th colspan=2>' . get_string('opciones', 'vocabulario') . '</th>';
+           // $titulillos .= '<th>' . get_string('opciones', 'vocabulario') . '</th>';
+           // $titulillos .= '<th>' . get_string('opciones', 'vocabulario') . '</th>';
             $titulillos .= '</tr>';
 
             $mform->addElement('html', $titulillos);
@@ -721,14 +882,20 @@ class mod_vocabulario_ver_form extends moodleform {
 //                $fila .= '<td> ' . $cosa['gramatica'] . ' </td>';
 //                $fila .= '<td> ' . $cosa['intencion'] . ' </td>';
 //                $fila .= '<td> ' . $cosa['tipo'] . ' </td>';
+
+            //    $fila .= '<td> <a href="./guardar.php?id_tocho=' . $this->id_tocho . '&viene='.$viene.'&borrar=' . $cosa->mpid . '">[' . get_string('eliminar', 'vocabulario') . ']</a></td>';
+
                 $fila .= '<td> ' . $cosa->pal . ' </td>';
                 $fila .= '<td> ' . $cosa->campo . ' </td>';
                 $fila .= '<td> ' . $cosa->gramatica . ' </td>';
                 $fila .= '<td> ' . $cosa->intencion . ' </td>';
                 $fila .= '<td> ' . $cosa->tipo . ' </td>';
-                $acciones = '<a href="./view.php?id=' . $this->id_tocho . '&opcion=4&act=1&id_mp=' . $cosa->mpid . '">[' . get_string('editar', 'vocabulario') . ']</a></td>';
-                $acciones .= '<td><a href="./guardar.php?id_tocho=' . $this->id_tocho . '&borrar=' . $cosa->mpid . '">[' . get_string('eliminar', 'vocabulario') . ']</a>';
-                $fila .= '<td> ' . $acciones . ' </td>';
+                         //modificado o quitado por mi fina (cambiado editar por modificar)
+
+             //   $acciones = '<td> <a href="./view.php?id=' . $this->id_tocho . '&opcion=4&viene='.$viene.'&act=1&id_mp=' . $cosa->mpid . '">[' . get_string('modificar', 'vocabulario') . ']</a></td>';
+             //   $acciones .= '<td> <a href="./view.php?id=' . $this->id_tocho . '&opcion=4&op=1&viene='.$viene.'&act=1&id_mp=' . $cosa->mpid . '">[' . get_string('Añadir', 'vocabulario') . ']</a></td>';
+
+           //     $fila .= '<td> ' . $acciones . ' </td>';
                 $fila .= '</tr>';
                 $mform->addElement('html', $fila);
                 $color++;
@@ -757,11 +924,11 @@ class mod_vocabulario_ver_form extends moodleform {
         if ($userid) {
             $atras = '<h1 style="text-align: center;" class="main">';
             $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&todasp=1&alid=' . $userid . '">[' . get_string('todo', 'vocabulario') . ']</a>';
-            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&alfa=1&alid=' . $userid . '">[' . get_string('alfabetico', 'vocabulario') . ']</a>';
+            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&alfa=1&alid=' . $userid . '">[' . get_string('alfabetico', 'vocabulario') . ']</a></br>';
 //            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&cl=1&alid=' . $userid . '">[' . get_string('pal_campo_lex', 'vocabulario') . ']</a></br>';
-            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&gr=1&alid=' . $userid . '">[' . get_string('campo_gram', 'vocabulario') . ']</a></br>';
+            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&gr=1&alid=' . $userid . '">[' . get_string('campo_gram', 'vocabulario') . ']</a>';
             $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&ic=1&alid=' . $userid . '">[' . get_string('campo_intencion', 'vocabulario') . ']</a>';
-            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&tt=1&alid=' . $userid . '">[' . get_string('campo_tipologia', 'vocabulario') . ']</a>';
+            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&tt=1&alid=' . $userid . '">[' . get_string('campo_tipologia', 'vocabulario') . ']</a></br>';
             $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&nube=1&alid=' . $userid . '">[' . get_string('nube', 'vocabulario') . ']</a>';
             //$atras .= '<a href="./pdf?id=' . $this->id_tocho . '&us=' . $userid . '">[' . get_string('pdf', 'vocabulario') . ']</a>';
             //$atras .= '<a href="./view.php?id=' . $this->id_tocho . '">[' . get_string('atras', 'vocabulario') . ']</a>';
@@ -792,7 +959,8 @@ class mod_vocabulario_nuevo_cl_form extends moodleform {
         $mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
 
         $aux = new Vocabulario_campo_lexico();
-        $clex = $aux->obtener_hijos($USER->id, 0);
+      
+        $clex= $aux->obtener_hijos($USER->id, 0, true);
 
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
 
@@ -832,7 +1000,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
         $id_tocho = optional_param('id', 0, PARAM_INT);
 
         $aux = new Vocabulario_gramatica();
-        $gramaticas = $aux->obtener_hijos($USER->id, 0);
+        $gramaticas = $aux->obtener_hijos($USER->id,0);
         $lista_padres = $aux->obtener_padres($USER->id, $grid);
 
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
@@ -2906,7 +3074,7 @@ class mod_vocabulario_aniadir_gr_form extends moodleform {
         $id_tocho = optional_param('id', 0, PARAM_INT);
 
         $aux = new Vocabulario_gramatica();
-        $gramaticas = $aux->obtener_hijos($USER->id, 0);
+        $gramaticas = $aux->obtener_hijos($USER->id, 0, true);
         $lista_padres = $aux->obtener_padres($USER->id, $grid);
 
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
@@ -3095,7 +3263,7 @@ class mod_vocabulario_intencion_desc_form extends moodleform {
         $mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
 
         $aux = new Vocabulario_intenciones();
-        $icom = $aux->obtener_hijos($USER->id, 0);
+        $icom = $aux->obtener_hijos($USER->id, 0,true);
 
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
 
