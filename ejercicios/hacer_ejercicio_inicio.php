@@ -60,12 +60,12 @@ $tipo1= new Ejercicios_general();
 #selecciono los ejercicios para generar uno aleatorio a mostrar
 $ejercicio= $tipo1->obtener_uno($id_ej);
 $tipo= $ejercicio->get('tipoactividad');
-
+$tipo_origen=$ejercicio->get('tipoarchivopregunta');
 if ($mform->is_submitted()) { //Boton realizar (el boton buscar y crear estan en el javascript)
    
      
        if($tipo==0){ // Ejercicio tipo multichoice
-           redirect('./view.php?opcion=8&id='.$id_curso.'&id_ejercicio='.$id_ej.'&buscar=1');
+           redirect('./view.php?opcion=8&id='.$id_curso.'&id_ejercicio='.$id_ej.'&buscar=1&tipo_origen='.$tipo_origen);
        }
      
 }
