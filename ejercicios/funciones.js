@@ -8,8 +8,8 @@
  var j8=1;
  var j9=1;
 
- function  setTextareaHeight(textarea) {
- 
+function setTextareaHeight(textarea) {
+   textarea.bind('blur focus', function() {
      var t = $(this),
      padding = parseInt(t.css('padding-top')) + parseInt(t.css('padding-bottom')); // to set total height - padding size
 
@@ -23,7 +23,7 @@
        t.css('overflow-y','hidden') // hide againg textarea scroll
         .height(newHeight + 'px'); // set textarea height to content height
      }
-  
+  });
 }
 
 
@@ -31,7 +31,10 @@
 $(document).ready(function(){
      setTextareaHeight($('.adaptHeightInput'));
  
-
+     var a = document.getElementsByClassName('adaptHeightInput');
+     var b = a.item();
+     b.focus();
+     b.blur();
 
     var correcto=new Array();
     var puesto=new Array();
