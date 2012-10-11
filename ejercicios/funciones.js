@@ -9,7 +9,7 @@
  var j9=1;
 
  function  setTextareaHeight(textarea) {
-   textarea.bind('keypress blur', function() {
+ 
      var t = $(this),
      padding = parseInt(t.css('padding-top')) + parseInt(t.css('padding-bottom')); // to set total height - padding size
 
@@ -23,7 +23,7 @@
        t.css('overflow-y','hidden') // hide againg textarea scroll
         .height(newHeight + 'px'); // set textarea height to content height
      }
-  });
+  
 }
 
 
