@@ -113,7 +113,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                $el_texto_origen->obtener_uno_id_ejercicio($id_ejercicio);
 
                if($buscar==1 || $modificable==false){ //Para que no pueda editarlo
-                         $divtexto='<div class="desctexto" name="texto" id="texto">'.nl2br((stripslashes($el_texto_origen->get('texto')))).'</div>';
+                         $divtexto='<div class="desctexto" name="texto" id="texto"><div class="margenes">'.nl2br((stripslashes($el_texto_origen->get('texto')))).'</div></div>';
                }else{
                          $divtexto='<textarea class="adaptHeightInput" name="texto" id="texto">'.$el_texto_origen->get('texto').'</textarea>';
                 }
