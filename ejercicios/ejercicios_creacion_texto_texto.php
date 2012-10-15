@@ -57,10 +57,29 @@ if($tipo_origen==1){ //Es un texto
     $texto_origen=optional_param('archivoorigen', NULL, PARAM_TEXT);
     $mitexto= new Ejercicios_textos(NULL,$id_ejercicio,$texto_origen);
     $mitexto->insertar();
-    echo "texto insertado";
+  //  echo "texto insertado";
     
 }else{
-    echo "es un audio si es 2 y un video si es 3";
+    //echo "es un audio si es 2 y un video si es 3";
+    
+        if($tipo_origen==2){//Es un audio
+        //comprobamos que esten en la carpeta que nosotros queremos4
+             foreach($_FILES as $name => $values){
+                
+            //tengo que cambiar la ruta donde se guarda
+                if( move_uploaded_file($values['tmp_name'],'C:/xampp/htdocs/moodle/mod/ejercicios/mediaplayer/audios/audio'.$id_ejercicio.'.mp3') ){
+
+                    echo 'El archivo ha sido subido correctamente.<br/>';
+                   
+                   
+                } else {
+                    //si no estan en la carpeta que nosotros queremos
+                  //  echo 'Ha ocurrido un error.<br/>';
+
+                }
+             }
+           
+        }
 }
 
 
