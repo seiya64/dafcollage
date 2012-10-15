@@ -16,7 +16,7 @@ function setTextareaHeight(textarea) {
      t.css('overflow-y','auto');
 
      var newHeight = textarea.get(0).scrollHeight;
-     if (newHeight > t.height()) {  // only change height if content is bigger than current height
+     if (newHeight > t.height() + 20) {  // only change height if content is bigger than current height
        if ($.browser.webkit) {
          newHeight = textarea.get(0).scrollHeight - padding; // because chrome set scrollHeight in a different way
        }
@@ -24,17 +24,20 @@ function setTextareaHeight(textarea) {
         .height(newHeight + 'px'); // set textarea height to content height
      }
   });
+
 }
 
 
 
 $(document).ready(function(){
+  
      setTextareaHeight($('.adaptHeightInput'));
- 
-     var a = document.getElementsByClassName('adaptHeightInput');
-     var b = a.item();
-     b.focus();
-     b.blur();
+     try{
+          var a = document.getElementsByClassName('adaptHeightInput');
+         var b = a.item();
+         b.focus();
+         b.blur();
+     }catch(e){};
 
     var correcto=new Array();
     var puesto=new Array();
