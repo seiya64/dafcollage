@@ -351,8 +351,10 @@ class mod_ejercicios_creando_ejercicio_texto extends moodleform_mod {
 
             break;
             case 2: //El archivo de origen es un audio
-                echo "el archivo origen es un audio";
-                die;
+                $mform->addElement('file', 'archivoaudio',"Audio");
+                $mform->addRule('archivoaudio', "Archivo Necesario", 'required', null, 'client');
+               // "el archivo origen es un audio";
+                
             break;
         }
       
