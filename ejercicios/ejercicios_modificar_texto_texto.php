@@ -79,7 +79,7 @@ if(optional_param("submitbutton2")){ //boton para añadir a mis ejercicos visibl
      //borro el texto
      delete_records('ejercicios_textos', 'id',$texto->get('id'));
      //vuelvo a insertarlo
-     $elmodificado=required_param('texto',PARAM_TEXT);
+     $elmodificado=optional_param('texto',PARAM_TEXT);
      $nuevotexto= new Ejercicios_textos(NULL,$id_ejercicio,$elmodificado);
      $nuevotexto->insertar();
     //obtengo los id de las preguntas del ejercicio
