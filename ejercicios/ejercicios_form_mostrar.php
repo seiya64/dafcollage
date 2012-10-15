@@ -121,7 +121,23 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                 $mform->addElement('html',$divtexto);
 
              
-         }//sera 2 si es audio y 3 si es video
+         }else{
+             if($tipo_origen==2){ //Es audio
+            //Añado el texto de origen
+                    
+                    $mform->addElement('html', '<script type="text/javascript" src="./mediaplayer/swfobject.js"></script>');
+                    $divaudio='<div class="claseaudio" id="player1"></div>';
+                    $mform->addElement('html',$divaudio);
+                    $mform->addElement('html','<script type="text/javascript"> var so = new SWFObject("./mediaplayer/mediaplayer.swf","mpl","290","20","7");
+                        so.addParam("allowfullscreen","true");
+                        so.addVariable("file","./mediaplayer/audios/audio'.$id_ejercicio.'.mp3");
+                        so.addVariable("height","20");
+                        so.addVariable("width","320");
+                        so.write("player1");
+                        </script>');
+               
+             }
+         }
          
          //Añado el archivo para el audio
         /* $mform->addElement('html', '<script type="text/javascript" src="./mediaplayer/swfobject.js"></script>');
