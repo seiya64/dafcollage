@@ -377,7 +377,7 @@ class mod_ejercicios_creando_ejercicio_texto extends moodleform_mod {
         for($i=0;$i<$p;$i++){
             
              $aux=$i+1;
-             $titulo= '<h3> Pregunta ' .$aux. '</h3>';
+             $titulo= '</br><h3> Pregunta ' .$aux. '</h3>';
              $mform->addElement('html',$titulo);
            
             $mform->addElement('textarea', 'pregunta'.$aux, get_string('pregunta', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
