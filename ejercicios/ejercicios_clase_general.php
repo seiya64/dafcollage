@@ -143,6 +143,10 @@ class Ejercicios_general {
         }
     }
 
+     function set_numpregunta($param) {
+         $this->numpreg=$param;
+     }
+
     function insertar() {
         
       // nl2br
@@ -1966,10 +1970,10 @@ class Ejercicios_texto_texto_resp{
         update_record('ejercicios_texto_texto_resp', $this, false);
     }
 
-    function borrar_id_ejercicio($id_ejercicio) {
+    function borrar_id_pregunta($id_pregunta) {
         //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
 
-        delete_records('ejercicios_texto_texto_resp', 'id_ejercicio', $id_ejercicio);
+        delete_records('ejercicios_texto_texto_resp', 'id_pregunta', $id_pregunta);
     }
 
     function obtener_uno($id) {
@@ -2114,6 +2118,102 @@ class Ejercicios_textos {
 
 
 
+
+
+
+
+
+
+
+
+
+/*
+ * Clase que gestiona la tabla mdl_ejercicios_textos de la BD, es decir si el arichivo origen
+ * es texto en el formulario de creación estará almacenado en esta tabla.
+ */
+
+class Ejercicios_videos {
+
+    var $id;
+    var $id_ejercicio;
+    var $video;
+
+
+    //Contructor por defecto y con parametros
+    function Ejercicios_videos($id = NULL,$id_ejercicio=NULL,$video = NULL) {
+
+        $this->id = $id;
+        $this->id_ejercicio = $id_ejercicio;
+        $this->video = $video;
+
+    }
+
+    //Obtener cada uno de los atributos de la tabla
+    function get($param) {
+
+        // $param = strtolower($param);
+        switch ($param) {
+            default:
+            case 'id':
+                return $this->id;
+                break;
+
+            case 'id_ejercicio':
+                return $this->id_ejercicio;
+                break;
+
+            case 'video':
+                return $this->video;
+                break;
+        }
+    }
+
+    //Inserta en la bd la instancia correspondiente a la clase y devuelve el identificador
+    //de la nueva instancia creada
+    function insertar() {
+
+        $id = insert_record('ejercicios_videos', $this, true);
+        //Devuelve el identificador del ejercicios creado
+
+        return $id;
+    }
+
+    //Modifica una instacia
+    function alterar() {
+
+        update_record('ejercicios_videos', $this, false);
+    }
+
+    //Borra la fila que tiene como id_ejercicio el que se le pasa como parametro
+    function borrar_id_ejercicio($id_ejercicio) {
+        delete_records('ejercicios_videos', 'id_ejercicio', $id_ejercicio);
+    }
+
+    //Obtiene el texto por id
+    function obtener_uno($id) {
+        $ejer = get_record('ejercicios_videos', 'id', $id);
+        $this->id = $ejer->id;
+        $this->id_ejercicio = $ejer->id_ejercicio;
+        $this->video = $ejer->video;
+
+        return $this;
+    }
+
+    function obtener_uno_id_ejercicio($id_ejercicio) {
+
+        $ejer = get_record('ejercicios_videos', 'id_ejercicio', $id_ejercicio);
+        $this->id = $ejer->id;
+        $this->id_ejercicio = $ejer->id_ejercicio;
+        $this->video=$ejer->video;
+
+
+        return $this;
+    }
+
+
+
+
+}
 
 /*
  * Clase que gestiona la tabla mdl_ejercicios_texto_texto de la bd
