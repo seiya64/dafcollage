@@ -43,16 +43,15 @@ require_once("ejercicios_form_creacion.php");
 
 $id_curso = optional_param('id_curso', 0, PARAM_INT);
 $id_ejercicio = optional_param('id_ejercicio', 0, PARAM_INT);
+$tipo_origen = optional_param('tipo_origen',0, PARAM_INT);
 
 //Es llamado por ejercicios_form_mostrar.php
 
 $mform = new  mod_ejercicios_mostrar_ejercicio($id_curso,$id_ejercicio);
 $mform->mostrar_ejercicio($id_curso,$id_ejercicio);
 
- $ejercicio_general = new Ejercicios_general();
- $miejercicio=$ejercicio_general->obtener_uno($id_ejercicio);
+$num_preg= required_param('num_preg', PARAM_TEXT);
 
- $numpreg=$miejercicio->get("numpreg"); 
  
 if(optional_param("submitbutton2")){ //boton para añadir a mis ejercicos visible desde la busqueda
      
@@ -71,17 +70,41 @@ if(optional_param("submitbutton2")){ //boton para añadir a mis ejercicos visibl
      #borro todas las respuestas y preguntas y las vuelvo a insertar
     //comenzamos una transacción para que en todas las tablas se haga seguido
     // en caso de error en algun delete, no se hace ninguno
+
+     $ejercicio_general = new Ejercicios_general();
+     $miejercicio=$ejercicio_general->obtener_uno($id_ejercicio);
+     $miejercicio->set_numpregunta($num_preg);
+     $miejercicio->alterar();
+    
+     
     begin_sql();
 
-    //obtengo el texto
-     $textos= new Ejercicios_textos();
-     $texto=$textos->obtener_uno_id_ejercicio($id_ejercicio);
-     //borro el texto
-     delete_records('ejercicios_textos', 'id',$texto->get('id'));
-     //vuelvo a insertarlo
-     $elmodificado=optional_param('texto',PARAM_TEXT);
-     $nuevotexto= new Ejercicios_textos(NULL,$id_ejercicio,$elmodificado);
-     $nuevotexto->insertar();
+    if($tipo_origen==1){//Es texto-texto
+        //obtengo el texto
+         $textos= new Ejercicios_textos();
+         $texto=$textos->obtener_uno_id_ejercicio($id_ejercicio);
+         //borro el texto
+         delete_records('ejercicios_textos', 'id',$texto->get('id'));
+         //vuelvo a insertarlo
+         $elmodificado=optional_param('texto',PARAM_TEXT);
+         $nuevotexto= new Ejercicios_textos(NULL,$id_ejercicio,$elmodificado);
+         $nuevotexto->insertar();
+    }else{
+        if($tipo_origen==3){ //Es con video
+        //
+               
+             //obtengo el texto
+             $videos= new Ejercicios_videos();
+             $video=$videos->obtener_uno_id_ejercicio($id_ejercicio);
+             //borro el texto
+             delete_records('ejercicios_videos', 'id',$video->get('id'));
+             //vuelvo a insertarlo
+             $elmodificado=optional_param('archivovideo',PARAM_TEXT);
+             $nuevovideo= new Ejercicios_videos(NULL,$id_ejercicio,$elmodificado);
+             $nuevovideo->insertar();
+            
+        }
+    }
     //obtengo los id de las preguntas del ejercicio
     $id_preguntas=array();
     
@@ -101,7 +124,7 @@ if(optional_param("submitbutton2")){ //boton para añadir a mis ejercicos visibl
   
     //leo un ejercicio y lo guardo
   
-    for($i=0;$i<$numpreg;$i++){
+    for($i=0;$i<$num_preg;$i++){
     //Obtengo el numero de respuestas a cada pregunta
     $j=$i+1;
 
