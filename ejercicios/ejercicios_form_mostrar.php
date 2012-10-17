@@ -339,7 +339,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
 					  $buttonarray[] = &$mform->createElement('submit', 'submitbutton2', get_string('BotonAñadir','ejercicios'));
 					  $mform->addGroup($buttonarray, 'botones2', '', array(' '), false);
                                           //boton menu principal
-                                            $tabla_menu='<center><input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal('.$id.')" /></center>';
+                                           $tabla_menu='<center><input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal('.$id.')" /></center>';
 				
                                             $mform->addElement('html',$tabla_menu);
                                         }else{
