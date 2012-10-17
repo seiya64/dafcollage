@@ -69,16 +69,21 @@ if($tipo_origen==1){ //Es un texto
             //tengo que cambiar la ruta donde se guarda
                 if( move_uploaded_file($values['tmp_name'],'C:/xampp/htdocs/moodle/mod/ejercicios/mediaplayer/audios/audio'.$id_ejercicio.'.mp3') ){
 
-                    echo 'El archivo ha sido subido correctamente.<br/>';
+                  //  echo 'El archivo ha sido subido correctamente.<br/>';
                    
                    
-                } else {
-                    //si no estan en la carpeta que nosotros queremos
-                  //  echo 'Ha ocurrido un error.<br/>';
-
-                }
+                } 
              }
            
+        }else{
+
+             if($tipo_origen==3){ //Es un video
+                  $video_origen=optional_param('archivovideo', NULL, PARAM_TEXT);
+                  $mivideo= new Ejercicios_videos(NULL,$id_ejercicio,$video_origen);
+                  $mivideo->insertar();
+
+             }
+
         }
 }
 
