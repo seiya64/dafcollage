@@ -136,24 +136,42 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                         so.write("player1");
                         </script>');
                
+             }else{
+                  if($tipo_origen==3){ //Es audio
+                    //Añado el texto de origen
+                         
+                         /*   $url="http://pagina.com/index.php?abc=123&def=456&ghi=789";
+                            @params=$url=~m/(?=[&\?]+?([a-z0-9_\-]+)(?=\=(\w*)))/gi;
+                            foreach(@params){
+                                    print ">> ".$_.$/;
+                            } 
+                          $vervideo='<iframe class="clasevideo" width="640" height="360" src="http://www.youtube.com/embed/xSU-k4Q_2dU?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>';
+                          $mform->addElement('html',  $vervideo);*/
+
+                       //Añado el texto de origen
+
+                           $el_video_origen = new Ejercicios_videos();
+                           $el_video_origen->obtener_uno_id_ejercicio($id_ejercicio);
+
+                           if($buscar==1 || $modificable==false){ //Para que no pueda editarlo
+                                     $vervideo=' <a class="button super yellow clasevideo" href="'.$el_video_origen->get('video').'" target="_blank">Ver Video</a>';
+                                   
+                             }else{
+                                     $vervideo=' <a class="button super yellow clasevideo" href="'.$el_video_origen->get('video').'" target="_blank">Ver Video</a>';
+                                    
+                                     //Para que modifique la dirección del video
+                                     $vervideo.= '<textarea class="video" name="archivovideo" id="archivovideo">'.$el_video_origen->get('video').'</textarea>';
+
+                              }
+                        $mform->addElement('html',  $vervideo);
+
+                         
+                     }
              }
+
          }
          
-         //Añado el archivo para el audio
-        /* $mform->addElement('html', '<script type="text/javascript" src="./mediaplayer/swfobject.js"></script>');
-
-        $divaudio='<div id="player1">Miaudio</div>';
-        $mform->addElement('html',$divaudio);
-        $mform->addElement('html','<script type="text/javascript"> var so = new SWFObject("./mediaplayer/mediaplayer.swf","mpl","320","20","7");
-            so.addParam("allowfullscreen","true");
-            so.addVariable("file","./mediaplayer/audios/danzahungara.mp3");
-            so.addVariable("height","20");
-            so.addVariable("width","320");
-            so.write("player1");
-            </script>');
-         $mform->addElement('html',$divdescripcion);
-         
-         */
+       
 
 
          //Veo que clasificación TipoActividad tiene
@@ -202,8 +220,8 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                                
                                                if($buscar!=1 && $modificable==true){
                                                $divpregunta.=' <td style="width:5%;">';
-                                               $divpregunta.='<img src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarRespuesta(tabpregunta'.$i.','.$i.')" title="Eliminar Pregunta"></img>';
-                                               $divpregunta.='</br><img src="./imagenes/añadir.gif" alt="eliminar respuesta"  height="15px"  width="15px" onClick="anadirRespuesta(respuestas'.$i.')" title="Añadir Respuesta"></img>';
+                                               $divpregunta.='<img id="imgpregborrar'.$i.'" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarPregunta(tabpregunta'.$i.','.$i.')" title="Eliminar Pregunta"></img>';
+                                               $divpregunta.='</br><img id="imgpreganadir'.$i.'" src="./imagenes/añadir.gif" alt="eliminar respuesta"  height="15px"  width="15px" onClick="anadirRespuesta(respuestas'.$i.','.$i.')" title="Añadir Respuesta"></img>';
                                                $divpregunta.='</td> ';
                                                $divpregunta.='</br> ';
                                                }
@@ -248,7 +266,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                               
                                                if($buscar!=1 && $modificable==true){ 
                                                //La imagen para eliminar las respuestas
-                                               $divpregunta.='<img src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarRespuesta(tablarespuesta'.$q.'_'.$i.','.$i.')" title="Eliminar Respuesta"></img>';
+                                               $divpregunta.='<img id="eliminarrespuesta'.$q.'_'.$i.'" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarRespuesta(tablarespuesta'.$q.'_'.$i.','.$i.')" title="Eliminar Respuesta"></img>';
                                                
                                                
                                                //La imagen para cambiar las respuestas
@@ -280,20 +298,27 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                             //Introduzco el número de respuestas de la pregunta
                                             //$mform->addElement('hidden', 'num_res_preg'.$i,$numero_respuestas);
 
-                                  
-                                  
+
                                
                              }
+
+                               $divnumpregunta='<input type="hidden" value='.sizeof($preguntas).' id="num_preg" name="num_preg" />';
+                               $mform->addElement('html',$divnumpregunta);
+
                              
                              
                              //Si soy el dueño del ejercicio y no estoy buscando boton guardar
                               if($buscar!=1 && $modificable==true){ 
                              //Pinto los botones
-                              $buttonarray = array();
+                                  //boton añadir pregunta
+                              $botones='<input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;" id="id_Añadir" value="Añadir Pregunta" onclick="javascript:botonMasPreguntas()">';
+                              $botones.='<input type="submit" style="height:30px; width:100px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="'.get_string('BotonGuardar','ejercicios').'">';
+                              $mform->addElement('html',$botones);
+                             /* $buttonarray = array();
                               $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('BotonGuardar','ejercicios'));
                                $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
                               
-                              
+                              */
                               }else{
                                   if($buscar==1){ //Si estoy buscand
                                                                             
@@ -325,8 +350,13 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                   }else{ //Estoy buscando o no
                                       // compruebo si soy profesor
 					if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false)){
-					     
+
+                                              $tabla_menu='<center><input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal('.$id.')" /></center>';
+
+                                              $mform->addElement('html',$tabla_menu);
 					}else{
+
+
 					      $tabla_menu='<center><input type="button" style="height:30px; width:100px; margin-left:175px;"  value="Corregir" onClick="javascript:botonCorregirMultiChoice('.$id.','.$npreg.')"/> <input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Atras" value="Atrás" onClick="javascript:botonAtras('.$id.')" /><input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal('.$id.')" /></center>';
 				
 					      $mform->addElement('html',$tabla_menu);
