@@ -77,7 +77,8 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
            $radioarray=array();
            $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Texto","Texto", null);
            $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Audio", "Audio", null);
-          
+           $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Video", "Video", null);
+
            
            //volver a añadir estos tres
            //$radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Audio", "Audio", null);
@@ -355,7 +356,20 @@ class mod_ejercicios_creando_ejercicio_texto extends moodleform_mod {
                 $mform->addRule('archivoaudio', "Archivo Necesario", 'required', null, 'client');
                // "el archivo origen es un audio";
                 
+            break; 
+        
+           case 3: //El archivo de origen es un video
+                  //Titule su ejercicio para facilitar la identificación o búsqueda
+                $attributes='size="100"';
+                $mform->addElement('text', 'archivovideo',get_string('Video', 'ejercicios') , $attributes);
+                $mform->addRule('archivovideo', "Dirección Web Necesaria", 'required', null, 'client');
+
+               // "el archivo origen es un audio";
+                
             break;
+
+
+
         }
       
      
