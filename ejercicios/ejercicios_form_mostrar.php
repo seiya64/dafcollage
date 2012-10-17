@@ -321,9 +321,16 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                               */
                               }else{
                                   if($buscar==1){ //Si estoy buscand
-                                                                            
+                                            $ejercicios_prof = new Ejercicios_prof_actividad();
+                                             $ejercicios_del_prof =$ejercicios_prof->obtener_uno_idejercicio($id_ejercicio);
+                                             if(sizeof( $ejercicios_del_prof)==0){
+                                                 $noagregado=true;
+                                             }else{
+                                                  $noagregado=false;
+                                             }
+
                                         //compruebo si soy profesor
-                                        if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false) && $modificable==false){
+                                        if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false) && ($modificable==false ||$noagregado==true) ){
                                         //boton añadir a mis ejercicios
 					  $attributes='size="40"';
 					  $mform->addElement('text', 'carpeta_ejercicio',get_string('carpeta', 'ejercicios') , $attributes);
@@ -336,7 +343,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
 				
                                             $mform->addElement('html',$tabla_menu);
                                         }else{
-                                            
+
                                             if($modificable==true){ // Si el ejercicio era mio y estoy buscando
                                                   $tabla_menu='<center><input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal('.$id.')" /></center>';
 				
@@ -366,8 +373,8 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                   
                               }
                               
-                               $tabla_imagenes ='</td>';
-                                      $tabla_imagenes .='<td  width="10%">';
+                                  $tabla_imagenes ='</td>';
+                                   $tabla_imagenes .='<td  width="10%">';
                                     //Mis palabras
                                     $tabla_imagenes .='<div><a  onclick=JavaScript:sele('.$id.')><img src="../vocabulario/imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im" title="'.get_string('guardar', 'vocabulario').'"/></a></div>';
                                     $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=5" target="_blank"><img src="../vocabulario/imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im" title="'. get_string('admin_gr', 'vocabulario') . '"/></a></div>';
