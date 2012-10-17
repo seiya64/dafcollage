@@ -83,24 +83,44 @@ $ejercicio_profesor_actividad = new Ejercicios_prof_actividad();
        $todos_ejercicios=$ejercicio_profesor_actividad->obtener_todos_idejercicio($id_ejercicio);
        
        if(sizeof($todos_ejercicios)==0){
-          // echo "no hay gente usandolo";
+            echo "no hay gente usandolo";
            //Lo elimino de la tabla de ejercicios correspondiente y de la tabla de ejercicios general
            
             $ejercicio_general=new Ejercicios_general();
             $ejercicio=$ejercicio_general->obtener_uno($id_ejercicio);
-            
-           if($ejercicio->get('id_creador')==$id_profesor){
-                    if($ejercicio->get('TipoActividad')==0){
-              
+            //lo borro
+            $ejercicio_general->borrar($ejercicio->get('id'));
 
-                        $ejercicio_general->borrar($id_ejercicio);
-                
-                        //echo "borrando de texto texto" 
-                        $ejercicio_texto_texto=new Ejercicios_texto_texto();
-                        $ejercicio_texto_texto->borrar_id_ejercicio($id_ejercicio);
-                   } //Falta añadir el resto de tipos de actividades
+            if($ejercicio->get('tipoactividad')==0){
+                if($ejercicio->get('tipoarchivopregunta')==1){//hay un texto
+                    $ej_textos=new Ejercicios_textos();
+                    $ej_textos->borrar_id_ejercicio($id_ejercicio);
+                }else{
+                     if($ejercicio->get('tipoarchivopregunta')==3){//hay un video
+                         $ej_video=new Ejercicios_videos();
+                         $ej_video->borrar_id_ejercicio($id_ejercicio);
+                      }
+                }
+
+                echo "tipo de actividad es 0";
+
+
+                         //borro las respuestas
+                         $ejercicio_texto_texto_preg=new Ejercicios_texto_texto_preg();
+                         $num_preguntas=$ejercicio_texto_texto_preg->obtener_todas_preguntas_ejercicicio($id_ejercicio);
+                          echo "el numero de preguntas".sizeof($num_preguntas);
+                         for($j=0;$j<sizeof($num_preguntas);$j++){
+                             $ejercicio_texto_texto_resp=new Ejercicios_texto_texto_resp();
+                             $id_pregunta=$num_preguntas[$j]->get('id');
+                             $ejercicio_texto_texto_resp->borrar_id_pregunta($id_pregunta);
+                         }
+                        //echo "borrando de texto texto preg"
+                       
+                          $ejercicio_texto_texto_preg->borrar_id_ejercicio($id_ejercicio);
+
+            } //Falta añadir el resto de tipos de actividades
           
-           }
+           
          
        }
   }
