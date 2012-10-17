@@ -97,6 +97,14 @@ if($tipo_pregunta == "Texto" && $tipo_respuesta == "Texto"){
             $TipoActividad=$tipocreacion;//Comienza en 0
             $TipoArchivoPregunta=2; // 2 va a ser audio
             $TipoArchivoRespuesta=1; //1 va a ser texto
+    }else{
+        if($tipo_pregunta == "Video" && $tipo_respuesta == "Texto"){
+            $id=NULL;
+            $id_creador=$USER->id;
+            $TipoActividad=$tipocreacion;//Comienza en 0
+            $TipoArchivoPregunta=3; // 3 va a ser audio
+            $TipoArchivoRespuesta=1; //1 va a ser texto
+         }
     }
 
 }
