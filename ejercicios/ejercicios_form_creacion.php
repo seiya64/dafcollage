@@ -69,6 +69,9 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
          $titulo= '<h2>' . get_string('FormularioCreacion', 'ejercicios') . '</h2>';
          $mform->addElement('html',$titulo);
          
+            $oculto='<input type="hidden" name="tipocreacion" id="tipocreacion" value="'.$tipocreacion.'"/>';
+            $mform->addElement('html',$oculto);
+
             
             $tabla='<div id="formulario">';
             $mform->addElement('html',$tabla);
@@ -79,7 +82,9 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
            $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Audio", "Audio", null);
            $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Video", "Video", null);
 
-           
+           if($tipocreacion==3){ //Asociacion Simple
+                  $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Foto", "Foto", null);
+           }
            //volver a añadir estos tres
            //$radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Audio", "Audio", null);
            //$radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Video", "Video", null);
@@ -87,10 +92,16 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
            
            $titulo= '</br>';
            $mform->addElement('html',$titulo);
-           
-           $mform->addGroup($radioarray, 'radiopregunta', get_string('tipopregunta', 'ejercicios') , array(' '), false);
-           $mform->setDefault('radiopregunta',"Texto");
-           
+
+           if($tipocreacion==2){ //Multichoice es archivo origen
+               $mform->addGroup($radioarray, 'radiopregunta', get_string('tipopregunta', 'ejercicios') , array(' '), false);
+               $mform->setDefault('radiopregunta',"Texto");
+           }else{ //El resto
+
+                $mform->addGroup($radioarray, 'radiopregunta', get_string('tipopregunta1', 'ejercicios') , array(' '), false);
+               $mform->setDefault('radiopregunta',"Texto");
+           }
+
            
            //Seleccione el número total de archivos pregunta
             $numimagenes=array();
@@ -106,9 +117,12 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
          
            //volver a añadir estos 3
           // $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Audio", "Audio", null);
-          // $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Video", "Video", null);
-          // $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Foto", "Video", null);
-           
+
+           if($tipocreacion==3){ //Asociacion Simple
+             $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Video", "Video", null);
+             $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Foto", "Foto", null);
+             $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Audio", "Audio", null);
+          }
            $mform->addGroup($radioarray, 'radiorespuesta',  get_string('tiporespuesta', 'ejercicios'), array(' '), false);
            $mform->setDefault('radiorespuesta',"Texto");
            
