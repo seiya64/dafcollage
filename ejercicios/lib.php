@@ -249,9 +249,24 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
             break;
 
 	case 7:// Segundo paso del formulario de creación caso texto-texto
-           
-            $mform= new mod_ejercicios_creando_ejercicio_texto($id,$p,$id_ejercicio,$tipo_origen);
-            $mform->pintarformulariotexto($id,$p,$id_ejercicio,$tipo_origen);
+
+            switch($tipocreacion){
+
+                case 0: //es de tipo multichoice
+                    $mform= new mod_ejercicios_creando_ejercicio_texto($id,$p,$id_ejercicio,$tipo_origen);
+                    $mform->pintarformulariotexto($id,$p,$id_ejercicio,$tipo_origen);
+                    break;
+                case 1: //es de tipo asociacion simple
+                    
+                    echo "Asociación simple";
+                    die;
+                    break;
+               case 2: //es de tipo asociacion multiple
+
+                    echo "Asociación multiple";
+                    die;
+                    break;
+            }
            
             break;
 
