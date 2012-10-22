@@ -79,7 +79,16 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
      
          $ejercicios_bd = new Ejercicios_general();
          $ejercicios_leido =$ejercicios_bd->obtener_uno($id_ejercicio);
-   
+
+
+         $tipoactividad=$ejercicios_leido->get('tipoactividad');
+
+         if($tipoactividad==1){
+             echo "es de tipo asociación simple";
+             die;
+         }
+
+
          $nombre=$ejercicios_leido->get('name');
          $npreg=$ejercicios_leido->get('numpreg');
          $creador=$ejercicios_leido->get('id_creador');
