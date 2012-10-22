@@ -44,7 +44,7 @@ require_once("ejercicios_form_creacion.php");
 $id_curso = optional_param('id_curso', 0, PARAM_INT);
 $tipocreacion = optional_param('tipocreacion', 0, PARAM_INT);
 
-
+echo "tipocreacion".$tipocreacion;
 
 $mform = new  mod_ejercicios_creando_ejercicio($id_curso);
 $mform->pintarformulario($id_curso);
@@ -84,7 +84,7 @@ if($tipo_pregunta == "Texto" && $tipo_respuesta == "Texto"){
 
     $id=NULL;
     $id_creador=$USER->id;
-    $TipoActividad=$tipocreacion;//Comienza en 0
+    $TipoActividad=$tipocreacion-2;//Comienza en 2
     $TipoArchivoPregunta=1; // 1 va a ser texto
     $TipoArchivoRespuesta=1; //1 va a ser texto
 
@@ -94,14 +94,14 @@ if($tipo_pregunta == "Texto" && $tipo_respuesta == "Texto"){
     if($tipo_pregunta == "Audio" && $tipo_respuesta == "Texto"){
          $id=NULL;
             $id_creador=$USER->id;
-            $TipoActividad=$tipocreacion;//Comienza en 0
+            $TipoActividad=$tipocreacion-2;//Comienza en 2
             $TipoArchivoPregunta=2; // 2 va a ser audio
             $TipoArchivoRespuesta=1; //1 va a ser texto
     }else{
         if($tipo_pregunta == "Video" && $tipo_respuesta == "Texto"){
             $id=NULL;
             $id_creador=$USER->id;
-            $TipoActividad=$tipocreacion;//Comienza en 0
+            $TipoActividad=$tipocreacion-2;//Comienza en 0
             $TipoArchivoPregunta=3; // 3 va a ser audio
             $TipoArchivoRespuesta=1; //1 va a ser texto
          }
@@ -151,7 +151,7 @@ if($tipo_pregunta == "Texto" && $tipo_respuesta == "Texto"){
 
   
     //La comprobacion de errores esta en el javascript
-     redirect('./view.php?id=' . $id_curso . '&opcion=7'. '&p='.$numeropreguntas. '&id_ejercicio=' .$id_ejercicio.'&tipo_origen='.$TipoArchivoPregunta);
+     redirect('./view.php?id=' . $id_curso . '&opcion=7'. '&p='.$numeropreguntas. '&id_ejercicio=' .$id_ejercicio.'&tipo_origen='.$TipoArchivoPregunta."&tipocreacion=".$TipoActividad);
         
 
     
