@@ -73,9 +73,9 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
          
        //clasificación por campo temático.
        //Si es 1 es -- y 0 Select
-        $ccl=$ccl-1;
-        $cgr=$cgr-1;
-        $cic=$cic-1;
+       // $ccl=$ccl-1;
+        //$cgr=$cgr-1;
+       // $cic=$cic-1;
        //clasificación por tipo de ejercicio
        //le resto 2 ya que el primero es -- y select
         
@@ -101,7 +101,7 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
         if($ccl>1){ //Si he seleccionado alguna opcion de campo temático
             if($cdc>=0){ //Si he seleccionado alguna opción de destreza
                 if($cgr>1){//Si he seleccionado alguna opción de tema gramatical
-                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                    if($cic>1){//Si he seleccionado alguna opción intencion comunicativa
                         if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
                              $buscados=$ejercicios_general->buscar_todas_clasificaciones($ccl,$cta ,$cdc,$cgr,$cic,$ctt);
                         }else{
@@ -116,7 +116,7 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
                     }
                 }else{
                     
-                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                    if($cic>1){//Si he seleccionado alguna opción intencion comunicativa
                         if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
                              $buscados=$ejercicios_general->buscar_sin_gr($ccl,$cta ,$cdc,$cic,$ctt);
                         }else{
@@ -135,7 +135,7 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
             }else{
                 
                 if($cgr>1){//Si he seleccionado alguna opción de tema gramatical
-                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                    if($cic>1){//Si he seleccionado alguna opción intencion comunicativa
                         if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
                              $buscados=$ejercicios_general->clasif_sin_dc($ccl,$cta,$cgr,$cic,$ctt);
                         }else{
@@ -150,7 +150,7 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
                     }
                 }else{
                     
-                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                    if($cic>1){//Si he seleccionado alguna opción intencion comunicativa
                         if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
                              $buscados=$ejercicios_general->buscar_sin_dc_gr($ccl,$cta,$cic,$ctt);
                         }else{
@@ -170,7 +170,7 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
         }else{
                if($cdc>=0){ //Si he seleccionado alguna opción de destreza
                 if($cgr>1){//Si he seleccionado alguna opción de tema gramatical
-                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                    if($cic>1){//Si he seleccionado alguna opción intencion comunicativa
                         if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
                              $buscados=$ejercicios_general->buscar_clasif_sin_cl($cta,$cdc,$cgr,$cic,$ctt);
                         }else{
@@ -185,7 +185,7 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
                     }
                 }else{
                     
-                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                    if($cic>1){//Si he seleccionado alguna opción intencion comunicativa
                         if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
                              $buscados=$ejercicios_general->buscar_sin_cl_gr($cta,$cdc,$cic,$ctt);
                         }else{
@@ -204,7 +204,7 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
             }else{
                 
                 if($cgr>1){//Si he seleccionado alguna opción de tema gramatical
-                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                    if($cic>1){//Si he seleccionado alguna opción intencion comunicativa
                         if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
                              $buscados=$ejercicios_general->buscar_clasif_sin_cl_dc($cta,$cgr,$cic,$ctt);
                         }else{
@@ -219,7 +219,7 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
                     }
                 }else{
                     
-                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                    if($cic>1){//Si he seleccionado alguna opción intencion comunicativa
                         if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
                              $buscados=$ejercicios_general->buscar_sin_cl_dc_gr($cta,$cic,$ctt);
                         }else{
@@ -251,10 +251,11 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
         
         
         }else{
+           
              if($ccl>1){ //Si he seleccionado alguna opcion de campo temático
             if($cdc>=0){ //Si he seleccionado alguna opción de destreza
                 if($cgr>1){//Si he seleccionado alguna opción de tema gramatical
-                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                    if($cic>1){//Si he seleccionado alguna opción intencion comunicativa
                         if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
                              $buscados=$ejercicios_general->buscar_sin_ta($ccl,$cdc,$cgr,$cic,$ctt);
                         }else{
@@ -264,12 +265,13 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
                        if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
                              $buscados=$ejercicios_general->buscar_clasif_sin_ta_ic($ccl,$cdc,$cgr,$ctt);
                         }else{
+                            
                              $buscados=$ejercicios_general->buscar_clasif_sin_ta_ic_tt($ccl,$cdc,$cgr);
                         } 
                     }
                 }else{
                     
-                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                    if($cic>1){//Si he seleccionado alguna opción intencion comunicativa
                         if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
                              $buscados=$ejercicios_general->buscar_sin_ta_gr($ccl,$cdc,$cic,$ctt);
                         }else{
@@ -288,7 +290,7 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
             }else{
                 
                 if($cgr>1){//Si he seleccionado alguna opción de tema gramatical
-                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                    if($cic>1){//Si he seleccionado alguna opción intencion comunicativa
                         if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
                              $buscados=$ejercicios_general->clasif_sin_ta_dc($ccl,$cgr,$cic,$ctt);
                         }else{
@@ -303,7 +305,7 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
                     }
                 }else{
                     
-                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                    if($cic>1){//Si he seleccionado alguna opción intencion comunicativa
                         if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
                              $buscados=$ejercicios_general->buscar_sin_ta_dc_gr($ccl,$cic,$ctt);
                         }else{
@@ -321,15 +323,19 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
                 
             }
         }else{
+           
                if($cdc>=0){ //Si he seleccionado alguna opción de destreza
+               
                 if($cgr>1){//Si he seleccionado alguna opción de tema gramatical
-                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                   
+                    if($cic>1){//Si he seleccionado alguna opción intencion comunicativa
                         if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
                              $buscados=$ejercicios_general->buscar_clasif_sin_ta_cl($cdc,$cgr,$cic,$ctt);
                         }else{
                              $buscados=$ejercicios_general->buscar_clasif_sin_ta_cl_tt($cdc,$cgr,$cic);
                         }
                     }else{
+                       
                        if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
                              $buscados=$ejercicios_general->buscar_clasif_sin_ta_cl_ic($cdc,$cgr,$ctt);
                         }else{
@@ -338,7 +344,7 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
                     }
                 }else{
                     
-                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                    if($cic>1){//Si he seleccionado alguna opción intencion comunicativa
                         if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
                              $buscados=$ejercicios_general->buscar_sin_ta_cl_gr($cdc,$cic,$ctt);
                         }else{
@@ -357,7 +363,7 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
             }else{
                 
                 if($cgr>1){//Si he seleccionado alguna opción de tema gramatical
-                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                    if($cic>1){//Si he seleccionado alguna opción intencion comunicativa
                         if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
                              $buscados=$ejercicios_general->buscar_clasif_sin_ta_cl_dc($cgr,$cic,$ctt);
                         }else{
@@ -372,7 +378,7 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
                     }
                 }else{
                     
-                    if($cic>0){//Si he seleccionado alguna opción intencion comunicativa
+                    if($cic>1){//Si he seleccionado alguna opción intencion comunicativa
                         if($ctt>1){//Si he seleccionado alguna opción de tipologia textual
                              $buscados=$ejercicios_general->buscar_sin_ta_cl_dc_gr($cic,$ctt);
                         }else{
