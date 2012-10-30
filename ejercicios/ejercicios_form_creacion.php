@@ -1,28 +1,40 @@
 <?php //$Id: mod_form.php,v 1.2.2.3 2009/03/19 12:23:11 mudrd8mz Exp $
 
-/**
- * This file defines the main ejercicios configuration form
- * It uses the standard core Moodle (>1.8) formslib. For
- * more info about them, please visit:
- *
- * http://docs.moodle.org/en/Development:lib/formslib.php
- *
- * The form must provide support for, at least these fields:
- *   - name: text element of 64cc max
- *
- * Also, it's usual to use these fields:
- *   - intro: one htmlarea element to describe the activity
- *            (will be showed in the list of activities of
- *             ejercicios type (index.php) and in the header
- *             of the ejercicios main page (view.php).
- *   - introformat: The format used to write the contents
- *             of the intro field. It automatically defaults
- *             to HTML when the htmleditor is used and can be
- *             manually selected if the htmleditor is not used
- *             (standard formats are: MOODLE, HTML, PLAIN, MARKDOWN)
- *             See lib/weblib.php Constants and the format_text()
- *             function for more info
- */
+/*
+  Daf-collage is made up of two Moodle modules which help in the process of
+  German language learning. It facilitates the content organization like
+  vocabulary or the main grammar features and gives the chance to create
+  exercises in order to consolidate knowledge.
+
+  Copyright (C) 2011
+
+  Coordination:
+  Ruth Burbat
+
+  Source code:
+  Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
+  Simeón Ruiz Romero (simeonruiz@gmail.com)
+  Serafina Molina Soto(finamolinasoto@gmail.com)
+
+  Original idea and content design:
+  Ruth Burbat
+  AInmaculada Almahano Güeto
+  Andrea Bies
+  Julia Möller Runge
+  Blanca Rodríguez Gómez
+  Antonio Salmerón Matilla
+  María José Varela Salinas
+  Karin Vilar Sánchez
+
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details. */
 
 require_once($CFG->dirroot.'/course/moodleform_mod.php');
 require_once("ejercicios_clases.php");
@@ -69,9 +81,8 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
          $titulo= '<h2>' . get_string('FormularioCreacion', 'ejercicios') . '</h2>';
          $mform->addElement('html',$titulo);
          
-            $oculto='<input type="hidden" name="tipocreacion" id="tipocreacion" value="'.$tipocreacion.'"/>';
+           $oculto='<input type="hidden" name="tipocreacion" id="tipocreacion" value="'.$tipocreacion.'"/>';
             $mform->addElement('html',$oculto);
-
             
             $tabla='<div id="formulario">';
             $mform->addElement('html',$tabla);
@@ -322,18 +333,19 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
 }
 
 
+//Formulario de creación actividades de tipo: "MULTIPLECHOICE"
 class mod_ejercicios_creando_ejercicio_texto extends moodleform_mod {
 
-    function mod_ejercicios_creando_ejercicio_texto($id,$p,$id_ejercicio,$tipo_origen)
+    function mod_ejercicios_creando_ejercicio_texto($id,$p,$id_ejercicio,$tipo_origen,$tipocreacion)
         {
          // El fichero que procesa el formulario es gestion.php
-         parent::moodleform('ejercicios_creacion_texto_texto.php?id_curso='.$id.'&id_ejercicio='.$id_ejercicio.'&tipo_origen='.$tipo_origen);
+         parent::moodleform('ejercicios_creacion_texto_texto.php?id_curso='.$id.'&id_ejercicio='.$id_ejercicio.'&tipo_origen='.$tipo_origen.'&tipocreacion='.$tipocreacion);
        }
-       
+
      function definition() {
      }
-     
-   
+
+
      /**
      * Function that add a table to the forma to show the main menu
      *
@@ -342,21 +354,24 @@ class mod_ejercicios_creando_ejercicio_texto extends moodleform_mod {
      * @param $p numero de preguntas
      * @param $r numero de respuetas
      * @param $c numero de respuestas correctas
-     * @param $id_ejercicio id del ejercicio que estamos creando 
+     * @param $id_ejercicio id del ejercicio que estamos creando
      */
-     function pintarformulariotexto($id,$p,$id_ejercicio,$tipoorigen){
-         
+     function pintarformulariotexto($id,$p,$id_ejercicio,$tipoorigen,$tipocreacion){
+
          global $CFG, $COURSE, $USER;
         $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
-  
+
         $mform =& $this->_form;
-       
+
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
         $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
         //titulo
         $titulo= '<h1>' . get_string('FormularioCreacionTextos', 'ejercicios') . '</h1>';
         $mform->addElement('html',$titulo);
 
+         $oculto='<input type="hidden" name="tipocreacion" id="tipocreacion" value="'.$tipocreacion.'"/>';
+         $mform->addElement('html',$oculto);
+         
         switch($tipoorigen){
             case 1: //El archivo de origen es un texto
                 //Añade una breve introducción al ejercicio
@@ -369,9 +384,9 @@ class mod_ejercicios_creando_ejercicio_texto extends moodleform_mod {
                 $mform->addElement('file', 'archivoaudio',"Audio");
                 $mform->addRule('archivoaudio', "Archivo Necesario", 'required', null, 'client');
                // "el archivo origen es un audio";
-                
-            break; 
-        
+
+            break;
+
            case 3: //El archivo de origen es un video
                   //Titule su ejercicio para facilitar la identificación o búsqueda
                 $attributes='size="100"';
@@ -379,58 +394,227 @@ class mod_ejercicios_creando_ejercicio_texto extends moodleform_mod {
                 $mform->addRule('archivovideo', "Dirección Web Necesaria", 'required', null, 'client');
 
                // "el archivo origen es un audio";
-                
+
             break;
 
 
 
         }
-      
-     
+
+
         //Para cada pregunta
         for($i=0;$i<$p;$i++){
-            
+
              $aux=$i+1;
              $titulo= '</br><h3> Pregunta ' .$aux. '</h3>';
              $mform->addElement('html',$titulo);
-           
+
             $mform->addElement('textarea', 'pregunta'.$aux, get_string('pregunta', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
-           
-          
-            $textarea='</br><div id="titulorespuestas" style="margin-left:130px;">Respuestas:</div>'; 
+
+
+            $textarea='</br><div id="titulorespuestas" style="margin-left:130px;">Respuestas:</div>';
             $textarea.='<div style="margin-left:310px;" id="respuestas_pregunta"'.$aux.'"> ';
             $textarea.='<textarea name="respuesta1_'.$aux.'" id="respuesta1_'.$aux.'" rows="5" cols="50"></textarea>';
-            $textarea.='</br><div id="correctarespuesta">'.get_string('Correcta', 'ejercicios'); 
+            $textarea.='</br><div id="correctarespuesta">'.get_string('Correcta', 'ejercicios');
             $textarea.='<input type="radio"  name="correcta1_'.$aux.'" id="correcta1_'.$aux.'" value="Si" checked> Si </input>';
             $textarea.='<input type="radio" name="correcta1_'.$aux.'"  id="correcta1_'.$aux.'" value="No"> No </input>';
             $textarea.='</br>';
             $textarea.='</div>';
-            
-          
+
+
             $textarea.='<input type="hidden" name="numerorespuestas_'.$aux.'" id="numerorespuestas_'.$aux.'" value="1"/>';
             $textarea.='</div>';
             $mform->addElement('html',$textarea);
-   
+
            // $mform->addElement('text', 'numerorespuestas_'.$aux,"hola");
             $botonañadir='<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestas('.$aux.');"></center>';
-         
+
             $mform->addElement('html', $botonañadir);
-            
-                      
+
+
         }
-        
+
            $mform->addElement('hidden','numeropreguntas',$p);
-           
-          
+
+
             $buttonarray = array();
             $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"onclick=obtenernumeroRespuestas('$p');");
             $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
-            
-        
+
+
      }
 }
 
 
+
+
+
+
+/*
+ * Formulario para la creación de actividades de tipo Asociación simple
+ */
+class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod {
+
+    function mod_ejercicios_creando_ejercicio_asociacion_simple($id,$p,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion)
+        {
+         // El fichero que procesa el formulario es gestion.php
+         parent::moodleform('ejercicios_creacion_asociacion_simple.php?id_curso='.$id.'&id_ejercicio='.$id_ejercicio.'&tipo_origen='.$tipo_origen.'&tr='.$trespuesta.'&tipocreacion='.$tipocreacion);
+       }
+
+     function definition() {
+     }
+
+
+     /**
+     * Function that add a table to the forma to show the main menu
+     *
+     * @author Serafina Molina Soto
+     * @param $id id for the course
+     * @param $p numero de preguntas
+     * @param $id_ejercicio id del ejercicio que estamos creando
+     * @param $tipoorigen: tipo de archivo origen( 1: Texto, 2: Audio, 3: Video, 4: Imagen)
+     * @param $tiporespuesta: tipo de archivo origen( 1: Texto, 2: Audio, 3: Video, 4: Imagen)
+     */
+     function pintarformularioasociacionsimple($id,$p,$id_ejercicio,$tipoorigen,$tiporespuesta,$tipocreacion){
+
+        global $CFG, $COURSE, $USER;
+        $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
+
+        $mform =& $this->_form;
+       
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
+       //$mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
+        //titulo
+        $titulo= '<h1>' . get_string('FormularioCreacionTextos', 'ejercicios') . '</h1>';
+        $mform->addElement('html',$titulo);
+
+         $oculto='<input type="hidden" name="tipocreacion" id="tipocreacion" value="'.$tipocreacion.'"/>';
+         $mform->addElement('html',$oculto);
+         
+        switch($tipoorigen){
+            case 1: //El archivo de origen es un texto
+
+                switch($tiporespuesta){
+
+                    case 1: //El archivo respuesta es un texto
+                        echo "texto-texto";
+                        //Para cada pregunta
+                        for($i=0;$i<$p;$i++){
+
+                             $aux=$i+1;
+                             $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
+                             $mform->addElement('html',$titulo);
+
+                            //Archivo Asociacion
+                            $mform->addElement('textarea', 'pregunta'.$aux, get_string('Asociacion_Texto', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
+                            //Archivo Asociado
+                            $mform->addElement('textarea', 'respuesta'.$aux, get_string('Asociacion_Texto_Asociado', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
+
+
+
+                        }
+
+                           $mform->addElement('hidden','numeropreguntas',$p);
+
+
+                    break;
+                    case 2: //El archivo respuesta es un audio
+                         echo "texto-audio";
+                    break;
+                    case 3: //El archivo respuesta es un video
+                         echo "texto-video";
+                    break;
+                    case 4: //El archivo respuesta es una imagen
+                         echo "texto-imagen";
+                    break;
+
+                }
+
+            break;
+
+            case 2: //El archivo de origen es un audio
+
+                switch($tiporespuesta){
+
+                    case 1: //El archivo respuesta es un texto
+                        echo "audio-texto";
+                    break;
+                    case 2: //El archivo respuesta es un audio
+                         echo "audio-audio";
+                    break;
+                    case 3: //El archivo respuesta es un video
+                         echo "audio-video";
+                    break;
+                    case 4: //El archivo respuesta es una imagen
+                         echo "audio-imagen";
+                    break;
+
+                }
+                $mform->addElement('file', 'archivoaudio',"Audio");
+                $mform->addRule('archivoaudio', "Archivo Necesario", 'required', null, 'client');
+               // "el archivo origen es un audio";
+
+            break;
+
+           case 3: //El archivo de origen es un video
+
+
+                switch($tiporespuesta){
+
+                    case 1: //El archivo respuesta es un texto
+                        echo "video-texto";
+                    break;
+                    case 2: //El archivo respuesta es un audio
+                         echo "video-audio";
+                    break;
+                    case 3: //El archivo respuesta es un video
+                         echo "video-video";
+                    break;
+                    case 4: //El archivo respuesta es una imagen
+                         echo "video-imagen";
+                    break;
+
+                }
+                  //Titule su ejercicio para facilitar la identificación o búsqueda
+                $attributes='size="100"';
+                $mform->addElement('text', 'archivovideo',get_string('Video', 'ejercicios') , $attributes);
+                $mform->addRule('archivovideo', "Dirección Web Necesaria", 'required', null, 'client');
+
+               // "el archivo origen es un audio";
+
+            break;
+
+            case 4: //El archivo de origen es una imagen
+
+                switch($tiporespuesta){
+
+                    case 1: //El archivo respuesta es un texto
+                        echo "imagen-texto";
+                    break;
+                    case 2: //El archivo respuesta es un audio
+                         echo "imagen-audio";
+                    break;
+                    case 3: //El archivo respuesta es un video
+                         echo "imagen-video";
+                    break;
+                    case 4: //El archivo respuesta es una imagen
+                         echo "texto-imagen";
+                    break;
+
+                }
+
+
+        }
+
+
+
+            $buttonarray = array();
+            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"onclick=obtenernumeroRespuestas('$p');");
+            $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
+
+
+     }
+}
 
 ?>
 
