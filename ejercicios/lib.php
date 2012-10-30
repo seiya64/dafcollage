@@ -1,21 +1,40 @@
 <?php  // $Id: lib.php,v 1.7.2.5 2009/04/22 21:30:57 skodak Exp $
 
-/**
- * Library of functions and constants for module ejercicios
- * This file should have two well differenced parts:
- *   - All the core Moodle functions, neeeded to allow
- *     the module to work integrated in Moodle.
- *   - All the ejercicios specific functions, needed
- *     to implement all the module logic. Please, note
- *     that, if the module become complex and this lib
- *     grows a lot, it's HIGHLY recommended to move all
- *     these module specific functions to a new php file,
- *     called "locallib.php" (see forum, quiz...). This will
- *     help to save some memory when Moodle is performing
- *     actions across all modules.
- */
+/*
+  Daf-collage is made up of two Moodle modules which help in the process of
+  German language learning. It facilitates the content organization like
+  vocabulary or the main grammar features and gives the chance to create
+  exercises in order to consolidate knowledge.
 
-/// (replace ejercicios with the name of your module and delete this line)
+  Copyright (C) 2011
+
+  Coordination:
+  Ruth Burbat
+
+  Source code:
+  Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
+  Simeón Ruiz Romero (simeonruiz@gmail.com)
+  Serafina Molina Soto(finamolinasoto@gmail.com)
+
+  Original idea and content design:
+  Ruth Burbat
+  AInmaculada Almahano Güeto
+  Andrea Bies
+  Julia Möller Runge
+  Blanca Rodríguez Gómez
+  Antonio Salmerón Matilla
+  María José Varela Salinas
+  Karin Vilar Sánchez
+
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details. */
 
 $ejercicios_EXAMPLE_CONSTANT = 42;     /// for example
 
@@ -25,6 +44,7 @@ require_once('ejercicios_form_misejercicios.php');
 require_once('ejercicios_form_buscar.php');
 require_once('ejercicios_form_mostrar.php');
 require_once('ejercicios_form_curso.php');
+require_once('ejercicios_mostrar_asociacion_simple.php');
 /**
  * Given an object containing all the necessary data,
  * (defined by the form in mod_form.php) this function
@@ -224,7 +244,7 @@ function ejercicios_uninstall() {
 /// Remember (see note in first lines) that, if this section grows, it's HIGHLY
 /// recommended to move all funcions below to a new "localib.php" file.
 
-function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p=1,$id_ejercicio,$ccl,$cta ,$cdc,$cgr,$cic,$ctt,$buscar,$tipo_origen=null) {
+function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p=1,$id_ejercicio,$ccl,$cta ,$cdc,$cgr,$cic,$ctt,$buscar,$tipo_origen=null,$trespuesta=null) {
     global $CFG, $COURSE, $USER;
 
     $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
@@ -253,13 +273,18 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
             switch($tipocreacion){
 
                 case 0: //es de tipo multichoice
-                    $mform= new mod_ejercicios_creando_ejercicio_texto($id,$p,$id_ejercicio,$tipo_origen);
-                    $mform->pintarformulariotexto($id,$p,$id_ejercicio,$tipo_origen);
+                    $mform= new mod_ejercicios_creando_ejercicio_texto($id,$p,$id_ejercicio,$tipo_origen,$tipocreacion);
+                    $mform->pintarformulariotexto($id,$p,$id_ejercicio,$tipo_origen,$tipocreacion);
                     break;
                 case 1: //es de tipo asociacion simple
                     
                     echo "Asociación simple";
-                    die;
+                
+                   $mform= new mod_ejercicios_creando_ejercicio_asociacion_simple($id,$p,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
+                    
+                   $mform->pintarformularioasociacionsimple($id,$p,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
+                    echo "akiii";
+                   
                     break;
                case 2: //es de tipo asociacion multiple
 
@@ -278,9 +303,22 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
 
       case 8:// Mostrando ejercicio Multichoice texto-texto a profesores o a alumnos
             
-             $mform= new mod_ejercicios_mostrar_ejercicio($id,$id_ejercicio,$tipo_origen);
-             $mform->mostrar_ejercicio($id,$id_ejercicio,$buscar,$tipo_origen);
-	    break;
+             echo "mostrando ejerciciossssss".$tipocreacion;
+            switch($tipocreacion){
+                    case 0: //Multichoice texto-texto a profesores o a alumnos
+                     $mform= new mod_ejercicios_mostrar_ejercicio($id,$id_ejercicio,$tipo_origen);
+                     $mform->mostrar_ejercicio($id,$id_ejercicio,$buscar,$tipo_origen);
+                        echo "mostrando ejercicio multichoice";
+                    break;
+                    case 1:
+
+                        echo "mostrando ejercicio asociacion simple";
+                      $mform= new mod_ejercicios_mostrar_ejercicio_asociacion_simple($id,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
+                      $mform->mostrar_ejercicio_asociacion_simple($id,$id_ejercicio,$buscar,$tipo_origen,$trespuesta,$tipocreacion);
+                    break;
+            }
+            break;
+        
        case 9:// Mostrando mis ejercicios (ejercicios profesor) 
            
              $mform= new mod_ejercicios_mis_ejercicios($id);
