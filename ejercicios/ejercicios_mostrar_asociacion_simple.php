@@ -245,7 +245,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                                                          else{
 
                                                              if($modificable==true){ // Si el ejercicio era mio y estoy buscando
-                                                                $tabla_imagenes='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id .'\'"></center>';
+                                                                $tabla_imagenes='<center><input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id .'\'"></center>';
                                                              }else{ //Si soy alumno
                                                                   $tabla_imagenes='<center><input type="button" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
                                                                   $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8'. '&id_ejercicio='.$id_ejercicio. '&tipo_origen='.$tipo_origen.'&tr='.$tipo_respuesta.'&tipocreacion='.$tipocreacion.'\'">';
@@ -265,7 +265,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
 
                                         $tabla_imagenes .='</td>';
                                         $tabla_imagenes .='<td  width="10%">';
-                                            //Mis palabras
+                                            //añado la parte de vocabulario para la conexión
                                         $tabla_imagenes .='<div><a  onclick=JavaScript:sele('.$id.')><img src="../vocabulario/imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im" title="'.get_string('guardar', 'vocabulario').'"/></a></div>';
                                         $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=5"><img src="../vocabulario/imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im" title="'. get_string('admin_gr', 'vocabulario') . '"/></a></div>';
                                         $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=7"><img src="../vocabulario/imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im" title="'. get_string('admin_ic', 'vocabulario') . '"/></a></div>';
