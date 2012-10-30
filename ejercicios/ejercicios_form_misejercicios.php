@@ -1,9 +1,40 @@
 <?php
 
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+  Daf-collage is made up of two Moodle modules which help in the process of
+  German language learning. It facilitates the content organization like
+  vocabulary or the main grammar features and gives the chance to create
+  exercises in order to consolidate knowledge.
+
+  Copyright (C) 2011
+
+  Coordination:
+  Ruth Burbat
+
+  Source code:
+  Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
+  Simeón Ruiz Romero (simeonruiz@gmail.com)
+  Serafina Molina Soto(finamolinasoto@gmail.com)
+
+  Original idea and content design:
+  Ruth Burbat
+  AInmaculada Almahano Güeto
+  Andrea Bies
+  Julia Möller Runge
+  Blanca Rodríguez Gómez
+  Antonio Salmerón Matilla
+  María José Varela Salinas
+  Karin Vilar Sánchez
+
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details. */
 
 require_once($CFG->dirroot.'/course/moodleform_mod.php');
 require_once("ejercicios_clases.php");
@@ -82,8 +113,27 @@ class mod_ejercicios_mis_ejercicios extends moodleform_mod {
             $nombre_ejercicio=$mi_ejercicio->get('name');
             //Añado un enlace por cada ejercicio dentro de la carpeta
            
-            $carpeta.='<li><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'&tipo_origen='.$mi_ejercicio->get('tipoarchivopregunta').'">'. $nombre_ejercicio.'</a><a href="eliminar_carpetas_ejercicios.php?id_curso='.$id.'&id_ejercicio='.$id_ejercicio.'""><img src="./imagenes/delete.gif"/></a></li>';
-                
+               echo "akiiiiiiiiiiiiiiiiiiiiiii".$mi_ejercicio->get('tipoactividad');
+            if($mi_ejercicio->get('tipoactividad')==0){ //multichoice
+              $carpeta.='<li><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'&tipo_origen='.$mi_ejercicio->get('tipoarchivopregunta').'">'. $nombre_ejercicio.'</a><a href="eliminar_carpetas_ejercicios.php?id_curso='.$id.'&id_ejercicio='.$id_ejercicio.'""><img src="./imagenes/delete.gif"/></a></li>';
+
+            }else{
+
+                 if($mi_ejercicio->get('tipoactividad')==1){ //asociacion simple
+                     echo "asociaciónnnnnn multipleeeeeeeeee";
+
+                     //comprubo que tipo tiene archivorespuesta
+                     if($mi_ejercicio->get('tipoarchivopregunta')==1){ //La pregunta es un texto
+                          if($mi_ejercicio->get('tipoarchivorespuesta')==1){ //La respuesta es un texto
+                                 $carpeta.='<li style="width:750px;"><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'&buscar=1&tipo_origen='.$mi_ejercicio->get('tipoarchivopregunta').'&tr='.$mi_ejercicio->get('tipoarchivorespuesta').'&tipocreacion='.$mi_ejercicio->get('tipoactividad').'">'. $nombre_ejercicio.'</a></li>';
+
+                          }
+
+                     }
+                 }
+
+
+            }
             
             
          }
