@@ -1,28 +1,40 @@
 <?php //$Id: mod_form.php,v 1.2.2.3 2009/03/19 12:23:11 mudrd8mz Exp $
 
-/**
- * This file defines the main ejercicios configuration form
- * It uses the standard core Moodle (>1.8) formslib. For
- * more info about them, please visit:
- *
- * http://docs.moodle.org/en/Development:lib/formslib.php
- *
- * The form must provide support for, at least these fields:
- *   - name: text element of 64cc max
- *
- * Also, it's usual to use these fields:
- *   - intro: one htmlarea element to describe the activity
- *            (will be showed in the list of activities of
- *             ejercicios type (index.php) and in the header
- *             of the ejercicios main page (view.php).
- *   - introformat: The format used to write the contents
- *             of the intro field. It automatically defaults
- *             to HTML when the htmleditor is used and can be
- *             manually selected if the htmleditor is not used
- *             (standard formats are: MOODLE, HTML, PLAIN, MARKDOWN)
- *             See lib/weblib.php Constants and the format_text()
- *             function for more info
- */
+/*
+  Daf-collage is made up of two Moodle modules which help in the process of
+  German language learning. It facilitates the content organization like
+  vocabulary or the main grammar features and gives the chance to create
+  exercises in order to consolidate knowledge.
+
+  Copyright (C) 2011
+
+  Coordination:
+  Ruth Burbat
+
+  Source code:
+  Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
+  Simeón Ruiz Romero (simeonruiz@gmail.com)
+  Serafina Molina Soto(finamolinasoto@gmail.com)
+
+  Original idea and content design:
+  Ruth Burbat
+  AInmaculada Almahano Güeto
+  Andrea Bies
+  Julia Möller Runge
+  Blanca Rodríguez Gómez
+  Antonio Salmerón Matilla
+  María José Varela Salinas
+  Karin Vilar Sánchez
+
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details. */
 
 require_once($CFG->dirroot.'/course/moodleform_mod.php');
 require_once("ejercicios_clases.php");
@@ -87,8 +99,32 @@ class mod_ejercicios_curso extends moodleform_mod{
             $nombre_ejercicio= $todos_ejer_curso[$i]->get('name');
             //Añado un enlace por cada ejercicio dentro de la carpeta
             $id_ejercicio=$todos_ejer_curso[$i]->get('id');
-            $carpeta.='<li style="width:750px;"><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'">'. $nombre_ejercicio.'</a></li>';
-                
+
+            if($todos_ejer_curso[$i]->get('tipoactividad')==0){ //multichoice
+
+                $carpeta.='<li style="width:750px;"><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'">'. $nombre_ejercicio.'</a></li>';
+
+            }else{
+
+                 if($todos_ejer_curso[$i]->get('tipoactividad')==1){ //asociacion simple
+
+
+                     //comprubo que tipo tiene archivorespuesta
+                     if($todos_ejer_curso[$i]->get('tipoarchivopregunta')==1){ //La pregunta es un texto
+                          if($todos_ejer_curso[$i]->get('tipoarchivorespuesta')==1){ //La respuesta es un texto
+                                 $carpeta.='<li style="width:750px;"><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'&buscar=1&tipo_origen='.$todos_ejer_curso[$i]->get('tipoarchivopregunta').'&tr='.$todos_ejer_curso[$i]->get('tipoarchivorespuesta').'&tipocreacion='.$todos_ejer_curso[$i]->get('tipoactividad').'">'. $nombre_ejercicio.'</a></li>';
+
+                          }
+
+                     }
+                 }
+
+
+            }
+
+
+
+
             
             
          }
