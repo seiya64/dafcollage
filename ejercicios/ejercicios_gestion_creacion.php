@@ -14,8 +14,8 @@
   Source code:
   Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
   Simeón Ruiz Romero (simeonruiz@gmail.com)
-  Serafina Molina Soto(finamolina@gmail.com)
- 
+  Serafina Molina Soto(finamolinasoto@gmail.com)
+
   Original idea and content design:
   Ruth Burbat
   AInmaculada Almahano Güeto
@@ -151,7 +151,7 @@ if($tipo_pregunta == "Texto" && $tipo_respuesta == "Texto"){
 
   
     //La comprobacion de errores esta en el javascript
-     redirect('./view.php?id=' . $id_curso . '&opcion=7'. '&p='.$numeropreguntas. '&id_ejercicio=' .$id_ejercicio.'&tipo_origen='.$TipoArchivoPregunta."&tipocreacion=".$TipoActividad);
+     redirect('./view.php?id=' . $id_curso . '&opcion=7'. '&p='.$numeropreguntas. '&id_ejercicio=' .$id_ejercicio.'&tipo_origen='.$TipoArchivoPregunta."&tipocreacion=".$TipoActividad.'&tr='.$TipoArchivoRespuesta);
         
 
     
