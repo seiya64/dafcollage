@@ -59,14 +59,38 @@ $id_ej = optional_param('oculto1',PARAM_TEXT);
 $tipo1= new Ejercicios_general();
 #selecciono los ejercicios para generar uno aleatorio a mostrar
 $ejercicio= $tipo1->obtener_uno($id_ej);
-$tipo= $ejercicio->get('tipoactividad');
-$tipo_origen=$ejercicio->get('tipoarchivopregunta');
+
+$nombre_ejercicio= $ejercicio->get('name');
+//Añado un enlace por cada ejercicio dentro de la carpeta
+ $id_ejercicio=$ejercicio->get('id');
+
 if ($mform->is_submitted()) { //Boton realizar (el boton buscar y crear estan en el javascript)
-   
+
+    //Miro que tipo de ejercicio es para mostrar el correcto
+
+            if($ejercicio->get('tipoactividad')==0){ //multichoice
+             redirect("./view.php?opcion=8&id=".$id_curso.'&id_ejercicio='.$id_ejercicio.'&buscar=1&tipo_origen='.$ejercicio->get('tipoarchivopregunta'));
+
+            }else{
+                 if($ejercicio->get('tipoactividad')==1){ //asociacion simple
+
+                     //comprubo que tipo tiene archivorespuesta
+                     if($ejercicio->get('tipoarchivopregunta')==1){ //La pregunta es un texto
+                          if($ejercicio->get('tipoarchivorespuesta')==1){ //La respuesta es un texto
+                              redirect("./view.php?opcion=8&id=".$id_curso.'&id_ejercicio='.$id_ejercicio.'&buscar=1&tipo_origen='.$ejercicio->get('tipoarchivopregunta').'&tr='.$ejercicio->get('tipoarchivorespuesta').'&tipocreacion='.$ejercicio->get('tipoactividad'));
+
+                          }
+
+                     }
+                 }
+
+
+            }
+
      
-       if($tipo==0){ // Ejercicio tipo multichoice
-           redirect('./view.php?opcion=8&id='.$id_curso.'&id_ejercicio='.$id_ej.'&buscar=1&tipo_origen='.$tipo_origen);
-       }
+      // if($tipo==0){ // Ejercicio tipo multichoice
+           //redirect('./view.php?opcion=8&id='.$id_curso.'&id_ejercicio='.$id_ej.'&buscar=1&tipo_origen='.$tipo_origen);
+      // }
      
 }
 
