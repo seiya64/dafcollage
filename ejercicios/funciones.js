@@ -56,23 +56,22 @@ $(document).ready(function(){
     $('.marquito').droppable( {
         drop: handleDropEvent
     } );
-    $('.imagen').droppable( {
-        drop: handleDropEvent
-
-    } );
+  
 
 
     function handleDropEvent( event, ui ) {
         var draggable = ui.draggable;
-        // alert( 'The square with ID "' + draggable.attr('id') + '" was dropped onto "'+$(this).attr('id')+ '"!' );
+         alert( 'The square with ID "' + draggable.attr('id') + '" was dropped onto "'+$(this).attr('id')+ '"!' );
         if( ($( this ).find( ".item" ).length)==0){
             $(this).append($(ui.draggable));
   
-
+           
  
 
             var Idimagen = $(ui.draggable).attr('id');
-            var Idmarquito = $(this).attr('id')
+            var Idmarquito = $(this).attr('id');
+            alert("idmgen"+Idimagen);
+            alert("idmarquito"+Idmarquito);
             if(Idimagen == Idmarquito){
                 correcto[Idimagen]=true;
                 puesto[Idimagen]=true;
@@ -88,7 +87,6 @@ $(document).ready(function(){
     }
     
 
-
     $("#botonResultado").click(function () {
 
                  
@@ -100,8 +98,9 @@ $(document).ready(function(){
         }
       
         if ($puestos==$numimagen) {
-          
+          alert("puestos todos");
             for(i=1;i<=parseInt($numimagen);i++){
+                alert(correcto[i]);
                 if (correcto[i]==true){
                     
                     variable="#aceptado"+i;
@@ -491,7 +490,7 @@ function botonPrincipal(id_curso){
 function botonCorregirMultiChoice(id_curso,npreg){
 
 
-     // alert("Corrigiendo");
+      //alert("Corrigiendo");
       var rep1_1=document.getElementById("id_crespuesta1_1");
     
       //location.href="ejercicios_corregir_ejercicio.php";
@@ -507,10 +506,10 @@ function botonCorregirMultiChoice(id_curso,npreg){
         {
             
             var nombre="num_res_preg"+i;
-            
+           
             //obtengo el numero de respuestas de la pregunta
              var nrep_preg=document.getElementById(nombre);
-           
+            
               for (j=1; j<=nrep_preg.value; j++){ //Para cad respuesta
                   //obtengo el valor correcto
                  
