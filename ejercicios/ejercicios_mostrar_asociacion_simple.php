@@ -45,7 +45,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
     function mod_ejercicios_mostrar_ejercicio_asociacion_simple($id,$id_ejercicio,$tipo_origen,$tipo_respuesta,$tipocreacion)
         {
          // El fichero que procesa el formulario es gestion.php
-         parent::moodleform('ejercicios_modificar_asociacion_simple.php?id_curso='.$id.'&id_ejercicio='.$id_ejercicio.'&tipo_origen='.$tipo_origen);
+         parent::moodleform('ejercicios_modificar_asociacion_simple.php?id_curso='.$id.'&id_ejercicio='.$id_ejercicio.'&tipo_origen='.$tipo_origen.'&tr='.$tipo_respuesta.'&tipocreacion='.$tipocreacion);
        }
 
      function definition() {
@@ -125,7 +125,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                  echo "tipo respuesta.$tipo_respuesta";
                       switch($tipo_respuesta){
                             case 1: //Es de tipo texto
-                              $tabla_imagenes.='<center><table>';
+                              $tabla_imagenes.='<center><table id="tablapreg" name="tablapreg">';
                                   //Obtengo las preguntas
                                  $mis_preguntas = new Ejercicios_texto_texto_preg();
                                  $preguntas=$mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
@@ -135,13 +135,13 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                                  for($i=1;$i<=sizeof($preguntas);$i++){
 
                                       //Obtengo la pregunta
-                                      $tabla_imagenes.='<td> <div class="item" id="'.$i.'">';
+                                      $tabla_imagenes.='<td id="texto'.$i.'"> <div class="item" id="'.$i.'">';
                                            if($buscar==1 || $modificable==false){
                                        
                                                 $tabla_imagenes.='<p style="margin-top: 10%;">'.$preguntas[$i-1]->get('pregunta').'</p>';
 
                                            }else{
-                                                $tabla_imagenes.='<textarea style="height: 197px; width: 396px;">'.$preguntas[$i-1]->get('pregunta').'</textarea>';
+                                                $tabla_imagenes.='<textarea id="pregunta'.$i.'" name="pregunta'.$i.'" style="height: 197px; width: 396px;">'.$preguntas[$i-1]->get('pregunta').'</textarea>';
 
                                            }
                                        $tabla_imagenes.='</div></div></td>';
@@ -153,7 +153,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                                  $tabla_imagenes.='</table></center>';
                                   $tabla_imagenes.="</br>";
                                    $tabla_imagenes.="</br>";
-                                 $tabla_imagenes.='<table><center>';
+                                 $tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
 
                                  $k=1;
                                  $las_respuestas[sizeof($preguntas)+1];
@@ -203,7 +203,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                                                $tabla_imagenes.='<td><div class=descripcion>';
                                                $tabla_imagenes.=$las_respuestas[$aleatorios_generados[$j]-1].'</div></td>';
                                               }else{
-                                                  $tabla_imagenes.='<td><textarea class=descripcion style="height: 192px; width: 401px;" >';
+                                                  $tabla_imagenes.='<td><textarea name="respuesta'.$aleatorios_generados[$j].'" id="respuesta'.$aleatorios_generados[$j].'" class=descripcion style="height: 192px; width: 401px;" >';
                                                   $tabla_imagenes.=$las_respuestas[$aleatorios_generados[$j]-1].'</textarea></td>';
                                               }
                                                $tabla_imagenes.='<td id="aceptado'.$aleatorios_generados[$j].'" class="marquitoaceptado"></td>';
@@ -212,13 +212,20 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
 
                                         $tabla_imagenes.='</table></center>';
                                         $tabla_imagenes.='<p class="numero" id="'.sizeof($preguntas).'"></p>';
-                                        //botones
+
+                                         //inserto el número de preguntas
+
+                                        $tabla_imagenes.='<input type="hidden" value='.sizeof($preguntas).' id="num_preg" name="num_preg" />';
+
+
+                                         //botones
                                          $mform->addElement('html',$tabla_imagenes);
 
 
                                           if($buscar!=1 && $modificable==true){
                                               //Si soy el profesor creadors
-                                             $tabla_imagenes='<input type="submit" style="height:30px; width:100px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="'.get_string('BotonGuardar','ejercicios').'">';
+                                             $tabla_imagenes='<input type="submit" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="'.get_string('BotonGuardar','ejercicios').'">';
+                                             $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonNA" name="botonNA" value="'.get_string('NuevaAso','ejercicios').'">';
                                              $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id .'\'"></center>';
 
                                           }else{
