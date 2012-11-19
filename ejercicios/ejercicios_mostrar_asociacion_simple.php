@@ -125,25 +125,23 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                  echo "tipo respuesta.$tipo_respuesta";
                       switch($tipo_respuesta){
                             case 1: //Es de tipo texto
-                              $tabla_imagenes.='<center><table id="tablapreg" name="tablapreg">';
+                             
                                   //Obtengo las preguntas
                                  $mis_preguntas = new Ejercicios_texto_texto_preg();
                                  $preguntas=$mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
-                                 $tabla_imagenes.="<tr>";
-                               
-                                 //Inserto las preguntas con clase "item" es decir dragables(mirar javascript.js)
+
+
+                               if($buscar==1 || $modificable==false){
+                                    $tabla_imagenes.='<center><table id="tablapreg" name="tablapreg">';
+                                    $tabla_imagenes.="<tr>";
+                                    //Inserto las preguntas con clase "item" es decir dragables(mirar javascript.js)
                                  for($i=1;$i<=sizeof($preguntas);$i++){
 
                                       //Obtengo la pregunta
                                       $tabla_imagenes.='<td id="texto'.$i.'"> <div class="item" id="'.$i.'">';
-                                           if($buscar==1 || $modificable==false){
-                                       
-                                                $tabla_imagenes.='<p style="margin-top: 10%;">'.$preguntas[$i-1]->get('pregunta').'</p>';
-
-                                           }else{
-                                                $tabla_imagenes.='<textarea id="pregunta'.$i.'" name="pregunta'.$i.'" style="height: 197px; width: 396px;">'.$preguntas[$i-1]->get('pregunta').'</textarea>';
-
-                                           }
+                                           
+                                      $tabla_imagenes.='<p style="margin-top: 10%;">'.$preguntas[$i-1]->get('pregunta').'</p>';
+  
                                        $tabla_imagenes.='</div></div></td>';
                                       if($i % 2 == 0){ //Si es impar lo bajo
                                           $tabla_imagenes.="</tr>";
@@ -198,14 +196,11 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
 
                                          for($j=0;$j< sizeof($aleatorios_generados);$j++){
                                                $tabla_imagenes.='<tr>';
-                                               $tabla_imagenes.='<td><div  id="'.$aleatorios_generados[$j].'" class="marquito"></div></td>';
-                                              if($buscar==1 || $modificable==false){ //Para que no pueda editarlo
+                                            
                                                $tabla_imagenes.='<td><div class=descripcion>';
                                                $tabla_imagenes.=$las_respuestas[$aleatorios_generados[$j]-1].'</div></td>';
-                                              }else{
-                                                  $tabla_imagenes.='<td><textarea name="respuesta'.$aleatorios_generados[$j].'" id="respuesta'.$aleatorios_generados[$j].'" class=descripcion style="height: 192px; width: 401px;" >';
-                                                  $tabla_imagenes.=$las_respuestas[$aleatorios_generados[$j]-1].'</textarea></td>';
-                                              }
+                                              
+                                               $tabla_imagenes.='<td><div  id="'.$aleatorios_generados[$j].'" class="marquito"></div></td>';
                                                $tabla_imagenes.='<td id="aceptado'.$aleatorios_generados[$j].'" class="marquitoaceptado"></td>';
                                                $tabla_imagenes.='</tr>';
                                          }
@@ -217,7 +212,35 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
 
                                         $tabla_imagenes.='<input type="hidden" value='.sizeof($preguntas).' id="num_preg" name="num_preg" />';
 
+                               }else{
+                                    echo "akiiiiiiii";
+                                    $tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
 
+                                    for($i=1;$i<=sizeof($preguntas);$i++){
+
+                                     $tabla_imagenes.="<tr>";
+                                     $tabla_imagenes.='<td id="texto'.$i.'">';
+                                     $tabla_imagenes.='<textarea id="pregunta'.$i.'" name="pregunta'.$i.'" style="height: 197px; width: 396px;">'.$preguntas[$i-1]->get('pregunta').'</textarea>';
+                                     $tabla_imagenes.='</td>';
+
+                                   $id_pregunta=$preguntas[$i-1]->get('id');
+                                   $mis_respuestas = new Ejercicios_texto_texto_resp();
+                                   $respuestas=$mis_respuestas->obtener_todas_respuestas_pregunta($id_pregunta);
+                                   
+                                   $tabla_imagenes.= '<td><textarea name="respuesta'.$i.'" id="respuesta'.$i.'" class=descripcion style="height: 192px; width: 401px;" >';
+                                   $tabla_imagenes.=$respuestas[0]->get('respuesta').'</textarea></td>';
+                                    $tabla_imagenes.="</tr>";
+                                    }
+                                    $tabla_imagenes.='</table></center>';
+
+                                    //inserto el número de preguntas
+
+                                    $tabla_imagenes.='<input type="hidden" value='.sizeof($preguntas).' id="num_preg" name="num_preg" />';
+
+                               }
+
+
+                               
                                          //botones
                                          $mform->addElement('html',$tabla_imagenes);
 
