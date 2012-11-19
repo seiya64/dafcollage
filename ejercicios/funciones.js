@@ -86,7 +86,58 @@ $(document).ready(function(){
 
     }
     
+     $("#botonNA").click(function () {
+     alert("añadiendooooooo asociacion");
+     num_preg=document.getElementById('num_preg');
+     alert("eL numero de preguntas es"+num_preg.value);
+     sig_preg=parseInt(num_preg.value)+1;
 
+        alert("aki llega");
+
+            //obtengo la tabla donde lo voy a insertar
+            tabla_insertar = document.getElementById('tablarespuestas');
+            alert(tabla_insertar);
+            tbody_insertar = tabla_insertar.lastChild;
+            alert(tbody_insertar);
+            //Para el texto
+            tabla_nuevotr = document.createElement('tr');
+            tabla_nuevotd = document.createElement('td');
+            tabla_nuevotd.id="texto"+sig_preg;
+            textarea = document.createElement('textarea');
+            textarea.id="pregunta"+sig_preg;
+            textarea.name="pregunta"+sig_preg;
+            textarea.setAttribute("style","height: 197px; width: 396px;");
+            textarea.appendChild(document.createTextNode("Nuevo Texto"));
+            alert("insertado el texto");
+            
+            //Para el texto asociado
+
+         
+            tabla_nuevotd1 = document.createElement('td');
+            
+            textarea1 = document.createElement('textarea');
+            textarea1.id="respuesta"+sig_preg;
+            textarea1.name="respuesta"+sig_preg;
+            textarea1.setAttribute("class","descripcion");
+            textarea1.setAttribute("style","height: 192px; width: 401px;");
+            textarea1.appendChild(document.createTextNode("Nuevo Texto Asociado"));
+
+          
+
+            
+            tabla_nuevotd.appendChild(textarea);
+            tabla_nuevotd1.appendChild(textarea1);
+            tabla_nuevotr.appendChild(tabla_nuevotd);
+            tabla_nuevotr.appendChild(tabla_nuevotd1);
+            tbody_insertar.appendChild(tabla_nuevotr);
+
+
+           //Actualizo el número de preguntas a 1 mas
+
+           num_preg.value=sig_preg;
+    });
+
+    
     $("#botonResultado").click(function () {
 
                  
