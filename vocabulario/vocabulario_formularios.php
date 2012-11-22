@@ -3083,7 +3083,7 @@ class mod_vocabulario_aniadir_gr_form extends moodleform {
         $mform->addElement('html', '<h1>' . get_string('add_gram', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
 
         //campo gramatical
-        $mform->addElement('select', 'campogr', get_string("nivel", "vocabulario"), $gramaticas, "onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico\",1)' style=\"min-height: 0;\"");
+        $mform->addElement('select', 'campogr', get_string("nivel", "vocabulario"), $gramaticas, "onChange='javascript:if( this.options[this.selectedIndex].text == \"--\" || this.options[this.selectedIndex].text == \"Seleccionar\" ) { this.selectedIndex == 0; this.options[0].selected = true; document.getElementById(\"grgeneraldinamico\").style.display=\"none\";} else { cargaContenido(this.id,\"grgeneraldinamico\",1); document.getElementById(\"grgeneraldinamico\").style.display=\"\";}' style=\"min-height: 0;\"");
         $mform->setDefault('campogr', $lista_padres[1]);
         //probar los campos dinamicos
         $i = 1;
@@ -3271,7 +3271,7 @@ class mod_vocabulario_intencion_desc_form extends moodleform {
         $mform->addElement('html', '<h1>' . get_string('nueva_ic', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
 
         //intencion comunicativa
-        $mform->addElement('select', 'campoic', get_string("nivel", "vocabulario"), $icom, "onChange='javascript:cargaContenido(this.id,\"icgeneraldinamico\",2)' style=\"min-height: 0;\"");
+        $mform->addElement('select', 'campoic', get_string("nivel", "vocabulario"), $icom, "onChange='javascript:if( this.options[this.selectedIndex].text == \"--\" || this.options[this.selectedIndex].text == \"Seleccionar\" ) { this.selectedIndex == 0; this.options[0].selected = true; document.getElementById(\"icgeneraldinamico\").style.display=\"none\";} else { cargaContenido(this.id,\"icgeneraldinamico\",2); document.getElementById(\"icgeneraldinamico\").style.display=\"\";}' style=\"min-height: 0;\"");
         //probar los campos dinamicos
         $campodinamico = "<div class=\"fitem\" id=\"icgeneraldinamico\"></div>";
         $mform->addElement('html', $campodinamico);
