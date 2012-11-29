@@ -57,9 +57,6 @@ $mform->pintarformularioasociacionsimple($id_curso,$p,$id_ejercicio,$tipo_origen
 //De donde vengo
 
 
-
-
-
 //A partir de aquí es de Tipocreación 1: Es decir "Asociación Simple";
 //
 //Obtengo el archivo origen
@@ -67,6 +64,9 @@ $mform->pintarformularioasociacionsimple($id_curso,$p,$id_ejercicio,$tipo_origen
 
 switch($tipo_origen){
     case 1://Es un texto
+    echo "Texto -";
+        switch($tipo_respuesta){
+            case 1:
             echo "inserto en la bd";
             //Obtengo el numero de preguntas
             $numero_preguntas = optional_param('numeropreguntas', PARAM_INT);
@@ -97,9 +97,69 @@ switch($tipo_origen){
 
             }
             break;
-    case 2://Es un audio
-    case 3://Es un video
-    case 4://
+            case 2://Respuesta es Audio
+                echo "es un audio";
+            break;
+            case 3://REspuesta es Video
+                echo  "es un video";
+            break;
+            case 4:// Respuesta es Foto
+                //Guardando la foto y el texto
+                echo "Foto";
+               
+                    //SUBO LAS IMAGENES A MOODLE
+                         $m=1;
+                         foreach($_FILES as $name => $values){
+
+                          //tengo que cambiar la ruta donde se guarda
+                            if( move_uploaded_file($values['tmp_name'],'C:/xampp/htdocs/moodle/mod/ejercicios/imagenes/actividades/img_'.$id_ejercicio.'_'.$m.'.jpg') ){
+
+                                   //  echo 'El archivo ha sido subido correctamente.<br/>';
+                                   $m++;
+
+                           }
+                        }
+                       // echo "m vale".$m;
+                    //Obtengo el numero de preguntas
+                    $numero_preguntas = optional_param('numeropreguntas', PARAM_INT);
+                        echo "numero preguntas".$numero_preguntas;
+                    for($i=0;$i<$numero_preguntas;$i++){
+                        //Obtengo la pregunta
+
+                        $j=$i+1;
+                        $pregunta = optional_param('pregunta'.$j,PARAM_TEXT);
+
+                        //Inserto la pregunta Archivo asociación
+                        $mispreguntas= new Ejercicios_texto_texto_preg(NULL,$id_ejercicio,$pregunta);
+                        $id_preg=$mispreguntas->insertar();
+
+                         //Lo inserto en la tabla de imagenes para asociar respuestas y preguntas
+                         $nombre_img='img_'.$id_ejercicio.'_'.$j.'.jpg';
+                         $mi_respuesta = new Ejercicios_Imagenes_Asociadas(NULL,$id_ejercicio,$id_preg,$nombre_img);
+
+                         $mi_respuesta->insertar();
+
+
+                       
+                      
+
+                    }
+                     echo "fin insercción";
+                     // die;
+            break;
+
+        }
+            break;
+
+    case 2://Es una foto
+        echo "es una foto";
+        die;
+    case 3://Es un audio
+        echo "es un audio";
+        die;
+    case 4://Es una video
+        echo "es una video";
+        die;
 
 }
 
