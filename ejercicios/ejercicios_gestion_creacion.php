@@ -74,20 +74,38 @@ $numerorespuestascorrectas=$numerorespuestascorrectas+1;
    global $CFG, $COURSE, $USER;
  //Si hemos elegido Texto - Texto
    echo "tipo_pregunta".$tipo_pregunta;
-if($tipo_pregunta == "Texto" && $tipo_respuesta == "Texto"){
-    
-   
-    
+if($tipo_pregunta == "Texto"){
+        
     //Guardar el ejercicio en la BD
     //leo un ejercicio y lo guardo
-     
 
     $id=NULL;
     $id_creador=$USER->id;
     $TipoActividad=$tipocreacion-2;//Comienza en 2
     $TipoArchivoPregunta=1; // 1 va a ser texto
-    $TipoArchivoRespuesta=1; //1 va a ser texto
 
+
+    if($tipo_respuesta=="Texto"){
+            $TipoArchivoRespuesta=1; //1 va a ser texto
+   }else{
+         if($tipo_respuesta=="Audio"){
+
+            $TipoArchivoRespuesta=2; //2 va a ser Audio
+
+         }else{
+             if($tipo_respuesta=="Video"){
+
+                $TipoArchivoRespuesta=3; //3 va a ser Video
+
+             }else{
+                    if($tipo_respuesta=="Foto"){
+                          $TipoArchivoRespuesta=4; //4 va a ser Foto
+                          echo "Texto-Foto";
+                         
+                    }
+             }
+         }
+   }
     
 }else{
 
