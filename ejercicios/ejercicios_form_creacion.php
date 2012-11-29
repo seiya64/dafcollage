@@ -130,9 +130,10 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
           // $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Audio", "Audio", null);
 
            if($tipocreacion==3){ //Asociacion Simple
+             $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Audio", "Audio", null);
              $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Video", "Video", null);
              $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Foto", "Foto", null);
-             $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Audio", "Audio", null);
+
           }
            $mform->addGroup($radioarray, 'radiorespuesta',  get_string('tiporespuesta', 'ejercicios'), array(' '), false);
            $mform->setDefault('radiorespuesta',"Texto");
@@ -525,7 +526,28 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
                          echo "texto-video";
                     break;
                     case 4: //El archivo respuesta es una imagen
-                         echo "texto-imagen";
+
+                            echo "entra";
+
+                            for($i=0;$i<$p;$i++){
+
+                            $aux=$i+1;
+                            $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
+                             $mform->addElement('html',$titulo);
+
+                           //Archivo Asociacion
+                            $mform->addElement('textarea', 'pregunta'.$aux, get_string('Asociacion_Texto', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
+                            //Archivo Asociado
+                            $mform->addElement('file', 'archivofoto'.$aux,"Foto");
+                            $mform->addRule('archivofoto'.$aux, "Archivo Necesario", 'required', null, 'client');
+
+
+
+                           }
+
+                           $mform->addElement('hidden','numeropreguntas',$p);
+                      
+                        
                     break;
 
                 }
