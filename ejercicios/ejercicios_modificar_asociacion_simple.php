@@ -78,6 +78,23 @@ echo "El numero de pregunas es".$numeropreguntas;
 
             }
 
+    }else{
+        if($tipo_respuesta==4){
+            echo "actualizando imagen";
+             //obtengo los id de las preguntas del ejercicio
+            $id_preguntas=array();
+
+            $mis_preguntas= new Ejercicios_texto_texto_preg();
+
+             $id_preguntas=$mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
+            //borro las respuestas
+
+            for($s=0;$s<sizeof($id_preguntas);$s++){
+                    delete_records('ejercicios_imagenes_asociadas', 'id_ejercicio', $id_ejercicio);
+
+            }
+
+        }
     }
 
     if($tipo_origen==1){
@@ -106,6 +123,14 @@ echo "El numero de pregunas es".$numeropreguntas;
 
            $ejercicio_texto_resp = new Ejercicios_texto_texto_resp(NULL,$id_pregunta,$resp,$correcta);
            $ejercicio_texto_resp->insertar();
+        }else{
+
+                if($tipo_respuesta==4){ //eS UNA IMAGEN
+                   
+
+                      $ejercicio_texto_img = new Ejercicios_imagenes_asociadas($NULL,$id_ejercicio,$id_pregunta ,'img_'.$id_ejercicio."_".$j.".jpg");
+                      $ejercicio_texto_img->insertar();
+                }
         }
     }
     commit_sql();
