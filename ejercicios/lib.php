@@ -310,7 +310,7 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
                      $mform->mostrar_ejercicio($id,$id_ejercicio,$buscar,$tipo_origen);
                         echo "mostrando ejercicio multichoice";
                     break;
-                    case 1:
+                    case 1: // si es asociacion simple
 
                         echo "mostrando ejercicio asociacion simple";
                       $mform= new mod_ejercicios_mostrar_ejercicio_asociacion_simple($id,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
