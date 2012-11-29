@@ -2309,4 +2309,140 @@ class Ejercicios_texto_texto_preg{
 }
 
 
+//Clase para gestionar las imagenes asociadas de los ejercicios
+
+
+
+
+/*
+ * Clase que gestiona la tabla mdl_ejercicios_textos de la BD, es decir si el arichivo origen
+ * es texto en el formulario de creación estará almacenado en esta tabla.
+ */
+
+class Ejercicios_imagenes_asociadas{
+
+    var $id;
+    var $id_ejercicio;
+    var $id_pregunta;
+    var $nombre_imagen;
+
+
+    //Contructor por defecto y con parametros
+    function Ejercicios_imagenes_asociadas($id = NULL,$id_ejercicio=NULL,$id_preg = NULL,$nombre_img=NULL) {
+    
+        $this->id = $id;
+        $this->id_ejercicio = $id_ejercicio;
+        $this->id_pregunta = $id_preg;
+        $this->nombre_imagen = $nombre_img;
+
+    }
+
+    //Obtener cada uno de los atributos de la tabla
+    function get($param) {
+
+        // $param = strtolower($param);
+        switch ($param) {
+            default:
+            case 'id':
+                return $this->id;
+                break;
+            case 'id_ejercicio':
+                return $this->id_ejercicio;
+                break;
+            case 'id_pregunta':
+                return $this->id_pregunta;
+                break;
+             case 'nombre_imagen':
+                return $this->nombre_imagen;
+                break;
+        }
+    }
+
+    //Inserta en la bd la instancia correspondiente a la clase y devuelve el identificador
+    //de la nueva instancia creada
+    function insertar() {
+
+        $id = insert_record('ejercicios_imagenes_asociadas', $this, true);
+        //Devuelve el identificador del ejercicios creado
+
+        return $id;
+    }
+
+    //Modifica una instacia
+    function alterar() {
+
+        update_record('ejercicios_imagenes_asociadas', $this, false);
+    }
+
+    //Borra la fila que tiene como id_ejercicio el que se le pasa como parametro
+    function borrar_id_ejercicio($id_ejercicio) {
+        delete_records('ejercicios_imagenes_asociadas', 'id_ejercicio', $id_ejercicio);
+    }
+
+    //Obtiene el texto por id
+    function obtener_uno($id) {
+        $ejer = get_record('ejercicios_imagenes_asociadas', 'id', $id);
+        $this->id = $ejer->id;
+        $this->id_ejercicio = $ejer->id_ejercicio;
+        $this->id_pregunta = $ejer->id_pregunta;
+        $this->nombre_imagen =$ejer->nombre_imagen;
+
+        return $this;
+    }
+
+    function obtener_todos_id_ejercicio($id_ejercicio) {
+
+       
+        $ejer = get_records('ejercicios_imagenes_asociadas', 'id_ejercicio',$id_ejercicio);
+          $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+           
+            $mp = new Ejercicios_imagenes_asociadas();
+
+            $mp->obtener_uno($cosa->id);
+               
+            $todos_mis_ejercicios[] = $mp;
+
+         
+        }
+
+
+        return $todos_mis_ejercicios;
+       
+    }
+
+      function obtener_todas_respuestas_pregunta($id_pregunta){
+
+     
+        
+        $sql = 'SELECT * FROM  mdl_ejercicios_imagenes_asociadas WHERE id_pregunta=' . $id_pregunta;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+            
+            $mp = new Ejercicios_imagenes_asociadas();
+
+            $mp->obtener_uno($cosa->id);
+               
+            $todos_mis_ejercicios[] = $mp;
+
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+
+
+
+
+
+}
+
+
+
 ?>
