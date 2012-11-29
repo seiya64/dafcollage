@@ -314,3 +314,25 @@ padding: 8px 14px 9px;
 
 .yellow.button, .yellow.button:visited { background-color: #FFB515; }
 .yellow.button:hover{ background-color: #FC9200; }
+
+
+#capa1{
+position:absolute;
+z-index:1;
+}
+
+
+.up{
+        padding:12px;
+        font:bold 12px Arial, Helvetica, sans-serif;
+        text-align:center;
+        background:#f2f2f2;
+        color:#3366cc;
+        border:1px solid #ccc;
+        width:150px;
+        display:block;
+        -moz-border-radius:5px;
+        -webkit-border-radius:5px;
+        margin:0 auto;
+        text-decoration:none
+    }
