@@ -521,6 +521,26 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
                     break;
                     case 2: //El archivo respuesta es un audio
                          echo "texto-audio";
+                    
+                            for($i=0;$i<$p;$i++){
+
+                            $aux=$i+1;
+                            $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
+                             $mform->addElement('html',$titulo);
+
+                           //Archivo Asociacion
+                            $mform->addElement('textarea', 'pregunta'.$aux, get_string('Asociacion_Texto', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
+                            //Archivo Asociado
+                            $mform->addElement('file', 'archivoaudio'.$aux,"Audio");
+                            $mform->addRule('archivoaudio'.$aux, "Archivo Necesario", 'required', null, 'client');
+
+
+
+                           }
+
+                           $mform->addElement('hidden','numeropreguntas',$p);
+
+
                     break;
                     case 3: //El archivo respuesta es un video
                          echo "texto-video";
