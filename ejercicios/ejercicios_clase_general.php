@@ -2445,4 +2445,298 @@ class Ejercicios_imagenes_asociadas{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * Clase que gestiona la tabla mdl_ejercicios_textos de la BD, es decir si el arichivo origen
+ * es texto en el formulario de creación estará almacenado en esta tabla.
+ */
+
+class Ejercicios_audios_asociados{
+
+    var $id;
+    var $id_ejercicio;
+    var $id_pregunta;
+    var $nombre_audio;
+
+
+    //Contructor por defecto y con parametros
+    function Ejercicios_audios_asociados($id = NULL,$id_ejercicio=NULL,$id_preg = NULL,$nombre_audio=NULL) {
+
+        $this->id = $id;
+        $this->id_ejercicio = $id_ejercicio;
+        $this->id_pregunta = $id_preg;
+        $this->nombre_audio = $nombre_audio;
+
+    }
+
+    //Obtener cada uno de los atributos de la tabla
+    function get($param) {
+
+        // $param = strtolower($param);
+        switch ($param) {
+            default:
+            case 'id':
+                return $this->id;
+                break;
+            case 'id_ejercicio':
+                return $this->id_ejercicio;
+                break;
+            case 'id_pregunta':
+                return $this->id_pregunta;
+                break;
+             case 'nombre_audio':
+                return $this->nombre_audio;
+                break;
+        }
+    }
+
+    //Inserta en la bd la instancia correspondiente a la clase y devuelve el identificador
+    //de la nueva instancia creada
+    function insertar() {
+
+        $id = insert_record('ejercicios_audios_asociados', $this, true);
+        //Devuelve el identificador del ejercicios creado
+
+        return $id;
+    }
+
+    //Modifica una instacia
+    function alterar() {
+
+        update_record('ejercicios_audios_asociados', $this, false);
+    }
+
+    //Borra la fila que tiene como id_ejercicio el que se le pasa como parametro
+    function borrar_id_ejercicio($id_ejercicio) {
+        delete_records('ejercicios_audios_asociados', 'id_ejercicio', $id_ejercicio);
+    }
+
+    //Obtiene el texto por id
+    function obtener_uno($id) {
+        $ejer = get_record('ejercicios_audios_asociados', 'id', $id);
+        $this->id = $ejer->id;
+        $this->id_ejercicio = $ejer->id_ejercicio;
+        $this->id_pregunta = $ejer->id_pregunta;
+        $this->nombre_audio =$ejer->nombre_audio;
+
+        return $this;
+    }
+
+    function obtener_todos_id_ejercicio($id_ejercicio) {
+
+
+        $ejer = get_records('ejercicios_audios_asociados', 'id_ejercicio',$id_ejercicio);
+          $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_audios_asociados();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+
+
+        }
+
+
+        return $todos_mis_ejercicios;
+
+    }
+
+      function obtener_todas_respuestas_pregunta($id_pregunta){
+
+
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_audios_asociados WHERE id_pregunta=' . $id_pregunta;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_audios_asociados();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * Clase que gestiona la tabla mdl_ejercicios_textos de la BD, es decir si el arichivo origen
+ * es texto en el formulario de creación estará almacenado en esta tabla.
+ */
+
+class Ejercicios_videos_asociados{
+
+    var $id;
+    var $id_ejercicio;
+    var $id_pregunta;
+    var $nombre_video;
+
+
+    //Contructor por defecto y con parametros
+    function Ejercicios_videos_asociados($id = NULL,$id_ejercicio=NULL,$id_preg = NULL,$nombre_video=NULL) {
+
+        $this->id = $id;
+        $this->id_ejercicio = $id_ejercicio;
+        $this->id_pregunta = $id_preg;
+        $this->nombre_video = $nombre_video;
+
+    }
+
+    //Obtener cada uno de los atributos de la tabla
+    function get($param) {
+
+        // $param = strtolower($param);
+        switch ($param) {
+            default:
+            case 'id':
+                return $this->id;
+                break;
+            case 'id_ejercicio':
+                return $this->id_ejercicio;
+                break;
+            case 'id_pregunta':
+                return $this->id_pregunta;
+                break;
+             case 'nombre_video':
+                return $this->nombre_video;
+                break;
+        }
+    }
+
+    //Inserta en la bd la instancia correspondiente a la clase y devuelve el identificador
+    //de la nueva instancia creada
+    function insertar() {
+
+        $id = insert_record('ejercicios_videos_asociados', $this, true);
+        //Devuelve el identificador del ejercicios creado
+
+        return $id;
+    }
+
+    //Modifica una instacia
+    function alterar() {
+
+        update_record('ejercicios_videos_asociados', $this, false);
+    }
+
+    //Borra la fila que tiene como id_ejercicio el que se le pasa como parametro
+    function borrar_id_ejercicio($id_ejercicio) {
+        delete_records('ejercicios_videos_asociados', 'id_ejercicio', $id_ejercicio);
+    }
+
+    //Obtiene el texto por id
+    function obtener_uno($id) {
+        $ejer = get_record('ejercicios_videos_asociados', 'id', $id);
+        $this->id = $ejer->id;
+        $this->id_ejercicio = $ejer->id_ejercicio;
+        $this->id_pregunta = $ejer->id_pregunta;
+        $this->nombre_video =$ejer->nombre_video;
+
+        return $this;
+    }
+
+    function obtener_todos_id_ejercicio($id_ejercicio) {
+
+
+        $ejer = get_records('ejercicios_videos_asociados', 'id_ejercicio',$id_ejercicio);
+          $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_videos_asociados();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+
+
+        }
+
+
+        return $todos_mis_ejercicios;
+
+    }
+
+      function obtener_todas_respuestas_pregunta($id_pregunta){
+
+
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_videos_asociados WHERE id_pregunta=' . $id_pregunta;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_videos_asociados();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+}
+
+
+
 ?>
