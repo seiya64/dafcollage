@@ -61,8 +61,8 @@ $tipo1= new Ejercicios_general();
 $ejercicio= $tipo1->obtener_uno($id_ej);
 
 $nombre_ejercicio= $ejercicio->get('name');
-//Añado un enlace por cada ejercicio dentro de la carpeta
- $id_ejercicio=$ejercicio->get('id');
+
+$id_ejercicio=$ejercicio->get('id');
 
 if ($mform->is_submitted()) { //Boton realizar (el boton buscar y crear estan en el javascript)
 
@@ -76,7 +76,7 @@ if ($mform->is_submitted()) { //Boton realizar (el boton buscar y crear estan en
 
                      //comprubo que tipo tiene archivorespuesta
                      if($ejercicio->get('tipoarchivopregunta')==1){ //La pregunta es un texto
-                          if($ejercicio->get('tipoarchivorespuesta')==1){ //La respuesta es un texto
+                          if($ejercicio->get('tipoarchivorespuesta')==1 || $ejercicio->get('tipoarchivorespuesta')==4){ //La respuesta es un texto
                               redirect("./view.php?opcion=8&id=".$id_curso.'&id_ejercicio='.$id_ejercicio.'&buscar=1&tipo_origen='.$ejercicio->get('tipoarchivopregunta').'&tr='.$ejercicio->get('tipoarchivorespuesta').'&tipocreacion='.$ejercicio->get('tipoactividad'));
 
                           }
