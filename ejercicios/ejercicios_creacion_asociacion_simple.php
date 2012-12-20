@@ -67,7 +67,7 @@ switch($tipo_origen){
     echo "Texto -";
         switch($tipo_respuesta){
             case 1:
-            echo "inserto en la bd";
+            //echo "inserto en la bd";
             //Obtengo el numero de preguntas
             $numero_preguntas = optional_param('numeropreguntas', PARAM_INT);
 
@@ -177,9 +177,6 @@ switch($tipo_origen){
 
                          $mi_respuesta->insertar();
 
-
-                       
-                      
 
                     }
                      echo "fin insercción";
