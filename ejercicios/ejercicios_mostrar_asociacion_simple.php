@@ -321,6 +321,228 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
 
                                break;
                              case 2: //Es de tipo audio la respuesta
+
+                                 echo "tipo respuesta es audio";
+
+                                 $mform->addElement('html', '<script src="./js/ajaxupload.js" type="text/javascript"></script>');
+
+
+                                 //Obtengo las preguntas que son texto
+                                 $mis_preguntas = new Ejercicios_texto_texto_preg();
+                                 $preguntas=$mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
+
+
+                               if($buscar==1 || $modificable==false){
+                                    $tabla_imagenes.='<center><table id="tablapreg" name="tablapreg">';
+                                    $tabla_imagenes.="<tr>";
+                                    //Inserto las preguntas con clase "item" es decir dragables(mirar javascript.js)
+                                 for($i=1;$i<=sizeof($preguntas);$i++){
+
+                                      //Obtengo la pregunta
+                                      $tabla_imagenes.='<td id="texto'.$i.'"> <div class="item" id="'.$i.'">';
+
+                                      $tabla_imagenes.='<p style="margin-top: 10%;">'.$preguntas[$i-1]->get('pregunta').'</p>';
+
+                                       $tabla_imagenes.='</div></div></td>';
+                                      if($i % 2 == 0){ //Si es impar lo bajo
+                                          $tabla_imagenes.="</tr>";
+                                      }
+                                 }
+                                 $tabla_imagenes.="</tr>";
+                                 $tabla_imagenes.='</table></center>';
+                                 $tabla_imagenes.="</br>";
+                                  $tabla_imagenes.="</br>";
+                                 $tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
+
+                                 $k=1;
+                                 $las_respuestas[sizeof($preguntas)+1];
+                                 $aleatorios_generados=array();
+                                 while($k<=sizeof($preguntas)){
+                                  //Obtengo la respuestas (En este caso sólo habrá 1, ya que es "simple")
+
+                                   $id_pregunta=$preguntas[$k-1]->get('id');
+                                   $mis_respuestas = new Ejercicios_audios_asociados();
+
+                                   $respuestas=$mis_respuestas->obtener_todas_respuestas_pregunta($id_pregunta);
+
+                                    //Para cada respuesta
+
+                                                   srand (time());
+                                                   //generamos un número aleatorio entre 1 y el número de pregutnas
+                                                   $numero_aleatorio = rand(1,sizeof($preguntas));
+
+                                                   //buscamos si aleatorios contine
+                                                   $esta='0';
+
+
+                                                   for($j=0;$j< sizeof($aleatorios_generados);$j++){
+
+                                                       if($aleatorios_generados[$j]==$numero_aleatorio){
+
+                                                           $esta='1';
+                                                       }
+                                                   }
+
+                                                   if($esta == '0'){ //Si no esta lo inserto
+
+                                                          $nombre_respuestas[]=$respuestas[0]->get('nombre_audio');
+                                                          echo $respuestas[0]->get('nombre_audio');
+                                                          $aleatorios_generados[]=$numero_aleatorio;
+                                                          $k++;
+                                                   }
+
+
+                                       }
+
+
+                                       echo "AAAAAAAAAAAAAAAAAAAAAAAAaa";
+                                         for($j=0;$j< sizeof($aleatorios_generados);$j++){
+                                               $tabla_imagenes.='<tr>';
+
+                                               $tabla_imagenes.='<td><div class=descripcion>';
+
+                                               $tabla_imagenes.='<script type="text/javascript" src="./mediaplayer/swfobject.js"></script>';
+                                               $tabla_imagenes.='<div class="claseaudio1" id="player1" name="respuesta'.$i.'"></div>';
+                                               $tabla_imagenes.='<embed type="application/x-shockwave-flash" src="./mediaplayer/mediaplayer.swf" width="320" height="20" style="undefined" id="mpl" name="mpl" quality="high" allowfullscreen="true" flashvars="file=./audios/actividades/audio_'.$id_ejercicio.'_'.$i.'.mp3&amp;height=20&amp;width=320">';
+
+                             
+                                               $tabla_imagenes.='</div></td>';
+
+                                               $tabla_imagenes.='<td><div  id="'.$aleatorios_generados[$j].'" class="marquito"></div></td>';
+                                               $tabla_imagenes.='<td id="aceptado'.$aleatorios_generados[$j].'" class="marquitoaceptado"></td>';
+                                               $tabla_imagenes.='</tr>';
+                                         }
+
+                                        $tabla_imagenes.='</table></center>';
+                                        $tabla_imagenes.='<p class="numero" id="'.sizeof($preguntas).'"></p>';
+
+                                         //inserto el número de preguntas
+
+                                        $tabla_imagenes.='<input type="hidden" value='.sizeof($preguntas).' id="num_preg" name="num_preg" />';
+
+                               }else{
+                                    echo "akiiiiiiii";
+                                    $tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
+                              
+                                    for($i=1;$i<=sizeof($preguntas);$i++){
+                                             echo "iteracion".$i."aaaa".sizeof($preguntas);
+                                     $tabla_imagenes.="<tr>";
+                                     $tabla_imagenes.='<td id="texto'.$i.'">';
+                                     $tabla_imagenes.='<textarea id="pregunta'.$i.'" name="pregunta'.$i.'" style="height: 197px; width: 396px;">'.$preguntas[$i-1]->get('pregunta').'</textarea>';
+                                     $tabla_imagenes.='</td>';
+
+                                      $id_pregunta=$preguntas[$i-1]->get('id');
+
+                                      $mis_respuestas = new Ejercicios_audios_asociados();
+                                      $respuestas=$mis_respuestas->obtener_todas_respuestas_pregunta($id_pregunta);
+                                     
+
+                                     $tabla_imagenes.= '<td>';
+
+
+                                      $tabla_imagenes.= '<div id="c1">';
+                                      $tabla_imagenes.='<a href="javascript:cargaAudios(\''.$respuestas[0]->get('nombre_audio').'\','.$i.',\'primera\')" id="upload'.$i.'" class="up">Cambiar Audio</a>';
+                                     // $tabla_imagenes.='<input name="uploadedfile" type="file" />';
+                                     // $tabla_imagenes.='</div>';
+                                      $tabla_imagenes.='</div>';
+                                      $tabla_imagenes.='<div id="capa2"> ';
+
+
+                                     $tabla_imagenes.='<script type="text/javascript" src="./mediaplayer/swfobject.js"></script>';
+                                     $tabla_imagenes.='<div class="claseaudio1" id="player1" name="respuesta'.$i.'"></div>';
+                                     $tabla_imagenes.='<embed type="application/x-shockwave-flash" src="./mediaplayer/mediaplayer.swf" width="320" height="20" style="undefined" id="mpl" name="mpl" quality="high" allowfullscreen="true" flashvars="file=./audios/actividades/audio_'.$id_ejercicio.'_'.$i.'.mp3&amp;height=20&amp;width=320">';
+
+                                     $tabla_imagenes.='</div>';
+
+                                     $tabla_imagenes.='</td>';
+                                      
+                                      $tabla_imagenes.='</tr>';
+
+                                  
+                                    }
+                                    $tabla_imagenes.='</table></center>';
+
+                                    //inserto el número de preguntas
+
+                                    $tabla_imagenes.='<input type="hidden" value='.sizeof($preguntas).' id="num_preg" name="num_preg" />';
+
+                               }
+
+
+
+                                         //botones
+                                         $mform->addElement('html',$tabla_imagenes);
+
+
+                                          if($buscar!=1 && $modificable==true){
+                                              //Si soy el profesor creadors
+                                             $tabla_imagenes='<input type="submit" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="'.get_string('BotonGuardar','ejercicios').'">';
+                                             $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonTextoAudio" name="botonTextoAudio" value="'.get_string('NuevaAso','ejercicios').'" onclick="botonASTextoAudio('.$id_ejercicio.')">';
+                                             $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id .'\'"></center>';
+
+                                          }else{
+                                                 if($buscar==1){ //Si estoy buscand
+                                                        $ejercicios_prof = new Ejercicios_prof_actividad();
+                                                         $ejercicios_del_prof =$ejercicios_prof->obtener_uno_idejercicio($id_ejercicio);
+                                                         if(sizeof( $ejercicios_del_prof)==0){
+                                                             $noagregado=true;
+                                                         }else{
+                                                              $noagregado=false;
+                                                         }
+                                                        //si el ejercicio no es mio y soy profesor
+                                                         if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false) && ($modificable==false ||$noagregado==true) ){
+                                                        //boton añadir a mis ejercicios
+                                                          $attributes='size="40"';
+                                                          $mform->addElement('text', 'carpeta_ejercicio',get_string('carpeta', 'ejercicios') , $attributes);
+                                                          $mform->addRule('carpeta_ejercicio', "Carpeta Necesaria", 'required', null, 'client');
+                                                          $buttonarray = array();
+                                                          $buttonarray[] = &$mform->createElement('submit', 'submitbutton2', get_string('BotonAñadir','ejercicios'));
+                                                          $mform->addGroup($buttonarray, 'botones2', '', array(' '), false);
+
+                                                         }
+
+                                                         else{
+
+                                                             if($modificable==true){ // Si el ejercicio era mio y estoy buscando
+                                                                $tabla_imagenes='<center><input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id .'\'"></center>';
+                                                             }else{ //Si soy alumno
+                                                                  $tabla_imagenes='<center><input type="button" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
+                                                                  $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8'. '&id_ejercicio='.$id_ejercicio. '&tipo_origen='.$tipo_origen.'&tr='.$tipo_respuesta.'&tipocreacion='.$tipocreacion.'\'">';
+                                                                  $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id .'\'"></center>';
+
+                                                             }
+                                                         }
+                                                 }else{
+
+                                                       $tabla_imagenes='<center><input type="button" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
+                                                       $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8'. '&id_ejercicio='.$id_ejercicio. '&tipo_origen='.$tipo_origen.'&tr='.$tipo_respuesta.'&tipocreacion='.$tipocreacion.'\'">';
+                                                       $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id .'\'"></center>';
+
+                                                 }
+                                          }
+
+
+                                        $tabla_imagenes .='</td>';
+                                        $tabla_imagenes .='<td  width="10%">';
+                                            //añado la parte de vocabulario para la conexión
+                                        $tabla_imagenes .='<div><a  onclick=JavaScript:sele('.$id.')><img src="../vocabulario/imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im" title="'.get_string('guardar', 'vocabulario').'"/></a></div>';
+                                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=5"><img src="../vocabulario/imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im" title="'. get_string('admin_gr', 'vocabulario') . '"/></a></div>';
+                                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=7"><img src="../vocabulario/imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im" title="'. get_string('admin_ic', 'vocabulario') . '"/></a></div>';
+                                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=9"><img src="../vocabulario/imagenes/tipologias_textuales.png" id="id_tt_im" name="tt_im" title="'. get_string('admin_tt', 'vocabulario') .'"/> </a></div>';
+                                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=11"><img src="../vocabulario/imagenes/estrategias_icon.png" id="id_ea_im" name="ea_im" title="'. get_string('admin_ea', 'vocabulario') .'"/> </a></div>';
+
+                                        $tabla_imagenes .='</td>';
+
+                                        $tabla_imagenes .='</table>';
+
+                                        $mform->addElement('html',$tabla_imagenes);
+
+
+
+
+
+
+
                              break;
                              case 3: //Es de tipo video la respuesta
                              break;
