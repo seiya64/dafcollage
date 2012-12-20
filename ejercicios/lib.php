@@ -296,7 +296,12 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
             break;
 
       case 6:// Pulsado botón Buscar tanto por alumno como por profesor
-           
+
+             echo "id del curso".$id;
+             echo "tipo de actividad".$cta;
+             echo "campo lexico".$ccl;
+             
+
              $mform= new mod_ejercicios_mostrar_ejercicios_buscados($id);
              $mform->mostrar_ejercicios_buscados($id,$ccl,$cta,$cdc,$cgr,$cic,$ctt);
             break;
