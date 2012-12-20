@@ -256,6 +256,10 @@
  .claseaudio{
      margin-left: 300px;
 }
+ .claseaudio1{
+     margin-left: 40px;
+}
+
 
 
 
@@ -321,6 +325,9 @@ position:absolute;
 z-index:1;
 }
 
+#c1{
+margin-bottom: 40px;
+}
 
 .up{
         padding:12px;
