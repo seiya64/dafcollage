@@ -1,5 +1,5 @@
 <?php
-
+echo "llega";
 $nombre=$_GET['nombre'];
 
 echo "procesandoooo".$nombre;
