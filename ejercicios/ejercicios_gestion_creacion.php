@@ -91,6 +91,7 @@ if($tipo_pregunta == "Texto"){
          if($tipo_respuesta=="Audio"){
 
             $TipoArchivoRespuesta=2; //2 va a ser Audio
+            echo "tipo_respuesta audio";
 
          }else{
              if($tipo_respuesta=="Video"){
