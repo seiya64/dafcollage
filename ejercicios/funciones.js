@@ -1463,3 +1463,175 @@ function botonASTextoImagen(id_ejercicio){
            num_preg.value=sig_preg;
 }
 
+
+
+
+function cargaAudios(elnombre,i,j){
+
+    alert("AAAAAAAA"+i);
+    var text='#upload'+i;
+     var button = $(text), interval;
+       alert("el nombre  "+elnombre);
+        if(j=='primera'){
+                button.text('Pulse aqui');
+         }
+       // var elnombre="aaa";
+        new AjaxUpload(button,{
+            action: 'procesaaudio.php?nombre='+elnombre,
+            name: 'image',
+            autoSubmit: true,
+            onSubmit : function(file, ext){
+                 alert("Cargandoooo audio");
+                // cambiar el texto del boton cuando se selecicione la imagen
+                button.text('Subiendo');
+                // desabilitar el boton
+                this.disable();
+
+                interval = window.setInterval(function(){
+                    var text = button.text();
+                    if (text.length < 11){
+                        button.text(text + '.');
+                    } else {
+                        button.text('Subiendo');
+                    }
+                }, 200);
+            },
+            onComplete: function(file, response){
+                  alert("completado");
+                button.text('Cambiar Audio');
+               
+                window.clearInterval(interval);
+
+                // Habilitar boton otra vez
+                this.enable();
+          
+ 
+                respuesta = document.getElementsByName('respuesta'+i);
+         
+                respuesta[0].removeChild(respuesta[0].firstChild);
+              
+                elememb=document.createElement('embed');
+            
+                elememb.setAttribute("type","application/x-shockwave-flash");
+                elememb.setAttribute("src","./mediaplayer/mediaplayer.swf");
+                elememb.setAttribute("width","320");
+                elememb.setAttribute("height","20")
+                elememb.setAttribute("style","undefined");
+                elememb.setAttribute("id","mpl");
+           
+                elememb.setAttribute("name","mpl");
+                elememb.setAttribute("quality","high");
+                elememb.setAttribute("allowfullscreen","true");
+                elememb.setAttribute("flashvars","file=./audios/actividades/"+elnombre+"&amp;height=20&amp;width=320");
+        
+                 respuesta[0].appendChild(elememb);
+               
+                 }
+                //Tengo que cambiar la foto
+        });
+
+}
+
+
+
+
+function botonASTextoAudio(id_ejercicio){
+
+
+     num_preg=document.getElementById('num_preg');
+
+     sig_preg=parseInt(num_preg.value)+1;
+
+
+
+            //obtengo la tabla donde lo voy a insertar
+            tabla_insertar = document.getElementById('tablarespuestas');
+            alert(tabla_insertar);
+            tbody_insertar = tabla_insertar.lastChild;
+            alert(tbody_insertar);
+
+           //Para el texto
+            tabla_nuevotr = document.createElement('tr');
+            tabla_nuevotd = document.createElement('td');
+            tabla_nuevotd.id="texto"+sig_preg;
+            textarea = document.createElement('textarea');
+            textarea.id="pregunta"+sig_preg;
+            textarea.name="pregunta"+sig_preg;
+            textarea.setAttribute("style","height: 197px; width: 396px;");
+            textarea.appendChild(document.createTextNode("Nuevo Texto"));
+
+
+            //Para el audio exagerada
+
+
+            tabla_nuevotd1 = document.createElement('td');
+
+
+
+           divcapa1= document.createElement('div');
+           divcapa1.id="c1";
+           enlace= document.createElement('a');
+           enlace.setAttribute("href","javascript:cargaAudios('audio_"+id_ejercicio+"_"+sig_preg+".mp3',"+sig_preg+",'primera')");
+           enlace.id=id="upload"+sig_preg;
+           enlace.setAttribute("class","up");
+           enlace.appendChild(document.createTextNode("Cambiar Audio"));
+           divcapa1.appendChild(enlace);
+
+           divcapa2= document.createElement('div');
+           divcapa2.id="capa2";
+
+           //<script type="text/javascript" src="./mediaplayer/swfobject.js"></script>
+
+           elemscript=document.createElement('script');
+
+           elemscript.setAttribute("type","text/javascript");
+           elemscript.setAttribute("src","./mediaplayer/swfobject.js");
+           divcapa2.appendChild(elemscript);
+
+           elemdiv=document.createElement('div');
+           elemdiv.setAttribute("class","claseaudio1");
+           elemdiv.setAttribute("id","player1");
+           elemdiv.setAttribute("name","respuesta"+sig_preg);
+
+
+                elememb=document.createElement('embed');
+
+                elememb.setAttribute("type","application/x-shockwave-flash");
+                elememb.setAttribute("src","./mediaplayer/mediaplayer.swf");
+                elememb.setAttribute("width","320");
+                elememb.setAttribute("height","20")
+                elememb.setAttribute("style","undefined");
+                elememb.setAttribute("id","mpl");
+
+                elememb.setAttribute("name","mpl");
+                elememb.setAttribute("quality","high");
+                elememb.setAttribute("allowfullscreen","true");
+                alert("sig preg vale"+sig_preg);
+                elememb.setAttribute("flashvars","file=./audios/actividades/audio_11_"+sig_preg+".mp3&amp;height=20&amp;width=320");
+
+                  elemdiv.appendChild(elememb);
+                  
+             divcapa2.appendChild(elemdiv);
+
+            elemscript2=document.createElement('script');
+            elemscript2.setAttribute("type","text/javascript");
+
+            dentroscript2=document.createTextNode("var so = new SWFObject('./mediaplayer/mediaplayer.swf','mpl','320','20','7'); "+" so.addParam('allowfullscreen','true');" + " so.addVariable('file','./audios/actividades/audio_11_"+sig_preg+".mp3'); "+"  so.addVariable('height','20');" + "  so.addVariable('width','320');" + "so.write('player1');");
+            elemscript2.appendChild(dentroscript2);
+            divcapa2.appendChild(elemscript2);
+
+
+            tabla_nuevotd.appendChild(textarea);
+            tabla_nuevotd1.appendChild(divcapa1);
+            tabla_nuevotd1.appendChild(divcapa2);
+            tabla_nuevotr.appendChild(tabla_nuevotd);
+            tabla_nuevotr.appendChild(tabla_nuevotd1);
+            tbody_insertar.appendChild(tabla_nuevotr);
+
+
+           //Actualizo el número de preguntas a 1 mas
+
+           num_preg.value=sig_preg;
+}
+
+
