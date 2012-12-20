@@ -150,7 +150,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                         </script>');
                
              }else{
-                  if($tipo_origen==3){ //Es audio
+                  if($tipo_origen==3){ //Es video
                     //Añado el texto de origen
                          
                          /*   $url="http://pagina.com/index.php?abc=123&def=456&ghi=789";
