@@ -91,8 +91,8 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
        //le resto 2 ya que el primero es -- y select
         
         $cta=$cta-2;
-    
 
+        
        //clasificación por gramatica
        //Si es 1 es -- y 0 Select
         
@@ -412,7 +412,7 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
 
       
         $numencontrados=sizeof($buscados);
-        
+        echo "numero encontrados".$numencontrados;
           $carpeta='<ul id="menuaux">';
          for($i=0;$i<$numencontrados;$i++){
     
@@ -435,9 +435,14 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
                                 $carpeta.='<li style="width:750px;"><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'&buscar=1&tipo_origen='.$buscados[$i]->get('tipoarchivopregunta').'&tr='.$buscados[$i]->get('tipoarchivorespuesta').'&tipocreacion='.$buscados[$i]->get('tipoactividad').'">'. $nombre_ejercicio.'</a></li>';
 
                           }else{
-                              if($buscados[$i]->get('tipoarchivorespuesta')==4){ //La respuesta es un texto
+                              if($buscados[$i]->get('tipoarchivorespuesta')==2){ //La respuesta es un audio
                                 $carpeta.='<li style="width:750px;"><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'&buscar=1&tipo_origen='.$buscados[$i]->get('tipoarchivopregunta').'&tr='.$buscados[$i]->get('tipoarchivorespuesta').'&tipocreacion='.$buscados[$i]->get('tipoactividad').'">'. $nombre_ejercicio.'</a></li>';
 
+                              }else{
+                                  if($buscados[$i]->get('tipoarchivorespuesta')==4){ //La respuesta es un texto
+                                    $carpeta.='<li style="width:750px;"><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'&buscar=1&tipo_origen='.$buscados[$i]->get('tipoarchivopregunta').'&tr='.$buscados[$i]->get('tipoarchivorespuesta').'&tipocreacion='.$buscados[$i]->get('tipoactividad').'">'. $nombre_ejercicio.'</a></li>';
+
+                                  }
                               }
                           }
 
