@@ -1549,7 +1549,6 @@ function botonASTextoAudio(id_ejercicio){
             alert(tabla_insertar);
             tbody_insertar = tabla_insertar.lastChild;
             alert(tbody_insertar);
-
            //Para el texto
             tabla_nuevotr = document.createElement('tr');
             tabla_nuevotd = document.createElement('td');
@@ -1561,69 +1560,66 @@ function botonASTextoAudio(id_ejercicio){
             textarea.appendChild(document.createTextNode("Nuevo Texto"));
 
 
-            //Para el audio exagerada
-
+            //Para el audio 
 
             tabla_nuevotd1 = document.createElement('td');
 
+            divcapa1= document.createElement('div');
+            divcapa1.id="c1";
+            enlace= document.createElement('a');
+            enlace.setAttribute("href","javascript:cargaAudios('audio_"+id_ejercicio+"_"+sig_preg+".mp3',"+sig_preg+",'primera')");
+            enlace.id=id="upload"+sig_preg;
+            enlace.setAttribute("class","up");
+            enlace.appendChild(document.createTextNode("Cambiar Audio"));
+            divcapa1.appendChild(enlace);
 
-
-           divcapa1= document.createElement('div');
-           divcapa1.id="c1";
-           enlace= document.createElement('a');
-           enlace.setAttribute("href","javascript:cargaAudios('audio_"+id_ejercicio+"_"+sig_preg+".mp3',"+sig_preg+",'primera')");
-           enlace.id=id="upload"+sig_preg;
-           enlace.setAttribute("class","up");
-           enlace.appendChild(document.createTextNode("Cambiar Audio"));
-           divcapa1.appendChild(enlace);
-
-           divcapa2= document.createElement('div');
-           divcapa2.id="capa2";
+            divcapados= document.createElement('div');
+            divcapados.id="capa2";
 
            //<script type="text/javascript" src="./mediaplayer/swfobject.js"></script>
 
-           elemscript=document.createElement('script');
+            elemscript=document.createElement('script');
 
-           elemscript.setAttribute("type","text/javascript");
-           elemscript.setAttribute("src","./mediaplayer/swfobject.js");
-           divcapa2.appendChild(elemscript);
+            elemscript.setAttribute("type","text/javascript");
+            elemscript.setAttribute("src","./mediaplayer/swfobject.js");
+            divcapados.appendChild(elemscript);
 
-           elemdiv=document.createElement('div');
-           elemdiv.setAttribute("class","claseaudio1");
-           elemdiv.setAttribute("id","player1");
-           elemdiv.setAttribute("name","respuesta"+sig_preg);
+            elemdiv=document.createElement('div');
+           // elemdiv.setAttribute("class","claseaudio1");
+            elemdiv.setAttribute("id","player1");
+            elemdiv.setAttribute("name","respuesta"+sig_preg);
 
 
-                elememb=document.createElement('embed');
+            elememb=document.createElement('embed');
 
-                elememb.setAttribute("type","application/x-shockwave-flash");
-                elememb.setAttribute("src","./mediaplayer/mediaplayer.swf");
-                elememb.setAttribute("width","320");
-                elememb.setAttribute("height","20")
-                elememb.setAttribute("style","undefined");
-                elememb.setAttribute("id","mpl");
+            elememb.setAttribute("type","application/x-shockwave-flash");
+            elememb.setAttribute("src","./mediaplayer/mediaplayer.swf");
+            elememb.setAttribute("width","320");
+            elememb.setAttribute("height","20")
+            elememb.setAttribute("style","undefined");
+            elememb.setAttribute("id","mpl");
 
-                elememb.setAttribute("name","mpl");
-                elememb.setAttribute("quality","high");
-                elememb.setAttribute("allowfullscreen","true");
-                alert("sig preg vale"+sig_preg);
-                elememb.setAttribute("flashvars","file=./audios/actividades/audio_11_"+sig_preg+".mp3&amp;height=20&amp;width=320");
+            elememb.setAttribute("name","mpl");
+            elememb.setAttribute("quality","high");
+            elememb.setAttribute("allowfullscreen","true");
+            alert("sig preg vale"+sig_preg);
+            elememb.setAttribute("flashvars","file=./audios/actividades/audio_"+id_ejercicio+'_'+sig_preg+".mp3&amp;height=20&amp;width=320");
 
-                  elemdiv.appendChild(elememb);
+            elemdiv.appendChild(elememb);
                   
-             divcapa2.appendChild(elemdiv);
+            divcapados.appendChild(elemdiv);
 
             elemscript2=document.createElement('script');
             elemscript2.setAttribute("type","text/javascript");
 
-            dentroscript2=document.createTextNode("var so = new SWFObject('./mediaplayer/mediaplayer.swf','mpl','320','20','7'); "+" so.addParam('allowfullscreen','true');" + " so.addVariable('file','./audios/actividades/audio_11_"+sig_preg+".mp3'); "+"  so.addVariable('height','20');" + "  so.addVariable('width','320');" + "so.write('player1');");
+            dentroscript2=document.createTextNode("var so"+id_ejercicio+"_"+sig_preg+" = new SWFObject('./mediaplayer/mediaplayer.swf','mpl','320','20','7'); "+" so.addParam('allowfullscreen','true');" + " so.addVariable('file','./audios/actividades/audio_"+id_ejercicio+"_"+sig_preg+".mp3'); "+"  so.addVariable('height','20');" + "  so.addVariable('width','320');" + "so.write('player1');");
             elemscript2.appendChild(dentroscript2);
-            divcapa2.appendChild(elemscript2);
+            divcapados.appendChild(elemscript2);
 
 
             tabla_nuevotd.appendChild(textarea);
             tabla_nuevotd1.appendChild(divcapa1);
-            tabla_nuevotd1.appendChild(divcapa2);
+            tabla_nuevotd1.appendChild(divcapados);
             tabla_nuevotr.appendChild(tabla_nuevotd);
             tabla_nuevotr.appendChild(tabla_nuevotd1);
             tbody_insertar.appendChild(tabla_nuevotr);
