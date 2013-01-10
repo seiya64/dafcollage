@@ -478,6 +478,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                                               //Si soy el profesor creadors
                                              $tabla_imagenes='<input type="submit" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="'.get_string('BotonGuardar','ejercicios').'">';
                                              $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonTextoAudio" name="botonTextoAudio" value="'.get_string('NuevaAso','ejercicios').'" onclick="botonASTextoAudio('.$id_ejercicio.')">';
+                                             echo "finnnnnnnnn";
                                              $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id .'\'"></center>';
 
                                           }else{
