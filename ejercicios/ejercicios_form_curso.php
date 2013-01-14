@@ -115,10 +115,16 @@ class mod_ejercicios_curso extends moodleform_mod{
                                  $carpeta.='<li style="width:750px;"><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'&buscar=1&tipo_origen='.$todos_ejer_curso[$i]->get('tipoarchivopregunta').'&tr='.$todos_ejer_curso[$i]->get('tipoarchivorespuesta').'&tipocreacion='.$todos_ejer_curso[$i]->get('tipoactividad').'">'. $nombre_ejercicio.'</a></li>';
 
                           }else{
-                              if($todos_ejer_curso[$i]->get('tipoarchivorespuesta')==4){ //La respuesta es una imagen
+
+                               if($todos_ejer_curso[$i]->get('tipoarchivorespuesta')==2){ //La respuesta es un audio
                                  $carpeta.='<li style="width:750px;"><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'&buscar=1&tipo_origen='.$todos_ejer_curso[$i]->get('tipoarchivopregunta').'&tr='.$todos_ejer_curso[$i]->get('tipoarchivorespuesta').'&tipocreacion='.$todos_ejer_curso[$i]->get('tipoactividad').'">'. $nombre_ejercicio.'</a></li>';
 
-                          }
+                               }else{
+                                  if($todos_ejer_curso[$i]->get('tipoarchivorespuesta')==4){ //La respuesta es una imagen
+                                     $carpeta.='<li style="width:750px;"><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'&buscar=1&tipo_origen='.$todos_ejer_curso[$i]->get('tipoarchivopregunta').'&tr='.$todos_ejer_curso[$i]->get('tipoarchivorespuesta').'&tipocreacion='.$todos_ejer_curso[$i]->get('tipoactividad').'">'. $nombre_ejercicio.'</a></li>';
+
+                                   }
+                               }
 
                           }
 
