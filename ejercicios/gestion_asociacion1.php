@@ -16,7 +16,10 @@
   Simeón Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto(finamolina@gmail.com)
 
-  Original idea and content design:
+  Original idea:
+  Ruth Burbat
+
+  Content design:
   Ruth Burbat
   AInmaculada Almahano Güeto
   Andrea Bies
