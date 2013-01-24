@@ -312,7 +312,7 @@ class Ejercicios_general {
     function buscar_temagramatical($temagramatical) {
 
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE destreza=' . $temagramatical;
+        $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE temagramatical=' . $temagramatical;
 
         $todos = get_records_sql($sql);
 
@@ -589,7 +589,7 @@ class Ejercicios_general {
         return $todos_mis_ejercicios;
     }
     
-        function buscar_clasif_sin_ta_cl_ic_tt($cdc,$cgr){
+     function buscar_clasif_sin_ta_cl_ic_tt($cdc,$cgr){
          $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE ' . 'destreza=' . $cdc . ' AND temagramatical=' . $cgr;
 
         $todos = get_records_sql($sql);
@@ -2617,7 +2617,7 @@ class Ejercicios_audios_asociados{
 
 
 /*
- * Clase que gestiona la tabla mdl_ejercicios_textos de la BD, es decir si el arichivo origen
+ * Clase que gestiona la tabla mdl_ejercicios_videos asociados de la BD, es decir si el arichivo origen
  * es texto en el formulario de creación estará almacenado en esta tabla.
  */
 
@@ -2739,6 +2739,10 @@ class Ejercicios_videos_asociados{
     }
 
 }
+
+
+
+//tabla para gestionar asociacion simple (Videos asociados a textos)
 
 
 
