@@ -1631,3 +1631,84 @@ function botonASTextoAudio(id_ejercicio){
 }
 
 
+
+
+
+
+function botonASTextoVideo(id_ejercicio){
+
+    alert("Añadiendo texto video");
+
+     num_preg=document.getElementById('num_preg');
+
+     sig_preg=parseInt(num_preg.value)+1;
+
+
+
+            //obtengo la tabla donde lo voy a insertar
+            tabla_insertar = document.getElementById('tablarespuestas');
+            alert(tabla_insertar);
+            tbody_insertar = tabla_insertar.lastChild;
+            alert(tbody_insertar);
+           //Para el texto
+            tabla_nuevotr = document.createElement('tr');
+            tabla_nuevotd = document.createElement('td');
+            tabla_nuevotd.id="texto"+sig_preg;
+            textarea = document.createElement('textarea');
+            textarea.id="pregunta"+sig_preg;
+            textarea.name="pregunta"+sig_preg;
+            textarea.setAttribute("style","height: 197px; width: 396px;");
+            textarea.appendChild(document.createTextNode("Nuevo Texto"));
+
+
+            //Para el audio
+
+            tabla_nuevotd1 = document.createElement('td');
+
+
+            //<a onclick="ObtenerDireccion(1)" class="button super yellow centrarvideo" href="http://www.youtube.com/" target="_blank" id="video1">Ver Video</a>
+            enlace= document.createElement('a');
+            enlace.setAttribute("onclick","ObtenerDireccion("+sig_preg+")");
+            enlace.setAttribute("class","button super yellow centrarvideo");
+            enlace.setAttribute("href","#");
+            enlace.setAttribute("target","_blank");
+
+
+
+          //  enlace.setAttribute("href","javascript:cargaAudios('audio_"+id_ejercicio+"_"+sig_preg+".mp3',"+sig_preg+",'primera')");
+            enlace.id=id="video"+sig_preg;
+            enlace.appendChild(document.createTextNode("Ver Video"));
+            
+            //<textarea class="video1" name="archivovideo1" id="archivovideo1">http://www.youtube.com/watch?v=WYGFNjEL7Jw</textarea>
+
+            textarea2 = document.createElement('textarea');
+            textarea2.setAttribute("class","video1");
+            textarea2.name="archivovideo"+sig_preg;
+            textarea2.id="archivovideo"+sig_preg;
+            textarea2.appendChild(document.createTextNode("Introduzca el enlace al video"));
+
+            tabla_nuevotd.appendChild(textarea);
+            tabla_nuevotd1.appendChild(enlace);
+            tabla_nuevotd1.appendChild(textarea2);
+            tabla_nuevotr.appendChild(tabla_nuevotd);
+            tabla_nuevotr.appendChild(tabla_nuevotd1);
+            tbody_insertar.appendChild(tabla_nuevotr);
+
+
+           //Actualizo el número de preguntas a 1 mas
+
+           num_preg.value=sig_preg;
+}
+
+
+
+function ObtenerDireccion(i){
+   
+    direccion=document.getElementById('archivovideo'+i);
+    enlace=document.getElementById('video'+i);
+    enlace.href=direccion.value;
+}
+
+
+
+
