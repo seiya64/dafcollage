@@ -14,10 +14,14 @@
   Source code:
   Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
   Simeón Ruiz Romero (simeonruiz@gmail.com)
+  Serafina Molina Soto(finamolinasoto@gmail.com)
 
-  Original idea and content design:
+  Original idea:
   Ruth Burbat
-  Inmaculada Almahano Güeto
+
+  Content design:
+  Ruth Burbat
+  AInmaculada Almahano Güeto
   Andrea Bies
   Julia Möller Runge
   Blanca Rodríguez Gómez
@@ -34,7 +38,6 @@
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details. */
-
 
 require_once("../../config.php");
 require_once("lib.php");
