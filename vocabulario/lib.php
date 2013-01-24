@@ -1,15 +1,43 @@
 <?php
 
-// $Id: lib.php,v 1.4 2006/08/28 16:41:20 mark-nielsen Exp $
-/**
- * Library of functions and constants for module vocabulario
- *
- * @author
- * @version $Id: lib.php,v 1.4 2006/08/28 16:41:20 mark-nielsen Exp $
- * @package vocabulario
- * */
-/// (replace vocabulario with the name of your module and delete this line)
-//$vocabulario_CONSTANT = 7;     /// for example
+/*
+  Daf-collage is made up of two Moodle modules which help in the process of
+  German language learning. It facilitates the content organization like
+  vocabulary or the main grammar features and gives the chance to create
+  exercises in order to consolidate knowledge.
+
+  Copyright (C) 2011
+
+  Coordination:
+  Ruth Burbat
+
+  Source code:
+  Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
+  Simeón Ruiz Romero (simeonruiz@gmail.com)
+  Serafina Molina Soto(finamolinasoto@gmail.com)
+
+  Original idea:
+  Ruth Burbat
+
+  Content design:
+  Ruth Burbat
+  AInmaculada Almahano Güeto
+  Andrea Bies
+  Julia Möller Runge
+  Blanca Rodríguez Gómez
+  Antonio Salmerón Matilla
+  María José Varela Salinas
+  Karin Vilar Sánchez
+
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details. */
 require_once("$CFG->libdir/formslib.php");
 require_once("vocabulario_formularios.php");
 
