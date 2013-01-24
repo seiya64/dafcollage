@@ -69,7 +69,7 @@ switch($tipo_origen){
     case 1://Es un texto
     echo "Texto -";
         switch($tipo_respuesta){
-            case 1:
+            case 1: //Respuesta texto
             //echo "inserto en la bd";
             //Obtengo el numero de preguntas
             $numero_preguntas = optional_param('numeropreguntas', PARAM_INT);
@@ -141,8 +141,34 @@ switch($tipo_origen){
                     }
                      echo "fin insercción";
             break;
-            case 3://REspuesta es Video
-                echo  "es un video";
+            case 3://Respuesta es Video
+                echo  "es un videooooooooo";
+                  //Guardando las direcciones de los videos y el texto correspondiente
+
+                    //Obtengo el numero de preguntas
+                    $numero_preguntas = optional_param('numeropreguntas', PARAM_INT);
+                        echo "numero preguntas".$numero_preguntas;
+                    for($i=0;$i<$numero_preguntas;$i++){
+                        //Obtengo la pregunta
+
+                        $j=$i+1;
+                        $pregunta = optional_param('pregunta'.$j,PARAM_TEXT);
+
+                        //Inserto la pregunta Archivo asociación
+                        $mispreguntas= new Ejercicios_texto_texto_preg(NULL,$id_ejercicio,$pregunta);
+                        $id_preg=$mispreguntas->insertar();
+
+                         $dirvideoasociado = optional_param('archivovideo'.$j,PARAM_TEXT);
+                         $rcorrecta=0; //Me da igual si es correcat o incorrecta
+
+                         //Lo inserto en la tabla de videos para asociar respuestas y preguntas
+                         $mi_respuesta = new Ejercicios_videos_asociados(NULL,$id_ejercicio,$id_preg,$dirvideoasociado);
+
+                         $mi_respuesta->insertar();
+
+
+                    }
+                     echo "fin insercción";
             break;
             case 4:// Respuesta es Foto
                 //Guardando la foto y el texto
@@ -183,7 +209,7 @@ switch($tipo_origen){
 
                     }
                      echo "fin insercción";
-                     // die;
+                    
             break;
 
         }
