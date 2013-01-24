@@ -198,6 +198,12 @@
 
 }
 
+.video1{
+        background-color: #D19DA0;
+        margin-top: 10px;
+	width: 400px;
+
+}
 
 .respuesta{
 
@@ -313,7 +319,7 @@ text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
 
 /* botones extra grandes */
 .super.button, .super.button:visited {
-font-size: 34px;
+font-size: 28px;
 padding: 8px 14px 9px;
 }
 
@@ -346,3 +352,7 @@ margin-bottom: 40px;
         margin:0 auto;
         text-decoration:none
     }
+
+ .centrarvideo{
+        margin-left:90px
+}
