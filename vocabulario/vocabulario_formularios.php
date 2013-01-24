@@ -14,16 +14,20 @@
   Source code:
   Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
   Simeón Ruiz Romero (simeonruiz@gmail.com)
+  Serafina Molina Soto(finamolinasoto@gmail.com)
 
-  Original idea and content design:
+  Original idea:
   Ruth Burbat
+
+  Content design:
+  Ruth Burbat
+  AInmaculada Almahano Güeto
   Andrea Bies
   Julia Möller Runge
-  Antonio Salmerón Matilla
-  Karin Vilar Sánchez
-  Inmaculada Almahano Güeto
   Blanca Rodríguez Gómez
+  Antonio Salmerón Matilla
   María José Varela Salinas
+  Karin Vilar Sánchez
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
