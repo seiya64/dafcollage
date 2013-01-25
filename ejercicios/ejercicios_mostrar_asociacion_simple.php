@@ -582,11 +582,13 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
 
 
                                if($buscar==1 || $modificable==false){
+                                   echo "buscar vale uno y no es modificable";
+                                   
                                     $tabla_imagenes.='<center><table id="tablapreg" name="tablapreg">';
                                     $tabla_imagenes.="<tr>";
                                     //Inserto las preguntas con clase "item" es decir dragables(mirar javascript.js)
                                  for($i=1;$i<=sizeof($preguntas);$i++){
-
+                                    echo "obtengo la pregunta";
                                       //Obtengo la pregunta
                                       $tabla_imagenes.='<td id="texto'.$i.'"> <div class="item" id="'.$i.'">';
 
@@ -601,6 +603,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                                  $tabla_imagenes.='</table></center>';
                                  $tabla_imagenes.="</br>";
                                   $tabla_imagenes.="</br>";
+                                  
                                  $tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
 
                                  $k=1;
@@ -645,15 +648,12 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
 
 
                                        echo "AAAAAAAAAAAAAAAAAAAAAAAAaa";
+                                       
                                          for($j=0;$j< sizeof($aleatorios_generados);$j++){
                                                $tabla_imagenes.='<tr>';
 
                                                $tabla_imagenes.='<td><div class=descripcion>';
-
-                                              $tabla_imagenes.='<a href="" id="video'.$i.'">Cambiar video</a>';
-
-                                              $tabla_imagenes.='<a href="'.$respuestas[0]->get('nombre_video').'" id="video'.$i.'">'.$respuestas[0]->get('nombre_video').'</a>';
-
+                    
                                               $tabla_imagenes.=' <a class="button super yellow" href="'.$respuestas[0]->get('nombre_video').'" target="_blank" id="video'.$i.'">Ver Video</a>';
 
                                            
@@ -665,6 +665,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                                          }
 
                                         $tabla_imagenes.='</table></center>';
+                                        echo"aki llega";
                                         $tabla_imagenes.='<p class="numero" id="'.sizeof($preguntas).'"></p>';
 
                                          //inserto el número de preguntas
@@ -693,10 +694,8 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
 
                                      $tabla_imagenes.=' <a onclick="ObtenerDireccion('.$i.')" class="button super yellow centrarvideo" href="'.$respuestas[0]->get('nombre_video').'" target="_blank" id="video'.$i.'">Ver Video</a>';
 
-                                     //Para que modifique la dirección del video
-                                    
-                                     $tabla_imagenes.= '<textarea class="video1" name="archivovideo'.$i.'" id="archivovideo'.$i.'">'.$respuestas[0]->get('nombre_video').'</textarea>';
-
+                                   
+                                   
                                      $tabla_imagenes.='</td>';
 
                                       $tabla_imagenes.='</tr>';
