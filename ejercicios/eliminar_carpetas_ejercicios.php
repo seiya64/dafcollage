@@ -99,6 +99,7 @@ $ejercicio_profesor_actividad = new Ejercicios_prof_actividad();
                     $ej_textos=new Ejercicios_textos();
                     $ej_textos->borrar_id_ejercicio($id_ejercicio);
                 }else{
+                    
                      if($ejercicio->get('tipoarchivopregunta')==3){//hay un video
                          $ej_video=new Ejercicios_videos();
                          $ej_video->borrar_id_ejercicio($id_ejercicio);
