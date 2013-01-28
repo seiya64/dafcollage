@@ -321,8 +321,8 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
                     case 1: // si es asociacion simple
 
                         echo "mostrando ejercicio asociacion simple";
-                      $mform= new mod_ejercicios_mostrar_ejercicio_asociacion_simple($id,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
-                      $mform->mostrar_ejercicio_asociacion_simple($id,$id_ejercicio,$buscar,$tipo_origen,$trespuesta,$tipocreacion);
+                       $mform= new mod_ejercicios_mostrar_ejercicio_asociacion_simple($id,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
+                       $mform->mostrar_ejercicio_asociacion_simple($id,$id_ejercicio,$buscar,$tipo_origen,$trespuesta,$tipocreacion);
                     break;
             }
             break;
