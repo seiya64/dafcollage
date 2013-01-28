@@ -215,15 +215,56 @@ switch($tipo_origen){
         }
             break;
 
-    case 2://Es una foto
-        echo "es una foto";
-        die;
-    case 3://Es un audio
-        echo "es un audio";
-        die;
+    case 2://Es una audio la pregunta
+
+
+    echo "la pregunta es un audio";
+                //Guardando las imagenes y los textos
+
+                    //SUBO LOS AUDIOS A MOODLE
+                         $m=1;
+                         foreach($_FILES as $name => $values){
+
+                          //tengo que cambiar la ruta donde se guarda
+                            if( move_uploaded_file($values['tmp_name'],'C:/xampp/htdocs/moodle/mod/ejercicios/audios/actividades/audio_'.$id_ejercicio.'_'.$m.'.mp3') ){
+
+                                   //  echo 'El archivo ha sido subido correctamente.<br/>';
+                                   $m++;
+
+                           }
+                        }
+                       // echo "m vale".$m;
+                    //Obtengo el numero de preguntas
+                    $numero_preguntas = optional_param('numeropreguntas', PARAM_INT);
+                        echo "numero preguntas".$numero_preguntas;
+                    for($i=0;$i<$numero_preguntas;$i++){
+                        //Obtengo la pregunta
+
+                        $j=$i+1;
+                        $pregunta = optional_param('pregunta'.$j,PARAM_TEXT);
+
+                        //Inserto la pregunta Archivo asociación
+                        $mispreguntas= new Ejercicios_texto_texto_preg(NULL,$id_ejercicio,$pregunta);
+                        $id_preg=$mispreguntas->insertar();
+
+                         //Lo inserto en la tabla de imagenes para asociar respuestas y preguntas
+                         $nombre_audio='audio_'.$id_ejercicio.'_'.$j.'.mp3';
+                         $mi_respuesta = new Ejercicios_audios_asociados(NULL,$id_ejercicio,$id_preg,$nombre_audio);
+
+                         $mi_respuesta->insertar();
+
+
+                    }
+                     echo "fin insercción";
+
+        echo "es una audio";
+        break;
+    case 3://Es un imagn
+        echo "es un imagen";
+        break;
     case 4://Es una video
         echo "es una video";
-        die;
+        break;
 
 }
 
