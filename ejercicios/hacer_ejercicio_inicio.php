@@ -88,12 +88,30 @@ if ($mform->is_submitted()) { //Boton realizar (el boton buscar y crear estan en
 
                                  }else{
 
-                                     if($ejercicio->get('tipoarchivorespuesta')==1 || $ejercicio->get('tipoarchivorespuesta')==4){ //La respuesta es una imagen
+                                     if($ejercicio->get('tipoarchivorespuesta')==1 || $ejercicio->get('tipoarchivorespuesta')==3){ //La respuesta es una video
+                                         echo "entra";
+                                       
                                           redirect("./view.php?opcion=8&id=".$id_curso.'&id_ejercicio='.$id_ejercicio.'&buscar=1&tipo_origen='.$ejercicio->get('tipoarchivopregunta').'&tr='.$ejercicio->get('tipoarchivorespuesta').'&tipocreacion='.$ejercicio->get('tipoactividad'));
 
+                                     }else{
+                                         if($ejercicio->get('tipoarchivorespuesta')==1 || $ejercicio->get('tipoarchivorespuesta')==4){ //La respuesta es una imagen
+                                              redirect("./view.php?opcion=8&id=".$id_curso.'&id_ejercicio='.$id_ejercicio.'&buscar=1&tipo_origen='.$ejercicio->get('tipoarchivopregunta').'&tr='.$ejercicio->get('tipoarchivorespuesta').'&tipocreacion='.$ejercicio->get('tipoactividad'));
+
+                                         }
                                      }
                                  }
                           }
+
+                     }else{
+
+                        if($ejercicio->get('tipoarchivopregunta')==2){ //La pregunta es unaudio
+                          if($ejercicio->get('tipoarchivorespuesta')==1){ //La respuesta es un texto
+                              redirect("./view.php?opcion=8&id=".$id_curso.'&id_ejercicio='.$id_ejercicio.'&buscar=1&tipo_origen='.$ejercicio->get('tipoarchivopregunta').'&tr='.$ejercicio->get('tipoarchivorespuesta').'&tipocreacion='.$ejercicio->get('tipoactividad'));
+
+                          }
+                         }
+
+
 
                      }
                  }
