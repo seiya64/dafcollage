@@ -66,59 +66,26 @@ echo "El numero de pregunas es".$numeropreguntas;
 
     begin_sql();
 
-    if($tipo_respuesta==1){//Es un texto
-       
-            //obtengo los id de las preguntas del ejercicio
-            $id_preguntas=array();
+    if($tipo_origen==1){ //la pregunta es un texto
+                if($tipo_respuesta==1){//Es un texto
 
-            $mis_preguntas= new Ejercicios_texto_texto_preg();
+                        //obtengo los id de las preguntas del ejercicio
+                        $id_preguntas=array();
 
-            $id_preguntas=$mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
-            //borro las respuestas
+                        $mis_preguntas= new Ejercicios_texto_texto_preg();
 
-            for($s=0;$s<sizeof($id_preguntas);$s++){
-                    delete_records('ejercicios_texto_texto_resp', 'id_pregunta', $id_preguntas[$s]->get('id'));
+                        $id_preguntas=$mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
+                        //borro las respuestas
 
-            }
+                        for($s=0;$s<sizeof($id_preguntas);$s++){
+                                delete_records('ejercicios_texto_texto_resp', 'id_pregunta', $id_preguntas[$s]->get('id'));
 
-    }else{
+                        }
 
-        if($tipo_respuesta==2){ //la respuesta es un audio
-            echo "actualizando audio";
-             //obtengo los id de las preguntas del ejercicio
-            $id_preguntas=array();
+                }else{
 
-            $mis_preguntas= new Ejercicios_texto_texto_preg();
-
-             $id_preguntas=$mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
-            //borro las respuestas
-
-            for($s=0;$s<sizeof($id_preguntas);$s++){
-                    delete_records('ejercicios_audios_asociados', 'id_ejercicio', $id_ejercicio);
-
-            }
-
-        }else{
-
-               if($tipo_respuesta==3){//video
-                    echo "actualizando video";
-                     //obtengo los id de las preguntas del ejercicio
-                    $id_preguntas=array();
-
-                    $mis_preguntas= new Ejercicios_texto_texto_preg();
-
-                     $id_preguntas=$mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
-                    //borro las respuestas
-
-                    for($s=0;$s<sizeof($id_preguntas);$s++){
-                            delete_records('ejercicios_videos_asociados', 'id_ejercicio', $id_ejercicio);
-
-                    }
-
-               }else{
-
-                    if($tipo_respuesta==4){
-                        echo "actualizando imagen";
+                    if($tipo_respuesta==2){ //la respuesta es un audio
+                        echo "actualizando audio";
                          //obtengo los id de las preguntas del ejercicio
                         $id_preguntas=array();
 
@@ -128,70 +95,140 @@ echo "El numero de pregunas es".$numeropreguntas;
                         //borro las respuestas
 
                         for($s=0;$s<sizeof($id_preguntas);$s++){
-                                delete_records('ejercicios_imagenes_asociadas', 'id_ejercicio', $id_ejercicio);
+                                delete_records('ejercicios_audios_asociados', 'id_ejercicio', $id_ejercicio);
 
                         }
 
+                    }else{
+
+                           if($tipo_respuesta==3){//video
+                                echo "actualizando video";
+                                 //obtengo los id de las preguntas del ejercicio
+                                $id_preguntas=array();
+
+                                $mis_preguntas= new Ejercicios_texto_texto_preg();
+
+                                 $id_preguntas=$mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
+                                //borro las respuestas
+
+                                for($s=0;$s<sizeof($id_preguntas);$s++){
+                                        delete_records('ejercicios_videos_asociados', 'id_ejercicio', $id_ejercicio);
+
+                                }
+
+                           }else{
+
+                                if($tipo_respuesta==4){
+                                    echo "actualizando imagen";
+                                     //obtengo los id de las preguntas del ejercicio
+                                    $id_preguntas=array();
+
+                                    $mis_preguntas= new Ejercicios_texto_texto_preg();
+
+                                     $id_preguntas=$mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
+                                    //borro las respuestas
+
+                                    for($s=0;$s<sizeof($id_preguntas);$s++){
+                                            delete_records('ejercicios_imagenes_asociadas', 'id_ejercicio', $id_ejercicio);
+
+                                    }
+
+                                }
+                            }
                     }
                 }
-        }
-    }
 
-    if($tipo_origen==1){
-            //borro las preguntas
-            delete_records('ejercicios_texto_texto_preg', 'id_ejercicio', $id_ejercicio);
-    }
+                 //borro las preguntas
+                 delete_records('ejercicios_texto_texto_preg', 'id_ejercicio', $id_ejercicio);
 
+    }else{
+           if($tipo_origen==2){ //Pregunta es un Audio
 
-    //Guardo las nuevas
+                        //borro las preguntas
+                        $id_preguntas=array();
 
-    for($i=0;$i<$numeropreguntas;$i++){
-    //Obtengo el numero de respuestas a cada pregunta
-    $j=$i+1;
+                        $mis_preguntas= new Ejercicios_texto_texto_preg();
 
+                         $id_preguntas=$mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
+                        //borro las respuestas
 
-        if($tipo_origen==1){ //Si la pregunta es un texto
-                $preg=required_param('pregunta'.$j,PARAM_TEXT);
-                $ejercicio_texto_preg = new Ejercicios_texto_texto_preg(NULL,$id_ejercicio,$preg);
-                $id_pregunta= $ejercicio_texto_preg->insertar();
-        }
+                        for($s=0;$s<sizeof($id_preguntas);$s++){
+                                delete_records('ejercicios_audios_asociados', 'id_ejercicio', $id_ejercicio);
 
-        if($tipo_respuesta==1){ //Si la respuesta es un texto
-            $resp=required_param('respuesta'.$j,PARAM_TEXT);
-
-            $correcta=0;
-
-           $ejercicio_texto_resp = new Ejercicios_texto_texto_resp(NULL,$id_pregunta,$resp,$correcta);
-           $ejercicio_texto_resp->insertar();
-        }else{
-
-                if($tipo_respuesta==2){ //es un audio
-
-
-                      $ejercicio_texto_audio = new Ejercicios_audios_asociados($NULL,$id_ejercicio,$id_pregunta ,'audio_'.$id_ejercicio."_".$j.".mp3");
-                      $ejercicio_texto_audio->insertar();
-                }else{
-
-                     if($tipo_respuesta==3){ //ES UN VIDEO
-
-                          $resp=required_param('archivovideo'.$j,PARAM_TEXT);
-                          echo "archivo video". $resp;
-                          
-                          $ejercicio_texto_video = new Ejercicios_videos_asociados($NULL,$id_ejercicio,$id_pregunta ,$resp);
-                          $ejercicio_texto_video->insertar();
-                        }else{
-
-                            if($tipo_respuesta==4){ //eS UNA IMAGEN
-
-
-                                  $ejercicio_texto_img = new Ejercicios_imagenes_asociadas($NULL,$id_ejercicio,$id_pregunta ,'img_'.$id_ejercicio."_".$j.".jpg");
-                                  $ejercicio_texto_img->insertar();
-                            }
                         }
-                }
-        }
+
+                   if($tipo_respuesta==1){ //La respuesta es un texto
+
+                         //borro las respuestas
+                         delete_records('ejercicios_texto_texto_preg', 'id_ejercicio', $id_ejercicio);
+                   }
+           }
     }
-    commit_sql();
+
+                //Guardo las nuevas
+
+                for($i=0;$i<$numeropreguntas;$i++){
+                //Obtengo el numero de respuestas a cada pregunta
+                $j=$i+1;
+
+
+                    if($tipo_origen==1){ //Si la pregunta es un texto
+                            $preg=required_param('pregunta'.$j,PARAM_TEXT);
+                            $ejercicio_texto_preg = new Ejercicios_texto_texto_preg(NULL,$id_ejercicio,$preg);
+                            $id_pregunta= $ejercicio_texto_preg->insertar();
+
+
+                                    if($tipo_respuesta==1){ //Si la respuesta es un texto
+                                        $resp=required_param('respuesta'.$j,PARAM_TEXT);
+
+                                        $correcta=0;
+
+                                       $ejercicio_texto_resp = new Ejercicios_texto_texto_resp(NULL,$id_pregunta,$resp,$correcta);
+                                       $ejercicio_texto_resp->insertar();
+                                    }else{
+
+                                            if($tipo_respuesta==2){ //es un audio
+
+
+                                                  $ejercicio_texto_audio = new Ejercicios_audios_asociados($NULL,$id_ejercicio,$id_pregunta ,'audio_'.$id_ejercicio."_".$j.".mp3");
+                                                  $ejercicio_texto_audio->insertar();
+                                            }else{
+
+                                                 if($tipo_respuesta==3){ //ES UN VIDEO
+
+                                                      $resp=required_param('archivovideo'.$j,PARAM_TEXT);
+                                                      echo "archivo video". $resp;
+
+                                                      $ejercicio_texto_video = new Ejercicios_videos_asociados($NULL,$id_ejercicio,$id_pregunta ,$resp);
+                                                      $ejercicio_texto_video->insertar();
+                                                    }else{
+
+                                                        if($tipo_respuesta==4){ //eS UNA IMAGEN
+
+
+                                                              $ejercicio_texto_img = new Ejercicios_imagenes_asociadas($NULL,$id_ejercicio,$id_pregunta ,'img_'.$id_ejercicio."_".$j.".jpg");
+                                                              $ejercicio_texto_img->insertar();
+                                                        }
+                                                    }
+                                            }
+                                    }
+                         }else{
+                             if($tipo_origen==2){ //la pregunta es un audio
+                            //     echo "entra";
+                                  $preg=required_param('pregunta'.$j,PARAM_TEXT);
+                                  $ejercicio_texto_preg = new Ejercicios_texto_texto_preg(NULL,$id_ejercicio,$preg);
+                                  $id_pregunta= $ejercicio_texto_preg->insertar();
+                            
+                                 if($tipo_respuesta==1){ //la respuesta es un texto
+                             //            echo "entra 2";
+                                     $ejercicio_texto_audio = new Ejercicios_audios_asociados($NULL,$id_ejercicio,$id_pregunta ,'audio_'.$id_ejercicio."_".$j.".mp3");
+                                     $ejercicio_texto_audio->insertar();
+                                 }
+                             }
+                         }
+                }
+                commit_sql();
+               
 
 
        redirect('./view.php?id=' . $id_curso . '&opcion=9');
