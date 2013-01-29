@@ -1,0 +1,7 @@
+Para installar este módulo es necesario tener previamiente instalado el módulo vocabulario.
+
+Para ello:
+
+	1. Añada una nueva actividad vocabulario
+	
+Posteriormente ya es posible añadir una nueva actividad "ejercicios" y que funcione directamente.
