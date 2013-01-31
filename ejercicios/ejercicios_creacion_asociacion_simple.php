@@ -259,11 +259,39 @@ switch($tipo_origen){
 
         echo "es una audio";
         break;
-    case 3://Es un imagn
-        echo "es un imagen";
+    case 3://Es un video
+        echo "es un video la pregunta";
+
+       //Guardando las direcciones de los videos y el texto correspondiente
+
+                    //Obtengo el numero de preguntas
+                    $numero_preguntas = optional_param('numeropreguntas', PARAM_INT);
+                        echo "numero preguntas".$numero_preguntas;
+                    for($i=0;$i<$numero_preguntas;$i++){
+                        //Obtengo la pregunta
+
+                        $j=$i+1;
+                        $pregunta = optional_param('pregunta'.$j,PARAM_TEXT);
+
+                        //Inserto la pregunta Archivo asociación
+                        $mispreguntas= new Ejercicios_texto_texto_preg(NULL,$id_ejercicio,$pregunta);
+                        $id_preg=$mispreguntas->insertar();
+
+                         $dirvideoasociado = optional_param('archivovideo'.$j,PARAM_TEXT);
+                         $rcorrecta=0; //Me da igual si es correcat o incorrecta
+
+                         //Lo inserto en la tabla de videos para asociar respuestas y preguntas
+                         $mi_respuesta = new Ejercicios_videos_asociados(NULL,$id_ejercicio,$id_preg,$dirvideoasociado);
+
+                         $mi_respuesta->insertar();
+
+
+                    }
+                     echo "fin insercción";
+    
         break;
-    case 4://Es una video
-        echo "es una video";
+    case 4://Es una imagen
+        echo "es una imagen";
         break;
 
 }
