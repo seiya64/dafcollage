@@ -359,15 +359,18 @@ class mod_ejercicios_mod_formulario extends moodleform_mod {
             srand (time());
             $numero_aleatorio = rand(0,2);
             $tipoej=$numero_aleatorio; //variable que indica el tipo de ejercicio a mostrar 0 Multichoice
-            
+                 
+             
+            echo "tipoejercicio".$tipoej;
             $ej_tipo= new Ejercicios_general();
             $todos_ej_tipo=$ej_tipo->obtener_ejercicios_tipo_publicos($tipoej);
             $tam1=sizeof($todos_ej_tipo);
             srand (time());
             //generamos un número aleatorio
             $numero_aleatorio = rand(1,$tam1);
-           
-             
+
+
+            echo "tam vale".$tam1;
             if($tam1!=0){
                $seleccionado=$todos_ej_tipo[$numero_aleatorio-1];
                $nombre=$seleccionado->get('name');
