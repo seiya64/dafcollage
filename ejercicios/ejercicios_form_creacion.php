@@ -90,14 +90,18 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
             $tabla='<div id="formulario">';
             $mform->addElement('html',$tabla);
            //Seleccione el tipo de archivo pregunta (texto/ audio/ vídeo/ foto)
-         
+           if($tipocreacion==2){
            $radioarray=array();
            $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Texto","Texto", null);
            $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Audio", "Audio", null);
            $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Video", "Video", null);
-
+           }
            if($tipocreacion==3){ //Asociacion Simple
-                  $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Foto", "Foto", null);
+                $radioarray=array();
+                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Texto","Texto", "onClick=\"muestra('textoseleccionado'); oculta('otroseleccionado')\"");
+                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Audio", "Audio", "onClick=\"muestra('otroseleccionado'); oculta('textoseleccionado')\"");
+                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Video", "Video", "onClick=\"muestra('otroseleccionado'); oculta('textoseleccionado')\"");
+                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Foto", "Foto", "onClick=\"muestra('otroseleccionado'); oculta('textoseleccionado')\"");
            }
            //volver a añadir estos tres
            //$radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Audio", "Audio", null);
@@ -112,7 +116,7 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
                $mform->setDefault('radiopregunta',"Texto");
            }else{ //El resto
 
-                $mform->addGroup($radioarray, 'radiopregunta', get_string('tipopregunta1', 'ejercicios') , array(' '), false);
+               $mform->addGroup($radioarray, 'radiopregunta', get_string('tipopregunta1', 'ejercicios') , array(' '), false);
                $mform->setDefault('radiopregunta',"Texto");
            }
 
@@ -127,20 +131,50 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
            //Seleccione el tipo de archivo respuesta (texto/ audio/ vídeo/ foto)
        
            $radioarray=array();
-           $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Texto","Texto", null);
          
            //volver a añadir estos 3
           // $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Audio", "Audio", null);
 
+           if($tipocreacion==2){ //Multiplechoice solo tipo texto
+                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Texto","Texto", null);
+                $mform->addGroup($radioarray, 'radiorespuesta',  get_string('tiporespuesta', 'ejercicios'), array(' '), false);
+                $mform->setDefault('radiorespuesta',"Texto");
+           }
            if($tipocreacion==3){ //Asociacion Simple
+               
+              $divoculto='<div id="textoseleccionado">';
+              $mform->addElement('html',$divoculto);
+              
+                
+  
+             $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Texto","Texto", null);
+
              $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Audio", "Audio", null);
              $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Video", "Video", null);
              $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Foto", "Foto", null);
+             $mform->addGroup($radioarray, 'radiorespuesta',  get_string('tiporespuesta', 'ejercicios'), array(' '), false);
+             $mform->setDefault('radiorespuesta',"Texto");
+
+             $divoculto='</div>';
+             $mform->addElement('html',$divoculto);
+             
+              $divoculto='<div id="otroseleccionado" style="display: none;">';
+              $mform->addElement('html',$divoculto);
+              
+                
+  
+             $radioarray1[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Texto","Texto", null);
+
+             $mform->addGroup($radioarray1, 'radiorespuesta',  get_string('tiporespuesta', 'ejercicios'), array(' '), false);
+             $mform->setDefault('radiorespuesta',"Texto");
+
+             $divoculto='</div>';
+             $mform->addElement('html',$divoculto);
+
 
           }
-           $mform->addGroup($radioarray, 'radiorespuesta',  get_string('tiporespuesta', 'ejercicios'), array(' '), false);
-           $mform->setDefault('radiorespuesta',"Texto");
-           
+          
+        
           /* 
             //Seleccione el número total de archivos respuesta
             $numimagenes=array();
@@ -620,15 +654,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
                            $mform->addElement('hidden','numeropreguntas',$p);
 
                     break;
-                    case 2: //El archivo respuesta es un audio
-                         echo "audio-audio";
-                    break;
-                    case 3: //El archivo respuesta es un video
-                         echo "audio-video";
-                    break;
-                    case 4: //El archivo respuesta es una imagen
-                         echo "audio-imagen";
-                    break;
+                   
 
                 }
                 // "el archivo origen es un audio";
@@ -641,24 +667,27 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
                 switch($tiporespuesta){
 
                     case 1: //El archivo respuesta es un texto
-                        echo "video-texto";
-                    break;
-                    case 2: //El archivo respuesta es un audio
-                         echo "video-audio";
-                    break;
-                    case 3: //El archivo respuesta es un video
-                         echo "video-video";
-                    break;
-                    case 4: //El archivo respuesta es una imagen
-                         echo "video-imagen";
-                    break;
+                          for($i=0;$i<$p;$i++){
 
+                            $aux=$i+1;
+                            $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
+                             $mform->addElement('html',$titulo);
+
+                           //Archivo Asociacion
+                            $mform->addElement('textarea', 'pregunta'.$aux, get_string('Asociacion_Texto', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
+                            //Archivo Asociado
+                            $attributes='size="100"';
+                            $mform->addElement('text', 'archivovideo'.$aux,get_string('Video', 'ejercicios') , $attributes);
+                            $mform->addRule('archivovideo'.$aux, "Dirección Web Necesaria", 'required', null, 'client');
+
+
+                           }
+
+                           $mform->addElement('hidden','numeropreguntas',$p);
+                    break;
+                  
                 }
-                  //Titule su ejercicio para facilitar la identificación o búsqueda
-                $attributes='size="100"';
-                $mform->addElement('text', 'archivovideo',get_string('Video', 'ejercicios') , $attributes);
-                $mform->addRule('archivovideo', "Dirección Web Necesaria", 'required', null, 'client');
-
+               
                // "el archivo origen es un audio";
 
             break;
