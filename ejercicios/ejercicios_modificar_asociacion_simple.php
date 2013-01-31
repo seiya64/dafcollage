@@ -162,6 +162,30 @@ echo "El numero de pregunas es".$numeropreguntas;
                          //borro las respuestas
                          delete_records('ejercicios_texto_texto_preg', 'id_ejercicio', $id_ejercicio);
                    }
+           }else{
+
+                   if($tipo_origen==3){//video
+                                echo "actualizando video";
+                                 //obtengo los id de las preguntas del ejercicio
+                                $id_preguntas=array();
+
+                                $mis_preguntas= new Ejercicios_texto_texto_preg();
+
+                                 $id_preguntas=$mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
+                                //borro las respuestas
+
+                                for($s=0;$s<sizeof($id_preguntas);$s++){
+                                        delete_records('ejercicios_videos_asociados', 'id_ejercicio', $id_ejercicio);
+
+                                }
+
+                   }
+
+                    if($tipo_respuesta==1){ //La respuesta es un texto
+
+                         //borro las respuestas
+                         delete_records('ejercicios_texto_texto_preg', 'id_ejercicio', $id_ejercicio);
+                   }
            }
     }
 
@@ -224,6 +248,23 @@ echo "El numero de pregunas es".$numeropreguntas;
                                      $ejercicio_texto_audio = new Ejercicios_audios_asociados($NULL,$id_ejercicio,$id_pregunta ,'audio_'.$id_ejercicio."_".$j.".mp3");
                                      $ejercicio_texto_audio->insertar();
                                  }
+                             }else{
+
+                                  if($tipo_origen==3){ //ES UN VIDEO
+
+                                      $preg=required_param('pregunta'.$j,PARAM_TEXT);
+                                      $ejercicio_texto_preg = new Ejercicios_texto_texto_preg(NULL,$id_ejercicio,$preg);
+                                      $id_pregunta= $ejercicio_texto_preg->insertar();
+
+                                                      $resp=required_param('archivovideo'.$j,PARAM_TEXT);
+                                                      echo "archivo video". $resp;
+                                                     
+                                                      $ejercicio_texto_video = new Ejercicios_videos_asociados($NULL,$id_ejercicio,$id_pregunta ,$resp);
+                                                      $ejercicio_texto_video->insertar();
+                                                      echo "insertado";
+                                                    
+                                  }
+
                              }
                          }
                 }
