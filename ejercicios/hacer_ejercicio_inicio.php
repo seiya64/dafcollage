@@ -109,6 +109,13 @@ if ($mform->is_submitted()) { //Boton realizar (el boton buscar y crear estan en
                               redirect("./view.php?opcion=8&id=".$id_curso.'&id_ejercicio='.$id_ejercicio.'&buscar=1&tipo_origen='.$ejercicio->get('tipoarchivopregunta').'&tr='.$ejercicio->get('tipoarchivorespuesta').'&tipocreacion='.$ejercicio->get('tipoactividad'));
 
                           }
+                         }else{
+                               if($ejercicio->get('tipoarchivopregunta')==3){ //La pregunta es un video
+                                  if($ejercicio->get('tipoarchivorespuesta')==1){ //La respuesta es un texto
+                                      redirect("./view.php?opcion=8&id=".$id_curso.'&id_ejercicio='.$id_ejercicio.'&buscar=1&tipo_origen='.$ejercicio->get('tipoarchivopregunta').'&tr='.$ejercicio->get('tipoarchivorespuesta').'&tipocreacion='.$ejercicio->get('tipoactividad'));
+
+                                  }
+                                }
                          }
 
 
