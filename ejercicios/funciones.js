@@ -30,7 +30,7 @@ function setTextareaHeight(textarea) {
 
 
 $(document).ready(function(){
-   
+    
      setTextareaHeight($('.adaptHeightInput'));
      try{
           var a = document.getElementsByClassName('adaptHeightInput');
@@ -1711,4 +1711,14 @@ function ObtenerDireccion(i){
 
 
 
+
+function oculta(id){
+ var elDiv = document.getElementById(id); //se define la variable "elDiv" igual a nuestro div
+   elDiv.style.display='none'; //damos un atributo display:none que oculta el div
+}
+
+function muestra(id){
+  var elDiv = document.getElementById(id); //se define la variable "elDiv" igual a nuestro div
+  elDiv.style.display='block';//damos un atributo display:block que  el div
+}
 
