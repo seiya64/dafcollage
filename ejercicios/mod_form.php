@@ -357,7 +357,7 @@ class mod_ejercicios_mod_formulario extends moodleform_mod {
            // $tam1=sizeof($ej_tipo1);
             //alimentamos el generador de aleatorios
             srand (time());
-            $numero_aleatorio = rand(0,1);
+            $numero_aleatorio = rand(0,2);
             $tipoej=$numero_aleatorio; //variable que indica el tipo de ejercicio a mostrar 0 Multichoice
             
             $ej_tipo= new Ejercicios_general();
@@ -426,9 +426,10 @@ class mod_ejercicios_mod_formulario extends moodleform_mod {
             
            // $tipoej=0; //variable que indica el tipo de ejercicio a mostrar 0 Multichoice
             srand (time());
-            $numero_aleatorio = rand(0,1);
+            $numero_aleatorio = rand(0,2);
             $tipoej=$numero_aleatorio; //variable que indica el tipo de ejercicio a mostrar 0 Multichoice
 
+            echo "tipoejercicio".$tipoej;
             $ej_tipo= new Ejercicios_general();
             $todos_ej_tipo=$ej_tipo->obtener_ejercicios_tipo_publicos($tipoej);
             $tam1=sizeof($todos_ej_tipo);
@@ -437,8 +438,9 @@ class mod_ejercicios_mod_formulario extends moodleform_mod {
             $numero_aleatorio = rand(1,$tam1);
             
           
-             
+            echo "tam vale".$tam1;
             if($tam1!=0){
+                echo "entra";
                $seleccionado=$todos_ej_tipo[$numero_aleatorio-1];
                $nombre=$seleccionado->get('name');
                
