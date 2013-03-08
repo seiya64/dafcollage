@@ -5,7 +5,7 @@ Al ser algo extensa para un archivo de texto plano, la descripción del proyecto
 en la forja de Rediris. 
 Se puede descargar desde el siguiente enlace:
 
-https://forja.rediris.es/docman/view.php/1036/1535/Descripcion%20del%20proyecto.pdf
+https://github.com/seiya64/dafcollage/raw/master/documentacion/Descripcion%20del%20proyecto.pdf
 
 ----------------------------------------------------------------------------------------------------------------
 ARBOL DE DIRECTORIOS DEL PROYECTO
@@ -13,7 +13,7 @@ ARBOL DE DIRECTORIOS DEL PROYECTO
 Se encuentra explicado en un pdf publicado en la forja de Rediris.
 Se puede descargar desde el siguiente enlace:
 
-https://forja.rediris.es/docman/view.php/1036/1537/arbol.pdf
+https://github.com/seiya64/dafcollage/raw/master/documentacion/arbol.pdf
 
 ----------------------------------------------------------------------------------------------------------------
 REQUISITOS DEL PROYECTO
@@ -35,24 +35,10 @@ http://moodle.org/
 ----------------------------------------------------------------------------------------------------------------
 OBTENCIÓN E INSTALACIÓN DEL PROYECTO
 
-Hay dos formas de obtener el módulo "vocabulario" (el que hay implementado en este momento).
 
-La primera consiste en descargar el snapshot que genera diariamente la Forja de Rediris. Se puede obtener
-en este enlace:
+La última versión estable publicada (v1.10) puede encontrarse en la siguiente dirección:
 
-http://forja.rediris.es/snapshots.php?group_id=1036
-
-La segunda forma consiste en descargar la última versión estable publicada, que también se publica en la 
-forja de Rediris; la página en la que hacerlo es la siguiente:
-
-http://forja.rediris.es/frs/?group_id=1036
-
-De las versiones que aparecen ahi, hasta el momento, la última versión publicada (v1.2) se puede descargar
-mediante el siguiente enlace:
-
-http://forja.rediris.es/frs/download.php/2554/daf-collage-v1.2.zip
-
-
+https://github.com/seiya64/dafcollage/raw/master/download/daf-collage-v1.10.zip
 
 Una vez descargado el módulo, para instalarlo basta con descomprimir el fichero zip 
 (o .tar.gz en caso del snapshot) y copiar la carpeta "vocabulario" dentro del directorio "mod" dentro del
@@ -69,11 +55,11 @@ Ambos documentos pueden ser descargados desde:
 
 Diagrama de base de datos:
 
-https://forja.rediris.es/docman/view.php/1036/1532/basededatos.png
+https://github.com/seiya64/dafcollage/raw/master/documentacion/basededatos.png
 
 Diccionario de datos:
 
-https://forja.rediris.es/docman/view.php/1036/1533/diccionario.pdf
+https://github.com/seiya64/dafcollage/raw/master/documentacion/diccionario.pdf
 
 ----------------------------------------------------------------------------------------------------------------
 GUIA DE USO
@@ -81,7 +67,7 @@ GUIA DE USO
 Pdf publicado en la forja de Rediris que explica cómo usar correctamente el módulo "vocabulario".
 Accesible desde el enlace:
 
-https://forja.rediris.es/docman/view.php/1036/1534/Ayudas_es.pdf
+https://github.com/seiya64/dafcollage/raw/master/documentacion/Ayudas_es.pdf
 
 ----------------------------------------------------------------------------------------------------------------
 INFORMACIÓN ADICIONAL
