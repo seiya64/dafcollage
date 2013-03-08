@@ -170,10 +170,10 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                            $el_video_origen->obtener_uno_id_ejercicio($id_ejercicio);
 
                            if($buscar==1 || $modificable==false){ //Para que no pueda editarlo
-                                     $vervideo=' <a class="button super yellow clasevideo" href="'.$el_video_origen->get('video').'" target="_blank">Ver Video</a>';
+ 									 $vervideo = '<object width="560" height="315"><param name="movie" value="'.$el_video_origen->get('video').'?version=3&amp;hl=es_ES"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="'.$el_video_origen->get('video').'?version=3&amp;hl=es_ES" type="application/x-shockwave-flash" width="560" height="315" allowscriptaccess="always" allowfullscreen="true"></embed></object><br/>';
                                    
                              }else{
-                                     $vervideo=' <a class="button super yellow clasevideo" href="'.$el_video_origen->get('video').'" target="_blank">Ver Video</a>';
+ 									 $vervideo = '<object width="560" height="315"><param name="movie" value="'.$el_video_origen->get('video').'?version=3&amp;hl=es_ES"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="'.$el_video_origen->get('video').'?version=3&amp;hl=es_ES" type="application/x-shockwave-flash" width="560" height="315" allowscriptaccess="always" allowfullscreen="true"></embed></object><br/>';
                                     
                                      //Para que modifique la dirección del video
                                      $vervideo.= '<textarea class="video" name="archivovideo" id="archivovideo">'.$el_video_origen->get('video').'</textarea>';
