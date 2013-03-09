@@ -1,5 +1,4 @@
 <?php
-
 /*
   Daf-collage is made up of two Moodle modules which help in the process of
   German language learning. It facilitates the content organization like
