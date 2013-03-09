@@ -12,8 +12,8 @@
   Ruth Burbat
 
   Source code:
-  Francisco Javier RodrÃ­guez LÃ³pez (seiyadesagitario@gmail.com)
-  SimeÃ³n Ruiz Romero (simeonruiz@gmail.com)
+  Francisco Javier Rodr’guez L—pez (seiyadesagitario@gmail.com)
+  Sime—n Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto(finamolinasoto@gmail.com)
 
   Original idea:
@@ -21,13 +21,13 @@
 
   Content design:
   Ruth Burbat
-  AInmaculada Almahano GÃ¼eto
+  AInmaculada Almahano GŸeto
   Andrea Bies
-  Julia MÃ¶ller Runge
-  Blanca RodrÃ­guez GÃ³mez
-  Antonio SalmerÃ³n Matilla
-  MarÃ­a JosÃ© Varela Salinas
-  Karin Vilar SÃ¡nchez
+  Julia Mšller Runge
+  Blanca Rodr’guez G—mez
+  Antonio Salmer—n Matilla
+  Mar’a JosŽ Varela Salinas
+  Karin Vilar S‡nchez
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -304,7 +304,7 @@ function vocabulario_view($id, $opcion = 0, $id_mp = null,$palabra="",$viene=0) 
         case 14: //imprimir apuntes en pdf
             $mform = new mod_vocabulario_pdf_form('pdf.php?id_tocho=' . $id);
             break;
-        case 15: //aÃ±adir gramatica
+        case 15: //a–adir gramatica
             $mform = new mod_vocabulario_aniadir_gr_form('guardar_gr_desc.php?id_tocho=' . $id);
             break;
         case 16: // colaboradores
@@ -348,7 +348,7 @@ function vocabulario_todas_palabras($usuarioid, $cl = null, $gram = null, $inten
         $sql .= 'SELECT * FROM (';
     }
    
-    $sql .= 'SELECT @a:=@a+1, todas.pal, cl.campo, gr.gramatica, ic.intencion, tt.tipo, todas.mpid ';
+    $sql .= 'SELECT @a:=@a+1, todas.pal, cl.campo, gr.gramatica, ic.intencion, tt.tipo, todas.mpid, todas.icid ';
     $sql .= 'FROM (';
     $sql .= '(SELECT  mp.id mpid,`sustantivoid` id,`palabra` pal,`campoid` clid,`gramaticaid` grid,`intencionid` icid,`tipologiaid` ttid ';
     $sql .= 'FROM ';
@@ -454,6 +454,7 @@ function vocabulario_todas_palabras($usuarioid, $cl = null, $gram = null, $inten
         $sql .= ') p WHERE p.pal like \'' . $letra . '%\'';
     }
    
+   
     $todas = get_records_sql($sql);
     return $todas;
 }
@@ -492,6 +493,43 @@ function todas_palabras_nube($usrid) {
 
     $todas = get_records_sql($sql);
     return $todas;
+}
+
+function obtener_superpadre($id){
+    $sufijotabla = get_sufijo_lenguaje_tabla();
+    $sql = 'SELECT `padre` FROM `mdl_vocabulario_intenciones_'.$sufijotabla.'` ';
+    $sql .= 'WHERE `id`='.$id;
+    
+    $padre = get_records_sql($sql);
+    
+    foreach($padre as $papi){
+        $numerico = $papi->padre;
+    }
+    if($numerico==0){
+        return -1;          //devuelvo -1 si ya es un superpadre
+    }else{
+       return obtener_superpadre_bis($numerico); //en caso contrario buscamos el superpadre y devolvemos su nombre
+    }
+    
+    
+}
+
+function obtener_superpadre_bis($id){
+    $sufijotabla = get_sufijo_lenguaje_tabla();
+    $sql = 'SELECT `padre`, `intencion` FROM `mdl_vocabulario_intenciones_'.$sufijotabla.'` ';
+    $sql .= 'WHERE `id`='.$id;
+    
+    $padre = get_records_sql($sql);
+    
+    foreach ($padre as $pad){
+        $padreid=$pad->padre;
+        $padrenom=$pad->intencion;
+    }
+    if($padreid>0){
+        $padrenom = obtener_superpadre_bis($padreid);
+    }
+    return $padrenom;
+    
 }
 
 function vocabulario_rellenar_alumnos($cursoid) {
