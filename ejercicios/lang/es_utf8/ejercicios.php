@@ -149,4 +149,11 @@ $string["MiBusqueda"]="Mi Busqueda";
 $string["BotonAñadir"]="Añadir a mis ejercicios";
 $string['Misejercicios']='Mis Actividades';
 $string["marcoteorico"]="Seleccionar el nivel según el marco europeo de referecia(OPCIONAL)";
+
+
+//FORMULARIO CREACION
+$string["textoorigen"]="Introduzca texto origen";
+$string["Asociacion_Texto"]= "Texto ";
+$string["Asociacion_Texto_Asociado"]= "Texto Asociado  ";
+$string['Video']='Introduzca la dirección del video';
 ?>
