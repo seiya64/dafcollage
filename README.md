@@ -6,7 +6,7 @@ DAF-COLLAGE
 DESCRIPCIÓN DEL PROYECTO
 --
 Al ser algo extensa para un archivo de texto plano, la descripción del proyecto se encuentra en un pdf publicado
-en la forja de Rediris. 
+en el proyecto en GitHub. 
 Se puede descargar desde el siguiente enlace:
 
 https://github.com/seiya64/dafcollage/raw/master/documentacion/Descripcion%20del%20proyecto.pdf
@@ -14,7 +14,7 @@ https://github.com/seiya64/dafcollage/raw/master/documentacion/Descripcion%20del
 
 ARBOL DE DIRECTORIOS DEL PROYECTO
 --
-Se encuentra explicado en un pdf publicado en la forja de Rediris.
+Se encuentra explicado en un pdf publicado en el proyecto en GitHub.
 Se puede descargar desde el siguiente enlace:
 
 https://github.com/seiya64/dafcollage/raw/master/documentacion/arbol.pdf
@@ -52,8 +52,8 @@ de aquí el proceso lo finaliza el propio Moodle.
 
 GUIAS DE DESARROLLO
 --
-Hasta el momento solo se dispone del diagrama de la base de datos, publicado en la forja de Rediris y el diccionario
-de datos, publicado tambien en Rediris.
+Hasta el momento solo se dispone del diagrama de la base de datos, publicado en el proyecto en GitHub y el diccionario
+de datos, publicado tambien en GitHub.
 Ambos documentos pueden ser descargados desde:
 
 Diagrama de base de datos:
@@ -67,7 +67,7 @@ https://github.com/seiya64/dafcollage/raw/master/documentacion/diccionario.pdf
 
 GUIA DE USO
 --
-Pdf publicado en la forja de Rediris que explica cómo usar correctamente el módulo "vocabulario".
+Pdf publicado en el proyecto en GitHub que explica cómo usar correctamente el módulo "vocabulario".
 Accesible desde el enlace:
 
 https://github.com/seiya64/dafcollage/raw/master/documentacion/Ayudas_es.pdf
