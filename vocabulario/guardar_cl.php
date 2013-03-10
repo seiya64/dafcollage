@@ -40,6 +40,10 @@
   GNU General Public License for more details. */
 
 
+/*
+ * EN ESTE FICHERO SE GUARDAN LOS NUEVOS CAMPOS LEXICOS AÑADIDOS POR EL USUARIO
+ */
+
 require_once("../../config.php");
 require_once("lib.php");
 require_once("vocabulario_classes.php");
