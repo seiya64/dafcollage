@@ -43,7 +43,7 @@ require_once("../../config.php");
 require_once("lib.php");
 require_once("ejercicios_clase_general.php");
 require_once("ejercicios_form_creacion.php");
-
+require_once("YoutubeVideoHelper.php");
 
 
 $id_curso = optional_param('id_curso', 0, PARAM_INT);
@@ -81,9 +81,13 @@ if($tipo_origen==1){ //Es un texto
         }else{
 
              if($tipo_origen==3){ //Es un video
-                  $video_origen=optional_param('archivovideo', NULL, PARAM_TEXT);
-                  $mivideo= new Ejercicios_videos(NULL,$id_ejercicio,$video_origen);
+                   echo "estoy creando multiplechoice, con video-texto";
+                  $auxUrlVideo=optional_param('archivovideo', NULL, PARAM_TEXT);
+                  $yvh=new  YoutubeVideoHelper();
+                  $id_video=$yvh->getVideoId($auxUrlVideo);
+                  $mivideo= new Ejercicios_videos(NULL,$id_ejercicio,$id_video);
                   $mivideo->insertar();
+                  
 
              }
 

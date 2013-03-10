@@ -127,6 +127,13 @@ if($tipo_pregunta == "Texto"){
             $TipoArchivoPregunta=3; // 3 va a ser audio
             $TipoArchivoRespuesta=1; //1 va a ser texto
          }
+         if($tipo_pregunta == "Foto" && $tipo_respuesta == "Texto"){
+            $id=NULL;
+            $id_creador=$USER->id;
+            $TipoActividad=$tipocreacion-2;//Comienza en 0
+            $TipoArchivoPregunta=4; // 4 va a ser una foto
+            $TipoArchivoRespuesta=1; //1 va a ser texto
+         }
     }
 
 }

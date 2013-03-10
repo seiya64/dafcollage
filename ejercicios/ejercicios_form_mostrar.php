@@ -42,6 +42,7 @@
 require_once($CFG->dirroot.'/course/moodleform_mod.php');
 require_once("ejercicios_clases.php");
 require_once("ejercicios_clase_general.php");
+require_once("YoutubeVideoHelper.php");
 
 
 
@@ -168,17 +169,20 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
 
                            $el_video_origen = new Ejercicios_videos();
                            $el_video_origen->obtener_uno_id_ejercicio($id_ejercicio);
+ 			   $vervideo = '<object width="560" height="315">
+                                        <param name="movie" value="http://www.youtube.com/v/'.$el_video_origen->get('video').'?hl=es_ES&amp;version=3">
+                                        </param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param>
+                                        <embed src="http://www.youtube.com/v/'.$el_video_origen->get('video').'?hl=es_ES&amp;version=3" type="application/x-shockwave-flash" width="560" height="315" allowscriptaccess="always" allowfullscreen="true">
+                                        </embed></object>';
 
                            if($buscar==1 || $modificable==false){ //Para que no pueda editarlo
- 									 $vervideo = '<object width="560" height="315"><param name="movie" value="'.$el_video_origen->get('video').'?version=3&amp;hl=es_ES"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="'.$el_video_origen->get('video').'?version=3&amp;hl=es_ES" type="application/x-shockwave-flash" width="560" height="315" allowscriptaccess="always" allowfullscreen="true"></embed></object><br/>';
-                                   
+                                     $vervideo .= "";
                              }else{
- 									 $vervideo = '<object width="560" height="315"><param name="movie" value="'.$el_video_origen->get('video').'?version=3&amp;hl=es_ES"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="'.$el_video_origen->get('video').'?version=3&amp;hl=es_ES" type="application/x-shockwave-flash" width="560" height="315" allowscriptaccess="always" allowfullscreen="true"></embed></object><br/>';
-                                    
-                                     //Para que modifique la dirección del video
-                                     $vervideo.= '<textarea class="video" name="archivovideo" id="archivovideo">'.$el_video_origen->get('video').'</textarea>';
+                                     $yvh=YoutubeVideoHelper::generarVideoUrl($el_video_origen->get('video'));
+                                     
+                                     $vervideo.= '<textarea class="video" name="archivovideo" id="archivovideo">'.$yvh.'</textarea>';
 
-                              }
+                             }
                         $mform->addElement('html',  $vervideo);
 
                          
@@ -389,7 +393,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                   
                               }
                               
-                                  $tabla_imagenes ='</td>';
+                                   $tabla_imagenes ='</td>';
                                    $tabla_imagenes .='<td  width="10%">';
                                     //Mis palabras
                                     $tabla_imagenes .='<div><a  onclick=JavaScript:sele('.$id.')><img src="../vocabulario/imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im" title="'.get_string('guardar', 'vocabulario').'"/></a></div>';
@@ -401,7 +405,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                     $tabla_imagenes .='</td>'; 
                      
                                     $tabla_imagenes .='</table>'; 
-                                        $mform->addElement('html',$tabla_imagenes);
+                                    $mform->addElement('html',$tabla_imagenes);
                  }
                  break;
 

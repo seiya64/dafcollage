@@ -43,6 +43,7 @@ require_once("../../config.php");
 require_once("lib.php");
 require_once("ejercicios_clase_general.php");
 require_once("ejercicios_form_creacion.php");
+require_once("YoutubeVideoHelper.php");
 
 $id_curso = optional_param('id_curso', 0, PARAM_INT);
 $id_ejercicio = optional_param('id_ejercicio', 0, PARAM_INT);
@@ -103,8 +104,15 @@ if(optional_param("submitbutton2")){ //boton para añadir a mis ejercicos visibl
              delete_records('ejercicios_videos', 'id',$video->get('id'));
              //vuelvo a insertarlo
              $elmodificado=optional_param('archivovideo',PARAM_TEXT);
-             $nuevovideo= new Ejercicios_videos(NULL,$id_ejercicio,$elmodificado);
-             $nuevovideo->insertar();
+             
+             
+                      
+             $elmodificado=optional_param('archivovideo', NULL, PARAM_TEXT);
+             $modyvh=new  YoutubeVideoHelper();
+             $id_video=$modyvh->getVideoId($elmodificado);
+             $mivideo= new Ejercicios_videos(NULL,$id_ejercicio,$id_video);
+             $mivideo->insertar();
+          
             
         }
     }
