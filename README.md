@@ -72,7 +72,11 @@ Accesible desde el enlace:
 
 https://github.com/seiya64/dafcollage/raw/master/documentacion/Ayudas_es.pdf
 
+
+
 ----------------------------------------------------------------------------------------------------------------
+
+
 
 INFORMACIÓN ADICIONAL
 --
