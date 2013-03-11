@@ -100,6 +100,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
          $nombre=$ejercicios_leido->get('name');
          $npreg=$ejercicios_leido->get('numpreg');
          $creador=$ejercicios_leido->get('id_creador');
+         $tipo_origen=$ejercicios_leido->get('tipoarchivopregunta');
      
          if($creador==$USER->id && has_capability('moodle/legacy:editingteacher', $context, $USER->id, false)){
              $modificable=true;
@@ -166,10 +167,10 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                           $mform->addElement('html',  $vervideo);*/
 
                        //Añado el texto de origen
-                           
+
                            $el_video_origen = new Ejercicios_videos();
                            $el_video_origen->obtener_uno_id_ejercicio($id_ejercicio);
- 			   $vervideo = '<object width="560" height="315">
+ 			   $vervideo = '<object class="centrarvideo1" width="560" height="315">
                                         <param name="movie" value="http://www.youtube.com/v/'.$el_video_origen->get('video').'?hl=es_ES&amp;version=3">
                                         </param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param>
                                         <embed src="http://www.youtube.com/v/'.$el_video_origen->get('video').'?hl=es_ES&amp;version=3" type="application/x-shockwave-flash" width="560" height="315" allowscriptaccess="always" allowfullscreen="true">

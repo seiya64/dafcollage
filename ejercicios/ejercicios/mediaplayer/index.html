@@ -1,0 +1,68 @@
+<html>
+<head>
+<script type="text/javascript" src="swfobject.js"></script>
+<title>Música clásica</title>
+</head>
+<body>
+<h1>Música clásica</h1>
+<h3>MP3 simple</h3>
+<div id="player1">This text will be replaced</div> 
+<script type="text/javascript">
+	var so = new SWFObject('mediaplayer.swf','mpl','320','20','7'); 
+	so.addParam('allowfullscreen','true'); 
+	so.addVariable('file','audios/danzahungara.mp3'); 
+	so.addVariable('height','20'); 
+	so.addVariable('width','320'); 
+	so.write('player1'); 
+</script>
+<br/><br/>
+<h3>MP3 con imagen</h3>
+<div id="player2">This text will be replaced</div> 
+<script type="text/javascript"> 
+	var so = new SWFObject('mediaplayer.swf','mp2','320','280','7'); 
+	so.addParam('allowfullscreen','true'); 
+	so.addVariable('displayheight','260'); 
+	so.addVariable('file','audios/danzahungara.mp3'); 
+	so.addVariable('height','280'); 
+	so.addVariable('image','images/brahms_large.jpg'); 
+	so.addVariable('width','320'); 
+	so.write('player2'); 
+</script>
+<br/><br/>
+<h3>Lista MP3 simple</h3>
+<div id="player3">This text will be replaced</div> 
+<script type="text/javascript"> 
+	var so = new SWFObject('mediaplayer.swf','mp3','320','140','7'); 
+	so.addParam('allowfullscreen','true'); 
+	so.addVariable('displayheight','0'); 
+	so.addVariable('file','playlist1.xml'); 
+	so.addVariable('height','140'); 
+	so.addVariable('width','320'); 
+	so.write('player3'); 
+</script>
+<br/><br/>
+<h3>Lista MP3 con imagen pequeña</h3>
+<div id="player4">This text will be replaced</div> 
+<script type="text/javascript"> 
+	var so = new SWFObject('mediaplayer.swf','mp4','320','140','7'); 
+	so.addParam('allowfullscreen','true'); 
+	so.addVariable('file','playlist1.xml'); 
+	so.addVariable('height','140'); 
+	so.addVariable('width','320'); 
+	so.addVariable('displaywidth','120'); 
+	so.write('player4'); 
+</script>
+<br/><br/>
+<h3>Lista MP3 con imagen grande</h3>
+<div id="player5">This text will be replaced</div> 
+	<script type="text/javascript"> 
+	var so = new SWFObject('mediaplayer.swf','mpl','320','400','7'); 
+	so.addParam('allowfullscreen','true'); 
+	so.addVariable('displayheight','260'); 
+	so.addVariable('file','playlist2.xml'); 
+	so.addVariable('height','400'); 
+	so.addVariable('width','320'); 
+	so.write('player5'); 
+	</script>
+</body>
+</html>

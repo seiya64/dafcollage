@@ -110,7 +110,7 @@ switch($tipo_origen){
                          foreach($_FILES as $name => $values){
 
                           //tengo que cambiar la ruta donde se guarda
-                            if( move_uploaded_file($values['tmp_name'],'./audios/actividades/audio_'.$id_ejercicio.'_'.$m.'.mp3') ){
+                            if( move_uploaded_file($values['tmp_name'],'./mediaplayer/audios/audio_'.$id_ejercicio.'_'.$m.'.mp3') ){
 
                                    //  echo 'El archivo ha sido subido correctamente.<br/>';
                                    $m++;
@@ -228,7 +228,7 @@ switch($tipo_origen){
                          foreach($_FILES as $name => $values){
 
                           //tengo que cambiar la ruta donde se guarda
-                            if( move_uploaded_file($values['tmp_name'],'C:/xampp/htdocs/moodle/mod/ejercicios/audios/actividades/audio_'.$id_ejercicio.'_'.$m.'.mp3') ){
+                            if( move_uploaded_file($values['tmp_name'],'./mediaplayer/audios/audio_'.$id_ejercicio.'_'.$m.'.mp3') ){
 
                                    //  echo 'El archivo ha sido subido correctamente.<br/>';
                                    $m++;
@@ -280,25 +280,21 @@ switch($tipo_origen){
                         $id_preg=$mispreguntas->insertar();
 
                          $auxUrlVideo = optional_param('archivovideo'.$j,PARAM_TEXT);
-                         $sujeto = $auxUrlVideo;
-                         $patrón = '/v=(.*?)[&?]/';
-                         preg_match($patrón, $sujeto, $coincidencias, PREG_OFFSET_CAPTURE, 3);
-                         print_r($coincidencias);
-                         $idVideo = $coincidencias[1];
                          
+                         $yvh=new  YoutubeVideoHelper();
+                         $id_video=$yvh->getVideoId($auxUrlVideo);
+                         
+                         
+                         $rcorrecta=0; //Me da igual si es correcat o incorrecta
+                         
+                         $mi_respuesta= new Ejercicios_videos_asociados(NULL,$id_ejercicio,$id_preg,$idVideo);
+                         $mi_respuesta->insertar();
+
                          
                          // $dirvideoasociado = optional_param('archivovideo'.$j,PARAM_TEXT);
                          
                          
-                         
-                         
-                         $rcorrecta=0; //Me da igual si es correcat o incorrecta
-
-                         //Lo inserto en la tabla de videos para asociar respuestas y preguntas
-                         $mi_respuesta = new Ejercicios_videos_asociados(NULL,$id_ejercicio,$id_preg,$idVideo);
-
-                         $mi_respuesta->insertar();
-                      
+                                             
                     }
                      echo "fin insercción";
     
