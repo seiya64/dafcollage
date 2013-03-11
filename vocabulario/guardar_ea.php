@@ -39,6 +39,10 @@
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details. */
 
+/*
+ * ESTE FICHERO SE ENCARGA DE GUARDAR EL CONTENIDO DE UNA ESTRATEGIA DE APRENDIZAJE 
+ */
+
 require_once("../../config.php");
 require_once("lib.php");
 require_once("vocabulario_classes.php");
@@ -56,7 +60,6 @@ if ($mform->is_cancelled()) {
 $user_object = get_record('user', 'id', $USER->id);
 
 $estrategia = new Vocabulario_estrategias($user_object->id, required_param('campoea', PARAM_TEXT), optional_param('estrategia', PARAM_TEXT));
-
 
 
 $desc = __SEPARADORCAMPOS__ . optional_param('miestrategia', null, PARAM_TEXT);

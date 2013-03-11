@@ -39,6 +39,10 @@
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details. */
 
+/*
+ * ESTE FICHERO SE ENCARGA DE AÑADIR NUEVAS ESTRATEGIAS DE APRENDIZAJE
+ */
+
 require_once("../../config.php");
 require_once("lib.php");
 require_once("vocabulario_classes.php");

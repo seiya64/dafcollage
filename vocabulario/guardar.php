@@ -38,7 +38,9 @@
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details. */
-
+/*
+ * ESTE FICHERO SE ENCARGA DEL GUARDADO Y ACTUALIZACIÓN DE LAS PALABRAS, NO DE LAS GRAMATICAS
+ */
 require_once("../../config.php");
 require_once("lib.php");
 require_once("vocabulario_classes.php");

@@ -888,11 +888,19 @@ class mod_vocabulario_ver_form extends moodleform {
 //                $fila .= '<td> ' . $cosa['tipo'] . ' </td>';
 
             //    $fila .= '<td> <a href="./guardar.php?id_tocho=' . $this->id_tocho . '&viene='.$viene.'&borrar=' . $cosa->mpid . '">[' . get_string('eliminar', 'vocabulario') . ']</a></td>';
-
+                    $superpadre = obtener_superpadre($cosa->icid);
+                    
+                    
+                    
+                
                 $fila .= '<td> ' . $cosa->pal . ' </td>';
                 $fila .= '<td> ' . $cosa->campo . ' </td>';
                 $fila .= '<td> ' . $cosa->gramatica . ' </td>';
-                $fila .= '<td> ' . $cosa->intencion . ' </td>';
+                $fila .= '<td> ' . $cosa->intencion;
+                if($superpadre!=-1){
+                    $fila .= '</br> ('.$superpadre.')';
+                }
+                $fila .=' </td>';
                 $fila .= '<td> ' . $cosa->tipo . ' </td>';
                          //modificado o quitado por mi fina (cambiado editar por modificar)
 
