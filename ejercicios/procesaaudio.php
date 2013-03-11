@@ -4,7 +4,7 @@ $nombre=$_GET['nombre'];
 
 echo "procesandoooo".$nombre;
 
-    $destino = "./audios/actividades/";
+    $destino = "./mediaplayer/audios/";
     if(isset($_FILES['image'])){
 
         $temp   = $_FILES['image']['tmp_name'];

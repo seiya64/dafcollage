@@ -377,7 +377,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
 
                                 $tabla_imagenes.='<script type="text/javascript" src="./mediaplayer/swfobject.js"></script>';
                                 $tabla_imagenes.='<div class="claseaudio1" id="player1" name="respuesta' . $i . '"></div>';
-                                $tabla_imagenes.='<embed type="application/x-shockwave-flash" src="./mediaplayer/mediaplayer.swf" width="320" height="20" style="undefined" id="mpl" name="mpl" quality="high" allowfullscreen="true" flashvars="file=./audios/actividades/audio_' . $id_ejercicio . '_' . $i . '.mp3&amp;height=20&amp;width=320">';
+                                $tabla_imagenes.='<embed type="application/x-shockwave-flash" src="./mediaplayer/mediaplayer.swf" width="320" height="20" style="undefined" id="mpl" name="mpl" quality="high" allowfullscreen="true" flashvars="file=./mediaplayer/audios/audio_' . $id_ejercicio . '_' . $i . '.mp3&amp;height=20&amp;width=320">';
 
 
                                 $tabla_imagenes.='</div></td>';
@@ -423,7 +423,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
 
                                 $tabla_imagenes.='<script type="text/javascript" src="./mediaplayer/swfobject.js"></script>';
                                 $tabla_imagenes.='<div class="claseaudio1" id="player1" name="respuesta' . $i . '"></div>';
-                                $tabla_imagenes.='<embed type="application/x-shockwave-flash" src="./mediaplayer/mediaplayer.swf" width="320" height="20" style="undefined" id="mpl" name="mpl" quality="high" allowfullscreen="true" flashvars="file=./audios/actividades/audio_' . $id_ejercicio . '_' . $i . '.mp3&amp;height=20&amp;width=320">';
+                                $tabla_imagenes.='<embed type="application/x-shockwave-flash" src="./mediaplayer/mediaplayer.swf" width="320" height="20" style="undefined" id="mpl" name="mpl" quality="high" allowfullscreen="true" flashvars="file=./mediaplayer/audios/audio_' . $id_ejercicio . '_' . $i . '.mp3&amp;height=20&amp;width=320">';
 
                                 $tabla_imagenes.='</div>';
 
@@ -983,7 +983,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
 
                         $tabla_imagenes.='<script type="text/javascript" src="./mediaplayer/swfobject.js"></script>';
                         $tabla_imagenes.='<div class="claseaudio1" id="player1" name="respuesta' . $i . '"></div>';
-                        $tabla_imagenes.='<embed type="application/x-shockwave-flash" src="./mediaplayer/mediaplayer.swf" width="320" height="20" style="undefined" id="mpl" name="mpl" quality="high" allowfullscreen="true" flashvars="file=./audios/actividades/audio_' . $id_ejercicio . '_' . $i . '.mp3&amp;height=20&amp;width=320">';
+                        $tabla_imagenes.='<embed type="application/x-shockwave-flash" src="./mediaplayer/mediaplayer.swf" width="320" height="20" style="undefined" id="mpl" name="mpl" quality="high" allowfullscreen="true" flashvars="file=./mediaplayer/audios/audio_' . $id_ejercicio . '_' . $i . '.mp3&amp;height=20&amp;width=320">';
 
 
                         $tabla_imagenes.='</div></td>';
@@ -1029,7 +1029,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
 
                         $tabla_imagenes.='<script type="text/javascript" src="./mediaplayer/swfobject.js"></script>';
                         $tabla_imagenes.='<div class="claseaudio1" id="player1" name="respuesta' . $i . '"></div>';
-                        $tabla_imagenes.='<embed type="application/x-shockwave-flash" src="./mediaplayer/mediaplayer.swf" width="320" height="20" style="undefined" id="mpl" name="mpl" quality="high" allowfullscreen="true" flashvars="file=./audios/actividades/audio_' . $id_ejercicio . '_' . $i . '.mp3&amp;height=20&amp;width=320">';
+                        $tabla_imagenes.='<embed type="application/x-shockwave-flash" src="./mediaplayer/mediaplayer.swf" width="320" height="20" style="undefined" id="mpl" name="mpl" quality="high" allowfullscreen="true" flashvars="file=./mediaplayer/audios/audio_' . $id_ejercicio . '_' . $i . '.mp3&amp;height=20&amp;width=320">';
 
                         $tabla_imagenes.='</div>';
 
@@ -1232,10 +1232,10 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                         //print_r($el_video_origen);
                         
                         //$tabla_imagenes.=' <a onclick="ObtenerDireccion(' . $i . ')" class="button super yellow centrarvideo" href="' . $respuestas[0]->get('nombre_video') . '" target="_blank" id="video' . $i . '">Ver Video</a>';
-                        $tabla_imagenes .= '<object width="560" height="315">
+                        $tabla_imagenes .= '<object width="396" height="197">
                                         <param name="movie" value="http://www.youtube.com/v/'.$el_video_origen->get('nombre_video').'?hl=es_ES&amp;version=3">
                                         </param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param>
-                                        <embed src="http://www.youtube.com/v/'.$el_video_origen->get('nombre_video').'?hl=es_ES&amp;version=3" type="application/x-shockwave-flash" width="560" height="315" allowscriptaccess="always" allowfullscreen="true">
+                                        <embed src="http://www.youtube.com/v/'.$el_video_origen->get('nombre_video').'?hl=es_ES&amp;version=3" type="application/x-shockwave-flash" width="396" height="197" allowscriptaccess="always" allowfullscreen="true">
                                         </embed></object>';
                         
                         $tabla_imagenes.=' <textarea class="video1" name="archivovideo' . $i . '" id="archivovideo' . $i . '">' . YoutubeVideoHelper::generarVideoUrl($respuestas[0]->get('nombre_video')) . '</textarea>';

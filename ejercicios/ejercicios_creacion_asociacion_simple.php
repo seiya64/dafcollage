@@ -44,10 +44,20 @@ require_once("lib.php");
 require_once("ejercicios_clase_general.php");
 require_once("ejercicios_form_creacion.php");
 
+// Crea ejercicio ahora
+$ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
+$carpeta = unserialize($_SESSION['cosasProfe']);
+$id_ejercicio = $ejercicioGeneral->insertar();
+
+// Y para el profesor tambien
+//Tengo que asignarle el ejercicio al profesor 
+$ejercicio_profesor = new Ejercicios_prof_actividad($ejercicioGeneral->get('id'),$ejercicioGeneral->get('id_creador'),$id_ejercicio,$carpeta);
+$ejercicio_profesor->insertar();
+
 $id_curso = optional_param('id_curso', 0, PARAM_INT);
 $p = optional_param('p', 0, PARAM_INT);
 $tipocreacion = optional_param('tipocreacion', 0, PARAM_INT);
-$id_ejercicio = optional_param('id_ejercicio', 0, PARAM_INT);
+//$id_ejercicio = optional_param('id_ejercicio', 0, PARAM_INT);
 $tipo_origen = optional_param('tipo_origen', 0, PARAM_INT);
 $tipo_respuesta = optional_param('tr', 0, PARAM_INT);
 
@@ -106,7 +116,7 @@ switch ($tipo_origen) {
                 foreach ($_FILES as $name => $values) {
 
                     //tengo que cambiar la ruta donde se guarda
-                    if (move_uploaded_file($values['tmp_name'], './audios/actividades/audio_' . $id_ejercicio . '_' . $m . '.mp3')) {
+                    if (move_uploaded_file($values['tmp_name'], './mediaplayer/audios/audio_' . $id_ejercicio . '_' . $m . '.mp3')) {
 
                         //  echo 'El archivo ha sido subido correctamente.<br/>';
                         $m++;
@@ -215,7 +225,7 @@ switch ($tipo_origen) {
         foreach ($_FILES as $name => $values) {
 
             //tengo que cambiar la ruta donde se guarda
-            if (move_uploaded_file($values['tmp_name'], 'C:/xampp/htdocs/moodle/mod/ejercicios/audios/actividades/audio_' . $id_ejercicio . '_' . $m . '.mp3')) {
+            if (move_uploaded_file($values['tmp_name'], './mediaplayer/audios/audio_' . $id_ejercicio . '_' . $m . '.mp3')) {
 
                 //  echo 'El archivo ha sido subido correctamente.<br/>';
                 $m++;

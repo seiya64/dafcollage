@@ -45,10 +45,19 @@ require_once("ejercicios_clase_general.php");
 require_once("ejercicios_form_creacion.php");
 require_once("YoutubeVideoHelper.php");
 
+// Crea ejercicio ahora
+$ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
+$carpeta = unserialize($_SESSION['cosasProfe']);
+$id_ejercicio = $ejercicioGeneral->insertar();
+
+// Y para el profesor tambien
+//Tengo que asignarle el ejercicio al profesor 
+$ejercicio_profesor = new Ejercicios_prof_actividad($ejercicioGeneral->get('id'),$ejercicioGeneral->get('id_creador'),$id_ejercicio,$carpeta);
+$ejercicio_profesor->insertar();
 
 $id_curso = optional_param('id_curso', 0, PARAM_INT);
 $tipocreacion = optional_param('tipocreacion', 0, PARAM_INT);
-$id_ejercicio = optional_param('id_ejercicio', 0, PARAM_INT);
+//$id_ejercicio = optional_param('id_ejercicio', 0, PARAM_INT);
 $tipo_origen = optional_param('tipo_origen', 0, PARAM_INT);
 
 $mform = new  mod_ejercicios_creando_ejercicio_texto($id_curso);

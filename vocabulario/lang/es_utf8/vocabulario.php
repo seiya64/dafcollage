@@ -185,6 +185,10 @@ $string['desc_inten5.2'] = 'Se refiere a una consecuencia que se ha esperado per
 $string['instr_nube1'] = 'Haz clic en una palabra para conocer con cuáles se puede relacionar o búscala en el campo \"Search\"';
 $string['instr_nube2'] = 'Para volver a mostrar todas las palabras borra el campo \"Search\"';
 
+//Lost in translation ;) -> comprobar con la versión en prodrucción
+$string['modificar'] = 'Modificar';
+$string['Añadir'] = 'Añadir';
+
 ///////////////////////////////////////////////////////////
 //a partir de aqui cosas en aleman que NO SE DEBEN TRADUCIR
 ///////////////////////////////////////////////////////////

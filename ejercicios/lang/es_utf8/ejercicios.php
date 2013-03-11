@@ -155,4 +155,6 @@ $string["textoorigen"]="Introduzca texto origen";
 $string["Asociacion_Texto"]= "Texto ";
 $string["Asociacion_Texto_Asociado"]= "Texto Asociado  ";
 $string['Video']='Introduzca la dirección del video';
+
+$string["NuevaAso"]="Añadir asociación";
 ?>
