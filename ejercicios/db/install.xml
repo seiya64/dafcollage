@@ -93,7 +93,7 @@
         <KEY NAME="clave_ejercicio" TYPE="foreign" FIELDS="id_ejercicio" REFTABLE="ejercicios_general" REFFIELDS="id" COMMENT="id del ejercicio" PREVIOUS="primary"/>
       </KEYS>
     </TABLE>
-     <TABLE NAME="ejercicios_videos" COMMENT="Ejercicios Video-Texto" PREVIOUS="ejercicios_textos" NEXT="ejercicios_texto_texto_preg">
+     <TABLE NAME="ejercicios_videos" COMMENT="Ejercicios Video-Texto" PREVIOUS="ejercicios_textos" NEXT="ejercicios_videos_asociados">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="id_ejercicio"/>
         <FIELD NAME="id_ejercicio" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Identificacion del ejrcicio" PREVIOUS="id" NEXT="video"/>
@@ -104,7 +104,23 @@
         <KEY NAME="clave_ejercicio" TYPE="foreign" FIELDS="id_ejercicio" REFTABLE="ejercicios_general" REFFIELDS="id" COMMENT="id del ejercicio" PREVIOUS="primary"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="ejercicios_texto_texto_preg" COMMENT="Ejercicios Texto-Texto preguntas" PREVIOUS="ejercicios_videos" NEXT="ejercicios_texto_texto_resp">
+    
+     <TABLE NAME="ejercicios_videos_asociados" COMMENT="Ejercicios Video-Texto" PREVIOUS="ejercicios_videos" NEXT="ejercicios_texto_texto_preg">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="id_ejercicio"/>
+        <FIELD NAME="id_ejercicio" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Identificacion del ejrcicio" PREVIOUS="id" NEXT="id_pregunta"/>
+        <FIELD NAME="id_pregunta" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Identificacion de la pregunta" PREVIOUS="id_ejercicio" NEXT="nombre_video"/>
+        <FIELD NAME="nombre_video" TYPE="text" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Dirección del video" PREVIOUS="id_pregunta"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_ejercicio" />
+        <KEY NAME="clave_ejercicio" TYPE="foreign" FIELDS="id_ejercicio" REFTABLE="ejercicios_general" REFFIELDS="id" COMMENT="id del ejercicio" PREVIOUS="primary" NEXT="clave_pregunta"/>
+        <KEY NAME="clave_pregunta" TYPE="foreign" FIELDS="id_pregunta" REFTABLE="ejercicios_texto_texto_preg" REFFIELDS="id" COMMENT="id de la pregunta" PREVIOUS="clave_ejercicio"/>
+    
+      </KEYS>
+    </TABLE>
+    
+    <TABLE NAME="ejercicios_texto_texto_preg" COMMENT="Ejercicios Texto-Texto preguntas" PREVIOUS="ejercicios_videos_asociados" NEXT="ejercicios_texto_texto_resp">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="id_ejercicio"/>
         <FIELD NAME="id_ejercicio" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="ejercicio al que se corresponde" PREVIOUS="id" NEXT="pregunta"/>

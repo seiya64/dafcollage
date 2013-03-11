@@ -2599,23 +2599,6 @@ class Ejercicios_audios_asociados{
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
  * Clase que gestiona la tabla mdl_ejercicios_videos asociados de la BD, es decir si el arichivo origen
  * es texto en el formulario de creación estará almacenado en esta tabla.
@@ -2636,7 +2619,6 @@ class Ejercicios_videos_asociados{
         $this->id_ejercicio = $id_ejercicio;
         $this->id_pregunta = $id_preg;
         $this->nombre_video = $nombre_video;
-
     }
 
     //Obtener cada uno de los atributos de la tabla
@@ -2663,11 +2645,15 @@ class Ejercicios_videos_asociados{
     //Inserta en la bd la instancia correspondiente a la clase y devuelve el identificador
     //de la nueva instancia creada
     function insertar() {
-
-        $id = insert_record('ejercicios_videos_asociados', $this, true);
+        if ($this->nombre_video != null){
+            $id = insert_record('ejercicios_videos_asociados', $this, true);
+            return $id;
+        }
+        else{
+            return null;
+        }
         //Devuelve el identificador del ejercicios creado
-
-        return $id;
+        
     }
 
     //Modifica una instacia
@@ -2692,6 +2678,22 @@ class Ejercicios_videos_asociados{
         return $this;
     }
 
+    //Obtiene el texto por id
+    function obtener_uno_ejpreg($id_ej,$id_preg) {
+        print_r('obteneruno');
+        print_r($id_ej);
+        print_r($id_preg);
+        $ejer = get_record('ejercicios_videos_asociados', 'id_ejercicio', $id_ej,'id_pregunta',$id_preg);
+        print_r($ejer);
+        print_r('otroo');
+        $this->id = $ejer->id;
+        $this->id_ejercicio = $ejer->id_ejercicio;
+        $this->id_pregunta = $ejer->id_pregunta;
+        $this->nombre_video =$ejer->nombre_video;
+        print_r($this);
+        return $this;
+    }
+    
     function obtener_todos_id_ejercicio($id_ejercicio) {
 
 
