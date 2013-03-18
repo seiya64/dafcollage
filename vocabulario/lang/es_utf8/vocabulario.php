@@ -1,4 +1,5 @@
 <?php
+
 /*
   Daf-collage is made up of two Moodle modules which help in the process of
   German language learning. It facilitates the content organization like
@@ -101,11 +102,13 @@ $string['adgr'] = 'Añadir descripción';
 $string['error_sus'] = 'No has escrito ninguna palabra para guardarla';
 $string['ver'] = 'Buscar';
 $string['guardar'] = 'Mis palabras';
-$string['editar'] = 'Editar';
+$string['modificar'] = 'Modificar';
 $string['eliminar'] = 'Eliminar';
+$string['Añadir'] = 'Añadir';
+$string['AñadirNuevo'] = 'Añadir Nuevo';
 $string['atras'] = 'Atrás';
 $string['id'] = 'Identificador';
-$string['todo'] = 'Todas las palabras';
+$string['todo'] = 'Relación con otros campos';
 $string['alfabetico'] = 'Palabras por orden alfabético';
 $string['nube'] = 'Tabla interactiva';
 $string['pdf'] = 'Copia en pdf';
@@ -184,10 +187,6 @@ $string['desc_inten5.2'] = 'Se refiere a una consecuencia que se ha esperado per
 // instrucciones de uso de la Tabla Interactiva(nube)
 $string['instr_nube1'] = 'Haz clic en una palabra para conocer con cuáles se puede relacionar o búscala en el campo \"Search\"';
 $string['instr_nube2'] = 'Para volver a mostrar todas las palabras borra el campo \"Search\"';
-
-//Lost in translation ;) -> comprobar con la versión en prodrucción
-$string['modificar'] = 'Modificar';
-$string['Añadir'] = 'Añadir';
 
 ///////////////////////////////////////////////////////////
 //a partir de aqui cosas en aleman que NO SE DEBEN TRADUCIR

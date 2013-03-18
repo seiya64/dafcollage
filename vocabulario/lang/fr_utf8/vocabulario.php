@@ -1,4 +1,6 @@
 <?php
+
+
 /*
 Daf-collage is made up of two Moodle modules which help in the process of
 German language learning. It facilitates the content organization like
@@ -102,8 +104,10 @@ $string['adgr'] = 'Ajouter une description';
 $string['error_sus'] = 'Il n’y a aucun mot à sauvegarder';
 $string['ver'] = 'Chercher';
 $string['guardar'] = 'Mes mots';
-$string['editar'] = 'Modifier';
+$string['modificar'] = 'Modifier';
 $string['eliminar'] = 'Supprimer';
+$string['Añadir'] = 'Ajouter';
+$string['AñadirNuevo'] = 'Ajouter Nouveau';
 $string['atras'] = 'Aller en arrière';
 $string['id'] = 'Nom d’utilisateur';
 $string['todo'] = 'Tous les mots';
