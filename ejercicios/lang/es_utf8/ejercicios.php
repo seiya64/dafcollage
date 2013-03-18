@@ -150,11 +150,13 @@ $string["BotonAñadir"]="Añadir a mis ejercicios";
 $string['Misejercicios']='Mis Actividades';
 $string["marcoteorico"]="Seleccionar el nivel según el marco europeo de referecia(OPCIONAL)";
 
-//FORMULARIO CREACION
+
+//A partir de aqui hay que traducir a ingles
 $string["textoorigen"]="Introduzca texto origen";
 $string["Asociacion_Texto"]= "Texto ";
 $string["Asociacion_Texto_Asociado"]= "Texto Asociado  ";
 $string['Video']='Introduzca la dirección del video';
+$string['NuevaAso']='Añadir Aso';
+$string['tipopregunta1']='Tipo de archivo pregunta';
 
-$string["NuevaAso"]="Añadir asociación";
 ?>
