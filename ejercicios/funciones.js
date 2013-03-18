@@ -1378,10 +1378,11 @@ function cargaImagenes(elnombre,i,j){
             alert("recargando");
                  
             respuesta = document.getElementById('respuesta'+i);
-            //   respuesta.reload();
-            respuesta.src="./imagenes/actividades/"+elnombre;
-               
-
+              
+            respuesta.src="./imagenes/"+elnombre;
+            respuesta.removeAttribute("src");
+            respuesta.setAttribute("src","./imagenes/"+elnombre);
+            alert('Fin cambio imagen');
               
         }
     //Tengo que cambiar la foto
