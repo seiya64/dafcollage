@@ -290,42 +290,7 @@ switch ($tipo_origen) {
 
         break;
     case 4://Es una imagen
-        echo "es una imagen la pregunta";
-         $numero_preguntas = optional_param('numeropreguntas', PARAM_INT);
-        echo "numero preguntas" . $numero_preguntas;
-        
-          //SUBO LAS FOTOS A MOODLE
-          $m = 1;
-           foreach ($_FILES as $name => $values) {
-
-               //tengo que cambiar la ruta donde se guarda
-               if (move_uploaded_file($values['tmp_name'], './imagenes/foto_' . $id_ejercicio . '_' . $m . '.jpg')) {
-
-                        //  echo 'El archivo ha sido subido correctamente.<br/>';
-                        $m++;
-               }
-           }
-        for ($i = 0; $i < $numero_preguntas; $i++) {
-            //Obtengo la pregunta
-
-            $j = $i + 1;
-            $pregunta = optional_param('pregunta' . $j, PARAM_TEXT);
-
-            //Inserto la pregunta Archivo asociación
-            $mispreguntas = new Ejercicios_texto_texto_preg(NULL, $id_ejercicio, $pregunta);
-            $id_preg = $mispreguntas->insertar();
-
-            // $dirvideoasociado = optional_param('archivovideo'.$j,PARAM_TEXT);
-
-             $rcorrecta = 0; //Me da igual si es corrects o incorrecta
-            
-            $nombre_foto = 'foto_' . $id_ejercicio . '_' . $j . '.jpg';
-            $mi_respuesta = new Ejercicios_imagenes_asociadas(NULL, $id_ejercicio, $id_preg, $nombre_foto);
-
-            $mi_respuesta->insertar();
-        }
-        echo "fin insercción";
-        
+        echo "es una imagen";
         break;
 }
 

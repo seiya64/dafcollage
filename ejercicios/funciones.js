@@ -1378,11 +1378,10 @@ function cargaImagenes(elnombre,i,j){
             alert("recargando");
                  
             respuesta = document.getElementById('respuesta'+i);
-              
-            respuesta.src="./imagenes/"+elnombre;
-            respuesta.removeAttribute("src");
-            respuesta.setAttribute("src","./imagenes/"+elnombre);
-            alert('Fin cambio imagen');
+            //   respuesta.reload();
+            respuesta.src="./imagenes/actividades/"+elnombre;
+               
+
               
         }
     //Tengo que cambiar la foto
@@ -1523,7 +1522,7 @@ function cargaAudios(elnombre,i,j){
             elememb.setAttribute("name","mpl");
             elememb.setAttribute("quality","high");
             elememb.setAttribute("allowfullscreen","true");
-            elememb.setAttribute("flashvars","file=./audios/"+elnombre+"&amp;height=20&amp;width=320");
+            elememb.setAttribute("flashvars","file=./mediaplayer/audios/"+elnombre+"&amp;height=20&amp;width=320");
         
             respuesta[0].appendChild(elememb);
                

@@ -90,7 +90,6 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
             $tabla='<div id="formulario">';
             $mform->addElement('html',$tabla);
            //Seleccione el tipo de archivo pregunta (texto/ audio/ vídeo/ foto)
-            //TODO Cambiar estos if por un switch
            if($tipocreacion==2){
            $radioarray=array();
            $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Texto","Texto", null);
@@ -611,7 +610,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
                             $aux=$i+1;
                             $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
                              $mform->addElement('html',$titulo);
-                             echo "aki si llega";
+
                            //Archivo Asociacion
                             $mform->addElement('textarea', 'pregunta'.$aux, get_string('Asociacion_Texto', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
                             //Archivo Asociado
@@ -623,8 +622,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
                            }
 
                            $mform->addElement('hidden','numeropreguntas',$p);
-                           echo "aki llega con angel";
-                       
+                      
                         
                     break;
 
@@ -696,28 +694,20 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
 
             case 4: //El archivo de origen es una imagen
 
-                if($tiporespuesta==1){//La respuesta es un texto (la unica posibilidad)
+                switch($tiporespuesta){
 
-                       
-                     for($i=0;$i<$p;$i++){
-
-                            $aux=$i+1;
-                            $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
-                             $mform->addElement('html',$titulo);
-                          
-                           //Archivo Asociacion
-                            $mform->addElement('textarea', 'pregunta'.$aux, get_string('Asociacion_Texto', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
-                            //Archivo Asociado
-                            $mform->addElement('file', 'archivofoto'.$aux,"Foto");
-                            $mform->addRule('archivofoto'.$aux, "Archivo Necesario", 'required', null, 'client');
-
-
-
-                          }
-
-                           $mform->addElement('hidden','numeropreguntas',$p);
-                          
-                         
+                    case 1: //El archivo respuesta es un texto
+                        echo "imagen-texto";
+                    break;
+                    case 2: //El archivo respuesta es un audio
+                         echo "imagen-audio";
+                    break;
+                    case 3: //El archivo respuesta es un video
+                         echo "imagen-video";
+                    break;
+                    case 4: //El archivo respuesta es una imagen
+                         echo "texto-imagen";
+                    break;
 
                 }
 
