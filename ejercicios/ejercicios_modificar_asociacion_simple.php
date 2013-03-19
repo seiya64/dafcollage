@@ -166,12 +166,34 @@ if ($tipo_origen == 1) { //la pregunta es un texto
             for ($s = 0; $s < sizeof($id_preguntas); $s++) {
                 delete_records('ejercicios_videos_asociados', 'id_ejercicio', $id_ejercicio);
             }
-        }
-
-        if ($tipo_respuesta == 1) { //La respuesta es un texto
+            
+              if ($tipo_respuesta == 1) { //La respuesta es un texto
             //borro las respuestas
             delete_records('ejercicios_texto_texto_preg', 'id_ejercicio', $id_ejercicio);
         }
+        }
+        else if ($tipo_origen==4) //La pregunta es una imagen
+        {
+               if ($tipo_respuesta == 1) {  //La respuesta es un texto
+                    echo "actualizando imagen";
+                    
+                    //obtengo los id de las preguntas del ejercicio
+                    $id_preguntas = array();
+
+                    $mis_preguntas = new Ejercicios_texto_texto_preg();
+
+                    $id_preguntas = $mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
+                    //borro las respuestas
+
+                    for ($s = 0; $s < sizeof($id_preguntas); $s++) {
+                        delete_records('ejercicios_imagenes_asociadas', 'id_ejercicio', $id_ejercicio);
+                    }
+                    delete_records('ejercicios_texto_texto_preg', 'id_ejercicio', $id_ejercicio);
+                    echo 'Borradas imagenes';
+                }
+        }
+
+      
     }
 }
 
@@ -245,6 +267,19 @@ for ($i = 0; $i < $numeropreguntas; $i++) {
                     $ejercicio_texto_video->insertar();
                     echo "insertado";
                 }
+            }
+            
+            else if ($tipo_origen == 4) { // ES UNA IMAGEN
+                
+                    if ($tipo_respuesta == 1) { //La respuesta es un texto
+                        
+                         $preg = required_param('pregunta' . $j, PARAM_TEXT);
+                        $ejercicio_texto_preg = new Ejercicios_texto_texto_preg(NULL, $id_ejercicio, $preg);
+                        $id_pregunta = $ejercicio_texto_preg->insertar();
+                    
+                        $ejercicio_texto_img = new Ejercicios_imagenes_asociadas($NULL, $id_ejercicio, $id_pregunta, 'foto_' . $id_ejercicio . "_" . $j . ".jpg");
+                        $ejercicio_texto_img->insertar();
+                    }
             }
         }
     }

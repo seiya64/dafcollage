@@ -121,7 +121,7 @@ class mod_ejercicios_mis_ejercicios extends moodleform_mod {
               $carpeta.='<li><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'&tipo_origen='.$mi_ejercicio->get('tipoarchivopregunta').'">'. $nombre_ejercicio.'</a><a href="eliminar_carpetas_ejercicios.php?id_curso='.$id.'&id_ejercicio='.$id_ejercicio.'""><img src="./imagenes/delete.gif"/></a></li>';
 
             }else{
-
+                //TODO Cambiar estos if-else por switch
                  if($mi_ejercicio->get('tipoactividad')==1){ //asociacion simple
                      echo "asociaciónnnnnn simpñeeee";
 
@@ -163,7 +163,17 @@ class mod_ejercicios_mis_ejercicios extends moodleform_mod {
 
                                   }
                              }
+                             else {
+                                  if($mi_ejercicio->get('tipoarchivopregunta')==4){ //La pregunta es una imagen
+                                    if($mi_ejercicio->get('tipoarchivorespuesta')==1){ //La respuesta es un texto
+                                           $carpeta.='<li style="width:750px;"><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'&tipo_origen='.$mi_ejercicio->get('tipoarchivopregunta').'&tr='.$mi_ejercicio->get('tipoarchivorespuesta').'&tipocreacion='.$mi_ejercicio->get('tipoactividad').'">'. $nombre_ejercicio.'</a><a href="eliminar_carpetas_ejercicios.php?id_curso='.$id.'&id_ejercicio='.$id_ejercicio.'""><img src="./imagenes/delete.gif"/></a></li>';
+
+                                    }
+                             }
+                                 
+                             }                          
                          }
+                         
 
                      }
                  }
