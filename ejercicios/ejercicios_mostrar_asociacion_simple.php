@@ -511,7 +511,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                         $mform->addElement('html', $tabla_imagenes);
 
                         break;
-                    case 3: //Es de tipo video la respuesta
+                    case 3: //Es de tipo video la respusta
 
                         $mform->addElement('html', '<script src="./js/ajaxupload.js" type="text/javascript"></script>');
 
@@ -589,8 +589,17 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                                 $tabla_imagenes.='<tr>';
 
                                 $tabla_imagenes.='<td><div class=descripcion>';
+                                
+                                $tabla_imagenes .= '<object id="video' . $i . ' width="396" height="197">
+                                        <param name="movie" value="http://www.youtube.com/v/' . $respuestas[0]->get('nombre_video') . '?hl=es_ES&amp;version=3">
+                                        </param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param>
+                                        <embed src="http://www.youtube.com/v/' . $respuestas[0]->get('nombre_video') . '?hl=es_ES&amp;version=3" type="application/x-shockwave-flash" width="396" height="197" allowscriptaccess="always" allowfullscreen="true">
+                                        </embed></object>';
 
-                                $tabla_imagenes.=' <a class="button super yellow" href="' . $respuestas[0]->get('nombre_video') . '" target="_blank" id="video' . $i . '">Ver Video</a>';
+             
+                                
+                                
+                              //  $tabla_imagenes.=' <a class="button super yellow" href="' . $respuestas[0]->get('nombre_video') . '" target="_blank" id="video' . $i . '">Ver Video</a>';
 
 
                                 $tabla_imagenes.='</td>';
@@ -828,7 +837,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                                 // $tabla_imagenes.='</div>';
                                 $tabla_imagenes.='</div>';
                                 $tabla_imagenes.='<div id="capa2"> ';
-                                $tabla_imagenes.='<img  name="respuesta' . $i . '" id="respuesta' . $i . '" src="./imagenes/actividades/' . $respuestas[0]->get('nombre_imagen') . '"   style="height: 192px; width: 401px;" ></img>';
+                                $tabla_imagenes.='<img  name="respuesta' . $i . '" id="respuesta' . $i . '" src="./imagenes/' . $respuestas[0]->get('nombre_imagen') . '"   style="height: 192px; width: 401px;" ></img>';
                                 $tabla_imagenes.='</div>';
 
 
@@ -1210,7 +1219,16 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
 
                         $tabla_imagenes.='<td><div class=descripcion>';
 
-                        $tabla_imagenes.=' <a class="button super yellow" href="' . $respuestas[0]->get('nombre_video') . '" target="_blank" id="video' . $i . '">Ver Video</a>';
+                        
+                             
+                        $tabla_imagenes .= '<object id="video' . $i . ' width="396" height="197">
+                                        <param name="movie" value="http://www.youtube.com/v/' . $respuestas[0]->get('nombre_video') . '?hl=es_ES&amp;version=3">
+                                        </param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param>
+                                        <embed src="http://www.youtube.com/v/' . $respuestas[0]->get('nombre_video') . '?hl=es_ES&amp;version=3" type="application/x-shockwave-flash" width="396" height="197" allowscriptaccess="always" allowfullscreen="true">
+                                        </embed></object>';
+
+             
+                      //  $tabla_imagenes.=' <a class="button super yellow" href="' . $respuestas[0]->get('nombre_video') . '" target="_blank" id="video' . $i . '">Ver Video</a>';
 
 
                         $tabla_imagenes.='</td>';
@@ -1410,7 +1428,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                                 $tabla_imagenes.='<tr>';
 
                                 $tabla_imagenes.='<td><div class=descripcion>';
-                                $tabla_imagenes.= '<img name="respuesta' . $i . '" id="respuesta' . $i . '" src="./imagenes/actividades/' . $nombre_respuestas[$aleatorios_generados[$j] - 1] . '"   style="height: 192px; width: 401px;" ></img>';
+                                $tabla_imagenes.= '<img name="respuesta' . $i . '" id="respuesta' . $i . '" src="./imagenes/' . $nombre_respuestas[$aleatorios_generados[$j] - 1] . '"   style="height: 192px; width: 401px;" ></img>';
                                 $tabla_imagenes.='</div></td>';
 
                                 $tabla_imagenes.='<td><div  id="' . $aleatorios_generados[$j] . '" class="marquito"></div></td>';
