@@ -377,6 +377,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
 
                             echo "AAAAAAAAAAAAAAAAAAAAAAAAaa";
                             for ($j = 0; $j < sizeof($aleatorios_generados); $j++) {
+                                $i=$j+1;
                                 $tabla_imagenes.='<tr>';
 
                                 $tabla_imagenes.='<td><div class=descripcion>';
@@ -919,9 +920,9 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                         break;
                 }
                 break;
-            case 2: //Es de tipo audio la respuesta
+            case 2: //Es de tipo audio la pregunta
 
-                echo "tipo respuesta es audio";
+                echo "tipo pregunta es audio";
 
                 $mform->addElement('html', '<script src="./js/ajaxupload.js" type="text/javascript"></script>');
 
@@ -993,6 +994,8 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
 
                     echo "AAAAAAAAAAAAAAAAAAAAAAAAaa";
                     for ($j = 0; $j < sizeof($aleatorios_generados); $j++) {
+                        
+                        $i=$j+1;
                         $tabla_imagenes.='<tr>';
 
                         $tabla_imagenes.='<td><div class=descripcion>';
