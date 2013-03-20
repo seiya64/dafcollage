@@ -75,10 +75,16 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
         $mform = & $this->_form;
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./style.css">');
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
-        $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>');
-        $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js"></script>');
-        $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
-        $mform->addElement('html', '<script type="text/javascript" src="./js/jquery.min.js"></script>');
+        //$mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>');
+        //$mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js"></script>');
+        
+        //$mform->addElement('html', '<script type="text/javascript" src="./js/jquery.min.js"></script>');
+        
+        
+          $mform->addElement('html','<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>');
+          $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.js"></script>');
+
+          $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
         //Cojo el ejercicio  de la bd a partir de su id (id_ejercicio)
         //Obtengo el ejercicio de la bd
         $ejercicios_bd = new Ejercicios_general();
