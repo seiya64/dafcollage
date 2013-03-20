@@ -586,14 +586,16 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                             echo "AAAAAAAAAAAAAAAAAAAAAAAAaa";
 
                             for ($j = 0; $j < sizeof($aleatorios_generados); $j++) {
+                                
+                                $i=$j+1;
                                 $tabla_imagenes.='<tr>';
 
                                 $tabla_imagenes.='<td><div class=descripcion>';
                                 
                                 $tabla_imagenes .= '<object id="video' . $i . ' width="396" height="197">
-                                        <param name="movie" value="http://www.youtube.com/v/' . $respuestas[0]->get('nombre_video') . '?hl=es_ES&amp;version=3">
+                                        <param name="movie" value="http://www.youtube.com/v/' .$nombre_respuestas[$j] . '?hl=es_ES&amp;version=3">
                                         </param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param>
-                                        <embed src="http://www.youtube.com/v/' . $respuestas[0]->get('nombre_video') . '?hl=es_ES&amp;version=3" type="application/x-shockwave-flash" width="396" height="197" allowscriptaccess="always" allowfullscreen="true">
+                                        <embed src="http://www.youtube.com/v/' . $nombre_respuestas[$j] . '?hl=es_ES&amp;version=3" type="application/x-shockwave-flash" width="396" height="197" allowscriptaccess="always" allowfullscreen="true">
                                         </embed></object>';
 
              
@@ -1215,6 +1217,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                     echo "AAAAAAAAAAAAAAAAAAAAAAAAaa";
 
                     for ($j = 0; $j < sizeof($aleatorios_generados); $j++) {
+                        $i=$j+1;
                         $tabla_imagenes.='<tr>';
 
                         $tabla_imagenes.='<td><div class=descripcion>';
@@ -1222,9 +1225,9 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                         
                              
                         $tabla_imagenes .= '<object id="video' . $i . ' width="396" height="197">
-                                        <param name="movie" value="http://www.youtube.com/v/' . $respuestas[0]->get('nombre_video') . '?hl=es_ES&amp;version=3">
+                                        <param name="movie" value="http://www.youtube.com/v/' . $nombre_respuestas[$j] . '?hl=es_ES&amp;version=3">
                                         </param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param>
-                                        <embed src="http://www.youtube.com/v/' . $respuestas[0]->get('nombre_video') . '?hl=es_ES&amp;version=3" type="application/x-shockwave-flash" width="396" height="197" allowscriptaccess="always" allowfullscreen="true">
+                                        <embed src="http://www.youtube.com/v/' .  $nombre_respuestas[$j] . '?hl=es_ES&amp;version=3" type="application/x-shockwave-flash" width="396" height="197" allowscriptaccess="always" allowfullscreen="true">
                                         </embed></object>';
 
              
