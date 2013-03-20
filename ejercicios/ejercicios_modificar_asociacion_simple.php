@@ -234,7 +234,7 @@ for ($i = 0; $i < $numeropreguntas; $i++) {
                 } else {
 
                     if ($tipo_respuesta == 4) { //eS UNA IMAGEN
-                        $ejercicio_texto_img = new Ejercicios_imagenes_asociadas($NULL, $id_ejercicio, $id_pregunta, 'img_' . $id_ejercicio . "_" . $j . ".jpg");
+                        $ejercicio_texto_img = new Ejercicios_imagenes_asociadas($NULL, $id_ejercicio, $id_pregunta, 'foto_' . $id_ejercicio . "_" . $j . ".jpg");
                         $ejercicio_texto_img->insertar();
                     }
                 }
