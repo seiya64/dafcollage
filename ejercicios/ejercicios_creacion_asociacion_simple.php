@@ -188,7 +188,7 @@ switch ($tipo_origen) {
                 foreach ($_FILES as $name => $values) {
 
                     //tengo que cambiar la ruta donde se guarda
-                    if (move_uploaded_file($values['tmp_name'], './imagenes/actividades/img_' . $id_ejercicio . '_' . $m . '.jpg')) {
+                    if (move_uploaded_file($values['tmp_name'], './imagenes/foto_' . $id_ejercicio . '_' . $m . '.jpg')) {
 
                         //  echo 'El archivo ha sido subido correctamente.<br/>';
                         $m++;
@@ -209,7 +209,7 @@ switch ($tipo_origen) {
                     $id_preg = $mispreguntas->insertar();
 
                     //Lo inserto en la tabla de imagenes para asociar respuestas y preguntas
-                    $nombre_img = 'img_' . $id_ejercicio . '_' . $j . '.jpg';
+                    $nombre_img = 'foto_' . $id_ejercicio . '_' . $j . '.jpg';
                     $mi_respuesta = new Ejercicios_Imagenes_Asociadas(NULL, $id_ejercicio, $id_preg, $nombre_img);
 
                     $mi_respuesta->insertar();
