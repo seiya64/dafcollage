@@ -93,37 +93,143 @@ $ejercicio_profesor_actividad = new Ejercicios_prof_actividad();
             $ejercicio=$ejercicio_general->obtener_uno($id_ejercicio);
             //lo borro
             $ejercicio_general->borrar($ejercicio->get('id'));
+            
+            switch ($ejercicio->get('tipoactividad')) {
+                case 0: //Multiple choice
+                    switch ($ejercicio->get('tipoarchivopregunta')) {
+                        case 1: //Hay un texto
+                            $ej_textos = new Ejercicios_textos();
+                            $ej_textos->borrar_id_ejercicio($id_ejercicio);
+                            break;
+                        case 2: //Hay un audio
+                            //Lo borramos directamente de la carpeta de audios
+                            if (!unlink('./mediaplayer/audios/audio' . $id_ejercicio . '.mp3')) {
+                                echo 'ERROR EN LA ELIMINACION DEL FICHERO DE AUDIO';
+                                echo 'RUTA: ' . './mediaplayer/audios/audio' . $id_ejercicio . '.mp3';
+                            }
 
-            if($ejercicio->get('tipoactividad')==0){
-                if($ejercicio->get('tipoarchivopregunta')==1){//hay un texto
-                    $ej_textos=new Ejercicios_textos();
-                    $ej_textos->borrar_id_ejercicio($id_ejercicio);
-                }else{
+                            break;
+                        case 3: //Hay un video
+                            $ej_video = new Ejercicios_videos();
+                            $ej_video->borrar_id_ejercicio($id_ejercicio);
+                            break;
+                    }
+
+
+
+
+                    //borro las respuestas
+                    $ejercicio_texto_texto_preg = new Ejercicios_texto_texto_preg();
+                    $num_preguntas = $ejercicio_texto_texto_preg->obtener_todas_preguntas_ejercicicio($id_ejercicio);
+                    echo "el numero de preguntas" . sizeof($num_preguntas);
+                    for ($j = 0; $j < sizeof($num_preguntas); $j++) {
+                        $ejercicio_texto_texto_resp = new Ejercicios_texto_texto_resp();
+                        $id_pregunta = $num_preguntas[$j]->get('id');
+                        $ejercicio_texto_texto_resp->borrar_id_pregunta($id_pregunta);
+                    }
+                    //echo "borrando de texto texto preg"
+
+                    $ejercicio_texto_texto_preg->borrar_id_ejercicio($id_ejercicio);
+
+                    break;
+                case 1: //Asociacion simple
+                    switch ($ejercicio->get('tipoarchivopregunta')) {
+                        case 1: //Hay un texto
+                            $ej_textos = new Ejercicios_texto_texto_preg();
+                            $ej_textos->borrar_id_ejercicio($id_ejercicio);
+                            
+                            switch($ejercicio->get('tipoarchivorespuesta')){
+                                //No ponemos 1 porque lo vamos a poner de manera general fuera de este switch
+                                case 2: //Es un audio
+                                    $ej_audio = new Ejercicios_audios_asociados();
+                                    $audios_filename = $ej_audio->obtener_todos_id_ejercicio($id_ejercicio);
+                                    for ($i = 0; $i < sizeof($audios_filename); $i++) {
+                                        unlink('./mediaplayer/audios/' . $audios_filename[$i]);
+                                    }
+                                    $ej_audio->borrar_id_ejercicio($id_ejercicio);
+                                    break;
+                                case 3: //Hay un video
+                                    $ej_video = new Ejercicios_videos_asociados();
+                                    $ej_video->borrar_id_ejercicio($id_ejercicio);
+                                    break;
+                                case 4:
+                                    $ej_img = new Ejercicios_imagenes_asociadas();
+                                    $img_filenames = $ej_img->obtener_todos_id_ejercicio($id_ejercicio);
+                                    for ($i = 0; $i < sizeof($img_filenames); $i++) {
+                                        unlink('./imagenes/' . $img_filenames[$i]);
+                                    }
+                                    $ej_img->borrar_id_ejercicio($id_ejercicio);
+                                    break;
+                            }
+                            break;
+                        case 2: //Hay un audio           
+                            $ej_audio = new Ejercicios_audios_asociados();
+                            $audios_filename = $ej_audio->obtener_todos_id_ejercicio($id_ejercicio);
+                            for($i=0; $i<sizeof($audios_filename); $i++) {
+                                unlink('./mediaplayer/audios/'. $audios_filename[$i]);
+                            }
+                            $ej_audio->borrar_id_ejercicio($id_ejercicio);
+                            break;
+                        case 3: //Hay un video
+                            $ej_video = new Ejercicios_videos_asociados();
+                            $ej_video->borrar_id_ejercicio($id_ejercicio);
+                            break;
+                        case 4:
+                            $ej_img = new Ejercicios_imagenes_asociadas();
+                            $img_filenames = $ej_img->obtener_todos_id_ejercicio($id_ejercicio);
+                            for($i=0; $i<sizeof($img_filenames); $i++) {
+                                unlink('./imagenes/' . $img_filenames[$i]);
+                            }
+                            $ej_img->borrar_id_ejercicio($id_ejercicio);
+                            break;
+                    }
                     
-                     if($ejercicio->get('tipoarchivopregunta')==3){//hay un video
-                         $ej_video=new Ejercicios_videos();
-                         $ej_video->borrar_id_ejercicio($id_ejercicio);
-                      }
-                }
+                    //borro las respuestas
+                    $ejercicio_texto_texto_preg = new Ejercicios_texto_texto_preg();
+                    $num_preguntas = $ejercicio_texto_texto_preg->obtener_todas_preguntas_ejercicicio($id_ejercicio);
+                    echo "el numero de preguntas" . sizeof($num_preguntas);
+                    
+                    //echo "borrando de texto texto preg"
+                    $ejercicio_texto_texto_preg->borrar_id_ejercicio($id_ejercicio);
+                    break;
+                case 4: //Identificar elementos
+                    switch ($ejercicio->get('tipoarchivopregunta')) {
+                        case 1: //Hay un texto
+                            $ej_textos = new Ejercicios_textos();
+                            $ej_textos->borrar_id_ejercicio($id_ejercicio);
+                            break;
+                        case 2: //Hay un audio
+                            //Lo borramos directamente de la carpeta de audios
+                            if (!unlink('./mediaplayer/audios/audio' . $id_ejercicio . '.mp3')) {
+                                echo 'ERROR EN LA ELIMINACION DEL FICHERO DE AUDIO';
+                                echo 'RUTA: ' . './mediaplayer/audios/audio' . $id_ejercicio . '.mp3';
+                            }
 
-                echo "tipo de actividad es 0";
+                            break;
+                        case 3: //Hay un video
+                            $ej_video = new Ejercicios_videos();
+                            $ej_video->borrar_id_ejercicio($id_ejercicio);
+                            break;
+                    }
 
 
-                         //borro las respuestas
-                         $ejercicio_texto_texto_preg=new Ejercicios_texto_texto_preg();
-                         $num_preguntas=$ejercicio_texto_texto_preg->obtener_todas_preguntas_ejercicicio($id_ejercicio);
-                          echo "el numero de preguntas".sizeof($num_preguntas);
-                         for($j=0;$j<sizeof($num_preguntas);$j++){
-                             $ejercicio_texto_texto_resp=new Ejercicios_texto_texto_resp();
-                             $id_pregunta=$num_preguntas[$j]->get('id');
-                             $ejercicio_texto_texto_resp->borrar_id_pregunta($id_pregunta);
-                         }
-                        //echo "borrando de texto texto preg"
-                       
-                          $ejercicio_texto_texto_preg->borrar_id_ejercicio($id_ejercicio);
 
-            } //Falta añadir el resto de tipos de actividades
-          
+
+                    //borro las respuestas
+                    $ejercicio_texto_texto_preg = new Ejercicios_texto_texto_preg();
+                    $num_preguntas = $ejercicio_texto_texto_preg->obtener_todas_preguntas_ejercicicio($id_ejercicio);
+                    echo "el numero de preguntas" . sizeof($num_preguntas);
+                    for ($j = 0; $j < sizeof($num_preguntas); $j++) {
+                        $ejercicio_ie_respuestas = new ejercicios_ie_respuestas();
+                        $id_pregunta = $num_preguntas[$j]->get('id');
+                        $ejercicio_ie_respuestas->borrar_id_pregunta($id_pregunta);
+                    }
+                    //echo "borrando de texto texto preg"
+
+                    $ejercicio_texto_texto_preg->borrar_id_ejercicio($id_ejercicio);
+                    break;
+            }
+         
            
          
        }

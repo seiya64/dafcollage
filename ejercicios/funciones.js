@@ -2268,3 +2268,112 @@ function EliminarRespuesta_IE(respuesta,numpreg){
     
    
 }
+
+
+function botonMasPreguntas_IE(){
+    alert("añadiendo pregunta");
+
+    divnumpreguntas = document.getElementById('num_preg');
+    numeropreguntas=divnumpreguntas.value;
+    alert("numero actual es"+ numeropreguntas);
+    anterior=document.getElementById('num_res_preg'+ numeropreguntas);
+    alert(anterior.id);
+    numeropreguntas= parseInt(numeropreguntas) +1;
+    divnumpreguntas.value=numeropreguntas;
+    alert("llega");
+    nuevodiv = document.createElement('div');
+    alert("aki tb llega");
+    nuevodiv.id= "tabpregunta"+numeropreguntas;
+    //Creo un nuevo hijo a la tabla general para la pregunta
+    alert("si");
+    var br = document.createElement('br');
+    var br1 = document.createElement('br');
+    var br2 = document.createElement('br');
+    tablapreg = document.createElement('table');
+    tablapreg.style.width="100%";
+
+    body= document.createElement('tbody');
+    nuevotr=document.createElement('tr');
+
+    body.appendChild(nuevotr);
+    nuevotd=document.createElement('td');
+    nuevotd.style.width="80%";
+    textareapreg=document.createElement('textarea');
+    textareapreg.style.width="900px";
+    textareapreg.setAttribute('class', 'pregunta');
+    textareapreg.name="pregunta"+numeropreguntas;
+    textareapreg.id="pregunta"+numeropreguntas;
+    //Añado el textarea de la prgunta
+    nuevotd.appendChild(textareapreg);
+
+    nuevotd1=document.createElement('td');
+    nuevotd1.style.width="5%";
+    imgborrar=document.createElement('img');
+    imgborrar.id="imgpregborrar"+numeropreguntas ;
+    imgborrar.src="./imagenes/delete.gif";
+    imgborrar.alt="eliminar respuesta";
+    imgborrar.style.height="10px";
+    imgborrar.style.width="10px";
+    imgborrar.setAttribute('onclick',"EliminarPregunta_IE(tabpregunta"+numeropreguntas+","+numeropreguntas+")");
+    imgborrar.title="Eliminar Pregunta";
+
+    //
+
+    //icono de borrar pregunta
+    nuevotd1.appendChild(imgborrar);
+    nuevotd1.appendChild(br);
+
+    //Creación imagen añadir
+
+    imgañadir=document.createElement('img');
+    imgañadir.id="imgpreganadir"+numeropreguntas ;
+    imgañadir.src="./imagenes/añadir.gif";
+    imgañadir.alt="añadir respuesta";
+    imgañadir.style.height="15px";
+    imgañadir.style.width="15px";
+    imgañadir.setAttribute('onclick',"anadirRespuesta_IE(respuestas"+numeropreguntas+","+numeropreguntas+")");
+    imgañadir.title="Añadir Pregunta";
+
+    nuevotd1.appendChild(imgañadir);
+    nuevotr.appendChild(nuevotd);
+    nuevotr.appendChild(nuevotd1);
+    tablapreg.appendChild(body);
+    //le añado sus br
+    nuevodiv.appendChild(br);
+    nuevodiv.appendChild(br1);
+    nuevodiv.appendChild(br2);
+    nuevodiv.appendChild(tablapreg);
+    nuevodiv.appendChild(br);
+
+    //div de respuestas
+
+
+    divrespuesta=document.createElement('div');
+    divrespuesta.id="respuestas"+numeropreguntas;
+    divrespuesta.setAttribute('class',"respuesta");
+
+      
+
+    nuevodiv.appendChild(divrespuesta);
+
+         
+
+    //lo inserto despues de anterior
+    insertAfter(anterior,nuevodiv);
+
+
+    //<input type="hidden" value="1" id="num_res_preg3" name="num_res_preg3
+
+    nuevoinput=document.createElement('input');
+    nuevoinput.type="hidden";
+    nuevoinput.value="0";
+    nuevoinput.id="num_res_preg"+numeropreguntas;
+    nuevoinput.name="num_res_preg"+numeropreguntas;
+
+    //añado el numero de respuestas de la nueva pregunta
+    insertAfter(nuevodiv,nuevoinput)
+
+    alert("fin");
+
+      
+}
