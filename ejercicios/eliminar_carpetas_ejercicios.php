@@ -142,7 +142,7 @@ $ejercicio_profesor_actividad = new Ejercicios_prof_actividad();
                                     $ej_audio = new Ejercicios_audios_asociados();
                                     $audios_filename = $ej_audio->obtener_todos_id_ejercicio($id_ejercicio);
                                     for ($i = 0; $i < sizeof($audios_filename); $i++) {
-                                        unlink('./mediaplayer/audios/' . $audios_filename[$i]);
+                                        unlink('./mediaplayer/audios/' . $audios_filename[$i]->get('nombre_audio'));
                                     }
                                     $ej_audio->borrar_id_ejercicio($id_ejercicio);
                                     break;
@@ -154,7 +154,7 @@ $ejercicio_profesor_actividad = new Ejercicios_prof_actividad();
                                     $ej_img = new Ejercicios_imagenes_asociadas();
                                     $img_filenames = $ej_img->obtener_todos_id_ejercicio($id_ejercicio);
                                     for ($i = 0; $i < sizeof($img_filenames); $i++) {
-                                        unlink('./imagenes/' . $img_filenames[$i]);
+                                        unlink('./imagenes/' . $img_filenames[$i]->get('nombre_imagen'));
                                     }
                                     $ej_img->borrar_id_ejercicio($id_ejercicio);
                                     break;
@@ -164,7 +164,7 @@ $ejercicio_profesor_actividad = new Ejercicios_prof_actividad();
                             $ej_audio = new Ejercicios_audios_asociados();
                             $audios_filename = $ej_audio->obtener_todos_id_ejercicio($id_ejercicio);
                             for($i=0; $i<sizeof($audios_filename); $i++) {
-                                unlink('./mediaplayer/audios/'. $audios_filename[$i]);
+                                unlink('./mediaplayer/audios/'. $audios_filename[$i]->get('nombre_audio'));
                             }
                             $ej_audio->borrar_id_ejercicio($id_ejercicio);
                             break;
@@ -176,7 +176,7 @@ $ejercicio_profesor_actividad = new Ejercicios_prof_actividad();
                             $ej_img = new Ejercicios_imagenes_asociadas();
                             $img_filenames = $ej_img->obtener_todos_id_ejercicio($id_ejercicio);
                             for($i=0; $i<sizeof($img_filenames); $i++) {
-                                unlink('./imagenes/' . $img_filenames[$i]);
+                                unlink('./imagenes/' . $img_filenames[$i]->get('nombre_imagen'));
                             }
                             $ej_img->borrar_id_ejercicio($id_ejercicio);
                             break;
