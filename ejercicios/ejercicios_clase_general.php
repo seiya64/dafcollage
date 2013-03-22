@@ -2746,6 +2746,136 @@ class Ejercicios_videos_asociados{
 
 //tabla para gestionar asociacion simple (Videos asociados a textos)
 
+//------- Tablas para ejercicios Identificar Elementos ------------------
+class ejercicios_ie_respuestas {
 
+    var $id;
+    var $id_ejercicio;
+    var $id_pregunta;
+    var $respuesta;
+
+
+    //Contructor por defecto y con parametros
+    function ejercicios_ie_respuestas($id = NULL,$id_ejercicio=NULL,$id_pregunta=NULL,$respuesta = NULL) {
+
+        $this->id = $id;
+        $this->id_ejercicio = $id_ejercicio;
+        $this->id_pregunta = $id_pregunta;
+        $this->respuesta = $respuesta;
+       
+    }
+
+    //Obtener cada uno de los atributos de la tabla
+    function get($param) {
+
+        // $param = strtolower($param);
+        switch ($param) {
+            default:
+            case 'id':
+                return $this->id;
+                break;
+
+            case 'id_ejercicio':
+                return $this->id_ejercicio;
+                break;
+            
+            case 'id_pregunta':
+                return $this->id_pregunta;
+                break;
+            case 'respuesta':
+                return $this->respuesta;
+                break;
+        }
+    }
+
+    //Inserta en la bd la instancia correspondiente a la clase y devuelve el identificador
+    //de la nueva instancia creada
+    function insertar() {
+
+        $id = insert_record('ejercicios_ie_respuestas', $this, true);
+        //Devuelve el identificador del ejercicios creado
+
+        return $id;
+    }
+
+    //Modifica una instacia
+    function alterar() {
+
+        update_record('ejercicios_ie_respuestas', $this, false);
+    }
+
+    //Borra todas las respuestas asociadas a un ejercicio
+    function borrar_id_ejercicio($id_ejercicio) {
+        delete_records('ejercicios_ie_respuestas', 'id_ejercicio', $id_ejercicio);
+    }
+    
+    //Borra todas las respuestas asociadas a una pregunta
+    function borrar_id_pregunta($id_pregunta) {
+        delete_records('ejercicios_ie_respuestas', 'id_pregunta', $id_pregunta);
+    }
+    
+    //Borra una respuesta dada por su id
+    function borrar_id_respuesta($id_respuesta) {
+        delete_record('ejercicios_ie_respuestas', 'id', $id_respuesta);
+    }
+
+    //Obtiene el texto por id
+    function obtener_uno($id) {
+        $ejer = get_record('ejercicios_ie_respuestas', 'id', $id);
+        $this->id = $ejer->id;
+        $this->id_ejercicio = $ejer->id_ejercicio;
+        $this->id_pregunta = $ejer->id_pregunta;
+        $this->respuesta = $ejer->respuesta;
+        
+     
+        return $this;
+    }
+
+    function obtener_todos_id_ejercicio($id_ejercicio) {
+        $sql = 'SELECT * FROM  mdl_ejercicios_ie_respuestas WHERE id_ejercicio=' . $id_ejercicio;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new ejercicios_ie_respuestas();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+    
+    function obtener_todos_id_pregunta($id_pregunta) {
+        $sql = 'SELECT * FROM  mdl_ejercicios_ie_respuestas WHERE id_pregunta=' . $id_pregunta;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new ejercicios_ie_respuestas();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+
+   
+
+
+}
 
 ?>

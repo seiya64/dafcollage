@@ -91,19 +91,27 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
             $mform->addElement('html',$tabla);
            //Seleccione el tipo de archivo pregunta (texto/ audio/ vÃ­deo/ foto)
             //TODO Cambiar estos if por un switch
-           if($tipocreacion==2){
-           $radioarray=array();
-           $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Texto","Texto", null);
-           $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Audio", "Audio", null);
-           $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Video", "Video", null);
-           }
-           if($tipocreacion==3){ //Asociacion Simple
-                $radioarray=array();
-                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Texto","Texto", "onClick=\"muestra('textoseleccionado'); oculta('otroseleccionado')\"");
-                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Audio", "Audio", "onClick=\"muestra('otroseleccionado'); oculta('textoseleccionado')\"");
-                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Video", "Video", "onClick=\"muestra('otroseleccionado'); oculta('textoseleccionado')\"");
-                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Foto", "Foto", "onClick=\"muestra('otroseleccionado'); oculta('textoseleccionado')\"");
-           }
+            switch($tipocreacion) {
+                case 2: //Multiple Choices
+                    $radioarray=array();
+                    $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Texto","Texto", null);
+                    $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Audio", "Audio", null);
+                    $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Video", "Video", null);
+                    break;
+                case 3: //Asociacion Simple
+                    $radioarray=array();
+                    $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Texto","Texto", "onClick=\"muestra('textoseleccionado'); oculta('otroseleccionado')\"");
+                    $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Audio", "Audio", "onClick=\"muestra('otroseleccionado'); oculta('textoseleccionado')\"");
+                    $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Video", "Video", "onClick=\"muestra('otroseleccionado'); oculta('textoseleccionado')\"");
+                    $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Foto", "Foto", "onClick=\"muestra('otroseleccionado'); oculta('textoseleccionado')\"");
+                    break;
+                case 6: //Identificar elementos
+                    $radioarray=array();
+                    $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Texto","Texto", null);
+                    $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Audio", "Audio", null);
+                    $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Video", "Video", null);
+                    break;
+            }
            //volver a añadir estos tres
            //$radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Audio", "Audio", null);
            //$radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Video", "Video", null);
@@ -135,45 +143,50 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
          
            //volver a añadir estos 3
           // $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Audio", "Audio", null);
-
-           if($tipocreacion==2){ //Multiplechoice solo tipo texto
-                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Texto","Texto", null);
-                $mform->addGroup($radioarray, 'radiorespuesta',  get_string('tiporespuesta', 'ejercicios'), array(' '), false);
-                $mform->setDefault('radiorespuesta',"Texto");
-           }
-           if($tipocreacion==3){ //Asociacion Simple
-               
-              $divoculto='<div id="textoseleccionado">';
-              $mform->addElement('html',$divoculto);
-              
-                
-  
-             $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Texto","Texto", null);
-
-             $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Audio", "Audio", null);
-             $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Video", "Video", null);
-             $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Foto", "Foto", null);
-             $mform->addGroup($radioarray, 'radiorespuesta',  get_string('tiporespuesta', 'ejercicios'), array(' '), false);
-             $mform->setDefault('radiorespuesta',"Texto");
-
-             $divoculto='</div>';
-             $mform->addElement('html',$divoculto);
-             
-              $divoculto='<div id="otroseleccionado" style="display: none;">';
-              $mform->addElement('html',$divoculto);
-              
-                
-  
-             $radioarray1[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Texto","Texto", null);
-
-             $mform->addGroup($radioarray1, 'radiorespuesta',  get_string('tiporespuesta', 'ejercicios'), array(' '), false);
-             $mform->setDefault('radiorespuesta',"Texto");
-
-             $divoculto='</div>';
-             $mform->addElement('html',$divoculto);
+           
+          switch ($tipocreacion) {
+            case 2: //Multiplechoice solo tipo texto
+                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Texto", "Texto", null);
+                $mform->addGroup($radioarray, 'radiorespuesta', get_string('tiporespuesta', 'ejercicios'), array(' '), false);
+                $mform->setDefault('radiorespuesta', "Texto");
+                break;
+            case 3: //Asociacion Simple
+                $divoculto = '<div id="textoseleccionado">';
+                $mform->addElement('html', $divoculto);
 
 
-          }
+
+                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Texto", "Texto", null);
+
+                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Audio", "Audio", null);
+                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Video", "Video", null);
+                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Foto", "Foto", null);
+                $mform->addGroup($radioarray, 'radiorespuesta', get_string('tiporespuesta', 'ejercicios'), array(' '), false);
+                $mform->setDefault('radiorespuesta', "Texto");
+
+                $divoculto = '</div>';
+                $mform->addElement('html', $divoculto);
+
+                $divoculto = '<div id="otroseleccionado" style="display: none;">';
+                $mform->addElement('html', $divoculto);
+
+
+
+                $radioarray1[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Texto", "Texto", null);
+
+                $mform->addGroup($radioarray1, 'radiorespuesta', get_string('tiporespuesta', 'ejercicios'), array(' '), false);
+                $mform->setDefault('radiorespuesta', "Texto");
+
+                $divoculto = '</div>';
+                $mform->addElement('html', $divoculto);
+                break;
+            case 6: //Identificar elementos
+                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Texto", "Texto", null);
+                $mform->addGroup($radioarray, 'radiorespuesta', get_string('tiporespuesta', 'ejercicios'), array(' '), false);
+                $mform->setDefault('radiorespuesta', "Texto");
+                break;
+        }
+           
           
         
           /* 
@@ -714,6 +727,120 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
 
         }
 
+
+
+            $buttonarray = array();
+            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"onclick=obtenernumeroRespuestas('$p');");
+            $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
+
+
+     }
+}
+
+
+/*
+ * Formulario para la creación de actividades de tipo Asociación simple
+ */
+class mod_ejercicios_creando_ejercicio_identificar_elementos extends moodleform_mod {
+    function mod_ejercicios_creando_ejercicio_identificar_elementos($id,$p,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion)
+        {
+         // El fichero que procesa el formulario es gestion.php
+         parent::moodleform('ejercicios_form_creacion_identificar_elementos.php?id_curso='.$id.'&id_ejercicio='.$id_ejercicio.'&tipo_origen='.$tipo_origen.'&tr='.$trespuesta.'&tipocreacion='.$tipocreacion);
+       }
+
+     function definition() {
+     }
+     
+     
+     /**
+     * Function that add a table to the forma to show the main menu
+     *
+     * @author Serafina Molina Soto
+     * @param $id id for the course
+     * @param $p numero de preguntas
+     * @param $id_ejercicio id del ejercicio que estamos creando
+     * @param $tipoorigen: tipo de archivo origen( 1: Texto, 2: Audio, 3: Video)
+     * @param $tiporespuesta: tipo de archivo origen( 1: Texto, )
+     */
+     function pintarformulario_identificarelementos($id,$p,$id_ejercicio,$tipoorigen,$tiporespuesta,$tipocreacion){
+         global $CFG, $COURSE, $USER;
+        $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
+
+        $mform =& $this->_form;
+
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
+        $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
+        //titulo
+        $titulo= '<h1>' . get_string('FormularioCreacionTextos', 'ejercicios') . '</h1>';
+        $mform->addElement('html',$titulo);
+
+         $oculto='<input type="hidden" name="tipocreacion" id="tipocreacion" value="'.$tipocreacion.'"/>';
+         $mform->addElement('html',$oculto);
+         echo "tipo origen es: " . $tipoorigen;
+         
+        switch($tipoorigen){
+            case 1: //El archivo de origen es un texto
+                //Añade una breve introducción al ejercicio
+            echo "entra para el cuadro general";
+            $mform->addElement('textarea', 'archivoorigen', get_string('textoorigen', 'ejercicios'), 'wrap="virtual" rows="10" cols="50"');
+            $mform->addRule('archivoorigen', "Texto Origen Necesario", 'required', null, 'client');
+
+            break;
+            case 2: //El archivo de origen es un audio
+                $mform->addElement('file', 'archivoaudio',"Audio");
+                $mform->addRule('archivoaudio', "Archivo Necesario", 'required', null, 'client');
+               // "el archivo origen es un audio";
+
+            break;
+
+           case 3: //El archivo de origen es un video
+                  //Titule su ejercicio para facilitar la identificación o búsqueda
+                $attributes='size="100"';
+                $mform->addElement('text', 'archivovideo',get_string('Video', 'ejercicios') , $attributes);
+                $mform->addRule('archivovideo', "Dirección Web Necesaria", 'required', null, 'client');
+
+               // "el archivo origen es un audio";
+
+            break;
+
+
+
+        }
+
+
+        //Para cada pregunta
+        for($i=0;$i<$p;$i++){
+
+             $aux=$i+1;
+             $titulo= '</br><h3> Pregunta ' .$aux. '</h3>';
+             $mform->addElement('html',$titulo);
+
+            $mform->addElement('textarea', 'pregunta'.$aux, get_string('pregunta', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
+
+
+            $textarea='</br><div id="titulorespuestas" style="margin-left:130px;">Respuestas:</div>';
+            $textarea.='<div style="margin-left:310px;" id="respuestas_pregunta"'.$aux.'"> ';
+            $textarea.='<textarea name="respuesta1_'.$aux.'" id="respuesta1_'.$aux.'" rows="1" cols="50"></textarea>';
+            //$textarea.='</br><div id="correctarespuesta">'.get_string('Correcta', 'ejercicios');
+            //$textarea.='<input type="radio"  name="correcta1_'.$aux.'" id="correcta1_'.$aux.'" value="Si" checked> Si </input>';
+            //$textarea.='<input type="radio" name="correcta1_'.$aux.'"  id="correcta1_'.$aux.'" value="No"> No </input>';
+            //$textarea.='</br>';
+            //$textarea.='</div>';
+
+
+            $textarea.='<input type="hidden" name="numerorespuestas_'.$aux.'" id="numerorespuestas_'.$aux.'" value="1"/>';
+            $textarea.='</div>';
+            $mform->addElement('html',$textarea);
+
+           // $mform->addElement('text', 'numerorespuestas_'.$aux,"hola");
+            $botonañadir='<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestas_IE('.$aux.');"></center>';
+
+            $mform->addElement('html', $botonañadir);
+
+
+        }
+
+           $mform->addElement('hidden','numeropreguntas',$p);
 
 
             $buttonarray = array();

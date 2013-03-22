@@ -126,7 +126,7 @@ if ($error == '0') {
             if ($tipo_pregunta == "Foto" && $tipo_respuesta == "Texto") {
                 $id = NULL;
                 $id_creador = $USER->id;
-                $TipoActividad = $tipocreacion - 2; //Comienza en 0
+                $TipoActividad = $tipocreacion - 2; //Comienza en 0. Porque el primer y segundo elemento no son nada.
                 $TipoArchivoPregunta = 4; // 4 va a ser una foto
                 $TipoArchivoRespuesta = 1; //1 va a ser texto
             }
