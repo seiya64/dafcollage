@@ -2377,3 +2377,7 @@ function botonMasPreguntas_IE(){
 
       
 }
+
+function botonCorregirIE(id_curso,npreg) {
+    alert("Falta implementar");
+}

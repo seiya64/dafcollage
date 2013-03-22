@@ -240,7 +240,8 @@ class mod_ejercicios_mostrar_identificar_elementos extends moodleform_mod {
                 //   $divpregunta.=$preguntas[$p]->get('Respuesta');
                 //   $divpregunta.='</div>';
                 if ($buscar == 1 || $modificable == false) {
-                    $divpregunta.='<div style="width: 700px;" class="resp" name="respuesta' . $q . "_" . $i . '" id="respuesta' . $q . "_" . $i . '" value="' . $respuestas[$p]->get('respuesta') . '">' . $respuestas[$p]->get('respuesta') . '</div>';
+                    //$divpregunta.='<div style="width: 700px;" class="resp" name="respuesta' . $q . "_" . $i . '" id="respuesta' . $q . "_" . $i . '" value="' . $respuestas[$p]->get('respuesta') . '">' . $respuestas[$p]->get('respuesta') . '</div>';
+                    $divpregunta.='<p> Respuesta ' . $q . ': </p><textarea style="width: 700px;" class="resp" name="respuesta' . $q . "_" . $i . '" id="respuesta' . $q . "_" . $i . '"></textarea>';
                 } else {
                     $divpregunta.='<textarea style="width: 700px;" class="resp" name="respuesta' . $q . "_" . $i . '" id="respuesta' . $q . "_" . $i . '" value="' . $respuestas[$p]->get('respuesta') . '">' . $respuestas[$p]->get('respuesta') . '</textarea>';
                 }

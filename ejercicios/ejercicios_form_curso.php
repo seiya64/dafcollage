@@ -102,8 +102,20 @@ class mod_ejercicios_curso extends moodleform_mod{
             $nombre_ejercicio= $todos_ejer_curso[$i]->get('name');
             //Añado un enlace por cada ejercicio dentro de la carpeta
             $id_ejercicio=$todos_ejer_curso[$i]->get('id');
+            
+            //Propuesta de codigo por Angel Biedma
+            $tipo_creacion = $todos_ejer_curso[$i]->get('tipoactividad');
+            switch($tipo_creacion) {
+                case 0: //Multiple Choice
+                case 4: //Identificar elementos
+                    $carpeta.='<li style="width:750px;"><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'&buscar=1&tipocreacion='.$tipo_creacion.'">'. $nombre_ejercicio.'</a></li>';
+                    break;
+                case 1: // Asociacion simple
+                    $carpeta.='<li style="width:750px;"><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'&buscar=1&tipo_origen='.$todos_ejer_curso[$i]->get('tipoarchivopregunta').'&tr='.$todos_ejer_curso[$i]->get('tipoarchivorespuesta').'&tipocreacion='.$todos_ejer_curso[$i]->get('tipoactividad').'">'. $nombre_ejercicio.'</a></li>';
+                    break;
+            }
 
-            if($todos_ejer_curso[$i]->get('tipoactividad')==0){ //multichoice
+            /*if($todos_ejer_curso[$i]->get('tipoactividad')==0){ //multichoice
 
                 $carpeta.='<li style="width:750px;"><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'">'. $nombre_ejercicio.'</a></li>';
 
@@ -164,7 +176,7 @@ class mod_ejercicios_curso extends moodleform_mod{
                  }
 
 
-            }
+            }*/
 
 
 

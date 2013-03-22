@@ -2096,7 +2096,7 @@ class Ejercicios_textos {
         $ejer = get_record('ejercicios_textos', 'id', $id);
         $this->id = $ejer->id;
         $this->id_ejercicio = $ejer->id_ejercicio;
-        $this->texto = $ejer->$texto;
+        $this->texto = $ejer->texto;  
      
         return $this;
     }
@@ -2399,7 +2399,7 @@ class Ejercicios_imagenes_asociadas{
         $ejer = get_records('ejercicios_imagenes_asociadas', 'id_ejercicio',$id_ejercicio);
           $todos_mis_ejercicios = array();
 
-        foreach ($todos as $cosa) {
+        foreach ($ejer as $cosa) {
            
             $mp = new Ejercicios_imagenes_asociadas();
 
@@ -2557,7 +2557,7 @@ class Ejercicios_audios_asociados{
         $ejer = get_records('ejercicios_audios_asociados', 'id_ejercicio',$id_ejercicio);
           $todos_mis_ejercicios = array();
 
-        foreach ($todos as $cosa) {
+        foreach ($ejer as $cosa) {
 
             $mp = new Ejercicios_audios_asociados();
 
@@ -2700,7 +2700,7 @@ class Ejercicios_videos_asociados{
         $ejer = get_records('ejercicios_videos_asociados', 'id_ejercicio',$id_ejercicio);
           $todos_mis_ejercicios = array();
 
-        foreach ($todos as $cosa) {
+        foreach ($ejer as $cosa) {
 
             $mp = new Ejercicios_videos_asociados();
 
