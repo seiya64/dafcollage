@@ -135,9 +135,7 @@ $ejercicio_profesor_actividad = new Ejercicios_prof_actividad();
                 case 1: //Asociacion simple
                     switch ($ejercicio->get('tipoarchivopregunta')) {
                         case 1: //Hay un texto
-                            $ej_textos = new Ejercicios_texto_texto_preg();
-                            $ej_textos->borrar_id_ejercicio($id_ejercicio);
-                            
+                           
                             switch($ejercicio->get('tipoarchivorespuesta')){
                                 //No ponemos 1 porque lo vamos a poner de manera general fuera de este switch
                                 case 2: //Es un audio
