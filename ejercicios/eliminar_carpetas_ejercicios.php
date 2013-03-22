@@ -188,6 +188,11 @@ $ejercicio_profesor_actividad = new Ejercicios_prof_actividad();
                     $ejercicio_texto_texto_preg = new Ejercicios_texto_texto_preg();
                     $num_preguntas = $ejercicio_texto_texto_preg->obtener_todas_preguntas_ejercicicio($id_ejercicio);
                     echo "el numero de preguntas" . sizeof($num_preguntas);
+                    for ($j = 0; $j < sizeof($num_preguntas); $j++) {
+                        $ejercicio_texto_texto_resp = new Ejercicios_texto_texto_resp();
+                        $id_pregunta = $num_preguntas[$j]->get('id');
+                        $ejercicio_texto_texto_resp->borrar_id_pregunta($id_pregunta);
+                    }
                     
                     //echo "borrando de texto texto preg"
                     $ejercicio_texto_texto_preg->borrar_id_ejercicio($id_ejercicio);
