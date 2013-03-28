@@ -3627,6 +3627,16 @@ class mod_vocabulario_colaboradores_form extends moodleform {
         $mform->addElement('static', 'colaboradores', '', 'Luisa Sánchez Avivar');
         $mform->addElement('static', 'colaboradores', '', 'Marina Torres Anaya');
         $mform->addElement('static', 'colaboradores', '', '');
+        $mform->addElement('static', 'colaboradores', '<strong>V Hackathon</strong>', '');
+        $mform->addElement('static', 'colaboradores', 'Premio productividad', 'Serafina Molina Soto <a href="http://twitter.com/#!/finamolina86" target="_blank">@finamolina86 </a>');
+        $mform->addElement('static', 'colaboradores', '', 'Rosa María Vidal');
+        $mform->addElement('static', 'colaboradores', '', 'Adrea Krispler');
+        $mform->addElement('static', 'colaboradores', '', 'Helena González');
+        $mform->addElement('static', 'colaboradores', '', 'Álvaro López Martínez <a href="http://twitter.com/#!/arsuceno" target="_blank">@arsuceno </a>');
+        $mform->addElement('static', 'colaboradores', '', 'David Medina Godoy <a href="http://twitter.com/#!/davidasce" target="_blank">@davidasce </a>');
+        $mform->addElement('static', 'colaboradores', '', 'Francisco Javier Marín Gómez <a href="http://twitter.com/#!/xavitux" target="_blank">@xavitux </a>');
+        $mform->addElement('static', 'colaboradores', '', 'Francisco R. Torres Fernández <a href="http://twitter.com/#!/frantorres" target="_blank">@frantorres </a>');
+        $mform->addElement('static', 'colaboradores', '', '');
         $mform->addElement('static', 'colaboradores', '', 'A todos ellos por la colaboración en el desarrollo de daf-collage y los buenos ratos pasados');
         $mform->addElement('static', 'colaboradores', '', '');
         $mform->addElement('static', 'colaboradores', '<strong>Centro de Enseñanzas Virtuales de la Universidad de Granada (CEVUG)</strong>', '');
