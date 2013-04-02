@@ -2378,6 +2378,75 @@ function botonMasPreguntas_IE(){
       
 }
 
-function botonCorregirIE(id_curso,npreg) {
-    alert("Falta implementar");
+function botonCorregirIE(id_curso,preguntas) {
+    alert("Boton Corregir");
+    /*for (var i=0; i<preguntas.length; i++) {
+        alert("Pregunta numero " + (i+1));
+        for (var j=0; j<preguntas[i].length; j++) {
+            alert("Respuesta numero " + (j+1) + " : " + preguntas[i][j]);
+        }
+    }*/
+    
+    /*if(respcorrecta.value==miresp.value){
+                    
+                imagen = document.createElement("img");
+                   
+                imagen.src='./imagenes/correcto.png';
+                imagen.style.height="15px";
+                imagen.style.width="15px";
+                midiv.appendChild(imagen);
+            }else{
+                     
+                imagen = document.createElement("img");
+                imagen.style.height="15px";
+                imagen.style.width="15px";
+                imagen.src='./imagenes/incorrecto.png';
+               
+                midiv.appendChild(imagen);
+            }*/
+    
+    //Recoger las respuestas de los alumnos
+    var respuestas_alumnos = new Array(preguntas.length);
+    for (var i=0; i<preguntas.length; i++) {
+        respuestas_alumnos[i] = new Array(preguntas[i].length);
+        for (var j=0; j<preguntas[i].length; j++) {
+            var correcta=false;
+            respuestas_alumnos[i][j]=document.getElementById("respuesta"+(j+1)+"_"+(i+1)).value;
+            //alert("respuesta " + (j+1) + " de la pregunta " + (i+1) + " es " + respuestas_alumnos[i][j]);
+            for (var k=0; k<preguntas[i].length && !correcta; k++) {
+                alert("Comparando " + preguntas[i][k] + " con " + respuestas_alumnos[i][j]);
+                if (preguntas[i][k]==respuestas_alumnos[i][j]) {
+                    alert("Da correcto: " + i + "," + k + " : " + preguntas[i][k]);
+                    var midiv = document.getElementById("tdcorregir"+(j+1)+"_"+(i+1));
+                    if (midiv.hasChildNodes()) midiv.removeChild(midiv.firstChild);
+                    alert("midiv es " + midiv);
+                    var imagen = document.createElement("img");
+                   
+                    imagen.src='./imagenes/correcto.png';
+                    imagen.style.height="15px";
+                    imagen.style.width="15px";
+                    midiv.appendChild(imagen);
+                    
+                    preguntas[i].splice(k,1);
+                    k--;
+                    correcta=true;
+                }
+            }
+            if (!correcta) {
+                alert("Da incorrecto: " + i + "," + j + " : " + preguntas[i][j]);
+                var midiv = document.getElementById("tdcorregir"+(j+1)+"_"+(i+1));
+                if (midiv.hasChildNodes()) midiv.removeChild(midiv.firstChild);
+                alert("midiv es " + midiv);
+                var imagen = document.createElement("img");
+                imagen = document.createElement("img");
+                imagen.style.height="15px";
+                imagen.style.width="15px";
+                imagen.src='./imagenes/incorrecto.png';
+               
+                midiv.appendChild(imagen);
+            }
+        }
+    }
+    
+       
 }

@@ -45,6 +45,30 @@ require_once("ejercicios_clases.php");
 require_once("ejercicios_clase_general.php");
 require_once("YoutubeVideoHelper.php");
 
+//Funcion para pasar una variable de PHP a Javascript
+function php2js ($var) {
+
+    if (is_array($var)) {
+        $res = "[";
+        $array = array();
+        foreach ($var as $a_var) {
+            $array[] = php2js($a_var);
+        }
+        return "[" . join(",", $array) . "]";
+    }
+    elseif (is_bool($var)) {
+        return $var ? "true" : "false";
+    }
+    elseif (is_int($var) || is_integer($var) || is_double($var) || is_float($var)) {
+        return $var;
+    }
+    elseif (is_string($var)) {
+        return "'" . addslashes(stripslashes($var)) . "'";
+    }
+
+    return FALSE;
+}
+
 
 /* Formulario generico de ejercicos de cualquier tipo de actidad
  * @author Serafina Molina Soto
@@ -186,7 +210,9 @@ class mod_ejercicios_mostrar_identificar_elementos extends moodleform_mod {
         //Obtengo las respuestas
         $mis_preguntas = new Ejercicios_texto_texto_preg();
         $preguntas = $mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
-
+        
+        //Matrix de las preguntas
+        $matrix_preguntas=array();
         for ($i = 1; $i <= sizeof($preguntas); $i++) {
 
 
@@ -223,12 +249,25 @@ class mod_ejercicios_mostrar_identificar_elementos extends moodleform_mod {
             $mis_respuestas = new Ejercicios_ie_respuestas();
             $respuestas = $mis_respuestas->obtener_todos_id_pregunta($id_pregunta);
             
+            //Recoger el texto de las respuestas del profesor desde la base de datos
+            $respuestas_prof = array();
+            for ($p = 0; $p < sizeof($respuestas); $p++) {
+                echo "Respuesta del profesor " . ($p+1) . " : " . $respuestas[$p]->get('respuesta') . "<br/>";
+                $q = $p + 1;
+                $respuestas_prof[] = $respuestas[$p]->get('respuesta'); 
+            }
+            $matrix_preguntas[] = $respuestas_prof;
 
             $divpregunta.='</br><div id="respuestas' . $i . '" class=respuesta>';
             for ($p = 0; $p < sizeof($respuestas); $p++) {
                 $q = $p + 1;
-
-                $divpregunta.='<table  id="tablarespuesta' . $q . '_' . $i . '" style="width:100%;">';
+                
+                if ($q%2==0 || $q==sizeof($respuestas)) {
+                    $divpregunta.='<table  id="tablarespuesta' . $q . '_' . $i . '" style="width:50%;">';
+                }
+                else {
+                    $divpregunta.='<table  id="tablarespuesta' . $q . '_' . $i . '" style="width:50%;float:left;">';
+                }
                 $divpregunta.='<tr id="trrespuesta' . $q . "_" . $i . '"> ';
                 $divpregunta.=' <td style="width:80%;">';
 
@@ -241,12 +280,12 @@ class mod_ejercicios_mostrar_identificar_elementos extends moodleform_mod {
                 //   $divpregunta.='</div>';
                 if ($buscar == 1 || $modificable == false) {
                     //$divpregunta.='<div style="width: 700px;" class="resp" name="respuesta' . $q . "_" . $i . '" id="respuesta' . $q . "_" . $i . '" value="' . $respuestas[$p]->get('respuesta') . '">' . $respuestas[$p]->get('respuesta') . '</div>';
-                    $divpregunta.='<p> Respuesta ' . $q . ': </p><textarea style="width: 700px;" class="resp" name="respuesta' . $q . "_" . $i . '" id="respuesta' . $q . "_" . $i . '"></textarea>';
+                    $divpregunta.='<textarea style="width: 300px;" class="resp" name="respuesta' . $q . "_" . $i . '" id="respuesta' . $q . "_" . $i . '"></textarea>';
                 } else {
-                    $divpregunta.='<textarea style="width: 700px;" class="resp" name="respuesta' . $q . "_" . $i . '" id="respuesta' . $q . "_" . $i . '" value="' . $respuestas[$p]->get('respuesta') . '">' . $respuestas[$p]->get('respuesta') . '</textarea>';
+                    $divpregunta.='<textarea style="width: 300px;" class="resp" name="respuesta' . $q . "_" . $i . '" id="respuesta' . $q . "_" . $i . '" value="' . $respuestas[$p]->get('respuesta') . '">' . $respuestas[$p]->get('respuesta') . '</textarea>';
                 }
                 $divpregunta.=' </td>';
-                $divpregunta.=' <td style="width:5%;">';
+                $divpregunta.=' <td style="width:5%;" id="tdcorregir'. $q . "_" . $i .'">';
 
                 if ($buscar != 1 && $modificable == true) {
                     //La imagen para eliminar las respuestas
@@ -322,7 +361,7 @@ class mod_ejercicios_mostrar_identificar_elementos extends moodleform_mod {
 
                         $mform->addElement('html', $tabla_menu);
                     } else {//soy alumno
-                        $tabla_menu = '<center><input type="button" style="height:30px; width:100px; margin-left:175px;"  value="Corregir" onClick="javascript:botonCorregirIE(' . $id . ',' . $npreg . ')"/> <input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal(' . $id . ')" /></center>';
+                        $tabla_menu = '<center><input type="button" name="corregirIE" style="height:30px; width:100px; margin-left:175px;"  value="Corregir" id="id_corregirIE" onClick="javascript:botonCorregirIE('.$id.",".php2js($matrix_preguntas).')"/> <input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal(' . $id . ')" /></center>';
 
                         $mform->addElement('html', $tabla_menu);
                     }
@@ -337,7 +376,7 @@ class mod_ejercicios_mostrar_identificar_elementos extends moodleform_mod {
                 } else {
 
 
-                    $tabla_menu = '<center><input type="button" style="height:30px; width:100px; margin-left:175px;"  value="Corregir" onClick="javascript:botonCorregirIE(' . $id . ',' . $npreg . ')"/> <input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Atras" value="Atrás" onClick="javascript:botonAtras(' . $id . ')" /><input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal(' . $id . ')" /></center>';
+                    $tabla_menu = '<center><input type="button" style="height:30px; width:100px; margin-left:175px;"  value="Corregir" id="id_corregirIE" onClick="javascript:botonCorregirIE('.$id.",".php2js($matrix_preguntas).')"/> <input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Atras" value="Atrás" onClick="javascript:botonAtras(' . $id . ')" /><input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal(' . $id . ')" /></center>';
 
                     $mform->addElement('html', $tabla_menu);
                 }

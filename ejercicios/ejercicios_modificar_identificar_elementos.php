@@ -50,6 +50,9 @@ $id_ejercicio = optional_param('id_ejercicio', 0, PARAM_INT);
 $tipo_origen = optional_param('tipo_origen',0, PARAM_INT);
 $buscar = optional_param('buscar',0,PARAM_INT);
 
+//Inicializar sesion
+session_start();
+
 //Es llamado por ejercicios_form_mostrar.php
 
 $mform = new mod_ejercicios_mostrar_identificar_elementos($id_curso,$id_ejercicio,$tipo_origen);
@@ -69,7 +72,7 @@ if(optional_param("submitbutton2")){ //boton para añadir a mis ejercicos visibl
     //Muestro mis ejercicios
      redirect('./view.php?id=' . $id_curso . '&opcion=9');
     
-}else{
+} else {
 
     if(optional_param("submitbutton")){ //boton para guardar los ejercicios visible desde mis ejercicios
      #borro todas las respuestas y preguntas y las vuelvo a insertar
@@ -166,6 +169,7 @@ if(optional_param("submitbutton2")){ //boton para añadir a mis ejercicos visibl
     
        redirect('./view.php?id=' . $id_curso . '&opcion=9');
     }
+    
 }
 
 
