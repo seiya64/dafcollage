@@ -51,7 +51,7 @@
         <KEY NAME="primary" TYPE="primary" FIELDS="id" />
       </KEYS>
       <INDEXES>
-        <INDEX NAME="name" UNIQUE="true" FIELDS="name"/>
+        <INDEX NAME="name" UNIQUE="false" FIELDS="name"/>
       </INDEXES>
     </TABLE>
     <TABLE NAME="ejercicios_general" COMMENT="Ejercicios Generico" PREVIOUS="ejercicios_tipo_puzzle" NEXT="ejercicios_textos">
@@ -79,7 +79,7 @@
         <KEY NAME="primary" TYPE="primary" FIELDS="id" />
       </KEYS>
       <INDEXES>
-        <INDEX NAME="name" UNIQUE="true" FIELDS="name"/>
+        <INDEX NAME="name" UNIQUE="false" FIELDS="name"/>
       </INDEXES>
     </TABLE>
     <TABLE NAME="ejercicios_textos" COMMENT="Ejercicios Texto-Texto" PREVIOUS="ejercicios_general" NEXT="ejercicios_videos">

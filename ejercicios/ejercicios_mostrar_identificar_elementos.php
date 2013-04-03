@@ -168,7 +168,7 @@ class mod_ejercicios_mostrar_identificar_elementos extends moodleform_mod {
                 $mform->addElement('html', '<script type="text/javascript" src="./mediaplayer/swfobject.js"></script>');
                 $divaudio = '<div class="claseaudio" id="player1"></div>';
                 $mform->addElement('html', $divaudio);
-                $mform->addElement('html', '<script type="text/javascript"> var so = new SWFObject("./mediaplayer/mediaplayer.swf","mpl","290","20","7");
+                $mform->addElement('html', '<script type="text/javascript"> var so = new SWFObject("./mediaplayer/mediaplayer.swf","mpl","350","20","7");
                         so.addParam("allowfullscreen","true");
                         so.addVariable("file","./mediaplayer/audios/audio' . $id_ejercicio . '.mp3");
                         so.addVariable("height","20");

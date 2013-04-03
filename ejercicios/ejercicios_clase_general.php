@@ -145,6 +145,16 @@ class Ejercicios_general {
                 break;
         }
     }
+    
+    function imprimir() {
+        echo "Id ejercicio: " . $this->id . "<br/>";
+        echo "Id creador: " . $this->id_creador . "<br/>";
+        echo "Id curso: " . $this->id_curso . "<br/>";
+        echo "Tipo Actividad: " . $this->tipoactividad . "<br/>";
+        echo "Nombre: " . $this->name . "<br/>";
+        echo "Descripcion: " . $this->descripcion . "<br/>";
+        echo "Num Pregunta: " . $this->numpreg . "<br/>";
+    }
 
      function set_numpregunta($param) {
          $this->numpreg=$param;

@@ -50,6 +50,12 @@ $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']);
 $carpeta = unserialize($_SESSION['cosasProfe']);
 $id_ejercicio = $ejercicioGeneral->insertar();
 
+/*echo "--------  IMPRIMIR EJERCICIO GENERAL ----------------<br/>";
+echo "Error SQL: " . mysql_error();
+$ejercicioGeneral->imprimir();
+echo "Id de ejercicio: " . $id_ejercicio;
+die;*/
+
 // Y para el profesor tambien
 //Tengo que asignarle el ejercicio al profesor 
 $ejercicio_profesor = new Ejercicios_prof_actividad($ejercicioGeneral->get('id'),$ejercicioGeneral->get('id_creador'),$id_ejercicio,$carpeta);

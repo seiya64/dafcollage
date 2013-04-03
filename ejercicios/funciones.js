@@ -2148,8 +2148,12 @@ function anadirRespuesta_IE(respuesta,numpreg){
     //-1 por el text del div
     var numresp=(respuesta.childNodes.length/2) +1;
           
-    table.width="100%";
+    table.width="50%";
     table.id="tablarespuesta"+numresp+"_"+numpreg;
+    if (numresp%2==0) {
+        var tablaAnterior = document.getElementById("tablarespuesta"+(numresp-1)+"_"+numpreg);
+        tablaAnterior.style.cssFloat="left";
+    }
         
     var tbody = document.createElement("tbody");
           
@@ -2166,7 +2170,7 @@ function anadirRespuesta_IE(respuesta,numpreg){
     radioInput.value="0";  
     radioInput.setAttribute("onclick","BotonRadio(crespuesta"+numresp+"_"+numpreg+")");  */
     var div = document.createElement("textarea");
-    div.style.width="700px";
+    div.style.width="300px";
     div.setAttribute("class","resp");
     div.name="respuesta"+numresp+"_"+numpreg;
     div.id="respuesta"+numresp+"_"+numpreg;
@@ -2234,20 +2238,34 @@ function EliminarRespuesta_IE(respuesta,numpreg){
     var k=padre.childNodes.length;
      
     j=0;
+    
+    alert("Numero de hijos: " + k);
    
     for(i=0;i<k;i=i+2){
         j=j+1;
         alert('Iteracion bucle: ' + i);
+        alert("J: " + j);
         padre.childNodes[i].setAttribute("id",'tablarespuesta'+j+'_'+numpreg);
-        alert(   padre.childNodes[i].childNodes[0].childNodes[0]);
+        if (i==k-2) {
+            alert("Entra en i==k-1");
+            var tabla = document.getElementById("tablarespuesta"+j+"_"+numpreg);
+            tabla.style.cssFloat="none";
+        }
+        else if (j%2!=0) {
+            alert("Entra en j%2!=0");
+            var tabla = document.getElementById("tablarespuesta"+j+"_"+numpreg);
+            tabla.style.cssFloat="left";
+        }
+        
+        //alert(   padre.childNodes[i].childNodes[0].childNodes[0]);
         padre.childNodes[i].childNodes[0].childNodes[0].setAttribute("id",'trrespuesta'+j+'_'+numpreg);
         //padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[0].setAttribute("name",'crespuesta'+j+'_'+numpreg);
-        alert( padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[0]);
+        //alert( padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[0]);
         padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[0].setAttribute("id",'respuesta'+j+'_'+numpreg);
         padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[0].setAttribute("name",'respuesta'+j+'_'+numpreg);
-        alert("3: " + padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3]);
-        alert("3 hijos: " + padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes);
-        alert("3 0: " + padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes[0]);
+        //alert("3: " + padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3]);
+        //alert("3 hijos: " + padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes);
+        //alert("3 0: " + padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes[0]);
         
         
         padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes[0].setAttribute("id",'eliminarrespuesta'+j+'_'+numpreg);
@@ -2379,37 +2397,13 @@ function botonMasPreguntas_IE(){
 }
 
 function botonCorregirIE(id_curso,preguntas) {
-    alert("Boton Corregir");
-    /*for (var i=0; i<preguntas.length; i++) {
-        alert("Pregunta numero " + (i+1));
-        for (var j=0; j<preguntas[i].length; j++) {
-            alert("Respuesta numero " + (j+1) + " : " + preguntas[i][j]);
-        }
-    }*/
-    
-    /*if(respcorrecta.value==miresp.value){
-                    
-                imagen = document.createElement("img");
-                   
-                imagen.src='./imagenes/correcto.png';
-                imagen.style.height="15px";
-                imagen.style.width="15px";
-                midiv.appendChild(imagen);
-            }else{
-                     
-                imagen = document.createElement("img");
-                imagen.style.height="15px";
-                imagen.style.width="15px";
-                imagen.src='./imagenes/incorrecto.png';
-               
-                midiv.appendChild(imagen);
-            }*/
+    alert("Boton Corregir");    
     
     //Recoger las respuestas de los alumnos
     var respuestas_alumnos = new Array(preguntas.length);
     for (var i=0; i<preguntas.length; i++) {
         respuestas_alumnos[i] = new Array(preguntas[i].length);
-        for (var j=0; j<preguntas[i].length; j++) {
+        for (var j=0; j<respuestas_alumnos[i].length; j++) {
             var correcta=false;
             respuestas_alumnos[i][j]=document.getElementById("respuesta"+(j+1)+"_"+(i+1)).value;
             //alert("respuesta " + (j+1) + " de la pregunta " + (i+1) + " es " + respuestas_alumnos[i][j]);
@@ -2428,12 +2422,13 @@ function botonCorregirIE(id_curso,preguntas) {
                     midiv.appendChild(imagen);
                     
                     preguntas[i].splice(k,1);
+                    alert("Preguntas queda como: " + preguntas[i].toString());
                     k--;
                     correcta=true;
                 }
             }
             if (!correcta) {
-                alert("Da incorrecto: " + i + "," + j + " : " + preguntas[i][j]);
+                alert("Da incorrecto: " + i + "," + j + " : " + respuestas_alumnos[i][j]);
                 var midiv = document.getElementById("tdcorregir"+(j+1)+"_"+(i+1));
                 if (midiv.hasChildNodes()) midiv.removeChild(midiv.firstChild);
                 alert("midiv es " + midiv);
