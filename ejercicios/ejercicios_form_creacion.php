@@ -99,6 +99,7 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
                     $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Video", "Video", null);
                     break;
                 case 3: //Asociacion Simple
+                case 4: //Asociacion Compleja
                     $radioarray=array();
                     $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Texto","Texto", "onClick=\"muestra('textoseleccionado'); oculta('otroseleccionado')\"");
                     $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Audio", "Audio", "onClick=\"muestra('otroseleccionado'); oculta('textoseleccionado')\"");
@@ -151,6 +152,7 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
                 $mform->setDefault('radiorespuesta', "Texto");
                 break;
             case 3: //Asociacion Simple
+            case 4: //Asociacion Compleja
                 $divoculto = '<div id="textoseleccionado">';
                 $mform->addElement('html', $divoculto);
 
@@ -227,7 +229,7 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
             $clasificaciondestreza=array();
             
             for($i=0;$i<7;$i++){
-            $clasificaciondestreza[]=get_string('Destreza'.$i,'ejercicios');
+                $clasificaciondestreza[]=get_string('Destreza'.$i,'ejercicios');
        
             }
             
@@ -719,6 +721,303 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
                         //Archivo Asociado
                         $mform->addElement('file', 'archivofoto' . $aux, "Foto");
                         $mform->addRule('archivofoto' . $aux, "Archivo Necesario", 'required', null, 'client');
+                    }
+
+                    $mform->addElement('hidden', 'numeropreguntas', $p);
+                }
+
+
+        }
+
+
+
+            $buttonarray = array();
+            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"onclick=obtenernumeroRespuestas('$p');");
+            $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
+
+
+     }
+}
+
+
+/*
+ * Formulario para la creacion de actividades de tipo Asociacion Multiple
+ */
+class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mod {
+
+    function mod_ejercicios_creando_ejercicio_asociacion_multiple($id,$p,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion)
+        {
+         // El fichero que procesa el formulario es gestion.php
+         parent::moodleform('ejercicios_creacion_asociacion_multiple.php?id_curso='.$id.'&id_ejercicio='.$id_ejercicio.'&tipo_origen='.$tipo_origen.'&tr='.$trespuesta.'&tipocreacion='.$tipocreacion);
+       }
+
+     function definition() {
+     }
+
+
+     /**
+     * Function that add a table to the forma to show the main menu
+     *
+     * @author Serafina Molina Soto
+     * @param $id id for the course
+     * @param $p numero de preguntas
+     * @param $id_ejercicio id del ejercicio que estamos creando
+     * @param $tipoorigen: tipo de archivo origen( 1: Texto, 2: Audio, 3: Video, 4: Imagen)
+     * @param $tiporespuesta: tipo de archivo origen( 1: Texto, 2: Audio, 3: Video, 4: Imagen)
+     */
+     function pintarformularioasociacionmultiple($id,$p,$id_ejercicio,$tipoorigen,$tiporespuesta,$tipocreacion){
+
+        global $CFG, $COURSE, $USER;
+        $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
+
+        $mform =& $this->_form;
+       
+        $mform->addElement('html','<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>');
+        $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.js"></script>');
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
+        $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
+        
+        //titulo
+        $titulo= '<h1>' . get_string('FormularioCreacionTextos', 'ejercicios') . '</h1>';
+        $mform->addElement('html',$titulo);
+
+         $oculto='<input type="hidden" name="tipocreacion" id="tipocreacion" value="'.$tipocreacion.'"/>';
+         $mform->addElement('html',$oculto);
+         
+        switch($tipoorigen){
+            case 1: //El archivo de origen es un texto
+
+                switch($tiporespuesta){
+
+                    case 1: //El archivo respuesta es un texto
+                        echo "texto-texto";
+                        //Para cada pregunta
+                        for($i=0;$i<$p;$i++){
+
+                             $aux=$i+1;
+                             $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
+                             $mform->addElement('html',$titulo);
+
+                            //Archivo Asociacion
+                            $mform->addElement('textarea', 'pregunta'.$aux, get_string('Asociacion_Texto', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
+                            //Archivo Asociado
+                            //$mform->addElement('textarea', 'respuesta'.$aux, get_string('Asociacion_Texto_Asociado', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
+                            $textarea='</br><div id="titulorespuestas" style="margin-left:130px;">Respuestas:</div>';
+                            $textarea.='<div style="margin-left:310px;" id="respuestas_pregunta"'.$aux.'"> ';
+                            $textarea.='<textarea name="respuesta1_'.$aux.'" id="respuesta1_'.$aux.'" rows="1" cols="50"></textarea>';
+                            
+                            $textarea.='<input type="hidden" name="numerorespuestas_'.$aux.'" id="numerorespuestas_'.$aux.'" value="1"/>';
+                            $textarea.='</div>';
+                            $mform->addElement('html',$textarea);
+                            
+                            // TODO COMPROBAR SI FUNCIONA LA FUNCION DE JAVASCRIPT DE MAS RESPUESTAS DE IE PARA ESTOS EJERCICIOS
+                            $botonañadir='<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestas_IE('.$aux.');"></center>';
+                            $mform->addElement('html', $botonañadir);
+
+
+                        }
+
+                           $mform->addElement('hidden','numeropreguntas',$p);
+
+
+                    break;
+                    case 2: //El archivo respuesta es un audio
+                         echo "texto-audio";
+                            
+                            $script = '<script type="text/javascript"> $(document).ready(function(){ arreglar_texto_audio_AM(); }); </script>';
+                            $mform->addElement('html',$script);
+                    
+                            for($i=0;$i<$p;$i++){
+
+                            $aux=$i+1;
+                            $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
+                             $mform->addElement('html',$titulo);
+
+                           //Archivo Asociacion
+                            $mform->addElement('textarea', 'pregunta'.$aux, get_string('Asociacion_Texto', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
+                            //Archivo Asociado 
+                            //Intentar encerrar los archivos de audio en un div
+                            $mform->addElement('html','<div  id="respuestas_pregunta'.$aux.'"> ');
+                            $mform->addElement('file', 'archivoaudio'.$aux,"Audio");
+                            $mform->addRule('archivoaudio'.$aux, "Archivo Necesario", 'required', null, 'client');
+                            $mform->addElement('html','<input type="hidden" name="numerorespuestas_'.$aux.'" id="numerorespuestas_'.$aux.'" value="1"/>');
+                            $mform->addElement('html','</div>');
+                            
+                            $botonañadir='<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestasAudio_AM('.$aux.');"></center>';
+                            $mform->addElement('html', $botonañadir);
+
+                           }
+
+                           $mform->addElement('hidden','numeropreguntas',$p);
+
+
+                    break;
+                    case 3: //El archivo respuesta es un video
+                        $script = '<script type="text/javascript"> $(document).ready(function(){ arreglar_texto_video_AM(); }); </script>';
+                        $mform->addElement('html',$script);
+                        
+                         for($i=0;$i<$p;$i++){
+
+                            $aux=$i+1;
+                            $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
+                             $mform->addElement('html',$titulo);
+
+                           //Archivo Asociacion
+                            $mform->addElement('textarea', 'pregunta'.$aux, get_string('Asociacion_Texto', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
+                            //Archivo Asociado
+                            $mform->addElement('html','<div id="respuestas_pregunta'.$aux.'"> ');
+                            $attributes='size="100"';
+                            $mform->addElement('text', 'archivovideo'.$aux,get_string('Video', 'ejercicios') , $attributes);
+                            $mform->addRule('archivovideo'.$aux, "Dirección Web Necesaria", 'required', null, 'client');
+                            $mform->addElement('html','<input type="hidden" name="numerorespuestas_'.$aux.'" id="numerorespuestas_'.$aux.'" value="1"/>');
+                            $mform->addElement('html','</div>');
+                            
+                            $botonañadir='<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestasVideo_AM('.$aux.');"></center>';
+                            $mform->addElement('html', $botonañadir);
+                           }
+                           
+                           
+
+                           $mform->addElement('hidden','numeropreguntas',$p);
+
+
+
+                    break;
+                    case 4: //El archivo respuesta es una imagen
+
+                            echo "texto-imagen";
+                        
+                            $script = '<script type="text/javascript"> $(document).ready(function(){ arreglar_texto_foto_AM(); }); </script>';
+                            $mform->addElement('html',$script);
+
+                            for($i=0;$i<$p;$i++){
+
+                            $aux=$i+1;
+                            $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
+                             $mform->addElement('html',$titulo);
+                             echo "aki si llega";
+                           //Archivo Asociacion
+                            $mform->addElement('textarea', 'pregunta'.$aux, get_string('Asociacion_Texto', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
+                            //Archivo Asociado
+                            $mform->addElement('html','<div id="respuestas_pregunta'.$aux.'"> ');
+                            $mform->addElement('file', 'archivofoto'.$aux,"Foto");
+                            $mform->addRule('archivofoto'.$aux, "Archivo Necesario", 'required', null, 'client');
+                            $mform->addElement('html','<input type="hidden" name="numerorespuestas_'.$aux.'" id="numerorespuestas_'.$aux.'" value="1"/>');
+                            $mform->addElement('html','</div>');
+                            
+                            $botonañadir='<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestasFoto_AM('.$aux.');"></center>';
+                            $mform->addElement('html', $botonañadir);
+                           }
+
+                           $mform->addElement('hidden','numeropreguntas',$p);
+                           echo "aki llega con angel";
+                      
+                        
+                    break;
+
+                }
+
+            break;
+
+            case 2: //El archivo de origen es un audio
+
+                switch($tiporespuesta){
+
+                    case 1: //El archivo respuesta es un texto
+                        echo "audio-texto aaaa";
+
+                          for($i=0;$i<$p;$i++){
+
+                            $aux=$i+1;
+                            $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
+                             $mform->addElement('html',$titulo);
+
+                           //Archivo Asociacion
+                            $mform->addElement('file', 'archivoaudio'.$aux,"Audio");
+                            $mform->addRule('archivoaudio'.$aux, "Archivo Necesario", 'required', null, 'client');
+                            
+                            //Archivo Asociado
+                            $mform->addElement('html','<div id="respuestas_pregunta'.$aux.'"> ');
+                            $mform->addElement('textarea', 'respuesta'.$aux.'_1', get_string('Asociacion_Texto', 'ejercicios'), 'wrap="virtual" rows="5" cols="50"');
+                            $mform->addElement('html','<input type="hidden" name="numerorespuestas_'.$aux.'" id="numerorespuestas_'.$aux.'" value="1"/>');
+                            $mform->addElement('html','</div>');
+                            
+                            $botonañadir='<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestasAFV_Texto_AM('.$aux.');"></center>';
+                            $mform->addElement('html', $botonañadir);
+
+                           }
+
+                           $mform->addElement('hidden','numeropreguntas',$p);
+
+                    break;
+                   
+
+                }
+                // "el archivo origen es un audio";
+
+            break;
+
+           case 3: //El archivo de origen es un video
+
+
+                switch($tiporespuesta){
+
+                    case 1: //El archivo respuesta es un texto
+                          for($i=0;$i<$p;$i++){
+
+                            $aux=$i+1;
+                            $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
+                             $mform->addElement('html',$titulo);
+
+                           //Archivo Asociacion
+                            $attributes='size="100"';
+                            $mform->addElement('text', 'archivovideo'.$aux,get_string('Video', 'ejercicios') , $attributes);
+                            $mform->addRule('archivovideo'.$aux, "Dirección Web Necesaria", 'required', null, 'client');
+                            
+                            
+                            //Archivo Asociado
+                            $mform->addElement('html','<div id="respuestas_pregunta'.$aux.'"> ');
+                            $mform->addElement('textarea', 'respuesta'.$aux.'_1', get_string('Asociacion_Texto', 'ejercicios'), 'wrap="virtual" rows="5" cols="50"');
+                            $mform->addElement('html','<input type="hidden" name="numerorespuestas_'.$aux.'" id="numerorespuestas_'.$aux.'" value="1"/>');
+                            $mform->addElement('html','</div>');
+                            
+                            $botonañadir='<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestasAFV_Texto_AM('.$aux.');"></center>';
+                            $mform->addElement('html', $botonañadir);
+
+
+                           }
+
+                           $mform->addElement('hidden','numeropreguntas',$p);
+                    break;
+                  
+                }
+               
+               // "el archivo origen es un audio";
+
+            break;
+
+            case 4: //El archivo de origen es una imagen
+
+                if ($tiporespuesta == 1) {//La respuesta es un texto (la unica posibilidad)
+                    for ($i = 0; $i < $p; $i++) {
+
+                        $aux = $i + 1;
+                        $titulo = '</br><h3> Asociación ' . $aux . '</h3>';
+                        $mform->addElement('html', $titulo);
+
+                        //Archivo Asociacion
+                        $mform->addElement('file', 'archivofoto' . $aux, "Foto");
+                        $mform->addRule('archivofoto' . $aux, "Archivo Necesario", 'required', null, 'client');
+                        
+                        
+                        //Archivo Asociado
+                        $mform->addElement('html','<div id="respuestas_pregunta'.$aux.'"> ');
+                        $mform->addElement('textarea', 'respuesta'.$aux.'_1', get_string('Asociacion_Texto', 'ejercicios'), 'wrap="virtual" rows="5" cols="50"');
+                        $mform->addElement('html','<input type="hidden" name="numerorespuestas_'.$aux.'" id="numerorespuestas_'.$aux.'" value="1"/>');
+                        $mform->addElement('html','</div>');
+                            
+                        $botonañadir='<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestasAFV_Texto_AM('.$aux.');"></center>';
+                        $mform->addElement('html', $botonañadir);
                     }
 
                     $mform->addElement('hidden', 'numeropreguntas', $p);

@@ -207,7 +207,7 @@ class mod_ejercicios_mostrar_identificar_elementos extends moodleform_mod {
 
         $mform->addElement('html', $tabla_imagenes);
 
-        //Obtengo las respuestas
+        //Obtengo las preguntas
         $mis_preguntas = new Ejercicios_texto_texto_preg();
         $preguntas = $mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
         

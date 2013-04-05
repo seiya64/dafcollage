@@ -31,6 +31,8 @@ function setTextareaHeight(textarea) {
 
 $(document).ready(function(){
     
+    alert("Funciona lo de ready function");
+    
     setTextareaHeight($('.adaptHeightInput'));
     try{
         var a = document.getElementsByClassName('adaptHeightInput');
@@ -2444,4 +2446,303 @@ function botonCorregirIE(id_curso,preguntas) {
     }
     
        
+}
+
+
+//---------------------  Funciones para ejercicios de Asociacion Multiple/Compleja ---------------------------------
+//El boton de mas respuestas en la interfaz de ejercicios AM Texto-Audio
+function botonMasRespuestasAudio_AM (num_preg) {
+    alert("Pulsado en boton Mas Respuestas Audio AM");
+    var totalRespuestas = document.getElementById("numerorespuestas_"+num_preg);
+    var divRespuestas = document.getElementById("respuestas_pregunta"+num_preg);
+    var num_resp = parseInt(totalRespuestas.value)+1;
+    
+    //Recuperar varios datos
+    var textoLabel = divRespuestas.getElementsByTagName("label")[0];
+    
+    var etImg = divRespuestas.getElementsByTagName("img")[0];
+    /*
+     * <div class="fitem required">
+        * <div class="fitemtitle">
+            * <label for="id_archivoaudio1">Audio (Tamaño máximo: 20Mb)
+            * <img class="req" title="Debe suministrar un valor aquí." alt="Debe suministrar un valor aquí." src="http://localhost/moodle/pix/req.gif">
+            *  </label>
+        *  </div>
+        *  <div class="felement ffile">
+        *     <input name="archivoaudio1" type="file" onblur="validate_mod_ejercicios_creando_ejercicio_asociacion_multiple_archivoaudio1(this)" onchange="validate_mod_ejercicios_creando_ejercicio_asociacion_multiple_archivoaudio1(this)" id="id_archivoaudio1">
+        *  </div>
+     *  </div>
+     */
+    var respuestas = document.getElementById("respuestas_pregunta"+num_preg);
+    var div1 = document.createElement("div");
+    div1.setAttribute("class","fitem required");
+    respuestas.appendChild(div1);
+    
+    var div2 = document.createElement("div");
+    div2.setAttribute("class","fitemtitle");
+    div1.appendChild(div2);
+    
+    var label = document.createElement("label");
+    label.setAttribute("for","id_archivoaudio" + num_preg + "_" + num_resp);
+    label.setAttribute("id","label_archivoaudio" + num_preg + "_" + num_resp);
+    label.innerHTML = textoLabel.childNodes[0].wholeText;
+    div2.appendChild(label);
+    
+    var img = document.createElement("img");
+    img.setAttribute("class","req");
+    img.title = etImg.title;
+    img.alt = etImg.alt;
+    img.src = etImg.src;
+    label.appendChild(img);
+    
+    var div3 = document.createElement("div");
+    div3.setAttribute("class","felement ffile");
+    div1.appendChild(div3);
+    
+    var input = document.createElement("input");
+    input.setAttribute("name","archivoaudio"+num_preg + "_" + num_resp);
+    input.setAttribute("type","file");
+    input.setAttribute("onblur","validate_mod_ejercicios_creando_ejercicio_asociacion_multiple_archivoaudio"+ num_preg + "(this)");
+    input.setAttribute("onchange","validate_mod_ejercicios_creando_ejercicio_asociacion_multiple_archivoaudio"+num_preg+"(this)");
+    input.setAttribute("id","id_archivoaudio"+num_preg+"_"+num_resp);
+    div3.appendChild(input);  
+    
+    //Aumentar el numero de respuestas
+    totalRespuestas.value = num_resp;
+}
+
+//Funcion que se ejecuta automaticamente en la segunda pagina de creacion de ejercicios AM Texto-Audio
+function arreglar_texto_audio_AM() {
+    alert("Entra en arreglar_texto_audio");
+    
+    var numpreg = parseInt(document.getElementsByName("numeropreguntas")[0].value);
+    //alert("Numero de preguntas: " + numpreg);
+    
+    for (var i=0; i<numpreg; i++) {
+        var divRespuestas = document.getElementById("respuestas_pregunta"+(i+1));
+        //alert("Div Respuestas: " + divRespuestas);
+        var labels = divRespuestas.getElementsByTagName("label");
+        //alert("Labels: " + labels.toString());
+        labels[0].setAttribute("id","label_archivoaudio"+(i+1)+"_"+1);
+        labels[0].setAttribute("for","id_archivoaudio"+(i+1)+"_"+1);
+        var input = document.getElementById("id_archivoaudio"+(i+1));
+        //alert("Input: " + input);
+        input.setAttribute("id","id_archivoaudio"+(i+1)+"_"+1);
+        input.setAttribute("name","archivoaudio"+(i+1)+"_"+1);
+    }
+}
+
+//Funcion que se ejecuta automaticamente en la segunda pagina de creacion de ejercicios AM Texto-Video
+function arreglar_texto_video_AM() {
+    alert("Entra en arreglar_texto_video");
+    
+    var numpreg = parseInt(document.getElementsByName("numeropreguntas")[0].value);
+    
+    for (var i=0; i<numpreg; i++) {
+        var divRespuestas = document.getElementById("respuestas_pregunta"+(i+1));
+        //alert("Div Respuestas: " + divRespuestas);
+        var labels = divRespuestas.getElementsByTagName("label");
+        //alert("Labels: " + labels.toString());
+        labels[0].setAttribute("id","label_archivovideo"+(i+1)+"_"+1);
+        labels[0].setAttribute("for","id_archivovideo"+(i+1)+"_"+1);
+        var input = document.getElementById("id_archivovideo"+(i+1));
+        //alert("Input: " + input);
+        input.setAttribute("id","id_archivovideo"+(i+1)+"_"+1);
+        input.setAttribute("name","archivovideo"+(i+1)+"_"+1);
+    }
+}
+
+//El boton de mas respuestas en la interfaz de ejercicios AM Texto-Video
+function botonMasRespuestasVideo_AM (num_preg) {
+    var totalRespuestas = document.getElementById("numerorespuestas_"+num_preg);
+    var divRespuestas = document.getElementById("respuestas_pregunta"+num_preg);
+    var num_resp = parseInt(totalRespuestas.value)+1;
+    
+    //Recuperar varios datos
+    var textoLabel = divRespuestas.getElementsByTagName("label")[0];
+    
+    var etImg = divRespuestas.getElementsByTagName("img")[0];
+    /*
+     * <div class="fitem required">
+        * <div class="fitemtitle">
+            * <label for="id_archivoaudio1">Audio (Tamaño máximo: 20Mb)
+            * <img class="req" title="Debe suministrar un valor aquí." alt="Debe suministrar un valor aquí." src="http://localhost/moodle/pix/req.gif">
+            *  </label>
+        *  </div>
+        *  <div class="felement ffile">
+        *     <input name="archivoaudio1" type="file" onblur="validate_mod_ejercicios_creando_ejercicio_asociacion_multiple_archivoaudio1(this)" onchange="validate_mod_ejercicios_creando_ejercicio_asociacion_multiple_archivoaudio1(this)" id="id_archivoaudio1">
+        *  </div>
+     *  </div>
+     */
+    var respuestas = document.getElementById("respuestas_pregunta"+num_preg);
+    var div1 = document.createElement("div");
+    div1.setAttribute("class","fitem required");
+    respuestas.appendChild(div1);
+    
+    var div2 = document.createElement("div");
+    div2.setAttribute("class","fitemtitle");
+    div1.appendChild(div2);
+    
+    var label = document.createElement("label");
+    label.setAttribute("for","id_archivovideo" + num_preg + "_" + num_resp);
+    label.setAttribute("id","label_archivovideo" + num_preg + "_" + num_resp);
+    label.innerHTML = textoLabel.childNodes[0].wholeText;
+    div2.appendChild(label);
+    
+    var img = document.createElement("img");
+    img.setAttribute("class","req");
+    img.title = etImg.title;
+    img.alt = etImg.alt;
+    img.src = etImg.src;
+    label.appendChild(img);
+    
+    var div3 = document.createElement("div");
+    div3.setAttribute("class","felement ftext");
+    div1.appendChild(div3);
+    
+    var input = document.createElement("input");
+    input.setAttribute("size","100");
+    input.setAttribute("name","archivovideo"+num_preg + "_" + num_resp);
+    input.setAttribute("type","text");
+    input.setAttribute("onblur","validate_mod_ejercicios_creando_ejercicio_asociacion_multiple_archivovideo"+ num_preg + "(this)");
+    input.setAttribute("onchange","validate_mod_ejercicios_creando_ejercicio_asociacion_multiple_archivovideo"+num_preg+"(this)");
+    input.setAttribute("id","id_archivovideo"+num_preg+"_"+num_resp);
+    div3.appendChild(input);  
+    
+    //Aumentar el numero de respuestas
+    totalRespuestas.value = num_resp;
+}
+
+//Funcion que se ejecuta automaticamente en la segunda pagina de creacion de ejercicios AM Texto-Foto
+function arreglar_texto_foto_AM() {
+    alert("Entra en arreglar_texto_foto");
+    
+    var numpreg = parseInt(document.getElementsByName("numeropreguntas")[0].value);
+    
+    for (var i=0; i<numpreg; i++) {
+        var divRespuestas = document.getElementById("respuestas_pregunta"+(i+1));
+        //alert("Div Respuestas: " + divRespuestas);
+        var labels = divRespuestas.getElementsByTagName("label");
+        //alert("Labels: " + labels.toString());
+        labels[0].setAttribute("id","label_archivofoto"+(i+1)+"_"+1);
+        labels[0].setAttribute("for","id_archivofoto"+(i+1)+"_"+1);
+        var input = document.getElementById("id_archivofoto"+(i+1));
+        //alert("Input: " + input);
+        input.setAttribute("id","id_archivofoto"+(i+1)+"_"+1);
+        input.setAttribute("name","archivofoto"+(i+1)+"_"+1);
+    }
+}
+
+//El boton de mas respuestas en la interfaz de ejercicios AM Texto-Foto
+function botonMasRespuestasFoto_AM(num_preg) {
+    alert("Pulsado en boton Mas Respuestas Foto AM");
+    var totalRespuestas = document.getElementById("numerorespuestas_"+num_preg);
+    var divRespuestas = document.getElementById("respuestas_pregunta"+num_preg);
+    var num_resp = parseInt(totalRespuestas.value)+1;
+    
+    //Recuperar varios datos
+    var textoLabel = divRespuestas.getElementsByTagName("label")[0];
+    
+    var etImg = divRespuestas.getElementsByTagName("img")[0];
+    /*
+     * <div class="fitem required">
+        * <div class="fitemtitle">
+            * <label for="id_archivoaudio1">Audio (Tamaño máximo: 20Mb)
+            * <img class="req" title="Debe suministrar un valor aquí." alt="Debe suministrar un valor aquí." src="http://localhost/moodle/pix/req.gif">
+            *  </label>
+        *  </div>
+        *  <div class="felement ffile">
+        *     <input name="archivoaudio1" type="file" onblur="validate_mod_ejercicios_creando_ejercicio_asociacion_multiple_archivoaudio1(this)" onchange="validate_mod_ejercicios_creando_ejercicio_asociacion_multiple_archivoaudio1(this)" id="id_archivoaudio1">
+        *  </div>
+     *  </div>
+     */
+    var respuestas = document.getElementById("respuestas_pregunta"+num_preg);
+    var div1 = document.createElement("div");
+    div1.setAttribute("class","fitem required");
+    respuestas.appendChild(div1);
+    
+    var div2 = document.createElement("div");
+    div2.setAttribute("class","fitemtitle");
+    div1.appendChild(div2);
+    
+    var label = document.createElement("label");
+    label.setAttribute("for","id_archivofoto" + num_preg + "_" + num_resp);
+    label.setAttribute("id","label_archivofoto" + num_preg + "_" + num_resp);
+    label.innerHTML = textoLabel.childNodes[0].wholeText;
+    div2.appendChild(label);
+    
+    var img = document.createElement("img");
+    img.setAttribute("class","req");
+    img.title = etImg.title;
+    img.alt = etImg.alt;
+    img.src = etImg.src;
+    label.appendChild(img);
+    
+    var div3 = document.createElement("div");
+    div3.setAttribute("class","felement ffile");
+    div1.appendChild(div3);
+    
+    var input = document.createElement("input");
+    input.setAttribute("name","archivofoto"+num_preg + "_" + num_resp);
+    input.setAttribute("type","file");
+    input.setAttribute("onblur","validate_mod_ejercicios_creando_ejercicio_asociacion_multiple_archivofoto"+ num_preg + "(this)");
+    input.setAttribute("onchange","validate_mod_ejercicios_creando_ejercicio_asociacion_multiple_archivofoto"+num_preg+"(this)");
+    input.setAttribute("id","id_archivofoto"+num_preg+"_"+num_resp);
+    div3.appendChild(input);  
+    
+    //Aumentar el numero de respuestas
+    totalRespuestas.value = num_resp;
+}
+
+//Boton para añadir mas respuestas a ejercicios (Audio|Foto|Video)-Texto de Asociacion Multiple
+function botonMasRespuestasAFV_Texto_AM(num_preg) {
+    alert("Pulsado en boton Mas Respuestas Foto AM");
+    var totalRespuestas = document.getElementById("numerorespuestas_"+num_preg);
+    var divRespuestas = document.getElementById("respuestas_pregunta"+num_preg);
+    var num_resp = parseInt(totalRespuestas.value)+1;
+    
+    //Recuperar varios datos
+    var textoLabel = divRespuestas.getElementsByTagName("label")[0];
+    
+    
+    /*
+     * <div class="fitem required">
+        * <div class="fitemtitle">
+            * <label for="id_archivoaudio1">Audio (Tamaño máximo: 20Mb)
+            * <img class="req" title="Debe suministrar un valor aquí." alt="Debe suministrar un valor aquí." src="http://localhost/moodle/pix/req.gif">
+            *  </label>
+        *  </div>
+        *  <div class="felement ffile">
+        *     <input name="archivoaudio1" type="file" onblur="validate_mod_ejercicios_creando_ejercicio_asociacion_multiple_archivoaudio1(this)" onchange="validate_mod_ejercicios_creando_ejercicio_asociacion_multiple_archivoaudio1(this)" id="id_archivoaudio1">
+        *  </div>
+     *  </div>
+     */
+    var respuestas = document.getElementById("respuestas_pregunta"+num_preg);
+    var div1 = document.createElement("div");
+    div1.setAttribute("class","fitem");
+    respuestas.appendChild(div1);
+    
+    var div2 = document.createElement("div");
+    div2.setAttribute("class","fitemtitle");
+    div1.appendChild(div2);
+    
+    var label = document.createElement("label");
+    label.setAttribute("for","id_respuesta" + num_preg + "_" + num_resp);
+    //label.setAttribute("id","label_archivofoto" + num_preg + "_" + num_resp);
+    label.innerHTML = textoLabel.childNodes[0].wholeText;
+    div2.appendChild(label);
+    
+    var div3 = document.createElement("div");
+    div3.setAttribute("class","felement ftextarea");
+    div1.appendChild(div3);
+    
+    var ta = document.createElement("textarea");
+    ta.setAttribute("wrap","virtual");
+    ta.setAttribute("rows","5");
+    ta.setAttribute("cols","50");
+    ta.setAttribute("name","respuesta"+num_preg+"_"+num_resp);
+    ta.setAttribute("id","id_respuesta"+num_preg+"_"+num_resp);
+    div3.appendChild(ta);
+    //Aumentar el numero de respuestas
+    totalRespuestas.value = num_resp;
 }
