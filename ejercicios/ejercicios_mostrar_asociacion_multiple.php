@@ -67,6 +67,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
 
         global $CFG, $COURSE, $USER;
         $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
+        echo "<br/>Directorio de librerias: " . $CFG->libdir . "<br/>";
 
 
         //Los iconos están sacados del tema de gnome que viene con ubuntu 11.04
@@ -135,9 +136,10 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                         //Obtengo las preguntas
                         $mis_preguntas = new Ejercicios_texto_texto_preg();
                         $preguntas = $mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
-
+                        echo "<br/>Saca las preguntas: buscar=".$buscar." modificable=".($modificable==false);
 
                         if ($buscar == 1 || $modificable == false) {
+                            echo "<br/>Aqui no debe entrar";
                             $tabla_imagenes.='<center><table id="tablapreg" name="tablapreg">';
                             $tabla_imagenes.="<tr>";
                             //Inserto las preguntas con clase "item" es decir dragables(mirar javascript.js)
@@ -235,8 +237,8 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                                 $divpregunta.=' </td>';
                                 
                                 $divpregunta.=' <td style="width:5%;">';
-                                $divpregunta.='<img id="imgpregborrar' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarPregunta_AM(tabpregunta' . $i . ',' . $i . ')" title="Eliminar Pregunta"></img>';
-                                $divpregunta.='</br><img id="imgpreganadir' . $i . '" src="./imagenes/añadir.gif" alt="eliminar respuesta"  height="15px"  width="15px" onClick="anadirRespuesta_TextoTexto_AM(respuestas' . $i . ',' . $i . ')" title="Añadir Respuesta"></img>';
+                                $divpregunta.='<img id="imgpregborrar' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarPregunta_IE(tabpregunta' . $i . ',' . $i . ')" title="Eliminar Pregunta"></img>';
+                                $divpregunta.='</br><img id="imgpreganadir' . $i . '" src="./imagenes/añadir.gif" alt="eliminar respuesta"  height="15px"  width="15px" onClick="anadirRespuesta_IE(respuestas' . $i . ',' . $i . ')" title="Añadir Respuesta"></img>';
                                 $divpregunta.='</td> ';
                                 $divpregunta.='</br> ';
                                 $divpregunta.='</table> ';
@@ -264,7 +266,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                                     $divpregunta.='<textarea style="width: 300px;" class="resp" name="respuesta' . $q . "_" . $i . '" id="respuesta' . $q . "_" . $i . '" value="' . $respuestas[$p]->get('respuesta') . '">' . $respuestas[$p]->get('respuesta') . '</textarea>';
                                     $divpregunta.=' </td>';
                                     $divpregunta.=' <td style="width:5%;" id="tdcorregir'. $q . "_" . $i .'">';
-                                    $divpregunta.='<img id="eliminarrespuesta' . $q . '_' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarRespuesta_TextoTexto_AM(tablarespuesta' . $q . '_' . $i . ',' . $i . ')" title="Eliminar Respuesta"></img>';
+                                    $divpregunta.='<img id="eliminarrespuesta' . $q . '_' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarRespuesta_IE(tablarespuesta' . $q . '_' . $i . ',' . $i . ')" title="Eliminar Respuesta"></img>';
                                     
                                     $divpregunta.='</td> ';
                                     $divpregunta.='<tr>';
@@ -293,7 +295,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                             
                             
                         }
-
+                            
 
 
                         //botones
@@ -303,7 +305,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                         if ($buscar != 1 && $modificable == true) {
                             //Si soy el profesor creadors
                             $tabla_imagenes = '<input type="submit" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
-                            $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonNA" name="botonNA" onclick="botonTextoTexto()" value="' . get_string('NuevaAso', 'ejercicios') . '">';
+                            $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonNA" name="botonNA" onclick="botonMasPreguntas_TextoAudio_AM('.$id_ejercicio.')" value="' . get_string('NuevaAso', 'ejercicios') . '">';
                             $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                         } else {
                             if ($buscar == 1) { //Si estoy buscand
@@ -457,14 +459,28 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                             $tabla_imagenes.='<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
                         } else {
                             echo "akiiiiiiii";
-                            $tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
+                            //$tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
 
                             for ($i = 1; $i <= sizeof($preguntas); $i++) {
                                 echo "iteracion" . $i . "aaaa" . sizeof($preguntas);
-                                $tabla_imagenes.="<tr>";
+                                /*$tabla_imagenes.="<tr>";
                                 $tabla_imagenes.='<td id="texto' . $i . '">';
                                 $tabla_imagenes.='<textarea id="pregunta' . $i . '" name="pregunta' . $i . '" style="height: 197px; width: 396px;">' . $preguntas[$i - 1]->get('pregunta') . '</textarea>';
-                                $tabla_imagenes.='</td>';
+                                $tabla_imagenes.='</td>';*/
+                                //Pinto la pregunta
+                                $divpregunta = '<div id="tabpregunta' . $i . '" >';
+                                $divpregunta.='<br/><br/>';
+                                $divpregunta.='<table style="width:100%;">';
+                                $divpregunta.=' <td style="width:80%;">';
+                                $divpregunta.='<textarea style="width: 900px;" class="pregunta" name="pregunta' . $i . '" id="pregunta' . $i . '">' . $preguntas[$i - 1]->get('pregunta') . '</textarea>';
+                                $divpregunta.=' </td>';
+                                
+                                $divpregunta.=' <td style="width:5%;">';
+                                $divpregunta.='<img id="imgpregborrar' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarPregunta_TextoAudio_AM('.$id_ejercicio.',tabpregunta' . $i . ',' . $i . ')" title="Eliminar Pregunta"></img>';
+                                $divpregunta.='</br><img id="imgpreganadir' . $i . '" src="./imagenes/añadir.gif" alt="eliminar respuesta"  height="15px"  width="15px" onClick="anadirRespuesta_AudioTexto_AM('.$id_ejercicio.',respuestas' . $i . ',' . $i . ')" title="Añadir Respuesta"></img>';
+                                $divpregunta.='</td> ';
+                                $divpregunta.='</br> ';
+                                $divpregunta.='</table> ';
 
                                 $id_pregunta = $preguntas[$i - 1]->get('id');
 
@@ -472,45 +488,78 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                                 $respuestas = $mis_respuestas->obtener_todas_respuestas_pregunta($id_pregunta);
 
 
-                                $tabla_imagenes.= '<td>';
+                                //$tabla_imagenes.= '<td>';
+
+                                $divpregunta.='</br><div id="respuestas' . $i . '" class=respuesta>';
+                                for ($p = 0; $p < sizeof($respuestas); $p++) {
+                                    $q = $p + 1;
+                                    
+                                    if ($q%2==0 || $q==sizeof($respuestas)) {
+                                        $divpregunta.='<table  id="tablarespuesta' . $q . '_' . $i . '" style="width:50%;">';
+                                    }
+                                    else {
+                                        $divpregunta.='<table  id="tablarespuesta' . $q . '_' . $i . '" style="width:50%;float:left;">';
+                                    }
+                                    
+                                    $divpregunta.='<tr id="trrespuesta' . $q . "_" . $i . '"> ';
+                                    $divpregunta.=' <td style="width:80%;">';
+                                    $divpregunta.='<script type="text/javascript" src="./mediaplayer/swfobject.js"></script>';
+                                    $divpregunta.='<div class="claseaudio1" id="player'.$q.'_'.$i.'" name="respuesta' . $q . "_" . $i . '">';
+                                    $divpregunta.='<embed type="application/x-shockwave-flash" src="./mediaplayer/mediaplayer.swf" width="320" height="20" style="undefined" id="mpl'.$q.'_'.$i.'" name="mpl" quality="high" allowfullscreen="true" flashvars="file=./mediaplayer/audios/audio_' . $id_ejercicio . '_' . $i . "_" . $q . '.mp3&amp;height=20&amp;width=320">';
+                                    $divpregunta.='</div>';
+                                    $divpregunta.='<a href="javascript:cargaAudios(\'' . $respuestas[$p]->get('nombre_audio') . '\',' . $i . ',\'primera\','.$q.',\'respuesta'.$q.'_'.$i.'\')" id="upload' . $i . "_" . $q . '" class="up">Cambiar Audio</a>';
+                                    $divpregunta.=' </td>';
+                                    $divpregunta.=' <td style="width:5%;" id="tdcorregir'. $q . "_" . $i .'">';
+                                    $divpregunta.='<img id="eliminarrespuesta' . $q . '_' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarRespuesta_TextoAudio_AM(tablarespuesta' . $q . '_' . $i . ',' . $i . ','.$q.','.$id_ejercicio.')" title="Eliminar Respuesta"></img>';
+                                    
+                                    $divpregunta.='</td> ';
+                                    $divpregunta.='<tr>';
+
+                                    $divpregunta.='</table> ';
+                                    
+                                    //$tabla_imagenes.= '<div id="c1">';
+                                    
+                                    // $tabla_imagenes.='<input name="uploadedfile" type="file" />';
+                                    // $tabla_imagenes.='</div>';
+                                    //$tabla_imagenes.='</div>';
+                                    //$tabla_imagenes.='<div id="capa2"> ';
 
 
-                                $tabla_imagenes.= '<div id="c1">';
-                                $tabla_imagenes.='<a href="javascript:cargaAudios(\'' . $respuestas[0]->get('nombre_audio') . '\',' . $i . ',\'primera\')" id="upload' . $i . '" class="up">Cambiar Audio</a>';
-                                // $tabla_imagenes.='<input name="uploadedfile" type="file" />';
-                                // $tabla_imagenes.='</div>';
-                                $tabla_imagenes.='</div>';
-                                $tabla_imagenes.='<div id="capa2"> ';
+                                    /*$tabla_imagenes.='<script type="text/javascript" src="./mediaplayer/swfobject.js"></script>';
+                                    $tabla_imagenes.='<div class="claseaudio1" id="player1" name="respuesta' . $i . '">';
+                                    $tabla_imagenes.='<embed type="application/x-shockwave-flash" src="./mediaplayer/mediaplayer.swf" width="320" height="20" style="undefined" id="mpl" name="mpl" quality="high" allowfullscreen="true" flashvars="file=./mediaplayer/audios/audio_' . $id_ejercicio . '_' . $i . '.mp3&amp;height=20&amp;width=320">';
+                                    $tabla_imagenes.='</div>';
 
+                                    $tabla_imagenes.='</div>';
 
-                                $tabla_imagenes.='<script type="text/javascript" src="./mediaplayer/swfobject.js"></script>';
-                                $tabla_imagenes.='<div class="claseaudio1" id="player1" name="respuesta' . $i . '">';
-                                $tabla_imagenes.='<embed type="application/x-shockwave-flash" src="./mediaplayer/mediaplayer.swf" width="320" height="20" style="undefined" id="mpl" name="mpl" quality="high" allowfullscreen="true" flashvars="file=./mediaplayer/audios/audio_' . $id_ejercicio . '_' . $i . '.mp3&amp;height=20&amp;width=320">';
-                                $tabla_imagenes.='</div>';
+                                    $tabla_imagenes.='</td>';
 
-                                $tabla_imagenes.='</div>';
-
-                                $tabla_imagenes.='</td>';
-
-                                $tabla_imagenes.='</tr>';
+                                    $tabla_imagenes.='</tr>';*/
+                                }
+                                
+                                $divpregunta.='</div>';
+                                $divpregunta.='</div>';
+                                $divpregunta.='<input type="hidden" value=' . sizeof($respuestas) . ' id="num_res_preg' . $i . '" name="num_res_preg' . $i . '" />';
+                                $mform->addElement('html', $divpregunta);
                             }
-                            $tabla_imagenes.='</table></center>';
+                            //$tabla_imagenes.='</table></center>';
 
                             //inserto el número de preguntas
-
-                            $tabla_imagenes.='<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
+                            $divnumpregunta = '<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
+                            $mform->addElement('html', $divnumpregunta);
+                            //$tabla_imagenes.='<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
                         }
 
 
 
                         //botones
-                        $mform->addElement('html', $tabla_imagenes);
+                        //$mform->addElement('html', $tabla_imagenes);
 
 
                         if ($buscar != 1 && $modificable == true) {
                             //Si soy el profesor creadors
                             $tabla_imagenes = '<input type="submit" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
-                            $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonTextoAudio" name="botonTextoAudio" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonASTextoAudio(' . $id_ejercicio . ')">';
+                            $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonTextoAudio" name="botonTextoAudio" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonMasPreguntas_TextoAudio_AM('.$id_ejercicio.')">';
                             echo "finnnnnnnnn";
                             $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                         } else {
@@ -676,53 +725,105 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                         } else {
                             echo "akiiiiiiii podemos cambiar";
 
-                            $tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
+                            //$tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
                             echo sizeof($preguntas);
                             for ($i = 1; $i <= sizeof($preguntas); $i++) {
                                 echo "iteracion" . $i . "aaaa" . count($preguntas);
-                                $tabla_imagenes.="<tr>";
+                                /*$tabla_imagenes.="<tr>";
                                 $tabla_imagenes.='<td id="texto' . $i . '">';
                                 $tabla_imagenes.='<textarea id="pregunta' . $i . '" name="pregunta' . $i . '" style="height: 197px; width: 396px;">' . $preguntas[$i - 1]->get('pregunta') . '</textarea>';
-                                $tabla_imagenes.='</td>';
+                                $tabla_imagenes.='</td>';*/
+                                //Pinto la pregunta
+                                $divpregunta = '<div id="tabpregunta' . $i . '" >';
+                                $divpregunta.='<br/><br/>';
+                                $divpregunta.='<table style="width:100%;">';
+                                $divpregunta.=' <td style="width:80%;">';
+                                $divpregunta.='<textarea style="width: 900px;" class="pregunta" name="pregunta' . $i . '" id="pregunta' . $i . '">' . $preguntas[$i - 1]->get('pregunta') . '</textarea>';
+                                $divpregunta.=' </td>';
+                                
+                                $divpregunta.=' <td style="width:5%;">';
+                                $divpregunta.='<img id="imgpregborrar' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarPregunta_IE(tabpregunta' . $i . ',' . $i . ')" title="Eliminar Pregunta"></img>';
+                                $divpregunta.='</br><img id="imgpreganadir' . $i . '" src="./imagenes/añadir.gif" alt="eliminar respuesta"  height="15px"  width="15px" onClick="anadirRespuesta_TextoVideo_AM(respuestas' . $i . ',' . $i . ')" title="Añadir Respuesta"></img>';
+                                $divpregunta.='</td> ';
+                                $divpregunta.='</br> ';
+                                $divpregunta.='</table> ';
 
                                 $id_pregunta = $preguntas[$i - 1]->get('id');
 
                                 $mis_respuestas = new Ejercicios_videos_asociados();
                                 echo "Mi pregunta:" . $id_pregunta;
                                 $respuestas = $mis_respuestas->obtener_todas_respuestas_pregunta($id_pregunta);
-                                $el_video_origen = new Ejercicios_videos_asociados();
-                                $el_video_origen->obtener_uno_ejpreg($id_ejercicio, $id_pregunta);
-                                //die;
+                                
+                                $divpregunta.='</br><div id="respuestas' . $i . '" class=respuesta>';
+                                for ($p = 0; $p < sizeof($respuestas); $p++) {
+                                    $q = $p + 1;
+                                    //$el_video_origen = new Ejercicios_videos_asociados();
+                                    //$el_video_origen->obtener_uno_ejpreg($id_ejercicio, $id_pregunta);
+                                    //die;
+                                    $el_video_origen = $respuestas[$p];
+                                    
+                                    if ($q%2==0 || $q==sizeof($respuestas)) {
+                                        $divpregunta.='<table  id="tablarespuesta' . $q . '_' . $i . '" style="width:50%;">';
+                                    }
+                                    else {
+                                        $divpregunta.='<table  id="tablarespuesta' . $q . '_' . $i . '" style="width:50%;float:left;">';
+                                    }
+                                    $divpregunta.='<tr id="trrespuesta' . $q . "_" . $i . '"> ';
+                                    $divpregunta.=' <td style="width:80%;">';
+                                    $divpregunta.= '<object width="396" height="197">
+                                            <param name="movie'.$q."_".$i.'" id="movie'.$q."_".$i.'" value="http://www.youtube.com/v/' . $el_video_origen->get('nombre_video') . '?hl=es_ES&amp;version=3">
+                                            </param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param>
+                                            <embed name="embed'.$q.'_'.$i.'" id="embed'.$q.'_'.$i.'" src="http://www.youtube.com/v/' . $el_video_origen->get('nombre_video') . '?hl=es_ES&amp;version=3" type="application/x-shockwave-flash" width="396" height="197" allowscriptaccess="always" allowfullscreen="true">
+                                            </embed></object>';
+                                    $divpregunta.='<textarea class="video1" onchange="actualizar_TextoVideo_AM('.$q.','.$i.')" style="width: 300px;" name="respuesta' . $q . "_" . $i . '" id="respuesta' . $q . "_" . $i . '" value="' . YoutubeVideoHelper::generarVideoUrl($el_video_origen->get('nombre_video')) . '">' . YoutubeVideoHelper::generarVideoUrl($el_video_origen->get('nombre_video')) . '</textarea>';
+                                    $divpregunta.=' </td>';
+                                    $divpregunta.=' <td style="width:5%;" id="tdcorregir'. $q . "_" . $i .'">';
+                                    $divpregunta.='<img id="eliminarrespuesta' . $q . '_' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarRespuesta_TextoVideo_AM(' .$q. ',' . $i . ')" title="Eliminar Respuesta"></img>';
+                                    
+                                    $divpregunta.='</td> ';
+                                    $divpregunta.='<tr>';
 
-                                $tabla_imagenes.= '<td>';
-                                //print_r($el_video_origen);
-                                //$tabla_imagenes.=' <a onclick="ObtenerDireccion(' . $i . ')" class="button super yellow centrarvideo" href="' . $respuestas[0]->get('nombre_video') . '" target="_blank" id="video' . $i . '">Ver Video</a>';
-                                $tabla_imagenes .= '<object width="396" height="197">
-                                        <param name="movie" value="http://www.youtube.com/v/' . $el_video_origen->get('nombre_video') . '?hl=es_ES&amp;version=3">
-                                        </param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param>
-                                        <embed src="http://www.youtube.com/v/' . $el_video_origen->get('nombre_video') . '?hl=es_ES&amp;version=3" type="application/x-shockwave-flash" width="396" height="197" allowscriptaccess="always" allowfullscreen="true">
-                                        </embed></object>';
+                                    $divpregunta.='</table> ';
 
-                                $tabla_imagenes.=' <textarea class="video1" name="archivovideo' . $i . '" id="archivovideo' . $i . '">' . YoutubeVideoHelper::generarVideoUrl($respuestas[0]->get('nombre_video')) . '</textarea>';
+                                    
 
-                                $tabla_imagenes.='</td>';
+                                    /*$tabla_imagenes.= '<td>';
+                                    //print_r($el_video_origen);
+                                    //$tabla_imagenes.=' <a onclick="ObtenerDireccion(' . $i . ')" class="button super yellow centrarvideo" href="' . $respuestas[0]->get('nombre_video') . '" target="_blank" id="video' . $i . '">Ver Video</a>';
+                                    $tabla_imagenes .= '<object width="396" height="197">
+                                            <param name="movie" value="http://www.youtube.com/v/' . $el_video_origen->get('nombre_video') . '?hl=es_ES&amp;version=3">
+                                            </param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param>
+                                            <embed src="http://www.youtube.com/v/' . $el_video_origen->get('nombre_video') . '?hl=es_ES&amp;version=3" type="application/x-shockwave-flash" width="396" height="197" allowscriptaccess="always" allowfullscreen="true">
+                                            </embed></object>';
 
-                                $tabla_imagenes.='</tr>';
+                                    $tabla_imagenes.=' <textarea class="video1" name="archivovideo' . $i . '" id="archivovideo' . $i . '">' . YoutubeVideoHelper::generarVideoUrl($respuestas[0]->get('nombre_video')) . '</textarea>';
+
+                                    $tabla_imagenes.='</td>';
+
+                                    $tabla_imagenes.='</tr>';*/
+                                }
+                                //Inserto el numero de respuestas para cada pregunta
+                                $divpregunta.='</div>';
+                                $divpregunta.='</div>';
+                                $divpregunta.='<input type="hidden" value=' . sizeof($respuestas) . ' id="num_res_preg' . $i . '" name="num_res_preg' . $i . '" />';
+                                $mform->addElement('html', $divpregunta);
                             }
-                            $tabla_imagenes.='</table></center>';
+                            //$tabla_imagenes.='</table></center>';
 
                             //inserto el número de preguntas
-
-                            $tabla_imagenes.='<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
+                            //inserto el número de preguntas
+                            $divnumpregunta = '<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
+                            $mform->addElement('html', $divnumpregunta);
+                            //$tabla_imagenes.='<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
                         }
 
                         //botones
-                        $mform->addElement('html', $tabla_imagenes);
+                        //$mform->addElement('html', $tabla_imagenes);
                         echo "botones";
                         if ($buscar != 1 && $modificable == true) {
                             //Si soy el profesor creadors
                             $tabla_imagenes = '<input type="submit" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
-                            $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonTextoVideo" name="botonTextoVideo" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonASTextoVideo(' . $id_ejercicio . ')">';
+                            $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonTextoVideo" name="botonTextoVideo" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonMasPreguntas_TextoVideo_AM(' . $id_ejercicio . ')">';
                             echo "finnnnnnnnn";
                             $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                         } else {
@@ -1354,7 +1455,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                 if ($buscar != 1 && $modificable == true) {
                     //Si soy el profesor creadors
                     $tabla_imagenes = '<input type="submit" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
-                    $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonTextoVideo" name="botonTextoVideo" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonASTextoVideo(' . $id_ejercicio . ')">';
+                    $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonTextoVideo" name="botonTextoVideo" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonMasPreguntas_TextoVideo_AM(' . $id_ejercicio . ')">';
                     echo "finnnnnnnnn";
                     $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                 } else {

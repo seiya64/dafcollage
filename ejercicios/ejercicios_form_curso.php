@@ -111,6 +111,7 @@ class mod_ejercicios_curso extends moodleform_mod{
                     $carpeta.='<li style="width:750px;"><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'&buscar=1&tipocreacion='.$tipo_creacion.'">'. $nombre_ejercicio.'</a></li>';
                     break;
                 case 1: // Asociacion simple
+                case 2: // Asociacion multiple
                     $carpeta.='<li style="width:750px;"><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'&buscar=1&tipo_origen='.$todos_ejer_curso[$i]->get('tipoarchivopregunta').'&tr='.$todos_ejer_curso[$i]->get('tipoarchivorespuesta').'&tipocreacion='.$todos_ejer_curso[$i]->get('tipoactividad').'">'. $nombre_ejercicio.'</a></li>';
                     break;
             }

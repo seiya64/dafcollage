@@ -16,7 +16,7 @@ class YoutubeVideoHelper {
 
         $sujeto = $url;
         echo $url;
-        $patron = '/v=(\w*)/';
+        $patron = '/v=((\w|-|_)*)/';
         preg_match($patron, $sujeto, $coincidencias);
         print_r($coincidencias);
         $idVideo = $coincidencias[1];
