@@ -2634,7 +2634,9 @@ if ($impr_estra == 1) {
 
 
 //se imprime el pdf
-$pdf->AliasNbPages();
-$pdf->Close();
+
+//Cambios - Angel Biedma Mesa - Estas dos lineas no funcionan con la nueva version de la libreria TCPDF
+//$pdf->AliasNbPages();
+//$pdf->Close();
 $pdf->Output($USER->firstname . ' ' . $USER->lastname . '.pdf', 'D');
 ?>
