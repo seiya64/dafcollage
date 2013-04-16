@@ -742,7 +742,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                                 $divpregunta.=' </td>';
                                 
                                 $divpregunta.=' <td style="width:5%;">';
-                                $divpregunta.='<img id="imgpregborrar' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarPregunta_IE(tabpregunta' . $i . ',' . $i . ')" title="Eliminar Pregunta"></img>';
+                                $divpregunta.='<img id="imgpregborrar' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarPregunta_TextoVideo_AM(tabpregunta' . $i . ',' . $i . ')" title="Eliminar Pregunta"></img>';
                                 $divpregunta.='</br><img id="imgpreganadir' . $i . '" src="./imagenes/añadir.gif" alt="eliminar respuesta"  height="15px"  width="15px" onClick="anadirRespuesta_TextoVideo_AM(respuestas' . $i . ',' . $i . ')" title="Añadir Respuesta"></img>';
                                 $divpregunta.='</td> ';
                                 $divpregunta.='</br> ';
@@ -973,36 +973,84 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                             $tabla_imagenes.='<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
                         } else {
                             echo "akiiiiiiii";
-                            $tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
+                            //$tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
 
                             for ($i = 1; $i <= sizeof($preguntas); $i++) {
                                 echo "iteracion" . $i . "aaaa" . sizeof($preguntas);
-                                $tabla_imagenes.="<tr>";
+                                /*$tabla_imagenes.="<tr>";
                                 $tabla_imagenes.='<td id="texto' . $i . '">';
                                 $tabla_imagenes.='<textarea id="pregunta' . $i . '" name="pregunta' . $i . '" style="height: 197px; width: 396px;">' . $preguntas[$i - 1]->get('pregunta') . '</textarea>';
-                                $tabla_imagenes.='</td>';
+                                $tabla_imagenes.='</td>';*/
+                                $divpregunta = '<div id="tabpregunta' . $i . '" >';
+                                $divpregunta.='<br/><br/>';
+                                $divpregunta.='<table style="width:100%;">';
+                                $divpregunta.=' <td style="width:80%;">';
+                                $divpregunta.='<textarea style="width: 900px;" class="pregunta" name="pregunta' . $i . '" id="pregunta' . $i . '">' . $preguntas[$i - 1]->get('pregunta') . '</textarea>';
+                                $divpregunta.=' </td>';
+                                
+                                $divpregunta.=' <td style="width:5%;">';
+                                $divpregunta.='<img id="imgpregborrar' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarPregunta_TextoFoto_AM('.$id_ejercicio.',tabpregunta' . $i . ',' . $i . ')" title="Eliminar Pregunta"></img>';
+                                $divpregunta.='</br><img id="imgpreganadir' . $i . '" src="./imagenes/añadir.gif" alt="eliminar respuesta"  height="15px"  width="15px" onClick="anadirRespuesta_TextoFoto_AM('.$id_ejercicio.',respuestas' . $i . ',' . $i . ')" title="Añadir Respuesta"></img>';
+                                $divpregunta.='</td> ';
+                                $divpregunta.='</br> ';
+                                $divpregunta.='</table> ';
 
                                 $id_pregunta = $preguntas[$i - 1]->get('id');
 
                                 $mis_respuestas = new Ejercicios_imagenes_asociadas();
                                 $respuestas = $mis_respuestas->obtener_todas_respuestas_pregunta($id_pregunta);
+                                
+                                $divpregunta.='</br><div id="respuestas' . $i . '" class=respuesta>';
+                                for ($p = 0; $p < sizeof($respuestas); $p++) {
+                                    $q = $p + 1;
+                                    
+                                    if ($q%2==0 || $q==sizeof($respuestas)) {
+                                        $divpregunta.='<table  id="tablarespuesta' . $q . '_' . $i . '" style="width:50%;">';
+                                    }
+                                    else {
+                                        $divpregunta.='<table  id="tablarespuesta' . $q . '_' . $i . '" style="width:50%;float:left;">';
+                                    }
+                                    
+                                    $divpregunta.='<tr id="trrespuesta' . $q . "_" . $i . '"> ';
+                                    $divpregunta.=' <td style="width:80%;">';
+                                    $divpregunta.='<div id="capa1">';
+                                    $divpregunta.='<a href="javascript:cargaImagenes(\'' . $respuestas[$p]->get('nombre_imagen') . '\',' . $i . ',\'primera\','.$q.')" id="upload' . $q . "_" . $i .'" class="up">Cambiar Foto</a>';
+                                    $divpregunta.='</div>';
+                                    $divpregunta.='<div id="capa2"> ';
+                                    $divpregunta.='<img  name="respuesta' . $q . "_" . $i . '" id="respuesta' . $q . "_" . $i . '" src="./imagenes/' . $respuestas[$p]->get('nombre_imagen') . '"   style="height: 192px; width: 401px;" ></img>';
+                                    $divpregunta.='</div>';
+                                    $divpregunta.=' </td>';
+                                    $divpregunta.=' <td style="width:5%;">';
+                                    $divpregunta.='<img id="eliminarrespuesta' . $q . '_' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarRespuesta_TextoFoto_AM(tablarespuesta' . $q . '_' . $i . ',' . $i . ','.$q.','.$id_ejercicio.')" title="Eliminar Respuesta"></img>';
+                                    
+                                    $divpregunta.='</td> ';
+                                    $divpregunta.='<tr>';
+
+                                    $divpregunta.='</table> ';
+                                }
+                                
+                                $divpregunta.='</div>';
+                                $divpregunta.='</div>';
+                                $divpregunta.='<input type="hidden" value=' . sizeof($respuestas) . ' id="num_res_preg' . $i . '" name="num_res_preg' . $i . '" />';
+                                $mform->addElement('html', $divpregunta);
+                                
                                 // echo "tamaño".sizeof($respuestas);
                                 //   echo "el nombre es". $respuestas[0]->get('nombre_imagen');
-                                $tabla_imagenes.= '<td>';
+                                /*$tabla_imagenes.= '<td>';
                                 $tabla_imagenes.= '<div id="capa1">';
-                                $tabla_imagenes.='<a href="javascript:cargaImagenes(\'' . $respuestas[0]->get('nombre_imagen') . '\',' . $i . ',\'primera\')" id="upload' . $i . '" class="up">Cambiar Foto</a>';
+                                $tabla_imagenes.='<a href="javascript:cargaImagenes(\'' . $respuestas[0]->get('nombre_imagen') . '\',' . $i . ',\'primera\')" id="upload' . $i . '" class="up">Cambiar Foto</a>';*/
                                 // $tabla_imagenes.='<input name="uploadedfile" type="file" />';
                                 // $tabla_imagenes.='</div>';
-                                $tabla_imagenes.='</div>';
+                                /*$tabla_imagenes.='</div>';
                                 $tabla_imagenes.='<div id="capa2"> ';
                                 $tabla_imagenes.='<img  name="respuesta' . $i . '" id="respuesta' . $i . '" src="./imagenes/' . $respuestas[0]->get('nombre_imagen') . '"   style="height: 192px; width: 401px;" ></img>';
-                                $tabla_imagenes.='</div>';
+                                $tabla_imagenes.='</div>';*/
 
 
 
-                                $tabla_imagenes.='</td>';
+                                //$tabla_imagenes.='</td>';
 
-                                $tabla_imagenes.='</tr>';
+                                //$tabla_imagenes.='</tr>';
                                 // $tabla_imagenes.="<tr>";
                                 // $mform->addElement('html',$tabla_imagenes);
                                 // $mform->addElement('file', 'archivofoto'.$i,'Cambiar Imagen '.$i);
@@ -1012,17 +1060,19 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                                 // $tabla_imagenes.='</td>';
                                 //  $tabla_imagenes.="</tr>";
                             }
-                            $tabla_imagenes.='</table></center>';
+                            
+                            //$tabla_imagenes.='</table></center>';
 
                             //inserto el número de preguntas
-
-                            $tabla_imagenes.='<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
+                            $divnumpregunta = '<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
+                            $mform->addElement('html', $divnumpregunta);
+                            //$tabla_imagenes.='<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
                         }
 
 
 
                         //botones
-                        $mform->addElement('html', $tabla_imagenes);
+                        //$mform->addElement('html', $tabla_imagenes);
 
 
                         if ($buscar != 1 && $modificable == true) {

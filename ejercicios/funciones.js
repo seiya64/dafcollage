@@ -2835,6 +2835,7 @@ function botonMasRespuestasAFV_Texto_AM(num_preg) {
 
 
 //------------- Mostrando Ejercicios AM ------------
+//Boton para añadir una nueva respuesta de los ejercicios Texto-Audio de Asociacion Multiple
 function anadirRespuesta_AudioTexto_AM(id_ejercicio,respuesta,numpreg){
     
     var table = document.createElement("table");
@@ -2956,7 +2957,7 @@ function anadirRespuesta_AudioTexto_AM(id_ejercicio,respuesta,numpreg){
 // respuesta.parentNode.addChild(respuesta);
 }
 
-
+//Boton para eliminar una respuesta en los ejercicios Texto-Audio de Asociacion Multiple
 function EliminarRespuesta_TextoAudio_AM(respuesta,numpreg,numresp,id_ejercicio){
   
 
@@ -3077,6 +3078,7 @@ function EliminarRespuesta_TextoAudio_AM(respuesta,numpreg,numresp,id_ejercicio)
     hidden_resp.value = totalRespuestas-1;
 }
 
+//Boton de añadir una pregunta para los ejercicios Texto-Audio de Asociacion Multiple
 function botonMasPreguntas_TextoAudio_AM(id_ejercicio) {
     alert("añadiendo pregunta");
 
@@ -3184,6 +3186,7 @@ function botonMasPreguntas_TextoAudio_AM(id_ejercicio) {
 
 }
 
+//Boton para añadir una respuesta 
 function anadirRespuesta_TextoVideo_AM(respuesta,numpreg){
     
     var table = document.createElement("table");
@@ -3321,11 +3324,11 @@ function EliminarPregunta_TextoAudio_AM(id_ejercicio,Pregunta,numpregunta){
             mitextarea.name='pregunta'+preg;
 
             miimgborrar=document.getElementById('imgpregborrar'+j);
-            miimgborrar.setAttribute("onclick","EliminarPregunta_TextoAudio_AM(tabpregunta"+preg+","+preg+")");
+            miimgborrar.setAttribute("onclick","EliminarPregunta_TextoAudio_AM("+id_ejercicio+",tabpregunta"+preg+","+preg+")");
             miimgborrar.id='imgpregborrar'+preg;
 
             miimgañadir=document.getElementById('imgpreganadir'+j);
-            miimgañadir.setAttribute("onclick","anadirRespuesta_AudioTexto_AM(respuestas"+preg+","+preg+")");
+            miimgañadir.setAttribute("onclick","anadirRespuesta_AudioTexto_AM("+id_ejercicio+",respuestas"+preg+","+preg+")");
             miimgañadir.id='imgpreganadir'+preg;
 
             //Obtengo el numero de respuestas de la pregunta
@@ -3373,6 +3376,8 @@ function EliminarPregunta_TextoAudio_AM(id_ejercicio,Pregunta,numpregunta){
                 var embed = document.getElementById("mpl"+k+"_"+j);
                 embed.setAttribute("id","mpl"+k+"_"+preg);
                 embed.setAttribute("flashvars","file=./mediaplayer/audios/audio_"+id_ejercicio+"_"+preg+"_"+k+".mp3&height=20&width=320");
+                //var trcorregir = document.getElementById("tdcorregir"+k+"_"+j);
+                //trcorregir.setAttribute("id","tdcorregir"+k+"_"+preg);
                 //el hidden de correcta
                 /*hiddencorrecta=document.getElementById('valorcorrecta'+k+"_"+j);
                 hiddencorrecta.id='valorcorrecta'+k+"_"+preg;
@@ -3385,6 +3390,9 @@ function EliminarPregunta_TextoAudio_AM(id_ejercicio,Pregunta,numpregunta){
             }
 
             alert("fin hijos");
+            
+            
+            
             //Cambio el número de respuestas
             minumeroresp=document.getElementById('num_res_preg'+j);
             minumeroresp.id='num_res_preg'+preg;
@@ -3392,6 +3400,15 @@ function EliminarPregunta_TextoAudio_AM(id_ejercicio,Pregunta,numpregunta){
 
             preg=preg+1;
         }
+        //Llamar a un archivo php para cambiar los archivos de audio del disco de la misma forma que se cambian en esta funcion
+            $.ajax({
+                type: "POST",
+                url: "borraaudio_pregunta.php?id_ejercicio=" + id_ejercicio + "&numpreg=" + numpregunta + "&totalPregs=" + (preg),
+                cache : false,
+                success : function(response) {
+                    alert("Terminada con exito la llamada a borraaudio_pregunta.php");
+                }
+            });
         
     }else{
         alert("El ejercicio debe tener al menos una pregunta");
@@ -3399,60 +3416,9 @@ function EliminarPregunta_TextoAudio_AM(id_ejercicio,Pregunta,numpregunta){
 }
 
 
-
+//Boton de Eliminar Respuesta a los ejercicios Texto-Video en Asociacion Multiple
 function EliminarRespuesta_TextoVideo_AM(numresp,numpreg){
-    /*
-     * padre=respuesta.parentNode;
-    padre.removeChild(respuesta.nextSibling);
-    padre.removeChild(respuesta);
-   
-    var k=padre.childNodes.length;
-     
-    j=0;
     
-    alert("Numero de hijos: " + k);
-   
-    for(i=0;i<k;i=i+2){
-        j=j+1;
-        alert('Iteracion bucle: ' + i);
-        alert("J: " + j);
-        padre.childNodes[i].setAttribute("id",'tablarespuesta'+j+'_'+numpreg);
-        if (i==k-2) {
-            alert("Entra en i==k-1");
-            var tabla = document.getElementById("tablarespuesta"+j+"_"+numpreg);
-            tabla.style.cssFloat="none";
-        }
-        else if (j%2!=0) {
-            alert("Entra en j%2!=0");
-            var tabla = document.getElementById("tablarespuesta"+j+"_"+numpreg);
-            tabla.style.cssFloat="left";
-        }
-        
-        //alert(   padre.childNodes[i].childNodes[0].childNodes[0]);
-        padre.childNodes[i].childNodes[0].childNodes[0].setAttribute("id",'trrespuesta'+j+'_'+numpreg);
-        //padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[0].setAttribute("name",'crespuesta'+j+'_'+numpreg);
-        //alert( padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[0]);
-        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[0].setAttribute("id",'respuesta'+j+'_'+numpreg);
-        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[0].setAttribute("name",'respuesta'+j+'_'+numpreg);
-        //alert("3: " + padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3]);
-        //alert("3 hijos: " + padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes);
-        //alert("3 0: " + padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes[0]);
-        
-        
-        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes[0].setAttribute("id",'eliminarrespuesta'+j+'_'+numpreg);
-        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes[0].setAttribute("onclick",'EliminarRespuesta_IE(tablarespuesta'+j+'_'+numpreg+','+numpreg+")");
-//        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes[1].setAttribute("id",'correcta'+j+'_'+numpreg);
-//        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes[1].setAttribute("onclick",'InvertirRespuesta(correcta'+j+'_'+numpreg+','+numpreg+")");
-//        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes[2].setAttribute("id",'valorcorrecta'+j+'_'+numpreg);
-//        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes[2].setAttribute("name",'valorcorrecta'+j+'_'+numpreg);
-            
-        
-    }
-    //Tengo una respuesta menos
-    numerorespuestas = document.getElementById('num_res_preg'+numpreg);
-       
-    numerorespuestas.value=parseInt(numerorespuestas.value)-1;
-     */
     
     
     var totalRespuestas = parseInt(document.getElementById("num_res_preg"+numpreg).value);
@@ -3493,6 +3459,8 @@ function EliminarRespuesta_TextoVideo_AM(numresp,numpreg){
         img.setAttribute("id","eliminarrespuesta"+(k-1)+"_"+numpreg);
         img.setAttribute("onclick","EliminarRespuesta_TextoVideo_AM("+(k-1)+","+numpreg+")");
         alert("Img: " + img);
+        //var tdcorregir = document.getElementById("tdcorregir"+k+"_"+numpreg);
+        //tdcorregir.setAttribute("id","tdcorregir"+(k-1)+"_"+numpreg);
     }
     
     var hidden_resp = document.getElementById("num_res_preg"+numpreg);
@@ -3501,6 +3469,7 @@ function EliminarRespuesta_TextoVideo_AM(numresp,numpreg){
 }
 
 
+//Boton para añadir mas preguntas a los ejercicios de Texto-Video en Asociacion Multiple
 function botonMasPreguntas_TextoVideo_AM(id_ejercicio) {
     alert("añadiendo pregunta");
 
@@ -3545,7 +3514,7 @@ function botonMasPreguntas_TextoVideo_AM(id_ejercicio) {
     imgborrar.alt="eliminar respuesta";
     imgborrar.style.height="10px";
     imgborrar.style.width="10px";
-    imgborrar.setAttribute('onclick',"EliminarPregunta_IE(tabpregunta"+numeropreguntas+","+numeropreguntas+")");
+    imgborrar.setAttribute('onclick',"EliminarPregunta_TextoVideo_AM(tabpregunta"+numeropreguntas+","+numeropreguntas+")");
     imgborrar.title="Eliminar Pregunta";
 
     //
@@ -3607,7 +3576,9 @@ function botonMasPreguntas_TextoVideo_AM(id_ejercicio) {
     alert("fin");
 }
 
+//Funcion que actualiza los objetos de video cuando se cambia los textarea de los videos
 function actualizar_TextoVideo_AM(numresp,numpreg) {
+    //Obtenemos las etiquetas a modificar (param y embed) donde se encuentra el origen del video de Youtube
     alert("Actualizando video: " + numresp + "," + numpreg);
     var param = document.getElementById("movie"+numresp+"_"+numpreg);
     alert("Param: " + param);
@@ -3618,6 +3589,11 @@ function actualizar_TextoVideo_AM(numresp,numpreg) {
     var texto = textarea.value;
     alert("Texto: " + texto);
     
+    //Obtenemos la etiqueta object
+    var obj = param.parentNode;
+    var padre = obj.parentNode;
+    
+    
     //Con expresiones regulares obtener el codigo del video de youtube
     var regexp = /^http\:\/\/www\.youtube\.com\/watch\?v\=((\w|_|-))*$/;
     if (regexp.test(texto)) {
@@ -3626,8 +3602,288 @@ function actualizar_TextoVideo_AM(numresp,numpreg) {
         alert("Codigo: " + codigo);
         param.setAttribute("value","http://www.youtube.com/v/"+codigo+"?hl=es_ES&version=3");
         embed.setAttribute("src","http://www.youtube.com/v/"+codigo+"?hl=es_ES&version=3");
+        //Guardamos todos el codigo de object, incluyendo los hijos (param y embed)
+        var htmlbkp = obj.innerHTML;
+        
+        //Eliminamos y volvemos a insertar para que se vuelva a cargar el video.
+        //Esto se debe a que no se carga el video si solo se modifica los parametros, hay que eliminar el nodo y volver a insertarlo.
+        
+        padre.removeChild(obj);
+        obj = document.createElement("object");
+        obj.innerHTML=htmlbkp;
+        padre.insertBefore(obj,padre.childNodes[0]);        
     }
     else {
         alert("No cumple la expresion regular");
     }
+}
+
+//Boton para eliminar pregunta de los ejercicios Texto-Video en Asociacion Multiple
+function EliminarPregunta_TextoVideo_AM (Pregunta,numpregunta){
+
+    divnumpreguntas = document.getElementById('num_preg');
+    numeropreguntas=divnumpreguntas.value;
+
+    //Compruebo que al menos hay una pregunta
+
+    if(parseInt(numeropreguntas)>1){
+        padre=Pregunta.parentNode;
+        padre.removeChild(Pregunta.nextSibling);
+        padre.removeChild(Pregunta);
+
+        //le quieto uno al número de preguntas
+
+
+        numeropreguntas= parseInt(numeropreguntas) - 1;
+        divnumpreguntas.value=numeropreguntas;
+
+        siguientepreg= parseInt(numpregunta)+1;
+        //Actualizo el resto de pregunta
+        alert(siguientepreg);
+        preg=parseInt(numpregunta);
+        alert("preg"+preg);
+        for(j=siguientepreg;j<=numeropreguntas+1;j++){
+            alert('tabpregunta'+j);
+            mitabla=document.getElementById('tabpregunta'+j);
+            mitabla.id='tabpregunta'+preg;
+
+            mitextarea=document.getElementById('pregunta'+j);
+            mitextarea.id='pregunta'+preg;
+            mitextarea.name='pregunta'+preg;
+
+            miimgborrar=document.getElementById('imgpregborrar'+j);
+            miimgborrar.setAttribute("onclick","EliminarPregunta_TextoVideo_AM(tabpregunta"+preg+","+preg+")");
+            miimgborrar.id='imgpregborrar'+preg;
+
+            miimgañadir=document.getElementById('imgpreganadir'+j);
+            miimgañadir.setAttribute("onclick","anadirRespuesta_TextoVideo_AM(respuestas"+preg+","+preg+")");
+            miimgañadir.id='imgpreganadir'+preg;
+
+            //Obtengo el numero de respuestas de la pregunta
+
+            minumeroresp=document.getElementById('num_res_preg'+j);
+            numresp=minumeroresp.value;
+            //Actualizo las respuestas
+            divrespuestas=document.getElementById('respuestas'+j);
+            divrespuestas.id='respuestas'+preg;
+            for(k=1;k<=parseInt(numresp);k++){
+
+                //Las tables
+                alert("llega");
+                tablarespuestas=document.getElementById("tablarespuesta"+k+"_"+j);
+                tablarespuestas.id="tablarespuesta"+k+"_"+preg;
+                alert("ki tba");
+                //los tr de las tables
+                lostr=document.getElementById('trrespuesta'+k+"_"+j);
+                lostr.id='trrespuesta'+k+"_"+preg;
+                alert("siiiiii");
+
+                /*losinput=document.getElementById('id_crespuesta'+k+"_"+j);
+                losinput.id='id_crespuesta'+k+"_"+preg;
+                losinput.name='crespuesta'+k+"_"+preg;
+                losinput.setAttribute("onclick","BotonRadio(crespuesta"+k+"_"+preg+")");*/
+
+
+                larespuesta=document.getElementById('respuesta'+k+"_"+j);
+                larespuesta.id='respuesta'+k+"_"+preg;
+                larespuesta.name='respuesta'+k+"_"+preg;
+                larespuesta.setAttribute("onchange","actualizar_TextoVideo_AM("+k+","+preg+")");
+
+                //la imagen de eliminar
+
+                laimageneliminar=document.getElementById('eliminarrespuesta'+k+"_"+j);
+                laimageneliminar.id='eliminarrespuesta'+k+"_"+preg;
+                laimageneliminar.setAttribute("onclick","EliminarRespuesta_TextoVideo_AM("+k+","+preg+")");
+
+                //el hidden de correcta
+                /*hiddencorrecta=document.getElementById('valorcorrecta'+k+"_"+j);
+                hiddencorrecta.id='valorcorrecta'+k+"_"+preg;
+                hiddencorrecta.name='valorcorrecta'+k+"_"+preg;
+                //La imagen de correcta
+                laimagencorrecta=document.getElementById('correcta'+k+"_"+j);
+                laimagencorrecta.id='correcta'+k+"_"+preg;
+                laimagencorrecta.setAttribute("onclick","InvertirRespuesta(correcta"+k+"_"+preg+","+hiddencorrecta.value+")");*/
+                
+                //Cambiar los param y embed
+                var param = document.getElementById("movie"+k+"_"+j);
+                param.setAttribute("id","movie"+k+"_"+preg);
+                param.setAttribute("name","movie"+k+"_"+preg);
+                var embed = document.getElementById("embed"+k+"_"+j);
+                embed.setAttribute("id","embed"+k+"_"+preg);
+                embed.setAttribute("name","embed"+k+"_"+preg);
+
+            }
+
+            alert("fin hijos");
+            //Cambio el número de respuestas
+            minumeroresp=document.getElementById('num_res_preg'+j);
+            minumeroresp.id='num_res_preg'+preg;
+            minumeroresp.name='num_res_preg'+preg;
+
+            preg=preg+1;
+        }
+        
+    }else{
+        alert("El ejercicio debe tener al menos una pregunta");
+    }
+}
+
+
+/**
+ * *****************  FUNCIONES TEXTO - IMAGEN ******************************
+ */
+//Boton para añadir respuestas en ejercicios Texto-Imagen en Asociacion Multiple
+function anadirRespuesta_TextoFoto_AM (id_ejercicio,respuesta,numpreg){
+    
+    var table = document.createElement("table");
+    var tr = document.createElement("tr");
+         
+            
+      
+    //-1 por el text del div
+    var numresp=(respuesta.childNodes.length/2) +1;
+          
+    table.width="50%";
+    table.id="tablarespuesta"+numresp+"_"+numpreg;
+    if (numresp%2==0) {
+        var tablaAnterior = document.getElementById("tablarespuesta"+(numresp-1)+"_"+numpreg);
+        tablaAnterior.style.cssFloat="left";
+    }
+        
+    var tbody = document.createElement("tbody");
+          
+            
+           
+    tr.id="trrespuesta"+numresp+"_"+numpreg;
+    var td = document.createElement("td");
+    td.style.width="80%";
+    
+    
+    var div1 = createElement("div",{id:"capa1"});
+    td.appendChild(div1);
+    
+    var a = createElement("a",{href:"javascript:cargaImagenes('foto_"+id_ejercicio+"_"+numpreg+"_"+numresp+".jpg',"+numpreg+",'primera',"+numresp+")",
+                                id: "upload"+numresp+"_"+numpreg, 
+                                class: "up"});
+    a.appendChild(document.createTextNode("Cambiar Foto"));
+    div1.appendChild(a);
+    
+    var div2 = createElement("div",{id:"capa2"});
+    td.appendChild(div2);
+    
+    var img1 = createElement("img",{name:"respuesta"+numresp+"_"+numpreg,
+                                    id:"respuesta"+numresp+"_"+numpreg,
+                                    src:"./imagenes/foto_"+id_ejercicio+"_"+numpreg+"_"+numresp+".jpg",
+                                    style:"height: 192px; width: 401px;"});
+    div2.appendChild(img1);
+    
+    
+    
+            
+    var td2 = document.createElement("td");
+    td2.style.width="5%";
+         
+         
+    var img= document.createElement("img");
+    img.id="eliminarrespuesta"+numresp+"_"+numpreg;
+    img.src="./imagenes/delete.gif";
+    img.style.height="10px";
+    img.style.width="10px";
+    img.setAttribute("onclick","EliminarRespuesta_TextoFoto_AM(tablarespuesta"+numresp+"_"+numpreg+","+numpreg+","+numresp+","+id_ejercicio+")");
+    img.title="Eliminar Respuesta";
+            
+            
+    /*var img2= document.createElement("img");
+    img2.src="./imagenes/incorrecto.png";
+    img2.style.height="15px";
+    img2.style.width="15x";
+    img2.id="correcta"+numresp+"_"+numpreg;
+    img2.setAttribute("onclick","InvertirRespuesta(correcta"+numresp+"_"+numpreg+",0)");
+    img2.title="Cambiar a Correcta";
+    var hidden= document.createElement("input");
+    hidden.type="hidden";
+    hidden.value="0";
+    hidden.id="valorcorrecta"+numresp+"_"+numpreg;
+    hidden.name="valorcorrecta"+numresp+"_"+numpreg;
+    //$divpregunta.='<input type="hidden" value="0"  id="valorcorrecta'.$q.'_'.$i.'" name="valorcorrecta'.$q.'_'.$i.'" />';*/
+    td2.appendChild(img);
+    /*td2.appendChild(img2);
+    td2.appendChild(hidden);
+    td.appendChild(radioInput);*/
+    //td.appendChild(div);
+    tr.appendChild(document.createTextNode(""));
+    tr.appendChild(td);
+    tr.appendChild(document.createTextNode(""));
+    tr.appendChild(td2);
+    tbody.appendChild(tr);
+    table.appendChild(tbody);
+            
+    respuesta.appendChild(table);
+    respuesta.appendChild(document.createTextNode(""));
+     
+    //Sumo 1 al número de respuesas
+    numerorespuestas = document.getElementById('num_res_preg'+numpreg);
+       
+    numerorespuestas.value=parseInt(numerorespuestas.value)+1;
+ 
+// respuesta.parentNode.addChild(respuesta);
+}
+
+//Funcion para cargar imagenes en los ejercicios Texto-Imagen de Asociacion Multiple
+function cargaImagenes(elnombre,i,j,numresp){
+    
+    alert("AAAAAAAA"+i);
+    var text='upload'+numresp+"_"+i;
+    alert("id: " + text);
+    var button = document.getElementById(text);
+    alert("el nombre  "+elnombre);
+    alert("Button: " + button);
+    if(j=='primera'){
+        button.childNodes[0].nodeValue='Pulse aqui';
+    }
+    // var elnombre="aaa";
+    new AjaxUpload(button,{
+        action: 'procesa.php?nombre='+elnombre,
+        name: 'image',
+        autoSubmit: true,
+        onSubmit : function(file, ext){
+            alert("Cargandoooo");
+            // cambiar el texto del boton cuando se selecicione la imagen
+            button.childNodes[0].nodeValue='Subiendo';
+            // desabilitar el boton
+            this.disable();
+
+            interval = window.setInterval(function(){
+                var text = button.childNodes[0].nodeValue;
+                if (text.length < 11){
+                    button.childNodes[0].nodeValue=text + '.';
+                } else {
+                    button.childNodes[0].nodeValue='Subiendo';
+                }
+            }, 200);
+        },
+        onComplete: function(file, response){
+            alert("completado");
+            button.childNodes[0].nodeValue='Cambiar Foto';
+
+            window.clearInterval(interval);
+
+            // Habilitar boton otra vez
+            this.enable();
+            alert("recargando");
+                 
+            respuesta = document.getElementById('respuesta'+numresp+"_"+i);
+              
+            respuesta.src="./imagenes/"+elnombre;
+            respuesta.removeAttribute("src");
+            respuesta.setAttribute("src","./imagenes/"+elnombre);
+            alert('Fin cambio imagen');
+               
+        }
+    //Tengo que cambiar la foto
+    });
+
+        
+
+        
 }

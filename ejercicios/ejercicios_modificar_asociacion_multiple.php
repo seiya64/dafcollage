@@ -238,12 +238,15 @@ for ($i = 0; $i < $numeropreguntas; $i++) {
             } else {
 
                 if ($tipo_respuesta == 3) { //ES UN VIDEO
-                    $resp = YoutubeVideoHelper::getVideoId(required_param('archivovideo' . $j, PARAM_TEXT));
+                    $num_resp = required_param('num_res_preg'.$j,PARAM_INT);
+                    for ($k=1; $k<=$num_resp; $k++) {
+                        $resp = YoutubeVideoHelper::getVideoId(required_param('respuesta'.$k.'_'.$j, PARAM_TEXT));
 
-                    echo "archivo video" . $resp;
+                        echo "archivo video" . $resp;
 
-                    $ejercicio_texto_video = new Ejercicios_videos_asociados(NULL, $id_ejercicio, $id_pregunta, $resp);
-                    $ejercicio_texto_video->insertar();
+                        $ejercicio_texto_video = new Ejercicios_videos_asociados(NULL, $id_ejercicio, $id_pregunta, $resp);
+                        $ejercicio_texto_video->insertar();
+                    }
                 } else {
 
                     if ($tipo_respuesta == 4) { //eS UNA IMAGEN
