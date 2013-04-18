@@ -122,7 +122,7 @@ if ($tipo_origen == 1) { //la pregunta es un texto
                 if ($tipo_respuesta == 4) {
                     echo "actualizando imagen";
                     //obtengo los id de las preguntas del ejercicio
-                    $id_preguntas = array();
+                    //$id_preguntas = array();
 
                     $mis_preguntas = new Ejercicios_texto_texto_preg();
 
@@ -142,7 +142,7 @@ if ($tipo_origen == 1) { //la pregunta es un texto
 } else {
     if ($tipo_origen == 2) { //Pregunta es un Audio
         //borro las preguntas
-        $id_preguntas = array();
+        //$id_preguntas = array();
 
         $mis_preguntas = new Ejercicios_texto_texto_preg();
 
@@ -153,16 +153,22 @@ if ($tipo_origen == 1) { //la pregunta es un texto
             delete_records('ejercicios_audios_asociados', 'id_ejercicio', $id_ejercicio);
         }
 
-        if ($tipo_respuesta == 1) { //La respuesta es un texto
+        if ($tipo_respuesta == 1) { //Borrar las preguntas
             //borro las respuestas
             delete_records('ejercicios_texto_texto_preg', 'id_ejercicio', $id_ejercicio);
         }
+        
+        //Borrar las respuestas del texto
+        foreach ($id_preguntas as $pregunta) {
+            delete_records('ejercicios_texto_texto_resp','id_pregunta',$pregunta->get('id'));
+        }
+        
     } else {
 
         if ($tipo_origen == 3) {//video
             echo "actualizando video";
             //obtengo los id de las preguntas del ejercicio
-            $id_preguntas = array();
+            //$id_preguntas = array();
 
             $mis_preguntas = new Ejercicios_texto_texto_preg();
 
@@ -174,9 +180,14 @@ if ($tipo_origen == 1) { //la pregunta es un texto
             }
             
               if ($tipo_respuesta == 1) { //La respuesta es un texto
-            //borro las respuestas
-            delete_records('ejercicios_texto_texto_preg', 'id_ejercicio', $id_ejercicio);
-        }
+                    //borro las preguntas
+                    delete_records('ejercicios_texto_texto_preg', 'id_ejercicio', $id_ejercicio);
+              }
+              
+           //Borrar las respuestas del texto
+            foreach ($id_preguntas as $pregunta) {
+                delete_records('ejercicios_texto_texto_resp','id_pregunta',$pregunta->get('id'));
+            }
         }
         else if ($tipo_origen==4) //La pregunta es una imagen
         {
@@ -184,7 +195,7 @@ if ($tipo_origen == 1) { //la pregunta es un texto
                     echo "actualizando imagen";
                     
                     //obtengo los id de las preguntas del ejercicio
-                    $id_preguntas = array();
+                    //$id_preguntas = array();
 
                     $mis_preguntas = new Ejercicios_texto_texto_preg();
 
@@ -250,8 +261,11 @@ for ($i = 0; $i < $numeropreguntas; $i++) {
                 } else {
 
                     if ($tipo_respuesta == 4) { //eS UNA IMAGEN
-                        $ejercicio_texto_img = new Ejercicios_imagenes_asociadas($NULL, $id_ejercicio, $id_pregunta, 'foto_' . $id_ejercicio . "_" . $j . ".jpg");
-                        $ejercicio_texto_img->insertar();
+                        $num_resp = required_param('num_res_preg'.$j,PARAM_INT);
+                        for ($k=1; $k<=$num_resp; $k++) {
+                            $ejercicio_texto_img = new Ejercicios_imagenes_asociadas($NULL, $id_ejercicio, $id_pregunta, 'foto_' . $id_ejercicio . "_" . $j . "_" . $k . ".jpg");
+                            $ejercicio_texto_img->insertar();
+                        }
                     }
                 }
             }
@@ -259,28 +273,46 @@ for ($i = 0; $i < $numeropreguntas; $i++) {
     } else {
         if ($tipo_origen == 2) { //la pregunta es un audio
             //     echo "entra";
-            $preg = required_param('pregunta' . $j, PARAM_TEXT);
+            //$preg = required_param('pregunta' . $j, PARAM_TEXT);
+            $preg = "audio_" . $id_ejercicio . "_" . $j . ".mp3";
             $ejercicio_texto_preg = new Ejercicios_texto_texto_preg(NULL, $id_ejercicio, $preg);
             $id_pregunta = $ejercicio_texto_preg->insertar();
+            $ejercicio_texto_audio = new Ejercicios_audios_asociados(NULL, $id_ejercicio, $id_pregunta, $preg);
+            $ejercicio_texto_audio->insertar();
 
             if ($tipo_respuesta == 1) { //la respuesta es un texto
                 //            echo "entra 2";
-                $ejercicio_texto_audio = new Ejercicios_audios_asociados($NULL, $id_ejercicio, $id_pregunta, 'audio_' . $id_ejercicio . "_" . $j . ".mp3");
-                $ejercicio_texto_audio->insertar();
+                $num_resp = required_param('num_res_preg'.$j,PARAM_INT);
+                for ($k=1; $k<=$num_resp; $k++) {
+                    $resp_textarea = required_param("respuesta".$k."_".$j,PARAM_TEXT);
+                    $resp_txt = new Ejercicios_texto_texto_resp(NULL, $id_pregunta, $resp_textarea, 0);
+                    $resp_txt->insertar();
+                }
             }
         } else {
 
             if ($tipo_origen == 3) { //ES UN VIDEO
                 if (YoutubeVideoHelper::getVideoId(required_param('archivovideo' . $j, PARAM_TEXT)) != null){
-                    $preg = required_param('pregunta' . $j, PARAM_TEXT);
+                    //$preg = required_param('pregunta' . $j, PARAM_TEXT);
+                    $preg = YoutubeVideoHelper::getVideoId(required_param('archivovideo' . $j, PARAM_TEXT));
                     $ejercicio_texto_preg = new Ejercicios_texto_texto_preg(NULL, $id_ejercicio, $preg);
                     $id_pregunta = $ejercicio_texto_preg->insertar();
-
-                    $resp = YoutubeVideoHelper::getVideoId(required_param('archivovideo' . $j, PARAM_TEXT));
-                    echo "archivo video" . $resp;
-
-                    $ejercicio_texto_video = new Ejercicios_videos_asociados(NULL, $id_ejercicio, $id_pregunta, $resp);
+                    $ejercicio_texto_video = new Ejercicios_videos_asociados(NULL, $id_ejercicio, $id_pregunta, $preg);
                     $ejercicio_texto_video->insertar();
+
+                    //$resp = YoutubeVideoHelper::getVideoId(required_param('archivovideo' . $j, PARAM_TEXT));
+                    //echo "archivo video" . $resp;
+                    
+                    if ($tipo_respuesta == 1) { //La respuesta es un texto
+                        $num_resp = required_param('num_res_preg'.$j,PARAM_INT);
+                        for ($k=1; $k<=$num_resp; $k++) {
+                            $resp_textarea = required_param("respuesta".$k."_".$j,PARAM_TEXT);
+                            $resp_txt = new Ejercicios_texto_texto_resp(NULL, $id_pregunta, $resp_textarea, 0);
+                            $resp_txt->insertar();
+                        }
+                    }
+
+                    
                     echo "insertado";
                 }
             }
