@@ -894,14 +894,14 @@ class mod_vocabulario_ver_form extends moodleform {
                     
                 
                 $fila .= '<td> ' . $cosa->pal . ' </td>';
-                $fila .= '<td> ' . $cosa->campo . ' </td>';
-                $fila .= '<td> ' . $cosa->gramatica . ' </td>';
-                $fila .= '<td> ' . $cosa->intencion;
+                $fila .= '<td> ' . $cosa->campo . '</td>';
+                $fila .= '<td><a href="./view.php?id='. $this->id_tocho.'&opcion=5'.'&grid='.$cosa->gramaticaid.'">' . $cosa->gramatica . '</a> </td>';
+                $fila .= '<td><a href="./view.php?id='. $this->id_tocho.'&opcion=7&icid='.$cosa->intencionid.'">'. $cosa->intencion.'</a>';
                 if($superpadre!=-1){
                     $fila .= '</br> ('.$superpadre.')';
                 }
                 $fila .=' </td>';
-                $fila .= '<td> ' . $cosa->tipo . ' </td>';
+                $fila .= '<td> <a href="./view.php?id='. $this->id_tocho.'&opcion=9&ttid='.$cosa->tiptexid.'">'. $cosa->tipo . ' </a></td>';
                          //modificado o quitado por mi fina (cambiado editar por modificar)
 
              //   $acciones = '<td> <a href="./view.php?id=' . $this->id_tocho . '&opcion=4&viene='.$viene.'&act=1&id_mp=' . $cosa->mpid . '">[' . get_string('modificar', 'vocabulario') . ']</a></td>';
