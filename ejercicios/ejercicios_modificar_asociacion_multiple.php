@@ -206,6 +206,11 @@ if ($tipo_origen == 1) { //la pregunta es un texto
                         delete_records('ejercicios_imagenes_asociadas', 'id_ejercicio', $id_ejercicio);
                     }
                     delete_records('ejercicios_texto_texto_preg', 'id_ejercicio', $id_ejercicio);
+                    
+                    //Borrar las respuestas del texto
+                    foreach ($id_preguntas as $pregunta) {
+                        delete_records('ejercicios_texto_texto_resp','id_pregunta',$pregunta->get('id'));
+                    }
                     echo 'Borradas imagenes';
                 }
         }
@@ -321,12 +326,19 @@ for ($i = 0; $i < $numeropreguntas; $i++) {
                 
                     if ($tipo_respuesta == 1) { //La respuesta es un texto
                         
-                         $preg = required_param('pregunta' . $j, PARAM_TEXT);
+                         //$preg = required_param('pregunta' . $j, PARAM_TEXT);
+                        $preg = "foto_" . $id_ejercicio . "_" . $j . ".jpg";
                         $ejercicio_texto_preg = new Ejercicios_texto_texto_preg(NULL, $id_ejercicio, $preg);
-                        $id_pregunta = $ejercicio_texto_preg->insertar();
-                    
-                        $ejercicio_texto_img = new Ejercicios_imagenes_asociadas($NULL, $id_ejercicio, $id_pregunta, 'foto_' . $id_ejercicio . "_" . $j . ".jpg");
+                        $id_pregunta = $ejercicio_texto_preg->insertar();                    
+                        $ejercicio_texto_img = new Ejercicios_imagenes_asociadas($NULL, $id_ejercicio, $id_pregunta, $preg);
                         $ejercicio_texto_img->insertar();
+                        
+                        $num_resp = required_param('num_res_preg'.$j,PARAM_INT);
+                        for ($k=1; $k<=$num_resp; $k++) {
+                            $resp_textarea = required_param("respuesta".$k."_".$j,PARAM_TEXT);
+                            $resp_txt = new Ejercicios_texto_texto_resp(NULL, $id_pregunta, $resp_textarea, 0);
+                            $resp_txt->insertar();
+                        }
                     }
             }
         }
