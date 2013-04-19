@@ -12,8 +12,8 @@
   Ruth Burbat
 
   Source code:
-  Francisco Javier Rodr’guez L—pez (seiyadesagitario@gmail.com)
-  Sime—n Ruiz Romero (simeonruiz@gmail.com)
+  Francisco Javier Rodrï¿½guez Lï¿½pez (seiyadesagitario@gmail.com)
+  Simeï¿½n Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto(finamolinasoto@gmail.com)
 
   Original idea:
@@ -21,13 +21,13 @@
 
   Content design:
   Ruth Burbat
-  AInmaculada Almahano GŸeto
+  AInmaculada Almahano Gï¿½eto
   Andrea Bies
-  Julia Mšller Runge
-  Blanca Rodr’guez G—mez
-  Antonio Salmer—n Matilla
-  Mar’a JosŽ Varela Salinas
-  Karin Vilar S‡nchez
+  Julia Mï¿½ller Runge
+  Blanca Rodrï¿½guez Gï¿½mez
+  Antonio Salmerï¿½n Matilla
+  Marï¿½a Josï¿½ Varela Salinas
+  Karin Vilar Sï¿½nchez
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -304,7 +304,7 @@ function vocabulario_view($id, $opcion = 0, $id_mp = null,$palabra="",$viene=0) 
         case 14: //imprimir apuntes en pdf
             $mform = new mod_vocabulario_pdf_form('pdf.php?id_tocho=' . $id);
             break;
-        case 15: //a–adir gramatica
+        case 15: //aï¿½adir gramatica
             $mform = new mod_vocabulario_aniadir_gr_form('guardar_gr_desc.php?id_tocho=' . $id);
             break;
         case 16: // colaboradores
@@ -348,7 +348,7 @@ function vocabulario_todas_palabras($usuarioid, $cl = null, $gram = null, $inten
         $sql .= 'SELECT * FROM (';
     }
    
-    $sql .= 'SELECT @a:=@a+1, todas.pal, cl.campo, gr.gramatica, ic.intencion, tt.tipo, todas.mpid, todas.icid ';
+    $sql .= 'SELECT @a:=@a+1, todas.pal, cl.campo, gr.gramatica, ic.intencion, tt.tipo, todas.mpid, todas.icid,gr.id gramaticaid,ic.id intencionid,tt.id tiptexid ';
     $sql .= 'FROM (';
     $sql .= '(SELECT  mp.id mpid,`sustantivoid` id,`palabra` pal,`campoid` clid,`gramaticaid` grid,`intencionid` icid,`tipologiaid` ttid ';
     $sql .= 'FROM ';
