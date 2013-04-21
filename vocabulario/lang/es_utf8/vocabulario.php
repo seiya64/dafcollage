@@ -101,6 +101,9 @@ $string['adotr'] = 'Añadir otra';
 $string['adgr'] = 'Añadir descripción';
 $string['error_sus'] = 'No has escrito ninguna palabra para guardarla';
 $string['ver'] = 'Buscar';
+$string['verintenciones'] = 'Buscar Intenciones';
+$string['buscintenciones']='Mittel: ';
+$string['botbuscintenciones']='Buscar';
 $string['guardar'] = 'Mis palabras';
 $string['modificar'] = 'Modificar';
 $string['eliminar'] = 'Eliminar';
@@ -309,4 +312,6 @@ $string['preposiciones'] = 'Präpositionen';
 $string['prafix'] = 'Präfix';
 $string['suffix'] = 'Suffix';
 $string['bedeutung'] = 'Bedeutung';
+
+$string['intencioncomunicativa']='Intención Comunicativa';
 ?>
