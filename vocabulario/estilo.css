@@ -84,6 +84,14 @@ guardar palabras por columnas
 .menuitem {opacity:0.8;}
 .menuitem:hover {opacity:1;}
 .menuitem{ clear:none;  width:30%; }
+.submenuitemizq{
+    float:left;
+    display:inline-block;
+}
+.submenuitemdcha{
+    float:right;
+    display:inline-block;
+}
 .left{ float:left; }
 .center{ margin-right:auto; margin-left:auto;}
 .right{ float:right; }
@@ -96,4 +104,20 @@ guardar palabras por columnas
 float: right;
 color: #EEE;
 font-size: 0.9em;
+}
+
+.buscador{
+    margin-left:300px;
+}
+
+.mimittel{
+    
+    text-align: center;
+    width: 100px;
+}
+
+.mimittelintencion{
+    
+    text-align: center;
+    width: 400px;
 }
