@@ -310,6 +310,9 @@ function vocabulario_view($id, $opcion = 0, $id_mp = null,$palabra="",$viene=0) 
         case 16: // colaboradores
             $mform = new mod_vocabulario_colaboradores_form('listado.php?id_tocho=' . $id);
             break;
+        case 17: //Buscar por intenciones comunicativas
+            $mform = new mod_vocabulario_buscar_intenciones_form('buscarintenciones.php?id_tocho='.$id);
+            break;
     }
 
     $mform->display();
