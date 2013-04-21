@@ -109,10 +109,10 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
         //inclusion del css para que salga en columnitas
 
-        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
+        //$mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
 
         //inclusion del javascript para las funciones
-        $mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
+        //$mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
 
         //inclusion del css para que se vean en dos columnas
         //$mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');

@@ -112,6 +112,7 @@ function cargaContenido(miselect, otroselect, tipo) {
         xmlhttp.onreadystatechange = function() {
             if(xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 document.getElementById(otroselect).innerHTML = xmlhttp.responseText;
+                $('#'+otroselect+' select').chosen();
             }
         }
        
@@ -217,3 +218,9 @@ function la_tabla_nube() {
         
     });
 }
+
+$(document).ready(function(){
+    $('#content select').each(function(){
+        $(this).chosen();
+    });
+});
