@@ -570,35 +570,46 @@ class mod_vocabulario_opciones_form extends moodleform {
         //1,3
         $tabla_menu .='<div class="menuitem right" style="text-align:right"><a href="view.php?id=' . $id . '&opcion=3"><img src="./imagenes/campos_lexicos.png" id="id_campos_im" name="campos_im"/><div class="texto">' . get_string('admin_cl', 'vocabulario') . '</div></a></div>';
         //1,2
-        $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=2"><img src="./imagenes/ver_palabras.png" id="id_ver_im" name="ver_im"/><div class="texto">' . get_string('ver', 'vocabulario') . '</div></a></div></div>';
+         $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=2"><img src="./imagenes/ver_palabras.png" id="id_ver_im" name="ver_im"/><div class="texto">' . get_string('ver', 'vocabulario') . '</div></a></div></div>';
+ 
+        
+        //$tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=2"><img src="./imagenes/ver_palabras.png" id="id_ver_im" name="ver_im"/><div class="texto">' . get_string('ver', 'vocabulario') . '</div></a></div></div>';
 
         //2,1
         $tabla_menu .='<div class="menurow"><div class="menuitem left" style="text-align:left"><a href="view.php?id=' . $id . '&opcion=5"><img src="./imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im"/><div class="texto">' . get_string('admin_gr', 'vocabulario') . '</div></a></div>';
         //2,3
         $tabla_menu .='<div class="menuitem right" style="text-align:right"><a href="view.php?id=' . $id . '&opcion=15"><img src="./imagenes/nueva_gramatica.png" id="id_gram_im" name="gram_im"/><div class="texto">' . get_string('add_gram', 'vocabulario') . '</div></a></div>';
         //2,2
-        $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=13"><img src="./imagenes/listado.png" id="id_listado" name="listado"/><div class="texto">' . get_string('listado', 'vocabulario') . '</div></a></div></div>';
+       
+        $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=17"><img src="./imagenes/ver_palabras.png" id="id_ver_intenc" name="ver_intenc"/><div class="texto">' . get_string('verintenciones', 'vocabulario') . '</div></a></div></div>';
 
         //3,1
         $tabla_menu .='<div class="menurow"><div class="menuitem left" style="text-align:left"><a href="view.php?id=' . $id . '&opcion=7"><img src="./imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im"/><div class="texto">' . get_string('admin_ic', 'vocabulario') . '</div></a></div>';
         //3,3
         $tabla_menu .='<div class="menuitem right" style="text-align:right"><a href="view.php?id=' . $id . '&opcion=8"><img src="./imagenes/nueva_ic.png" id="id_nueva_ic" name="nueva_ic"/><div class="texto">' . get_string('nueva_ic', 'vocabulario') . '</div></a></div>';
         //3,2
-        $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=14"><img src="./imagenes/pdf.png" id="id_pdf" name="pdf"/><div class="texto">' . get_string('pdf', 'vocabulario') . '</div></a></div></div>';
+        
+        $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=13"><img src="./imagenes/listado.png" id="id_listado" name="listado"/><div class="texto">' . get_string('listado', 'vocabulario') . '</div></a></div></div>';
+
+        //$tabla_menu .='<div class="menuitem center submenuitemdcha"><a href="view.php?id=' . $id . '&opcion=13"><img src="./imagenes/listado.png" id="id_listado" name="listado"/><div class="texto">' . get_string('listado', 'vocabulario') . '</div></a></div></div>';
 
         //4,1
         $tabla_menu .='<div class="menurow"><div class="menuitem left" style="text-align:left"><a href="view.php?id=' . $id . '&opcion=9"><img src="./imagenes/tipologias_textuales.png" id="id_tt_im" name="tt_im"/><div class="texto">' . get_string('admin_tt', 'vocabulario') . '</div></a></div>';
         //4,3
         $tabla_menu .='<div class="menuitem right" style="text-align:right"><a href="view.php?id=' . $id . '&opcion=10"><img src="./imagenes/nueva_tt.png" id="id_nueva_tt_im" name="nueva_tt_im"/><div class="texto">' . get_string('nueva_tt', 'vocabulario') . '</div></a></div>';
         //4,2
-        $sufijotabla = get_sufijo_lenguaje_tabla();
-        $tabla_menu .='<div class="menuitem center"><a href="./ayudas/Ayudas_' . $sufijotabla . '.pdf"><img src="./imagenes/ayuda.png" id="id_ayuda" name="ayuda"/><div class="texto">' . get_string('ayuda', 'vocabulario') . '</div></a></div></div>';
+       
+       $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=14"><img src="./imagenes/pdf.png" id="id_pdf" name="pdf"/><div class="texto">' . get_string('pdf', 'vocabulario') . '</div></a></div></div>';
 
         //5,1
         $tabla_menu .='<div class="menurow"><div class="menuitem left" style="text-align:left"><a href="view.php?id=' . $id . '&opcion=11"><img src="./imagenes/estrategias_icon.png" id="id_ea_im" name="ea_im"/><div class="texto">' . get_string('admin_ea', 'vocabulario') . '</div></a></div>';
         //5,3
         $tabla_menu .='<div class="menuitem right" style="text-align:right"><a href="view.php?id=' . $id . '&opcion=12"><img src="./imagenes/nueva_ea.png" id="id_nueva_ea_im" name="nueva_ea_im"/><div class="texto">' . get_string('nueva_ea', 'vocabulario') . '</div></a></div>';
         //5,2
+        // 
+        $sufijotabla = get_sufijo_lenguaje_tabla();
+        $tabla_menu .='<div class="menuitem center"><a href="./ayudas/Ayudas_' . $sufijotabla . '.pdf"><img src="./imagenes/ayuda.png" id="id_ayuda" name="ayuda"/><div class="texto">' . get_string('ayuda', 'vocabulario') . '</div></a></div></div>';
+
      #  $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=16"><img src="./imagenes/colaboradores.png" id="id_colaboradores_im" name="colaboradores_im"/><div class="texto">' . get_string('colaboradores', 'vocabulario') . '</div></a></div></div>';
         $tabla_menu .='</div>';
         $tabla_menu .='</div>';
@@ -3670,4 +3681,81 @@ class mod_vocabulario_colaboradores_form extends moodleform {
     }
 }
 
+class mod_vocabulario_buscar_intenciones_form extends moodleform {
+    function definition(){
+        global $USER;
+        $mform = & $this->_form;
+        
+        $middle = optional_param('middle',"", PARAM_TEXT);
+        
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
+        
+        $mform->addElement('html', '<h1>' . get_string('verintenciones', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
+  
+        $attributes='size="20"';
+    
+        $mform->addElement('text', 'buscarpor', get_string('buscintenciones', 'vocabulario'), $attributes);
+       
+       
+         if ($middle != "") {
+            $intencion = new Vocabulario_mis_intenciones();
+            $misintenciones=$intencion->recuperar_middles($USER->id,$middle);
+             //tabla
+            $mform->addElement('html', '<p>');
+            $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter">');
+
+            //titulillos de la tabla
+            $titulillos = '<tr class="head">';
+            $titulillos .='<th>' . get_string('mittel', 'vocabulario') . '</th>';
+            $titulillos .='<th>' . get_string('wortklase', 'vocabulario') . '</th>';
+            $titulillos .='<th>' . get_string('beisp', 'vocabulario') . '</th>';
+            $titulillos .='<th>' . get_string('siehe', 'vocabulario') . '</th>';
+            $titulillos .='<th>' . get_string('intencioncomunicativa', 'vocabulario') . '</th>';
+            $titulillos .= '</tr>';
+            $mform->addElement('html', $titulillos);
+          
+            for($k=0;$k<count($misintenciones);$k++){
+            $descripcion_troceada = explode(__SEPARADORCAMPOS__, $misintenciones[$k]->descripcion);
+           
+            $totalfilas = ((count($descripcion_troceada)-1) / 4);
+           
+            $pintar = false;
+            if ($totalfilas == 0) {
+                $pintar = true;
+            }
+            $avance = 4;
+            $i = 1;
+            $intencion1=new Vocabulario_intenciones();
+            $intencion1->leer($misintenciones[$k]->intencionesid,$USER->id);
+          
+            for ($i = 1; $i < $totalfilas * $avance || $pintar; $i = $i + $avance) {
+                $titulillos = '<tr class="cell">';
+                $titulillos .= '<td class="mimittel">' . $descripcion_troceada[$i] .'</td>';
+                $titulillos .= '<td class="mimittel">'. $descripcion_troceada[$i + 1] .'</td>';
+                $titulillos .= '<td class="mimittel">' . $descripcion_troceada[$i + 2] . '</td>';
+                $titulillos .= '<td class="mimittel">'. $descripcion_troceada[$i + 3] . '</td>';
+                $titulillos .= '<td class="mimittelintencion">' . $intencion1->get('intencion') . '</td>';
+              
+                $titulillos .= '</tr>';
+
+//                $titulillos .= '<tr class="cell">'; 
+//                $titulillos .= '<td>BEISPIEL</td>';
+//                $titulillos .= '<td colspan=2><input type="text" id="id_beisp'.$i.'" name="beisp'.$i.'" value="' . $descripcion_troceada[$i+2] . '"></td>';
+//                $titulillos .= '</tr>';
+
+                $mform->addElement('html', $titulillos);
+                $pintar = false;
+            }
+            }
+            $mform->addElement('html', '</table>');
+        }
+        
+        $buttonarray = array();
+        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('botbuscintenciones', 'vocabulario'));
+        $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
+        $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
+      
+    }
+   
+}
 ?>
