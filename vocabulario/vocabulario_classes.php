@@ -1503,6 +1503,7 @@ class Vocabulario_mis_intenciones {
             $this->palabra_id = $gr->palabra_id;
         }
     }
+   
 
     function relacionadas($usuarioid, $intencionid) {
         $palabras = get_records_select('vocabulario_mis_intenciones', 'usuarioid=' . $usuarioid . ' and intencionesid=' . $intencionid);
@@ -1512,6 +1513,41 @@ class Vocabulario_mis_intenciones {
     function obtener_todas($usuarioid) {
         $ic = get_records_select('vocabulario_mis_intenciones', 'usuarioid=' . $usuarioid);
         return $ic;
+    }
+    
+     function recuperar_middles($usuarioid,$middle){
+        
+            $sql='SELECT * FROM mdl_vocabulario_mis_intenciones WHERE usuarioid=' . $usuarioid.' AND descripcion like "%'.$middle.'%"';
+            $gr = get_records_sql($sql);
+            $todos=array();
+          
+            foreach ($gr as $i) {
+                $todo = null;
+                $todo->usuarioid = $i->usuarioid;
+                $auxtodo = $i->descripcion;
+                $var=explode("\$FIELD\$",$auxtodo);
+                $descripcion="\$FIELD\$";
+               
+                for ($k=1;$k<count($var)-1;$k+=4) {
+                         
+                    if(strpos($var[$k],$middle)!== FALSE){
+                        for($j=$k;$j<$k+4;$j++){
+                        $descripcion.=$var[$j]."\$FIELD\$";
+                        }
+                    }
+                   
+                
+                }
+                $todo->descripcion=$descripcion;
+                $todo->intencionesid = $i->intencionesid;
+                $todo->id = $i->id;
+                $todo->tipo_palabra = $i->tipo_palabra;
+                $todo->palabra_id = $i->palabra_id;
+                $todos[]=$todo;
+            }
+          
+            return $todos;
+        
     }
 
 }
