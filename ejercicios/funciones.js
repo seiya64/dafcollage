@@ -23,6 +23,79 @@ function createElement(etiqueta,atributos) {
     return elm;
 }
 
+/**
+ * Funciones para trabajar con cookies
+ */
+var Cookies = {
+    /**
+     * Lee una cookie por su nombre
+     * @param {String} c_name Nombre de la cookie
+     * @returns Devuelve el valor de la cookie o null si no se encuentra
+     */
+  read: function(c_name) {
+        var c_value = document.cookie;
+        var c_start = c_value.indexOf(" " + c_name + "=");
+        if (c_start == -1)
+        {
+            c_start = c_value.indexOf(c_name + "=");
+        }
+        if (c_start == -1)
+        {
+            c_value = null;
+        }
+        else
+        {
+            c_start = c_value.indexOf("=", c_start) + 1;
+            var c_end = c_value.indexOf(";", c_start);
+            if (c_end == -1)
+            {
+                c_end = c_value.length;
+            }
+            c_value = unescape(c_value.substring(c_start, c_end));
+        }
+        return c_value;
+  },
+  /**
+   * Crea una nueva cookie
+   * @param {String} c_name Nombre de la cookie
+   * @param {String} value Valor que le damos a la cookie
+   * @param {Integer} exdays Dias en los que expirara o null para que expire al cerrar sesion
+   */
+  create: function(c_name, value, exdays) {
+      var exdate=new Date();
+      exdate.setDate(exdate.getDate() + exdays);
+      var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+      document.cookie=c_name + "=" + c_value;
+  },
+  
+  /**
+   * Elimina la cookie dada
+   * @param {String} c_name Nombre de la cookie
+   */
+  erase: function(c_name) {
+      var exdate=new Date();
+      var value="";
+      exdate.setDate(exdate.getDate() - 1);
+      var c_value=escape(value) +  "; expires="+exdate.toUTCString();
+      document.cookie=c_name + "=" + c_value;
+  }
+};
+
+/**
+ * Devuelve una cadena con el contenido del objeto 
+ * @param {Object} obj Objeto a analizar
+ * @returns {String} Cadena con el contenido del objeto
+ */
+function var_dump(obj) {
+  var out = "{";
+  for (var v in obj) {
+      out += v + " : " + obj[v] + "\n";
+  }
+  out+="}";
+  return out;
+}
+
+
 function setTextareaHeight(textarea) {
     textarea.bind('blur focus', function() {
         var t = $(this),
@@ -42,20 +115,9 @@ function setTextareaHeight(textarea) {
 
 }
 
-
-
-$(document).ready(function(){
+function arrastrar_AS() {
+    alert("ARRASTRAR AS");
     
-    alert("Funciona lo de ready function");
-    
-    setTextareaHeight($('.adaptHeightInput'));
-    try{
-        var a = document.getElementsByClassName('adaptHeightInput');
-        var b = a.item();
-        b.focus();
-        b.blur();
-    }catch(e){};
-
     var correcto=new Array();
     var puesto=new Array();
     
@@ -102,6 +164,297 @@ $(document).ready(function(){
         }
 
     }
+    
+    
+    $("#botonResultado").click(function () {
+
+                 
+        $puestos=0;
+        for(i=1;i<=parseInt($numimagen);i++){
+            if (puesto[i]==true){
+                $puestos++;
+            }
+        }
+      
+        if ($puestos==$numimagen) {
+            alert("puestos todos");
+            for(i=1;i<=parseInt($numimagen);i++){
+                alert(correcto[i]);
+                if (correcto[i]==true){
+                    
+                    variable="#aceptado"+i;
+                    $(variable).html( '<img style="margin-top: 20px; margin-left: 20px;" src="./imagenes/correcto.png"/>');
+                }else{
+                    variable="#aceptado"+i;
+                    $(variable).html( '<img style="margin-top: 20px; margin-left: 20px;" src="./imagenes/incorrecto.png"/>');
+                }
+            }
+
+
+        }else{
+            alert("Debe rellenar todos los campos");
+                       
+        }
+
+    });
+ 
+    $('#menuaux li #classa').click(function(event){
+       
+        var elem = $(this).next().next();
+   
+        if(elem.is('ul')){
+           
+            event.preventDefault(event);
+         
+            $('#menuaux ul:visible').not(elem).slideUp();
+           
+            elem.slideToggle();
+        }
+    });
+}
+
+function arrastrar_AM() {
+    alert("ARRASTAR AM");
+    
+    
+    
+    var Ejercicio = {
+        num_pregs: parseInt(document.getElementById("num_preg").value),
+        total_respuestas: parseInt($(".numero").attr('id')),
+        num_resp: new Array(),
+        respuestas: new Array()
+    }
+    
+    //var numpreg = parseInt(document.getElementById("num_preg").value);
+    //var numresp = new Array();
+    var k = 1;
+    for (var i=0; i<Ejercicio.num_pregs; i++) {
+        Ejercicio.num_resp[i]=parseInt(document.getElementById("num_resp_preg"+(i+1)).value);
+        
+        for (var j=0; j<Ejercicio.num_resp[i]; j++) {
+            Ejercicio.respuestas[k] = {preg:i+1, resp:j+1,correcto:false,puesto:false};
+            //alert("Ejercicio.respuestas["+k+"]: " + var_dump(Ejercicio.respuestas[k]));
+            k++;            
+        }
+    }
+    
+    
+    //$numimagen = $(".numero").attr('id');
+    
+    /*for(i=0;i<=numpreg;i++){
+        correcto[i]=0;
+        puesto[i]=0;
+    }*/
+     
+
+    $('.item').draggable({
+        helper: 'clone'
+    });
+    $('.marquito').droppable( {
+        drop: handleDropEvent
+    } );
+  
+
+
+    function handleDropEvent( event, ui ) {
+        var draggable = ui.draggable;
+        alert( 'The square with ID "' + draggable.attr('id') + '" was dropped onto "'+$(this).attr('id')+ '" !' );
+        //alert("$( this ).find( '.item' ): " + $( this ).find( ".item" ));
+        //if( ($( this ).find( ".item" ).length)==0){
+            $(this).append($(ui.draggable));
+  
+           
+ 
+
+            var Idimagen = $(ui.draggable).attr('id');
+            Idimagen = Idimagen.split("_")[1];
+            var Idmarquito = $(this).attr('id');
+            alert("idmgen"+Idimagen);
+            alert("idmarquito"+Idmarquito);
+            
+            
+            
+            if (Ejercicio.respuestas[Idimagen].preg==Idmarquito) {
+                alert("Correcto");
+                Ejercicio.respuestas[Idimagen].correcto=true;
+                Ejercicio.respuestas[Idimagen].puesto=true;
+            }
+            else {
+                alert("Incorrecto");
+                Ejercicio.respuestas[Idimagen].correcto=false;
+                Ejercicio.respuestas[Idimagen].puesto=true;
+                
+            }
+            alert("Ejercicio.respuestas[Idimagen("+Idimagen+")]: " + var_dump(Ejercicio.respuestas[Idimagen]));
+            /*if(Idimagen == Idmarquito){
+                correcto[Idimagen-1]+=1;
+                puesto[Idimagen-1]+=1;
+
+            }else{
+                correcto[Idimagen-1]-=1;
+                puesto[Idimagen-1]+=1;
+            }*/
+            
+            
+            //Imprimir lo correcto y lo puesto
+            /*var cad = "";
+            for (var i=0; i<correcto.length; i++){
+                cad += i + ": correcto=" + correcto[i] + ",puesto=" + puesto[i] + "\n";
+            }
+            alert(cad);*/
+        
+        //}
+        
+        //Se ajusta el tamaño de las preguntas
+        for (var k=1; k<=Ejercicio.num_pregs; k++) {
+            alert("k: " + k);
+            var preg = document.getElementById(""+k);
+            //Si las preguntas son videos o son imagenes, los cuadros de las preguntas debemos hacerlos mas grandes
+            if (document.getElementById("movie"+k)==null && document.getElementById("imagen"+k)==null) {
+                var altura = 100 + (preg.childNodes.length-1)*100;
+            } else {
+                var altura = 250 + (preg.childNodes.length-1)*100;
+            }            
+            alert("altura: " + altura + " y puestos: " + (preg.childNodes.length-1));
+            preg.setAttribute("style","height:"+altura+"px;");
+        }
+
+    }
+    
+    
+    $("#botonResultado").click(function () {
+
+                 
+        var puestos=0;
+        for(i=1;i<=Ejercicio.total_respuestas;i++){
+            if (Ejercicio.respuestas[i].puesto==true){
+                puestos++;
+            }
+        }
+      
+        if (puestos==Ejercicio.total_respuestas) {
+            alert("puestos todos");
+            for(i=1;i<=Ejercicio.total_respuestas;i++){
+                //alert(correcto[i]);
+                if (Ejercicio.respuestas[i].correcto==true){                    
+                    //variable="#aceptado"+i;
+                    //$(variable).html( '<img style="margin-top: 20px; margin-left: 20px;" src="./imagenes/correcto.png"/>');
+                    var div = document.getElementById("resp_"+i);
+                    var img = createElement("img",{style:"margin-top: 20px; margin-left: 20px;",src:"./imagenes/correcto.png"});
+                    //Borrar las anteriores respuestas
+                    //alert("div.childNodes.length="+div.childNodes.length);
+                    for (var j=1; j<div.childNodes.length; j++) { div.removeChild(div.childNodes[j]); }
+                    div.appendChild(img);
+                }else{
+                    //variable="#aceptado"+i;
+                    //$(variable).html( '<img style="margin-top: 20px; margin-left: 20px;" src="./imagenes/incorrecto.png"/>');
+                    var div = document.getElementById("resp_"+i);
+                    var img = createElement("img",{style:"margin-top: 20px; margin-left: 20px;",src:"./imagenes/incorrecto.png"});
+                    //Borrar las anteriores respuestas
+                    for (var j=1; j<div.childNodes.length; j++) { div.removeChild(div.childNodes[j]); }
+                    div.appendChild(img);
+                }
+            }
+
+
+        }else{
+            alert("Debe rellenar todos los campos");
+                       
+        }
+
+    });
+ 
+    $('#menuaux li #classa').click(function(event){
+       
+        var elem = $(this).next().next();
+   
+        if(elem.is('ul')){
+           
+            event.preventDefault(event);
+         
+            $('#menuaux ul:visible').not(elem).slideUp();
+           
+            elem.slideToggle();
+        }
+    });
+}
+
+
+$(document).ready(function(){
+    
+    alert("Funciona lo de ready function");
+    
+    
+    
+    
+    setTextareaHeight($('.adaptHeightInput'));
+    try{
+        var a = document.getElementsByClassName('adaptHeightInput');
+        var b = a.item();
+        b.focus();
+        b.blur();
+    }catch(e){};
+    
+    
+    var tipo_ej = "";
+    try {
+        tipo_ej = document.getElementById("tipo_ej").value;
+    }
+    catch(e) {};
+    alert("tipo_ej: " + tipo_ej);
+    if (tipo_ej=="AM") {
+        arrastrar_AM();
+    } else if (tipo_ej=="") {
+        arrastrar_AS();
+    }
+    
+
+    /*var correcto=new Array();
+    var puesto=new Array();
+    
+    $numimagen = $(".numero").attr('id');
+    
+    for(i=0;i<=parseInt($numimagen);i++){
+        correcto[i]=false;
+        puesto[i]=false;
+    }
+     
+
+    $('.item').draggable({
+        helper: 'clone'
+    });
+    $('.marquito').droppable( {
+        drop: handleDropEvent
+    } );
+  
+
+
+    function handleDropEvent( event, ui ) {
+        var draggable = ui.draggable;
+        alert( 'The square with ID "' + draggable.attr('id') + '" was dropped onto "'+$(this).attr('id')+ '"!' );
+        if( ($( this ).find( ".item" ).length)==0){
+            $(this).append($(ui.draggable));
+  
+           
+ 
+
+            var Idimagen = $(ui.draggable).attr('id');
+            var Idmarquito = $(this).attr('id');
+            alert("idmgen"+Idimagen);
+            alert("idmarquito"+Idmarquito);
+            if(Idimagen == Idmarquito){
+                correcto[Idimagen]=true;
+                puesto[Idimagen]=true;
+
+            }else{
+                correcto[Idimagen]=false;
+                puesto[Idimagen]=true;
+            }
+
+        
+        }
+
+    }*/
 
 //
 //   
@@ -207,7 +560,7 @@ $(document).ready(function(){
 //    });
 
     
-    $("#botonResultado").click(function () {
+    /*$("#botonResultado").click(function () {
 
                  
         $puestos=0;
@@ -251,7 +604,7 @@ $(document).ready(function(){
            
             elem.slideToggle();
         }
-    });
+    });*/
 
 
 });
