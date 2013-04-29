@@ -95,6 +95,8 @@ $string['Tipo10']="IDENTIFICAR ELEMENTOS MÁS RESPUESTA CORTA";
 $string['Tipo11']="IDENTIFICAR ELEMENOS CON ASOCIACIÓN SIMPLE";
 $string['Tipo12']="IDENTIFICAR ELEMENOS CON  RESPUESTA MÚLTIPLE";
 $string['Tipo13']="PRACTICAR PRONUNCIACIÓN";
+//(* Angel Biedma *) Añadido Tipo Ejercicio Entrenador de Vocabulario
+$string['Tipo14']="ENTRENADOR DE VOCABULARIO";
 
 
 

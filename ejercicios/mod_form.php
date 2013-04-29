@@ -160,9 +160,9 @@ class mod_ejercicios_mod_formulario extends moodleform_mod {
           
             $clasificaciontipo=array();
             
-            for($i=0;$i<14;$i++){
-            $clasificaciontipo[]=get_string('Tipo'.$i,'ejercicios');
-       
+            //Añadido tipo ejercicio ENTRENADOR DE VOCABULARIO:  (* Codigo de antes *) for($i=0;$i<14;$i++){
+            for($i=0;$i<15;$i++){
+                $clasificaciontipo[]=get_string('Tipo'.$i,'ejercicios');       
             }
            
              
@@ -325,9 +325,9 @@ class mod_ejercicios_mod_formulario extends moodleform_mod {
           
             $clasificaciontipo=array();
             
-            for($i=0;$i<14;$i++){
-            $clasificaciontipo[]=get_string('Tipo'.$i,'ejercicios');
-       
+            //Añadido tipo ejercicio ENTRENADOR DE VOCABULARIO:  (* Codigo de antes *) for($i=0;$i<14;$i++){
+            for($i=0;$i<15;$i++){
+                $clasificaciontipo[]=get_string('Tipo'.$i,'ejercicios');       
             }
            
              
