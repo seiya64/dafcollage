@@ -4102,7 +4102,9 @@ function anadirRespuesta_TextoFoto_AM (id_ejercicio,respuesta,numpreg){
             
       
     //-1 por el text del div
-    var numresp=(respuesta.childNodes.length/2) +1;
+    //var numresp=(respuesta.childNodes.length/2) +1;
+    var numresp = parseInt(document.getElementById("num_res_preg"+numpreg).value)+1;
+    alert("Numero respuesta a crear: " + numresp);
           
     table.width="50%";
     table.id="tablarespuesta"+numresp+"_"+numpreg;
@@ -4302,7 +4304,7 @@ function EliminarRespuesta_TextoFoto_AM(respuesta,numpreg,numresp,id_ejercicio){
         img2.setAttribute("id","eliminarrespuesta"+(k-1)+"_"+numpreg);
         img2.setAttribute("name","eliminarrespuesta"+(k-1)+"_"+numpreg);
         img2.setAttribute("onclick","EliminarRespuesta_TextoFoto_AM(tablarespuesta"+(k-1)+"_"+numpreg+","+numpreg+","+(k-1)+","+id_ejercicio+")");
-        location.reload(); //Recarga la pagina para que las imagenes se actualicen bien
+        //location.reload(); //Recarga la pagina para que las imagenes se actualicen bien
     }
     
     //Llamar a un archivo php para cambiar los archivos de audio del disco de la misma forma que se cambian en esta funcion

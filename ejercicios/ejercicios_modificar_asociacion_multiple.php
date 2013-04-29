@@ -220,11 +220,13 @@ if ($tipo_origen == 1) { //la pregunta es un texto
 }
 
 //Guardo las nuevas
-
+$file_log = @fopen("log_modificarAM.txt","w");
+$log = "";
+$log.="Numero de preguntas: " . $numeropreguntas . "\n";
 for ($i = 0; $i < $numeropreguntas; $i++) {
     //Obtengo el numero de respuestas a cada pregunta
     $j = $i + 1;
-
+    $log.="Pregunta numero: " . $j . "\n";
 
     if ($tipo_origen == 1) { //Si la pregunta es un texto
         $preg = required_param('pregunta' . $j, PARAM_TEXT);
@@ -267,10 +269,14 @@ for ($i = 0; $i < $numeropreguntas; $i++) {
 
                     if ($tipo_respuesta == 4) { //eS UNA IMAGEN
                         $num_resp = required_param('num_res_preg'.$j,PARAM_INT);
+                        $log.="Numero de respuestas para la pregunta " . $j . " : " . $num_resp . "\n";
                         for ($k=1; $k<=$num_resp; $k++) {
+                            $log.="Respuesta numero " . $k . "\n";
                             $ejercicio_texto_img = new Ejercicios_imagenes_asociadas($NULL, $id_ejercicio, $id_pregunta, 'foto_' . $id_ejercicio . "_" . $j . "_" . $k . ".jpg");
                             $ejercicio_texto_img->insertar();
                         }
+                        fwrite($file_log, $log, strlen($log));
+                        fclose($file_log);
                     }
                 }
             }

@@ -111,6 +111,8 @@ switch ($tipo_origen) {
                 }
                 break;
             case 2://Respuesta es Audio
+                $fichero = @fopen("log_creacion.txt","w");
+                $log="";
                 echo "es un audio";
                 
 
@@ -128,14 +130,16 @@ switch ($tipo_origen) {
                 }*/
                 // echo "m vale".$m;
                 
-                //Obtengo el numero de preguntas
+                //Obtengo el numero de preguntas                
                 $numero_preguntas = optional_param('numeropreguntas', PARAM_INT);
+                $log.= "Numero de preguntas: " . $numero_preguntas . "\n"; 
                 echo "numero preguntas" . $numero_preguntas;
                 for ($i = 0; $i < $numero_preguntas; $i++) {
                     //Obtengo la pregunta
 
                     $j = $i + 1;
                     $pregunta = optional_param('pregunta' . $j, PARAM_TEXT);
+                    $log.= "Pregunta " . $j . " : " . $pregunta . "\n";
 
                     //Inserto la pregunta Archivo asociación
                     $mispreguntas = new Ejercicios_texto_texto_preg(NULL, $id_ejercicio, $pregunta);
@@ -143,16 +147,22 @@ switch ($tipo_origen) {
 
                     //Lo inserto en la tabla de imagenes para asociar respuestas y preguntas
                     $num_resp = optional_param("numerorespuestas_".$j);
+                    $log.="Pregunta " . $j . " , numero de respuestas: " . $num_resp . "\n";
                     
                     for($k=1; $k<=$num_resp; $k++) {
                         $nombre_audio = 'audio_' . $id_ejercicio . '_' . $j . '_' . $k . '.mp3';
+                        $log.="Nombre del archivo: " . $nombre_audio . "\n";
                         $name_files_audio = "archivoaudio" . $j . "_" . $k;
                         
                         //Mover el archivo subido
                         if (move_uploaded_file($_FILES[$name_files_audio]['tmp_name'], './mediaplayer/audios/' . $nombre_audio)) {
+                            $log.="Se ha movido correctamente el archivo de audio de " . $_FILES[$name_files_audio]['tmp_name'] . " a " . './mediaplayer/audios/' . $nombre_audio
+                                    . "\n";
                             echo "<br/>ARCHIVO DE AUDIO MOVIDO A: " . './mediaplayer/audios/' . $nombre_audio;
                         }
                         else {
+                            $log.="No se ha movido correctamente el archivo de audio de " . $_FILES[$name_files_audio]['tmp_name'] . " a " . './mediaplayer/audios/' . $nombre_audio
+                                    . "\n";
                             echo "<br/>ERROR AL MOVER EL ARCHIVO DE AUDIO A: " . './mediaplayer/audios/' . $nombre_audio;
                             die;
                         }
@@ -162,6 +172,8 @@ switch ($tipo_origen) {
                         $mi_respuesta->insertar();
                     }
                 }
+                fwrite($fichero, $log, strlen($log));
+                fclose($fichero);
                 echo "fin insercción";
                 break;
             case 3://Respuesta es Video
