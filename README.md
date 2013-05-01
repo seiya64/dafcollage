@@ -9,7 +9,7 @@ Al ser algo extensa para un archivo de texto plano, la descripción del proyecto
 en el proyecto en GitHub. 
 Se puede descargar desde el siguiente enlace:
 
-https://github.com/seiya64/dafcollage/raw/master/documentacion/Descripcion%20del%20proyecto.pdf
+https://github.com/seiya64/dafcollage/raw/master/documentacion/descripcion.pdf
 
 
 ARBOL DE DIRECTORIOS DEL PROYECTO
@@ -17,7 +17,7 @@ ARBOL DE DIRECTORIOS DEL PROYECTO
 Se encuentra explicado en un pdf publicado en el proyecto en GitHub.
 Se puede descargar desde el siguiente enlace:
 
-https://github.com/seiya64/dafcollage/raw/master/documentacion/arbol.pdf
+https://github.com/seiya64/dafcollage/raw/master/documentacion/arbol.md
 
 
 REQUISITOS DEL PROYECTO
