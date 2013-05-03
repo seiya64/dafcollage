@@ -2888,4 +2888,113 @@ class ejercicios_ie_respuestas {
 
 }
 
+
+//------- Tablas para ejercicios Texto Hueco ------------------
+//Tabla que sirve para guardar la configuracion de un ejercicio de texto hueco
+class ejercicios_texto_hueco {
+
+    var $id;
+    var $id_ejercicio;
+    var $mostrar_pistas;
+    var $mostrar_palabras;
+    var $mostrar_solucion;
+
+
+    //Contructor por defecto y con parametros
+    function ejercicios_texo_hueco($id = NULL,$id_ejercicio=NULL,$mostrar_pistas=NULL, $mostrar_palabras=NULL, $mostrar_solucion=NULL) {
+
+        $this->id = $id;
+        $this->id_ejercicio = $id_ejercicio;
+        $this->mostrar_pistas = $mostrar_pistas;
+        $this->mostrar_palabras = $mostrar_palabras;
+        $this->mostrar_solucion = $mostrar_solucion;
+       
+    }
+
+    //Obtener cada uno de los atributos de la tabla
+    function get($param) {
+
+        // $param = strtolower($param);
+        switch ($param) {
+            default:
+            case 'id':
+                return $this->id;
+                break;
+
+            case 'id_ejercicio':
+                return $this->id_ejercicio;
+                break;
+            
+            case 'mostrar_pistas':
+                return $this->mostrar_pistas;
+                break;
+            case 'mostrar_palabras':
+                return $this->mostrar_palabras;
+                break;
+            case 'mostrar_solucion':
+                return $this->mostrar_solucion;
+                break;
+        }
+    }
+
+    //Inserta en la bd la instancia correspondiente a la clase y devuelve el identificador
+    //de la nueva instancia creada
+    function insertar() {
+
+        $id = insert_record('ejercicios_texto_hueco', $this, true);
+        //Devuelve el identificador del ejercicios creado
+
+        return $id;
+    }
+
+    //Modifica una instacia
+    function alterar() {
+
+        update_record('ejercicios_texto_hueco', $this, false);
+    }
+
+    //Borra todas las respuestas asociadas a un ejercicio
+    function borrar_id_ejercicio($id_ejercicio) {
+        delete_records('ejercicios_texto_hueco', 'id_ejercicio', $id_ejercicio);
+    }
+    
+    //Borra un registro dado su id
+    function borrar_id($id) {
+        delete_record('ejercicios_texto_hueco', 'id', $id);
+    }
+
+    //Obtiene el texto por id
+    function obtener_uno($id) {
+        $ejer = get_record('ejercicios_texto_hueco', 'id', $id);
+        $this->id = $ejer->id;
+        $this->id_ejercicio = $ejer->id_ejercicio;
+        $this->mostrar_palabras = $ejer->mostrar_palabras;
+        $this->mostrar_pistas = $ejer->mostrar_pistas;
+        $this->mostrar_solucion = $ejer->mostrar_solucion;      
+     
+        return $this;
+    }
+
+    function obtener_todos_id_ejercicio($id_ejercicio) {
+        $sql = 'SELECT * FROM  mdl_ejercicios_texto_hueco WHERE id_ejercicio=' . $id_ejercicio;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new ejercicios_texto_hueco();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+}
+
 ?>

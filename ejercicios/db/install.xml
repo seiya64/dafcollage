@@ -193,7 +193,7 @@
         <KEY NAME="clave_texto" TYPE="foreign" FIELDS="id_texto" REFTABLE="ejercicios_texto_texto" REFFIELDS="id" COMMENT="id de la respuesta en texto texto" PREVIOUS="primary"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="ejercicios_ie_respuestas" COMMENT="Respuestas correctas que pone el profesor a los ejercicios de identificar elementos" PREVIOUS="ejercicios_alum_resp_texto_texto">
+    <TABLE NAME="ejercicios_ie_respuestas" COMMENT="Respuestas correctas que pone el profesor a los ejercicios de identificar elementos" PREVIOUS="ejercicios_alum_resp_texto_texto" NEXT="ejercicios_texto_hueco">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="id_ejercicio"/>
         <FIELD NAME="id_ejercicio" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Identificacion del ejercicio" PREVIOUS="id" NEXT="id_pregunta"/>
@@ -204,6 +204,20 @@
         <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_ejercicio"/>
         <KEY NAME="clave_ejercicio" TYPE="foreign" FIELDS="id_ejercicio" REFTABLE="ejercicios_general" REFFIELDS="id" COMMENT="id del ejercicio" PREVIOUS="primary" NEXT="clave_pregunta"/>
         <KEY NAME="clave_pregunta" TYPE="foreign" FIELDS="id_pregunta" REFTABLE="ejercicios_texto_texto_preg" REFFIELDS="id" COMMENT="id de la pregunta" PREVIOUS="clave_ejercicio"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="ejercicios_texto_hueco" COMMENT="Se guarda la configuracion de un ejercicio de Texto Hueco" PREVIOUS="ejercicios_ie_respuestas">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="id_ejercicio"/>
+        <FIELD NAME="id_ejercicio" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Identificacion del ejercicio" PREVIOUS="id" NEXT="mostrar_pistas"/>
+        <FIELD NAME="mostrar_pistas" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Indica si se debe mostrar pistas" PREVIOUS="id_ejercicio" NEXT="mostrar_palabras"/>
+        <FIELD NAME="mostrar_palabras" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Indica si se debe mostrar las palabras" PREVIOUS="mostrar_pistas" NEXT="mostrar_solucion"/>
+        <FIELD NAME="mostrar_solucion" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Indica si se debe mostrar las soluciones" PREVIOUS="mostrar_palabras" />
+    </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_ejercicio"/>
+        <KEY NAME="clave_ejercicio" TYPE="foreign" FIELDS="id_ejercicio" REFTABLE="ejercicios_general" REFFIELDS="id" COMMENT="id del ejercicio" PREVIOUS="primary"/>
+        
       </KEYS>
     </TABLE>
   </TABLES>
