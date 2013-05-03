@@ -161,4 +161,13 @@ $string['Video']='Introduzca la dirección del video';
 $string['NuevaAso']='Añadir Aso';
 $string['tipopregunta1']='Tipo de archivo pregunta';
 
+//Generador de Ejercicios -- Texto Hueco -- Etiqueta TH
+$string["TH_texto"]="Texto ";
+$string["TH_huecos"]="Palabras ocultadas ";
+$string["TH_add_hueco"]="Añadir Hueco";
+$string["TH_mostrar_pistas"]="¿Desea que se muestren pistas sobre la longitud de las palabras que se colocan en los huecos?";
+$string["TH_mostrar_palabras"]="¿Desea que aparezcan las soluciones de los huecos en la parte inferior del ejercicio?";
+$string["TH_mostrar_soluciones"]="¿Desea que aparezcan las soluciones al pulsar el boton de Corregir los ejercicios?";
+$string["TH_introduzca_texto"]="Introduzca el texto en el cual se seleccionaran los huecos";
+
 ?>

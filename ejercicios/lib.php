@@ -302,6 +302,11 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
                     $mform = new mod_ejercicios_creando_ejercicio_identificar_elementos($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
                     $mform->pintarformulario_identificarelementos($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
                     break;
+                case 3:
+                    echo "Texto Hueco";
+                    $mform = new mod_ejercicios_creando_ejercicio_texto_hueco($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
+                    $mform->pintarformulariotextohueco($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
+                    break;
             }
            
             break;

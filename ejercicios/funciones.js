@@ -5469,3 +5469,87 @@ function EliminarPregunta_FotoTexto_AM(id_ejercicio,Pregunta,numpregunta){
         alert("El ejercicio debe tener al menos una pregunta");
     }
 }
+
+
+/**
+ * **************************  EJERCICIOS --  TEXTO HUECO *********************************
+ */
+
+
+//----------------- PLUGIN PARA REEMPLAZAR TEXTO SELECCIONADO --------------------
+//Funcion que devuelve un array asociativo con la posicion de inicio y de fin del texto seleccionado
+function getInputSelection(el) {
+    var start = 0, end = 0, normalizedValue, range,
+        textInputRange, len, endRange;
+
+    if (typeof el.selectionStart == "number" && typeof el.selectionEnd == "number") {
+        start = el.selectionStart;
+        end = el.selectionEnd;
+    } else {
+        range = document.selection.createRange();
+
+        if (range && range.parentElement() == el) {
+            len = el.value.length;
+            normalizedValue = el.value.replace(/\r\n/g, "\n");
+
+            // Create a working TextRange that lives only in the input
+            textInputRange = el.createTextRange();
+            textInputRange.moveToBookmark(range.getBookmark());
+
+            // Check if the start and end of the selection are at the very end
+            // of the input, since moveStart/moveEnd doesn't return what we want
+            // in those cases
+            endRange = el.createTextRange();
+            endRange.collapse(false);
+
+            if (textInputRange.compareEndPoints("StartToEnd", endRange) > -1) {
+                start = end = len;
+            } else {
+                start = -textInputRange.moveStart("character", -len);
+                start += normalizedValue.slice(0, start).split("\n").length - 1;
+
+                if (textInputRange.compareEndPoints("EndToEnd", endRange) > -1) {
+                    end = len;
+                } else {
+                    end = -textInputRange.moveEnd("character", -len);
+                    end += normalizedValue.slice(0, end).split("\n").length - 1;
+                }
+            }
+        }
+    }
+
+    return {
+        start: start,
+        end: end
+    };
+}
+
+//Reemplaza el texto seleccionado del elemento el por el texto dado en text
+function replaceSelectedText(el, text) {
+    var sel = getInputSelection(el), val = el.value;
+    el.value = val.slice(0, sel.start) + text + val.slice(sel.end);
+}
+
+//Devuelve el texto seleccionado del elemento el
+function getSelectedText(el) {
+    var sel = getInputSelection(el);
+    return el.value.slice(sel.start,sel.end);
+}
+//-------------------------------------------------------------------------------------
+
+//Boton para añadir una palabra hueco de un trozo de palabra seleccionada de un cuadro de texto
+function TH_addHueco_Creacion(id_ejercicio,numpreg) {
+    var textarea = document.getElementById("id_pregunta"+numpreg); //Cojo el textarea
+    var numresp = parseInt(document.getElementById("numerorespuestas_"+numpreg).value);
+    var texto_sel = getSelectedText(textarea);
+    
+    var div_respuestas = document.getElementById("respuestas_pregunta"+numpreg);
+    var resp = createElement("textarea",{name: "respuesta"+(numresp+1)+"_"+numpreg, id: "respuesta"+(numresp+1)+"_"+numpreg,
+                                         rows:"1", cols:"50",readonly:"yes", value:texto_sel});
+    resp.appendChild(document.createTextNode(texto_sel));
+    div_respuestas.appendChild(resp);
+    
+    replaceSelectedText(textarea,"$$"+numresp+"$$");
+    var numero_respuestas = document.getElementById("numerorespuestas_"+numpreg);
+    numero_respuestas.value = (numresp+1);
+}

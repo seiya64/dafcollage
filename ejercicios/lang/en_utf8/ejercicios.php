@@ -151,4 +151,13 @@ $string["MiBusqueda"]="Mi Busqueda";
 $string["BotonAñadir"]="Añadir a mis ejercicios";
 $string['Misejercicios']='Mis Actividades';
 $string["marcoteorico"]="Seleccionar el nivel según el marco europeo de referecia(OPCIONAL)";
+
+//Generador de Ejercicios -- Texto Hueco -- Etiqueta TH
+$string["TH_texto"]="Texto ";
+$string["TH_huecos"]="Palabras ocultadas ";
+$string["TH_add_hueco"]="Añadir Hueco";
+$string["TH_mostrar_pistas"]="¿Desea que se muestren pistas sobre la longitud de las palabras que se colocan en los huecos?";
+$string["TH_mostrar_palabras"]="¿Desea que aparezcan las soluciones de los huecos en la parte inferior del ejercicio?";
+$string["TH_mostrar_soluciones"]="¿Desea que aparezcan las soluciones al pulsar el boton de Corregir los ejercicios?";
+
 ?>

@@ -106,6 +106,11 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
                     $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Video", "Video", "onClick=\"muestra('otroseleccionado'); oculta('textoseleccionado')\"");
                     $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Foto", "Foto", "onClick=\"muestra('otroseleccionado'); oculta('textoseleccionado')\"");
                     break;
+                case 5: //Texto Hueco
+                    $radioarray=array();
+                    $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Texto","Texto", "onClick=\"muestra('textoseleccionado'); oculta('otroseleccionado')\"");
+                    
+                    break;
                 case 6: //Identificar elementos
                     $radioarray=array();
                     $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiopregunta', '', "Texto","Texto", null);
@@ -146,6 +151,7 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
           // $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Audio", "Audio", null);
            
           switch ($tipocreacion) {
+            case 5: //Texto Hueco. Solo tipo Texto
             case 2: //Multiplechoice solo tipo texto
                 $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Texto", "Texto", null);
                 $mform->addGroup($radioarray, 'radiorespuesta', get_string('tiporespuesta', 'ejercicios'), array(' '), false);
@@ -153,6 +159,7 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
                 break;
             case 3: //Asociacion Simple
             case 4: //Asociacion Compleja
+            
                 $divoculto = '<div id="textoseleccionado">';
                 $mform->addElement('html', $divoculto);
 
@@ -1036,6 +1043,118 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
      }
 }
 
+/*
+ * Formulario para la creacion de actividades de tipo Texto Hueco
+ */
+class mod_ejercicios_creando_ejercicio_texto_hueco extends moodleform_mod {
+
+    function mod_ejercicios_creando_ejercicio_texto_hueco($id,$p,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion)
+        {
+         // El fichero que procesa el formulario es gestion.php
+         parent::moodleform('ejercicios_creacion_texto_hueco.php?id_curso='.$id.'&id_ejercicio='.$id_ejercicio.'&tipo_origen='.$tipo_origen.'&tr='.$trespuesta.'&tipocreacion='.$tipocreacion);
+       }
+
+     function definition() {
+     }
+
+
+     /**
+     * Function that add a table to the forma to show the main menu
+     *
+     * @author Serafina Molina Soto
+     * @param $id id for the course
+     * @param $p numero de preguntas
+     * @param $id_ejercicio id del ejercicio que estamos creando
+     * @param $tipoorigen: tipo de archivo origen( 1: Texto, 2: Audio, 3: Video, 4: Imagen)
+     * @param $tiporespuesta: tipo de archivo origen( 1: Texto, 2: Audio, 3: Video, 4: Imagen)
+     */
+     function pintarformulariotextohueco($id,$p,$id_ejercicio,$tipoorigen,$tiporespuesta,$tipocreacion){
+
+        global $CFG, $COURSE, $USER;
+        $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
+
+        $mform =& $this->_form;
+       
+        $mform->addElement('html','<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>');
+        $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.js"></script>');
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
+        $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
+        
+        //titulo
+        $titulo= '<h1>' . get_string('FormularioCreacionTextos', 'ejercicios') . '</h1>';
+        $mform->addElement('html',$titulo);
+
+         $oculto='<input type="hidden" name="tipocreacion" id="tipocreacion" value="'.$tipocreacion.'"/>';
+         $mform->addElement('html',$oculto);
+         
+        switch($tipoorigen){
+            case 1: //El archivo de origen es un texto
+
+                switch($tiporespuesta){
+
+                    case 1: //El archivo respuesta es un texto
+                        echo "texto-texto";
+                        //Para cada pregunta
+                        for($i=0;$i<$p;$i++){
+
+                             $aux=$i+1;
+                             $titulo= '</br><h3>'. get_string('TH_texto','ejercicios') .$aux. '</h3>';
+                             $mform->addElement('html',$titulo);                           
+
+                            //Cuadro de texto donde se introducira el texto del cual se sacaran los huecos                          
+                            $mform->addElement('textarea', 'pregunta'.$aux, get_string("TH_introduzca_texto", 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
+                            
+                            //Se añade un boton para que se cree un nuevo hueco. 
+                            $boton = '<center><input type="button" name="add_hueco' . $aux . '" id="add_hueco' . $aux . '" value="' . get_string('TH_add_hueco','ejercicios') . '" onclick="TH_addHueco_Creacion(' . $id_ejercicio . "," . $aux . ')" /></center>';
+                            $mform->addElement('html',$boton);
+                            
+                            
+                            //Archivo Asociado
+                            //$mform->addElement('textarea', 'respuesta'.$aux, get_string('Asociacion_Texto_Asociado', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
+                            $textarea='</br><div id="titulorespuestas" style="margin-left:130px;">'.get_string('TH_huecos','ejercicios') . '</div>';
+                            $textarea.='<div style="margin-left:310px;" id="respuestas_pregunta'.$aux.'"> ';
+                            //$textarea.='<textarea name="respuesta1_'.$aux.'" id="respuesta1_'.$aux.'" rows="1" cols="50"></textarea>';
+                            
+                            $textarea.='<input type="hidden" name="numerorespuestas_'.$aux.'" id="numerorespuestas_'.$aux.'" value="0"/>';
+                            $textarea.='</div>';
+                            $mform->addElement('html',$textarea);
+                            
+                            // TODO COMPROBAR SI FUNCIONA LA FUNCION DE JAVASCRIPT DE MAS RESPUESTAS DE IE PARA ESTOS EJERCICIOS
+                            //$botonañadir='<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestas_IE('.$aux.');"></center>';
+                            //$mform->addElement('html', $botonañadir);
+                            
+                            
+
+
+                        }
+
+                           $mform->addElement('hidden','numeropreguntas',$p);
+                           
+                           //Añadir las opciones de configuracion:
+                           //   - Si desea que aparezcan pistas sobre la longitud de las respuestas
+                           //   - Si desea que aparezcan las palabras que van en los huecos en la parte inferior de la pagina
+                           //   - Si desea que al darle a corregir se le mostrara cuales son las respuestas correctas o solo indicar si es correcta o no
+                           $mform->addElement('html','<br/><br/><br/>');
+                           $mform->addElement('advcheckbox','TH_mostrar_pistas',get_string('TH_mostrar_pistas','ejercicios'));
+                           $mform->addElement('advcheckbox','TH_mostrar_palabras',get_string('TH_mostrar_palabras','ejercicios'));
+                           $mform->addElement('advcheckbox','TH_mostrar_soluciones',get_string('TH_mostrar_soluciones','ejercicios'));
+
+
+                    break;
+                }
+
+            break;
+        }
+
+
+
+            $buttonarray = array();
+            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"onclick=obtenernumeroRespuestas('$p');");
+            $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
+
+
+     }
+}
 
 /*
  * Formulario para la creación de actividades de tipo Asociación simple
