@@ -73,6 +73,27 @@ https://github.com/seiya64/dafcollage/raw/master/documentacion/Ayudas_es.pdf
 
 
 INFORMACIÓN ADICIONAL
+--
+
+CANAL UGR
+
+http://canalugr.es/notas-de-prensa/item/64782-“lingua-collageeu”-enseñar-y-aprender-una-lengua-extranjera-de-forma-virtual
+
+SECRETARIA GENERAL
+
+http://secretariageneral.ugr.es/pages/tablon/*/noticias-canal-ugr/lingua-collageeu-ensenar-y-aprender-una-lengua-extranjera-de-forma-virtual#.UYNmXJVFdkA
+
+MI UGR
+
+http://miugr.ideal.es/noticias/actualidad/1201-la-ugr-ensena-lenguas-extranjeras-a-traves-de-internet-.html
+
+RADIO GRANADA
+
+http://www.radiogranada.es/2013/05/02/lingua-collage-eu-ensenar-y-aprender-una-lengua-extranjera-de-forma-virtual/
+
+NOODLS
+
+http://www.noodls.com/view/775DA323E0494613D214343E6B0AC2ACFA60701F
 
 Entrevista en onda maracena radio.
 
