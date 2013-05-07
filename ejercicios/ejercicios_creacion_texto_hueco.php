@@ -63,12 +63,19 @@ $tipo_origen = optional_param('tipo_origen', 0, PARAM_INT);
 $tipo_respuesta = optional_param('tr', 0, PARAM_INT);
 
 //Añadir la configuracion del ejercicio dada por el profesor
+$file_log = fopen('log_creacion_th.txt','w');
 $mostrar_pistas = optional_param('TH_mostrar_pistas',0,PARAM_INT);
 $mostrar_palabras = optional_param('TH_mostrar_palabras',0,PARAM_INT);
 $mostrar_solucion = optional_param('TH_mostrar_soluciones',0,PARAM_INT);
+$log = "mostrar pistas: " . $mostrar_pistas . "\n";
+$log .= "mostrar palabras: " . $mostrar_palabras . "\n";
+$log .= "mostrar solucion: " . $mostrar_solucion . "\n";
+$log .= "id ejercicio: " . $id_ejercicio . "\n";
 $conf_ej = new ejercicios_texto_hueco(NULL,$id_ejercicio,$mostrar_pistas,$mostrar_palabras,$mostrar_solucion);
 $conf_ej->insertar();
-
+$log .= "Error mysql: " . mysql_error() . "\n";
+fwrite($file_log,$log,strlen($log));
+fclose($file_log);
 
 $mform = new mod_ejercicios_creando_ejercicio_texto_hueco($id_curso, $p, $id_ejercicio, $tipo_origen, $tipo_respuesta, $tipocreacion);
 $mform->pintarformulariotextohueco($id_curso, $p, $id_ejercicio, $tipo_origen, $tipo_respuesta, $tipocreacion);

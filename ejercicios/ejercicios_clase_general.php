@@ -2898,17 +2898,20 @@ class ejercicios_texto_hueco {
     var $mostrar_pistas;
     var $mostrar_palabras;
     var $mostrar_solucion;
+    
+   
 
 
     //Contructor por defecto y con parametros
-    function ejercicios_texo_hueco($id = NULL,$id_ejercicio=NULL,$mostrar_pistas=NULL, $mostrar_palabras=NULL, $mostrar_solucion=NULL) {
-
+    function ejercicios_texto_hueco($id = NULL,$id_ejercicio=NULL,$mostrar_pistas=NULL, $mostrar_palabras=NULL, $mostrar_solucion=NULL) {
+        
         $this->id = $id;
         $this->id_ejercicio = $id_ejercicio;
         $this->mostrar_pistas = $mostrar_pistas;
         $this->mostrar_palabras = $mostrar_palabras;
         $this->mostrar_solucion = $mostrar_solucion;
-       
+        
+        
     }
 
     //Obtener cada uno de los atributos de la tabla
@@ -2940,7 +2943,6 @@ class ejercicios_texto_hueco {
     //Inserta en la bd la instancia correspondiente a la clase y devuelve el identificador
     //de la nueva instancia creada
     function insertar() {
-
         $id = insert_record('ejercicios_texto_hueco', $this, true);
         //Devuelve el identificador del ejercicios creado
 

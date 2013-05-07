@@ -50,6 +50,7 @@ require_once('ejercicios_form_curso.php');
 require_once('ejercicios_mostrar_asociacion_simple.php');
 require_once('ejercicios_mostrar_asociacion_multiple.php');
 require_once('ejercicios_mostrar_identificar_elementos.php');
+require_once('ejercicios_mostrar_texto_hueco.php');
 /**
  * Given an object containing all the necessary data,
  * (defined by the form in mod_form.php) this function
@@ -341,6 +342,11 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
                         echo "mostrando ejercicio asociacion multiple";
                         $mform= new mod_ejercicios_mostrar_ejercicio_asociacion_multiple($id,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
                         $mform->mostrar_ejercicio_asociacion_multiple($id,$id_ejercicio,$buscar,$tipo_origen,$trespuesta,$tipocreacion);
+                        break;
+                    case 3: //si es Texto Hueco
+                        echo "mostrando ejercicio texto hueco";
+                        $mform= new mod_ejercicios_mostrar_ejercicio_texto_hueco($id,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
+                        $mform->mostrar_ejercicio_texto_hueco($id,$id_ejercicio,$buscar,$tipo_origen,$trespuesta,$tipocreacion);
                         break;
                     case 4: // si es identificar elementos
                         echo "mostrando ejercicio identificar elementos";

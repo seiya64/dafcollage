@@ -1087,6 +1087,8 @@ class mod_ejercicios_creando_ejercicio_texto_hueco extends moodleform_mod {
          $oculto='<input type="hidden" name="tipocreacion" id="tipocreacion" value="'.$tipocreacion.'"/>';
          $mform->addElement('html',$oculto);
          
+         
+         
         switch($tipoorigen){
             case 1: //El archivo de origen es un texto
 
@@ -1103,6 +1105,7 @@ class mod_ejercicios_creando_ejercicio_texto_hueco extends moodleform_mod {
 
                             //Cuadro de texto donde se introducira el texto del cual se sacaran los huecos                          
                             $mform->addElement('textarea', 'pregunta'.$aux, get_string("TH_introduzca_texto", 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
+                                                        
                             
                             //Se añade un boton para que se cree un nuevo hueco. 
                             $boton = '<center><input type="button" name="add_hueco' . $aux . '" id="add_hueco' . $aux . '" value="' . get_string('TH_add_hueco','ejercicios') . '" onclick="TH_addHueco_Creacion(' . $id_ejercicio . "," . $aux . ')" /></center>';

@@ -5537,11 +5537,35 @@ function getSelectedText(el) {
 }
 //-------------------------------------------------------------------------------------
 
+
+
 //Boton para añadir una palabra hueco de un trozo de palabra seleccionada de un cuadro de texto
 function TH_addHueco_Creacion(id_ejercicio,numpreg) {
     var textarea = document.getElementById("id_pregunta"+numpreg); //Cojo el textarea
     var numresp = parseInt(document.getElementById("numerorespuestas_"+numpreg).value);
     var texto_sel = getSelectedText(textarea);
+    var sel = getInputSelection(textarea);
+    
+    //Comprobar que no haya un hueco en el texto seleccionado. O que no haya un $ atras o adelante
+    var regexp = /(\[|\])/g;
+    if (texto_sel.match(regexp)) {
+        alert("No se puede crear un hueco que contenga a otro hueco. Revise el texto seleccionado.");
+        return;
+    }
+    //Comprobar que no se haya seleccionado una cadena vacia
+    if (texto_sel==="") {
+        alert("No se puede crear un hueco vacio. Escriba algo de texto y seleccione para crear un hueco.");
+        return;
+    }
+    //Esto impide que se cree un hueco con los digitos que identifica un hueco
+    var inicio = (sel.start>=1) ? sel.start-1 : sel.start;
+    var fin = (sel.end==textarea.value.length-1) ? sel.end : sel.end+1;
+    var t = textarea.value.slice(inicio,fin);
+    if (t.match(regexp)) {
+        alert("No se puede crear un hueco que contenga a otro hueco. Revise el texto seleccionado.");
+        return;
+    }
+    
     
     var div_respuestas = document.getElementById("respuestas_pregunta"+numpreg);
     var resp = createElement("textarea",{name: "respuesta"+(numresp+1)+"_"+numpreg, id: "respuesta"+(numresp+1)+"_"+numpreg,
@@ -5549,7 +5573,313 @@ function TH_addHueco_Creacion(id_ejercicio,numpreg) {
     resp.appendChild(document.createTextNode(texto_sel));
     div_respuestas.appendChild(resp);
     
-    replaceSelectedText(textarea,"$$"+numresp+"$$");
+    replaceSelectedText(textarea,"[["+numresp+"]]");
     var numero_respuestas = document.getElementById("numerorespuestas_"+numpreg);
     numero_respuestas.value = (numresp+1);
+}
+
+//Boton para añadir una palabra hueco de un trozo de palabra seleccionada de un cuadro de texto
+function TH_addHueco_Modificar(id_ejercicio,numpreg) {
+    var textarea = document.getElementById("pregunta"+numpreg); //Cojo el textarea
+    var numresp = parseInt(document.getElementById("num_res_preg"+numpreg).value)+1;
+    var texto_sel = getSelectedText(textarea);
+    var sel = getInputSelection(textarea);
+    
+    //Comprobar que no haya un hueco en el texto seleccionado. O que no haya un $ atras o adelante
+    var regexp = /(\[|\])/g;
+    if (texto_sel.match(regexp)) {
+        alert("No se puede crear un hueco que contenga a otro hueco. Revise el texto seleccionado.");
+        return;
+    }
+    //Comprobar que no se haya seleccionado una cadena vacia
+    if (texto_sel==="") {
+        alert("No se puede crear un hueco vacio. Escriba algo de texto y seleccione para crear un hueco.");
+        return;
+    }
+    //Esto impide que se cree un hueco con los digitos que identifica un hueco
+    var inicio = (sel.start>=1) ? sel.start-1 : sel.start;
+    var fin = (sel.end==textarea.value.length-1) ? sel.end : sel.end+1;
+    var t = textarea.value.slice(inicio,fin);
+    if (t.match(regexp)) {
+        alert("No se puede crear un hueco que contenga a otro hueco. Revise el texto seleccionado.");
+        return;
+    }
+    
+    
+    var div_respuestas = document.getElementById("respuestas"+numpreg);   
+    var table = document.createElement("table");
+    var tr = document.createElement("tr");             
+    table.width="50%";
+    table.id="tablarespuesta"+numresp+"_"+numpreg;
+    if (numresp%2==0) {
+        var tablaAnterior = document.getElementById("tablarespuesta"+(numresp-1)+"_"+numpreg);
+        tablaAnterior.style.cssFloat="left";
+    }        
+    var tbody = document.createElement("tbody");          
+    tr.id="trrespuesta"+numresp+"_"+numpreg;
+    var td = document.createElement("td");
+    td.style.width="80%";
+    var div = document.createElement("textarea");
+    div.style.width="300px";
+    div.setAttribute("class","resp");
+    div.setAttribute("readonly","yes");
+    div.name="respuesta"+numresp+"_"+numpreg;
+    div.id="respuesta"+numresp+"_"+numpreg;
+    var text = document.createTextNode(texto_sel);
+           
+    div.appendChild(text);
+            
+    var td2 = document.createElement("td");
+    td2.style.width="5%"
+         
+         
+    var img= document.createElement("img");
+    img.id="eliminarrespuesta"+numresp+"_"+numpreg;
+    img.src="./imagenes/delete.gif";
+    img.style.height="10px";
+    img.style.width="10px";
+    img.setAttribute("onclick","TH_EliminarHueco("+id_ejercicio+","+numpreg+","+numresp+")");
+    img.title="Eliminar Hueco";
+            
+            
+    
+    td2.appendChild(img);
+    td.appendChild(div);
+    tr.appendChild(document.createTextNode(""));
+    tr.appendChild(td);
+    tr.appendChild(document.createTextNode(""));
+    tr.appendChild(td2);
+    tbody.appendChild(tr);
+    table.appendChild(tbody);
+            
+    div_respuestas.appendChild(table);
+    div_respuestas.appendChild(document.createTextNode(""));
+    
+    
+    
+    replaceSelectedText(textarea,"[["+(numresp-1)+"]]");
+    var numero_respuestas = document.getElementById("num_res_preg"+numpreg);
+    numero_respuestas.value = (numresp);
+}
+
+//Boton para eliminar un hueco de un ejercicio Texto-Hueco
+function TH_EliminarHueco(id_ejercicio,numpreg,numresp) {
+    var ta = document.getElementById("respuesta"+numresp+"_"+numpreg);
+    var texto_resp = ta.value;
+    var hueco = "[["+(numresp-1)+"]]";
+    
+    var ta_preg = document.getElementById("pregunta"+numpreg);
+    ta_preg.value = ta_preg.value.replace(hueco,texto_resp);
+    var tabla = document.getElementById("tablarespuesta"+numresp+"_"+numpreg);
+    
+    var total_resp = parseInt(document.getElementById("num_res_preg"+numpreg).value);
+    for (var k=numresp; k<=total_resp; k++) {
+        ta_preg.value = ta_preg.value.replace("[["+(k-1)+"]]","[["+(k-2)+"]]");
+    }
+    
+    EliminarRespuesta_IE(tabla,numpreg);
+    
+    var total_resp = parseInt(document.getElementById("num_res_preg"+numpreg).value);
+    for (var k=numresp; k<=total_resp; k++) {
+        var img = document.getElementById("eliminarrespuesta"+k+"_"+numpreg);
+        img.setAttribute("onclick","TH_EliminarHueco("+id_ejercicio+","+numpreg+","+numresp+")");
+        
+    }
+}
+
+//Boton para añadir una pregunta a un ejercicio Texto Hueco
+function TH_AddPregunta(id_ejercicio) {
+    divnumpreguntas = document.getElementById('num_preg');
+    numeropreguntas=divnumpreguntas.value;
+    alert("numero actual es"+ numeropreguntas);
+    anterior=document.getElementById('num_res_preg'+ numeropreguntas);
+    alert(anterior.id);
+    numeropreguntas= parseInt(numeropreguntas) +1;
+    divnumpreguntas.value=numeropreguntas;
+    alert("llega");
+    nuevodiv = document.createElement('div');
+    alert("aki tb llega");
+    nuevodiv.id= "tabpregunta"+numeropreguntas;
+    //Creo un nuevo hijo a la tabla general para la pregunta
+    alert("si");
+    var br = document.createElement('br');
+    var br1 = document.createElement('br');
+    var br2 = document.createElement('br');
+    tablapreg = document.createElement('table');
+    tablapreg.style.width="100%";
+
+    body= document.createElement('tbody');
+    nuevotr=document.createElement('tr');
+
+    body.appendChild(nuevotr);
+    nuevotd=document.createElement('td');
+    nuevotd.style.width="80%";
+    textareapreg=document.createElement('textarea');
+    textareapreg.style.width="900px";
+    textareapreg.setAttribute('class', 'pregunta');
+    textareapreg.name="pregunta"+numeropreguntas;
+    textareapreg.id="pregunta"+numeropreguntas;
+    //Añado el textarea de la prgunta
+    nuevotd.appendChild(textareapreg);
+
+    nuevotd1=document.createElement('td');
+    nuevotd1.style.width="5%";
+    imgborrar=document.createElement('img');
+    imgborrar.id="imgpregborrar"+numeropreguntas ;
+    imgborrar.src="./imagenes/delete.gif";
+    imgborrar.alt="eliminar respuesta";
+    imgborrar.style.height="10px";
+    imgborrar.style.width="10px";
+    imgborrar.setAttribute('onclick',"TH_DelPregunta("+id_ejercicio+","+numeropreguntas+")");
+    imgborrar.title="Eliminar Pregunta";
+
+    //
+
+    //icono de borrar pregunta
+    nuevotd1.appendChild(imgborrar);
+    nuevotd1.appendChild(br);
+
+    //Creación imagen añadir
+
+    imgañadir=document.createElement('img');
+    imgañadir.id="imgpreganadir"+numeropreguntas ;
+    imgañadir.src="./imagenes/añadir.gif";
+    imgañadir.alt="añadir respuesta";
+    imgañadir.style.height="15px";
+    imgañadir.style.width="15px";
+    imgañadir.setAttribute('onclick',"TH_addHueco_Modificar("+id_ejercicio+","+numeropreguntas+")");
+    imgañadir.title="Añadir Pregunta";
+
+    nuevotd1.appendChild(imgañadir);
+    nuevotr.appendChild(nuevotd);
+    nuevotr.appendChild(nuevotd1);
+    tablapreg.appendChild(body);
+    //le añado sus br
+    nuevodiv.appendChild(br);
+    nuevodiv.appendChild(br1);
+    nuevodiv.appendChild(br2);
+    nuevodiv.appendChild(tablapreg);
+    nuevodiv.appendChild(br);
+
+    //div de respuestas
+
+
+    divrespuesta=document.createElement('div');
+    divrespuesta.id="respuestas"+numeropreguntas;
+    divrespuesta.setAttribute('class',"respuesta");
+
+      
+
+    nuevodiv.appendChild(divrespuesta);
+
+         
+
+    //lo inserto despues de anterior
+    insertAfter(anterior,nuevodiv);
+
+
+    //<input type="hidden" value="1" id="num_res_preg3" name="num_res_preg3
+
+    nuevoinput=document.createElement('input');
+    nuevoinput.type="hidden";
+    nuevoinput.value="0";
+    nuevoinput.id="num_res_preg"+numeropreguntas;
+    nuevoinput.name="num_res_preg"+numeropreguntas;
+
+    //añado el numero de respuestas de la nueva pregunta
+    insertAfter(nuevodiv,nuevoinput)
+
+    alert("fin");
+}
+
+//Boton para eliminar una pregunta a un ejercicio Texto Hueco
+function TH_DelPregunta(id_ejercicio,numpreg) {
+    divnumpreguntas = document.getElementById('num_preg');
+    numeropreguntas=divnumpreguntas.value;
+    
+    var Pregunta = document.getElementById("tabpregunta"+numpreg);
+
+    //Compruebo que al menos hay una pregunta
+
+    if(parseInt(numeropreguntas)>1){
+        padre=Pregunta.parentNode;
+        padre.removeChild(Pregunta.nextSibling);
+        padre.removeChild(Pregunta);
+
+        //le quieto uno al número de preguntas
+
+
+        numeropreguntas= parseInt(numeropreguntas) - 1;
+        divnumpreguntas.value=numeropreguntas;
+
+        siguientepreg= parseInt(numpreg)+1;
+        //Actualizo el resto de pregunta
+        alert(siguientepreg);
+        preg=parseInt(numpreg);
+        alert("preg"+preg);
+        for(j=siguientepreg;j<=numeropreguntas+1;j++){
+            alert('tabpregunta'+j);
+            mitabla=document.getElementById('tabpregunta'+j);
+            mitabla.id='tabpregunta'+preg;
+
+            mitextarea=document.getElementById('pregunta'+j);
+            mitextarea.id='pregunta'+preg;
+            mitextarea.name='pregunta'+preg;
+
+            miimgborrar=document.getElementById('imgpregborrar'+j);
+            miimgborrar.setAttribute("onclick","TH_DelPregunta("+id_ejercicio+","+preg+")");
+            miimgborrar.id='imgpregborrar'+preg;
+
+            miimgañadir=document.getElementById('imgpreganadir'+j);
+            miimgañadir.setAttribute("onclick","TH_addHueco_Modificar("+id_ejercicio+","+preg+")");
+            miimgañadir.id='imgpreganadir'+preg;
+
+            //Obtengo el numero de respuestas de la pregunta
+
+            minumeroresp=document.getElementById('num_res_preg'+j);
+            numresp=minumeroresp.value;
+            //Actualizo las respuestas
+            divrespuestas=document.getElementById('respuestas'+j);
+            divrespuestas.id='respuestas'+preg;
+            for(k=1;k<=parseInt(numresp);k++){
+
+                //Las tables
+                alert("llega");
+                tablarespuestas=document.getElementById("tablarespuesta"+k+"_"+j);
+                tablarespuestas.id="tablarespuesta"+k+"_"+preg;
+                alert("ki tba");
+                //los tr de las tables
+                lostr=document.getElementById('trrespuesta'+k+"_"+j);
+                lostr.id='trrespuesta'+k+"_"+preg;
+                alert("siiiiii");
+
+                
+
+
+                larespuesta=document.getElementById('respuesta'+k+"_"+j);
+                larespuesta.id='respuesta'+k+"_"+preg;
+                larespuesta.name='respuesta'+k+"_"+preg;
+
+                //la imagen de eliminar
+
+                laimageneliminar=document.getElementById('eliminarrespuesta'+k+"_"+j);
+                laimageneliminar.id='eliminarrespuesta'+k+"_"+preg;
+                laimageneliminar.setAttribute("onclick","TH_EliminarHueco("+id_ejercicio+","+preg+","+k+")");
+
+                
+
+            }
+
+            alert("fin hijos");
+            //Cambio el número de respuestas
+            minumeroresp=document.getElementById('num_res_preg'+j);
+            minumeroresp.id='num_res_preg'+preg;
+            minumeroresp.name='num_res_preg'+preg;
+
+            preg=preg+1;
+        }
+        
+    }else{
+        alert("El ejercicio debe tener al menos una pregunta");
+    }
 }
