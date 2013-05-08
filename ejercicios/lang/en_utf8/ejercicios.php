@@ -160,4 +160,6 @@ $string["TH_mostrar_pistas"]="¿Desea que se muestren pistas sobre la longitud d
 $string["TH_mostrar_palabras"]="¿Desea que aparezcan las soluciones de los huecos en la parte inferior del ejercicio?";
 $string["TH_mostrar_soluciones"]="¿Desea que aparezcan las soluciones al pulsar el boton de Corregir los ejercicios?";
 $string['TH_configuracion_ejercicio']="Configuraci&oacute;n del Ejercicio";
+$string['TH_pistas']="Pistas";
+$string['TH_pista_longitud']='Ocupa {$a} simbolos';
 ?>

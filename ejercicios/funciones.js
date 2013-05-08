@@ -384,7 +384,7 @@ $(document).ready(function(){
     
     alert("Funciona lo de ready function");
     
-    
+    //$(document).tooltip({track: true,my: "left+15 center", at: "right center"});
     
     
     setTextareaHeight($('.adaptHeightInput'));
@@ -5680,9 +5680,9 @@ function TH_EliminarHueco(id_ejercicio,numpreg,numresp) {
     EliminarRespuesta_IE(tabla,numpreg);
     
     var total_resp = parseInt(document.getElementById("num_res_preg"+numpreg).value);
-    for (var k=numresp; k<=total_resp; k++) {
+    for (var k=1; k<=total_resp; k++) {
         var img = document.getElementById("eliminarrespuesta"+k+"_"+numpreg);
-        img.setAttribute("onclick","TH_EliminarHueco("+id_ejercicio+","+numpreg+","+numresp+")");
+        img.setAttribute("onclick","TH_EliminarHueco("+id_ejercicio+","+numpreg+","+k+")");
         
     }
 }
