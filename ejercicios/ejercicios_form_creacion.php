@@ -1104,7 +1104,7 @@ class mod_ejercicios_creando_ejercicio_texto_hueco extends moodleform_mod {
                              $mform->addElement('html',$titulo);                           
 
                             //Cuadro de texto donde se introducira el texto del cual se sacaran los huecos                          
-                            $mform->addElement('textarea', 'pregunta'.$aux, get_string("TH_introduzca_texto", 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
+                            $mform->addElement('textarea', 'pregunta'.$aux, get_string("TH_introduzca_texto", 'ejercicios'), 'wrap="virtual" rows="5" cols="50"');
                                                         
                             
                             //Se añade un boton para que se cree un nuevo hueco. 

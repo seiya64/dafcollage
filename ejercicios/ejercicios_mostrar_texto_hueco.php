@@ -54,6 +54,20 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
         
     }
     
+    //Genera el codigo para almacenar en una variable de javascript las respuestas
+    function genera_matriz_respuestas_js($respuestas) {
+        $salida = '<script type="text/javascript">';
+        $salida .= ' var respuestas = new Array();';
+        for ($i=0; $i<sizeof($respuestas); $i++){
+            $salida .= 'respuestas['.$i.']=new Array();';
+            for ($j=0; $j<sizeof($respuestas[$i]); $j++) {
+                $salida .= 'respuestas['.$i.']['.$j.']="' . $respuestas[$i][$j]->get('respuesta') . '";';
+            }
+        }
+        $salida.='</script>';
+        return $salida;
+    }
+    
     /**
      * Genera el codigo html para presentar el texto de la pregunta con los huecos
      * @param string $texto Texto de la pregunta
@@ -92,6 +106,7 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
                 $nombre = "resp" . ($numero+1) . "_" . $numpreg;
                 $nombre_help = "help" . ($numero+1) . "_" . $numpreg;
                 $salida .= '<textarea style="resize:none;" name="'.$nombre.'" id="' . $nombre . '" rows="1" cols="' . $long . '" ></textarea>';
+                $salida .= '<img id="img_' . $nombre . '" />'; 
                 if ($mostrar_pistas) {
                     //$salida .= '<div id="'.$nombre_help.'" style="display:none;" >' . get_string('TH_pista_longitud','ejercicios',$long) . '</div>';
                     //$salida .= '<script type="text/javascript" >$("#'.$nombre_help.'").tooltip({track: true,my: "left+15 center", at: "right center"}););</script>';
@@ -270,6 +285,9 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
                             $tabla_imagenes.='<input type="hidden" name="tipo_ej" id="tipo_ej" value="AM"/>';
                             $tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';*/
                             
+                            //Añadir las respuestas en una variable en javascript
+                            $tabla_imagenes .= $this->genera_matriz_respuestas_js($respuestas);
+                            
                             
                             //------------------
                             //$aleatorios_generados = array();    
@@ -340,7 +358,7 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
                             
 
                             //inserto el número de preguntas
-
+                            $tabla_imagenes.='<input type="hidden" name="tipo_ej" id="tipo_ej" value="TH"/>';
                             $tabla_imagenes.='<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
                             for ($l=0; $l<sizeof($preguntas); $l++){
                                 $tabla_imagenes.='<input type="hidden" id="num_resp_preg'.($l+1).'" name="num_resp_preg'.($l+1).'" value="'.sizeof($respuestas[$l]).'"/>';
@@ -481,14 +499,14 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
                                     if ($modificable == true) { // Si el ejercicio era mio y estoy buscando
                                         $tabla_imagenes = '<center><input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                                     } else { //Si soy alumno
-                                        $tabla_imagenes = '<center><input type="button" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
+                                        $tabla_imagenes = '<center><input type="button" onclick="TH_Corregir('.$id_ejercicio.','.$mostrar_soluciones.')" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
                                         $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
                                         $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                                     }
                                 }
                             } else {
 
-                                $tabla_imagenes = '<center><input type="button" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
+                                $tabla_imagenes = '<center><input type="button" onclick="TH_Corregir('.$id_ejercicio.','.$mostrar_soluciones.')" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
                                 $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
                                 $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                             }

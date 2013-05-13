@@ -407,6 +407,7 @@ $(document).ready(function(){
     } else if (tipo_ej=="") {
         arrastrar_AS();
     }
+    else if (tipo_ej=="TH") {}
     
 
     /*var correcto=new Array();
@@ -5881,5 +5882,29 @@ function TH_DelPregunta(id_ejercicio,numpreg) {
         
     }else{
         alert("El ejercicio debe tener al menos una pregunta");
+    }
+}
+
+//Boton para corregir un ejercicio de Texto Hueco
+function TH_Corregir(id_ejercicio,mostrar_soluciones) {
+    alert("TH CORREGIR ENTRA AQUI");
+    
+    var numpreg = parseInt(document.getElementById("num_preg").value);
+    for (var i=1; i<=numpreg; i++) {
+        var numresp = parseInt(document.getElementById("num_resp_preg"+i).value);
+        for (var j=1; j<=numresp; j++) {
+            var resp = document.getElementById("resp"+j+"_"+i);
+            if (resp.value===respuestas[i-1][j-1]) {
+                var img = document.getElementById("img_resp"+j+"_"+i);
+                img.setAttribute("src","./imagenes/correcto.png");
+            }
+            else {
+                var img = document.getElementById("img_resp"+j+"_"+i);
+                img.setAttribute("src","./imagenes/incorrecto.png");
+                if (mostrar_soluciones) {
+                    resp.value = respuestas[i-1][j-1];
+                }
+            }
+        }
     }
 }
