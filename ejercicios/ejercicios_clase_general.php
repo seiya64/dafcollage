@@ -2999,4 +2999,113 @@ class ejercicios_texto_hueco {
     }
 }
 
+
+
+//------- Tablas para ejercicios Ordenar Elementos ------------------
+//Tabla que sirve para guardar las respuestas de los ejercicios Ordenar Elementos
+class ejercicios_ordenar_elementos_resp {
+
+    var $id;
+    var $id_pregunta;
+    var $orden;
+    var $suborden;
+    var $respuesta;
+
+    //Contructor por defecto y con parametros
+    function ejercicios_ordenar_elementos_resp($id = NULL,$id_pregunta=NULL,$orden=NULL, $suborden=NULL, $respuesta=NULL) {
+        
+        $this->id = $id;
+        $this->id_pregunta = $id_pregunta;
+        $this->orden = $orden;
+        $this->suborden = $suborden;
+        $this->respuesta = $respuesta;
+    }
+
+    //Obtener cada uno de los atributos de la tabla
+    function get($param) {
+
+        // $param = strtolower($param);
+        switch ($param) {
+            default:
+            case 'id':
+                return $this->id;
+                break;
+
+            case 'id_pregunta':
+                return $this->id_pregunta;
+                break;
+            
+            case 'orden':
+                return $this->orden;
+                break;
+            case 'suborden':
+                return $this->suborden;
+                break;
+            case 'respuesta':
+                return $this->respuesta;
+                break;
+        }
+    }
+
+    //Inserta en la bd la instancia correspondiente a la clase y devuelve el identificador
+    //de la nueva instancia creada
+    function insertar() {
+        $id = insert_record('ejercicios_ordenar_elementos_resp', $this, true);
+        //Devuelve el identificador del ejercicios creado
+
+        return $id;
+    }
+
+    //Modifica una instacia
+    function alterar() {
+
+        update_record('ejercicios_ordenar_elementos_resp', $this, false);
+    }
+
+    //Borra todas las respuestas asociadas a una pregunta
+    function borrar_id_pregunta($id_pregunta) {
+        delete_records('ejercicios_ordenar_elementos_resp', 'id_pregunta', $id_pregunta);
+    }
+    
+    //Borra un registro dado su id
+    function borrar_id($id) {
+        delete_record('ejercicios_ordenar_elementos_resp', 'id', $id);
+    }
+
+    //Obtiene el texto por id
+    function obtener_uno($id) {
+        $ejer = get_record('ejercicios_ordenar_elementos_resp', 'id', $id);
+        $this->id = $ejer->id;
+        $this->id_pregunta = $ejer->id_pregunta;
+        $this->orden = $ejer->orden;
+        $this->suborden = $ejer->suborden;
+        $this->respuesta = $ejer->respuesta;      
+     
+        return $this;
+    }
+
+    function obtener_todos_id_pregunta($id_pregunta) {
+        $sql = 'SELECT * FROM  mdl_ejercicios_ordenar_elementos_resp WHERE id_pregunta=' . $id_pregunta;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new ejercicios_ordenar_elementos_resp();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+    
+    
+}
+
 ?>

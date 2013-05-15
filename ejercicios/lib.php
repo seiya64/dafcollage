@@ -51,6 +51,7 @@ require_once('ejercicios_mostrar_asociacion_simple.php');
 require_once('ejercicios_mostrar_asociacion_multiple.php');
 require_once('ejercicios_mostrar_identificar_elementos.php');
 require_once('ejercicios_mostrar_texto_hueco.php');
+require_once('ejercicios_mostrar_ordenar_elementos.php');
 /**
  * Given an object containing all the necessary data,
  * (defined by the form in mod_form.php) this function
@@ -303,10 +304,15 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
                     $mform = new mod_ejercicios_creando_ejercicio_identificar_elementos($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
                     $mform->pintarformulario_identificarelementos($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
                     break;
-                case 3:
+                case 3: //Texto Hueco
                     echo "Texto Hueco";
                     $mform = new mod_ejercicios_creando_ejercicio_texto_hueco($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
                     $mform->pintarformulariotextohueco($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
+                    break;
+                case 7: //Ordenar Elementos
+                    echo "Ordenar Elementos";
+                    $mform = new mod_ejercicios_creando_ejercicio_ordenar_elementos($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
+                    $mform->pintarformularioordenarelementos($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
                     break;
             }
            
@@ -355,6 +361,11 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
                         echo "CREADO IE";
                         $mform->mostrar_ejercicio_identificar_elementos($id, $id_ejercicio, $buscar, $tipo_origen);
                         
+                        break;
+                    case 7: //si es ordenar elementos
+                        echo "mostrando ejercicio texto hueco";
+                        $mform= new mod_ejercicios_mostrar_ejercicio_ordenar_elementos($id,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
+                        $mform->mostrar_ejercicio_ordenar_elementos($id,$id_ejercicio,$buscar,$tipo_origen,$trespuesta,$tipocreacion);
                         break;
             }
             break;

@@ -162,4 +162,13 @@ $string["TH_mostrar_soluciones"]="¿Desea que aparezcan las soluciones al pulsar
 $string['TH_configuracion_ejercicio']="Configuraci&oacute;n del Ejercicio";
 $string['TH_pistas']="Pistas";
 $string['TH_pista_longitud']='Ocupa {$a} simbolos';
+
+//Generador de Ejercicios -- Ordenar Elementos -- Etiqueta OE
+$string['OE_texto']="Texto ";
+$string['OE_pregunta']="Introduzca un texto completo o frases sueltas";
+$string['OE_seleccione']="Seleccione los elementos que hay que ordenar (palabras sueltas o párrafos etc.) siguiendo el orden correcto. En caso de tener más de una opción de orden correcto, es necesario que lo indique marcando las diferentes posibilidades.";
+$string['OE_add_orden']="Añadir Orden";
+$string['OE_add_palabra']="Añadir Palabra";
+$string['OE_pregunta']='Pregunta {$a} :';
+$string['OE_orden']='Orden {$a} :';
 ?>
