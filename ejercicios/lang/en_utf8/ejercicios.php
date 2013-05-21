@@ -171,4 +171,5 @@ $string['OE_add_orden']="Añadir Orden";
 $string['OE_add_palabra']="Añadir Palabra";
 $string['OE_pregunta']='Pregunta {$a} :';
 $string['OE_orden']='Orden {$a} :';
+$string['OE_introduzca_texto']='En esta area de texto puede escribir, y despues puede seleccionar texto y añadir nuevas palabras a los ordenes';
 ?>

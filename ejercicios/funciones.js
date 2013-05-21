@@ -379,6 +379,67 @@ function arrastrar_AM() {
     });
 }
 
+function arrastrar_OE() {
+    alert("ARRASTAR OE");
+    
+    
+    //var numpreg = parseInt(document.getElementById("num_preg").value);
+    //var numresp = new Array();
+    
+    
+    
+    //$numimagen = $(".numero").attr('id');
+    
+    /*for(i=0;i<=numpreg;i++){
+        correcto[i]=0;
+        puesto[i]=0;
+    }*/
+     
+
+    $('.item').draggable({
+        helper: 'clone'
+    });
+    $('.marquito').droppable( {
+        drop: handleDropEvent
+    } );
+  
+
+
+    function handleDropEvent( event, ui ) {
+        var draggable = ui.draggable;
+        alert( 'The square with ID "' + draggable.attr('id') + '" was dropped onto "'+$(this).attr('id')+ '" !' );
+        //alert("$( this ).find( '.item' ): " + $( this ).find( ".item" ));
+        if( ($( this ).find( ".item" ).length)==0){
+            if($(this).attr('preg')==draggable.attr('preg')) {
+                $(this).append($(ui.draggable));
+            }
+            else {
+                alert("No se puede colocar una palabra de una pregunta en un hueco de otra pregunta distinta.");
+            }
+        }
+        else {
+            alert("No se pueden poner dos palabras en un mismo hueco.");
+        }
+        
+
+    }
+    
+ 
+    $('#menuaux li #classa').click(function(event){
+       
+        var elem = $(this).next().next();
+   
+        if(elem.is('ul')){
+           
+            event.preventDefault(event);
+         
+            $('#menuaux ul:visible').not(elem).slideUp();
+           
+            elem.slideToggle();
+        }
+    });
+}
+
 
 $(document).ready(function(){
     
@@ -406,6 +467,9 @@ $(document).ready(function(){
         arrastrar_AM();
     } else if (tipo_ej=="") {
         arrastrar_AS();
+    }
+    else if (tipo_ej=="OE") {
+        arrastrar_OE();
     }
     else if (tipo_ej=="TH") {}
     
@@ -5978,5 +6042,331 @@ function OE_addOrden_Creacion(id_ejercicio,numpreg) {
     
     var numorden = document.getElementById("num_orden_"+numpreg);
     numorden.value=orden;
+    
+}
+
+//Boton para añadir una palabra en un ejercicio Ordenar Elementos
+function OE_addPalabra_Modificar(id_ejercicio,numpreg,orden) {
+    var textarea = document.getElementById("pregunta"+numpreg); //Cojo el textarea
+    var numresp = parseInt(document.getElementById("num_res_preg"+numpreg+"_"+orden).value)+1;
+    var texto_sel = getSelectedText(textarea);
+    var sel = getInputSelection(textarea);
+    
+    
+    //Comprobar que no se haya seleccionado una cadena vacia
+    if (texto_sel==="") {
+        alert("No se puede crear un hueco vacio. Escriba algo de texto y seleccione para crear un hueco.");
+        return;
+    }
+        
+    
+    var div_respuestas = document.getElementById("orden"+numpreg+"_"+orden);   
+    var table = document.createElement("table");
+    var tr = document.createElement("tr");             
+    table.width="50%";
+    table.id="tablarespuesta"+numresp+"_"+orden+"_"+numpreg;
+    if (numresp%2==0) {
+        var tablaAnterior = document.getElementById("tablarespuesta"+(numresp-1)+"_"+orden+"_"+numpreg);
+        tablaAnterior.style.cssFloat="left";
+    }        
+    var tbody = document.createElement("tbody");          
+    tr.id="trrespuesta"+numresp+"_"+orden+"_"+numpreg;
+    var td = document.createElement("td");
+    td.style.width="80%";
+    var div = document.createElement("textarea");
+    div.style.width="300px";
+    div.setAttribute("class","resp");
+    div.setAttribute("readonly","yes");
+    div.name="respuesta"+numresp+"_"+orden+"_"+numpreg;
+    div.id="respuesta"+numresp+"_"+orden+"_"+numpreg;
+    var text = document.createTextNode(texto_sel);
+           
+    div.appendChild(text);
+            
+    var td2 = document.createElement("td");
+    td2.style.width="5%";
+         
+         
+    var img= document.createElement("img");
+    img.id="eliminarrespuesta"+numresp+"_"+orden+"_"+numpreg;
+    img.src="./imagenes/delete.gif";
+    img.style.height="10px";
+    img.style.width="10px";
+    img.setAttribute("onclick","OE_EliminarResp("+id_ejercicio+","+numpreg+","+orden+","+numresp+")");
+    img.title="Eliminar Respuesta";
+            
+            
+    
+    td2.appendChild(img);
+    td.appendChild(div);
+    tr.appendChild(document.createTextNode(""));
+    tr.appendChild(td);
+    tr.appendChild(document.createTextNode(""));
+    tr.appendChild(td2);
+    tbody.appendChild(tr);
+    table.appendChild(tbody);
+            
+    div_respuestas.appendChild(table);
+    div_respuestas.appendChild(document.createTextNode(""));
+    
+    var numero_respuestas = document.getElementById("num_res_preg"+numpreg+"_"+orden);
+    numero_respuestas.value = (numresp);
+}
+
+//Boton para eliminar una palabra en los ejercicios Ordenar Elementos
+function OE_EliminarResp(id_ejercicio,numpreg,orden,numresp) {
+    var respuesta = document.getElementById("tablarespuesta"+numresp+"_"+orden+"_"+numpreg);
+    
+    padre=respuesta.parentNode;
+    padre.removeChild(respuesta.nextSibling);
+    padre.removeChild(respuesta);
+   
+    var k=padre.childNodes.length;
+     
+    j=0;
+    
+    alert("Numero de hijos: " + k);
+   
+    for(i=0;i<k;i=i+2){
+        j=j+1;
+        alert('Iteracion bucle: ' + i);
+        alert("J: " + j);
+        padre.childNodes[i].setAttribute("id",'tablarespuesta'+j+"_"+orden+'_'+numpreg);
+        if (i==k-2) {
+            alert("Entra en i==k-1");
+            var tabla = document.getElementById("tablarespuesta"+j+"_"+orden+"_"+numpreg);
+            tabla.style.cssFloat="none";
+        }
+        else if (j%2!=0) {
+            alert("Entra en j%2!=0");
+            var tabla = document.getElementById("tablarespuesta"+j+"_"+orden+"_"+numpreg);
+            tabla.style.cssFloat="left";
+        }
+        
+        
+        padre.childNodes[i].childNodes[0].childNodes[0].setAttribute("id",'trrespuesta'+j+"_"+orden+'_'+numpreg);
+
+        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[0].setAttribute("id",'respuesta'+j+"_"+orden+'_'+numpreg);
+        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[0].setAttribute("name",'respuesta'+j+"_"+orden+'_'+numpreg);
+      
+        
+        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes[0].setAttribute("id",'eliminarrespuesta'+j+"_"+orden+'_'+numpreg);
+        padre.childNodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes[0].setAttribute("onclick",'OE_EliminarResp('+id_ejercicio+","+numpreg+","+orden+","+j+")");
+        
+        
+    }
+    //Tengo una respuesta menos
+    numerorespuestas = document.getElementById('num_res_preg'+numpreg+"_"+orden);
+       
+    numerorespuestas.value=parseInt(numerorespuestas.value)-1;
+}
+
+//Boton para añadir un nuevo orden a una pregunta de un ejercicio Ordenar Elementos
+function OE_addOrden_Modificar(id_ejercicio,numpreg) {
+    var div_pregunta = document.getElementById("tabpregunta"+numpreg);
+    var input_orden = document.getElementById("num_orden_"+numpreg);
+    var orden = parseInt(input_orden.value)+1;
+    
+    var table = createElement("table",{id:"table_h3_orden_"+numpreg+"_"+orden}); div_pregunta.appendChild(table);
+    var tbody = createElement("tbody",{}); table.appendChild(tbody);
+    var tr = createElement("tr",{});    tbody.appendChild(tr);
+    var td1 = createElement("td",{});   tr.appendChild(td1);
+    var h3 = createElement("h3",{id:"h3_orden_"+numpreg+"_"+orden});       td1.appendChild(h3);
+    h3.appendChild(document.createTextNode("Orden "+orden+": "));
+    
+    var td2 = createElement("td",{});  tr.appendChild(td2);
+    var img1 = createElement("img",{id: "add_palabra_"+numpreg+"_"+orden, src: "./imagenes/añadir.gif",
+                                    alt: "añadir palabra", height: "15px", width: "15px", title: "Añadir Palabra",
+                                    onclick: "OE_addPalabra_Modificar("+id_ejercicio+","+numpreg+","+orden+")"});
+    var img2 = createElement("img",{id: "del_orden_"+numpreg+"_"+orden, src: "./imagenes/delete.gif",
+                                    alt: "delete orden", height: "15px", width: "15px", title: "Eliminar Orden",
+                                    onclick: "OE_delOrden_Modificar("+id_ejercicio+","+numpreg+","+orden+")"});
+    td2.appendChild(img1);
+    td2.appendChild(img2);
+    
+    var div_respuestas = createElement("div",{id: "orden"+numpreg+"_"+orden, class: "respuesta"});
+    div_pregunta.appendChild(div_respuestas);
+    var input_resp = createElement("input",{type:"hidden",name:"num_res_preg"+numpreg+"_"+orden,
+                                            id:"num_res_preg"+numpreg+"_"+orden, value:"0"});
+    div_pregunta.appendChild(input_resp);
+    
+    input_orden.value = orden;   
+}
+
+//Boton para eliminar un orden de un ejercicio Ordenar Elementos
+function OE_delOrden_Modificar(id_ejercicio,numpreg,orden ) {
+    var input_orden = document.getElementById("num_orden_"+numpreg);
+    var numorden = parseInt(input_orden.value);
+    
+    if(numorden>1) {
+        //Eliminar los nodos
+        var table = document.getElementById("table_h3_orden_"+numpreg+"_"+orden);
+        table.parentNode.removeChild(table);
+        var div = document.getElementById("orden"+numpreg+"_"+orden);
+        div.parentNode.removeChild(div);
+        var input = document.getElementById("num_res_preg"+numpreg+"_"+orden);
+        input.parentNode.removeChild(input);
+
+        //Ajustar todo
+        for (var i=orden+1; i<=numorden; i++) {
+            var q = i-1;
+            var table = document.getElementById("table_h3_orden_"+numpreg+"_"+i);
+            table.setAttribute("id","table_h3_orden_"+numpreg+"_"+q);
+            var h3 = document.getElementById("h3_orden_"+numpreg+"_"+i);
+            h3.setAttribute("id","h3_orden_"+numpreg+"_"+q);
+            h3.removeChild(h3.childNodes[0]);
+            h3.appendChild(document.createTextNode("Orden "+q+" :"));
+            var img1 = document.getElementById("add_palabra_"+numpreg+"_"+i);
+            img1.setAttribute("id","add_palabra_"+numpreg+"_"+q);
+            img1.setAttribute("name","add_palabra_"+numpreg+"_"+q);
+            img1.setAttribute("onclick","OE_addPalabra_Modificar("+id_ejercicio+","+numpreg+","+q+")");
+            var img2 = document.getElementById("del_orden_"+numpreg+"_"+i);
+            img2.setAttribute("id","del_orden_"+numpreg+"_"+q);
+            img2.setAttribute("name","del_orden_"+numpreg+"_"+q);
+            img2.setAttribute("onclick","OE_delOrden_Modificar("+id_ejercicio+","+numpreg+","+q+")");
+            var div = document.getElementById("orden"+numpreg+"_"+i);
+            div.setAttribute("id","orden"+numpreg+"_"+q);
+            var resp_i = document.getElementById("num_res_preg"+numpreg+"_"+i);
+            resp_i.setAttribute("id","num_res_preg"+numpreg+"_"+q);
+            resp_i.setAttribute("name","num_res_preg"+numpreg+"_"+q);
+            var numresp = parseInt(resp_i.value);
+            for (var j=1; j<=numresp; j++) {
+                var tabla_resp = document.getElementById("tablarespuesta"+j+"_"+i+"_"+numpreg);
+                tabla_resp.setAttribute("id","tablarespuesta"+j+"_"+q+"_"+numpreg);
+                var tr = document.getElementById("trrespuesta"+j+"_"+i+"_"+numpreg);
+                tr.setAttribute("id","trrespuesta"+j+"_"+q+"_"+numpreg);
+                var texta = document.getElementById("respuesta"+j+"_"+i+"_"+numpreg);
+                texta.setAttribute("id","respuesta"+j+"_"+q+"_"+numpreg);
+                texta.setAttribute("name","respuesta"+j+"_"+q+"_"+numpreg);
+                var img = document.getElementById("eliminarrespuesta"+j+"_"+i+"_"+numpreg);
+                img.setAttribute("id","eliminarrespuesta"+j+"_"+q+"_"+numpreg);
+                img.setAttribute("onclick","OE_EliminarResp("+id_ejercicio+","+numpreg+","+q+","+j+")");
+            }
+
+        }
+        input_orden.value = numorden-1;
+    } else {
+        alert("Debe haber al menos un orden.");
+    }
+}
+
+//Boton para eliminar la pregunta de un ejercicio de Ordenar Elementos
+function OE_DelPregunta(id_ejercicio,numpreg) {
+    var input_preg = document.getElementById("num_preg");
+    var numpregs = parseInt(input_preg.value);
+    
+    if ((numpregs-1)>0) {
+        var div = document.getElementById("tabpregunta" + numpreg);
+        div.parentNode.removeChild(div);
+        
+        for (var i = numpreg + 1; i <= numpregs; i++) {
+            var q = i - 1;
+            var div = document.getElementById("tabpregunta" + i);
+            div.setAttribute("id", "tabpregunta" + q);
+            var table = document.getElementById("table_pregunta" + i);
+            table.setAttribute("id", "table_pregunta" + q);
+            var h2 = document.getElementById("h2_pregunta" + i);
+            h2.setAttribute("id", "h2_pregunta" + q);
+            h2.removeChild(h2.childNodes[0]);
+            h2.appendChild(document.createTextNode("Pregunta " + q + " :"));
+            var texta = document.getElementById("pregunta" + i);
+            texta.setAttribute("id", "pregunta" + q);
+            texta.setAttribute("name", "pregunta" + q);
+            var img1 = document.getElementById("imgpregborrar" + i);
+            img1.setAttribute("id", "imgpregborrar" + q);
+            img1.setAttribute("onclick", "OE_DelPregunta(" + id_ejercicio + "," + q + ")");
+            var img2 = document.getElementById("imgpreganadir" + i);
+            img2.setAttribute("id", "imgpreganadir" + q);
+            img2.setAttribute("onclick", "OE_addOrden_Modificar(" + id_ejercicio + "," + q + ")");
+            var input_orden = document.getElementById("num_orden_" + i);
+            input_orden.setAttribute("id", "num_orden_" + q);
+            input_orden.setAttribute("name", "num_orden_" + q);
+            var numorden = parseInt(input_orden.value);
+            for (var j = 1; j <= numorden; j++) {
+                var table = document.getElementById("table_h3_orden_" + i + "_" + j);
+                table.setAttribute("id", "table_h3_orden_" + q + "_" + j);
+                var h3 = document.getElementById("h3_orden_" + i + "_" + j);
+                h3.setAttribute("id", "h3_orden_" + q + "_" + j);
+                var img1 = document.getElementById("add_palabra_" + i + "_" + j);
+                img1.setAttribute("id", "add_palabra_" + q + "_" + j);
+                img1.setAttribute("onclick", "OE_addPalabra_Modificar(" + id_ejercicio + "," + q + "," + j + ")");
+                var img2 = document.getElementById("del_orden_" + i + "_" + j);
+                img2.setAttribute("id", "del_orden_" + q + "_" + j);
+                img2.setAttribute("onclick", "OE_delOrden_Modificar(" + id_ejercicio + "," + q + "," + j + ")");
+                var div = document.getElementById("orden" + i + "_" + j);
+                div.setAttribute("id", "orden" + q + "_" + j);
+                var input_resp = document.getElementById("num_res_preg" + i + "_" + j);
+                input_resp.setAttribute("id", "num_res_preg" + q + "_" + j);
+                input_resp.setAttribute("name", "num_res_preg" + q + "_" + j);
+                var numresp = parseInt(input_resp.value);
+                for (var k = 1; k <= numresp; k++) {
+                    var tabla_resp = document.getElementById("tablarespuesta" + k + "_" + j + "_" + i);
+                    tabla_resp.setAttribute("id", "tablarespuesta" + k + "_" + j + "_" + q);
+                    var tr = document.getElementById("trrespuesta" + k + "_" + j + "_" + i);
+                    tr.setAttribute("id", "trrespuesta" + k + "_" + j + "_" + q);
+                    var texta = document.getElementById("respuesta" + k + "_" + j + "_" + i);
+                    texta.setAttribute("id", "respuesta" + k + "_" + j + "_" + q);
+                    texta.setAttribute("name", "respuesta" + k + "_" + j + "_" + q);
+                    var img = document.getElementById("eliminarrespuesta" + k + "_" + j + "_" + i);
+                    img.setAttribute("id", "eliminarrespuesta" + k + "_" + j + "_" + q);
+                    img.setAttribute("onclick", "OE_EliminarResp(" + id_ejercicio + "," + q + "," + j + "," + k + ")");
+                }
+            }
+        }
+        
+        input_preg.value = numpregs - 1;        
+        
+    } else {
+        alert("Debe haber al menos una pregunta.");
+    }
+}
+
+//Boton para añadir una pregunta a un ejercicio de Ordenar Elementos
+function OE_AddPregunta(id_ejercicio) {
+    var input_preg = document.getElementById("num_preg");
+    var numpregs = parseInt(input_preg.value);
+    var npreg = numpregs+1;
+    
+    //Siempre va a haber al menos una pregunta
+    var divpregunta1 = document.getElementById("tabpregunta1");
+    var padre = divpregunta1.parentNode;
+    
+    var div = createElement("div",{id:"tabpregunta"+npreg});
+    padre.insertBefore(div,input_preg);
+    var table = createElement("table",{id:"table_pregunta"+npreg,style:"width:100%;"}); 
+    div.appendChild(table);
+    var tbody = createElement("tbody",{}); table.appendChild(tbody);
+    var tr = createElement("tr",{}); tbody.appendChild(tr);
+    var td1 = createElement("td",{style:"witdh:80%;"}); tr.appendChild(td1);
+    var h2 = createElement("h2",{id:"h2_pregunta"+npreg}); td1.appendChild(h2);
+    h2.appendChild(document.createTextNode("Pregunta "+npreg+" :"));
+    var texta = createElement("textarea",{style:"width: 900px;",class:"pregunta",
+                                          name:"pregunta"+npreg, id:"pregunta"+npreg});
+    texta.appendChild(document.createTextNode("En esta area de texto puede escribir, y despues puede seleccionar texto y añadir nuevas palabras a los ordenes"));
+    td1.appendChild(texta);
+    var td2 = createElement("td",{style:"width:5%;"}); tr.appendChild(td2);
+    var img1 = createElement("img",{id:"imgpregborrar"+npreg, src:"./imagenes/delete.gif",
+                                    alt:"eliminar respuesta",height:"10px",width:"10px",
+                                    onclick:"OE_DelPregunta("+id_ejercicio+","+npreg+")",
+                                    title:"Eliminar Pregunta"});
+    var img2 = createElement("img",{id:"imgpreganadir"+npreg, src:"./imagenes/añadir.gif",
+                                    alt:"añadir hueco",height:"15px",width:"15px",
+                                    onclick:"OE_addOrden_Modificar("+id_ejercicio+","+npreg+")",
+                                    title:"Añadir Orden"});
+    td2.appendChild(img1);
+    td2.appendChild(img2);
+    var input_orden = createElement("input",{type:"hidden",value:"0",id:"num_orden_"+npreg,
+                                             name:"num_orden_"+npreg});
+    div.appendChild(input_orden);
+    
+    input_preg.value=npreg;
+    
+    OE_addOrden_Modificar(id_ejercicio,npreg);
+    
+    
+}
+
+//Boton para corregir un ejercicio de Ordenar Elementos
+function OE_Corregir(id_ejercicio) {
     
 }

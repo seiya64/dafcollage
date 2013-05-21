@@ -37,7 +37,8 @@
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details. */
+  GNU General Public License for more details. 
+ */
 
 require_once($CFG->dirroot . '/course/moodleform_mod.php');
 require_once("ejercicios_clases.php");
@@ -62,73 +63,18 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
         $salida .= ' var respuestas = new Array();';
         for ($i=0; $i<sizeof($respuestas); $i++){
             $salida .= 'respuestas['.$i.']=new Array();';
-            for ($j=0; $j<sizeof($respuestas[$i]); $j++) {
-                $salida .= 'respuestas['.$i.']['.$j.']="' . $respuestas[$i][$j]->get('respuesta') . '";';
+            for ($j=1; $j<=sizeof($respuestas[$i]); $j++) {
+                $salida .= 'respuestas['.$i.']['.$j.']=new Array();';
+                for ($k=1; $k<=sizeof($respuestas[$i][$j]); $k++) {
+                    $salida .= 'respuestas['.$i.']['.$j.']['.$k.']="' . $respuestas[$i][$j][$k]->get('respuesta') . '";';
+                }
             }
         }
         $salida.='</script>';
         return $salida;
     }
     
-    /**
-     * Genera el codigo html para presentar el texto de la pregunta con los huecos
-     * @param string $texto Texto de la pregunta
-     * @param integer $numpreg Numero de pregunta
-     * @param array $respuestas Array con las respuestas de la pregunta
-     * @param {0,1} $mostrar_pistas 1 si se desea mostrar pistas, 0 en otro caso
-     */
-    function genera_texto_con_huecos($texto,$numpreg,$respuestas,$mostrar_pistas) {
-        //$file_log = fopen("log_TH_genera_huecos.txt","a");
-        $regexp = "/\[\[(\d)+\]\]/";
-        $encontrado = preg_match_all($regexp,$texto,$coincidencias,PREG_OFFSET_CAPTURE);
-        //$log = "Numero de pregunta: " . $numpreg . "\n";
-        //$log .= "Texto: " . $texto . "\n";
-        //$log .= "Respuestas: " . var_export($respuestas,true) . "\n";
-        //$log .= "encontrado: " . $encontrado . "\n";
-        //$log .= "coincidencias: " . var_export($coincidencias, true) . "\n";
-        
-        $salida = "";
-        $inicio=0;
-        $fin=0;
-        
-        if ($encontrado) {
-            foreach ($coincidencias[0] as $coincide) {
-                $fin = $coincide[1]-1 - $inicio;
-                //$log .= "Inicio: " . $inicio . " Fin: " . $fin . "\n";
-                $cad = substr($texto, $inicio, $fin);
-                //$log .= "Cad: " . $cad . "\n";
-                $salida .= '<span>'.$cad.'</span>';
-                $numero = (int)substr($coincide[0],2,strlen($coincide[0])-3);
-                //$log .= "Numero: " . $numero . "\n";
-                //$log .= "Respuesta numero " . ($numero+1) . " : " . $respuestas[$numero]->get('respuesta') . "\n";
-                $inicio = $coincide[1] + strlen($coincide[0]);
-                //$log .= "Nuevo inicio: " . $inicio . "\n";
-                
-                $long = strlen($respuestas[$numero]->get('respuesta'));
-                $nombre = "resp" . ($numero+1) . "_" . $numpreg;
-                $nombre_help = "help" . ($numero+1) . "_" . $numpreg;
-                $salida .= '<textarea style="resize:none;" name="'.$nombre.'" id="' . $nombre . '" rows="1" cols="' . $long . '" ></textarea>';
-                $salida .= '<img id="img_' . $nombre . '" />'; 
-                if ($mostrar_pistas) {
-                    //$salida .= '<div id="'.$nombre_help.'" style="display:none;" >' . get_string('TH_pista_longitud','ejercicios',$long) . '</div>';
-                    //$salida .= '<script type="text/javascript" >$("#'.$nombre_help.'").tooltip({track: true,my: "left+15 center", at: "right center"}););</script>';
-                    //$salida .= '<img id="'.$nombre_help.'" src="http://localhost/moodle/pix/help.gif" onmouseover="document.getElementById(\''.$nombre_help.'\').style.display=\'block\'" onmouseout="document.getElementById(\''.$nombre_help.'\').style.display=\'none\'" />';
-                    $salida .= '<img id="'.$nombre_help.'" src="http://localhost/moodle/pix/help.gif" title="'.get_string('TH_pista_longitud','ejercicios',$long).'"  />';
-                }
-            }
-            if ($inicio<strlen($texto)-1) {
-                $cad = substr($texto,$inicio);
-                //$log .= "Ultima cadena: " . $cad . "\n";
-                $salida .= '<span>'.$cad.'</span>';
-            }
-        }
-        
-        
-        //fwrite($file_log,$log,strlen($log));
-        //fclose($file_log);    
-        
-        return $salida;
-    }
+    
 
     /**
      * Function that add a table to the forma to show the main menu
@@ -138,8 +84,6 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
      * @param $id_ejercicio id del ejercicio a mostrar
      */
     function mostrar_ejercicio_ordenar_elementos($id, $id_ejercicio, $buscar, $tipo_origen, $tipo_respuesta, $tipocreacion) {
-
-
 
         global $CFG, $COURSE, $USER;
         $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
@@ -220,11 +164,10 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
                             //$tabla_imagenes.='<center><table id="tablapreg" name="tablapreg">';
                             //$tabla_imagenes.="<tr>";
                                                         
-                            $total_respuestas=0;
-                            $respuestas = array();
-                            $pregs_indice = array();
-                            $resp_indice = array();
                             
+                            
+                            
+                            $array_todas_respuestas = array();
                             $tabla_imagenes = "";
                             //Inserto las preguntas con clase "item" es decir dragables(mirar javascript.js)
                             for ($i = 1; $i <= sizeof($preguntas); $i++) {
@@ -236,20 +179,96 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
                                 
                                 //Obtengo la respuestas
                                 $id_pregunta = $preguntas[$i - 1]->get('id');
-                                $mis_respuestas = new Ejercicios_texto_texto_resp();
-                                $respuestas[] = $mis_respuestas->obtener_todas_respuestas_pregunta($id_pregunta);
-                                $total_respuestas += sizeof($respuestas[$i-1]);
+                                $mis_respuestas = new ejercicios_ordenar_elementos_resp();
+                                $respuestas = $mis_respuestas->obtener_todos_id_pregunta($id_pregunta);
+                                $matriz_respuestas = array();
+                                for ($k=0; $k<sizeof($respuestas); $k++) {
+                                    if($matriz_respuestas[$respuestas[$k]->get('orden')]==NULL) {
+                                        $matriz_respuestas[$respuestas[$k]->get('orden')]=array();
+                                    }
+                                    $matriz_respuestas[$respuestas[$k]->get('orden')][$respuestas[$k]->get('suborden')] = $respuestas[$k];
+                                }
+                                $array_todas_respuestas[] = $matriz_respuestas;
                                 
                                 //-------
                                 $log.="Id de ejercicio: " . $id_ejercicio . "\n";
                                 $log.="Id de pregunta " . $i . " : " . $id_pregunta . "\n";
-                                $log.="Total de respuestas: " . $total_respuestas . "\n";
+                                $log.="Respuestas Export: " . var_export($matriz_respuestas, true) . "\n";
                                 //-------
                                 
                                 //Genero la pregunta con los huecos
-                                $salida = $this->genera_texto_con_huecos($preguntas[$i - 1]->get('pregunta'), $i, $respuestas[$i-1], $mostrar_pistas);
+                                //$salida = $this->genera_texto_con_huecos($preguntas[$i - 1]->get('pregunta'), $i, $respuestas[$i-1], $mostrar_pistas);
                                 //Pinto la pregunta
-                                $tabla_imagenes.='<div style="width: 900px;" class="pregunta" name="pregunta' . $i . '" id="pregunta' . $i . '">' . $salida . '</div>';
+                                $long_palabras = sizeof($matriz_respuestas[1]);
+                                $tabla_imagenes.='<div style="width: 900px;" class="pregunta" name="pregunta' . $i . '" id="pregunta' . $i . '">';
+                                $tabla_imagenes.='<h3 style="display:inline;" >Pregunta '.$i.':</h3>';
+                                $tabla_imagenes.='<img id="img_preg'.$i.'" src="not_found" />';
+                                   $tabla_imagenes.='<div>';
+                                for ($l=0; $l<$long_palabras; $l++) {
+                                    $tabla_imagenes.='<div  style="float:left;width:150px;height:30px;"  class="marquito" preg="'.$i.'" id="preg'.$i."_".($l+1).'" ></div>';
+                                }
+                                   $tabla_imagenes.='</div>';
+                                $tabla_imagenes.='<div style="clear:both">';
+                                
+                                //------------------
+                                //$aleatorios_generados = array();    
+                                $resp_generadas = array();          //Array con todas las respuestas desordenadas.
+                                srand(time());                      //Inicializar el generador de numeros aleatorios
+
+                                //Array de aleatorios generados. 
+                                //Almacena un orden aleatorio de respuestas para que no aparezcan todas ordenadas
+                                if ($long_palabras>=1) {
+                                    $aleatorios_generados = range(1,$long_palabras);
+                                    shuffle($aleatorios_generados);
+                                    $z=0;
+                                    foreach ($aleatorios_generados as $al) {
+                                        $log.="".$z.": " . $al . "\n";
+                                        $z+=1;
+                                    }
+                                }
+                                else {
+                                    $aleatorios_generados = array();
+                                    $log.="No hay respuestas\n";
+                                }
+                                
+                                $pregs_indice = array();
+                                $resp_indice = array();
+                                //Guarda todas las respuestas en un array
+                                for ($m=1; $m<=sizeof($matriz_respuestas[1]); $m++) {
+                                    //Se guarda la posicion en la que se pondra la respuesta
+                                    //$aleatorios_generados[] = $azar;
+                                    $resp_generadas[] = $matriz_respuestas[1][$m]->get('respuesta');
+                                    $pregs_indice[] = $i;
+                                    $resp_indice[] = $m;
+                                }
+
+
+
+                                //Se van a pintar las respuestas                                
+                                
+                                for ($j=0; $j<sizeof($aleatorios_generados); $j++) {
+                                    //$tabla_imagenes.='<tr>';
+                                    $long = strlen($resp_generadas[$aleatorios_generados[$j] - 1]);
+                                    $tabla_imagenes.='<div preg="'.$i.'"  style="float:left;width:'.($long*10).'px;height:30px;" class="item" id="resp_'.$aleatorios_generados[$j].'" >';
+                                    $tabla_imagenes.=$resp_generadas[$aleatorios_generados[$j] - 1] . '</div>';
+
+                                    //Le asigno un numero aleatorio a la respuesta
+                                    //$hash[$aleatorios_generados[$j]] = $pregs_indice[$aleatorios_generados[$j] - 1] . "_" . $resp_indice[$aleatorios_generados[$j] - 1];
+                                    //$log .= "Para la respuesta " . $resp_indice[$aleatorios_generados[$j] - 1] . " de la pregunta " . $pregs_indice[$aleatorios_generados[$j] - 1] 
+                                    //        . " se le ha asignado el numero aleatorio " . $aleatorios_generados[$j] . "\n";
+
+                                    //$tabla_imagenes.='<td><div  id="' . $aleatorios_generados[$j] . '" class="marquito"></div></td>';
+                                    //$tabla_imagenes.='<td><div  style="width:100px; height:100px;" id="resp_' . $aleatorios_generados[$j] . '" class="item"><p>'.$resp_generadas[$aleatorios_generados[$j] - 1].'</p></div></td>';
+                                    //$tabla_imagenes.='<td id="aceptado' . $aleatorios_generados[$j] . '" class="marquitoaceptado"></td>';
+                                    //$tabla_imagenes.='</tr>';
+                                }
+                                $tabla_imagenes.="</div>";
+                                //$tabla_imagenes.='</table></center>';
+                                //$tabla_imagenes.='<p class="numero" id="' . sizeof($preguntas) . '"></p>';
+                                $tabla_imagenes.='<p class="numero" id="' . $long_palabras . '"></p>';
+                                
+                                
+                                $tabla_imagenes.='</div>';
                                 $tabla_imagenes.=' </td>';
 
                                 //Obtengo la pregunta
@@ -260,6 +279,9 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
                                 $tabla_imagenes.='</td> ';
                                 $tabla_imagenes.='</br> ';
                                 $tabla_imagenes.='</table> ';
+                                
+                                
+                                
                                                                
                                 
                                 $tabla_imagenes.='</div>';
@@ -280,67 +302,12 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
                             $tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';*/
                             
                             //Añadir las respuestas en una variable en javascript
-                            $tabla_imagenes .= $this->genera_matriz_respuestas_js($respuestas);
+                            //$tabla_imagenes .= $this->genera_matriz_respuestas_js($respuestas);
                             
                             
-                            //------------------
-                            //$aleatorios_generados = array();    
-                            $resp_generadas = array();          //Array con todas las respuestas desordenadas.
-                            srand(time());                      //Inicializar el generador de numeros aleatorios
-                            
-                            //Array de aleatorios generados. 
-                            //Almacena un orden aleatorio de respuestas para que no aparezcan todas ordenadas
-                            if ($total_respuestas>=1) {
-                                $aleatorios_generados = range(1,$total_respuestas);
-                                shuffle($aleatorios_generados);
-                                $i=0;
-                                foreach ($aleatorios_generados as $al) {
-                                    $log.="".$i.": " . $al . "\n";
-                                    $i+=1;
-                                }
-                            }
-                            else {
-                                $aleatorios_generados = array();
-                                $log.="No hay respuestas\n";
-                            }
-                            
-                            //Guarda todas las respuestas en un array
-                            for ($i=1; $i<=sizeof($respuestas); $i++) {
-                                for ($j=1; $j<=sizeof($respuestas[$i-1]); $j++) {                                    
-                                    
-                                    //Se guarda la posicion en la que se pondra la respuesta
-                                    //$aleatorios_generados[] = $azar;
-                                    $resp_generadas[] = $respuestas[$i-1][$j-1]->get('respuesta');
-                                    $pregs_indice[] = $i;
-                                    $resp_indice[] = $j;
-                                }
-                            }
-                            
-                            
-                            
-                            //Se van a pintar las respuestas
-                            if ($mostrar_palabras) {
-                                $tabla_imagenes .= '<h1>'.get_string('TH_pistas','ejercicios').'</h1>';
-                                for ($j=0; $j<sizeof($aleatorios_generados); $j++) {
-                                    //$tabla_imagenes.='<tr>';
-
-                                    $tabla_imagenes.='<span class=item id="resp_'.$aleatorios_generados[$j].'" >';
-                                    $tabla_imagenes.=$resp_generadas[$aleatorios_generados[$j] - 1] . '</span><span>   </span>';
-
-                                    //Le asigno un numero aleatorio a la respuesta
-                                    //$hash[$aleatorios_generados[$j]] = $pregs_indice[$aleatorios_generados[$j] - 1] . "_" . $resp_indice[$aleatorios_generados[$j] - 1];
-                                    //$log .= "Para la respuesta " . $resp_indice[$aleatorios_generados[$j] - 1] . " de la pregunta " . $pregs_indice[$aleatorios_generados[$j] - 1] 
-                                    //        . " se le ha asignado el numero aleatorio " . $aleatorios_generados[$j] . "\n";
-
-                                    //$tabla_imagenes.='<td><div  id="' . $aleatorios_generados[$j] . '" class="marquito"></div></td>';
-                                    //$tabla_imagenes.='<td><div  style="width:100px; height:100px;" id="resp_' . $aleatorios_generados[$j] . '" class="item"><p>'.$resp_generadas[$aleatorios_generados[$j] - 1].'</p></div></td>';
-                                    //$tabla_imagenes.='<td id="aceptado' . $aleatorios_generados[$j] . '" class="marquitoaceptado"></td>';
-                                    //$tabla_imagenes.='</tr>';
-                                }
-                                //$tabla_imagenes.='</table></center>';
-                                //$tabla_imagenes.='<p class="numero" id="' . sizeof($preguntas) . '"></p>';
-                                $tabla_imagenes.='<p class="numero" id="' . $total_respuestas . '"></p>';
-                            }
+                            //Meter todas las respuestas en el codigo javascript
+                            $salida = $this->genera_matriz_respuestas_js($array_todas_respuestas);
+                            $tabla_imagenes.=$salida;
                             
                             
                             //Escribir en el archivo
@@ -352,11 +319,9 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
                             
 
                             //inserto el número de preguntas
-                            $tabla_imagenes.='<input type="hidden" name="tipo_ej" id="tipo_ej" value="TH"/>';
+                            $tabla_imagenes.='<input type="hidden" name="tipo_ej" id="tipo_ej" value="OE"/>';
                             $tabla_imagenes.='<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
-                            for ($l=0; $l<sizeof($preguntas); $l++){
-                                $tabla_imagenes.='<input type="hidden" id="num_resp_preg'.($l+1).'" name="num_resp_preg'.($l+1).'" value="'.sizeof($respuestas[$l]).'"/>';
-                            }
+                            
                             
                             //Insertar el html                            
                             $mform->addElement('html', $tabla_imagenes);
@@ -376,11 +341,11 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
                                 //Pinto la pregunta
                                 $divpregunta = '<div id="tabpregunta' . $i . '" >';
                                 $divpregunta.='<br/><br/>';
-                                $divpregunta.='<table style="width:100%;">';
+                                $divpregunta.='<table id="table_pregunta'.$i.'" style="width:100%;">';
                                 $divpregunta.=' <td style="width:80%;">';
 
-                                $divpregunta.='<h2>'.get_string('OE_pregunta','ejercicios',$i).'</h2>';
-                                $divpregunta.='<textarea readonly="yes" style="width: 900px;" class="pregunta" name="pregunta' . $i . '" id="pregunta' . $i . '"></textarea>';
+                                $divpregunta.='<h2 id="h2_pregunta'.$i.'" >'.get_string('OE_pregunta','ejercicios',$i).'</h2>';
+                                $divpregunta.='<textarea style="width: 900px;" class="pregunta" name="pregunta' . $i . '" id="pregunta' . $i . '">'.get_string('OE_introduzca_texto','ejercicios').'</textarea>';
                                 
                                 $divpregunta.=' </td>';
                                 
@@ -408,8 +373,9 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
                                 
                                 for ($k=1; $k<=sizeof($matriz_respuestas); $k++) {
                                     $log->write("k: ".$k."\n");
-                                    $divpregunta.='</br><h3>'.get_string('OE_orden','ejercicios',$k).'</h3>';
-                                    $divpregunta.='<img id="add_palabra_'.$i."_".$k.'" src="./imagenes/añadir.gif" alt="añadir palabra"  height="15px"  width="15px" onClick="OE_addPalabra_Modificar('.$id_ejercicio.",".$i.",".$k.' )" title="Añadir Palabra"></img>';
+                                    $divpregunta.='</br><table id="table_h3_orden_'.$i."_".$k.'" ><tbody><tr><td><h3 id="h3_orden_'.$i."_".$k.'" >'.get_string('OE_orden','ejercicios',$k).'</h3></td>';
+                                    $divpregunta.='<td><img id="add_palabra_'.$i."_".$k.'" src="./imagenes/añadir.gif" alt="añadir palabra"  height="15px"  width="15px" onClick="OE_addPalabra_Modificar('.$id_ejercicio.",".$i.",".$k.' )" title="Añadir Palabra"></img>';
+                                    $divpregunta.='<img id="del_orden_'.$i."_".$k.'" src="./imagenes/delete.gif" alt="delete orden"  height="15px"  width="15px" onClick="OE_delOrden_Modificar('.$id_ejercicio.",".$i.",".$k.' )" title="Eliminar Orden"></img></td></tr></tbody></table>';
                                     $divpregunta.='<div id="orden' . $i . "_" . $k . '" class=respuesta>';
                                     $log->write("size of matriz_respuestas: " . sizeof($matriz_respuestas));
                                     for ($p = 0; $p < sizeof($matriz_respuestas[$k]); $p++) {
@@ -452,8 +418,8 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
                                     $divpregunta="";
                                 }
                                 //Insertar el numero de ordenes
-                                $divpregunta.='</div>';
                                 $divpregunta .= '<input type="hidden" value=' . sizeof($matriz_respuestas) . ' id="num_orden_'.$i.'" name="num_orden_'.$i.'" />';                            
+                                $divpregunta.='</div>';                                
                                 $mform->addElement('html', $divpregunta);
                                 
                             }
@@ -475,7 +441,7 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
                         if ($buscar != 1 && $modificable == true) {
                             //Si soy el profesor creadors
                             $tabla_imagenes = '<input type="submit" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
-                            $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonNA" name="botonNA" onclick="TH_AddPregunta('.$id_ejercicio.')" value="' . get_string('NuevaAso', 'ejercicios') . '">';
+                            $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonNA" name="botonNA" onclick="OE_AddPregunta('.$id_ejercicio.')" value="' . get_string('NuevaAso', 'ejercicios') . '">';
                             $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                         } else {
                             if ($buscar == 1) { //Si estoy buscand
@@ -500,14 +466,14 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
                                     if ($modificable == true) { // Si el ejercicio era mio y estoy buscando
                                         $tabla_imagenes = '<center><input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                                     } else { //Si soy alumno
-                                        $tabla_imagenes = '<center><input type="button" onclick="TH_Corregir('.$id_ejercicio.','.$mostrar_soluciones.')" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
+                                        $tabla_imagenes = '<center><input type="button" onclick="OE_Corregir('.$id_ejercicio.')" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
                                         $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
                                         $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                                     }
                                 }
                             } else {
 
-                                $tabla_imagenes = '<center><input type="button" onclick="TH_Corregir('.$id_ejercicio.','.$mostrar_soluciones.')" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
+                                $tabla_imagenes = '<center><input type="button" onclick="OE_Corregir('.$id_ejercicio.')" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
                                 $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
                                 $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                             }
