@@ -1221,14 +1221,14 @@ class mod_ejercicios_creando_ejercicio_ordenar_elementos extends moodleform_mod 
 
 
             //Se añade un boton para que se cree un nuevo hueco. 
-            $boton = '<center><input type="button" name="add_orden' . $aux . '" id="add_orden' . $aux . '" value="' . get_string('OE_add_orden', 'ejercicios') . '" onclick="OE_addOrden_Creacion(' . $id_ejercicio . "," . $aux . ')" /></center>';
-            $mform->addElement('html', $boton);
-            $textarea='<input type="hidden" name="num_orden_' . $aux . '" id="num_orden_' . $aux . '" value="1" />';
+            //$boton = '<center><input type="button" name="add_orden' . $aux . '" id="add_orden' . $aux . '" value="' . get_string('OE_add_orden', 'ejercicios') . '" onclick="OE_addOrden_Creacion(' . $id_ejercicio . "," . $aux . ')" /></center>';
+            //$mform->addElement('html', $boton);
+            //$textarea='<input type="hidden" name="num_orden_' . $aux . '" id="num_orden_' . $aux . '" value="1" />';
 
 
             //Archivo Asociado
             //$mform->addElement('textarea', 'respuesta'.$aux, get_string('Asociacion_Texto_Asociado', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
-            $textarea .= '</br><div id="titulorespuestas_'.$aux.'" style="margin-left:130px;">';
+            /*$textarea .= '</br><div id="titulorespuestas_'.$aux.'" style="margin-left:130px;">';
             $textarea.='<div id="orden'.$aux.'_1" style="margin-left:130px;">Orden 1';
             $textarea.='<center><input type="button" name="add_palabra" onclick="OE_AddPalabra_Creacion('.$id_ejercicio.",".$aux.",".'1)" id="add_palabra" value="' . get_string('OE_add_palabra', 'ejercicios') . '" /></center>';
             $textarea.='<table id="resp_orden_' . $aux . '_1"> ';
@@ -1239,14 +1239,15 @@ class mod_ejercicios_creando_ejercicio_ordenar_elementos extends moodleform_mod 
             $textarea.='</table>';
             $textarea.='</div>';
             $textarea.='</div>';
-            $mform->addElement('html', $textarea);
+            $mform->addElement('html', $textarea);*/
 
             // TODO COMPROBAR SI FUNCIONA LA FUNCION DE JAVASCRIPT DE MAS RESPUESTAS DE IE PARA ESTOS EJERCICIOS
             //$botonañadir='<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestas_IE('.$aux.');"></center>';
             //$mform->addElement('html', $botonañadir);
         }
-
-            $mform->addElement('hidden','numeropreguntas',$p);
+            
+            $html = '<input type="hidden" name="numeropreguntas" id="numeropreguntas" value="'.$p.'" />';
+            $mform->addElement('html',$html);
                            
                            
 
@@ -1257,6 +1258,7 @@ class mod_ejercicios_creando_ejercicio_ordenar_elementos extends moodleform_mod 
 
             $buttonarray = array();
             $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"onclick=obtenernumeroRespuestas('$p');");
+            $buttonarray[] = &$mform->createElement('button', 'add_frase', get_string('OE_add_frase','ejercicios'),'onclick=OE_Add_Frase('.$id_ejercicio.');');
             $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
 
 

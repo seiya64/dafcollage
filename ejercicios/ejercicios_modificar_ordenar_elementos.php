@@ -100,9 +100,9 @@ for ($i = 0; $i < $numeropreguntas; $i++) {
     $log.="Pregunta numero: " . $j . "\n";
 
     if ($tipo_origen == 1) { //Si la pregunta es un texto
-        //$preg = required_param('pregunta' . $j, PARAM_TEXT);
+        $preg = required_param('pregunta' . $j, PARAM_TEXT);
         
-        $ejercicio_texto_preg = new Ejercicios_texto_texto_preg(NULL, $id_ejercicio, "");
+        $ejercicio_texto_preg = new Ejercicios_texto_texto_preg(NULL, $id_ejercicio, $preg);
         $id_pregunta = $ejercicio_texto_preg->insertar();
 
 

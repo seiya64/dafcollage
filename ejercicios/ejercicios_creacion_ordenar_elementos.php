@@ -87,8 +87,8 @@ switch ($tipo_origen) {
                     //Obtengo la pregunta
 
                     $j = $i + 1;
-                    //$pregunta = optional_param('pregunta' . $j, PARAM_TEXT);
-                    $pregunta = "";
+                    $pregunta = optional_param('pregunta' . $j, PARAM_TEXT);
+                    //$pregunta = "";
 
                     //Inserto la pregunta Archivo asociación
                     $mispreguntas = new Ejercicios_texto_texto_preg(NULL, $id_ejercicio, $pregunta);
@@ -96,7 +96,7 @@ switch ($tipo_origen) {
 
                     
                     //Obtengo el numero de ordenes para esta pregunta
-                    $num_orden = optional_param('num_orden_'.$j);
+                    /*$num_orden = optional_param('num_orden_'.$j);
                     for ($k=1; $k<=$num_orden; $k++) {
                         //Obtengo el numero de respuestas para este orden
                         $num_resp = optional_param('num_resp_'.$j."_".$k);
@@ -105,7 +105,7 @@ switch ($tipo_origen) {
                             $oe_resp = new ejercicios_ordenar_elementos_resp(NULL, $id_preg, $k, $l, $respuesta);
                             $oe_resp->insertar();
                         }
-                    }
+                    }*/
 
 
                     echo "fin insercción";

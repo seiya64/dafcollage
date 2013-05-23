@@ -6368,5 +6368,86 @@ function OE_AddPregunta(id_ejercicio) {
 
 //Boton para corregir un ejercicio de Ordenar Elementos
 function OE_Corregir(id_ejercicio) {
+    var numpreg = respuestas.length;
+    for (var i=1; i<=numpreg; i++) {
+        var numorden = respuestas[i-1].length-1;
+        var numresp = respuestas[i-1][1].length-1;
+        
+        var img = document.getElementById("img_preg"+i);
+        img.setAttribute("src","");
+        
+        var correcta=0;
+        var j=1;
+        while(j<=numorden && correcta<numresp) {
+            correcta=0;
+            for(var k=1; k<=numresp; k++) {
+                
+                var preg = document.getElementById("preg"+i+"_"+k);
+                if (preg.childNodes.length==1) {
+                    var texta = preg.childNodes[0].childNodes[0];
+
+                    if(respuestas[i-1][j][k]==texta.textContent)
+                        correcta++;
+                }
+                else {
+                    alert("No todas los huecos tienen palabras.");
+                    return;
+                }
+                
+            }
+            j++;
+        }
+        
+        
+        if(correcta==numresp) {            
+            img.setAttribute("src","./imagenes/correcto.png");
+        }
+        else {
+            img.setAttribute("src","./imagenes/incorrecto.png");
+        }
+    }
+}
+
+//Boton para añadir una frase a un ejercicio de Ordenar Elementos
+function OE_Add_Frase(id_ejercicio) {
+    var input_preg = document.getElementById("numeropreguntas");
+    var npreg = parseInt(input_preg.value)+1;
+    var text1 = document.getElementById("id_pregunta1");
+    var div_p = text1.parentNode.parentNode.parentNode;
     
+    var div = createElement("div",{class:"fitem"});
+    div_p.insertBefore(div,input_preg);
+    
+    var div1 = createElement("div",{class:"fitemtitle"});
+    div.appendChild(div1);
+    var label = createElement("label",{for:"id_pregunta"+npreg});
+    label.appendChild(document.createTextNode("Escriba la frase que se querra desordenar sus palabras. "));
+    div1.appendChild(label);
+    
+    var div2 = createElement("div",{class:"felement ftextarea"});
+    div.appendChild(div2);
+    var texta = createElement("textarea",{wrap:"virtual",rows:"5", cols:"50", name:"pregunta"+npreg, id:"id_pregunta"+npreg});
+    div2.appendChild(texta);
+    
+    input_preg.value=npreg;
+}   
+
+//Funcion para comprobar que se han generado bien los distintos ordenes en los ejercicios de Ordenar Elementos
+function OE_Guardar(id_ejercicio) {
+    var numpreg = parseInt(document.getElementById("num_preg").value);
+    for (var i=1; i<=numpreg; i++) {
+        var anterior = -1;
+        var numorden = parseInt(document.getElementById("num_orden_"+i).value);
+        for (var j=1; j<=numorden; j++) {
+            var numresp = parseInt(document.getElementById("num_res_preg"+i+"_"+j).value);
+            if(anterior==-1)
+                anterior = numresp;
+            else {
+                if(anterior!=numresp) {
+                    alert("No se permite que haya ordenes con distinto numero de respuestas");
+                    return false;                    
+                }
+            }
+        }
+    }
 }

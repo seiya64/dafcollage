@@ -202,9 +202,10 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
                                 $long_palabras = sizeof($matriz_respuestas[1]);
                                 $tabla_imagenes.='<div style="width: 900px;" class="pregunta" name="pregunta' . $i . '" id="pregunta' . $i . '">';
                                 $tabla_imagenes.='<h3 style="display:inline;" >Pregunta '.$i.':</h3>';
-                                $tabla_imagenes.='<img id="img_preg'.$i.'" src="not_found" />';
+                                $tabla_imagenes.='<img id="img_preg'.$i.'" />';
                                    $tabla_imagenes.='<div>';
                                 for ($l=0; $l<$long_palabras; $l++) {
+                                    //$long_pal = strlen($matriz_respuestas[1][$l+1]->get('respuesta'));
                                     $tabla_imagenes.='<div  style="float:left;width:150px;height:30px;"  class="marquito" preg="'.$i.'" id="preg'.$i."_".($l+1).'" ></div>';
                                 }
                                    $tabla_imagenes.='</div>';
@@ -345,7 +346,7 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
                                 $divpregunta.=' <td style="width:80%;">';
 
                                 $divpregunta.='<h2 id="h2_pregunta'.$i.'" >'.get_string('OE_pregunta','ejercicios',$i).'</h2>';
-                                $divpregunta.='<textarea style="width: 900px;" class="pregunta" name="pregunta' . $i . '" id="pregunta' . $i . '">'.get_string('OE_introduzca_texto','ejercicios').'</textarea>';
+                                $divpregunta.='<textarea readonly="yes" style="width: 900px;" class="pregunta" name="pregunta' . $i . '" id="pregunta' . $i . '">'.$preguntas[$i-1]->get('pregunta').'</textarea>';
                                 
                                 $divpregunta.=' </td>';
                                 
@@ -440,7 +441,7 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
 
                         if ($buscar != 1 && $modificable == true) {
                             //Si soy el profesor creadors
-                            $tabla_imagenes = '<input type="submit" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
+                            $tabla_imagenes = '<input type="submit" onclick="return OE_Guardar('.$id_ejercicio.');" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
                             $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonNA" name="botonNA" onclick="OE_AddPregunta('.$id_ejercicio.')" value="' . get_string('NuevaAso', 'ejercicios') . '">';
                             $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                         } else {
