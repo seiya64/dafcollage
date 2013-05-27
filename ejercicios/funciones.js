@@ -6323,6 +6323,7 @@ function OE_DelPregunta(id_ejercicio,numpreg) {
 
 //Boton para añadir una pregunta a un ejercicio de Ordenar Elementos
 function OE_AddPregunta(id_ejercicio) {
+    var frase = prompt("Escriba la frase que se querra desordenar sus palabras.");
     var input_preg = document.getElementById("num_preg");
     var numpregs = parseInt(input_preg.value);
     var npreg = numpregs+1;
@@ -6340,9 +6341,9 @@ function OE_AddPregunta(id_ejercicio) {
     var td1 = createElement("td",{style:"witdh:80%;"}); tr.appendChild(td1);
     var h2 = createElement("h2",{id:"h2_pregunta"+npreg}); td1.appendChild(h2);
     h2.appendChild(document.createTextNode("Pregunta "+npreg+" :"));
-    var texta = createElement("textarea",{style:"width: 900px;",class:"pregunta",
+    var texta = createElement("textarea",{style:"width: 900px;",class:"pregunta",readonly:"yes",
                                           name:"pregunta"+npreg, id:"pregunta"+npreg});
-    texta.appendChild(document.createTextNode("En esta area de texto puede escribir, y despues puede seleccionar texto y añadir nuevas palabras a los ordenes"));
+    texta.appendChild(document.createTextNode(frase));
     td1.appendChild(texta);
     var td2 = createElement("td",{style:"width:5%;"}); tr.appendChild(td2);
     var img1 = createElement("img",{id:"imgpregborrar"+npreg, src:"./imagenes/delete.gif",
