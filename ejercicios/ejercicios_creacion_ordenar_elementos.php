@@ -62,6 +62,11 @@ $tipocreacion = optional_param('tipocreacion', 0, PARAM_INT);
 $tipo_origen = optional_param('tipo_origen', 0, PARAM_INT);
 $tipo_respuesta = optional_param('tr', 0, PARAM_INT);
 
+//Coger la casilla seleccionada
+$orden_unico = optional_param('orden_unico',0,PARAM_INT);
+$cfg_ordenar_elementos = new ejercicios_ordenar_elementos(NULL,$id_ejercicio,$orden_unico);
+$cfg_ordenar_elementos->insertar();
+
 $mform = new mod_ejercicios_creando_ejercicio_ordenar_elementos($id_curso, $p, $id_ejercicio, $tipo_origen, $tipo_respuesta, $tipocreacion);
 $mform->pintarformularioordenarelementos($id_curso, $p, $id_ejercicio, $tipo_origen, $tipo_respuesta, $tipocreacion);
 
@@ -88,6 +93,8 @@ switch ($tipo_origen) {
 
                     $j = $i + 1;
                     $pregunta = optional_param('pregunta' . $j, PARAM_TEXT);
+                    if($orden_unico==1)
+                        $pregunta = strtoupper ($pregunta);
                     //$pregunta = "";
 
                     //Inserto la pregunta Archivo asociación
@@ -96,16 +103,18 @@ switch ($tipo_origen) {
 
                     
                     //Obtengo el numero de ordenes para esta pregunta
-                    /*$num_orden = optional_param('num_orden_'.$j);
-                    for ($k=1; $k<=$num_orden; $k++) {
+                    //$num_orden = optional_param('num_orden_'.$j);
+                    //for ($k=1; $k<=$num_orden; $k++) {
                         //Obtengo el numero de respuestas para este orden
-                        $num_resp = optional_param('num_resp_'.$j."_".$k);
+                   $num_resp = optional_param('num_resp_'.$j);
                         for ($l=1; $l<=$num_resp; $l++) {
-                            $respuesta = optional_param('respuesta'.$l."_".$k."_".$j);
-                            $oe_resp = new ejercicios_ordenar_elementos_resp(NULL, $id_preg, $k, $l, $respuesta);
+                            $respuesta = optional_param('respuesta'.$l."_".$j);
+                            if ($orden_unico==1)
+                                $respuesta = strtoupper ($respuesta);
+                            $oe_resp = new ejercicios_ordenar_elementos_resp(NULL, $id_preg, 1, $l, $respuesta);
                             $oe_resp->insertar();
                         }
-                    }*/
+                    //}
 
 
                     echo "fin insercción";

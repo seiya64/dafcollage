@@ -1,0 +1,55 @@
+i: 1
+Numero de preguntas: 2
+matriz_respuestas: array (
+  1 => 
+  array (
+    1 => 
+    ejercicios_ordenar_elementos_resp::__set_state(array(
+       'id' => '341',
+       'id_pregunta' => '79',
+       'orden' => '1',
+       'suborden' => '1',
+       'respuesta' => 'Die ',
+    )),
+    2 => 
+    ejercicios_ordenar_elementos_resp::__set_state(array(
+       'id' => '342',
+       'id_pregunta' => '79',
+       'orden' => '1',
+       'suborden' => '2',
+       'respuesta' => 'Banane ',
+    )),
+    3 => 
+    ejercicios_ordenar_elementos_resp::__set_state(array(
+       'id' => '343',
+       'id_pregunta' => '79',
+       'orden' => '1',
+       'suborden' => '3',
+       'respuesta' => 'ist ',
+    )),
+    4 => 
+    ejercicios_ordenar_elementos_resp::__set_state(array(
+       'id' => '344',
+       'id_pregunta' => '79',
+       'orden' => '1',
+       'suborden' => '4',
+       'respuesta' => 'krumm und gelb.',
+    )),
+  ),
+)k: 1
+size of matriz_respuestas: 1p:0
+
+size of matriz_respuestas de k: 4Respuesta: Die 
+p:1
+
+size of matriz_respuestas de k: 4Respuesta: Banane 
+p:2
+
+size of matriz_respuestas de k: 4Respuesta: ist 
+p:3
+
+size of matriz_respuestas de k: 4Respuesta: krumm und gelb.
+i: 2
+Numero de preguntas: 2
+matriz_respuestas: array (
+)

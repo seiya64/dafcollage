@@ -124,9 +124,10 @@ $string["nombre"]="Titule su ejercicio para facilitar la identificación o búsq
 $string["descripcion"]="Añade una breve introducción al ejercicio:";
 $string["visible"]="Visible (accesible por sus alumnos)";
 $string["publico"]="Público (accesible por otros profesores y alumnos)";
-$string["carpeta"]="Introduzca la ruta del ejercicio";
-$string["copyright"]="Seleccione el copyright de sus archivos respuesta";
-$string["copyrightresp"]="Seleccione el copyright de sus archivos pregunta";
+//$string["carpeta"]="Introduzca la ruta del ejercicio";
+$string["carpeta"]="Selecciona la carpeta donde quiera guardar el ejercicio";
+$string["copyright"]="Seleccione el copyright de sus archivos pregunta";
+$string["copyrightresp"]="Seleccione el copyright de sus archivos respuesta";
 $string["textoclasej"]="Asigne una o varias categorías de búsqueda de los siguientes menús desplegables(Obligatorio Campo Temático o Tema gramatical):";
 //Formulario de creacion texto-texto
 
@@ -174,13 +175,21 @@ $string['TH_pistas']="Pistas";
 $string['TH_pista_longitud']='Ocupa {$a} simbolos';
 
 //Generador de Ejercicios -- Ordenar Elementos -- Etiqueta OE
-$string['OE_texto']="Texto ";
-$string['OE_pregunta']="Introduzca un texto completo o frases sueltas";
-$string['OE_seleccione']="Escriba la frase que se querra desordenar sus palabras.";
+$string['OE_seleccione']="Escriba la frase que quiera desordenar.";
 $string['OE_add_orden']="Añadir Orden";
-$string['OE_add_palabra']="Añadir Palabra";
+$string['OE_add_palabra']="Insertar Elemento";
 $string['OE_add_frase']="Añadir Frase";
-$string['OE_pregunta']='Pregunta {$a} :';
+$string['OE_pregunta']='Oracion {$a} :';
+$string["OE_FormularioCreacionTextos"]="Introduzca las frases";
 $string['OE_orden']='Orden {$a} :';
 $string['OE_introduzca_texto']='En esta area de texto puede escribir, y despues puede seleccionar texto y añadir nuevas palabras a los ordenes';
+$string['OE_add_pregunta']='Añadir Oracion';
+$string['OE_orden_unico']="Seleccione la casilla para activar que haya multiples ordenes correctos. Si se deja desactivada solo se permitira un orden correcto.";
+$string['OE_help_add_palabra']="Seleccione con el raton los elementos del texto. A continuación pulse en Insertar Elemento siguiendo el orden correcto (los ordenes correctos).";
+$string['OE_config']="¿Quiere que haya sólo una opción correcta o varias?";
+$string['OE_list_preguntas']="Lista de Oraciones";
+$string['OE_help_orden_multiple']="Se guardara todo en mayuscula. Es recomendable seleccionar lo signos de puntuacion como elementos independientes.";
+$string["OE_FormularioCreacionTextos"]="Introduzca las frases y determine los elementos";
+$string["OE_orden_unico"]="Solo un orden correcto.";
+$string["OE_orden_multiple"]="Varios ordenes correctos.";
 ?>

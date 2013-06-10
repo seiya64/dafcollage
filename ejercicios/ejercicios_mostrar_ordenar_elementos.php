@@ -141,6 +141,11 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
         $tabla_imagenes .='<td>'; #columna
         
         $mform->addElement('html', $tabla_imagenes);
+        
+        //Obtener la configuracion del ejercicio
+        $ej_ordenar_elementos = new ejercicios_ordenar_elementos();
+        $matriz = $ej_ordenar_elementos->obtener_todos_id_ejercicio($id_ejercicio);
+        $cfg_ej = $matriz[0]->get('orden_unico');
 
 
         echo "tipo origen.$tipo_origen";
@@ -334,25 +339,31 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
                             //$tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
                             
                             $log = new Log("log_OE_mostrar.txt");
+                            
+                            $html = '<input type=hidden name="orden_unico" id="orden_unico" value="'.$cfg_ej.'" />';
+                            $mform->addElement('html',$html);
 
                             for ($i = 1; $i <= sizeof($preguntas); $i++) {
                                 $log->write("i: " . $i . "\n");
                                 
-                                $log->write("Numero de preguntas: " . sizeof($preguntas) . "\n");
+                                $log->write("Numero de oraciones: " . sizeof($preguntas) . "\n");
                                 //Pinto la pregunta
                                 $divpregunta = '<div id="tabpregunta' . $i . '" >';
                                 $divpregunta.='<br/><br/>';
                                 $divpregunta.='<table id="table_pregunta'.$i.'" style="width:100%;">';
-                                $divpregunta.=' <td style="width:80%;">';
+                                $divpregunta.=' <td style="width:70%;">';
 
                                 $divpregunta.='<h2 id="h2_pregunta'.$i.'" >'.get_string('OE_pregunta','ejercicios',$i).'</h2>';
-                                $divpregunta.='<textarea readonly="yes" style="width: 900px;" class="pregunta" name="pregunta' . $i . '" id="pregunta' . $i . '">'.$preguntas[$i-1]->get('pregunta').'</textarea>';
+                                $divpregunta.='<textarea readonly="yes" style="resize:none; width: 900px;" class="pregunta" name="pregunta' . $i . '" id="pregunta' . $i . '">'.$preguntas[$i-1]->get('pregunta').'</textarea>';
+                                
+                                $divpregunta.='<img id="imgpregborrar' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="OE_DelPregunta('.$id_ejercicio.",".$i.')" title="Eliminar Pregunta">&nbsp;&nbsp;Eliminar Pregunta&nbsp;&nbsp;</img>';
+                                if($cfg_ej==1) $divpregunta.='<img id="imgpreganadir' . $i . '" src="./imagenes/añadir.gif" alt="añadir hueco"  height="15px"  width="15px" onClick="OE_addOrden_Modificar('.$id_ejercicio.",".$i.' )" title="Añadir Orden Nuevo">&nbsp;&nbsp;Añadir Orden Nuevo&nbsp;&nbsp;</img>';
                                 
                                 $divpregunta.=' </td>';
                                 
-                                $divpregunta.=' <td style="width:5%;">';
-                                $divpregunta.='<img id="imgpregborrar' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="OE_DelPregunta('.$id_ejercicio.",".$i.')" title="Eliminar Pregunta"></img>';
-                                $divpregunta.='</br><img id="imgpreganadir' . $i . '" src="./imagenes/añadir.gif" alt="añadir hueco"  height="15px"  width="15px" onClick="OE_addOrden_Modificar('.$id_ejercicio.",".$i.' )" title="Añadir Orden"></img>';
+                                $divpregunta.=' <td style="width:15%;">';
+                                //$divpregunta.='<img id="imgpregborrar' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="OE_DelPregunta('.$id_ejercicio.",".$i.')" title="Eliminar Pregunta">Eliminar Pregunta</img>';
+                                //$divpregunta.='</br><img id="imgpreganadir' . $i . '" src="./imagenes/añadir.gif" alt="añadir hueco"  height="15px"  width="15px" onClick="OE_addOrden_Modificar('.$id_ejercicio.",".$i.' )" title="Añadir Orden">Añadir Orden</img>';
                                 $divpregunta.='</td> ';
                                 $divpregunta.='</br> ';
                                 $divpregunta.='</table> ';
@@ -375,8 +386,9 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
                                 for ($k=1; $k<=sizeof($matriz_respuestas); $k++) {
                                     $log->write("k: ".$k."\n");
                                     $divpregunta.='</br><table id="table_h3_orden_'.$i."_".$k.'" ><tbody><tr><td><h3 id="h3_orden_'.$i."_".$k.'" >'.get_string('OE_orden','ejercicios',$k).'</h3></td>';
-                                    $divpregunta.='<td><img id="add_palabra_'.$i."_".$k.'" src="./imagenes/añadir.gif" alt="añadir palabra"  height="15px"  width="15px" onClick="OE_addPalabra_Modificar('.$id_ejercicio.",".$i.",".$k.' )" title="Añadir Palabra"></img>';
-                                    $divpregunta.='<img id="del_orden_'.$i."_".$k.'" src="./imagenes/delete.gif" alt="delete orden"  height="15px"  width="15px" onClick="OE_delOrden_Modificar('.$id_ejercicio.",".$i.",".$k.' )" title="Eliminar Orden"></img></td></tr></tbody></table>';
+                                    //$divpregunta.='<td><img id="add_palabra_'.$i."_".$k.'" src="./imagenes/añadir.gif" alt="añadir palabra"  height="15px"  width="15px" onClick="OE_addPalabra_Modificar('.$id_ejercicio.",".$i.",".$k.' )" title="Añadir Palabra">&nbsp;&nbsp;Añadir Palabra&nbsp;&nbsp;&nbsp;&nbsp;</img>';
+                                    if($cfg_ej==1) $divpregunta.='<td><img id="del_orden_'.$i."_".$k.'" src="./imagenes/delete.gif" alt="delete orden"  height="15px"  width="15px" onClick="OE_delOrden_Modificar('.$id_ejercicio.",".$i.",".$k.' )" title="Eliminar Orden">&nbsp;&nbsp;Eliminar Orden</img></td></tr></tbody></table>';
+                                    else           $divpregunta.='</tr></tbody></table>';
                                     $divpregunta.='<div id="orden' . $i . "_" . $k . '" class=respuesta>';
                                     $log->write("size of matriz_respuestas: " . sizeof($matriz_respuestas));
                                     for ($p = 0; $p < sizeof($matriz_respuestas[$k]); $p++) {
@@ -397,10 +409,14 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
                                         }
                                         $divpregunta.='<tr id="trrespuesta' . $q . "_" . $k . '_' . $i . '"> ';
                                         $divpregunta.=' <td style="width:80%;">';
-                                        $divpregunta.='<textarea style="width: 300px;" readonly="yes" class="resp" name="respuesta' . $q . "_" . $k . '_' . $i . '" id="respuesta' . $q . "_" . $k . '_' . $i . '" value="' . $matriz_respuestas[$k][$q]->get('respuesta') . '">' . $matriz_respuestas[$k][$q]->get('respuesta') . '</textarea>';
+                                        $divpregunta.='<div id="enum_resp_'.$q. '_'. $k . '_' . $i .'" >'.$q.'.</div><textarea style="resize:none; width: 300px;" readonly="yes" class="resp" name="respuesta' . $q . "_" . $k . '_' . $i . '" id="respuesta' . $q . "_" . $k . '_' . $i . '" value="' . $matriz_respuestas[$k][$q]->get('respuesta') . '">' . $matriz_respuestas[$k][$q]->get('respuesta') . '</textarea>';
                                         $divpregunta.=' </td>';
                                         $divpregunta.=' <td style="width:5%;" id="tdcorregir'. $q . "_" . $k . '_' . $i .'">';
-                                        $divpregunta.='<img id="eliminarrespuesta' . $q . '_' . $k . '_' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="OE_EliminarResp('.$id_ejercicio.",".$i.",".$k.",".$q.')" title="Eliminar Respuesta"></img>';
+                                        if($cfg_ej==1) {
+                                        //$divpregunta.='<img id="eliminarrespuesta' . $q . '_' . $k . '_' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="OE_EliminarResp('.$id_ejercicio.",".$i.",".$k.",".$q.')" title="Eliminar Respuesta"></img>';
+                                            $divpregunta.='<img id="up_'.$q.'_'. $k . '_' . $i . '" src="./imagenes/up.svg" alt="Subir Orden" height="20px"  width="20px" title="Subir Orden" onclick="OE_BajarOrden('.$id_ejercicio.','.$i.','.$k.','.$q.')" ></img>';
+                                            $divpregunta.='<img id="down_'.$q.'_'. $k . '_' . $i . '" src="./imagenes/down.svg" alt="Bajar Orden" height="20px"  width="20px" title="Bajar Orden" onclick="OE_SubirOrden('.$id_ejercicio.','.$i.','.$k.','.$q.')" ></img>';
+                                        }
 
                                         $divpregunta.='</td> ';
                                         $divpregunta.='</tr>';
@@ -442,7 +458,7 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
                         if ($buscar != 1 && $modificable == true) {
                             //Si soy el profesor creadors
                             $tabla_imagenes = '<input type="submit" onclick="return OE_Guardar('.$id_ejercicio.');" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
-                            $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonNA" name="botonNA" onclick="OE_AddPregunta('.$id_ejercicio.')" value="' . get_string('NuevaAso', 'ejercicios') . '">';
+                            $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonNA" name="botonNA" onclick="OE_AddPregunta('.$id_ejercicio.')" value="' . get_string('OE_add_pregunta', 'ejercicios') . '">';
                             $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                         } else {
                             if ($buscar == 1) { //Si estoy buscand
@@ -483,13 +499,15 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
 
                         $tabla_imagenes .='</td>';
                         $tabla_imagenes .='<td  width="10%">';
-                        //añado la parte de vocabulario para la conexión
-                        $tabla_imagenes .='<div><a  onclick=JavaScript:sele(' . $id . ')><img src="../vocabulario/imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im" title="' . get_string('guardar', 'vocabulario') . '"/></a></div>';
-                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=5"><img src="../vocabulario/imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im" title="' . get_string('admin_gr', 'vocabulario') . '"/></a></div>';
-                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=7"><img src="../vocabulario/imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im" title="' . get_string('admin_ic', 'vocabulario') . '"/></a></div>';
-                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=9"><img src="../vocabulario/imagenes/tipologias_textuales.png" id="id_tt_im" name="tt_im" title="' . get_string('admin_tt', 'vocabulario') . '"/> </a></div>';
-                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=11"><img src="../vocabulario/imagenes/estrategias_icon.png" id="id_ea_im" name="ea_im" title="' . get_string('admin_ea', 'vocabulario') . '"/> </a></div>';
-
+                        //Para alumnos
+                        if ($modificable==false) {
+                            //añado la parte de vocabulario para la conexión
+                            $tabla_imagenes .='<div><a  onclick=JavaScript:sele(' . $id . ')><img src="../vocabulario/imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im" title="' . get_string('guardar', 'vocabulario') . '"/></a></div>';
+                            $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=5"><img src="../vocabulario/imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im" title="' . get_string('admin_gr', 'vocabulario') . '"/></a></div>';
+                            $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=7"><img src="../vocabulario/imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im" title="' . get_string('admin_ic', 'vocabulario') . '"/></a></div>';
+                            $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=9"><img src="../vocabulario/imagenes/tipologias_textuales.png" id="id_tt_im" name="tt_im" title="' . get_string('admin_tt', 'vocabulario') . '"/> </a></div>';
+                            $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=11"><img src="../vocabulario/imagenes/estrategias_icon.png" id="id_ea_im" name="ea_im" title="' . get_string('admin_ea', 'vocabulario') . '"/> </a></div>';
+                        }
                         $tabla_imagenes .='</td>';
 
                         $tabla_imagenes .='</table>';

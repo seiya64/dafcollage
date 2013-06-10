@@ -3108,4 +3108,95 @@ class ejercicios_ordenar_elementos_resp {
     
 }
 
+
+//Tabla que sirve para guardar la configuracion de un ejercicio de ordenar elementos
+class ejercicios_ordenar_elementos {
+
+    var $id;
+    var $id_ejercicio;
+    var $orden_unico;
+
+    //Contructor por defecto y con parametros
+    function ejercicios_ordenar_elementos($id = NULL,$id_ejercicio=NULL,$orden_unico=NULL) {
+        
+        $this->id = $id;
+        $this->id_ejercicio = $id_ejercicio;
+        $this->orden_unico = $orden_unico;       
+    }
+
+    //Obtener cada uno de los atributos de la tabla
+    function get($param) {
+
+        // $param = strtolower($param);
+        switch ($param) {
+            default:
+            case 'id':
+                return $this->id;
+                break;
+            case 'id_ejercicio':
+                return $this->id_ejercicio;
+                break;
+            case 'orden_unico':
+                return $this->orden_unico;
+                break;
+        }
+    }
+
+    //Inserta en la bd la instancia correspondiente a la clase y devuelve el identificador
+    //de la nueva instancia creada
+    function insertar() {
+        $id = insert_record('ejercicios_ordenar_elementos', $this, true);
+        //Devuelve el identificador del ejercicios creado
+
+        return $id;
+    }
+
+    //Modifica una instacia
+    function alterar() {
+
+        update_record('ejercicios_ordenar_elementos', $this, false);
+    }
+
+    //Borra todas las respuestas asociadas a un ejercicio
+    function borrar_id_ejercicio($id_ejercicio) {
+        delete_records('ejercicios_ordenar_elementos', 'id_ejercicio', $id_ejercicio);
+    }
+    
+    //Borra un registro dado su id
+    function borrar_id($id) {
+        delete_record('ejercicios_ordenar_elementos', 'id', $id);
+    }
+
+    //Obtiene el texto por id
+    function obtener_uno($id) {
+        $ejer = get_record('ejercicios_ordenar_elementos', 'id', $id);
+        $this->id = $ejer->id;
+        $this->id_ejercicio = $ejer->id_ejercicio;
+        $this->orden_unico = $ejer->orden_unico;    
+     
+        return $this;
+    }
+
+    function obtener_todos_id_ejercicio($id_ejercicio) {
+        $sql = 'SELECT * FROM  mdl_ejercicios_ordenar_elementos WHERE id_ejercicio=' . $id_ejercicio;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new ejercicios_ordenar_elementos();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+}
+
 ?>
