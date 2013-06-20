@@ -402,6 +402,27 @@ function arrastrar_OE() {
     $('.marquito').droppable( {
         drop: handleDropEvent
     } );
+    
+    //Arreglar que se vean los cuadros de texto de las respuestas
+    try {
+        var numpreg = parseInt($("#num_preg").attr("value"));
+        for (var k=1; k<=numpreg; k++) {
+            var numresp = parseInt($("#num_res_preg"+k).attr("value"));
+            for (var l=1; l<=numresp; l++) {
+                var t = $("#resp_"+l+"_"+k);
+                var tamTexto = medirCadena(t.text());
+                console.log("Tam Texto{ w:" + tamTexto.width + ",h: " + tamTexto.height);
+                var tamDiv = {width: t.width(), height: t.height()};
+                console.log("Tam Div{ w:" + tamDiv.width + ",h:" + tamDiv.height);
+                var ancho = tamTexto.width*Math.round(tamTexto.height/16);
+                console.log("Ancho: " + ancho);
+                var filas = parseInt(Math.round(ancho/tamDiv.width)+1);
+                console.log("Numero de filas: " + filas);
+                t.css("height",(filas*20)+"px");
+            }
+        }
+    }
+    catch(e){}
   
 
 
@@ -412,6 +433,8 @@ function arrastrar_OE() {
         if( ($( this ).find( ".item" ).length)==0){
             if($(this).attr('preg')==draggable.attr('preg')) {
                 $(this).append($(ui.draggable));
+                $(this).css('width',$(ui.draggable).css('width'));
+                $(this).css('height',$(ui.draggable).css('height'));
             }
             else {
                 alert("No se puede colocar una palabra de una pregunta en un hueco de otra pregunta distinta.");
@@ -752,10 +775,14 @@ function compruebaCopyright(id_curso,tipocreacion){
     var objeto = document.getElementById("id_copyright");
   
     var eltxt =objeto.selectedIndex;
-   
+    if(tipocreacion!=5 && tipocreacion!=9) {
     var objeto2 = document.getElementById("id_copyrightresp");
   
     var eltxtresp =objeto2.selectedIndex;
+    }
+    else {
+        eltxtresp=-1;
+    }
    
     var campotematico = document.getElementById("id_campoid");
   
@@ -6115,7 +6142,7 @@ function OE_addPalabra_Modificar(id_ejercicio,numpreg,orden,texto) {
     div_resp.appendChild(document.createTextNode(numresp+"."));
     var div = document.createElement("textarea");
     div.style.width="300px";
-    div.style.resize="none";
+    //div.style.resize="none";
     div.setAttribute("class","resp");
     div.setAttribute("readonly","yes");
     div.name="respuesta"+numresp+"_"+orden+"_"+numpreg;
@@ -6356,7 +6383,7 @@ function OE_DelPregunta(id_ejercicio,numpreg) {
             var h2 = document.getElementById("h2_pregunta" + i);
             h2.setAttribute("id", "h2_pregunta" + q);
             h2.removeChild(h2.childNodes[0]);
-            h2.appendChild(document.createTextNode("Pregunta " + q + " :"));
+            h2.appendChild(document.createTextNode("Oracion " + q + " :"));
             var texta = document.getElementById("pregunta" + i);
             texta.setAttribute("id", "pregunta" + q);
             texta.setAttribute("name", "pregunta" + q);
@@ -6433,6 +6460,8 @@ function OE_AddPregunta(id_ejercicio) {
     var orden_unico = parseInt(document.getElementById("orden_unico").value)==0;
     var npreg = numpregs+1;
     
+    if (!orden_unico) frase = frase.toUpperCase();
+    
     //Siempre va a haber al menos una pregunta
     var divpregunta1 = document.getElementById("tabpregunta1");
     var padre = divpregunta1.parentNode;
@@ -6446,15 +6475,15 @@ function OE_AddPregunta(id_ejercicio) {
     var td1 = createElement("td",{style:"width:70%;"}); tr.appendChild(td1);
     var h2 = createElement("h2",{id:"h2_pregunta"+npreg}); td1.appendChild(h2);
     h2.appendChild(document.createTextNode("Oracion "+npreg+" :"));
-    var texta = createElement("textarea",{style:"resize:none; width: 900px;",class:"pregunta",
+    var texta = createElement("textarea",{style:" width: 900px;",class:"pregunta",
                                           name:"pregunta"+npreg, id:"pregunta"+npreg});
     texta.appendChild(document.createTextNode(frase));
     td1.appendChild(texta);
     var td2 = createElement("td",{style:"width:5%;"}); tr.appendChild(td2);
     var img1 = createElement("img",{id:"imgpregborrar"+npreg, src:"./imagenes/lock.svg",
-                                    alt:"Bloquear Pregunta",height:"10px",width:"10px",
+                                    alt:"Confirmar Oracion",height:"10px",width:"10px",
                                     onclick:"OE_BloquearPregunta("+id_ejercicio+","+npreg+")",
-                                    title:"Boquear Pregunta"});
+                                    title:"Confirmar Oracion"});
     
     var img2 = createElement("img",{id:"imgpreganadir"+npreg, src:"./imagenes/añadir.gif",
                                     alt:"añadir hueco",height:"15px",width:"15px", style:"visibility:hidden;",
@@ -6462,8 +6491,16 @@ function OE_AddPregunta(id_ejercicio) {
                                     title:"Añadir Orden Nuevo"});
     
     td1.appendChild(img1);
-    td1.appendChild(document.createTextNode("  Bloquear Pregunta  "));
+    td1.appendChild(document.createTextNode("  Confirmar Oracion  "));
     td1.appendChild(img2);
+    
+    var tr2 = createElement("tr",{});
+    tbody.appendChild(tr2);
+    var td3 = createElement("td",{});
+    tr2.appendChild(td3);
+    var h4 = createElement("h4",{});
+    h4.appendChild(document.createTextNode("Puede cambiar el orden de los elementos con la ayuda de las flechas a al derecha."));
+    td3.appendChild(h4);
     //td1.appendChild(document.createTextNode("  Añadir Orden Nuevo  "));
     var input_orden = createElement("input",{type:"hidden",value:"0",id:"num_orden_"+npreg,
                                              name:"num_orden_"+npreg});
@@ -6508,7 +6545,58 @@ function OE_AddPregunta(id_ejercicio) {
 
 //Boton para bloquear una pregunta bloqueada
 function OE_BloquearPregunta(id_ejercicio,numpreg) {
+    var orden_unico = parseInt(document.getElementById("orden_unico").value)==0;
+    var texta = document.getElementById("pregunta"+numpreg);
+    texta.setAttribute("readonly","yes");
     
+    //Cambiar boton Bloquear Pregunta por Eliminar Pregunta
+    var img1 = document.getElementById("imgpregborrar"+numpreg);
+    img1.setAttribute("src","./imagenes/delete.gif");
+    img1.setAttribute("alt","eliminar respuesta");
+    img1.setAttribute("onclick","OE_DelPregunta("+id_ejercicio+","+numpreg+")");
+    img1.setAttribute("title","Eliminar Oracion");
+    img1.nextSibling.textContent="  Eliminar Oracion  ";
+    
+    if(orden_unico) {
+        //Ocultar boton de Añadir Palabra
+        var imgadd = document.getElementById("add_palabra_"+numpreg+"_1");
+        imgadd.style.visibility="hidden";
+        imgadd.nextSibling.textContent="";
+        
+        //Ocultar botones de Eliminar Respuesta
+        var totalResp = parseInt(document.getElementById("num_res_preg"+numpreg+"_1").value);
+        for (var k=1; k<=totalResp; k++) {
+            var imgdel = document.getElementById("up_"+k+"_1_"+numpreg);
+            imgdel.style.visibility="hidden";
+        }
+    }
+    else {
+        //Hacer visible el boton de Añadir Orden Nuevo
+        var img2 = document.getElementById("imgpreganadir"+numpreg);
+        img2.style.visibility="visible";
+        img2.parentNode.appendChild(document.createTextNode("  Añadir Orden Nuevo  "));
+        
+        //Cambiar el boton Añadir Palabra por Eliminar Orden
+        var imgadd = document.getElementById("add_palabra_"+numpreg+"_1");
+        imgadd.parentNode.removeChild(imgadd.nextSibling);
+        imgadd.parentNode.removeChild(imgadd);
+        var imgdel = document.getElementById("del_orden_"+numpreg+"_1");
+        imgdel.style.visibility="visible";
+        imgdel.parentNode.appendChild(document.createTextNode("  Eliminar Orden  "));
+        
+        //Poner visibles las flechas para cambiar el orden de las respuestas
+        var totalResp = parseInt(document.getElementById("num_res_preg"+numpreg+"_1").value);
+        for (var k=1; k<=totalResp; k++) {
+            var imgup = document.getElementById("up_"+k+"_1_"+numpreg);
+            imgup.setAttribute("src","./imagenes/up.svg");
+            imgup.setAttribute("alt","Subir Orden");
+            imgup.setAttribute("title","Subir Orden");
+            imgup.setAttribute("onclick","OE_BajarOrden("+id_ejercicio+","+numpreg+",1,"+k+")");
+            
+            var imgdown = document.getElementById("down_"+k+"_1_"+numpreg);
+            imgdown.style.visibility="visible";
+        }
+    }
 }
 
 function OE_addPalabra_Seleccion(id_ejercicio, numpreg, orden) {
@@ -6516,6 +6604,9 @@ function OE_addPalabra_Seleccion(id_ejercicio, numpreg, orden) {
     var numresp = parseInt(document.getElementById("num_res_preg"+numpreg+"_"+orden).value)+1;
     var texto_sel = getSelectedText(textarea);
     var sel = getInputSelection(textarea);
+    
+    var orden_unico = parseInt(document.getElementById("orden_unico").value)==0;
+    if(!orden_unico) texto_sel = texto_sel.toUpperCase();
     
     
     //Comprobar que no se haya seleccionado una cadena vacia
@@ -6542,7 +6633,7 @@ function OE_addPalabra_Seleccion(id_ejercicio, numpreg, orden) {
     div_resp.appendChild(document.createTextNode(numresp+"."));
     var div = document.createElement("textarea");
     div.style.width="300px";
-    div.style.resize="none";
+    //div.style.resize="none";
     div.setAttribute("class","resp");
     div.setAttribute("readonly","yes");
     div.name="respuesta"+numresp+"_"+orden+"_"+numpreg;
@@ -6748,4 +6839,37 @@ function OE_BajarOrden(id_ejercicio, numpreg, orden, numresp) {
     else {
         alert("No se puede bajar mas de orden.");
     }
+}
+
+//Oculta la pista H4 en los ejercicios Ordenar Elementos
+function ocultarH4() {
+    $("#h4_p").css("visibility","hidden");
+    $("#h4_p2").css("visibility","hidden");
+}
+//Muestra la pista H4 en los ejercicios Ordenar Elementos
+function mostrarH4() {
+    $("#h4_p").css("visibility","visible");
+    $("#h4_p2").css("visibility","visible");
+}
+
+//Funcion que calcula el ancho y el alto en pixeles de una cadena de texto
+function medirCadena(texto) {
+    var s = $("#temp");
+    s.text(texto);
+    var ret = {width:s.width(), height:s.height()};
+    s.text("");
+    return ret;
+}
+
+//Muestra en un textarea una breve explicacion de en que consiste el ejercicio
+function cargaResumenEjercicio() {
+    var select = document.getElementById("TipoActividadCrear");
+    var texta = document.getElementById("desc_TipoActividadCrear");
+    
+    texta.removeChild(texta.childNodes[0]);
+    var opcion = select.selectedIndex;
+    console.log("Opcion seleccionada: " + opcion);
+    
+    texta.appendChild(document.createTextNode(descripciones[opcion]));
+    texta.style.visibility="visible";
 }

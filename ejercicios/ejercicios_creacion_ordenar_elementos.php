@@ -48,6 +48,8 @@ require_once("ejercicios_form_creacion.php");
 // Crea ejercicio ahora
 $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
 $carpeta = unserialize($_SESSION['cosasProfe']);
+$tipoorden = $_SESSION['tipoorden'];
+$tipoorden = ($tipoorden=="Frase") ? 1 : 0;
 $id_ejercicio = $ejercicioGeneral->insertar();
 
 // Y para el profesor tambien
@@ -64,7 +66,7 @@ $tipo_respuesta = optional_param('tr', 0, PARAM_INT);
 
 //Coger la casilla seleccionada
 $orden_unico = optional_param('orden_unico',0,PARAM_INT);
-$cfg_ordenar_elementos = new ejercicios_ordenar_elementos(NULL,$id_ejercicio,$orden_unico);
+$cfg_ordenar_elementos = new ejercicios_ordenar_elementos(NULL,$id_ejercicio,$orden_unico,$tipoorden);
 $cfg_ordenar_elementos->insertar();
 
 $mform = new mod_ejercicios_creando_ejercicio_ordenar_elementos($id_curso, $p, $id_ejercicio, $tipo_origen, $tipo_respuesta, $tipocreacion);

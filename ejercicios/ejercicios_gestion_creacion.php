@@ -66,15 +66,32 @@ if ($error == '0') {
 //Le sumo uno porque me coge los indices
     $numeropreguntas = $numeropreguntas + 1;
 
-    $tipo_respuesta = optional_param('radiorespuesta', PARAM_TEXT);
-    $numerorespuestas = optional_param('numerorespuestas', PARAM_INT);
+    switch($tipocreacion) {
+        case 5:
+        case 9:
+            $tipo_respuesta = "Texto";
+            $numerorespuestas=1;
+            $numerorespuestascorrectas=1;
+            break;
+            
+        default:
+            $tipo_respuesta = optional_param('radiorespuesta', PARAM_TEXT);
+            $numerorespuestas = optional_param('numerorespuestas', PARAM_INT);
 
-    $numerorespuestas = $numerorespuestas + 1;
+            $numerorespuestas = $numerorespuestas + 1;
 
-    $numerorespuestascorrectas = optional_param('numerorespuestascorrectas', PARAM_INT);
+            $numerorespuestascorrectas = optional_param('numerorespuestascorrectas', PARAM_INT);
 
-    $numerorespuestascorrectas = $numerorespuestascorrectas + 1;
+            $numerorespuestascorrectas = $numerorespuestascorrectas + 1;
+            break;
+    }
+    if($tipocreacion==9) {
+        $tipoorden = optional_param('radiotipoorden',PARAM_TEXT);
+    }
+    
     global $CFG, $COURSE, $USER;
+    
+    
     //Si hemos elegido Texto - Texto
     echo "tipo_pregunta" . $tipo_pregunta;
     if ($tipo_pregunta == "Texto") {
@@ -108,25 +125,21 @@ if ($error == '0') {
             }
         }
     } else {
-
+        $id = NULL;
+        $id_creador = $USER->id;
+        $TipoActividad = $tipocreacion - 2; //Comienza en 0. Porque el primer y segundo elemento no son nada.
         if ($tipo_pregunta == "Audio" && $tipo_respuesta == "Texto") {
-            $id = NULL;
-            $id_creador = $USER->id;
-            $TipoActividad = $tipocreacion - 2; //Comienza en 2
+            
             $TipoArchivoPregunta = 2; // 2 va a ser audio
             $TipoArchivoRespuesta = 1; //1 va a ser texto
         } else {
             if ($tipo_pregunta == "Video" && $tipo_respuesta == "Texto") {
-                $id = NULL;
-                $id_creador = $USER->id;
-                $TipoActividad = $tipocreacion - 2; //Comienza en 0
+                
                 $TipoArchivoPregunta = 3; // 3 va a ser audio
                 $TipoArchivoRespuesta = 1; //1 va a ser texto
             }
             if ($tipo_pregunta == "Foto" && $tipo_respuesta == "Texto") {
-                $id = NULL;
-                $id_creador = $USER->id;
-                $TipoActividad = $tipocreacion - 2; //Comienza en 0. Porque el primer y segundo elemento no son nada.
+                
                 $TipoArchivoPregunta = 4; // 4 va a ser una foto
                 $TipoArchivoRespuesta = 1; //1 va a ser texto
             }
@@ -158,7 +171,12 @@ if ($error == '0') {
     $name = required_param('nombre_ejercicio', PARAM_TEXT);
     $descripcion = required_param('descripcion', PARAM_TEXT);
     $copyrightpreg = required_param('copyright', PARAM_INT);
-    $copyrightresp = required_param('copyrightresp', PARAM_INT);
+    if ($tipocreacion!=5 && $tipocreacion!=9) {
+        $copyrightresp = required_param('copyrightresp', PARAM_INT);
+    }
+    else {
+        $copyrightresp=0;
+    }
 
 
     //  $descripcion=htmlspecialchars( mysql_real_escape_string($descripcion));
@@ -178,6 +196,9 @@ if ($error == '0') {
     // Cosas del profe a session tambien (necesita id_ejercicio)
     $carpeta = required_param('carpeta_ejercicio', PARAM_TEXT);
     $_SESSION['cosasProfe'] = serialize($carpeta);
+    
+    //Meto en sesion el tipo de orden
+    $_SESSION['tipoorden']=$tipoorden;
 
 
     //La comprobacion de errores esta en el javascript

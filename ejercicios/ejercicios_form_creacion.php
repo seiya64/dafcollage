@@ -81,7 +81,31 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
         $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
         //titulo
-         $titulo= '<h2>' . get_string('FormularioCreacion', 'ejercicios') . '</h2>';
+        switch($tipocreacion) {
+            case 2: //Multiple Choices
+                $title=get_string('MC_title', 'ejercicios');
+                break;
+            case 3: //Asociacion Simple
+                $title=get_string('AS_title', 'ejercicios');
+                break;
+            case 4: //Asociacion Compleja
+                $title=get_string('AC_title', 'ejercicios');
+                break;
+            case 5: //Texto Hueco
+                $title=get_string('TH_title', 'ejercicios');
+                break;
+            case 9: //Ordenar Elementos
+                $title=get_string('OE_title', 'ejercicios');
+                break;
+            case 6: //Identificar Elementos
+                $title=get_string('IE_title', 'ejercicios');
+                break;
+            default:
+                $title=get_string('FormularioCreacion', 'ejercicios');
+                break;
+        }
+         $titulo= '<h2>' . $title . '</h2>';
+         
          $mform->addElement('html',$titulo);
          
            $oculto='<input type="hidden" name="tipocreacion" id="tipocreacion" value="'.$tipocreacion.'"/>';
@@ -154,7 +178,13 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
            
           switch ($tipocreacion) {
             case 5: //Texto Hueco. Solo tipo Texto
+                break;
             case 9: //Ordenar Elementos, Solo tipo Texto
+                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiotipoorden', '', get_string("OE_tipoorden_frase","ejercicios"), "Frase", null);
+                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiotipoorden', '', get_string("OE_tipoorden_parrafos","ejercicios"), "Parrafo", null);
+                $mform->addGroup($radioarray, 'radiotipoorden', get_string('OE_tipoorden', 'ejercicios'), array(' '), false);
+                $mform->setDefault('radiotipoorden', "Frase");
+                break;
             case 2: //Multiplechoice solo tipo texto
                 $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Texto", "Texto", null);
                 $mform->addGroup($radioarray, 'radiorespuesta', get_string('tiporespuesta', 'ejercicios'), array(' '), false);
@@ -372,17 +402,19 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
             $cright[]="Reconocimiento-NoComercial-NoDerivadas (CC-BY-NC-ND)";
             
             $mform->addElement('select', 'copyright', get_string("copyright", "ejercicios"), $cright,"onChange='javascript:cargaDescripcion(1)'");
-
-            $cright=array();
-            $cright[]="--";
-            $cright[]="Reconocimiento (CC-BY)";
-            $cright[]="Reconocimiento-CompartirIgual (CC-BY-SA)";
-            $cright[]="Reconocimiento-NoDerivadas (CC-BY-ND)";
-            $cright[]="Reconocimiento-NoComercial (CC-BY-NC)";
-            $cright[]="Reconocimiento-NoComercial-CompartirIgual (CC-BY-NC-SA)";
-            $cright[]="Reconocimiento-NoComercial-NoDerivadas (CC-BY-NC-ND)";
             
-            $mform->addElement('select', 'copyrightresp', get_string("copyrightresp", "ejercicios"), $cright,"onChange='javascript:cargaDescripcion(2)'");
+            if($tipocreacion!=5 && $tipocreacion!=9) {
+                $cright=array();
+                $cright[]="--";
+                $cright[]="Reconocimiento (CC-BY)";
+                $cright[]="Reconocimiento-CompartirIgual (CC-BY-SA)";
+                $cright[]="Reconocimiento-NoDerivadas (CC-BY-ND)";
+                $cright[]="Reconocimiento-NoComercial (CC-BY-NC)";
+                $cright[]="Reconocimiento-NoComercial-CompartirIgual (CC-BY-NC-SA)";
+                $cright[]="Reconocimiento-NoComercial-NoDerivadas (CC-BY-NC-ND)";
+
+                $mform->addElement('select', 'copyrightresp', get_string("copyrightresp", "ejercicios"), $cright,"onChange='javascript:cargaDescripcion(2)'");
+            }
 
             
             $buttonarray = array();
@@ -1199,11 +1231,12 @@ class mod_ejercicios_creando_ejercicio_ordenar_elementos extends moodleform_mod 
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
         $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
         
+        $tipoorden = $_SESSION['tipoorden'];
         
         
         //titulo
-        $titulo= '<h1>' . get_string('OE_FormularioCreacionTextos', 'ejercicios') . '</h1>';
-        $mform->addElement('html',$titulo);
+        //$titulo= '<h1>' . get_string('OE_FormularioCreacionTextos', 'ejercicios') . '</h1>';
+        //$mform->addElement('html',$titulo);
 
          $oculto='<input type="hidden" name="tipocreacion" id="tipocreacion" value="'.$tipocreacion.'"/>';
          $mform->addElement('html',$oculto);
@@ -1215,11 +1248,13 @@ class mod_ejercicios_creando_ejercicio_ordenar_elementos extends moodleform_mod 
        $html = '<h2>'. get_string('OE_config','ejercicios') . '</h2>';
         $mform->addElement('html',$html);
         $radioarray = array();
-        $radioarray[] = &$mform->createElement('radio','orden_unico','',get_string('OE_orden_unico','ejercicios'),0,'');
-        $radioarray[] = &$mform->createElement('radio','orden_unico','',get_string('OE_orden_multiple','ejercicios'),1,'');
+        $radioarray[] = &$mform->createElement('radio','orden_unico','',get_string('OE_orden_unico','ejercicios'),0,'onchange="ocultarH4()"');
+        if ($tipoorden=="Frase") {
+            $radioarray[] = &$mform->createElement('radio','orden_unico','',get_string('OE_orden_multiple','ejercicios'),1,'onchange="mostrarH4()"');
+        }
         $mform->addGroup($radioarray,'group_orden_unico','',array(' '),false);
         //$mform->addElement('advcheckbox','OE_orden_unico',get_string('OE_orden_unico','ejercicios'));
-        $html = '<br/><h4>'.get_string('OE_help_orden_multiple','ejercicios').'</h4>';
+        $html = '<br/><h4 id="h4_p" style="visibility:hidden;">'.get_string('OE_help_orden_multiple','ejercicios').'</h4>';
         $mform->addElement('html',$html);
         $mform->addElement('html','<br/>');
         
@@ -1227,6 +1262,7 @@ class mod_ejercicios_creando_ejercicio_ordenar_elementos extends moodleform_mod 
        $mform->addElement('html',$html);
        
        $help = '<h3>' . get_string('OE_help_add_palabra','ejercicios') . '</h3>';
+       $help.='<h3 id="h4_p2" style="visibility:hidden">' . get_string('OE_help_add_more_palabra','ejercicios') . '</h3>';
        $mform->addElement('html',$help);
                         
          //Para cada pregunta
@@ -1238,7 +1274,10 @@ class mod_ejercicios_creando_ejercicio_ordenar_elementos extends moodleform_mod 
             
             
             //Cuadro de texto donde se introducira el texto del cual se sacaran los huecos                          
-            $mform->addElement('textarea', 'pregunta' . $aux, get_string("OE_seleccione", 'ejercicios'), 'style="resize:none;" wrap="virtual" rows="5" cols="78"');
+            //get_string("OE_seleccione", 'ejercicios')
+            $textarea = '<textarea style="resize:none;" wrap="virtual" rows="5" cols="120" name="pregunta'.$aux.'" id="id_pregunta'.$aux.'" ></textarea>';
+            $mform->addElement('html',$textarea);
+            //$mform->addElement('textarea', 'pregunta' . $aux, '', 'style="resize:none;" wrap="virtual" rows="5" cols="78"');
                     
                 
 
@@ -1251,9 +1290,9 @@ class mod_ejercicios_creando_ejercicio_ordenar_elementos extends moodleform_mod 
 
             //Archivo Asociado
             //$mform->addElement('textarea', 'respuesta'.$aux, get_string('Asociacion_Texto_Asociado', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
-            $textarea = '</br><div id="titulorespuestas_'.$aux.'" style="margin-left:130px;">';
+            $textarea = '</br><div id="titulorespuestas_'.$aux.'" >';
             //$textarea.='<div id="orden'.$aux.'" style="margin-left:130px;">Elementos a ordenar';
-            $textarea.='<center><input type="button" name="add_palabra" onclick="OE_AddPalabra_Creacion('.$id_ejercicio.",".$aux.')" id="add_palabra" value="' . get_string('OE_add_palabra', 'ejercicios') . '" /></center>';
+            $textarea.='<br/><center><input type="button" name="add_palabra" onclick="OE_AddPalabra_Creacion('.$id_ejercicio.",".$aux.')" id="add_palabra" value="' . get_string('OE_add_palabra', 'ejercicios') . '" /></center>';
             $textarea.='<table id="resp_orden_' . $aux . '"> ';
             //$textarea.='<textarea name="respuesta1_'.$aux.'" id="respuesta1_'.$aux.'" rows="1" cols="50"></textarea>';
             
@@ -1274,10 +1313,12 @@ class mod_ejercicios_creando_ejercicio_ordenar_elementos extends moodleform_mod 
             
             
             
-            $buttonarray = array();
-            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"onclick=obtenernumeroRespuestas('$p');");
+            //$buttonarray = array();
+            //$buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"onclick=obtenernumeroRespuestas('$p');");
+            $html = '<br/><br/><center><input onclick="obtenernumeroRespuestas('.$p.');" name="submitbutton" value="'.get_string('Aceptar','ejercicios').'" type="submit" id="id_submitbutton"></center>';
+            $mform->addElement('html',$html);
             //$buttonarray[] = &$mform->createElement('button', 'add_frase', get_string('OE_add_frase','ejercicios'),'onclick=OE_Add_Frase('.$id_ejercicio.');');
-            $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
+            //$mform->addGroup($buttonarray, 'botones', '', array(' '), false);
 
             
      }

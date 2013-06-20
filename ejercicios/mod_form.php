@@ -42,6 +42,7 @@
 require_once($CFG->dirroot.'/course/moodleform_mod.php');
 require_once($CFG->dirroot.'/mod/vocabulario/vocabulario_classes.php');
 require_once($CFG->dirroot.'/mod/vocabulario/lib.php');
+require_once('clase_log.php');
 
 class mod_ejercicios_mod_form extends moodleform_mod {
 
@@ -105,6 +106,23 @@ class mod_ejercicios_mod_formulario extends moodleform_mod {
          // El fichero que procesa el formulario es gestion.php
         parent::moodleform('hacer_ejercicio_inicio.php?id='.$id);
        }
+       
+       /**
+      * Generara un codigo javascript que se incrustara en la pagina
+      * en la que se almacenara para cada tipo de ejercicio (se guardara su indice en el control select de la pagina)
+      * una breve descripcion del ejercicio que despues al seleccionarlo en el select
+      * aparecera en un textarea
+      */
+     function pintarDescripcionEjercicios() {
+        $salida = '<script type="text/javascript">';
+        $salida .= ' var descripciones = new Array();';
+        $numEjercicios = (int) get_string('TotalEjercicios','ejercicios');
+        for ($i=0; $i<$numEjercicios; $i++){
+            $salida .= 'descripciones['.$i.']="'.get_string('desc_Tipo'.$i,'ejercicios').'";';
+        }
+        $salida.='</script>';
+        return $salida;
+     }
 
      function definition() {
      }
@@ -122,9 +140,16 @@ class mod_ejercicios_mod_formulario extends moodleform_mod {
 	
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
      
+        //Añade una breve descripcion para cada tipo de ejercicio
+        $script = $this->pintarDescripcionEjercicios();
+        $log = new Log("log_mod_form.txt");
+        $log->write("Script: " . $script);
+        $log->close();
+        $mform->addElement('html',$script);
+        
 
 
-            $tabla_menu .=  '<h1><center>'.get_string('Actividades', 'ejercicios').'</center></h1>';
+            $tabla_menu =  '<h1><center>'.get_string('Actividades', 'ejercicios').'</center></h1>';
           
             
             $tabla_menu .=  '<div id="divflotanteizq">';
@@ -331,12 +356,13 @@ class mod_ejercicios_mod_formulario extends moodleform_mod {
             }
            
              
-            $tabla_menu.='<select id="TipoActividadCrear" style="width: 380px;" class="selectbuscar">';
+            $tabla_menu.='<select id="TipoActividadCrear" style="width: 380px;" class="selectbuscar" onchange="cargaResumenEjercicio()" >';
              
              for($i=0;$i<sizeof($clasificaciontipo);$i++){
                  $tabla_menu.='<option value="'.$i.'">'.$clasificaciontipo[$i].'</option>';
              }
             $tabla_menu.='</select>';
+            $tabla_menu.='<textarea id="desc_TipoActividadCrear" rows="5" cols="50" style="visibility:hidden;width:380px;resize:none;" readonly="yes">aaaa</textarea>';
            
          
             

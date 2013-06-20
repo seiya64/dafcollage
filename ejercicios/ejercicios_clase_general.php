@@ -3115,13 +3115,15 @@ class ejercicios_ordenar_elementos {
     var $id;
     var $id_ejercicio;
     var $orden_unico;
+    var $frase;
 
     //Contructor por defecto y con parametros
-    function ejercicios_ordenar_elementos($id = NULL,$id_ejercicio=NULL,$orden_unico=NULL) {
+    function ejercicios_ordenar_elementos($id = NULL,$id_ejercicio=NULL,$orden_unico=NULL,$frase=NULL) {
         
         $this->id = $id;
         $this->id_ejercicio = $id_ejercicio;
-        $this->orden_unico = $orden_unico;       
+        $this->orden_unico = $orden_unico;
+        $this->frase = $frase;
     }
 
     //Obtener cada uno de los atributos de la tabla
@@ -3138,6 +3140,9 @@ class ejercicios_ordenar_elementos {
                 break;
             case 'orden_unico':
                 return $this->orden_unico;
+                break;
+            case 'frase':
+                return $this->frase;
                 break;
         }
     }
@@ -3173,6 +3178,7 @@ class ejercicios_ordenar_elementos {
         $this->id = $ejer->id;
         $this->id_ejercicio = $ejer->id_ejercicio;
         $this->orden_unico = $ejer->orden_unico;    
+        $this->frase = $ejer->frase;
      
         return $this;
     }

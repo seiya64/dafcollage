@@ -81,6 +81,7 @@ $string['Intencion']='Intención Comunicativa';
 
 
 //CLASIFICACION TIPO DE ACTIVIDAD
+$string['TotalEjercicios']="15";
 $string['Tipo0']="Seleccionar";
 $string['Tipo1']="--";
 $string['Tipo2']="ELECCIÓN MÚLTIPLE con sus diversas variantes";
@@ -97,6 +98,23 @@ $string['Tipo12']="IDENTIFICAR ELEMENOS CON  RESPUESTA MÚLTIPLE";
 $string['Tipo13']="PRACTICAR PRONUNCIACIÓN";
 //(* Angel Biedma *) Añadido Tipo Ejercicio Entrenador de Vocabulario
 $string['Tipo14']="ENTRENADOR DE VOCABULARIO";
+//DESCRIPCION DE EJERCICIOS
+$string['desc_Tipo0']="Seleccionar";
+$string['desc_Tipo1']="--";
+$string['desc_Tipo2']="ELECCIÓN MÚLTIPLE con sus diversas variantes";
+$string['desc_Tipo3']="ASOCIACIÓN SIMPLE";
+$string['desc_Tipo4']="ASOCIACIÓN COMPLEJA";
+$string['desc_Tipo5']="TEXTO HUECO";
+$string['desc_Tipo6']="IDENTIFICAR ELEMENTOS";
+$string['desc_Tipo7']="RESPUESTA ABIERTA";
+$string['desc_Tipo8']="CRUCIGRAMA";
+$string['desc_Tipo9']="ORDENAR ELEMENTOS";
+$string['desc_Tipo10']="IDENTIFICAR ELEMENTOS MÁS RESPUESTA CORTA";
+$string['desc_Tipo11']="IDENTIFICAR ELEMENOS CON ASOCIACIÓN SIMPLE";
+$string['desc_Tipo12']="IDENTIFICAR ELEMENOS CON  RESPUESTA MÚLTIPLE";
+$string['desc_Tipo13']="PRACTICAR PRONUNCIACIÓN";
+//(* Angel Biedma *) Añadido Tipo Ejercicio Entrenador de Vocabulario
+$string['desc_Tipo14']="ENTRENADOR DE VOCABULARIO";
 
 
 
@@ -126,7 +144,7 @@ $string["descripcion"]="Añade una breve introducción al ejercicio:";
 $string["visible"]="Visible (accesible por sus alumnos)";
 $string["publico"]="Público (accesible por otros profesores y alumnos)";
 //$string["carpeta"]="Introduzca la ruta del ejercicio";
-$string["carpeta"]="Selecciona la carpeta donde quiera guardar el ejercicio";
+$string["carpeta"]="Seleccione la carpeta donde quiera guardar el ejercicio";
 $string["copyright"]="Seleccione el copyright de sus archivos pregunta";
 $string["copyrightresp"]="Seleccione el copyright de sus archivos respuesta";
 $string["textoclasej"]="Asigne una o varias categorías de búsqueda de los siguientes menús desplegables(Obligatorio Campo Temático o Tema gramatical):";
@@ -165,23 +183,34 @@ $string['TH_configuracion_ejercicio']="Configuraci&oacute;n del Ejercicio";
 $string['TH_pistas']="Pistas";
 $string['TH_pista_longitud']='Ocupa {$a} simbolos';
 
-//Generador de Ejercicios -- Ordenar Elementos -- Etiqueta OE
+//Titulos de Ejercicios
+$string['MC_title']="Multiple Choice";
+$string['AS_title']="Asociacion Simple";
+$string['AC_title']="Asociacion Compleja";
+$string['TH_title']="Texto Hueco";
+$string['OE_title']="Ordenar Elementos";
+$string['IE_title']="Identificar Elementos";
 
+//Generador de Ejercicios -- Ordenar Elementos -- Etiqueta OE
 $string['OE_seleccione']="Escriba la frase que quiera desordenar.";
 $string['OE_add_orden']="Añadir Orden";
 $string['OE_add_palabra']="Insertar Elemento";
-$string['OE_add_frase']="Añadir Frase";
-$string['OE_pregunta']='Oracion {$a} :';
-$string["OE_FormularioCreacionTextos"]="Introduzca las frases";
+$string['OE_add_frase']="Añadir Frase o Parrafo";
+$string['OE_pregunta']='Oracion o Parrafo {$a} :';
 $string['OE_orden']='Orden {$a} :';
 $string['OE_introduzca_texto']='En esta area de texto puede escribir, y despues puede seleccionar texto y añadir nuevas palabras a los ordenes';
-$string['OE_add_pregunta']='Añadir Oracion';
-$string['OE_help_add_palabra']="Seleccione con el raton los elementos del texto. A continuación pulse en Insertar Elemento siguiendo el orden correcto (los ordenes correctos).";
-$string['OE_help_add_palabra']="Nota: Seleccione con el raton los elementos del cuadro de texto y pulse en Añadir Palabra para crear un elemento que desordenar. Los elementos a ordenar apareceran enumerados en el orden en que lo han seleccionado.";
-$string['OE_config']="¿Quiere que haya sólo una opción correcta o varias?";
-$string['OE_list_preguntas']="Lista de Oraciones";
+$string['OE_add_pregunta']='Añadir Oración o Parrafo Nueva';
+$string['OE_orden_unico']="Seleccione la casilla para activar que haya multiples ordenes correctos. Si se deja desactivada solo se permitira un orden correcto.";
+$string['OE_help_add_palabra']='Primero introduzca las frases/los párrafos. <br/><br/> Después seleccione con el ratón los elementos que quiera desordenar. Éstos aparecerán enumerados segun el orden en el que se han seleccionado. A continuación pulse en <i>Insertar Elemento</i> para confirmar.<br/><br/>';
+$string['OE_help_add_more_palabra']="Podra añadir mas opciones correctas al pulsar en Aceptar.";
+$string['OE_config']="¿Quiere que en este ejercicio haya sólo una opción correcta o varias?";
+$string['OE_list_preguntas']="Lista de Oraciones o Parrafos";
 $string['OE_help_orden_multiple']="Se guardara todo en mayuscula. Es recomendable seleccionar lo signos de puntuacion como elementos independientes.";
 $string["OE_FormularioCreacionTextos"]="Introduzca las frases y determine los elementos";
 $string["OE_orden_unico"]="Solo un orden correcto.";
 $string["OE_orden_multiple"]="Varios ordenes correctos.";
+$string["OE_help_flechas"]="Puede cambiar el orden de los elementos con la ayuda de las flechas a al derecha.";
+$string["OE_tipoorden"]="Se ordenarán: ";
+$string["OE_tipoorden_frase"]="Elementos de una frase";
+$string["OE_tipoorden_parrafos"]="Frases de un Párrafo/Párrafos de un texto";
 ?>
