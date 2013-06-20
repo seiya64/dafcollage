@@ -563,16 +563,18 @@ class mod_vocabulario_opciones_form extends moodleform {
         //0,3
         $tabla_menu .='<div class="menuitem right" style="text-align:right"><div class="texto">' . get_string('nuevos', 'vocabulario') . '</div></div>';
         //0,2
-        $tabla_menu .='<div class="menuitem center"><div class="texto">' . get_string('busc', 'vocabulario') . '</div></div></div>';
+        $tabla_menu .='<div class="menuitem center"><div class="texto">' . '</div></div></div>';
         //1,1
-        $tabla_menu .='<div class="menurow"><div class="menuitem left" style="text-align:left"><a href="view.php?id=' . $id . '&opcion=1"><img src="./imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im"/><div class="texto">' . get_string('guardar', 'vocabulario') . '</div></a></div>';
+        $tabla_menu .='<div class="menurow"><div class="menuitem left" style="text-align:left"><a href="view.php?id=' . $id . '&opcion=2"><img src="./imagenes/ver_palabras.png" id="id_ver_im" name="ver_im"/><div class="texto">' . get_string('guardar', 'vocabulario') . '</div></a></div>';
+        
+ 
         //}
         //1,3
         $tabla_menu .='<div class="menuitem right" style="text-align:right"><a href="view.php?id=' . $id . '&opcion=3"><img src="./imagenes/campos_lexicos.png" id="id_campos_im" name="campos_im"/><div class="texto">' . get_string('admin_cl', 'vocabulario') . '</div></a></div>';
         //1,2
-         $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=2"><img src="./imagenes/ver_palabras.png" id="id_ver_im" name="ver_im"/><div class="texto">' . get_string('ver', 'vocabulario') . '</div></a></div></div>';
- 
-        
+        $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=1"><img src="./imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im"/><div class="texto">' . get_string('ver', 'vocabulario') . '</div></a></div>';
+
+     
         //$tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=2"><img src="./imagenes/ver_palabras.png" id="id_ver_im" name="ver_im"/><div class="texto">' . get_string('ver', 'vocabulario') . '</div></a></div></div>';
 
         //2,1
@@ -580,11 +582,29 @@ class mod_vocabulario_opciones_form extends moodleform {
         //2,3
         $tabla_menu .='<div class="menuitem right" style="text-align:right"><a href="view.php?id=' . $id . '&opcion=15"><img src="./imagenes/nueva_gramatica.png" id="id_gram_im" name="gram_im"/><div class="texto">' . get_string('add_gram', 'vocabulario') . '</div></a></div>';
         //2,2
-       
-        $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=17"><img src="./imagenes/ver_palabras.png" id="id_ver_intenc" name="ver_intenc"/><div class="texto">' . get_string('verintenciones', 'vocabulario') . '</div></a></div></div>';
+        $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=17"><div class="texto">' .  '</div></a></div></div>';
 
         //3,1
-        $tabla_menu .='<div class="menurow"><div class="menuitem left" style="text-align:left"><a href="view.php?id=' . $id . '&opcion=7"><img src="./imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im"/><div class="texto">' . get_string('admin_ic', 'vocabulario') . '</div></a></div>';
+        //
+         //   $tabla_menu .='<div class="menurow"><div class="menuitem left" style="text-align:left"><a href="view.php?id=' . $id . '&opcion=7"><img src="./imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im"/><div class="texto">' . get_string('admin_ic', 'vocabulario') . '</div></a></div>';
+       // $tabla_menu .='<div class="menurow"><div class="menuitem left" style="text-align:left"><a href="javascript:mi_alerta()"><img src="./imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im"/><div class="texto">' . get_string('admin_ic', 'vocabulario') . '</div></a></div>';
+        
+        //<input type="text" name="test" value="choose your size" class="field" readonly="readonly" />
+        
+        $tabla_menu .='<div class="menurow"><div class="menuitem left" style="text-align:left">
+        <div class="size">
+        <img src="./imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im"/><div class="texto field">' . get_string('admin_ic', 'vocabulario') . '</div>
+	
+	<ul class="list">
+		<li><a href="view.php?id=' . $id . '&opcion=7">Por Categoría</a></li>
+		<li><a href="view.php?id=' . $id . '&opcion=17">Por Mittle</a></li>
+		
+	</ul>
+        </div></div>';
+    
+       
+        
+
         //3,3
         $tabla_menu .='<div class="menuitem right" style="text-align:right"><a href="view.php?id=' . $id . '&opcion=8"><img src="./imagenes/nueva_ic.png" id="id_nueva_ic" name="nueva_ic"/><div class="texto">' . get_string('nueva_ic', 'vocabulario') . '</div></a></div>';
         //3,2
