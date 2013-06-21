@@ -196,7 +196,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $mform->addElement('text', 'ejemplo_sus', get_string("ejem", "vocabulario"), 'value="' . $sustantivo->get('ejemplo') . '"');
 
                 //campo gramatical
-                $mform->addElement('select', 'gramatica_sus', get_string("campo_gram", "vocabulario"), $cgra, "onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico\",1)'");
+                $mform->addElement('select', 'gramatica_sus', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico\",1)'");
                 //probar los campos dinamicos
                 $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico\"  style=\"min-height: 0;\"></div>";
                 $mform->addElement('html', $campodinamico);
@@ -204,12 +204,12 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $mform->addElement('hidden', 'descripcion_grsus');
 
                 //intencion comunicativa
-                $mform->addElement('select', 'intencion_sus', get_string("campo_intencion", "vocabulario"), $cintencion);
+                $mform->addElement('select', 'intencion_sus', get_string("campo_intencion", "vocabulario"), $cintencion, "style=\"width:200px;\"");
                 $mform->setDefault('intencion_sus', $sustantivo->get('intencionid'));
                 $mform->addElement('hidden', 'descripcion_intensus');
 
                 //tipologia textual
-                $mform->addElement('select', 'tipologia_sus', get_string("campo_tipologia", "vocabulario"), $ctipologia);
+                $mform->addElement('select', 'tipologia_sus', get_string("campo_tipologia", "vocabulario"), $ctipologia, "style=\"width:200px;\"");
                 $mform->setDefault('tipologia_sus', $sustantivo->get('tipologiaid'));
                 $mform->addElement('hidden', 'descripcion_tiposus');
                 $ocultador = "</div>";
@@ -228,7 +228,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $mform->addElement('text', 'ejemplo_sus', get_string("ejem", "vocabulario"), 'value="' . $sustantivo->get('ejemplo') . '"');
 
                 //campo gramatical
-                $mform->addElement('select', 'gramatica_sus', get_string("campo_gram", "vocabulario"), $cgra, "onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico\",1)'");
+                $mform->addElement('select', 'gramatica_sus', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico\",1)'");
                 //probar los campos dinamicos
                 $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico\"  style=\"min-height: 0;\"></div>";
                 $mform->addElement('html', $campodinamico);
@@ -236,12 +236,12 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $mform->addElement('hidden', 'descripcion_grsus');
 
                 //intencion comunicativa
-                $mform->addElement('select', 'intencion_sus', get_string("campo_intencion", "vocabulario"), $cintencion);
+                $mform->addElement('select', 'intencion_sus', get_string("campo_intencion", "vocabulario"), $cintencion, "style=\"width:200px;\"");
                 $mform->setDefault('intencion_sus', $sustantivo->get('intencionid'));
                 $mform->addElement('hidden', 'descripcion_intensus');
 
                 //tipologia textual
-                $mform->addElement('select', 'tipologia_sus', get_string("campo_tipologia", "vocabulario"), $ctipologia);
+                $mform->addElement('select', 'tipologia_sus', get_string("campo_tipologia", "vocabulario"), $ctipologia, "style=\"width:200px;\"");
                 $mform->setDefault('tipologia_sus', $sustantivo->get('tipologiaid'));
                 $mform->addElement('hidden', 'descripcion_tiposus');
                 $ocultador = "</div>";
@@ -286,7 +286,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $mform->addElement('text', 'observaciones_vrb', get_string("comen", "vocabulario"), 'value="' . $verbo->get('observaciones') . '"');
 
                 //campo gramatical
-                $mform->addElement('select', 'gramatica_vrb', get_string("campo_gram", "vocabulario"), $cgra, "onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_vrb\",1)'");
+                $mform->addElement('select', 'gramatica_vrb', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_vrb\",1)'");
                 //probar los campos dinamicos
                 $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_vrb\" style=\"min-height: 0;\"></div>";
                 $mform->addElement('html', $campodinamico);
@@ -294,12 +294,12 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $mform->addElement('hidden', 'descripcion_grvrb');
 
                 //intencion comunicativa
-                $mform->addElement('select', 'intencion_vrb', get_string("campo_intencion", "vocabulario"), $cintencion);
+                $mform->addElement('select', 'intencion_vrb', get_string("campo_intencion", "vocabulario"), $cintencion, "style=\"width:200px;\"");
                 $mform->setDefault('intencion_vrb', $verbo->get('intencionid'));
                 $mform->addElement('hidden', 'descripcion_intenvrb');
 
                 //tipologia textual
-                $mform->addElement('select', 'tipologia_vrb', get_string("campo_tipologia", "vocabulario"), $ctipologia);
+                $mform->addElement('select', 'tipologia_vrb', get_string("campo_tipologia", "vocabulario"), $ctipologia, "style=\"width:200px;\"");
                 $mform->setDefault('tipologia_vrb', $verbo->get('tipologiaid'));
                 $mform->addElement('hidden', 'descripcion_tipovrb');
 
@@ -312,7 +312,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $mform->addElement('text', 'observaciones_vrb', get_string("comen", "vocabulario"), 'value="' . $verbo->get('observaciones') . '"');
 
                 //campo gramatical
-                $mform->addElement('select', 'gramatica_vrb', get_string("campo_gram", "vocabulario"), $cgra, "onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_vrb\",1)'");
+                $mform->addElement('select', 'gramatica_vrb', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_vrb\",1)'");
                 //probar los campos dinamicos
                 $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_vrb\" style=\"min-height: 0;\"></div>";
                 $mform->addElement('html', $campodinamico);
@@ -320,12 +320,12 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $mform->addElement('hidden', 'descripcion_grvrb');
 
                 //intencion comunicativa
-                $mform->addElement('select', 'intencion_vrb', get_string("campo_intencion", "vocabulario"), $cintencion);
+                $mform->addElement('select', 'intencion_vrb', get_string("campo_intencion", "vocabulario"), $cintencion, "style=\"width:200px;\"");
                 $mform->setDefault('intencion_vrb', $verbo->get('intencionid'));
                 $mform->addElement('hidden', 'descripcion_intenvrb');
 
                 //tipologia textual
-                $mform->addElement('select', 'tipologia_vrb', get_string("campo_tipologia", "vocabulario"), $ctipologia);
+                $mform->addElement('select', 'tipologia_vrb', get_string("campo_tipologia", "vocabulario"), $ctipologia,"style=\"width:200px;\"");
                 $mform->setDefault('tipologia_vrb', $verbo->get('tipologiaid'));
                 $mform->addElement('hidden', 'descripcion_tipovrb');
 
@@ -360,7 +360,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
             $mform->addElement('text', 'observaciones_adj', get_string("comen", "vocabulario"), 'value="' . $adjetivo->get('observaciones') . '"');
 
             //campo gramatical
-            $mform->addElement('select', 'gramatica_adj', get_string("campo_gram", "vocabulario"), $cgra, "onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_adj\",1)'");
+            $mform->addElement('select', 'gramatica_adj', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_adj\",1)'");
             //probar los campos dinamicos
             $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_adj\" style=\"min-height: 0;\"></div>";
             $mform->addElement('html', $campodinamico);
@@ -368,12 +368,12 @@ class mod_vocabulario_rellenar_form extends moodleform {
             $mform->addElement('hidden', 'descripcion_gradj');
 
             //intencion comunicativa
-            $mform->addElement('select', 'intencion_adj', get_string("campo_intencion", "vocabulario"), $cintencion);
+            $mform->addElement('select', 'intencion_adj', get_string("campo_intencion", "vocabulario"), $cintencion,"style=\"width:200px;\"");
             $mform->setDefault('intencion_adj', $adjetivo->get('intencionid'));
             $mform->addElement('hidden', 'descripcion_intenadj');
 
             //tipologia textual
-            $mform->addElement('select', 'tipologia_adj', get_string("campo_tipologia", "vocabulario"), $ctipologia);
+            $mform->addElement('select', 'tipologia_adj', get_string("campo_tipologia", "vocabulario"), $ctipologia, "style=\"width:200px;\"");
             $mform->setDefault('tipologia_adj', $adjetivo->get('tipologiaid'));
             $mform->addElement('hidden', 'descripcion_tipoadj');
 
@@ -386,7 +386,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $mform->addElement('text', 'observaciones_adj', get_string("comen", "vocabulario"), 'value="' . $adjetivo->get('observaciones') . '"');
 
                 //campo gramatical
-                $mform->addElement('select', 'gramatica_adj', get_string("campo_gram", "vocabulario"), $cgra, "onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_adj\",1)'");
+                $mform->addElement('select', 'gramatica_adj', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_adj\",1)'");
                 //probar los campos dinamicos
                 $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_adj\" style=\"min-height: 0;\"></div>";
                 $mform->addElement('html', $campodinamico);
@@ -394,12 +394,12 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $mform->addElement('hidden', 'descripcion_gradj');
 
                 //intencion comunicativa
-                $mform->addElement('select', 'intencion_adj', get_string("campo_intencion", "vocabulario"), $cintencion);
+                $mform->addElement('select', 'intencion_adj', get_string("campo_intencion", "vocabulario"), $cintencion, "style=\"width:200px;\"");
                 $mform->setDefault('intencion_adj', $adjetivo->get('intencionid'));
                 $mform->addElement('hidden', 'descripcion_intenadj');
 
                 //tipologia textual
-                $mform->addElement('select', 'tipologia_adj', get_string("campo_tipologia", "vocabulario"), $ctipologia);
+                $mform->addElement('select', 'tipologia_adj', get_string("campo_tipologia", "vocabulario"), $ctipologia,"style=\"width:200px;\"");
                 $mform->setDefault('tipologia_adj', $adjetivo->get('tipologiaid'));
                 $mform->addElement('hidden', 'descripcion_tipoadj');
 
@@ -435,7 +435,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $mform->addElement('text', 'observaciones_otr', get_string("comen", "vocabulario"), 'value="' . $otro->get('observaciones') . '"');
 
                 //campo gramatical
-                $mform->addElement('select', 'gramatica_otr', get_string("campo_gram", "vocabulario"), $cgra, "onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_otr\",1)'");
+                $mform->addElement('select', 'gramatica_otr', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_otr\",1)'");
                 //probar los campos dinamicos
                 $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_otr\" style=\"min-height: 0;\"></div>";
                 $mform->addElement('html', $campodinamico);
@@ -443,12 +443,12 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $mform->addElement('hidden', 'descripcion_grotr');
 
                 //intencion comunicativa
-                $mform->addElement('select', 'intencion_otr', get_string("campo_intencion", "vocabulario"), $cintencion);
+                $mform->addElement('select', 'intencion_otr', get_string("campo_intencion", "vocabulario"), $cintencion,"style=\"width:200px;\"");
                 $mform->setDefault('intencion_otr', $otro->get('intencionid'));
                 $mform->addElement('hidden', 'descripcion_intenotr');
 
                 //tipologia textual
-                $mform->addElement('select', 'tipologia_otr', get_string("campo_tipologia", "vocabulario"), $ctipologia);
+                $mform->addElement('select', 'tipologia_otr', get_string("campo_tipologia", "vocabulario"), $ctipologia,"style=\"width:200px;\"");
                 $mform->setDefault('tipologia_otr', $otro->get('tipologiaid'));
                 $mform->addElement('hidden', 'descripcion_tipootr');
 
@@ -463,7 +463,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
                     $mform->addElement('text', 'observaciones_otr', get_string("comen", "vocabulario"), 'value="' . $otro->get('observaciones') . '"');
 
                     //campo gramatical
-                    $mform->addElement('select', 'gramatica_otr', get_string("campo_gram", "vocabulario"), $cgra, "onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_otr\",1)'");
+                    $mform->addElement('select', 'gramatica_otr', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_otr\",1)'");
                     //probar los campos dinamicos
                     $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_otr\" style=\"min-height: 0;\"></div>";
                     $mform->addElement('html', $campodinamico);
@@ -471,12 +471,12 @@ class mod_vocabulario_rellenar_form extends moodleform {
                     $mform->addElement('hidden', 'descripcion_grotr');
 
                     //intencion comunicativa
-                    $mform->addElement('select', 'intencion_otr', get_string("campo_intencion", "vocabulario"), $cintencion);
+                    $mform->addElement('select', 'intencion_otr', get_string("campo_intencion", "vocabulario"), $cintencion, "style=\"width:200px;\"");
                     $mform->setDefault('intencion_otr', $otro->get('intencionid'));
                     $mform->addElement('hidden', 'descripcion_intenotr');
 
                     //tipologia textual
-                    $mform->addElement('select', 'tipologia_otr', get_string("campo_tipologia", "vocabulario"), $ctipologia);
+                    $mform->addElement('select', 'tipologia_otr', get_string("campo_tipologia", "vocabulario"), $ctipologia,"style=\"width:200px;\"");
                     $mform->setDefault('tipologia_otr', $otro->get('tipologiaid'));
                     $mform->addElement('hidden', 'descripcion_tipootr');
 
@@ -593,11 +593,11 @@ class mod_vocabulario_opciones_form extends moodleform {
         
         $tabla_menu .='<div class="menurow"><div class="menuitem left" style="text-align:left">
         <div class="size">
-        <img src="./imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im"/><div class="texto field">' . get_string('admin_ic', 'vocabulario') . '</div>
+        <div class="field"><img src="./imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im"/><div class="texto">' . get_string('admin_ic', 'vocabulario') . '</div></div>
 	
 	<ul class="list">
 		<li><a href="view.php?id=' . $id . '&opcion=7">Por Categoría</a></li>
-		<li><a href="view.php?id=' . $id . '&opcion=17">Por Mittle</a></li>
+		<li><a href="view.php?id=' . $id . '&opcion=17">Por Recurso</a></li>
 		
 	</ul>
         </div></div>';

@@ -118,6 +118,7 @@ $string['revert'] = 'Effacer';
 $string['vease_pdf'] = '*Remarques';
 $string['anotar'] = 'Vérifier et compléter';
 $string['busc'] = 'Chercher et organiser';
+$string['buscintenciones']='Ressource: ';
 $string['nuevos'] = 'Créer de nouveaux domaines';
 //$string['admin_cl'] = 'Nouveau domaine léxique';
 //$string['admin_cl'] = 'Nouveau domaine du sujet';
@@ -154,7 +155,7 @@ $string['guardesc'] = 'Sauvegarder les modifications';
 $string['ayuda'] = 'Aide';
 $string['cancel'] = 'Menu principal';
 $string['mascampos'] = 'D’autres domaines';
-$string['listado'] = 'Montrer la liste';
+$string['listado'] = 'Menus déroulant: Afficher la liste';
 //preguntas tipologías textuales
 $string['quien'] = 'Qui est-ce qu’est l’émmeteur?';
 $string['finalidad'] = 'Dans quel but?';

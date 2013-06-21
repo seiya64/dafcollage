@@ -116,6 +116,7 @@ $string['revert'] = 'Löschen';
 $string['vease_pdf'] = '*Beachten';
 $string['anotar'] = 'Überprüfen und vervollständigen';
 $string['busc'] = 'Suchen und organisieren';
+$string['buscintenciones']='Ressource: ';
 $string['nuevos'] = 'Neue Gliederungspunkte erstellen';
 //$string['admin_cl'] = 'Neuer lexikalischer Themenbereich';
 //$string['admin_cl'] = 'Neuer lexikalischer Themenbereich';
@@ -152,7 +153,7 @@ $string['guardesc'] = 'Speichern';
 $string['ayuda'] = 'Hilfe';
 $string['cancel'] = 'Hauptmenü';
 $string['mascampos'] = 'Weitere Felder';
-$string['listado'] = 'Liste anzeigen';
+$string['listado'] = 'Dropdown-Menüs: Liste anzeigen';
 //preguntas tipologias textuales
 $string['quien'] = 'Wer vermittelt?';
 $string['finalidad'] = 'Mit welchem Ziel?';

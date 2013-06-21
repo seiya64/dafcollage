@@ -116,6 +116,7 @@ $string['revert'] = 'Clean';
 $string['vease_pdf'] = '*Remarks';
 $string['anotar'] = 'Check and complete';
 $string['busc'] = 'Search and organize';
+$string['buscintenciones']='Resource: ';
 $string['nuevos'] = 'New thematic field';
 //$string['admin_cl'] = 'New field of words';
 //$string['admin_cl'] = 'New thematic field';
@@ -152,7 +153,7 @@ $string['guardesc'] = 'Save changes';
 $string['ayuda'] = 'Help';
 $string['cancel'] = 'Main menu';
 $string['mascampos'] = 'Other fields';
-$string['listado'] = 'Show list';
+$string['listado'] = 'Drop-down menus: Show List';
 //preguntas tipologias textuales
 $string['quien'] = 'Who transmits?';
 $string['finalidad'] = 'With which purpose?';

@@ -102,7 +102,7 @@ $string['adgr'] = 'Añadir descripción';
 $string['error_sus'] = 'No has escrito ninguna palabra para guardarla';
 $string['ver'] = 'Nueva palabra';
 $string['verintenciones'] = 'Buscar Intenciones';
-$string['buscintenciones']='Mittel: ';
+$string['buscintenciones']='Recurso: ';
 $string['botbuscintenciones']='Buscar';
 $string['guardar'] = 'Mis palabras';
 $string['modificar'] = 'Modificar';
@@ -155,7 +155,7 @@ $string['guardesc'] = 'Guardar cambios';
 $string['ayuda'] = 'Ayuda';
 $string['cancel'] = 'Menú principal';
 $string['mascampos'] = 'Otros campos';
-$string['listado'] = 'Mostrar listado';
+$string['listado'] = 'Menús desplegables: Mostrar listado';
 //preguntas tipologias textuales
 $string['quien'] = '¿Quién transmite?';
 $string['finalidad'] = '¿Con qué finalidad?';
