@@ -116,7 +116,7 @@ function setTextareaHeight(textarea) {
 }
 
 function arrastrar_AS() {
-    alert("ARRASTRAR AS");
+    //alert("ARRASTRAR AS");
     
     var correcto=new Array();
     var puesto=new Array();
@@ -140,7 +140,7 @@ function arrastrar_AS() {
 
     function handleDropEvent( event, ui ) {
         var draggable = ui.draggable;
-        alert( 'The square with ID "' + draggable.attr('id') + '" was dropped onto "'+$(this).attr('id')+ '"!' );
+        //alert( 'The square with ID "' + draggable.attr('id') + '" was dropped onto "'+$(this).attr('id')+ '"!' );
         if( ($( this ).find( ".item" ).length)==0){
             $(this).append($(ui.draggable));
   
@@ -149,8 +149,8 @@ function arrastrar_AS() {
 
             var Idimagen = $(ui.draggable).attr('id');
             var Idmarquito = $(this).attr('id');
-            alert("idmgen"+Idimagen);
-            alert("idmarquito"+Idmarquito);
+            //alert("idmgen"+Idimagen);
+            //alert("idmarquito"+Idmarquito);
             if(Idimagen == Idmarquito){
                 correcto[Idimagen]=true;
                 puesto[Idimagen]=true;
@@ -177,9 +177,9 @@ function arrastrar_AS() {
         }
       
         if ($puestos==$numimagen) {
-            alert("puestos todos");
+            //alert("puestos todos");
             for(i=1;i<=parseInt($numimagen);i++){
-                alert(correcto[i]);
+                //alert(correcto[i]);
                 if (correcto[i]==true){
                     
                     variable="#aceptado"+i;
@@ -214,7 +214,7 @@ function arrastrar_AS() {
 }
 
 function arrastrar_AM() {
-    alert("ARRASTAR AM");
+    //alert("ARRASTAR AM");
     
     
     
@@ -258,7 +258,7 @@ function arrastrar_AM() {
 
     function handleDropEvent( event, ui ) {
         var draggable = ui.draggable;
-        alert( 'The square with ID "' + draggable.attr('id') + '" was dropped onto "'+$(this).attr('id')+ '" !' );
+        //alert( 'The square with ID "' + draggable.attr('id') + '" was dropped onto "'+$(this).attr('id')+ '" !' );
         //alert("$( this ).find( '.item' ): " + $( this ).find( ".item" ));
         //if( ($( this ).find( ".item" ).length)==0){
             $(this).append($(ui.draggable));
@@ -269,23 +269,23 @@ function arrastrar_AM() {
             var Idimagen = $(ui.draggable).attr('id');
             Idimagen = Idimagen.split("_")[1];
             var Idmarquito = $(this).attr('id');
-            alert("idmgen"+Idimagen);
-            alert("idmarquito"+Idmarquito);
+            //alert("idmgen"+Idimagen);
+            //alert("idmarquito"+Idmarquito);
             
             
             
             if (Ejercicio.respuestas[Idimagen].preg==Idmarquito) {
-                alert("Correcto");
+                //alert("Correcto");
                 Ejercicio.respuestas[Idimagen].correcto=true;
                 Ejercicio.respuestas[Idimagen].puesto=true;
             }
             else {
-                alert("Incorrecto");
+                //alert("Incorrecto");
                 Ejercicio.respuestas[Idimagen].correcto=false;
                 Ejercicio.respuestas[Idimagen].puesto=true;
                 
             }
-            alert("Ejercicio.respuestas[Idimagen("+Idimagen+")]: " + var_dump(Ejercicio.respuestas[Idimagen]));
+            //alert("Ejercicio.respuestas[Idimagen("+Idimagen+")]: " + var_dump(Ejercicio.respuestas[Idimagen]));
             /*if(Idimagen == Idmarquito){
                 correcto[Idimagen-1]+=1;
                 puesto[Idimagen-1]+=1;
@@ -307,7 +307,7 @@ function arrastrar_AM() {
         
         //Se ajusta el tamaño de las preguntas
         for (var k=1; k<=Ejercicio.num_pregs; k++) {
-            alert("k: " + k);
+            //alert("k: " + k);
             var preg = document.getElementById(""+k);
             //Si las preguntas son videos o son imagenes, los cuadros de las preguntas debemos hacerlos mas grandes
             if (document.getElementById("movie"+k)==null && document.getElementById("imagen"+k)==null) {
@@ -315,7 +315,7 @@ function arrastrar_AM() {
             } else {
                 var altura = 250 + (preg.childNodes.length-1)*100;
             }            
-            alert("altura: " + altura + " y puestos: " + (preg.childNodes.length-1));
+            //alert("altura: " + altura + " y puestos: " + (preg.childNodes.length-1));
             preg.setAttribute("style","height:"+altura+"px;");
         }
 
@@ -333,7 +333,7 @@ function arrastrar_AM() {
         }
       
         if (puestos==Ejercicio.total_respuestas) {
-            alert("puestos todos");
+            //alert("puestos todos");
             for(i=1;i<=Ejercicio.total_respuestas;i++){
                 //alert(correcto[i]);
                 if (Ejercicio.respuestas[i].correcto==true){                    
@@ -380,7 +380,7 @@ function arrastrar_AM() {
 }
 
 function arrastrar_OE() {
-    alert("ARRASTAR OE");
+    //alert("ARRASTAR OE");
     
     
     //var numpreg = parseInt(document.getElementById("num_preg").value);
@@ -428,7 +428,7 @@ function arrastrar_OE() {
 
     function handleDropEvent( event, ui ) {
         var draggable = ui.draggable;
-        alert( 'The square with ID "' + draggable.attr('id') + '" was dropped onto "'+$(this).attr('id')+ '" !' );
+        //alert( 'The square with ID "' + draggable.attr('id') + '" was dropped onto "'+$(this).attr('id')+ '" !' );
         //alert("$( this ).find( '.item' ): " + $( this ).find( ".item" ));
         if( ($( this ).find( ".item" ).length)==0){
             if($(this).attr('preg')==draggable.attr('preg')) {
@@ -466,7 +466,7 @@ function arrastrar_OE() {
 
 $(document).ready(function(){
     
-    alert("Funciona lo de ready function");
+    //alert("Funciona lo de ready function");
     
     //$(document).tooltip({track: true,my: "left+15 center", at: "right center"});
     
@@ -485,7 +485,7 @@ $(document).ready(function(){
         tipo_ej = document.getElementById("tipo_ej").value;
     }
     catch(e) {};
-    alert("tipo_ej: " + tipo_ej);
+    //alert("tipo_ej: " + tipo_ej);
     if (tipo_ej=="AM") {
         arrastrar_AM();
     } else if (tipo_ej=="") {
@@ -1122,21 +1122,21 @@ function insertAfter(e,i){
 }
 
 function botonMasPreguntas(){
-    alert("añadiendo pregunta");
+    //alert("añadiendo pregunta");
 
     divnumpreguntas = document.getElementById('num_preg');
     numeropreguntas=divnumpreguntas.value;
-    alert("numero actual es"+ numeropreguntas);
+    //alert("numero actual es"+ numeropreguntas);
     anterior=document.getElementById('num_res_preg'+ numeropreguntas);
-    alert(anterior.id);
+    //alert(anterior.id);
     numeropreguntas= parseInt(numeropreguntas) +1;
     divnumpreguntas.value=numeropreguntas;
-    alert("llega");
+    //alert("llega");
     nuevodiv = document.createElement('div');
-    alert("aki tb llega");
+    //alert("aki tb llega");
     nuevodiv.id= "tabpregunta"+numeropreguntas;
     //Creo un nuevo hijo a la tabla general para la pregunta
-    alert("si");
+    //alert("si");
     var br = document.createElement('br');
     var br1 = document.createElement('br');
     var br2 = document.createElement('br');
@@ -1224,7 +1224,7 @@ function botonMasPreguntas(){
     //añado el numero de respuestas de la nueva pregunta
     insertAfter(nuevodiv,nuevoinput)
 
-    alert("fin");
+    //alert("fin");
 
       
 }
@@ -1786,11 +1786,11 @@ function EliminarPregunta(Pregunta,numpregunta){
 
         siguientepreg= parseInt(numpregunta)+1;
         //Actualizo el resto de pregunta
-        alert(siguientepreg);
+        //alert(siguientepreg);
         preg=parseInt(numpregunta);
-        alert("preg"+preg);
+        //alert("preg"+preg);
         for(j=siguientepreg;j<=numeropreguntas+1;j++){
-            alert('tabpregunta'+j);
+            //alert('tabpregunta'+j);
             mitabla=document.getElementById('tabpregunta'+j);
             mitabla.id='tabpregunta'+preg;
 
@@ -1816,14 +1816,14 @@ function EliminarPregunta(Pregunta,numpregunta){
             for(k=1;k<=parseInt(numresp);k++){
 
                 //Las tables
-                alert("llega");
+                //alert("llega");
                 tablarespuestas=document.getElementById("tablarespuesta"+k+"_"+j);
                 tablarespuestas.id="tablarespuesta"+k+"_"+preg;
-                alert("ki tba");
+                //alert("ki tba");
                 //los tr de las tables
                 lostr=document.getElementById('trrespuesta'+k+"_"+j);
                 lostr.id='trrespuesta'+k+"_"+preg;
-                alert("siiiiii");
+                //alert("siiiiii");
 
                 losinput=document.getElementById('id_crespuesta'+k+"_"+j);
                 losinput.id='id_crespuesta'+k+"_"+preg;
@@ -1852,7 +1852,7 @@ function EliminarPregunta(Pregunta,numpregunta){
 
             }
 
-            alert("fin hijos");
+            //alert("fin hijos");
             //Cambio el número de respuestas
             minumeroresp=document.getElementById('num_res_preg'+j);
             minumeroresp.id='num_res_preg'+preg;
@@ -2064,10 +2064,10 @@ function InvertirRespuesta(correcta,valor){
 
 function cargaImagenes_old(elnombre,i,j){
     
-    alert("AAAAAAAA"+i);
+    //alert("AAAAAAAA"+i);
     var text='#upload'+i;
     var button = $(text), interval;
-    alert(elnombre);
+    //alert(elnombre);
     if(j=='primera'){
         button.text('Pulse aqui');
     }
@@ -2077,7 +2077,7 @@ function cargaImagenes_old(elnombre,i,j){
         name: 'image',
         autoSubmit: true,
         onSubmit : function(file, ext){
-            alert("Cargandoooo");
+            //alert("Cargandoooo");
             // cambiar el texto del boton cuando se selecicione la imagen
             button.text('Subiendo');
             // desabilitar el boton
@@ -2093,21 +2093,21 @@ function cargaImagenes_old(elnombre,i,j){
             }, 200);
         },
         onComplete: function(file, response){
-            alert("completado");
+            //alert("completado");
             button.text('Cambiar Foto');
 
             window.clearInterval(interval);
 
             // Habilitar boton otra vez
             this.enable();
-            alert("recargando");
+            //alert("recargando");
                  
             respuesta = document.getElementById('respuesta'+i);
               
             respuesta.src="./imagenes/"+elnombre;
             respuesta.removeAttribute("src");
             respuesta.setAttribute("src","./imagenes/"+elnombre);
-            alert('Fin cambio imagen');
+            //alert('Fin cambio imagen');
                
         }
     //Tengo que cambiar la foto
@@ -2129,9 +2129,9 @@ function botonASTextoImagen(id_ejercicio){
 
     //obtengo la tabla donde lo voy a insertar
     tabla_insertar = document.getElementById('tablarespuestas');
-    alert(tabla_insertar);
+    //alert(tabla_insertar);
     tbody_insertar = tabla_insertar.lastChild;
-    alert(tbody_insertar);
+    //alert(tbody_insertar);
            
     //Para el texto
     tabla_nuevotr = document.createElement('tr');
@@ -2194,10 +2194,10 @@ function botonASTextoImagen(id_ejercicio){
 
 function cargaAudios_old(elnombre,i,j){
 
-    alert("AAAAAAAA"+i);
+    //alert("AAAAAAAA"+i);
     var text='#upload'+i;
     var button = $(text), interval;    
-    alert("el nombre  "+elnombre);
+    //alert("el nombre  "+elnombre);
     if(j=='primera'){
         button.text('Pulse aqui');
     }
@@ -2207,7 +2207,7 @@ function cargaAudios_old(elnombre,i,j){
         name: 'image',
         autoSubmit: true,
         onSubmit : function(file, ext){
-            alert("Cargandoooo audio");
+            //alert("Cargandoooo audio");
             // cambiar el texto del boton cuando se selecicione la imagen
             button.text('Subiendo');
             // desabilitar el boton
@@ -2223,7 +2223,7 @@ function cargaAudios_old(elnombre,i,j){
             }, 200);
         },
         onComplete: function(file, response){
-            alert("completado");
+            //alert("completado");
             button.text('Cambiar Audio');
                
             window.clearInterval(interval);
@@ -2269,14 +2269,14 @@ function cargaAudios(elnombre,i,j,numresp,nodo){
     }
     else {
 
-        alert("AAAAAAAA" + i);
+        //alert("AAAAAAAA" + i);
         var text = 'upload' + i + "_" + numresp;
-        alert("id: " + text);
+        //alert("id: " + text);
         var button = document.getElementById(text);
-        alert("el nombre  " + elnombre);
-        alert("Button: " + button);
-        alert("Button node type: " + button.nodeType);
-        alert("!Button: " + !button);
+        //alert("el nombre  " + elnombre);
+        //alert("Button: " + button);
+        //alert("Button node type: " + button.nodeType);
+        //alert("!Button: " + !button);
         if (j == 'primera') {
             button.childNodes[0].nodeValue = 'Pulse aqui';
         }
@@ -2286,7 +2286,7 @@ function cargaAudios(elnombre,i,j,numresp,nodo){
             name: 'image',
             autoSubmit: true,
             onSubmit: function(file, ext) {
-                alert("Cargandoooo audio");
+                //alert("Cargandoooo audio");
                 // cambiar el texto del boton cuando se selecicione la imagen
                 button.childNodes[0].nodeValue = 'Subiendo';
                 // desabilitar el boton
@@ -2302,7 +2302,7 @@ function cargaAudios(elnombre,i,j,numresp,nodo){
                 }, 200);
             },
             onComplete: function(file, response) {
-                alert("completado");
+                //alert("completado");
                 button.childNodes[0].nodeValue = 'Cambiar Audio';
 
                 window.clearInterval(interval);
@@ -2351,9 +2351,9 @@ function botonASTextoAudio(id_ejercicio){
 
     //obtengo la tabla donde lo voy a insertar
     tabla_insertar = document.getElementById('tablarespuestas');
-    alert(tabla_insertar);
+    //alert(tabla_insertar);
     tbody_insertar = tabla_insertar.lastChild;
-    alert(tbody_insertar);
+    //alert(tbody_insertar);
     //Para el texto
     tabla_nuevotr = document.createElement('tr');
     tabla_nuevotd = document.createElement('td');
@@ -2407,7 +2407,7 @@ function botonASTextoAudio(id_ejercicio){
     elememb.setAttribute("name","mpl");
     elememb.setAttribute("quality","high");
     elememb.setAttribute("allowfullscreen","true");
-    alert("sig preg vale"+sig_preg);
+    //alert("sig preg vale"+sig_preg);
     elememb.setAttribute("flashvars","file=./audios/audio_"+id_ejercicio+'_'+sig_preg+".mp3&amp;height=20&amp;width=320");
 
     elemdiv.appendChild(elememb);
@@ -2442,7 +2442,7 @@ function botonASTextoAudio(id_ejercicio){
 
 function botonASTextoVideo(id_ejercicio){
 
-    alert("Añadiendo texto video");
+    //alert("Añadiendo texto video");
 
     num_preg=document.getElementById('num_preg');
 
@@ -2452,9 +2452,9 @@ function botonASTextoVideo(id_ejercicio){
 
     //obtengo la tabla donde lo voy a insertar
     tabla_insertar = document.getElementById('tablarespuestas');
-    alert(tabla_insertar);
+    //alert(tabla_insertar);
     tbody_insertar = tabla_insertar.lastChild;
-    alert(tbody_insertar);
+    //alert(tbody_insertar);
     //Para el texto
     tabla_nuevotr = document.createElement('tr');
     tabla_nuevotd = document.createElement('td');
@@ -2529,18 +2529,18 @@ function muestra(id){
 
 
 function botonTextoTexto() {
-    alert("añadiendooooooo asociacion");
+    //alert("añadiendooooooo asociacion");
         num_preg=document.getElementById('num_preg');
-        alert("eL numero de preguntas es"+num_preg.value);
+        //alert("eL numero de preguntas es"+num_preg.value);
         sig_preg=parseInt(num_preg.value)+1;
 
-        alert("aki llega");
+        //alert("aki llega");
 
         //obtengo la tabla donde lo voy a insertar
         tabla_insertar = document.getElementById('tablarespuestas');
-        alert(tabla_insertar);
+        //alert(tabla_insertar);
         tbody_insertar = tabla_insertar.lastChild;
-        alert(tbody_insertar);
+        //alert(tbody_insertar);
         //Para el texto
         tabla_nuevotr = document.createElement('tr');
         tabla_nuevotd = document.createElement('td');
@@ -2550,7 +2550,7 @@ function botonTextoTexto() {
         textarea.name="pregunta"+sig_preg;
         textarea.setAttribute("style","height: 197px; width: 396px;");
         textarea.appendChild(document.createTextNode("Nuevo Texto"));
-        alert("insertado el texto");
+        //alert("insertado el texto");
             
         //Para el texto asociado
 
@@ -2598,11 +2598,11 @@ function EliminarPregunta_IE(Pregunta,numpregunta){
 
         siguientepreg= parseInt(numpregunta)+1;
         //Actualizo el resto de pregunta
-        alert(siguientepreg);
+        //alert(siguientepreg);
         preg=parseInt(numpregunta);
-        alert("preg"+preg);
+        //alert("preg"+preg);
         for(j=siguientepreg;j<=numeropreguntas+1;j++){
-            alert('tabpregunta'+j);
+            //alert('tabpregunta'+j);
             mitabla=document.getElementById('tabpregunta'+j);
             mitabla.id='tabpregunta'+preg;
 
@@ -2628,14 +2628,14 @@ function EliminarPregunta_IE(Pregunta,numpregunta){
             for(k=1;k<=parseInt(numresp);k++){
 
                 //Las tables
-                alert("llega");
+                //alert("llega");
                 tablarespuestas=document.getElementById("tablarespuesta"+k+"_"+j);
                 tablarespuestas.id="tablarespuesta"+k+"_"+preg;
-                alert("ki tba");
+                //alert("ki tba");
                 //los tr de las tables
                 lostr=document.getElementById('trrespuesta'+k+"_"+j);
                 lostr.id='trrespuesta'+k+"_"+preg;
-                alert("siiiiii");
+                //alert("siiiiii");
 
                 /*losinput=document.getElementById('id_crespuesta'+k+"_"+j);
                 losinput.id='id_crespuesta'+k+"_"+preg;
@@ -2664,7 +2664,7 @@ function EliminarPregunta_IE(Pregunta,numpregunta){
 
             }
 
-            alert("fin hijos");
+            //alert("fin hijos");
             //Cambio el número de respuestas
             minumeroresp=document.getElementById('num_res_preg'+j);
             minumeroresp.id='num_res_preg'+preg;
@@ -2780,20 +2780,20 @@ function EliminarRespuesta_IE(respuesta,numpreg){
      
     j=0;
     
-    alert("Numero de hijos: " + k);
+    //alert("Numero de hijos: " + k);
    
     for(i=0;i<k;i=i+2){
         j=j+1;
-        alert('Iteracion bucle: ' + i);
-        alert("J: " + j);
+        //alert('Iteracion bucle: ' + i);
+        //alert("J: " + j);
         padre.childNodes[i].setAttribute("id",'tablarespuesta'+j+'_'+numpreg);
         if (i==k-2) {
-            alert("Entra en i==k-1");
+            //alert("Entra en i==k-1");
             var tabla = document.getElementById("tablarespuesta"+j+"_"+numpreg);
             tabla.style.cssFloat="none";
         }
         else if (j%2!=0) {
-            alert("Entra en j%2!=0");
+            //alert("Entra en j%2!=0");
             var tabla = document.getElementById("tablarespuesta"+j+"_"+numpreg);
             tabla.style.cssFloat="left";
         }
@@ -2830,21 +2830,21 @@ function EliminarRespuesta_IE(respuesta,numpreg){
 
 
 function botonMasPreguntas_IE(){
-    alert("añadiendo pregunta");
+    //alert("añadiendo pregunta");
 
     divnumpreguntas = document.getElementById('num_preg');
     numeropreguntas=divnumpreguntas.value;
-    alert("numero actual es"+ numeropreguntas);
+    //alert("numero actual es"+ numeropreguntas);
     anterior=document.getElementById('num_res_preg'+ numeropreguntas);
-    alert(anterior.id);
+    //alert(anterior.id);
     numeropreguntas= parseInt(numeropreguntas) +1;
     divnumpreguntas.value=numeropreguntas;
-    alert("llega");
+    //alert("llega");
     nuevodiv = document.createElement('div');
-    alert("aki tb llega");
+    //alert("aki tb llega");
     nuevodiv.id= "tabpregunta"+numeropreguntas;
     //Creo un nuevo hijo a la tabla general para la pregunta
-    alert("si");
+    //alert("si");
     var br = document.createElement('br');
     var br1 = document.createElement('br');
     var br2 = document.createElement('br');
@@ -2932,13 +2932,13 @@ function botonMasPreguntas_IE(){
     //añado el numero de respuestas de la nueva pregunta
     insertAfter(nuevodiv,nuevoinput)
 
-    alert("fin");
+    //alert("fin");
 
       
 }
 
 function botonCorregirIE(id_curso,preguntas) {
-    alert("Boton Corregir");    
+    //alert("Boton Corregir");    
     
     //Recoger las respuestas de los alumnos
     var respuestas_alumnos = new Array(preguntas.length);
@@ -2949,12 +2949,12 @@ function botonCorregirIE(id_curso,preguntas) {
             respuestas_alumnos[i][j]=document.getElementById("respuesta"+(j+1)+"_"+(i+1)).value;
             //alert("respuesta " + (j+1) + " de la pregunta " + (i+1) + " es " + respuestas_alumnos[i][j]);
             for (var k=0; k<preguntas[i].length && !correcta; k++) {
-                alert("Comparando " + preguntas[i][k] + " con " + respuestas_alumnos[i][j]);
+                //alert("Comparando " + preguntas[i][k] + " con " + respuestas_alumnos[i][j]);
                 if (preguntas[i][k]==respuestas_alumnos[i][j]) {
-                    alert("Da correcto: " + i + "," + k + " : " + preguntas[i][k]);
+                    //alert("Da correcto: " + i + "," + k + " : " + preguntas[i][k]);
                     var midiv = document.getElementById("tdcorregir"+(j+1)+"_"+(i+1));
                     if (midiv.hasChildNodes()) midiv.removeChild(midiv.firstChild);
-                    alert("midiv es " + midiv);
+                    //alert("midiv es " + midiv);
                     var imagen = document.createElement("img");
                    
                     imagen.src='./imagenes/correcto.png';
@@ -2963,16 +2963,16 @@ function botonCorregirIE(id_curso,preguntas) {
                     midiv.appendChild(imagen);
                     
                     preguntas[i].splice(k,1);
-                    alert("Preguntas queda como: " + preguntas[i].toString());
+                    //alert("Preguntas queda como: " + preguntas[i].toString());
                     k--;
                     correcta=true;
                 }
             }
             if (!correcta) {
-                alert("Da incorrecto: " + i + "," + j + " : " + respuestas_alumnos[i][j]);
+                //alert("Da incorrecto: " + i + "," + j + " : " + respuestas_alumnos[i][j]);
                 var midiv = document.getElementById("tdcorregir"+(j+1)+"_"+(i+1));
                 if (midiv.hasChildNodes()) midiv.removeChild(midiv.firstChild);
-                alert("midiv es " + midiv);
+                //alert("midiv es " + midiv);
                 var imagen = document.createElement("img");
                 imagen = document.createElement("img");
                 imagen.style.height="15px";
@@ -2991,7 +2991,7 @@ function botonCorregirIE(id_curso,preguntas) {
 //---------------------  Funciones para ejercicios de Asociacion Multiple/Compleja ---------------------------------
 //El boton de mas respuestas en la interfaz de ejercicios AM Texto-Audio
 function botonMasRespuestasAudio_AM (num_preg) {
-    alert("Pulsado en boton Mas Respuestas Audio AM");
+    //alert("Pulsado en boton Mas Respuestas Audio AM");
     var totalRespuestas = document.getElementById("numerorespuestas_"+num_preg);
     var divRespuestas = document.getElementById("respuestas_pregunta"+num_preg);
     var num_resp = parseInt(totalRespuestas.value)+1;
@@ -3052,7 +3052,7 @@ function botonMasRespuestasAudio_AM (num_preg) {
 
 //Funcion que se ejecuta automaticamente en la segunda pagina de creacion de ejercicios AM Texto-Audio
 function arreglar_texto_audio_AM() {
-    alert("Entra en arreglar_texto_audio");
+    //alert("Entra en arreglar_texto_audio");
     
     var numpreg = parseInt(document.getElementsByName("numeropreguntas")[0].value);
     //alert("Numero de preguntas: " + numpreg);
@@ -3073,7 +3073,7 @@ function arreglar_texto_audio_AM() {
 
 //Funcion que se ejecuta automaticamente en la segunda pagina de creacion de ejercicios AM Texto-Video
 function arreglar_texto_video_AM() {
-    alert("Entra en arreglar_texto_video");
+    //alert("Entra en arreglar_texto_video");
     
     var numpreg = parseInt(document.getElementsByName("numeropreguntas")[0].value);
     
@@ -3154,7 +3154,7 @@ function botonMasRespuestasVideo_AM (num_preg) {
 
 //Funcion que se ejecuta automaticamente en la segunda pagina de creacion de ejercicios AM Texto-Foto
 function arreglar_texto_foto_AM() {
-    alert("Entra en arreglar_texto_foto");
+    //alert("Entra en arreglar_texto_foto");
     
     var numpreg = parseInt(document.getElementsByName("numeropreguntas")[0].value);
     
@@ -3174,7 +3174,7 @@ function arreglar_texto_foto_AM() {
 
 //El boton de mas respuestas en la interfaz de ejercicios AM Texto-Foto
 function botonMasRespuestasFoto_AM(num_preg) {
-    alert("Pulsado en boton Mas Respuestas Foto AM");
+    //alert("Pulsado en boton Mas Respuestas Foto AM");
     var totalRespuestas = document.getElementById("numerorespuestas_"+num_preg);
     var divRespuestas = document.getElementById("respuestas_pregunta"+num_preg);
     var num_resp = parseInt(totalRespuestas.value)+1;
@@ -3235,7 +3235,7 @@ function botonMasRespuestasFoto_AM(num_preg) {
 
 //Boton para añadir mas respuestas a ejercicios (Audio|Foto|Video)-Texto de Asociacion Multiple
 function botonMasRespuestasAFV_Texto_AM(num_preg) {
-    alert("Pulsado en boton Mas Respuestas Foto AM");
+    //alert("Pulsado en boton Mas Respuestas Foto AM");
     var totalRespuestas = document.getElementById("numerorespuestas_"+num_preg);
     var divRespuestas = document.getElementById("respuestas_pregunta"+num_preg);
     var num_resp = parseInt(totalRespuestas.value)+1;
@@ -3478,32 +3478,32 @@ function EliminarRespuesta_TextoAudio_AM(respuesta,numpreg,numresp,id_ejercicio)
     numerorespuestas.value=parseInt(numerorespuestas.value)-1;*/
     
     var totalRespuestas = parseInt(document.getElementById("num_res_preg"+numpreg).value);
-    alert("Total Respuestas: " + totalRespuestas);
+    //alert("Total Respuestas: " + totalRespuestas);
     //var respuesta = document.getElementById("tablarespuesta" + numresp + "_" + numpreg);
-    alert("Respuesta: " + respuesta);
+    //alert("Respuesta: " + respuesta);
     respuesta.parentNode.removeChild(respuesta);
     
     for (var k=numresp+1; k<=totalRespuestas; k++) {
         var table = document.getElementById('tablarespuesta'+k+'_'+numpreg);
-        alert("Iteraccion: " + k);
-        alert("Table: " + table);
+        //alert("Iteraccion: " + k);
+        //alert("Table: " + table);
         if(k==totalRespuestas) {
-            alert("Es la ultima respuestas");
+            //alert("Es la ultima respuestas");
             table.style.cssFloat="none";
         }
         else if ((k-1)%2!=0) {
-            alert("Entra en el else if");
+            //alert("Entra en el else if");
             table.style.cssFloat="left";
         }
         table.setAttribute("name",'tablarespuesta'+(k-1)+'_'+numpreg);
         table.setAttribute("id",'tablarespuesta'+(k-1)+'_'+numpreg);
         var tr = document.getElementById('trrespuesta'+k+'_'+numpreg);
-        alert("Tr: " + tr);
+        //alert("Tr: " + tr);
         tr.setAttribute("id",'trrespuesta'+(k-1)+'_'+numpreg);
         //var resp = document.getElementById('respuesta'+k+'_'+numpreg);
         //resp.setAttribute("id",'respuesta'+(k-1)+'_'+numpreg);
         //resp.setAttribute("name",'respuesta'+(k-1)+'_'+numpreg);
-        //alert("Resp: " + resp);
+        ////alert("Resp: " + resp);
         var player = document.getElementById("player"+k+"_"+numpreg);
         player.setAttribute("id","player"+(k-1)+"_"+numpreg);
         player.setAttribute("name","respuesta"+(k-1)+"_"+numpreg);
@@ -3524,7 +3524,7 @@ function EliminarRespuesta_TextoAudio_AM(respuesta,numpreg,numresp,id_ejercicio)
         url: "borrarespuesta.php?id_ejercicio=" + id_ejercicio + "&numpreg=" + numpreg + "&numresp=" + numresp + "&totalResp=" + totalRespuestas + "&directorio=./mediaplayer/audios/&archivo=audio_&extension=.mp3",
         cache : false,
         success : function(response) {
-            alert("Terminada con exito la llamada a borraaudio.php");
+            //alert("Terminada con exito la llamada a borraaudio.php");
         }
     });
     var hidden_resp = document.getElementById("num_res_preg"+numpreg);
@@ -3533,21 +3533,21 @@ function EliminarRespuesta_TextoAudio_AM(respuesta,numpreg,numresp,id_ejercicio)
 
 //Boton de añadir una pregunta para los ejercicios Texto-Audio de Asociacion Multiple
 function botonMasPreguntas_TextoAudio_AM(id_ejercicio) {
-    alert("añadiendo pregunta");
+    //alert("añadiendo pregunta");
 
     divnumpreguntas = document.getElementById('num_preg');
     numeropreguntas=divnumpreguntas.value;
-    alert("numero actual es"+ numeropreguntas);
+    //alert("numero actual es"+ numeropreguntas);
     anterior=document.getElementById('num_res_preg'+ numeropreguntas);
-    alert(anterior.id);
+    //alert(anterior.id);
     numeropreguntas= parseInt(numeropreguntas) +1;
     divnumpreguntas.value=numeropreguntas;
-    alert("llega");
+    //alert("llega");
     nuevodiv = document.createElement('div');
-    alert("aki tb llega");
+    //alert("aki tb llega");
     nuevodiv.id= "tabpregunta"+numeropreguntas;
     //Creo un nuevo hijo a la tabla general para la pregunta
-    alert("si");
+    //alert("si");
     var br = document.createElement('br');
     var br1 = document.createElement('br');
     var br2 = document.createElement('br');
@@ -3635,7 +3635,7 @@ function botonMasPreguntas_TextoAudio_AM(id_ejercicio) {
     //añado el numero de respuestas de la nueva pregunta
     insertAfter(nuevodiv,nuevoinput)
 
-    alert("fin");
+    //alert("fin");
 
 }
 
@@ -3764,11 +3764,11 @@ function EliminarPregunta_TextoAudio_AM(id_ejercicio,Pregunta,numpregunta){
 
         siguientepreg= parseInt(numpregunta)+1;
         //Actualizo el resto de pregunta
-        alert(siguientepreg);
+        //alert(siguientepreg);
         preg=parseInt(numpregunta);
-        alert("preg"+preg);
+        //alert("preg"+preg);
         for(j=siguientepreg;j<=numeropreguntas+1;j++){
-            alert('tabpregunta'+j);
+            //alert('tabpregunta'+j);
             mitabla=document.getElementById('tabpregunta'+j);
             mitabla.id='tabpregunta'+preg;
 
@@ -3794,14 +3794,14 @@ function EliminarPregunta_TextoAudio_AM(id_ejercicio,Pregunta,numpregunta){
             for(k=1;k<=parseInt(numresp);k++){
 
                 //Las tables
-                alert("llega");
+                //alert("llega");
                 tablarespuestas=document.getElementById("tablarespuesta"+k+"_"+j);
                 tablarespuestas.id="tablarespuesta"+k+"_"+preg;
-                alert("ki tba");
+                //alert("ki tba");
                 //los tr de las tables
                 lostr=document.getElementById('trrespuesta'+k+"_"+j);
                 lostr.id='trrespuesta'+k+"_"+preg;
-                alert("siiiiii");
+                //alert("siiiiii");
 
                 /*losinput=document.getElementById('id_crespuesta'+k+"_"+j);
                 losinput.id='id_crespuesta'+k+"_"+preg;
@@ -3842,7 +3842,7 @@ function EliminarPregunta_TextoAudio_AM(id_ejercicio,Pregunta,numpregunta){
 
             }
 
-            alert("fin hijos");
+            //alert("fin hijos");
             
             
             
@@ -3859,7 +3859,7 @@ function EliminarPregunta_TextoAudio_AM(id_ejercicio,Pregunta,numpregunta){
                 url: "borrapregunta.php?id_ejercicio=" + id_ejercicio + "&numpreg=" + numpregunta + "&totalPregs=" + (preg) + "&directorio=./mediaplayer/audios/&archivo=audio_&extension=.mp3",
                 cache : false,
                 success : function(response) {
-                    alert("Terminada con exito la llamada a borraaudio_pregunta.php");
+                    //alert("Terminada con exito la llamada a borraaudio_pregunta.php");
                 }
             });
         
@@ -3875,33 +3875,33 @@ function EliminarRespuesta_TextoVideo_AM(numresp,numpreg){
     
     
     var totalRespuestas = parseInt(document.getElementById("num_res_preg"+numpreg).value);
-    alert("Total Respuestas: " + totalRespuestas);
+    //alert("Total Respuestas: " + totalRespuestas);
     var respuesta = document.getElementById("tablarespuesta" + numresp + "_" + numpreg);
-    alert("Respuesta: " + respuesta);
+    //alert("Respuesta: " + respuesta);
     respuesta.parentNode.removeChild(respuesta);
     
     for (var k=numresp+1; k<=totalRespuestas; k++) {
         var table = document.getElementById('tablarespuesta'+k+'_'+numpreg);
-        alert("Iteraccion: " + k);
-        alert("Table: " + table);
+        //alert("Iteraccion: " + k);
+        //alert("Table: " + table);
         if(k==totalRespuestas) {
-            alert("Es la ultima respuestas");
+            //alert("Es la ultima respuestas");
             table.style.cssFloat="none";
         }
         else if ((k-1)%2!=0) {
-            alert("Entra en el else if");
+            //alert("Entra en el else if");
             table.style.cssFloat="left";
         }
         table.setAttribute("name",'tablarespuesta'+(k-1)+'_'+numpreg);
         table.setAttribute("id",'tablarespuesta'+(k-1)+'_'+numpreg);
         var tr = document.getElementById('trrespuesta'+k+'_'+numpreg);
-        alert("Tr: " + tr);
+        //alert("Tr: " + tr);
         tr.setAttribute("id",'trrespuesta'+(k-1)+'_'+numpreg);
         var resp = document.getElementById('respuesta'+k+'_'+numpreg);
         resp.setAttribute("id",'respuesta'+(k-1)+'_'+numpreg);
         resp.setAttribute("name",'respuesta'+(k-1)+'_'+numpreg);
         resp.setAttribute("onchange","actualizar_TextoVideo_AM("+(k-1)+","+numpreg+")");
-        alert("Resp: " + resp);
+        //alert("Resp: " + resp);
         var param = document.getElementById("movie"+k+"_"+numpreg);
         param.setAttribute("id","movie"+(k-1)+'_'+numpreg);
         param.setAttribute("name","movie"+(k-1)+'_'+numpreg);
@@ -3911,7 +3911,7 @@ function EliminarRespuesta_TextoVideo_AM(numresp,numpreg){
         var img = document.getElementById("eliminarrespuesta"+k+"_"+numpreg);
         img.setAttribute("id","eliminarrespuesta"+(k-1)+"_"+numpreg);
         img.setAttribute("onclick","EliminarRespuesta_TextoVideo_AM("+(k-1)+","+numpreg+")");
-        alert("Img: " + img);
+        //alert("Img: " + img);
         //var tdcorregir = document.getElementById("tdcorregir"+k+"_"+numpreg);
         //tdcorregir.setAttribute("id","tdcorregir"+(k-1)+"_"+numpreg);
     }
@@ -3924,21 +3924,21 @@ function EliminarRespuesta_TextoVideo_AM(numresp,numpreg){
 
 //Boton para añadir mas preguntas a los ejercicios de Texto-Video en Asociacion Multiple
 function botonMasPreguntas_TextoVideo_AM(id_ejercicio) {
-    alert("añadiendo pregunta");
+    //alert("añadiendo pregunta");
 
     divnumpreguntas = document.getElementById('num_preg');
     numeropreguntas=divnumpreguntas.value;
-    alert("numero actual es"+ numeropreguntas);
+    //alert("numero actual es"+ numeropreguntas);
     anterior=document.getElementById('num_res_preg'+ numeropreguntas);
-    alert(anterior.id);
+    //alert(anterior.id);
     numeropreguntas= parseInt(numeropreguntas) +1;
     divnumpreguntas.value=numeropreguntas;
-    alert("llega");
+    //alert("llega");
     nuevodiv = document.createElement('div');
-    alert("aki tb llega");
+    //alert("aki tb llega");
     nuevodiv.id= "tabpregunta"+numeropreguntas;
     //Creo un nuevo hijo a la tabla general para la pregunta
-    alert("si");
+    //alert("si");
     var br = document.createElement('br');
     var br1 = document.createElement('br');
     var br2 = document.createElement('br');
@@ -4026,21 +4026,21 @@ function botonMasPreguntas_TextoVideo_AM(id_ejercicio) {
     //añado el numero de respuestas de la nueva pregunta
     insertAfter(nuevodiv,nuevoinput)
 
-    alert("fin");
+    //alert("fin");
 }
 
 //Funcion que actualiza los objetos de video cuando se cambia los textarea de los videos
 function actualizar_TextoVideo_AM(numresp,numpreg) {
     //Obtenemos las etiquetas a modificar (param y embed) donde se encuentra el origen del video de Youtube
-    alert("Actualizando video: " + numresp + "," + numpreg);
+    //alert("Actualizando video: " + numresp + "," + numpreg);
     var param = document.getElementById("movie"+numresp+"_"+numpreg);
-    alert("Param: " + param);
+    //alert("Param: " + param);
     var embed = document.getElementById("embed"+numresp+"_"+numpreg);
-    alert("Embed: " + embed);
+    //alert("Embed: " + embed);
     
     var textarea = document.getElementById("respuesta"+numresp+"_"+numpreg);
     var texto = textarea.value;
-    alert("Texto: " + texto);
+    //alert("Texto: " + texto);
     
     //Obtenemos la etiqueta object
     var obj = param.parentNode;
@@ -4050,9 +4050,9 @@ function actualizar_TextoVideo_AM(numresp,numpreg) {
     //Con expresiones regulares obtener el codigo del video de youtube
     var regexp = /^http\:\/\/www\.youtube\.com\/watch\?v\=((\w|_|-))*$/;
     if (regexp.test(texto)) {
-        alert("Cumple la expresion regular");
+        //alert("Cumple la expresion regular");
         var codigo = texto.replace(/^http\:\/\/www\.youtube\.com\/watch\?v\=/,"");
-        alert("Codigo: " + codigo);
+        //alert("Codigo: " + codigo);
         param.setAttribute("value","http://www.youtube.com/v/"+codigo+"?hl=es_ES&version=3");
         embed.setAttribute("src","http://www.youtube.com/v/"+codigo+"?hl=es_ES&version=3");
         //Guardamos todos el codigo de object, incluyendo los hijos (param y embed)
@@ -4092,11 +4092,11 @@ function EliminarPregunta_TextoVideo_AM (Pregunta,numpregunta){
 
         siguientepreg= parseInt(numpregunta)+1;
         //Actualizo el resto de pregunta
-        alert(siguientepreg);
+        //alert(siguientepreg);
         preg=parseInt(numpregunta);
-        alert("preg"+preg);
+        //alert("preg"+preg);
         for(j=siguientepreg;j<=numeropreguntas+1;j++){
-            alert('tabpregunta'+j);
+            //alert('tabpregunta'+j);
             mitabla=document.getElementById('tabpregunta'+j);
             mitabla.id='tabpregunta'+preg;
 
@@ -4122,14 +4122,14 @@ function EliminarPregunta_TextoVideo_AM (Pregunta,numpregunta){
             for(k=1;k<=parseInt(numresp);k++){
 
                 //Las tables
-                alert("llega");
+                //alert("llega");
                 tablarespuestas=document.getElementById("tablarespuesta"+k+"_"+j);
                 tablarespuestas.id="tablarespuesta"+k+"_"+preg;
-                alert("ki tba");
+                //alert("ki tba");
                 //los tr de las tables
                 lostr=document.getElementById('trrespuesta'+k+"_"+j);
                 lostr.id='trrespuesta'+k+"_"+preg;
-                alert("siiiiii");
+                //alert("siiiiii");
 
                 /*losinput=document.getElementById('id_crespuesta'+k+"_"+j);
                 losinput.id='id_crespuesta'+k+"_"+preg;
@@ -4167,7 +4167,7 @@ function EliminarPregunta_TextoVideo_AM (Pregunta,numpregunta){
 
             }
 
-            alert("fin hijos");
+            //alert("fin hijos");
             //Cambio el número de respuestas
             minumeroresp=document.getElementById('num_res_preg'+j);
             minumeroresp.id='num_res_preg'+preg;
@@ -4196,7 +4196,7 @@ function anadirRespuesta_TextoFoto_AM (id_ejercicio,respuesta,numpreg){
     //-1 por el text del div
     //var numresp=(respuesta.childNodes.length/2) +1;
     var numresp = parseInt(document.getElementById("num_res_preg"+numpreg).value)+1;
-    alert("Numero respuesta a crear: " + numresp);
+    //alert("Numero respuesta a crear: " + numresp);
           
     table.width="50%";
     table.id="tablarespuesta"+numresp+"_"+numpreg;
@@ -4294,12 +4294,12 @@ function cargaImagenes(elnombre,i,j,numresp){
         cargaImagenes_old(elnombre,i,j);
     } else {
     
-        alert("AAAAAAAA" + i);
+        //alert("AAAAAAAA" + i);
         var text = 'upload' + numresp + "_" + i;
-        alert("id: " + text);
+        //alert("id: " + text);
         var button = document.getElementById(text);
-        alert("el nombre  " + elnombre);
-        alert("Button: " + button);
+        //alert("el nombre  " + elnombre);
+        //alert("Button: " + button);
         if (j == 'primera') {
             button.childNodes[0].nodeValue = 'Pulse aqui';
         }
@@ -4309,7 +4309,7 @@ function cargaImagenes(elnombre,i,j,numresp){
             name: 'image',
             autoSubmit: true,
             onSubmit: function(file, ext) {
-                alert("Cargandoooo");
+                //alert("Cargandoooo");
                 // cambiar el texto del boton cuando se selecicione la imagen
                 button.childNodes[0].nodeValue = 'Subiendo';
                 // desabilitar el boton
@@ -4325,14 +4325,14 @@ function cargaImagenes(elnombre,i,j,numresp){
                 }, 200);
             },
             onComplete: function(file, response) {
-                alert("completado");
+                //alert("completado");
                 button.childNodes[0].nodeValue = 'Cambiar Foto';
 
                 window.clearInterval(interval);
 
                 // Habilitar boton otra vez
                 this.enable();
-                alert("recargando");
+                //alert("recargando");
 
                 respuesta = document.getElementById('respuesta' + numresp + "_" + i);
                 var padre = respuesta.parentNode;
@@ -4342,7 +4342,7 @@ function cargaImagenes(elnombre,i,j,numresp){
                 respuesta.removeAttribute("src");
                 respuesta.setAttribute("src", "./imagenes/" + elnombre);
                 padre.appendChild(respuesta);
-                alert('Fin cambio imagen');
+                //alert('Fin cambio imagen');
 
             }
             //Tengo que cambiar la foto
@@ -4356,27 +4356,27 @@ function cargaImagenes(elnombre,i,j,numresp){
 //Boton para eliminar una respuesta en los ejercicios Texto-Imagen de Asociacion Multiple
 function EliminarRespuesta_TextoFoto_AM(respuesta,numpreg,numresp,id_ejercicio){
     var totalRespuestas = parseInt(document.getElementById("num_res_preg"+numpreg).value);
-    alert("Total Respuestas: " + totalRespuestas);
+    //alert("Total Respuestas: " + totalRespuestas);
     //var respuesta = document.getElementById("tablarespuesta" + numresp + "_" + numpreg);
-    alert("Respuesta: " + respuesta);
+    //alert("Respuesta: " + respuesta);
     respuesta.parentNode.removeChild(respuesta);
     
     for (var k=numresp+1; k<=totalRespuestas; k++) {
         var table = document.getElementById('tablarespuesta'+k+'_'+numpreg);
-        alert("Iteraccion: " + k);
-        alert("Table: " + table);
+        //alert("Iteraccion: " + k);
+        //alert("Table: " + table);
         if(k==totalRespuestas) {
-            alert("Es la ultima respuestas");
+            //alert("Es la ultima respuestas");
             table.style.cssFloat="none";
         }
         else if ((k-1)%2!=0) {
-            alert("Entra en el else if");
+            //alert("Entra en el else if");
             table.style.cssFloat="left";
         }
         table.setAttribute("name",'tablarespuesta'+(k-1)+'_'+numpreg);
         table.setAttribute("id",'tablarespuesta'+(k-1)+'_'+numpreg);
         var tr = document.getElementById('trrespuesta'+k+'_'+numpreg);
-        alert("Tr: " + tr);
+        //alert("Tr: " + tr);
         tr.setAttribute("id",'trrespuesta'+(k-1)+'_'+numpreg);
         //var resp = document.getElementById('respuesta'+k+'_'+numpreg);
         //resp.setAttribute("id",'respuesta'+(k-1)+'_'+numpreg);
@@ -4405,7 +4405,7 @@ function EliminarRespuesta_TextoFoto_AM(respuesta,numpreg,numresp,id_ejercicio){
         url: "borrarespuesta.php?id_ejercicio=" + id_ejercicio + "&numpreg=" + numpreg + "&numresp=" + numresp + "&totalResp=" + totalRespuestas + "&directorio=./imagenes/&archivo=foto_&extension=.jpg",
         cache : false,
         success : function(response) {
-            alert("Terminada con exito la llamada a borrarespuesta.php");
+            //alert("Terminada con exito la llamada a borrarespuesta.php");
         }
     });
     var hidden_resp = document.getElementById("num_res_preg"+numpreg);
@@ -4414,21 +4414,21 @@ function EliminarRespuesta_TextoFoto_AM(respuesta,numpreg,numresp,id_ejercicio){
 
 //Boton de añadir una pregunta para los ejercicios Texto-Imagen de Asociacion Multiple
 function botonMasPreguntas_TextoFoto_AM(id_ejercicio) {
-    alert("añadiendo pregunta");
+    //alert("añadiendo pregunta");
 
     divnumpreguntas = document.getElementById('num_preg');
     numeropreguntas=divnumpreguntas.value;
-    alert("numero actual es"+ numeropreguntas);
+    //alert("numero actual es"+ numeropreguntas);
     anterior=document.getElementById('num_res_preg'+ numeropreguntas);
-    alert(anterior.id);
+    //alert(anterior.id);
     numeropreguntas= parseInt(numeropreguntas) +1;
     divnumpreguntas.value=numeropreguntas;
-    alert("llega");
+    //alert("llega");
     nuevodiv = document.createElement('div');
-    alert("aki tb llega");
+    //alert("aki tb llega");
     nuevodiv.id= "tabpregunta"+numeropreguntas;
     //Creo un nuevo hijo a la tabla general para la pregunta
-    alert("si");
+    //alert("si");
     var br = document.createElement('br');
     var br1 = document.createElement('br');
     var br2 = document.createElement('br');
@@ -4516,7 +4516,7 @@ function botonMasPreguntas_TextoFoto_AM(id_ejercicio) {
     //añado el numero de respuestas de la nueva pregunta
     insertAfter(nuevodiv,nuevoinput)
 
-    alert("fin");
+    //alert("fin");
 
 }
 
@@ -4541,11 +4541,11 @@ function EliminarPregunta_TextoFoto_AM(id_ejercicio,Pregunta,numpregunta){
 
         siguientepreg= parseInt(numpregunta)+1;
         //Actualizo el resto de pregunta
-        alert(siguientepreg);
+        //alert(siguientepreg);
         preg=parseInt(numpregunta);
-        alert("preg"+preg);
+        //alert("preg"+preg);
         for(j=siguientepreg;j<=numeropreguntas+1;j++){
-            alert('tabpregunta'+j);
+            //alert('tabpregunta'+j);
             mitabla=document.getElementById('tabpregunta'+j);
             mitabla.id='tabpregunta'+preg;
 
@@ -4571,14 +4571,14 @@ function EliminarPregunta_TextoFoto_AM(id_ejercicio,Pregunta,numpregunta){
             for(k=1;k<=parseInt(numresp);k++){
 
                 //Las tables
-                alert("llega");
+                //alert("llega");
                 tablarespuestas=document.getElementById("tablarespuesta"+k+"_"+j);
                 tablarespuestas.id="tablarespuesta"+k+"_"+preg;
-                alert("ki tba");
+                //alert("ki tba");
                 //los tr de las tables
                 lostr=document.getElementById('trrespuesta'+k+"_"+j);
                 lostr.id='trrespuesta'+k+"_"+preg;
-                alert("siiiiii");
+                //alert("siiiiii");
 
                 /*losinput=document.getElementById('id_crespuesta'+k+"_"+j);
                 losinput.id='id_crespuesta'+k+"_"+preg;
@@ -4618,7 +4618,7 @@ function EliminarPregunta_TextoFoto_AM(id_ejercicio,Pregunta,numpregunta){
 
             }
 
-            alert("fin hijos");
+            //alert("fin hijos");
             
             
             
@@ -4635,7 +4635,7 @@ function EliminarPregunta_TextoFoto_AM(id_ejercicio,Pregunta,numpregunta){
                 url: "borrapregunta.php?id_ejercicio=" + id_ejercicio + "&numpreg=" + numpregunta + "&totalPregs=" + (preg) + "&directorio=./imagenes/&archivo=foto_&extension=.jpg",
                 cache : false,
                 success : function(response) {
-                    alert("Terminada con exito la llamada a borrapregunta.php");
+                    //alert("Terminada con exito la llamada a borrapregunta.php");
                 }
             });
         
@@ -4649,21 +4649,21 @@ function EliminarPregunta_TextoFoto_AM(id_ejercicio,Pregunta,numpregunta){
  * ************************* EJERCICIOS ASOCIACION MULTIPLE  AUDIO-TEXTO ************************************
  */
 function botonMasPreguntas_AudioTexto_AM(id_ejercicio) {
-    alert("añadiendo pregunta");
+    //alert("añadiendo pregunta");
 
     divnumpreguntas = document.getElementById('num_preg');
     numeropreguntas=divnumpreguntas.value;
-    alert("numero actual es"+ numeropreguntas);
+    //alert("numero actual es"+ numeropreguntas);
     anterior=document.getElementById('num_res_preg'+ numeropreguntas);
-    alert(anterior.id);
+    //alert(anterior.id);
     numeropreguntas= parseInt(numeropreguntas) +1;
     divnumpreguntas.value=numeropreguntas;
-    alert("llega");
+    //alert("llega");
     nuevodiv = document.createElement('div');
-    alert("aki tb llega");
+    //alert("aki tb llega");
     nuevodiv.id= "tabpregunta"+numeropreguntas;
     //Creo un nuevo hijo a la tabla general para la pregunta
-    alert("si");
+    //alert("si");
     var br = document.createElement('br');
     var br1 = document.createElement('br');
     var br2 = document.createElement('br');
@@ -4764,7 +4764,7 @@ function botonMasPreguntas_AudioTexto_AM(id_ejercicio) {
     //añado el numero de respuestas de la nueva pregunta
     insertAfter(nuevodiv,nuevoinput)
 
-    alert("fin");
+    //alert("fin");
 
 }
 
@@ -4772,14 +4772,14 @@ function botonMasPreguntas_AudioTexto_AM(id_ejercicio) {
  * Funcion para subir archivos de audio para los ejercicios Audio-Texto en Asociacion Multiple
  */
 function cargaAudios_AudioTexto_AM(elnombre,i,j){
-    alert("AAAAAAAA" + i);
+    //alert("AAAAAAAA" + i);
     var text = 'upload' + i;
-    alert("id: " + text);
+    //alert("id: " + text);
     var button = document.getElementById(text);
-    alert("el nombre  " + elnombre);
-    alert("Button: " + button);
-    alert("Button node type: " + button.nodeType);
-    alert("!Button: " + !button);
+    //alert("el nombre  " + elnombre);
+    //alert("Button: " + button);
+    //alert("Button node type: " + button.nodeType);
+    //alert("!Button: " + !button);
     if (j == 'primera') {
         button.childNodes[0].nodeValue = 'Pulse aqui';
     }
@@ -4789,7 +4789,7 @@ function cargaAudios_AudioTexto_AM(elnombre,i,j){
         name: 'image',
         autoSubmit: true,
         onSubmit: function(file, ext) {
-            alert("Cargandoooo audio");
+            //alert("Cargandoooo audio");
             // cambiar el texto del boton cuando se selecicione la imagen
             button.childNodes[0].nodeValue = 'Subiendo';
             // desabilitar el boton
@@ -4805,7 +4805,7 @@ function cargaAudios_AudioTexto_AM(elnombre,i,j){
             }, 200);
         },
         onComplete: function(file, response) {
-            alert("completado");
+            //alert("completado");
             button.childNodes[0].nodeValue = 'Cambiar Audio';
 
             window.clearInterval(interval);
@@ -4850,11 +4850,11 @@ function EliminarPregunta_AudioTexto_AM(id_ejercicio,Pregunta,numpregunta){
 
         siguientepreg= parseInt(numpregunta)+1;
         //Actualizo el resto de pregunta
-        alert(siguientepreg);
+        //alert(siguientepreg);
         preg=parseInt(numpregunta);
-        alert("preg"+preg);
+        //alert("preg"+preg);
         for(j=siguientepreg;j<=numeropreguntas+1;j++){
-            alert('tabpregunta'+j);
+            //alert('tabpregunta'+j);
             mitabla=document.getElementById('tabpregunta'+j);
             mitabla.id='tabpregunta'+preg;
 
@@ -4889,14 +4889,14 @@ function EliminarPregunta_AudioTexto_AM(id_ejercicio,Pregunta,numpregunta){
             for(k=1;k<=parseInt(numresp);k++){
 
                 //Las tables
-                alert("llega");
+                //alert("llega");
                 tablarespuestas=document.getElementById("tablarespuesta"+k+"_"+j);
                 tablarespuestas.id="tablarespuesta"+k+"_"+preg;
-                alert("ki tba");
+                //alert("ki tba");
                 //los tr de las tables
                 lostr=document.getElementById('trrespuesta'+k+"_"+j);
                 lostr.id='trrespuesta'+k+"_"+preg;
-                alert("siiiiii");
+                //alert("siiiiii");
 
                 /*losinput=document.getElementById('id_crespuesta'+k+"_"+j);
                 losinput.id='id_crespuesta'+k+"_"+preg;
@@ -4931,7 +4931,7 @@ function EliminarPregunta_AudioTexto_AM(id_ejercicio,Pregunta,numpregunta){
 
             }
 
-            alert("fin hijos");
+            //alert("fin hijos");
             
             
             
@@ -4948,7 +4948,7 @@ function EliminarPregunta_AudioTexto_AM(id_ejercicio,Pregunta,numpregunta){
                 url: "borrapregunta.php?id_ejercicio=" + id_ejercicio + "&numpreg=" + numpregunta + "&totalPregs=" + (preg) + "&directorio=./mediaplayer/audios/&archivo=audio_&extension=.mp3",
                 cache : false,
                 success : function(response) {
-                    alert("Terminada con exito la llamada a borraaudio_pregunta.php");
+                    //alert("Terminada con exito la llamada a borraaudio_pregunta.php");
                 }
             });
         
@@ -4965,15 +4965,15 @@ function EliminarPregunta_AudioTexto_AM(id_ejercicio,Pregunta,numpregunta){
 //texto en los ejercicios Video-Texto en Asociacion Multiple
 function actualizar_VideoTexto_AM(id_ejercicio,numpreg) {
     //Obtenemos las etiquetas a modificar (param y embed) donde se encuentra el origen del video de Youtube
-    alert("Actualizando video: " + id_ejercicio + "," + numpreg);
+    //alert("Actualizando video: " + id_ejercicio + "," + numpreg);
     var param = document.getElementById("movie"+numpreg);
-    alert("Param: " + param);
+    //alert("Param: " + param);
     var embed = document.getElementById("embed"+numpreg);
-    alert("Embed: " + embed);
+    //alert("Embed: " + embed);
     
     var textarea = document.getElementById("archivovideo"+numpreg);
     var texto = textarea.value;
-    alert("Texto: " + texto);
+    //alert("Texto: " + texto);
     
     //Obtenemos la etiqueta object
     var obj = param.parentNode;
@@ -4983,9 +4983,9 @@ function actualizar_VideoTexto_AM(id_ejercicio,numpreg) {
     //Con expresiones regulares obtener el codigo del video de youtube
     var regexp = /^http\:\/\/www\.youtube\.com\/watch\?v\=((\w|_|-))*$/;
     if (regexp.test(texto)) {
-        alert("Cumple la expresion regular");
+        //alert("Cumple la expresion regular");
         var codigo = texto.replace(/^http\:\/\/www\.youtube\.com\/watch\?v\=/,"");
-        alert("Codigo: " + codigo);
+        //alert("Codigo: " + codigo);
         param.setAttribute("value","http://www.youtube.com/v/"+codigo+"?hl=es_ES&version=3");
         embed.setAttribute("src","http://www.youtube.com/v/"+codigo+"?hl=es_ES&version=3");
         //Guardamos todos el codigo de object, incluyendo los hijos (param y embed)
@@ -5006,21 +5006,21 @@ function actualizar_VideoTexto_AM(id_ejercicio,numpreg) {
 
 //Boton de añadir una nueva pregunta para ejercicios Video-Texto en Asociacion Multiple
 function botonMasPreguntas_VideoTexto_AM(id_ejercicio) {
-    alert("añadiendo pregunta");
+    //alert("añadiendo pregunta");
 
     divnumpreguntas = document.getElementById('num_preg');
     numeropreguntas=divnumpreguntas.value;
-    alert("numero actual es"+ numeropreguntas);
+    //alert("numero actual es"+ numeropreguntas);
     anterior=document.getElementById('num_res_preg'+ numeropreguntas);
-    alert(anterior.id);
+    //alert(anterior.id);
     numeropreguntas= parseInt(numeropreguntas) +1;
     divnumpreguntas.value=numeropreguntas;
-    alert("llega");
+    //alert("llega");
     nuevodiv = document.createElement('div');
-    alert("aki tb llega");
+    //alert("aki tb llega");
     nuevodiv.id= "tabpregunta"+numeropreguntas;
     //Creo un nuevo hijo a la tabla general para la pregunta
-    alert("si");
+    //alert("si");
     var br = document.createElement('br');
     var br1 = document.createElement('br');
     var br2 = document.createElement('br');
@@ -5127,7 +5127,7 @@ function botonMasPreguntas_VideoTexto_AM(id_ejercicio) {
     //añado el numero de respuestas de la nueva pregunta
     insertAfter(nuevodiv,nuevoinput)
 
-    alert("fin");
+    //alert("fin");
 
 }
 
@@ -5152,11 +5152,11 @@ function EliminarPregunta_VideoTexto_AM(id_ejercicio,Pregunta,numpregunta){
 
         siguientepreg= parseInt(numpregunta)+1;
         //Actualizo el resto de pregunta
-        alert(siguientepreg);
+        //alert(siguientepreg);
         preg=parseInt(numpregunta);
-        alert("preg"+preg);
+        //alert("preg"+preg);
         for(j=siguientepreg;j<=numeropreguntas+1;j++){
-            alert('tabpregunta'+j);
+            //alert('tabpregunta'+j);
             mitabla=document.getElementById('tabpregunta'+j);
             mitabla.id='tabpregunta'+preg;
 
@@ -5192,14 +5192,14 @@ function EliminarPregunta_VideoTexto_AM(id_ejercicio,Pregunta,numpregunta){
             for(k=1;k<=parseInt(numresp);k++){
 
                 //Las tables
-                alert("llega");
+                //alert("llega");
                 tablarespuestas=document.getElementById("tablarespuesta"+k+"_"+j);
                 tablarespuestas.id="tablarespuesta"+k+"_"+preg;
-                alert("ki tba");
+                //alert("ki tba");
                 //los tr de las tables
                 lostr=document.getElementById('trrespuesta'+k+"_"+j);
                 lostr.id='trrespuesta'+k+"_"+preg;
-                alert("siiiiii");
+                //alert("siiiiii");
 
                 /*losinput=document.getElementById('id_crespuesta'+k+"_"+j);
                 losinput.id='id_crespuesta'+k+"_"+preg;
@@ -5234,7 +5234,7 @@ function EliminarPregunta_VideoTexto_AM(id_ejercicio,Pregunta,numpregunta){
 
             }
 
-            alert("fin hijos");
+            //alert("fin hijos");
             
             
             
@@ -5257,14 +5257,14 @@ function EliminarPregunta_VideoTexto_AM(id_ejercicio,Pregunta,numpregunta){
  */
 //Carga las imagenes de los ejercicios Imagen-Texto en Asociacion Multiple
 function cargaImagenes_FotoTexto_AM(elnombre,i,j){
-    alert("AAAAAAAA" + i);
+    //alert("AAAAAAAA" + i);
     var text = 'upload' + i;
-    alert("id: " + text);
+    //alert("id: " + text);
     var button = document.getElementById(text);
-    alert("el nombre  " + elnombre);
-    alert("Button: " + button);
-    alert("Button node type: " + button.nodeType);
-    alert("!Button: " + !button);
+    //alert("el nombre  " + elnombre);
+    //alert("Button: " + button);
+    //alert("Button node type: " + button.nodeType);
+    //alert("!Button: " + !button);
     if (j == 'primera') {
         button.childNodes[0].nodeValue = 'Pulse aqui';
     }
@@ -5274,7 +5274,7 @@ function cargaImagenes_FotoTexto_AM(elnombre,i,j){
         name: 'image',
         autoSubmit: true,
         onSubmit: function(file, ext) {
-            alert("Cargandoooo foto");
+            //alert("Cargandoooo foto");
             // cambiar el texto del boton cuando se selecicione la imagen
             button.childNodes[0].nodeValue = 'Subiendo';
             // desabilitar el boton
@@ -5290,7 +5290,7 @@ function cargaImagenes_FotoTexto_AM(elnombre,i,j){
             }, 200);
         },
         onComplete: function(file, response) {
-            alert("completado");
+            //alert("completado");
             button.childNodes[0].nodeValue = 'Cambiar Foto';
 
             window.clearInterval(interval);
@@ -5315,21 +5315,21 @@ function cargaImagenes_FotoTexto_AM(elnombre,i,j){
 
 //Boton para añadir una pregunta a los ejercicios Imagen-Texto en Asociacion Multiple
 function botonMasPreguntas_FotoTexto_AM(id_ejercicio) {
-    alert("añadiendo pregunta");
+    //alert("añadiendo pregunta");
 
     divnumpreguntas = document.getElementById('num_preg');
     numeropreguntas=divnumpreguntas.value;
-    alert("numero actual es"+ numeropreguntas);
+    //alert("numero actual es"+ numeropreguntas);
     anterior=document.getElementById('num_res_preg'+ numeropreguntas);
-    alert(anterior.id);
+    //alert(anterior.id);
     numeropreguntas= parseInt(numeropreguntas) +1;
     divnumpreguntas.value=numeropreguntas;
-    alert("llega");
+    //alert("llega");
     nuevodiv = document.createElement('div');
-    alert("aki tb llega");
+    //alert("aki tb llega");
     nuevodiv.id= "tabpregunta"+numeropreguntas;
     //Creo un nuevo hijo a la tabla general para la pregunta
-    alert("si");
+    //alert("si");
     var br = document.createElement('br');
     var br1 = document.createElement('br');
     var br2 = document.createElement('br');
@@ -5429,7 +5429,7 @@ function botonMasPreguntas_FotoTexto_AM(id_ejercicio) {
     //añado el numero de respuestas de la nueva pregunta
     insertAfter(nuevodiv,nuevoinput)
 
-    alert("fin");
+    //alert("fin");
 
 }
 
@@ -5454,11 +5454,11 @@ function EliminarPregunta_FotoTexto_AM(id_ejercicio,Pregunta,numpregunta){
 
         siguientepreg= parseInt(numpregunta)+1;
         //Actualizo el resto de pregunta
-        alert(siguientepreg);
+        //alert(siguientepreg);
         preg=parseInt(numpregunta);
-        alert("preg"+preg);
+        //alert("preg"+preg);
         for(j=siguientepreg;j<=numeropreguntas+1;j++){
-            alert('tabpregunta'+j);
+            //alert('tabpregunta'+j);
             mitabla=document.getElementById('tabpregunta'+j);
             mitabla.id='tabpregunta'+preg;
 
@@ -5494,14 +5494,14 @@ function EliminarPregunta_FotoTexto_AM(id_ejercicio,Pregunta,numpregunta){
             for(k=1;k<=parseInt(numresp);k++){
 
                 //Las tables
-                alert("llega");
+                //alert("llega");
                 tablarespuestas=document.getElementById("tablarespuesta"+k+"_"+j);
                 tablarespuestas.id="tablarespuesta"+k+"_"+preg;
-                alert("ki tba");
+                //alert("ki tba");
                 //los tr de las tables
                 lostr=document.getElementById('trrespuesta'+k+"_"+j);
                 lostr.id='trrespuesta'+k+"_"+preg;
-                alert("siiiiii");
+                //alert("siiiiii");
 
                 /*losinput=document.getElementById('id_crespuesta'+k+"_"+j);
                 losinput.id='id_crespuesta'+k+"_"+preg;
@@ -5536,7 +5536,7 @@ function EliminarPregunta_FotoTexto_AM(id_ejercicio,Pregunta,numpregunta){
 
             }
 
-            alert("fin hijos");
+            //alert("fin hijos");
             
             
             
@@ -5553,7 +5553,7 @@ function EliminarPregunta_FotoTexto_AM(id_ejercicio,Pregunta,numpregunta){
                 url: "borrapregunta.php?id_ejercicio=" + id_ejercicio + "&numpreg=" + numpregunta + "&totalPregs=" + (preg) + "&directorio=./imagenes/&archivo=foto_&extension=.jpg",
                 cache : false,
                 success : function(response) {
-                    alert("Terminada con exito la llamada a borrapregunta.php");
+                    //alert("Terminada con exito la llamada a borrapregunta.php");
                 }
             });
         
@@ -5783,17 +5783,17 @@ function TH_EliminarHueco(id_ejercicio,numpreg,numresp) {
 function TH_AddPregunta(id_ejercicio) {
     divnumpreguntas = document.getElementById('num_preg');
     numeropreguntas=divnumpreguntas.value;
-    alert("numero actual es"+ numeropreguntas);
+    //alert("numero actual es"+ numeropreguntas);
     anterior=document.getElementById('num_res_preg'+ numeropreguntas);
-    alert(anterior.id);
+    //alert(anterior.id);
     numeropreguntas= parseInt(numeropreguntas) +1;
     divnumpreguntas.value=numeropreguntas;
-    alert("llega");
+    //alert("llega");
     nuevodiv = document.createElement('div');
-    alert("aki tb llega");
+    //alert("aki tb llega");
     nuevodiv.id= "tabpregunta"+numeropreguntas;
     //Creo un nuevo hijo a la tabla general para la pregunta
-    alert("si");
+    //alert("si");
     var br = document.createElement('br');
     var br1 = document.createElement('br');
     var br2 = document.createElement('br');
@@ -5881,7 +5881,7 @@ function TH_AddPregunta(id_ejercicio) {
     //añado el numero de respuestas de la nueva pregunta
     insertAfter(nuevodiv,nuevoinput)
 
-    alert("fin");
+    //alert("fin");
 }
 
 //Boton para eliminar una pregunta a un ejercicio Texto Hueco
@@ -5906,11 +5906,11 @@ function TH_DelPregunta(id_ejercicio,numpreg) {
 
         siguientepreg= parseInt(numpreg)+1;
         //Actualizo el resto de pregunta
-        alert(siguientepreg);
+        //alert(siguientepreg);
         preg=parseInt(numpreg);
-        alert("preg"+preg);
+        //alert("preg"+preg);
         for(j=siguientepreg;j<=numeropreguntas+1;j++){
-            alert('tabpregunta'+j);
+            //alert('tabpregunta'+j);
             mitabla=document.getElementById('tabpregunta'+j);
             mitabla.id='tabpregunta'+preg;
 
@@ -5936,14 +5936,14 @@ function TH_DelPregunta(id_ejercicio,numpreg) {
             for(k=1;k<=parseInt(numresp);k++){
 
                 //Las tables
-                alert("llega");
+                //alert("llega");
                 tablarespuestas=document.getElementById("tablarespuesta"+k+"_"+j);
                 tablarespuestas.id="tablarespuesta"+k+"_"+preg;
-                alert("ki tba");
+                //alert("ki tba");
                 //los tr de las tables
                 lostr=document.getElementById('trrespuesta'+k+"_"+j);
                 lostr.id='trrespuesta'+k+"_"+preg;
-                alert("siiiiii");
+                //alert("siiiiii");
 
                 
 
@@ -5962,7 +5962,7 @@ function TH_DelPregunta(id_ejercicio,numpreg) {
 
             }
 
-            alert("fin hijos");
+            //alert("fin hijos");
             //Cambio el número de respuestas
             minumeroresp=document.getElementById('num_res_preg'+j);
             minumeroresp.id='num_res_preg'+preg;
@@ -6212,20 +6212,20 @@ function OE_EliminarResp(id_ejercicio,numpreg,orden,numresp) {
      
     j=0;
     
-    alert("Numero de hijos: " + k);
+    //alert("Numero de hijos: " + k);
    
     for(i=0;i<k;i=i+2){
         j=j+1;
-        alert('Iteracion bucle: ' + i);
-        alert("J: " + j);
+        //alert('Iteracion bucle: ' + i);
+        //alert("J: " + j);
         padre.childNodes[i].setAttribute("id",'tablarespuesta'+j+"_"+orden+'_'+numpreg);
         if (i==k-2) {
-            alert("Entra en i==k-1");
+            //alert("Entra en i==k-1");
             var tabla = document.getElementById("tablarespuesta"+j+"_"+orden+"_"+numpreg);
             tabla.style.cssFloat="none";
         }
         else if (j%2!=0) {
-            alert("Entra en j%2!=0");
+            //alert("Entra en j%2!=0");
             var tabla = document.getElementById("tablarespuesta"+j+"_"+orden+"_"+numpreg);
             tabla.style.cssFloat="left";
         }
