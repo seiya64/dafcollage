@@ -119,7 +119,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
 
         //titulo de la seccion
-        $mform->addElement('html', '<h1>' . get_string('guardar', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
+        $mform->addElement('html', '<h1>' . get_string('add_palabra', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
         if ($leido) {
             $mform->addElement('hidden', 'idleido', $leido);
         }
@@ -572,7 +572,7 @@ class mod_vocabulario_opciones_form extends moodleform {
         //1,3
         $tabla_menu .='<div class="menuitem right" style="text-align:right"><a href="view.php?id=' . $id . '&opcion=3"><img src="./imagenes/campos_lexicos.png" id="id_campos_im" name="campos_im"/><div class="texto">' . get_string('admin_cl', 'vocabulario') . '</div></a></div>';
         //1,2
-        $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=1"><img src="./imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im"/><div class="texto">' . get_string('ver', 'vocabulario') . '</div></a></div>';
+        $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=1"><img src="./imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im"/><div class="texto">' . get_string('add_palabra', 'vocabulario') . '</div></a></div>';
 
      
         //$tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=2"><img src="./imagenes/ver_palabras.png" id="id_ver_im" name="ver_im"/><div class="texto">' . get_string('ver', 'vocabulario') . '</div></a></div></div>';
@@ -691,7 +691,7 @@ class mod_vocabulario_ver_form extends moodleform {
 
 
             @import "css/demo_page.css";
-            @import "css/header.ccss";
+            /*@import "css/header.css";*/
             @import "css/demo_table_jui.css";
             @import "css/smoothness/jquery-ui-1.8.4.custom.css";
         </style>';
@@ -769,7 +769,7 @@ class mod_vocabulario_ver_form extends moodleform {
 
             //botones
             $buttonarray = array();
-            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('ver', 'vocabulario'));
+            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('buscar', 'vocabulario'));
             $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
 
             $mform->addElement('html', '</br>');
@@ -790,7 +790,7 @@ class mod_vocabulario_ver_form extends moodleform {
 
             //botones
             $buttonarray = array();
-            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('ver', 'vocabulario'));
+            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('buscar', 'vocabulario'));
             $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
 
             $mform->addElement('html', '</br>');
@@ -811,7 +811,7 @@ class mod_vocabulario_ver_form extends moodleform {
 
             //botones
             $buttonarray = array();
-            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('ver', 'vocabulario'));
+            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('buscar', 'vocabulario'));
             $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
 
             $mform->addElement('html', '</br>');
@@ -891,6 +891,8 @@ class mod_vocabulario_ver_form extends moodleform {
             //titulillos de la tabla
             $titulillos = '<tr class="header">';
             $titulillos .= '<th>' . get_string('pal', 'vocabulario') . '</th>';
+            //Añadido columna significado ABM
+            $titulillos .= '<th>' . get_string('Tpal','vocabulario') . '</th>';
             $titulillos .= '<th>' . get_string('campo_lex', 'vocabulario') . '</th>';
             $titulillos .= '<th>' . get_string('campo_gram', 'vocabulario') . '</th>';
             $titulillos .= '<th>' . get_string('campo_intencion', 'vocabulario') . '</th>';
@@ -920,11 +922,11 @@ class mod_vocabulario_ver_form extends moodleform {
 
             //    $fila .= '<td> <a href="./guardar.php?id_tocho=' . $this->id_tocho . '&viene='.$viene.'&borrar=' . $cosa->mpid . '">[' . get_string('eliminar', 'vocabulario') . ']</a></td>';
                     $superpadre = obtener_superpadre($cosa->icid);
-                    
-                    
+                
                     
                 
                 $fila .= '<td> ' . $cosa->pal . ' </td>';
+                $fila .= '<td> ' . $cosa->sig . '</td>';
                 $fila .= '<td> ' . $cosa->campo . '</td>';
                 $fila .= '<td><a href="./view.php?id='. $this->id_tocho.'&opcion=5'.'&grid='.$cosa->gramaticaid.'">' . $cosa->gramatica . '</a> </td>';
                 $fila .= '<td><a href="./view.php?id='. $this->id_tocho.'&opcion=7&icid='.$cosa->intencionid.'">'. $cosa->intencion.'</a>';

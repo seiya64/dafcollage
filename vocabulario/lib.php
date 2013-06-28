@@ -351,9 +351,10 @@ function vocabulario_todas_palabras($usuarioid, $cl = null, $gram = null, $inten
         $sql .= 'SELECT * FROM (';
     }
    
-    $sql .= 'SELECT @a:=@a+1, todas.pal, cl.campo, gr.gramatica, ic.intencion, tt.tipo, todas.mpid, todas.icid,gr.id gramaticaid,ic.id intencionid,tt.id tiptexid ';
+    $sql .= 'SELECT @a:=@a+1, todas.pal, todas.sig, cl.campo, gr.gramatica, ic.intencion, tt.tipo, todas.mpid, todas.icid,gr.id gramaticaid,ic.id intencionid,tt.id tiptexid ';
+    
     $sql .= 'FROM (';
-    $sql .= '(SELECT  mp.id mpid,`sustantivoid` id,`palabra` pal,`campoid` clid,`gramaticaid` grid,`intencionid` icid,`tipologiaid` ttid ';
+    $sql .= '(SELECT  mp.id mpid,`sustantivoid` sid,`palabra` pal,`campoid` clid,`gramaticaid` grid,`intencionid` icid,`tipologiaid` ttid, `significado` sig ';
     $sql .= 'FROM ';
     if ($cl) {
         $sql .= '(SELECT * FROM `mdl_vocabulario_mis_palabras` WHERE campoid = ' . $cl . ') mp,';
@@ -377,7 +378,7 @@ function vocabulario_todas_palabras($usuarioid, $cl = null, $gram = null, $inten
     }
     $sql .= 'WHERE `usuarioid` = ' . $usuarioid . ' and mp.`sustantivoid` = s.`id`) ';
     $sql .= 'UNION ALL ';
-    $sql .= '(SELECT mp.id mpid, `adjetivoid` id, `sin_declinar` pal, `campoid` clid, `gramaticaid` grid, `intencionid` icid, `tipologiaid` ttid ';
+    $sql .= '(SELECT mp.id mpid, `adjetivoid` aid, `sin_declinar` pal, `campoid` clid, `gramaticaid` grid, `intencionid` icid, `tipologiaid` ttid, `significado` sig ';
     $sql .= 'FROM ';
     if ($cl) {
         $sql .= '(SELECT * FROM `mdl_vocabulario_mis_palabras` WHERE campoid = ' . $cl . ') mp,';
@@ -401,7 +402,7 @@ function vocabulario_todas_palabras($usuarioid, $cl = null, $gram = null, $inten
     }
     $sql .= 'WHERE `usuarioid` = ' . $usuarioid . ' and mp.`adjetivoid` = a.`id` and a.`id` <> 1) ';
     $sql .= 'UNION ALL ';
-    $sql .= '(SELECT mp.id mpid, `verboid` id, `infinitivo` pal, `campoid` clid, `gramaticaid` grid, `intencionid` icid, `tipologiaid` ttid ';
+    $sql .= '(SELECT mp.id mpid, `verboid` vid, `infinitivo` pal, `campoid` clid, `gramaticaid` grid, `intencionid` icid, `tipologiaid` ttid, `significado` sig ';
     $sql .= 'FROM ';
     if ($cl) {
         $sql .= '(SELECT * FROM `mdl_vocabulario_mis_palabras` WHERE campoid = ' . $cl . ') mp,';
@@ -425,7 +426,7 @@ function vocabulario_todas_palabras($usuarioid, $cl = null, $gram = null, $inten
     }
     $sql .= 'WHERE `usuarioid` = ' . $usuarioid . ' and mp.`verboid` = a.`id` and a.`id` <> 1) ';
     $sql .= 'UNION ALL ';
-    $sql .= '(SELECT mp.id mpid, `otroid` id, `palabra` pal, `campoid` clid, `gramaticaid` grid, `intencionid` icid, `tipologiaid` ttid ';
+    $sql .= '(SELECT mp.id mpid, `otroid` oid, `palabra` pal, `campoid` clid, `gramaticaid` grid, `intencionid` icid, `tipologiaid` ttid, `significado` sig ';
     $sql .= 'FROM ';
     if ($cl) {
         $sql .= '(SELECT * FROM `mdl_vocabulario_mis_palabras` WHERE campoid = ' . $cl . ') mp,';
@@ -451,7 +452,9 @@ function vocabulario_todas_palabras($usuarioid, $cl = null, $gram = null, $inten
     $sql .= 'WHERE `usuarioid` = ' . $usuarioid . ' and mp.`otroid` = a.`id` and a.`id` <> 1) ';
     $sql .= 'ORDER BY pal) todas,';
     $sql .= '`mdl_vocabulario_camposlexicos_' . $sufijotabla . '` cl, `mdl_vocabulario_gramatica` gr, `mdl_vocabulario_intenciones_' . $sufijotabla . '` ic, `mdl_vocabulario_tipologias_' . $sufijotabla . '` tt ';
+    //$sql .= ', `mdl_vocabulario_sustantivos` sust, `mdl_vocabulario_adjetivos` adj, `mdl_vocabulario_verbos` verb, `mdl_vocabulario_otros` otros, `mdl_vocabulario_mis_palabras` mp ';
     $sql .= 'WHERE todas.clid = cl.id and todas.grid = gr.id and todas.icid = ic.id and todas.ttid = tt.id';
+    //$sql .= ' and todas.mpid=mp.id and sust.id=mp.`sustantivoid` and adj.id=mp.`adjetivoid` and verb.id=mp.`verboid` and otros.id=mp.`otroid` ';
 
     if ($letra) {
         $sql .= ') p WHERE p.pal like \'' . $letra . '%\'';
@@ -459,6 +462,11 @@ function vocabulario_todas_palabras($usuarioid, $cl = null, $gram = null, $inten
    
    
     $todas = get_records_sql($sql);
+    $file_log = fopen("log_sql.txt", "w");
+    $cad = "SQL: " . $sql . "\n\n\n";
+    $cad.= "Error: " . mysql_error() . "\n\n";
+    fwrite($file_log, $cad, strlen($cad));
+    fclose($file_log);
     return $todas;
 }
 

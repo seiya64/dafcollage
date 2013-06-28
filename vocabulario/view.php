@@ -89,7 +89,7 @@ $strvocabularios = get_string("modulenameplural", "vocabulario");
 $strvocabulario = get_string("modulename", "vocabulario");
 
 print_header("$course->shortname: $vocabulario->name", "$course->fullname", "$navigation <a href=index.php?id=$course->id>$strvocabularios</a> -> $vocabulario->name", "", "", true, update_module_button($cm->id, $course->id, $strvocabulario), navmenu($course, $cm));
-echo "esto lo pintan todos";
+//echo "esto lo pintan todos";
 //inclusion del css para que salga en columnitas
 echo '<link rel="stylesheet" type="text/css" href="./estilo.css">';
 echo '<link rel="stylesheet" type="text/css" href="js/chosen/chosen.css">';
