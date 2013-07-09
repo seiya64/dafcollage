@@ -47,10 +47,16 @@ require_once("vocabulario_formularios.php");
 global $CFG, $COURSE, $USER;
 $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
 
+$file = fopen("log_ver.txt","w");
+$log = "";
 
 $campo = optional_param('campoid', 0, PARAM_INT);
 $id_tocho = optional_param('id_tocho', 0, PARAM_INT);
 $tipo = optional_param('tipo', 'cl', PARAM_ALPHA);
+
+$log .= "campo: " . $campo . "\n";
+$log .= "id_tocho: " . $id_tocho . "\n";
+$log .= "tipo: " . $tipo . "\n";
 
 $cancel = optional_param('cancelbutton', '', PARAM_ALPHA);
 
@@ -58,11 +64,24 @@ if ($cancel) {
     redirect('./view.php?id=' . $id_tocho);
 }
 
-if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false)) {
+if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false) && empty($campo) && empty($tipo) ) {
     $alumno = optional_param('alumnoid', 0, PARAM_INT);
+    $log .= "Ha entrado en el sitio prohibido\n";
+    $log .= "alumno: " . $alumno . "\n";
+    fwrite($file,$log,strlen($log));
+    fclose($file);
     redirect('view.php?id=' . $id_tocho . '&opcion=2&alid=' . $alumno);
 }
+else if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false) && !empty($tipo) && !empty($campo)) {
+    $alumno = optional_param('alumnoid', 0, PARAM_INT);
+    $log .= "BIENNNNNN\n";
+    $log .= "alumno: " . $alumno . "\n";
+    fwrite($file,$log,strlen($log));
+    fclose($file);
+    redirect('view.php?id=' . $id_tocho . '&opcion=2&' . $tipo . '=1&campo=' . $campo . '&alid=' . $alumno);
+}
 
-
+fwrite($file,$log,strlen($log));
+fclose($file);
 redirect('view.php?id=' . $id_tocho . '&opcion=2&' . $tipo . '=1&campo=' . $campo);
 ?>

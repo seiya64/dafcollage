@@ -883,71 +883,80 @@ class mod_vocabulario_ver_form extends moodleform {
         }
 
         if (!$nube) {
-
             
-            $mform->addElement('html', '<p>');
-            $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
-
-            //titulillos de la tabla
-            $titulillos = '<tr class="header">';
-            $titulillos .= '<th>' . get_string('pal', 'vocabulario') . '</th>';
-            //Añadido columna significado ABM
-            $titulillos .= '<th>' . get_string('Tpal','vocabulario') . '</th>';
-            $titulillos .= '<th>' . get_string('campo_lex', 'vocabulario') . '</th>';
-            $titulillos .= '<th>' . get_string('campo_gram', 'vocabulario') . '</th>';
-            $titulillos .= '<th>' . get_string('campo_intencion', 'vocabulario') . '</th>';
-            $titulillos .= '<th>' . get_string('campo_tipologia', 'vocabulario') . '</th>';
-           // $titulillos .= '<th>' . get_string('opciones', 'vocabulario') . '</th>';
-           // $titulillos .= '<th>' . get_string('opciones', 'vocabulario') . '</th>';
-            $titulillos .= '</tr>';
-
-            $mform->addElement('html', $titulillos);
-
-            //filas de la tabla
-            $color = 0;
-            //$mis_palabras = $mp->combinaciones_completas($USER->id);
-            foreach ($mis_palabras as $cosa) {
-                $fila = '<tr class="cell" style="text-align:center;';
-                if ($color % 2 == 0) {
-                    $fila .= '">';
-                    $color = 0;
-                } else {
-                    $fila .= 'background:#BDC7D8;">';
-                }
-//                $fila .= '<td> ' . $cosa['pal'] . ' </td>';
-//                $fila .= '<td> ' . $cosa['campo'] . ' </td>';
-//                $fila .= '<td> ' . $cosa['gramatica'] . ' </td>';
-//                $fila .= '<td> ' . $cosa['intencion'] . ' </td>';
-//                $fila .= '<td> ' . $cosa['tipo'] . ' </td>';
-
-            //    $fila .= '<td> <a href="./guardar.php?id_tocho=' . $this->id_tocho . '&viene='.$viene.'&borrar=' . $cosa->mpid . '">[' . get_string('eliminar', 'vocabulario') . ']</a></td>';
-                    $superpadre = obtener_superpadre($cosa->icid);
+            $file = fopen("log_mp.txt","w");
+            $log = "Tam mis palabras: " . sizeof($mis_palabras) . "\n";
+            $log .= "mis palabras: " . var_export($mis_palabras, true);
+            fwrite($file, $log, strlen($log));
+            fclose($file);
+            
+            //Si no hay resultados se oculta la tabla
+            if (sizeof($mis_palabras)>0 && $mis_palabras!=false) {
                 
-                    
-                
-                $fila .= '<td> ' . $cosa->pal . ' </td>';
-                $fila .= '<td> ' . $cosa->sig . '</td>';
-                $fila .= '<td> ' . $cosa->campo . '</td>';
-                $fila .= '<td><a href="./view.php?id='. $this->id_tocho.'&opcion=5'.'&grid='.$cosa->gramaticaid.'">' . $cosa->gramatica . '</a> </td>';
-                $fila .= '<td><a href="./view.php?id='. $this->id_tocho.'&opcion=7&icid='.$cosa->intencionid.'">'. $cosa->intencion.'</a>';
-                if($superpadre!=-1){
-                    $fila .= '</br> ('.$superpadre.')';
+                $mform->addElement('html', '<p>');
+                $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
+            
+                //titulillos de la tabla
+                $titulillos = '<tr class="header">';
+                $titulillos .= '<th>' . get_string('pal', 'vocabulario') . '</th>';
+                //Añadido columna significado ABM
+                $titulillos .= '<th>' . get_string('Tpal','vocabulario') . '</th>';
+                $titulillos .= '<th>' . get_string('campo_lex', 'vocabulario') . '</th>';
+                $titulillos .= '<th>' . get_string('campo_gram', 'vocabulario') . '</th>';
+                $titulillos .= '<th>' . get_string('campo_intencion', 'vocabulario') . '</th>';
+                $titulillos .= '<th>' . get_string('campo_tipologia', 'vocabulario') . '</th>';
+               // $titulillos .= '<th>' . get_string('opciones', 'vocabulario') . '</th>';
+               // $titulillos .= '<th>' . get_string('opciones', 'vocabulario') . '</th>';
+                $titulillos .= '</tr>';
+
+                $mform->addElement('html', $titulillos);
+
+                //filas de la tabla
+                $color = 0;
+                //$mis_palabras = $mp->combinaciones_completas($USER->id);
+                foreach ($mis_palabras as $cosa) {
+                    $fila = '<tr class="cell" style="text-align:center;';
+                    if ($color % 2 == 0) {
+                        $fila .= '">';
+                        $color = 0;
+                    } else {
+                        $fila .= 'background:#BDC7D8;">';
+                    }
+    //                $fila .= '<td> ' . $cosa['pal'] . ' </td>';
+    //                $fila .= '<td> ' . $cosa['campo'] . ' </td>';
+    //                $fila .= '<td> ' . $cosa['gramatica'] . ' </td>';
+    //                $fila .= '<td> ' . $cosa['intencion'] . ' </td>';
+    //                $fila .= '<td> ' . $cosa['tipo'] . ' </td>';
+
+                //    $fila .= '<td> <a href="./guardar.php?id_tocho=' . $this->id_tocho . '&viene='.$viene.'&borrar=' . $cosa->mpid . '">[' . get_string('eliminar', 'vocabulario') . ']</a></td>';
+                        $superpadre = obtener_superpadre($cosa->icid);
+
+
+
+                    $fila .= '<td> ' . $cosa->pal . ' </td>';
+                    $fila .= '<td> ' . $cosa->sig . '</td>';
+                    $fila .= '<td> ' . $cosa->campo . '</td>';
+                    $fila .= '<td><a href="./view.php?id='. $this->id_tocho.'&opcion=5'.'&grid='.$cosa->gramaticaid.'">' . $cosa->gramatica . '</a> </td>';
+                    $fila .= '<td><a href="./view.php?id='. $this->id_tocho.'&opcion=7&icid='.$cosa->intencionid.'">'. $cosa->intencion.'</a>';
+                    if($superpadre!=-1){
+                        $fila .= '</br> ('.$superpadre.')';
+                    }
+                    $fila .=' </td>';
+                    $fila .= '<td> <a href="./view.php?id='. $this->id_tocho.'&opcion=9&ttid='.$cosa->tiptexid.'">'. $cosa->tipo . ' </a></td>';
+                             //modificado o quitado por mi fina (cambiado editar por modificar)
+
+                 //   $acciones = '<td> <a href="./view.php?id=' . $this->id_tocho . '&opcion=4&viene='.$viene.'&act=1&id_mp=' . $cosa->mpid . '">[' . get_string('modificar', 'vocabulario') . ']</a></td>';
+                 //   $acciones .= '<td> <a href="./view.php?id=' . $this->id_tocho . '&opcion=4&op=1&viene='.$viene.'&act=1&id_mp=' . $cosa->mpid . '">[' . get_string('Añadir', 'vocabulario') . ']</a></td>';
+
+               //     $fila .= '<td> ' . $acciones . ' </td>';
+                    $fila .= '</tr>';
+                    $mform->addElement('html', $fila);
+                    $color++;
                 }
-                $fila .=' </td>';
-                $fila .= '<td> <a href="./view.php?id='. $this->id_tocho.'&opcion=9&ttid='.$cosa->tiptexid.'">'. $cosa->tipo . ' </a></td>';
-                         //modificado o quitado por mi fina (cambiado editar por modificar)
 
-             //   $acciones = '<td> <a href="./view.php?id=' . $this->id_tocho . '&opcion=4&viene='.$viene.'&act=1&id_mp=' . $cosa->mpid . '">[' . get_string('modificar', 'vocabulario') . ']</a></td>';
-             //   $acciones .= '<td> <a href="./view.php?id=' . $this->id_tocho . '&opcion=4&op=1&viene='.$viene.'&act=1&id_mp=' . $cosa->mpid . '">[' . get_string('Añadir', 'vocabulario') . ']</a></td>';
-
-           //     $fila .= '<td> ' . $acciones . ' </td>';
-                $fila .= '</tr>';
-                $mform->addElement('html', $fila);
-                $color++;
-            }
-
-            $mform->addElement('html', '</table>');
-            $mform->addElement('html', '<p>');
+                $mform->addElement('html', '</table>');
+                $mform->addElement('html', '<p>');
+        }
         }
         //botones
         $buttonarray = array();
@@ -967,26 +976,36 @@ class mod_vocabulario_ver_form extends moodleform {
         global $USER;
         //elegir la visualizacion
         if ($userid) {
-            $atras = '<h1 style="text-align: center;" class="main">';
-            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&todasp=1&alid=' . $userid . '">[' . get_string('todo', 'vocabulario') . ']</a>';
-            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&alfa=1&alid=' . $userid . '">[' . get_string('alfabetico', 'vocabulario') . ']</a></br>';
+            //$atras = '<h1 style="text-align: center;" class="main">';
+            $atras = '<h1  class="main">';
+            $atras.= '<div style="float:left; width:70%;">';
+            $atras.='<ul>';
+            $atras .= '<li><a href="./view.php?id=' . $this->id_tocho . '&opcion=2&nube=1&alid=' . $userid . '">[' . get_string('nube', 'vocabulario') . ']</a></li>';
+            $atras .= '<li><a href="./view.php?id=' . $this->id_tocho . '&opcion=2&todasp=1&alid=' . $userid . '">[' . get_string('todo', 'vocabulario') . ']</a></li>';
+            $atras .= '<li><a href="./view.php?id=' . $this->id_tocho . '&opcion=2&alfa=1&alid=' . $userid . '">[' . get_string('alfabetico', 'vocabulario') . ']</a></li>';//</br>';
+            $atras .= '</ul></div>';
 //            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&cl=1&alid=' . $userid . '">[' . get_string('pal_campo_lex', 'vocabulario') . ']</a></br>';
-            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&gr=1&alid=' . $userid . '">[' . get_string('campo_gram', 'vocabulario') . ']</a>';
-            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&ic=1&alid=' . $userid . '">[' . get_string('campo_intencion', 'vocabulario') . ']</a>';
-            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&tt=1&alid=' . $userid . '">[' . get_string('campo_tipologia', 'vocabulario') . ']</a></br>';
-            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&nube=1&alid=' . $userid . '">[' . get_string('nube', 'vocabulario') . ']</a>';
+            $atras .= '<div><ul>';
+            $atras .= '<li><a href="./view.php?id=' . $this->id_tocho . '&opcion=2&gr=1&alid=' . $userid . '">[' . get_string('campo_gram', 'vocabulario') . ']</a></li>';
+            $atras .= '<li><a href="./view.php?id=' . $this->id_tocho . '&opcion=2&ic=1&alid=' . $userid . '">[' . get_string('campo_intencion', 'vocabulario') . ']</a></li>';
+            $atras .= '<li><a href="./view.php?id=' . $this->id_tocho . '&opcion=2&tt=1&alid=' . $userid . '">[' . get_string('campo_tipologia', 'vocabulario') . ']</a></li>';//</br>';
+            
+            
             //$atras .= '<a href="./pdf?id=' . $this->id_tocho . '&us=' . $userid . '">[' . get_string('pdf', 'vocabulario') . ']</a>';
             //$atras .= '<a href="./view.php?id=' . $this->id_tocho . '">[' . get_string('atras', 'vocabulario') . ']</a>';
+            $atras.='</ul></div>';
             $atras .= '</h1>';
             $mform->addElement('html', $atras);
             $mform->addElement('html', '</br>');
         } else {
-            $atras = '<h1 style="text-align: center;" class="main">';
-            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2">[' . get_string('todo', 'vocabulario') . ']</a>';
-            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&alfa=1">[' . get_string('alfabetico', 'vocabulario') . ']</a>';
-            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&cl=1">[' . get_string('campo_lex', 'vocabulario') . ']</a>';
-            $atras .= '<a href="./pdf.php?id=' . $this->id_tocho . '&us=' . $userid . '">[' . get_string('pdf', 'vocabulario') . ']</a>';
-            $atras .= '<a href="./view.php?id=' . $this->id_tocho . '">[' . get_string('atras', 'vocabulario') . ']</a>';
+            $atras = '<h1  class="main">';
+            $atras.='<ul>';
+            $atras .= '<li><a href="./view.php?id=' . $this->id_tocho . '&opcion=2">[' . get_string('todo', 'vocabulario') . ']</a></li>';
+            $atras .= '<li><a href="./view.php?id=' . $this->id_tocho . '&opcion=2&alfa=1">[' . get_string('alfabetico', 'vocabulario') . ']</a></li>';
+            $atras .= '<li><a href="./view.php?id=' . $this->id_tocho . '&opcion=2&cl=1">[' . get_string('campo_lex', 'vocabulario') . ']</a></li>';
+            $atras .= '<li><a href="./pdf.php?id=' . $this->id_tocho . '&us=' . $userid . '">[' . get_string('pdf', 'vocabulario') . ']</a></li>';
+            $atras .= '<li><a href="./view.php?id=' . $this->id_tocho . '">[' . get_string('atras', 'vocabulario') . ']</a></li>';
+            $atras.='</ul>';
             $atras .= '</h1>';
             $mform->addElement('html', $atras);
             $mform->addElement('html', '</br>');

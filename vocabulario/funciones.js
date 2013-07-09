@@ -202,10 +202,9 @@ function la_tabla_nube() {
             "sInfo": "Mostrando _START_ de _END_ de un total de _TOTAL_ entradas",
             "sInfoEmpty": "Mostrando 0 de 0 de un total de 0 entradas",
             "sInfoFiltered": "(Filtrado de _MAX_ entradas)"
-        }
-          
-       
-
+        },
+        "aLengthMenu": [[50,30,20,10,-1], [50,30,20,10,"All"]],
+        "iDisplayLength": 50
     });
 
 
