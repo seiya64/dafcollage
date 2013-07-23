@@ -3205,4 +3205,248 @@ class ejercicios_ordenar_elementos {
     }
 }
 
+
+//Tabla que sirve para guardar las preguntas de un ejercicio de IE mas RC
+class ejercicios_ierc_preg {
+
+    var $id;
+    var $id_ejercicio;
+    var $texto;
+    var $num_cabs;
+    var $cab1;
+    var $cab2;
+    var $cab3;
+    var $cab4;
+    var $cab5;
+
+    //Contructor por defecto y con parametros
+    function ejercicios_ierc_preg($id = NULL,$id_ejercicio=NULL,$texto=NULL,$num_cabs=NULL,$cab1=NULL,$cab2=NULL,$cab3=NULL,$cab4=NULL,$cab5=NULL) {
+        
+        $this->id = $id;
+        $this->id_ejercicio = $id_ejercicio;
+        $this->texto = $texto;
+        $this->num_cabs = $num_cabs;
+        $this->cab1 = $cab1;
+        $this->cab2 = $cab2;
+        $this->cab3 = $cab3;
+        $this->cab4 = $cab4;
+        $this->cab5 = $cab5;
+    }
+
+    //Obtener cada uno de los atributos de la tabla
+    function get($param) {
+
+        // $param = strtolower($param);
+        switch ($param) {
+            default:
+            case 'id':
+                return $this->id;
+                break;
+            case 'id_ejercicio':
+                return $this->id_ejercicio;
+                break;
+            case 'texto':
+                return $this->texto;
+                break;
+            case 'num_cabs':
+                return $this->num_cabs;
+                break;
+            case 'cab1':
+                return $this->cab1;
+                break;
+            case 'cab2':
+                return $this->cab2;
+                break;
+            case 'cab3':
+                return $this->cab3;
+                break;
+            case 'cab4':
+                return $this->cab4;
+                break;
+            case 'cab5':
+                return $this->cab5;
+                break;
+            
+        }
+    }
+
+    //Inserta en la bd la instancia correspondiente a la clase y devuelve el identificador
+    //de la nueva instancia creada
+    function insertar() {
+        $id = insert_record('ejercicios_ierc_preg', $this, true);
+        //Devuelve el identificador del ejercicios creado
+
+        return $id;
+    }
+
+    //Modifica una instacia
+    function alterar() {
+
+        update_record('ejercicios_ierc_preg', $this, false);
+    }
+
+    //Borra todas las respuestas asociadas a un ejercicio
+    function borrar_id_ejercicio($id_ejercicio) {
+        delete_records('ejercicios_ierc_preg', 'id_ejercicio', $id_ejercicio);
+    }
+    
+    //Borra un registro dado su id
+    function borrar_id($id) {
+        delete_record('ejercicios_ierc_preg', 'id', $id);
+    }
+
+    //Obtiene el texto por id
+    function obtener_uno($id) {
+        $ejer = get_record('ejercicios_ierc_preg', 'id', $id);
+        $this->id = $ejer->id;
+        $this->id_ejercicio = $ejer->id_ejercicio;
+        $this->texto = $ejer->texto;
+        $this->num_cabs = $ejer->num_cabs;
+        $this->cab1 = $ejer->cab1;
+        $this->cab2 = $ejer->cab2;
+        $this->cab3 = $ejer->cab3;
+        $this->cab4 = $ejer->cab4;
+        $this->cab5 = $ejer->cab5;
+     
+        return $this;
+    }
+
+    function obtener_todos_id_ejercicio($id_ejercicio) {
+        $sql = 'SELECT * FROM  mdl_ejercicios_ierc_preg WHERE id_ejercicio=' . $id_ejercicio;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new ejercicios_ierc_preg();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+}
+
+
+//Tabla que sirve para guardar las respuestas de un ejercicio de IE mas RC
+class ejercicios_ierc_resp {
+
+    var $id;
+    var $id_pregunta;
+    var $resp1;
+    var $resp2;
+    var $resp3;
+    var $resp4;
+    var $resp5;
+
+    //Contructor por defecto y con parametros
+    function ejercicios_ierc_resp($id = NULL,$id_pregunta=NULL,$resp1=NULL,$resp2=NULL,$resp3=NULL,$resp4=NULL,$resp5=NULL) {
+        
+        $this->id = $id;
+        $this->id_pregunta = $id_pregunta;
+        $this->resp1 = $resp1;
+        $this->resp2 = $resp2;
+        $this->resp3 = $resp3;
+        $this->resp4 = $resp4;
+        $this->resp5 = $resp5;
+    }
+
+    //Obtener cada uno de los atributos de la tabla
+    function get($param) {
+
+        // $param = strtolower($param);
+        switch ($param) {
+            default:
+            case 'id':
+                return $this->id;
+                break;
+            case 'id_pregunta':
+                return $this->id_pregunta;
+                break;
+            case 'resp1':
+                return $this->resp1;
+                break;
+            case 'resp2':
+                return $this->resp2;
+                break;
+            case 'resp3':
+                return $this->resp3;
+                break;
+            case 'resp4':
+                return $this->resp4;
+                break;
+            case 'resp5':
+                return $this->resp5;
+                break;
+            
+        }
+    }
+
+    //Inserta en la bd la instancia correspondiente a la clase y devuelve el identificador
+    //de la nueva instancia creada
+    function insertar() {
+        $id = insert_record('ejercicios_ierc_resp', $this, true);
+        //Devuelve el identificador del ejercicios creado
+
+        return $id;
+    }
+
+    //Modifica una instacia
+    function alterar() {
+
+        update_record('ejercicios_ierc_resp', $this, false);
+    }
+
+    //Borra todas las respuestas asociadas a un ejercicio
+    function borrar_id_pregunta($id_pregunta) {
+        delete_records('ejercicios_ierc_resp', 'id_pregunta', $id_pregunta);
+    }
+    
+    //Borra un registro dado su id
+    function borrar_id($id) {
+        delete_record('ejercicios_ierc_resp', 'id', $id);
+    }
+
+    //Obtiene el texto por id
+    function obtener_uno($id) {
+        $ejer = get_record('ejercicios_ierc_resp', 'id', $id);
+        $this->id = $ejer->id;
+        $this->id_pregunta = $ejer->id_pregunta;
+        $this->resp1 = $ejer->resp1;
+        $this->resp2 = $ejer->resp2;
+        $this->resp3 = $ejer->resp3;
+        $this->resp4 = $ejer->resp4;
+        $this->resp5 = $ejer->resp5;
+     
+        return $this;
+    }
+
+    function obtener_todos_id_pregunta($id_pregunta) {
+        $sql = 'SELECT * FROM  mdl_ejercicios_ierc_resp WHERE id_pregunta=' . $id_pregunta;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new ejercicios_ierc_resp();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+}
+
 ?>

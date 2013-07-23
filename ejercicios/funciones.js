@@ -13,15 +13,130 @@ var j9=1;
  * @author Angel Biedma Mesa
  * @param {String} etiqueta Cadena con el tipo de etiqueta. P.ej: input, textarea, etc...
  * @param {Object} atributos Diccionario con los atributos de la etiqueta. P. ej: {name:"nombre",id:"id1",width:"300"}
+ * @param {Node} padre Nodo que contendra el elemento recien creado
  * @returns {Elemento XML} Elemento XML creado con la etiqueta y atributos dados
  */
-function createElement(etiqueta,atributos) {
+function createElement(etiqueta,atributos,padre) {
     var elm = document.createElement(etiqueta);
     for (key in atributos) {
         elm.setAttribute(key,atributos[key]);
     }
+    if(createElement.arguments.length==3) {
+        if(typeof padre.appendChild == "function") //Javascript DOM
+            padre.appendChild(elm);
+        else if (typeof padre.append == "function") //JQuery
+            padre.append(elm);
+    }
     return elm;
 }
+
+/**
+ * Interfaz con dict.php. Pide una lista de cadenas de idiomas pasandole los codigos en un array.
+ * Cuando se reciba la respuesta se ejecutara el manejador pasandole la informacion recibida del servidor.
+ * @param {Array} lista Lista de codigos de cadenas de idioma. 
+ * @param {function} manejador Funcion que se ejecutara una vez que se reciba del servidor la informacion solicitada. Como argumento recibe
+ * la informacion recibida del servidor. Esta informacion se pasara como un diccionario de Javascript en la que en cada clave estara un codigo 
+ * de idioma y como valor la cadena de idioma.
+ * @author Angel Biedma Mesa
+ */
+function getCadLang(lista,manejador) {
+    /**
+     * Parametros a pasar a dict
+     * num (Entero) Indica el numero de ids a pasar
+     * id<N> (Cadena) Son los distintos codigos de cadena de idioma
+     */
+    
+    /**
+     * Lo que se recibe de dict es un objeto JSON con el siguiente formato
+     * codigoIdioma => (Cadena) cadenaIdioma
+     * donde codigoIdioma es el codigo de la cadena de idioma y 
+     * la cadenaIdioma es la cadena de idioma
+     */
+    
+    var num = 0;
+    var data;
+    if(typeof lista == "string") {
+        data="num=1&id1="+lista;
+    }
+    else {
+        data="num="+lista.length+"&";
+        for (i=0;i<lista.length;i++) {
+            data+="id"+(i+1)+"="+lista[i];
+            if(i!=lista.length-1) data+="&";
+        }
+    }
+    console.log("data: " + data);
+    
+    $.ajax({
+        type:"POST",
+        dataType:"json",
+        url:"dict.php",
+        data:data,
+        success:function(data) {            
+            var json = $.parseJSON(data);
+            manejador(json);
+        },
+        error:function(error) {
+            console.log("Error getCadLang con " + codcadena + " : " + error);
+        }
+    });
+}
+
+
+/**
+ * Interfaz con dict.php. Pide una lista de cadenas de idiomas pasandole los codigos en un array.
+ * La peticion se realiza de forma sincrona, asi que la funcion espera a que el servidor responda, por lo que la funcion
+ * devuelve las cadenas de idiomas.
+ * @param {Array} lista Lista de codigos de cadenas de idioma. 
+ * @returns {JSON} Diccionario JSON cuyas claves son los codigos de las cadenas de idiomas y los valores son
+ * las cadenas de idiomas devueltas por el servidor
+ * @author Angel Biedma Mesa
+ */
+function getCadLangSync(lista,manejador) {
+    /**
+     * Parametros a pasar a dict
+     * num (Entero) Indica el numero de ids a pasar
+     * id<N> (Cadena) Son los distintos codigos de cadena de idioma
+     */
+    
+    /**
+     * Lo que se recibe de dict es un objeto JSON con el siguiente formato
+     * codigoIdioma => (Cadena) cadenaIdioma
+     * donde codigoIdioma es el codigo de la cadena de idioma y 
+     * la cadenaIdioma es la cadena de idioma
+     */
+    
+    var num = 0;
+    var data;
+    if(typeof lista == "string") {
+        data="num=1&id1="+lista;
+    }
+    else {
+        data="num="+lista.length+"&";
+        for (i=0;i<lista.length;i++) {
+            data+="id"+(i+1)+"="+lista[i];
+            if(i!=lista.length-1) data+="&";
+        }
+    }
+    console.log("data: " + data);
+    
+    var res;
+    $.ajax({
+        type:"POST",
+        dataType:"json",
+        async:false,
+        url:"dict.php",
+        data:data,
+        success:function(data) {            
+            res = $.parseJSON(data);
+        },
+        error:function(error) {
+            console.log("Error getCadLang con " + codcadena + " : " + error);
+        }
+    });
+    return res;
+}
+
 
 /**
  * Funciones para trabajar con cookies
@@ -6872,4 +6987,433 @@ function cargaResumenEjercicio() {
     
     texta.appendChild(document.createTextNode(descripciones[opcion]));
     texta.style.visibility="visible";
+}
+
+
+/**
+ * *********************** Ejercicios IE mas RC ************************************
+ */
+//Configuracion inicial de la tabla
+function IERC_setupTabla(id_pregunta,editable) {
+    var oTable = $('#tbl_resp_'+id_pregunta).dataTable({
+        "bPaginate":false,
+        "bLengthChange":false,
+        "bFilter":false,
+        "bSort":false,
+        "bInfo":false
+        
+    }); 
+    
+    //Oculta inicialmente las columnas
+    IERC_cambiaCols(id_pregunta);
+}
+
+//Pone los campos de la tabla Editables de forma dinamica
+function IERC_tablaEditable(oTable){
+    oTable.$('input').editable(function(value,settings) {
+            return value;
+            }, {
+                "callback": function( sValue, y ) {
+                    var aPos = oTable.fnGetPosition( this );
+                    oTable.fnUpdate( sValue, aPos[0], aPos[1] );
+                },
+                "submitdata": function ( value, settings ) {
+                    return {
+                        "row_id": this.parentNode.getAttribute('id'),
+                        "column": oTable.fnGetPosition( this )[2]
+                    };
+                },
+                "height": "14px",
+                "width": "100%"
+            } );
+}
+
+//Oculta varias columnas de la tabla dependiendo de cuantas subrespuestas se hayan seleccionado del select
+function IERC_cambiaCols(id_pregunta) {
+    var oTable = $('#tbl_resp_'+id_pregunta).dataTable();
+    var numCols = parseInt($('#id_sel_subrespuestas_'+id_pregunta).val());
+    for (var k=0; k<=4; k++) {
+        if(k<numCols) oTable.fnSetColumnVis(k,true);
+        else          oTable.fnSetColumnVis(k,false);
+    }
+}
+
+//Añade una nueva subrespuesta 
+function IERC_addFila(id_pregunta) {
+    var numresp = parseInt($('#numerorespuestas_'+id_pregunta).val());
+    var oTable = $('#tbl_resp_'+id_pregunta).dataTable();
+    var frase = $('#IERC_click').val();
+    var frase_del = $('#IERC_eliminar').val();
+    var aux = numresp+1;
+    
+    //Añadir la nueva fila
+    var celda = function(i){return '<input type="text"  name="resp_'+id_pregunta+'_'+aux+'_'+i+'" value="'+frase+'" />'};
+    var img = '<img id="del_resp_'+id_pregunta+"_"+aux+'" name="del_resp_'+id_pregunta+"_"+aux+'" src="./imagenes/delete.gif" onclick="IERC_delFila('+id_pregunta+","+aux+')" >'+frase_del+'</img>';
+    oTable.fnAddData([celda(1),celda(2),celda(3),celda(4),celda(5),img]);
+    
+    //Coger el tr de la ultima fila
+    var ultimaFila = oTable.$('tr:last');
+    ultimaFila.attr('id','fila_'+aux);
+    ultimaFila.attr('class',(aux%2==0)?"odd":"even");
+    
+    //Mostrar todas las columnas para actualizar los ids
+    var old_num_cols = $('#id_sel_subrespuestas_'+id_pregunta).val();
+    $('#id_sel_subrespuestas_'+id_pregunta).val(5);
+    IERC_cambiaCols(id_pregunta);
+        
+    //Poner los ids a las celdas de la tabla
+    $.each(ultimaFila.children(),function(index,celda){
+        if(index<5)
+            $(celda).attr('id','celda_'+id_pregunta+"_"+aux+"_"+(index+1));
+     else
+            $(celda).attr('id','celda_'+id_pregunta+"_"+aux+"_img");
+    });
+    
+    //Volver al valor anterior del numero de columnas
+    $('#id_sel_subrespuestas_'+id_pregunta).val(old_num_cols);
+    IERC_cambiaCols(id_pregunta);
+    
+    $('#numerorespuestas_'+id_pregunta).val(aux);
+}
+
+//Funcion para eliminar una fila de la tabla
+function IERC_delFila(id_pregunta,id_resp) {
+    var numresp = parseInt($('#numerorespuestas_'+id_pregunta).val());
+    var oTable = $('#tbl_resp_'+id_pregunta).dataTable();
+    
+    //Controlar que no se eliminen todas las preguntas
+    if (numresp<=1) {
+        alert("No se pueden eliminar todas las respuestas");
+        return;
+    }
+    
+    oTable.fnDeleteRow(id_resp-1);
+    
+    //Mostrar todas las columnas para actualizar los ids
+    var old_num_cols = $('#id_sel_subrespuestas_'+id_pregunta).val();
+    $('#id_sel_subrespuestas_'+id_pregunta).val(5);
+    IERC_cambiaCols(id_pregunta);
+    
+    //Ajustar los ids de los campos para cada celda de la tabla
+    var filas = oTable.$('tr');
+    $.each(filas,function(f,tr){
+       $(tr).attr('id','fila_'+(f+1));
+       var hijos = $(tr).children();
+       $.each(hijos,function(r,td){
+          if(r<5) {             
+              $(td).attr('id','celda_'+id_pregunta+'_'+(f+1)+'_'+(r+1));
+              $($(td).find('input')).attr('name','resp_'+id_pregunta+'_'+(f+1)+'_'+(r+1));
+          }
+          else {
+              console.log("Entra aquiiiii");
+              console.log("f: " + f);
+              $(td).attr('id','celda_'+id_pregunta+'_'+(f+1)+'_img');
+              var img = $(td).find('img');
+              $(img).attr('id','del_resp_'+id_pregunta+'_'+(f+1));
+              $(img).attr('name','del_resp_'+id_pregunta+'_'+(f+1));
+              img[0].setAttribute('onclick','IERC_delFila('+id_pregunta+','+(f+1)+')');
+          }
+       });
+    });
+    
+    //Volver al valor anterior del numero de columnas
+    $('#id_sel_subrespuestas_'+id_pregunta).val(old_num_cols);
+    IERC_cambiaCols(id_pregunta);
+    
+    $('#numerorespuestas_'+id_pregunta).val(numresp-1);
+}
+
+//Funcion para cargar el audio
+function IERC_cargaAudios(elnombre,id_preg,j) {
+
+          
+     var div = $("#pregunta"+id_preg);
+     var button = $("#upload"+id_preg);
+     
+     if (j == 'primera') {
+         button.text('Pulse aqui');
+     }
+     // var elnombre="aaa";
+     new AjaxUpload(button, {
+         action: 'procesaaudio.php?nombre=' + elnombre,
+         name: 'image',
+         autoSubmit: true,
+         onSubmit: function(file, ext) {
+             //alert("Cargandoooo audio");
+             // cambiar el texto del boton cuando se selecicione la imagen
+             button.text('Subiendo');
+             // desabilitar el boton
+             this.disable();
+
+             interval = window.setInterval(function() {
+                 var text = button.text();
+                 if (text.length < 11) {
+                     button.text(text + '.');
+                 } else {
+                     button.text('Subiendo');
+                 }
+             }, 200);
+         },
+         onComplete: function(file, response) {
+             //alert("completado");
+             button.text('Cambiar Audio');
+
+             window.clearInterval(interval);
+
+             // Habilitar boton otra vez
+             this.enable();
+             
+             //Poner el objeto para reproducir el audio
+             $(div.children()).remove(); //Quita el embed
+             var embed = createElement("embed",{type:"application/x-shockwave-flash", src: "./mediaplayer/mediaplayer.swf", 
+                                                width:"320", height:"20",style:"undefined",name:"mpl",quality:"high",
+                                                allowfullscreen:"true",flashvars:"file=./mediaplayer/audios/" + elnombre + "&amp;height=20&amp;width=320"});
+             div.append(embed);
+
+
+             /*respuesta = document.getElementsByName(nodo);
+
+             respuesta[0].removeChild(respuesta[0].firstChild);
+
+             elememb = document.createElement('embed');
+
+             elememb.setAttribute("type", "application/x-shockwave-flash");
+             elememb.setAttribute("src", "./mediaplayer/mediaplayer.swf");
+             elememb.setAttribute("width", "320");
+             elememb.setAttribute("height", "20")
+             elememb.setAttribute("style", "undefined");
+             elememb.setAttribute("id", "mpl" + numresp + "_" + i);
+
+             elememb.setAttribute("name", "mpl");
+             elememb.setAttribute("quality", "high");
+             elememb.setAttribute("allowfullscreen", "true");
+             elememb.setAttribute("flashvars", "file=./mediaplayer/audios/" + elnombre + "&amp;height=20&amp;width=320");
+
+             respuesta[0].appendChild(elememb);*/
+
+         }
+         //Tengo que cambiar la foto
+     });
+}
+
+//Funcion que carga el video cuando se modifica el cuadro de texto
+function IERC_cargaVideo(id_preg) {
+    var texto = $('#pregunta'+id_preg).val();
+    var obj = $('#video_pregunta'+id_preg);
+    
+    //Con expresiones regulares obtener el codigo del video de youtube
+    var regexp = /^http\:\/\/www\.youtube\.com\/watch\?v\=((\w|_|-))*$/;
+    if (regexp.test(texto)) {
+         var codigo = texto.replace(/^http\:\/\/www\.youtube\.com\/watch\?v\=/,"");
+         
+         var nobj = createElement('object',{width:"560",height:"315",id:"video_pregunta"+id_preg,
+                                            class:"video"});
+         var param1 = createElement('param',{name:"movie",value:"http://www.youtube.com/v/"+codigo+"?hl=es_ES&version=3"});
+         var param2 = createElement('param',{name:"allowFullScreen",value:"true"});
+         var param3 = createElement('param',{name:"allowscriptaccess",value:"always"});
+         var embed = createElement('embed',{src:"http://www.youtube.com/v/"+codigo+"?hl=es_ES&version=3",
+                                            type:"application/x-shockwave-flash",width:"560",height:"315",
+                                            allowscriptaccess:"always",allowfullscreen:"true"});
+         nobj.appendChild(param1);
+         nobj.appendChild(param2);
+         nobj.appendChild(param3);
+         nobj.appendChild(embed);
+         
+         obj.replaceWith(nobj);
+    }
+    
+}
+
+//Boton para añadir una nueva pregunta a un ejercicio IE mas RC
+function IERC_AddPregunta(id_ejercicio) {
+    //Coger numero de pregunta, tipo de pregunta y el nodo padre donde se insertara la nueva pregunta
+    var numpreg = parseInt($('#num_preg').val());
+    var npreg = numpreg+1;
+    var tipoorigen = parseInt($('#tipoorigen').val());
+    var contenedor = $('#tabpregunta1').parent();
+    var frase = $('#OE_pregunta').val();
+    var frase_sub = $('#IERC_num_subresp').val();
+    
+    //Crear la nueva pregunta 
+    var div = createElement('div',{id:"tabpregunta"+npreg});
+    $(div).insertBefore('#num_preg'); //Lo insertamos junto antes del input oculto del numero de preguntas
+    createElement('br',{},div);
+    createElement('br',{},div);
+    var table = createElement('table',{id:"table_pregunta"+npreg, style:"width:100%;"},div);
+    var tr = createElement('tr',{},table);
+    var td = createElement('td',{style:"width:100%;"},tr);
+    $(createElement('h2',{id:"h2_pregunta"+npreg},td)).text(frase);
+    
+    switch(tipoorigen) {
+        case 1: //Es texto
+            var textarea = createElement('textarea',{style:"width: 900px;",class:"pregunta",
+                                                     name:"pregunta"+npreg,id:"pregunta"+npreg},td);
+            break;
+        case 2: //Es audio
+            var script = createElement('script',{type:"text/javascript",src:"./mediaplayer/swfobject.js"},td);
+            var divAudio = createElement('div',{class:"claseaudio",id:"pregunta"+npreg},td);
+            var embed = createElement("embed",{type:"application/x-shockwave-flash", src: "./mediaplayer/mediaplayer.swf", 
+                                                width:"320", height:"20",style:"undefined",name:"mpl",quality:"high",
+                                                allowfullscreen:"true",flashvars:"file=./mediaplayer/audios/audio" + id_ejercicio + "_" + npreg + ".mp3&amp;height=20&amp;width=320"},divAudio);
+            var c1 = createElement('div',{id:"c1"},td);
+            var a = createElement('a',{href:'javascript:IERC_cargaAudios(\'audio' + id_ejercicio + "_" + npreg + ".mp3" + '\',' + npreg + ',\'primera\')',
+                                       id:"upload"+npreg,class:"up"},c1);
+            $(a).text('Cambiar Audio');
+            break;
+        case 3: //Es video
+            var nobj = createElement('object',{width:"560",height:"315",id:"video_pregunta"+npreg,
+                                            class:"video"},td);
+            var param1 = createElement('param',{name:"movie",value:""},nobj);
+            var param2 = createElement('param',{name:"allowFullScreen",value:"true"},nobj);
+            var param3 = createElement('param',{name:"allowscriptaccess",value:"always"},nobj);
+            var embed = createElement('embed',{src:"http://www.youtube.com/v/"+""+"?hl=es_ES&version=3",
+                                               type:"application/x-shockwave-flash",width:"560",height:"315",
+                                               allowscriptaccess:"always",allowfullscreen:"true"},nobj);
+            var textarea = createElement('textarea',{onchange:"IERC_cargaVideo("+npreg+")", class:"video", name:"pregunta"+npreg, id:"pregunta"+npreg},td);
+            $(textarea).text("");
+            createElement('br',{},td);
+            
+            break;   
+    }
+    
+    var img = createElement('img',{id:"imgpreganadir"+npreg,src:"./imagenes/añadir.gif", alt:"añadir hueco",
+                                   height:"15px",width:"15px",onclick:"IERC_addFila("+npreg+")",title:"Añadir Respuesta"},td);
+    $(td).append(document.createTextNode(' Añadir Respuesta '));
+    var span = createElement('span',{style:"float:right;"},td);
+    var label = createElement('label',{for:"id_sel_subrespuestas_"+npreg},span);
+    $(label).text(frase_sub);
+    var select = createElement('select',{id:"id_sel_subrespuestas_"+npreg,name:"sel_subrespuestas_"+npreg,onchange:"IERC_cambiaCols("+npreg+")"},span);
+    for (i=1; i<=5; i++) {
+        var option = createElement('option',{value:""+i},select);
+        $(option).text(""+i);
+        if(i==5) $(option).attr('selected','selected');
+    }
+    var td2 = createElement('td',{style:"width:15%;"},tr);
+    
+    //Pintar las respuestas
+    var table = createElement('table',{style:"width:100%; margin-bottom:15px;",id:"tbl_resp_"+npreg,name:"tbl_resp_"+npreg},td);
+    var thead = createElement('thead',{},table);
+    var tr = createElement('tr',{id:"fila_0"},thead);
+    for (i=1; i<=5; i++) {
+        var th = createElement('th',{id:"celda_"+npreg+"_0_"+i},tr);
+        var input = createElement('input',{type:"text",id:"cab_"+npreg+"_0_"+i,name:"cab_"+npreg+"_0_"+i,value:""},th);
+    }
+    var th = createElement('th',{},tr); $(th).text('Acciones');
+    var tbody = createElement('tbody',{},table);
+    //Poner una fila de respuestas
+    var tr = createElement('tr',{id:"fila_1"},tbody);
+    for (i=1; i<=5; i++) {
+        var td2 = createElement('td',{id:"celda_"+npreg+"_1_"+i},tr);
+        var input = createElement('input',{type:"text",name:"resp_"+npreg+"_1_"+i,value:""},td2);
+    }
+    var td2 = createElement('td',{id:"celda_"+npreg+"_1_img"},tr);
+    var img = createElement('img',{id:"del_resp_"+npreg+"_1",name:"del_resp_"+npreg+"_1",
+                                   src:"./imagenes/delete.gif",onclick:"IERC_delFila("+npreg+",1)"},td2);
+    $(td2).append(document.createTextNode('Eliminar'));
+    var input = createElement('input',{type:"hidden",name:"numerorespuestas_"+npreg,id:"numerorespuestas_"+npreg,value:"1"},td);
+    IERC_setupTabla(npreg,true); //Ponemos la tabla de respuestas dinamica
+    
+    //Aumentar el numero de preguntas
+    $('#num_preg').val(npreg);
+}   
+
+//Boton para eliminar una pregunta de un ejercicio IE mas RC
+function IERC_DelPregunta(id_ejercicio, id_preg) {
+    //Obtiene informacion: numero de preguntas y demas
+    var num_pregs = parseInt($('#num_preg').val());
+    var tipoorigen = parseInt($('#tipoorigen').val());
+    
+    //Elimina la pregunta determinada
+    $('#tabpregunta'+id_preg).remove();
+    
+    //Desde la pregunta siguiente hasta la ultima pregunta, se deben ajustar
+    //los ids, names y demas, puesto que el numero de preguntas ha bajado
+    for (var k=id_preg+1; k<=num_pregs; k++) {
+        var j = k-1;
+        
+        $('#tabpregunta'+k).attr("id","tabpregunta"+j);
+        $('#table_pregunta'+k).attr("id","table_pregunta"+j);
+        var h2 = $('#h2_pregunta'+k);
+        h2.attr("id","h2_pregunta"+j);
+        h2.text().replace(""+k,""+j);
+        
+        switch(tipoorigen) {
+            case 1: //Es texto
+                var preg = $('#pregunta'+k);
+                preg.attr("id","pregunta"+j);
+                preg.attr("name","pregunta"+j);
+                break;
+            case 2: //Es audio
+                var preg = $('#pregunta'+k);
+                preg.attr("id","pregunta"+j);
+                var embed = $(preg.children()[0]);
+                embed.attr('flashvars','file=./mediaplayer/audios/audio'+id_ejercicio+'_'+j+'.mp3&height=20&width=320');
+                var upload = $('#upload'+k);
+                upload.attr("id","upload"+j);
+                upload.attr("href","javascript:IERC_cargaAudios('audio"+id_ejercicio+"_"+j+".mp3',1,'primera')");
+                break;
+            case 3: //Es video
+                var obj = $('#video_pregunta'+k);
+                obj.attr("id","video_pregunta"+j);
+                var text = $('#pregunta'+k);
+                text.attr("id","pregunta"+j);
+                text.attr("name","pregunta"+j);
+                text.attr("onchange","IERC_cargaVideo("+j+")");
+                break;
+        }
+        
+        var img = $('#imgpreganadir'+k);
+        img.attr("id","imgpreganadir"+j);
+        img.attr("onclick","IERC_addFila("+j+")");
+        $('[for=id_sel_subrespuestas_'+k+"]").attr("for","id_sel_subrespuestas_"+j);
+        var select = $('#id_sel_subrespuestas_'+k);
+        select.attr("id","id_sel_subrespuestas_"+j);
+        select.attr("name","sel_subrespuestas_"+j);
+        select.attr("onchange","IERC_cambiaCols("+j+")");
+        
+        //Cambiar los ids y names para todas las respuestas
+        //Mostrar todas las columnas para actualizar los ids
+        var old_num_cols = $('#id_sel_subrespuestas_'+k).val();
+        $('#id_sel_subrespuestas_'+k).val(5);
+        IERC_cambiaCols(k);
+        
+        var table = $('#tbl_resp_'+k);
+        table.attr("id","tbl_resp_"+j);
+        //Actualizar ids y names de las cabeceras
+        $.each(table.find('thead th'),function(ind,val){
+            $(val).attr('id','celda_'+j+'_0_'+(ind+1));
+            var input = $($(val).children[0]);
+            input.attr('id','cab_'+j+'_0_'+(ind+1));
+            input.attr('name','cab_'+j+'_0_'+(ind+1));
+        });
+        
+        //Actualizar ids y names de las filas de respuestas
+        $.each(table.find('tbody tr'),function(tr_ind,tr_val){
+
+            $.each($(tr_val).find('td'),function(td_ind,td_val){
+                
+                if (td_ind<5) {
+                    $(td_val).attr('id','celda_'+j+'_'+(tr_ind+1)+'_'+(td_ind+1));
+                    var input = $($(td_val).children[0]);
+                    input.attr('name','resp_'+j+'_'+(tr_ind+1)+'_'+(td_ind+1));
+                }
+                else {
+                    $(td_val).attr('id','celda_'+j+'_'+(tr_ind+1)+'_img');
+                    var img = $($(td_val).children[0]);
+                    img.attr('id','del_resp_'+j+'_'+(tr_ind+1));
+                    img.attr('name','del_resp_'+j+'_'+(tr_ind+1));
+                    img.attr('onclick','IERC_delFila('+j+","+(tr_ind+1)+")");
+                }
+            });
+        });
+        
+        //Volver al valor anterior del numero de columnas
+        $('#id_sel_subrespuestas_'+j).val(old_num_cols);
+        IERC_setupTabla(j,true); //Volver a setear la tabla
+        
+        
+    }
+    
+    //Cambia el numero de preguntas
+    $('#num_preg').val(num_pregs-1);
 }

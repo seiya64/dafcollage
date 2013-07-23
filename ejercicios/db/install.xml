@@ -232,7 +232,7 @@
             <KEY NAME="clave_pregunta" TYPE="foreign" FIELDS="id_pregunta" REFTABLE="ejercicios_texto_texto_preg" REFFIELDS="id" COMMENT="id de la pregunta" PREVIOUS="primary"/>
         </KEYS>        
     </TABLE>
-    <TABLE NAME="ejercicios_ordenar_elementos" COMMENT="Se guardan la configuracion de un ejercicio de Ordenar Elementos" PREVIOUS="ejercicios_ordenar_elementos_resp">
+    <TABLE NAME="ejercicios_ordenar_elementos" COMMENT="Se guardan la configuracion de un ejercicio de Ordenar Elementos" PREVIOUS="ejercicios_ordenar_elementos_resp" NEXT="ejercicios_ierc_preg">
         <FIELDS>
             <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="id_ejercicio"/>
             <FIELD NAME="id_ejercicio" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Identificacion del ejercicio" PREVIOUS="id" NEXT="orden_unico"/>
@@ -242,6 +242,38 @@
         <KEYS>
             <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_ejercicio"/>
             <KEY NAME="clave_ejercicio" TYPE="foreign" FIELDS="id_ejercicio" REFTABLE="ejercicios_general" REFFIELDS="id" COMMENT="id del ejercicio" PREVIOUS="primary"/>
+        </KEYS>  
+    </TABLE>
+    <TABLE NAME="ejercicios_ierc_preg" COMMENT="Se guardan las preguntas de un ejercicio IE mas RC" PREVIOUS="ejercicios_ordenar_elementos" NEXT="ejercicios_ierc_resp">
+        <FIELDS>
+            <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="id_ejercicio"/>
+            <FIELD NAME="id_ejercicio" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Identificacion del ejercicio" PREVIOUS="id" NEXT="texto"/>
+            <FIELD NAME="texto" TYPE="text" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Respuesta" PREVIOUS="id_ejercicio" NEXT="num_cabs"/>
+            <FIELD NAME="num_cabs" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Indica el numero de cabeceras" PREVIOUS="texto" NEXT="cab1"/>
+            <FIELD NAME="cab1" TYPE="text" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Respuesta" PREVIOUS="num_cabs" NEXT="cab2"/>
+            <FIELD NAME="cab2" TYPE="text" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Respuesta" PREVIOUS="cab1" NEXT="cab3"/>
+            <FIELD NAME="cab3" TYPE="text" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Respuesta" PREVIOUS="cab2" NEXT="cab4"/>
+            <FIELD NAME="cab4" TYPE="text" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Respuesta" PREVIOUS="cab3" NEXT="cab5"/>
+            <FIELD NAME="cab5" TYPE="text" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Respuesta" PREVIOUS="cab4" />
+        </FIELDS>
+        <KEYS>
+            <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_ejercicio"/>
+            <KEY NAME="clave_ejercicio" TYPE="foreign" FIELDS="id_ejercicio" REFTABLE="ejercicios_general" REFFIELDS="id" COMMENT="id del ejercicio" PREVIOUS="primary"/>
+        </KEYS>  
+    </TABLE>
+    <TABLE NAME="ejercicios_ierc_resp" COMMENT="Se guardan las respuestas de un ejercicio IE mas RC" PREVIOUS="ejercicios_ierc_preg">
+        <FIELDS>
+            <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="id_pregunta"/>
+            <FIELD NAME="id_pregunta" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Identificacion del ejercicio" PREVIOUS="id" NEXT="resp1"/>
+            <FIELD NAME="resp1" TYPE="text" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Respuesta" PREVIOUS="id_pregunta" NEXT="resp2"/>
+            <FIELD NAME="resp2" TYPE="text" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Respuesta" PREVIOUS="resp1" NEXT="resp3"/>
+            <FIELD NAME="resp3" TYPE="text" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Respuesta" PREVIOUS="resp2" NEXT="resp4"/>
+            <FIELD NAME="resp4" TYPE="text" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Respuesta" PREVIOUS="resp3" NEXT="resp5"/>
+            <FIELD NAME="resp5" TYPE="text" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Respuesta" PREVIOUS="resp4" />
+        </FIELDS>
+        <KEYS>
+            <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_pregunta"/>
+            <KEY NAME="clave_pregunta" TYPE="foreign" FIELDS="id_pregunta" REFTABLE="ejercicios_ierc_preg" REFFIELDS="id" COMMENT="id de pregunta" PREVIOUS="primary"/>
         </KEYS>  
     </TABLE>
   </TABLES>

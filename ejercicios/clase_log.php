@@ -39,6 +39,11 @@
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details. */
 
+/**
+ * Clase que permite trabajar comodamente con un archivo de log
+ * 
+ * @author Angel Biedma Mesa
+ */
 class Log 
 {
     private $file;
@@ -57,7 +62,7 @@ class Log
      * @param String $cadena Cadena a escribir
      */
     public function write($cadena) {
-        fwrite($this->file,$cadena,strlen($cadena));
+        fwrite($this->file,$cadena."\n",strlen($cadena)+1);
     }
     
     /**

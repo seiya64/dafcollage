@@ -135,12 +135,13 @@ $string['componerActividades']="Crear Conjunto de Actividades";
 $string["FormularioCreacion"]= "Formulario de Creación";
 $string["tipopregunta"]='Tipo de archivo pregunta:';
 $string["tipopregunta1"]='Tipo de archivo pregunta:';
-$string["numeropreguntas"]="Número de preguntas en total:";
-$string["tiporespuesta"]='Tipo de archivo respuesta:';
+$string["tipoorigen"]='Tipo de archivo origen/pregunta:';
+$string["numeropreguntas"]="Número de archivos/preguntas en total:";
+$string["tiporespuesta"]='Tipo de archivo solución:';
 $string["numerorespuestas"]="Número de archivos respuesta por pregunta:";
 $string["numerorespuestascorrectas"]="Número de archivos respuesta correctos:";
 $string["nombre"]="Titule su ejercicio para facilitar la identificación o búsqueda:";
-$string["descripcion"]="Añade una breve introducción al ejercicio:";
+$string["descripcion"]="Añade unas breves instrucciones del ejercicio para el alumno:";
 $string["visible"]="Visible (accesible por sus alumnos)";
 $string["publico"]="Público (accesible por otros profesores y alumnos)";
 //$string["carpeta"]="Introduzca la ruta del ejercicio";
@@ -213,4 +214,16 @@ $string["OE_help_flechas"]="Puede cambiar el orden de los elementos con la ayuda
 $string["OE_tipoorden"]="Se ordenarán: ";
 $string["OE_tipoorden_frase"]="Elementos de una frase";
 $string["OE_tipoorden_parrafos"]="Frases de un Párrafo/Párrafos de un texto";
+
+
+//Generador de Ejercicios -- IE mas RC -----
+$string['IERC_num_subresp']="Numero de subrespuestas para cada respuesta";
+$string['IERC_enunciado']="Texto: ";
+$string['IERC_pregunta']='Texto {$a}';
+$string['IERC_cabecera']='Cabecera {$a}';
+$string['IERC_click']="Pulse para editar";
+$string['IERC_eliminar']="Eliminar";
+$string["IERC_instr_prof"]='Introduce el texto y las soluciones';
+$string["IERC_descripcion"]='Instrucciones del ejercicio como se le muestran al alumno';
+$string["IERC_descripcion2"]="Si tiene más de una pregunta relacionada con el elemento a identificar es recomendable que las redacte siguiendo el orden a), b), c), etc... (Hay hasta 5 opciones)";
 ?>

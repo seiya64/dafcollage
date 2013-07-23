@@ -43,6 +43,7 @@ require_once("../../config.php");
 require_once("lib.php");
 require_once("ejercicios_clase_general.php");
 require_once("ejercicios_form_creacion.php");
+require_once('clase_log.php');
 
 $id_curso = optional_param('id_curso', 0, PARAM_INT);
 $tipocreacion = optional_param('tipocreacion', 0, PARAM_INT);
