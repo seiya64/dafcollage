@@ -3269,14 +3269,14 @@ class mod_vocabulario_nuevo_ic_form extends moodleform {
 
             //tabla
             $mform->addElement('html', '<p>');
-            $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter">');
+            $mform->addElement('html', '<table style="width: 100%; margin-left:no; margin-right:no;" class="flexible generaltable generalbox boxaligncenter">');
 
             //titulillos de la tabla
             $titulillos = '<tr class="head">';
-            $titulillos .='<th>' . get_string('mittel', 'vocabulario') . '</th>';
-            $titulillos .='<th>' . get_string('wortklase', 'vocabulario') . '</th>';
+            $titulillos .='<th style="width:10%">' . get_string('mittel', 'vocabulario') . '</th>';
+            $titulillos .='<th style="width:40%">' . get_string('wortklase', 'vocabulario') . '</th>';
             $titulillos .='<th>' . get_string('beisp', 'vocabulario') . '</th>';
-            $titulillos .='<th>' . get_string('siehe', 'vocabulario') . '</th>';
+            $titulillos .='<th style="width:10%" >' . get_string('siehe', 'vocabulario') . '</th>';
             $titulillos .= '</tr>';
             $mform->addElement('html', $titulillos);
 
@@ -3289,10 +3289,10 @@ class mod_vocabulario_nuevo_ic_form extends moodleform {
             $i = 1;
             for ($i = 1; $i < $totalfilas * $avance || $pintar; $i = $i + $avance) {
                 $titulillos = '<tr class="cell">';
-                $titulillos .= '<td><input type="text" id="id_mittel' . $i . '" name="mittel' . $i . '" value="' . $descripcion_troceada[$i] . '"></td>';
-                $titulillos .= '<td><input type="text" id="id_wortklase' . $i . '" name="wortklase' . $i . '" value="' . $descripcion_troceada[$i + 1] . '"></td>';
-                $titulillos .= '<td><input type="text" id="id_beisp' . $i . '" name="beisp' . $i . '" value="' . $descripcion_troceada[$i + 2] . '"></td>';
-                $titulillos .= '<td><input type="text" id="id_siehe' . $i . '" name="siehe' . $i . '" value="' . $descripcion_troceada[$i + 3] . '"></td>';
+                $titulillos .= '<td><input type="text" style="width:95%" id="id_mittel' . $i . '" name="mittel' . $i . '" value="' . $descripcion_troceada[$i] . '"></td>';
+                $titulillos .= '<td><input type="text" style="width:98%" id="id_wortklase' . $i . '" name="wortklase' . $i . '" value="' . $descripcion_troceada[$i + 1] . '"></td>';
+                $titulillos .= '<td><input type="text" style="width:98%" id="id_beisp' . $i . '" name="beisp' . $i . '" value="' . $descripcion_troceada[$i + 2] . '"></td>';
+                $titulillos .= '<td><input type="text" style="width:98%" id="id_siehe' . $i . '" name="siehe' . $i . '" value="' . $descripcion_troceada[$i + 3] . '"></td>';
                 $titulillos .= '</tr>';
 
 //                $titulillos .= '<tr class="cell">'; 
@@ -3390,41 +3390,41 @@ class mod_vocabulario_nuevo_tipologia_form extends moodleform {
                     $mform->addElement('html', '</br><a href="javascript:ocultar(\'tabla' . $i . '\')" id="mctabla' . $i . '">' . get_string("ejem", "vocabulario") . ' ' . $i . '</a>');
                     $mform->addElement('html', '<div id="ocultador_tabla' . $i . '">');
                 }
-                $mform->addElement('text', 'quien' . $i, get_string('quien', 'vocabulario'));
+                $mform->addElement('text', 'quien' . $i, get_string('quien', 'vocabulario'),'style="width:100%;"');
                 $mform->setDefault('quien' . $i, $descripcion_troceada[15 * ($i - 1) + 0]);
-                $mform->addElement('text', 'finalidad' . $i, get_string('finalidad', 'vocabulario'));
+                $mform->addElement('text', 'finalidad' . $i, get_string('finalidad', 'vocabulario'),'style="width:100%;"');
                 $mform->setDefault('finalidad' . $i, $descripcion_troceada[15 * ($i - 1) + 1]);
-                $mform->addElement('text', 'a_quien' . $i, get_string('a_quien', 'vocabulario'));
+                $mform->addElement('text', 'a_quien' . $i, get_string('a_quien', 'vocabulario'),'style="width:100%;"');
                 $mform->setDefault('a_quien' . $i, $descripcion_troceada[15 * ($i - 1) + 2]);
-                $mform->addElement('text', 'medio' . $i, get_string('medio', 'vocabulario'));
+                $mform->addElement('text', 'medio' . $i, get_string('medio', 'vocabulario'),'style="width:100%;"');
                 $mform->setDefault('medio' . $i, $descripcion_troceada[15 * ($i - 1) + 3]);
-                $mform->addElement('text', 'donde' . $i, get_string('donde', 'vocabulario'));
+                $mform->addElement('text', 'donde' . $i, get_string('donde', 'vocabulario'),'style="width:100%;"');
                 $mform->setDefault('donde' . $i, $descripcion_troceada[15 * ($i - 1) + 4]);
-                $mform->addElement('text', 'cuando' . $i, get_string('cuando', 'vocabulario'));
+                $mform->addElement('text', 'cuando' . $i, get_string('cuando', 'vocabulario'),'style="width:100%;"');
                 $mform->setDefault('cuando' . $i, $descripcion_troceada[15 * ($i - 1) + 5]);
-                $mform->addElement('text', 'motivo' . $i, get_string('motivo', 'vocabulario'));
+                $mform->addElement('text', 'motivo' . $i, get_string('motivo', 'vocabulario'),'style="width:100%;"');
                 $mform->setDefault('motivo' . $i, $descripcion_troceada[15 * ($i - 1) + 6]);
-                $mform->addElement('text', 'funcion' . $i, get_string('funcion', 'vocabulario'));
+                $mform->addElement('text', 'funcion' . $i, get_string('funcion', 'vocabulario'),'style="width:100%;"');
                 $mform->setDefault('funcion' . $i, $descripcion_troceada[15 * ($i - 1) + 7]);
-                $mform->addElement('text', 'sobre_que' . $i, get_string('sobre_que', 'vocabulario'));
+                $mform->addElement('text', 'sobre_que' . $i, get_string('sobre_que', 'vocabulario'),'style="width:100%;"');
                 $mform->setDefault('sobre_que' . $i, $descripcion_troceada[15 * ($i - 1) + 8]);
-                $mform->addElement('text', 'que' . $i, get_string('que', 'vocabulario'));
+                $mform->addElement('text', 'que' . $i, get_string('que', 'vocabulario'),'style="width:100%;"');
                 $mform->setDefault('que' . $i, $descripcion_troceada[15 * ($i - 1) + 9]);
-                $mform->addElement('text', 'orden' . $i, get_string('orden', 'vocabulario'));
+                $mform->addElement('text', 'orden' . $i, get_string('orden', 'vocabulario'),'style="width:100%;"');
                 $mform->setDefault('orden' . $i, $descripcion_troceada[15 * ($i - 1) + 10]);
-                $mform->addElement('text', 'medios_nonverbales' . $i, get_string('medios_nonverbales', 'vocabulario'));
+                $mform->addElement('text', 'medios_nonverbales' . $i, get_string('medios_nonverbales', 'vocabulario'),'style="width:100%;"');
                 $mform->setDefault('medios_nonverbales' . $i, $descripcion_troceada[15 * ($i - 1) + 11]);
-                $mform->addElement('text', 'que_palabras' . $i, get_string('que_palabras', 'vocabulario'));
+                $mform->addElement('text', 'que_palabras' . $i, get_string('que_palabras', 'vocabulario'),'style="width:100%;"');
                 $mform->setDefault('que_palabras' . $i, $descripcion_troceada[15 * ($i - 1) + 12]);
-                $mform->addElement('text', 'que_frases' . $i, get_string('que_frases', 'vocabulario'));
+                $mform->addElement('text', 'que_frases' . $i, get_string('que_frases', 'vocabulario'),'style="width:100%;"');
                 $mform->setDefault('que_frases' . $i, $descripcion_troceada[15 * ($i - 1) + 13]);
-                $mform->addElement('text', 'que_tono' . $i, get_string('que_tono', 'vocabulario'));
+                $mform->addElement('text', 'que_tono' . $i, get_string('que_tono', 'vocabulario'),'style="width:100%;"');
                 $mform->setDefault('que_tono' . $i, $descripcion_troceada[15 * ($i - 1) + 14]);
                 $mform->addElement('html', '</div>');
             }
 
             //solucion de enlazar todo con todo
-            $mform->addElement('textarea', 'miraren', get_string('miraren', 'vocabulario'), 'rows="5" cols="30"');
+            $mform->addElement('textarea', 'miraren', get_string('miraren', 'vocabulario'), 'rows="5" cols="60"');
             $mform->setDefault('miraren', $descripcion_troceada[count($descripcion_troceada) - 1]);
         }
         //botones
@@ -3743,15 +3743,15 @@ class mod_vocabulario_buscar_intenciones_form extends moodleform {
             $misintenciones=$intencion->recuperar_middles($USER->id,$middle);
              //tabla
             $mform->addElement('html', '<p>');
-            $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter">');
+            $mform->addElement('html', '<table border class="flexible generaltable generalbox boxaligncenter">');
 
             //titulillos de la tabla
             $titulillos = '<tr class="head">';
-            $titulillos .='<th>' . get_string('mittel', 'vocabulario') . '</th>';
-            $titulillos .='<th>' . get_string('wortklase', 'vocabulario') . '</th>';
-            $titulillos .='<th>' . get_string('beisp', 'vocabulario') . '</th>';
-            $titulillos .='<th>' . get_string('siehe', 'vocabulario') . '</th>';
-            $titulillos .='<th>' . get_string('intencioncomunicativa', 'vocabulario') . '</th>';
+            $titulillos .='<th style="width:10%" >' . get_string('mittel', 'vocabulario') . '</th>';
+            $titulillos .='<th style="width:30%" >' . get_string('wortklase', 'vocabulario') . '</th>';
+            $titulillos .='<th style="witdh:40%" >' . get_string('beisp', 'vocabulario') . '</th>';
+            $titulillos .='<th style="width:10%" >' . get_string('siehe', 'vocabulario') . '</th>';
+            $titulillos .='<th style="width:20%" >' . get_string('intencioncomunicativa', 'vocabulario') . '</th>';
             $titulillos .= '</tr>';
             $mform->addElement('html', $titulillos);
           
@@ -3768,6 +3768,7 @@ class mod_vocabulario_buscar_intenciones_form extends moodleform {
             $i = 1;
             $intencion1=new Vocabulario_intenciones();
             $intencion1->leer($misintenciones[$k]->intencionesid,$USER->id);
+            $superpadre = obtener_superpadre($intencion1->get('id'));
           
             for ($i = 1; $i < $totalfilas * $avance || $pintar; $i = $i + $avance) {
                 $titulillos = '<tr class="cell">';
@@ -3775,7 +3776,8 @@ class mod_vocabulario_buscar_intenciones_form extends moodleform {
                 $titulillos .= '<td class="mimittel">'. $descripcion_troceada[$i + 1] .'</td>';
                 $titulillos .= '<td class="mimittel">' . $descripcion_troceada[$i + 2] . '</td>';
                 $titulillos .= '<td class="mimittel">'. $descripcion_troceada[$i + 3] . '</td>';
-                $titulillos .= '<td class="mimittelintencion">' . $intencion1->get('intencion') . '</td>';
+                $poner_superpadre = ($superpadre!=-1) ? "<br/> (".$superpadre.")" : "";
+                $titulillos .= '<td class="mimittelintencion">' . $intencion1->get('intencion') . $poner_superpadre . '</td>';
               
                 $titulillos .= '</tr>';
 

@@ -73,6 +73,7 @@ function vocabulario_add_instance($vocabulario) {
 function get_sufijo_lenguaje_tabla() {
 
     $lenguaje = current_language();
+    //$lenguaje = "de_utf8";
     if ($lenguaje == "es_utf8") {
         $sufijotabla = "es";
     } else if ($lenguaje == "en_utf8") {

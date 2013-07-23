@@ -1621,18 +1621,21 @@ class Vocabulario_tipologias {
 
     function obtener_todos($usuarioid) {
         $sufijotabla = get_sufijo_lenguaje_tabla();
-        $tipo = get_records_select('vocabulario_tipologias_'.$sufijotabla, 'usuarioid=' . $usuarioid . ' or usuarioid=0');
+        $tipo = get_records_select('vocabulario_tipologias_'.$sufijotabla, 'usuarioid=' . $usuarioid . ' or usuarioid=0 ORDER BY tipo asc');
+
         $ic = array();
         $orden = $this->ordena($tipo);
         foreach ($orden as $i) {
             $ic[$tipo[$i]->id] = $tipo[$i]->tipo;
         }
+        
+
         return $ic;
     }
 
     function obtener_todos_ids($usuarioid) {
         $sufijotabla = get_sufijo_lenguaje_tabla();
-        $tipo = get_records_select('vocabulario_tipologias_'.$sufijotabla, 'usuarioid=' . $usuarioid . ' or usuarioid=0');
+        $tipo = get_records_select('vocabulario_tipologias_'.$sufijotabla, 'usuarioid=' . $usuarioid . ' or usuarioid=0 ORDER BY tipo asc');
         $ic = array();
         $orden = $this->ordena($tipo);
         foreach ($orden as $i) {
