@@ -91,7 +91,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
         //Cojo el ejercicio  de la bd a partir de su id (id_ejercicio)
 
-        echo "mostrando formulario multiplechoice";
+        //echo "mostrando formulario multiplechoice";
         $ejercicios_bd = new Ejercicios_general();
         $ejercicios_leido = $ejercicios_bd->obtener_uno($id_ejercicio);
 
@@ -128,8 +128,8 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
             //Añado el texto de origen
             $el_texto_origen = new Ejercicios_textos();
             $el_texto_origen->obtener_uno_id_ejercicio($id_ejercicio);
-             echo "aki entra";
-             echo "por lo que estoy en texto texto";
+             //echo "aki entra";
+             //echo "por lo que estoy en texto texto";
             if ($buscar == 1 || $modificable == false) { //Para que no pueda editarlo
                 $divtexto = '<div class="desctexto" name="texto" id="texto"><div class="margenes">' . nl2br((stripslashes($el_texto_origen->get('texto')))) . '</div></div>';
             } else {

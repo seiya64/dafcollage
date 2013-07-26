@@ -101,10 +101,10 @@ $string['Tipo14']="ENTRENADOR DE VOCABULARIO";
 //DESCRIPCION DE EJERCICIOS
 $string['desc_Tipo0']="Seleccionar";
 $string['desc_Tipo1']="--";
-$string['desc_Tipo2']="ELECCIÓN MÚLTIPLE con sus diversas variantes";
-$string['desc_Tipo3']="ASOCIACIÓN SIMPLE";
-$string['desc_Tipo4']="ASOCIACIÓN COMPLEJA";
-$string['desc_Tipo5']="TEXTO HUECO";
+$string['desc_Tipo2']="Seleccionar entre varias opciones una solución correcta relacionada con preguntas acerca de un texto, vídeo, o audio. Por ejemplo para practicar la comprensión lectora, comprensión oral, o realizar actividades de gramática y/ o de léxico, etc.";
+$string['desc_Tipo3']="Coordinar un determinado número de archivos de texto, vídeo, audio o imagen con el mismo número de archivos de texto, vídeo, audio o imagen. Con este ejercicio se puede practicar la comprensión lectora, comprensión oral o elaborar reglas gramaticales, etc.";
+$string['desc_Tipo4']="Seleccionar archivos de texto, vídeo, audio o imagen para coordinarlos con una cantidad inferior o superior de archivos de texto, vídeo, audio o imagen. Al no coincidir el número de archivos de origen y solución es más difícil que los ejercicios de ASOCIACIÓN SIMPLE.";
+$string['desc_Tipo5']="Rellenar los huecos de un texto para practicar la gramática o el léxico, la ortografía, elaborar una regla gramatical, etc. El hueco puede tener entre una o varias letras, palabras, etc.";
 $string['desc_Tipo6']="IDENTIFICAR ELEMENTOS";
 $string['desc_Tipo7']="RESPUESTA ABIERTA";
 $string['desc_Tipo8']="CRUCIGRAMA";

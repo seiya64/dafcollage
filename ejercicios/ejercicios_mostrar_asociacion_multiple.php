@@ -67,7 +67,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
 
         global $CFG, $COURSE, $USER;
         $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
-        echo "<br/>Directorio de librerias: " . $CFG->libdir . "<br/>";
+        //echo "<br/>Directorio de librerias: " . $CFG->libdir . "<br/>";
 
 
         //Los iconos están sacados del tema de gnome que viene con ubuntu 11.04
@@ -102,7 +102,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
         }
 
         //Añado el título
-        $titulo = '<h1>' . $nombre . '</h1>';
+        $titulo = '<h1 class="instrucciones" >' . $nombre . '</h1>';
         $mform->addElement('html', $titulo);
 
         //Añado la descripción
@@ -124,19 +124,19 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
         $mform->addElement('html', $tabla_imagenes);
 
 
-        echo "tipo origen.$tipo_origen";
+        //echo "tipo origen.$tipo_origen";
         //compruebo de que tipo es el origen
         switch ($tipo_origen) {
 
             case 1: //Es de tipo texto la pregunta
 
-                echo "tipo respuesta.$tipo_respuesta";
+                //echo "tipo respuesta.$tipo_respuesta";
                 switch ($tipo_respuesta) {
                     case 1: //Es de tipo texto la respuesta
                         //Obtengo las preguntas
                         $mis_preguntas = new Ejercicios_texto_texto_preg();
                         $preguntas = $mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
-                        echo "<br/>Saca las preguntas: buscar=".$buscar." modificable=".($modificable==false);
+                        //echo "<br/>Saca las preguntas: buscar=".$buscar." modificable=".($modificable==false);
 
                         if ($buscar == 1 || $modificable == false) {
                             //Escribir log de registro
@@ -339,7 +339,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                             
                             
                         } else {
-                            echo "akiiiiiiii";
+                            //echo "akiiiiiiii";
                             //$tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
                             
 
@@ -484,7 +484,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                         break;
                     case 2: //Es de tipo audio la respuesta
 
-                        echo "tipo respuesta es audio";
+                        //echo "tipo respuesta es audio";
 
                         $mform->addElement('html', '<script src="./js/ajaxupload.js" type="text/javascript"></script>');
 
@@ -676,11 +676,11 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                             //Insertar el html                            
                             $mform->addElement('html', $tabla_imagenes);
                         } else {
-                            echo "akiiiiiiii";
+                            //echo "akiiiiiiii";
                             //$tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
 
                             for ($i = 1; $i <= sizeof($preguntas); $i++) {
-                                echo "iteracion" . $i . "aaaa" . sizeof($preguntas);
+                                //echo "iteracion" . $i . "aaaa" . sizeof($preguntas);
                                 /*$tabla_imagenes.="<tr>";
                                 $tabla_imagenes.='<td id="texto' . $i . '">';
                                 $tabla_imagenes.='<textarea id="pregunta' . $i . '" name="pregunta' . $i . '" style="height: 197px; width: 396px;">' . $preguntas[$i - 1]->get('pregunta') . '</textarea>';
@@ -778,7 +778,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                             //Si soy el profesor creadors
                             $tabla_imagenes = '<input type="submit" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
                             $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonTextoAudio" name="botonTextoAudio" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonMasPreguntas_TextoAudio_AM('.$id_ejercicio.')">';
-                            echo "finnnnnnnnn";
+                            //echo "finnnnnnnnn";
                             $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                         } else {
                             if ($buscar == 1) { //Si estoy buscand
@@ -840,13 +840,13 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
 
                         //Obtengo las preguntas que son texto
                         $mis_preguntas = new Ejercicios_texto_texto_preg();
-                        echo "Ejercicio Id: $id_ejercicio";
+                        //echo "Ejercicio Id: $id_ejercicio";
                         $preguntas = $mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
 
                         if ($buscar == 1 || $modificable == false) {
                             $fichero = @fopen("log_AM_alumno.txt","w");
                             $log="";
-                            echo "buscar vale uno y no es modificable";
+                            //echo "buscar vale uno y no es modificable";
 
                             $tabla_imagenes.='<center><table id="tablapreg" name="tablapreg">';
                             $tabla_imagenes.="<tr>";
@@ -858,7 +858,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                             
                             //Inserto las preguntas con clase "item" es decir dragables(mirar javascript.js)
                             for ($i = 1; $i <= sizeof($preguntas); $i++) {
-                                echo "obtengo la pregunta";
+                                //echo "obtengo la pregunta";
                                 
                                 //Obtengo la respuestas
                                 $id_pregunta = $preguntas[$i - 1]->get('id');
@@ -1029,12 +1029,12 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                             $mform->addElement('html', $tabla_imagenes);
                             
                         } else {
-                            echo "akiiiiiiii podemos cambiar";
+                            //echo "akiiiiiiii podemos cambiar";
 
                             //$tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
-                            echo sizeof($preguntas);
+                            //echo sizeof($preguntas);
                             for ($i = 1; $i <= sizeof($preguntas); $i++) {
-                                echo "iteracion" . $i . "aaaa" . count($preguntas);
+                                //echo "iteracion" . $i . "aaaa" . count($preguntas);
                                 /*$tabla_imagenes.="<tr>";
                                 $tabla_imagenes.='<td id="texto' . $i . '">';
                                 $tabla_imagenes.='<textarea id="pregunta' . $i . '" name="pregunta' . $i . '" style="height: 197px; width: 396px;">' . $preguntas[$i - 1]->get('pregunta') . '</textarea>';
@@ -1057,7 +1057,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                                 $id_pregunta = $preguntas[$i - 1]->get('id');
 
                                 $mis_respuestas = new Ejercicios_videos_asociados();
-                                echo "Mi pregunta:" . $id_pregunta;
+                                //echo "Mi pregunta:" . $id_pregunta;
                                 $respuestas = $mis_respuestas->obtener_todas_respuestas_pregunta($id_pregunta);
                                 
                                 $divpregunta.='</br><div id="respuestas' . $i . '" class=respuesta>';
@@ -1125,12 +1125,12 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
 
                         //botones
                         //$mform->addElement('html', $tabla_imagenes);
-                        echo "botones";
+                        //echo "botones";
                         if ($buscar != 1 && $modificable == true) {
                             //Si soy el profesor creadors
                             $tabla_imagenes = '<input type="submit" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
                             $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonTextoVideo" name="botonTextoVideo" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonMasPreguntas_TextoVideo_AM(' . $id_ejercicio . ')">';
-                            echo "finnnnnnnnn";
+                            //echo "finnnnnnnnn";
                             $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                         } else {
                             if ($buscar == 1) { //Si estoy buscand
@@ -1167,10 +1167,10 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                                 $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                             }
 
-                            echo "dentro del bucle infernal";
+                            //echo "dentro del bucle infernal";
                         }
 
-                        echo "no muero";
+                        //echo "no muero";
                         $tabla_imagenes .='</td>';
                         $tabla_imagenes .='<td  width="10%">';
                         //añado la parte de vocabulario para la conexión
@@ -1192,7 +1192,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
 
                         $mform->addElement('html', '<script src="./js/ajaxupload.js" type="text/javascript"></script>');
 
-                        echo "SSSSSSSSSSSSSS";
+                        //echo "SSSSSSSSSSSSSS";
                         //Obtengo las preguntas que son texto
                         $mis_preguntas = new Ejercicios_texto_texto_preg();
                         $preguntas = $mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
@@ -1360,11 +1360,11 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                             //Insertar el html                            
                             $mform->addElement('html', $tabla_imagenes);
                         } else {
-                            echo "akiiiiiiii";
+                            //echo "akiiiiiiii";
                             //$tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
 
                             for ($i = 1; $i <= sizeof($preguntas); $i++) {
-                                echo "iteracion" . $i . "aaaa" . sizeof($preguntas);
+                                //echo "iteracion" . $i . "aaaa" . sizeof($preguntas);
                                 /*$tabla_imagenes.="<tr>";
                                 $tabla_imagenes.='<td id="texto' . $i . '">';
                                 $tabla_imagenes.='<textarea id="pregunta' . $i . '" name="pregunta' . $i . '" style="height: 197px; width: 396px;">' . $preguntas[$i - 1]->get('pregunta') . '</textarea>';
@@ -1529,7 +1529,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                 break;
             case 2: //Es de tipo audio la pregunta
 
-                echo "tipo pregunta es audio";
+                //echo "tipo pregunta es audio";
 
                 $mform->addElement('html', '<script src="./js/ajaxupload.js" type="text/javascript"></script>');
 
@@ -1554,7 +1554,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                     
                     //Inserto las preguntas con clase "item" es decir dragables(mirar javascript.js)
                     for ($i = 1; $i <= sizeof($preguntas); $i++) {
-                        echo "AQUI NO DEBERIA ENTRARRRRRRRR";
+                        //echo "AQUI NO DEBERIA ENTRARRRRRRRR";
                         //Obtengo la respuestas
                         $id_pregunta = $preguntas[$i - 1]->get('id');
                         $mis_respuestas = new Ejercicios_texto_texto_resp();
@@ -1710,11 +1710,11 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                     //Insertar el html                            
                     $mform->addElement('html', $tabla_imagenes);
                 } else {
-                    echo "akiiiiiiii   3333";
+                    //echo "akiiiiiiii   3333";
                     //$tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
 
                     for ($i = 1; $i <= sizeof($preguntas); $i++) {
-                        echo "iteracion" . $i . "aaaa" . sizeof($preguntas);
+                        //echo "iteracion" . $i . "aaaa" . sizeof($preguntas);
                         /*$tabla_imagenes.="<tr>";
                         $tabla_imagenes.='<td id="texto' . $i . '">';
                         $tabla_imagenes.='<textarea id="pregunta' . $i . '" name="pregunta' . $i . '" style="height: 197px; width: 396px;">' . $preguntas[$i - 1]->get('pregunta') . '</textarea>';
@@ -1816,7 +1816,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                     //Si soy el profesor creadors
                     $tabla_imagenes = '<input type="submit" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
                     $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonTextoAudio" name="botonTextoAudio" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonMasPreguntas_AudioTexto_AM(' . $id_ejercicio . ')">';
-                    echo "finnnnnnnnn";
+                    //echo "finnnnnnnnn";
                     $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                 } else {
                     if ($buscar == 1) { //Si estoy buscand
@@ -1880,14 +1880,14 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
 
                 //Obtengo las preguntas que son texto
                 $mis_preguntas = new Ejercicios_texto_texto_preg();
-                echo "Ejercicio Id: $id_ejercicio";
+                //echo "Ejercicio Id: $id_ejercicio";
                 $preguntas = $mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
 
                 if ($buscar == 1 || $modificable == false) {
                     //Escribir log de registro
                     $fichero = @fopen("log_AM_alumno.txt","w");
                     $log="";
-                    echo "buscar vale uno y no es modificable";
+                    //echo "buscar vale uno y no es modificable";
 
                     $tabla_imagenes.='<center><table id="tablapreg" name="tablapreg">';
                     $tabla_imagenes.="<tr>";
@@ -1904,7 +1904,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                         $mis_respuestas = new Ejercicios_texto_texto_resp();
                         $respuestas[] = $mis_respuestas->obtener_todas_respuestas_pregunta($id_pregunta);
                         $total_respuestas += sizeof($respuestas[$i-1]);                        
-                        echo "obtengo la pregunta";
+                        //echo "obtengo la pregunta";
                         
                         //-------
                         $log.="Id de ejercicio: " . $id_ejercicio . "\n";
@@ -2067,12 +2067,12 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                     
                     
                 } else {
-                    echo "akiiiiiiii podemos cambiar";
+                    //echo "akiiiiiiii podemos cambiar";
                     
                     //$tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
                     //echo sizeof($preguntas);
                     for ($i = 1; $i <= sizeof($preguntas); $i++) {
-                        echo "iteracion" . $i . "aaaa" . count($preguntas);
+                        //echo "iteracion" . $i . "aaaa" . count($preguntas);
                         /*$tabla_imagenes.="<tr>";
                         $tabla_imagenes.='<td id="texto' . $i . '">';
                         $tabla_imagenes.='<textarea id="pregunta' . $i . '" name="pregunta' . $i . '" style="height: 197px; width: 396px;">' . $preguntas[$i - 1]->get('pregunta') . '</textarea>';
@@ -2113,7 +2113,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                         
 
                         $mis_respuestas = new Ejercicios_texto_texto_resp();
-                        echo "Mi pregunta:".$id_pregunta;
+                        //echo "Mi pregunta:".$id_pregunta;
                         $respuestas = $mis_respuestas->obtener_todas_respuestas_pregunta($id_pregunta);
                         
                         $divpregunta.='</br><div id="respuestas' . $i . '" class=respuesta>';
@@ -2174,12 +2174,12 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                 //$mform->addElement('html', $tabla_imagenes);
                 
                 
-                echo "botones";
+                //echo "botones";
                 if ($buscar != 1 && $modificable == true) {
                     //Si soy el profesor creadors
                     $tabla_imagenes = '<input type="submit" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
                     $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonTextoVideo" name="botonTextoVideo" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonMasPreguntas_VideoTexto_AM(' . $id_ejercicio . ')">';
-                    echo "finnnnnnnnn";
+                    //echo "finnnnnnnnn";
                     $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                 } else {
                     if ($buscar == 1) { //Si estoy buscand
@@ -2216,10 +2216,10 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                         $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                     }
                     
-                    echo "dentro del bucle infernal";
+                    //echo "dentro del bucle infernal";
                 }
 
-                echo "no muero";
+                //echo "no muero";
                 $tabla_imagenes .='</td>';
                 $tabla_imagenes .='<td  width="10%">';
                 //añado la parte de vocabulario para la conexión
@@ -2239,7 +2239,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
             case 4: //Es una imagen la pregunta
                       $mform->addElement('html', '<script src="./js/ajaxupload.js" type="text/javascript"></script>');
 
-                        echo "SSSSSSSSSSSSSS";
+                        //echo "SSSSSSSSSSSSSS";
                         //Obtengo las preguntas que son texto
                         $mis_preguntas = new Ejercicios_texto_texto_preg();
                         $preguntas = $mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
@@ -2405,11 +2405,11 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                             $mform->addElement('html', $tabla_imagenes);
                             
                         } else {
-                            echo "akiiiiiiii";
+                            //echo "akiiiiiiii";
                             //$tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
 
                             for ($i = 1; $i <= sizeof($preguntas); $i++) {
-                                echo "iteracion" . $i . "aaaa" . sizeof($preguntas);
+                                //echo "iteracion" . $i . "aaaa" . sizeof($preguntas);
                                 /*$tabla_imagenes.="<tr>";
                                 $tabla_imagenes.='<td id="texto' . $i . '">';
                                 $tabla_imagenes.='<textarea id="pregunta' . $i . '" name="pregunta' . $i . '" style="height: 197px; width: 396px;">' . $preguntas[$i - 1]->get('pregunta') . '</textarea>';
@@ -2440,7 +2440,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                                 $divpregunta.='</table> ';
                                 
                                 $id_pregunta = $preguntas[$i - 1]->get('id');
-                                echo 'id pregunta vale: ' . $id_pregunta;
+                                //echo 'id pregunta vale: ' . $id_pregunta;
                                 $mis_respuestas = new Ejercicios_texto_texto_resp();
                                 $respuestas = $mis_respuestas->obtener_todas_respuestas_pregunta($id_pregunta);
                                 // echo "tamaÃ±o".sizeof($respuestas);
@@ -2580,7 +2580,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                 break;
         }
         
-        echo "termino del todo";
+        //echo "termino del todo";
     }
 
 }

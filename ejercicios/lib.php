@@ -286,32 +286,32 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
                     break;
                 case 1: //es de tipo asociacion simple
                     
-                    echo "Asociación simple";
+                    ////echo "Asociación simple";
                 
                    $mform= new mod_ejercicios_creando_ejercicio_asociacion_simple($id,$p,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
                     
                    $mform->pintarformularioasociacionsimple($id,$p,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
-                    echo "akiii";
+                    //echo "akiii";
                    
                     break;
                case 2: //es de tipo asociacion multiple
 
-                    echo "Asociación multiple";
+                    //echo "Asociación multiple";
                     $mform = new mod_ejercicios_creando_ejercicio_asociacion_multiple($id,$p,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
                     $mform->pintarformularioasociacionmultiple($id,$p,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
                     break;
                 case 4: //Identificar elementos
-                    echo "Identificar elementos";
+                    //echo "Identificar elementos";
                     $mform = new mod_ejercicios_creando_ejercicio_identificar_elementos($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
                     $mform->pintarformulario_identificarelementos($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
                     break;
                 case 3: //Texto Hueco
-                    echo "Texto Hueco";
+                    //echo "Texto Hueco";
                     $mform = new mod_ejercicios_creando_ejercicio_texto_hueco($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
                     $mform->pintarformulariotextohueco($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
                     break;
                 case 7: //Ordenar Elementos
-                    echo "Ordenar Elementos";
+                    //echo "Ordenar Elementos";
                     $mform = new mod_ejercicios_creando_ejercicio_ordenar_elementos($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
                     $mform->pintarformularioordenarelementos($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
                     break;
@@ -325,9 +325,9 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
 
       case 6:// Pulsado botón Buscar tanto por alumno como por profesor
 
-             echo "id del curso".$id;
-             echo "tipo de actividad".$cta;
-             echo "campo lexico".$ccl;
+             //echo "id del curso".$id;
+             //echo "tipo de actividad".$cta;
+             //echo "campo lexico".$ccl;
              
 
              $mform= new mod_ejercicios_mostrar_ejercicios_buscados($id);
@@ -336,45 +336,45 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
 
       case 8:// Mostrando ejercicios a profesores o a alumnos
             
-             echo "mostrando ejerciciossssss".$tipocreacion;
+             //echo "mostrando ejerciciossssss".$tipocreacion;
             switch($tipocreacion){
                     case 0: //Multichoice texto-texto a profesores o a alumnos
                      $mform= new mod_ejercicios_mostrar_ejercicio($id,$id_ejercicio,$tipo_origen);
                      $mform->mostrar_ejercicio($id,$id_ejercicio,$buscar,$tipo_origen);
-                        echo "mostrando ejercicio multichoice";
+                        //echo "mostrando ejercicio multichoice";
                     break;
                     case 1: // si es asociacion simple
 
-                        echo "mostrando ejercicio asociacion simple";
+                        //echo "mostrando ejercicio asociacion simple";
                        $mform= new mod_ejercicios_mostrar_ejercicio_asociacion_simple($id,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
                        $mform->mostrar_ejercicio_asociacion_simple($id,$id_ejercicio,$buscar,$tipo_origen,$trespuesta,$tipocreacion);
                     break;
                     case 2: // si es asociacion multiple 
-                        echo "mostrando ejercicio asociacion multiple";
+                        //echo "mostrando ejercicio asociacion multiple";
                         $mform= new mod_ejercicios_mostrar_ejercicio_asociacion_multiple($id,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
                         $mform->mostrar_ejercicio_asociacion_multiple($id,$id_ejercicio,$buscar,$tipo_origen,$trespuesta,$tipocreacion);
                         break;
                     case 3: //si es Texto Hueco
-                        echo "mostrando ejercicio texto hueco";
+                        //echo "mostrando ejercicio texto hueco";
                         $mform= new mod_ejercicios_mostrar_ejercicio_texto_hueco($id,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
                         $mform->mostrar_ejercicio_texto_hueco($id,$id_ejercicio,$buscar,$tipo_origen,$trespuesta,$tipocreacion);
                         break;
                     case 4: // si es identificar elementos
-                        echo "mostrando ejercicio identificar elementos";
-                        echo "<br/>";
+                        //echo "mostrando ejercicio identificar elementos";
+                        //echo "<br/>";
                         $mform = new mod_ejercicios_mostrar_identificar_elementos($id, $id_ejercicio, $tipo_origen);
-                        echo "CREADO IE";
+                        //echo "CREADO IE";
                         $mform->mostrar_ejercicio_identificar_elementos($id, $id_ejercicio, $buscar, $tipo_origen);
                         
                         break;
                     case 7: //si es ordenar elementos
-                        echo "mostrando ejercicio texto hueco";
+                        //echo "mostrando ejercicio texto hueco";
                         $mform= new mod_ejercicios_mostrar_ejercicio_ordenar_elementos($id,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
                         $mform->mostrar_ejercicio_ordenar_elementos($id,$id_ejercicio,$buscar,$tipo_origen,$trespuesta,$tipocreacion);
                         break;
                     case 8: //si es IE mas RC
-                        $mform = new mod_ejercicios_mostrar_ejercicio_ierc($id, $id_ejercicio, $tipo_origen);
-                        $mform->mostrar_ejercicio_ierc($id, $id_ejercicio, $buscar, $tipo_origen);
+                        $mform = new mod_ejercicios_mostrar_ejercicio_ierc($id, $id_ejercicio, $tipo_origen,$trespuesta,$tipocreacion);
+                        $mform->mostrar_ejercicio_ierc($id, $id_ejercicio, $buscar, $tipo_origen,$trespuesta,$tipocreacion);
                         break;
             }
             break;

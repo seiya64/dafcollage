@@ -76,10 +76,10 @@ $mform->pintarformularioasociacionsimple($id_curso, $p, $id_ejercicio, $tipo_ori
 
 switch ($tipo_origen) {
     case 1://Es un texto
-        echo "Texto -";
+        //echo "Texto -";
         switch ($tipo_respuesta) {
             case 1: //Respuesta texto
-                //echo "inserto en la bd";
+                ////echo "inserto en la bd";
                 //Obtengo el numero de preguntas
                 $numero_preguntas = optional_param('numeropreguntas', PARAM_INT);
 
@@ -104,11 +104,11 @@ switch ($tipo_origen) {
                     $mi_respuesta->insertar();
 
 
-                    echo "fin insercción";
+                    //echo "fin insercción";
                 }
                 break;
             case 2://Respuesta es Audio
-                echo "es un audio";
+                //echo "es un audio";
 
                 //Guardando las imagenes y los textos
                 //SUBO LOS AUDIOS A MOODLE
@@ -125,7 +125,7 @@ switch ($tipo_origen) {
                 // echo "m vale".$m;
                 //Obtengo el numero de preguntas
                 $numero_preguntas = optional_param('numeropreguntas', PARAM_INT);
-                echo "numero preguntas" . $numero_preguntas;
+                //echo "numero preguntas" . $numero_preguntas;
                 for ($i = 0; $i < $numero_preguntas; $i++) {
                     //Obtengo la pregunta
 
@@ -142,14 +142,14 @@ switch ($tipo_origen) {
 
                     $mi_respuesta->insertar();
                 }
-                echo "fin insercción";
+                //echo "fin insercción";
                 break;
             case 3://Respuesta es Video
-                echo "es un videooooooooo";
+                //echo "es un videooooooooo";
                 //Guardando las direcciones de los videos y el texto correspondiente
                 //Obtengo el numero de preguntas
                 $numero_preguntas = optional_param('numeropreguntas', PARAM_INT);
-                echo "numero preguntas" . $numero_preguntas;
+                //echo "numero preguntas" . $numero_preguntas;
                 for ($i = 0; $i < $numero_preguntas; $i++) {
                     //Obtengo la pregunta
 
@@ -177,11 +177,11 @@ switch ($tipo_origen) {
                     $mi_respuesta = new Ejercicios_videos_asociados(NULL, $id_ejercicio, $id_preg, $idVideo);
                     $mi_respuesta->insertar();
                 }
-                echo "fin insercción";
+                //echo "fin insercción";
                 break;
             case 4:// Respuesta es Foto
                 //Guardando la foto y el texto
-                echo "Foto";
+                //echo "Foto";
 
                 //SUBO LAS IMAGENES A MOODLE
                 $m = 1;
@@ -197,7 +197,7 @@ switch ($tipo_origen) {
                 // echo "m vale".$m;
                 //Obtengo el numero de preguntas
                 $numero_preguntas = optional_param('numeropreguntas', PARAM_INT);
-                echo "numero preguntas" . $numero_preguntas;
+                //echo "numero preguntas" . $numero_preguntas;
                 for ($i = 0; $i < $numero_preguntas; $i++) {
                     //Obtengo la pregunta
 
@@ -214,7 +214,7 @@ switch ($tipo_origen) {
 
                     $mi_respuesta->insertar();
                 }
-                echo "fin insercción";
+                //echo "fin insercción";
 
                 break;
         }
@@ -223,7 +223,7 @@ switch ($tipo_origen) {
     case 2://Es una audio la pregunta
 
 
-        echo "la pregunta es un audio";
+        //echo "la pregunta es un audio";
         //Guardando las imagenes y los textos
         //SUBO LOS AUDIOS A MOODLE
         $m = 1;
@@ -239,7 +239,7 @@ switch ($tipo_origen) {
         // echo "m vale".$m;
         //Obtengo el numero de preguntas
         $numero_preguntas = optional_param('numeropreguntas', PARAM_INT);
-        echo "numero preguntas" . $numero_preguntas;
+        //echo "numero preguntas" . $numero_preguntas;
         for ($i = 0; $i < $numero_preguntas; $i++) {
             //Obtengo la pregunta
 
@@ -256,17 +256,17 @@ switch ($tipo_origen) {
 
             $mi_respuesta->insertar();
         }
-        echo "fin insercción";
+        //echo "fin insercción";
 
-        echo "es una audio";
+        //echo "es una audio";
         break;
     case 3://Es un video
-        echo "es un video la pregunta";
+        //echo "es un video la pregunta";
 
         //Guardando las direcciones de los videos y el texto correspondiente
         //Obtengo el numero de preguntas
         $numero_preguntas = optional_param('numeropreguntas', PARAM_INT);
-        echo "numero preguntas" . $numero_preguntas;
+        //echo "numero preguntas" . $numero_preguntas;
         for ($i = 0; $i < $numero_preguntas; $i++) {
             //Obtengo la pregunta
 
@@ -291,13 +291,13 @@ switch ($tipo_origen) {
             $mi_respuesta = new Ejercicios_videos_asociados(NULL, $id_ejercicio, $id_preg, $idVideo);
             $mi_respuesta->insertar();
         }
-        echo "fin insercción";
+        //echo "fin insercción";
 
         break;
     case 4://Es una imagen
-        echo "es una imagen la pregunta";
+        //echo "es una imagen la pregunta";
          $numero_preguntas = optional_param('numeropreguntas', PARAM_INT);
-        echo "numero preguntas" . $numero_preguntas;
+        //echo "numero preguntas" . $numero_preguntas;
         
         //SUBO LAS FOTOS A MOODLE
         $m = 1;
@@ -329,7 +329,7 @@ switch ($tipo_origen) {
 
             $mi_respuesta->insertar();
         }
-        echo "fin insercciÃ³n";
+        //echo "fin insercciÃ³n";
         
         break;
 }

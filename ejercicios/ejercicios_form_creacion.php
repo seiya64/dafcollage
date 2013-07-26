@@ -407,7 +407,8 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
             $cright[]="Reconocimiento-NoComercial-CompartirIgual (CC-BY-NC-SA)";
             $cright[]="Reconocimiento-NoComercial-NoDerivadas (CC-BY-NC-ND)";
             
-            $mform->addElement('select', 'copyright', get_string("copyright", "ejercicios"), $cright,"onChange='javascript:cargaDescripcion(1)'");
+            $mform->addElement('select', 'copyright', get_string("copyright", "ejercicios"), $cright,"onChange='javascript:cargaDescripcion(1);'");
+            $mform->addRule('copyright', "Copyright Necesario", 'required', null, 'client');
             
             if($tipocreacion!=5 && $tipocreacion!=9) {
                 $cright=array();
@@ -419,7 +420,8 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
                 $cright[]="Reconocimiento-NoComercial-CompartirIgual (CC-BY-NC-SA)";
                 $cright[]="Reconocimiento-NoComercial-NoDerivadas (CC-BY-NC-ND)";
 
-                $mform->addElement('select', 'copyrightresp', get_string("copyrightresp", "ejercicios"), $cright,"onChange='javascript:cargaDescripcion(2)'");
+                $mform->addElement('select', 'copyrightresp', get_string("copyrightresp", "ejercicios"), $cright,"onChange='javascript:cargaDescripcion(2);'");
+                $mform->addRule('copyrightresp', "Copyright Necesario", 'required', null, 'client');
             }
 
             
@@ -472,7 +474,7 @@ class mod_ejercicios_creando_ejercicio_texto extends moodleform_mod {
         $mform->addElement('html',$titulo);
         
         $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
-         $titulo = '<h2>'.get_string('IERC_descripcion','ejercicios') . ' <br/><i><u>'.$ejercicioGeneral->get('descripcion').'</u></i></h2>';
+         $titulo = '<h2>'. nl2br(get_string('IERC_descripcion','ejercicios')) . ' <br/><i><u>'.nl2br($ejercicioGeneral->get('descripcion')).'</u></i></h2>';
          $mform->addElement('html',$titulo);
 
          $oculto='<input type="hidden" name="tipocreacion" id="tipocreacion" value="'.$tipocreacion.'"/>';
@@ -595,7 +597,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
         $mform->addElement('html',$titulo);
         
         $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
-         $titulo = '<h2>'.get_string('IERC_descripcion','ejercicios') . ' <br/><i><u>'.$ejercicioGeneral->get('descripcion').'</u></i></h2>';
+         $titulo = '<h2>'. nl2br(get_string('IERC_descripcion','ejercicios')) . ' <br/><i><u>'.nl2br($ejercicioGeneral->get('descripcion')).'</u></i></h2>';
          $mform->addElement('html',$titulo);
 
          $oculto='<input type="hidden" name="tipocreacion" id="tipocreacion" value="'.$tipocreacion.'"/>';
@@ -607,7 +609,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
                 switch($tiporespuesta){
 
                     case 1: //El archivo respuesta es un texto
-                        echo "texto-texto";
+                        //echo "texto-texto";
                         //Para cada pregunta
                         for($i=0;$i<$p;$i++){
 
@@ -629,7 +631,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
 
                     break;
                     case 2: //El archivo respuesta es un audio
-                         echo "texto-audio";
+                         //echo "texto-audio";
                     
                             for($i=0;$i<$p;$i++){
 
@@ -673,14 +675,14 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
                     break;
                     case 4: //El archivo respuesta es una imagen
 
-                            echo "texto-imagen";
+                            //echo "texto-imagen";
 
                             for($i=0;$i<$p;$i++){
 
                             $aux=$i+1;
                             $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
                              $mform->addElement('html',$titulo);
-                             echo "aki si llega";
+                             //echo "aki si llega";
                            //Archivo Asociacion
                             $mform->addElement('textarea', 'pregunta'.$aux, get_string('Asociacion_Texto', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
                             //Archivo Asociado
@@ -692,7 +694,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
                            }
 
                            $mform->addElement('hidden','numeropreguntas',$p);
-                           echo "aki llega con angel";
+                           //echo "aki llega con angel";
                       
                         
                     break;
@@ -706,7 +708,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
                 switch($tiporespuesta){
 
                     case 1: //El archivo respuesta es un texto
-                        echo "audio-texto aaaa";
+                        //echo "audio-texto aaaa";
 
                           for($i=0;$i<$p;$i++){
 
@@ -838,7 +840,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
         $mform->addElement('html',$titulo);
         
         $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
-         $titulo = '<h2>'.get_string('IERC_descripcion','ejercicios') . ' <br/><i><u>'.$ejercicioGeneral->get('descripcion').'</u></i></h2>';
+         $titulo = '<h2>'. nl2br(get_string('IERC_descripcion','ejercicios')) . ' <br/><i><u>'.nl2br($ejercicioGeneral->get('descripcion')).'</u></i></h2>';
          $mform->addElement('html',$titulo);
 
          $oculto='<input type="hidden" name="tipocreacion" id="tipocreacion" value="'.$tipocreacion.'"/>';
@@ -850,7 +852,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
                 switch($tiporespuesta){
 
                     case 1: //El archivo respuesta es un texto
-                        echo "texto-texto";
+                        //echo "texto-texto";
                         //Para cada pregunta
                         for($i=0;$i<$p;$i++){
 
@@ -882,7 +884,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
 
                     break;
                     case 2: //El archivo respuesta es un audio
-                         echo "texto-audio";
+                         //echo "texto-audio";
                             
                             $script = '<script type="text/javascript"> $(document).ready(function(){ arreglar_texto_audio_AM(); }); </script>';
                             $mform->addElement('html',$script);
@@ -945,7 +947,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
                     break;
                     case 4: //El archivo respuesta es una imagen
 
-                            echo "texto-imagen";
+                            //echo "texto-imagen";
                         
                             $script = '<script type="text/javascript"> $(document).ready(function(){ arreglar_texto_foto_AM(); }); </script>';
                             $mform->addElement('html',$script);
@@ -955,7 +957,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
                             $aux=$i+1;
                             $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
                              $mform->addElement('html',$titulo);
-                             echo "aki si llega";
+                             //echo "aki si llega";
                            //Archivo Asociacion
                             $mform->addElement('textarea', 'pregunta'.$aux, get_string('Asociacion_Texto', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
                             //Archivo Asociado
@@ -970,7 +972,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
                            }
 
                            $mform->addElement('hidden','numeropreguntas',$p);
-                           echo "aki llega con angel";
+                           //echo "aki llega con angel";
                       
                         
                     break;
@@ -984,7 +986,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
                 switch($tiporespuesta){
 
                     case 1: //El archivo respuesta es un texto
-                        echo "audio-texto aaaa";
+                        //echo "audio-texto aaaa";
 
                           for($i=0;$i<$p;$i++){
 
@@ -1138,7 +1140,7 @@ class mod_ejercicios_creando_ejercicio_texto_hueco extends moodleform_mod {
         $mform->addElement('html',$titulo);
         
         $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
-         $titulo = '<h2>'.get_string('IERC_descripcion','ejercicios') . ' <br/><i><u>'.$ejercicioGeneral->get('descripcion').'</u></i></h2>';
+         $titulo = '<h2>'. nl2br(get_string('IERC_descripcion','ejercicios')) . ' <br/><i><u>'.nl2br($ejercicioGeneral->get('descripcion')).'</u></i></h2>';
          $mform->addElement('html',$titulo);
 
          $oculto='<input type="hidden" name="tipocreacion" id="tipocreacion" value="'.$tipocreacion.'"/>';
@@ -1152,7 +1154,7 @@ class mod_ejercicios_creando_ejercicio_texto_hueco extends moodleform_mod {
                 switch($tiporespuesta){
 
                     case 1: //El archivo respuesta es un texto
-                        echo "texto-texto";
+                        //echo "texto-texto";
                         //Para cada pregunta
                         for($i=0;$i<$p;$i++){
 
@@ -1264,7 +1266,9 @@ class mod_ejercicios_creando_ejercicio_ordenar_elementos extends moodleform_mod 
          $mform->addElement('html',$oculto);
          
        
-       
+       $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
+         $titulo = '<h2>'. nl2br(get_string('IERC_descripcion','ejercicios')) . ' <br/><i><u>'.nl2br($ejercicioGeneral->get('descripcion')).'</u></i></h2>';
+         $mform->addElement('html',$titulo);
        
        
        $html = '<h2>'. get_string('OE_config','ejercicios') . '</h2>';
@@ -1385,17 +1389,17 @@ class mod_ejercicios_creando_ejercicio_identificar_elementos extends moodleform_
         $mform->addElement('html',$titulo);
         
         $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
-         $titulo = '<h2>'.get_string('IERC_descripcion','ejercicios') . ' <br/><i><u>'.$ejercicioGeneral->get('descripcion').'</u></i></h2>';
+         $titulo = '<h2>'. nl2br(get_string('IERC_descripcion','ejercicios')) . ' <br/><i><u>'.nl2br($ejercicioGeneral->get('descripcion')).'</u></i></h2>';
          $mform->addElement('html',$titulo);
 
          $oculto='<input type="hidden" name="tipocreacion" id="tipocreacion" value="'.$tipocreacion.'"/>';
          $mform->addElement('html',$oculto);
-         echo "tipo origen es: " . $tipoorigen;
+         //echo "tipo origen es: " . $tipoorigen;
          
         switch($tipoorigen){
             case 1: //El archivo de origen es un texto
                 //Añade una breve introducción al ejercicio
-            echo "entra para el cuadro general";
+            //echo "entra para el cuadro general";
             $mform->addElement('textarea', 'archivoorigen', get_string('textoorigen', 'ejercicios'), 'wrap="virtual" rows="10" cols="50"');
             $mform->addRule('archivoorigen', "Texto Origen Necesario", 'required', null, 'client');
 
@@ -1515,7 +1519,7 @@ class mod_ejercicios_creando_ejercicio_ierc extends moodleform_mod {
          
          //Pintar descripcion
          $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
-         $titulo = '<h2>'.get_string('IERC_descripcion','ejercicios') . ' <br/><i><u>'.$ejercicioGeneral->get('descripcion').'</u></i></h2>';
+         $titulo = '<h2>'. nl2br(get_string('IERC_descripcion','ejercicios')) . ' <br/><i><u>'.nl2br($ejercicioGeneral->get('descripcion')).'</u></i></h2>';
          $mform->addElement('html',$titulo);
          
         /*switch($tipoorigen){
@@ -1572,9 +1576,17 @@ class mod_ejercicios_creando_ejercicio_ierc extends moodleform_mod {
                     $mform->addRule('pregunta'.$aux, "Dirección Web Necesaria", 'required', null, 'client');
                     break;
             }
-            $numeros = array(1=>1,2=>2,3=>3,4=>4,5=>5);
-            $mform->addElement('select','sel_subrespuestas_'.$aux,get_string('IERC_num_subresp','ejercicios'),$numeros,' style="margin-left:100px;" onchange="IERC_cambiaCols('.$aux.')"');
-            $mform->setDefault('sel_subrespuestas_'.$aux,5);
+            //$numeros = array(1=>1,2=>2,3=>3,4=>4,5=>5);
+            //$mform->addElement('select','sel_subrespuestas_'.$aux,get_string('IERC_num_subresp','ejercicios'),$numeros,' style="margin-left:100px;" onchange="IERC_cambiaCols('.$aux.')"');
+            //$mform->setDefault('sel_subrespuestas_'.$aux,5);
+            $select = '<center><label for="id_sel_subrespuestas_'.$aux.'">'.get_string('IERC_num_subresp','ejercicios').'</label>';
+            $select.= '<select style="margin-left:2%;" onchange="IERC_cambiaCols('.$aux.')" name="sel_subrespuestas_'.$aux.'" id="id_sel_subrespuestas_'.$aux.'" >';
+            for ($l=1; $l<=5; $l++) {
+                $sel = ($l==5) ? 'selected="selected"' : "";
+                $select.='<option value="'.$l.'" '.$sel.' >'.$l.'</option>';
+            }
+            $select.='</select></center>';
+            $mform->addElement('html',$select);
 
 
             $textarea='</br><div id="titulorespuestas" style="margin-left:130px;">Respuestas:';

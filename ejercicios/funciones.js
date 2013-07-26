@@ -202,11 +202,17 @@ var Cookies = {
  * @returns {String} Cadena con el contenido del objeto
  */
 function var_dump(obj) {
-  var out = "{";
-  for (var v in obj) {
-      out += v + " : " + obj[v] + "\n";
+  var tipo = typeof obj;
+  if (tipo == "object") {
+    var out = "{";
+    for (var v in obj) {
+        out += v + " : " + var_dump(obj[v]) + "\n";
+    }
+    out+="}";
   }
-  out+="}";
+  else {
+      out = obj;
+  }
   return out;
 }
 
@@ -579,12 +585,23 @@ function arrastrar_OE() {
 }
 
 
+
 $(document).ready(function(){
     
     //alert("Funciona lo de ready function");
     
     //$(document).tooltip({track: true,my: "left+15 center", at: "right center"});
     
+    //Poner valores por defecto para las tablas
+    if (typeof $.fn.dataTable != "undefined") {
+        $.extend($.fn.dataTable.defaults,{
+            "bPaginate":false,
+            "bLengthChange":false,
+            "bFilter":false,
+            "bSort":false,
+            "bInfo":false
+        });
+    }
     
     setTextareaHeight($('.adaptHeightInput'));
     try{
@@ -610,6 +627,9 @@ $(document).ready(function(){
         arrastrar_OE();
     }
     else if (tipo_ej=="TH") {}
+    else if (tipo_ej=="IERC") {
+        
+    }
     
 
     /*var correcto=new Array();
@@ -7005,7 +7025,8 @@ function IERC_setupTabla(id_pregunta,editable) {
     }); 
     
     //Oculta inicialmente las columnas
-    IERC_cambiaCols(id_pregunta);
+    if(editable)
+        IERC_cambiaCols(id_pregunta);
 }
 
 //Pone los campos de la tabla Editables de forma dinamica
@@ -7047,7 +7068,7 @@ function IERC_addFila(id_pregunta) {
     var aux = numresp+1;
     
     //Añadir la nueva fila
-    var celda = function(i){return '<input type="text"  name="resp_'+id_pregunta+'_'+aux+'_'+i+'" value="'+frase+'" />'};
+    var celda = function(i){return '<input type="text"  name="resp_'+id_pregunta+'_'+aux+'_'+i+'" value="" />'};
     var img = '<img id="del_resp_'+id_pregunta+"_"+aux+'" name="del_resp_'+id_pregunta+"_"+aux+'" src="./imagenes/delete.gif" onclick="IERC_delFila('+id_pregunta+","+aux+')" >'+frase_del+'</img>';
     oTable.fnAddData([celda(1),celda(2),celda(3),celda(4),celda(5),img]);
     
@@ -7232,6 +7253,7 @@ function IERC_AddPregunta(id_ejercicio) {
     var tipoorigen = parseInt($('#tipoorigen').val());
     var contenedor = $('#tabpregunta1').parent();
     var frase = $('#OE_pregunta').val();
+    frase = frase.replace(" :"," "+npreg+" :");
     var frase_sub = $('#IERC_num_subresp').val();
     
     //Crear la nueva pregunta 
@@ -7276,6 +7298,9 @@ function IERC_AddPregunta(id_ejercicio) {
             break;   
     }
     
+    var img2 = createElement('img',{id:"imgpregborrar"+npreg,src:"./imagenes/delete.gif",alt:"Eliminar Pregunta",
+                                    height:"10px", width:"10px",onclick:"IERC_DelPregunta("+id_ejercicio+","+npreg+")", title:"Eliminar Pregunta"},td);
+    $(td).append(document.createTextNode("  Eliminar Pregunta  "));
     var img = createElement('img',{id:"imgpreganadir"+npreg,src:"./imagenes/añadir.gif", alt:"añadir hueco",
                                    height:"15px",width:"15px",onclick:"IERC_addFila("+npreg+")",title:"Añadir Respuesta"},td);
     $(td).append(document.createTextNode(' Añadir Respuesta '));
@@ -7335,7 +7360,7 @@ function IERC_DelPregunta(id_ejercicio, id_preg) {
         $('#table_pregunta'+k).attr("id","table_pregunta"+j);
         var h2 = $('#h2_pregunta'+k);
         h2.attr("id","h2_pregunta"+j);
-        h2.text().replace(""+k,""+j);
+        h2.text(h2.text().replace(""+k,""+j));
         
         switch(tipoorigen) {
             case 1: //Es texto
@@ -7362,6 +7387,9 @@ function IERC_DelPregunta(id_ejercicio, id_preg) {
                 break;
         }
         
+        var img2 = $('#imgpregborrar'+k);
+        img2.attr("id","imgpregborrar"+j);
+        img2.attr("onclick","IERC_DelPregunta("+id_ejercicio+","+j+")");
         var img = $('#imgpreganadir'+k);
         img.attr("id","imgpreganadir"+j);
         img.attr("onclick","IERC_addFila("+j+")");
@@ -7372,17 +7400,25 @@ function IERC_DelPregunta(id_ejercicio, id_preg) {
         select.attr("onchange","IERC_cambiaCols("+j+")");
         
         //Cambiar los ids y names para todas las respuestas
-        //Mostrar todas las columnas para actualizar los ids
-        var old_num_cols = $('#id_sel_subrespuestas_'+k).val();
-        $('#id_sel_subrespuestas_'+k).val(5);
-        IERC_cambiaCols(k);
-        
+        $('#tbl_resp_'+k+'_wrapper').attr("id",'tbl_resp_'+j+'_wrapper');
         var table = $('#tbl_resp_'+k);
         table.attr("id","tbl_resp_"+j);
+        table.attr("name","tbl_resp_"+j);
+        
+        var numresp = $('#numerorespuestas_'+k);
+        numresp.attr('id','numerorespuestas_'+j);
+        numresp.attr('name','numerorespuestas_'+j);
+        
+        
+        //Mostrar todas las columnas para actualizar los ids
+        var old_num_cols = $('#id_sel_subrespuestas_'+j).val();
+        $('#id_sel_subrespuestas_'+j).val(5);
+        IERC_cambiaCols(j);
+        
         //Actualizar ids y names de las cabeceras
         $.each(table.find('thead th'),function(ind,val){
             $(val).attr('id','celda_'+j+'_0_'+(ind+1));
-            var input = $($(val).children[0]);
+            var input = $($(val).children()[0]);
             input.attr('id','cab_'+j+'_0_'+(ind+1));
             input.attr('name','cab_'+j+'_0_'+(ind+1));
         });
@@ -7394,12 +7430,12 @@ function IERC_DelPregunta(id_ejercicio, id_preg) {
                 
                 if (td_ind<5) {
                     $(td_val).attr('id','celda_'+j+'_'+(tr_ind+1)+'_'+(td_ind+1));
-                    var input = $($(td_val).children[0]);
+                    var input = $($(td_val).children()[0]);
                     input.attr('name','resp_'+j+'_'+(tr_ind+1)+'_'+(td_ind+1));
                 }
                 else {
                     $(td_val).attr('id','celda_'+j+'_'+(tr_ind+1)+'_img');
-                    var img = $($(td_val).children[0]);
+                    var img = $($(td_val).children()[0]);
                     img.attr('id','del_resp_'+j+'_'+(tr_ind+1));
                     img.attr('name','del_resp_'+j+'_'+(tr_ind+1));
                     img.attr('onclick','IERC_delFila('+j+","+(tr_ind+1)+")");
@@ -7409,11 +7445,86 @@ function IERC_DelPregunta(id_ejercicio, id_preg) {
         
         //Volver al valor anterior del numero de columnas
         $('#id_sel_subrespuestas_'+j).val(old_num_cols);
-        IERC_setupTabla(j,true); //Volver a setear la tabla
+        IERC_cambiaCols(j);
         
         
     }
     
     //Cambia el numero de preguntas
     $('#num_preg').val(num_pregs-1);
+}
+
+//Funcion para realizar la peticion AJAX que recupere las soluciones del ejercicio
+function IERC_pedirSoluciones(id_ejercicio) {
+    var res;
+    
+    //Peticion AJAX
+    $.ajax({
+        type:"POST",
+        dataType:"json",
+        async:false,
+        url:"ejercicios_respuestas_ierc.php",
+        data:"id_ejercicio="+id_ejercicio,
+        success:function(data) {
+            console.log("Obtenidas las respuestas correctamente: " + var_dump(data));
+            res = $.parseJSON(data);
+            //console.log("parseado");
+        },
+        error:function(error) {
+            console.log("Error al pedir las soluciones : " + var_dump(error));
+        }
+    });
+    
+    return res;
+}
+
+//Funcion para corregir el ejercicio IERC
+function IERC_corregir(id_ejercicio) {
+    //El objeto soluciones lo puedo usar porque ya lo he recogido con la funcion IERC_pedirSoluciones
+    //En ese objeto se guardan las soluciones del ejercicio
+    
+    var correcto = "./imagenes/correcto.png";
+    var incorrecto = "./imagenes/incorrecto.png";
+    
+    //Para cada pregunta
+    for (var i=0; i<soluciones.num_pregs; i++) {
+        console.log("pregunta " + (i+1));
+        //Numero de subrespuestas para esta pregunta
+        var numcabs = soluciones.preguntas[i].num_cabs;
+        console.log("numcabs: " + numcabs);
+        //Numero de respuestas para esta pregunta
+        var numresp = soluciones.preguntas[i].num_resp;
+        console.log("num resp: " + numresp);
+        
+        //Para cada respuesta que no haya sido ya usada, 
+        //comprobar si es correcta
+        for (var j=0; j<numresp; j++) {
+            console.log("respuesta " + (j+1));
+            var seguir = true;
+            for (var k=0; k<numresp && seguir; k++) {
+                if(!("usada" in soluciones.preguntas[i][k])) {
+                    var todo = true;
+                    for (var l=1; l<=numcabs; l++) {
+                        console.log("l: " + l);
+                        console.log("input resp: " + $('#resp_'+(i+1)+"_"+(j+1)+"_"+l).val());
+                        console.log("sol resp: " + soluciones.preguntas[i][k][l]);
+                        if($('#resp_'+(i+1)+"_"+(j+1)+"_"+l).val()==soluciones.preguntas[i][k][l])
+                            todo = todo && true;
+                        else
+                            todo = todo && false;
+                    }
+                    if(todo) {
+                        console.log("todas correctas para la respuesta " + (j+1));
+                        seguir=false;
+                        soluciones.preguntas[i][k].usada=true;
+                        $('#corr_resp_'+(i+1)+"_"+(j+1)).attr("src",correcto);
+                    }
+                }
+            }
+            if(seguir) { //No se ha encontrado ninguna respuesta correcta
+                console.log("incorrecto para la respuesta " + (j+1));
+                $('#corr_resp_'+(i+1)+"_"+(j+1)).attr("src",incorrecto);
+            }
+        }
+    }
 }

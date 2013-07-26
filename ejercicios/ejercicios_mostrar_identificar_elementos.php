@@ -82,7 +82,7 @@ class mod_ejercicios_mostrar_identificar_elementos extends moodleform_mod {
     function mod_ejercicios_mostrar_identificar_elementos($id, $id_ejercicio, $tipo_origen) {
         // El fichero que procesa el formulario es gestion.php
         parent::moodleform('ejercicios_modificar_identificar_elementos.php?id_curso=' . $id . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen);
-        echo "En el constructor de mostrar IE";
+        //echo "En el constructor de mostrar IE";
     }
 
     function definition() {
@@ -97,7 +97,7 @@ class mod_ejercicios_mostrar_identificar_elementos extends moodleform_mod {
      * @param $id_ejercicio id del ejercicio a mostrar
      */
     function mostrar_ejercicio_identificar_elementos($id, $id_ejercicio, $buscar, $tipo_origen) {
-        echo "INICIO MOSTRAR EJERCICIO IDENTIFICAR ELEMENTOS";
+        //echo "INICIO MOSTRAR EJERCICIO IDENTIFICAR ELEMENTOS";
         
         global $CFG, $COURSE, $USER;
         $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
@@ -107,7 +107,7 @@ class mod_ejercicios_mostrar_identificar_elementos extends moodleform_mod {
         //inclusion del javascript para las funciones
 
         $mform = & $this->_form;
-        echo "COGIDO FORM";
+        //echo "COGIDO FORM";
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./style.css">');
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
         $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>');
@@ -115,7 +115,7 @@ class mod_ejercicios_mostrar_identificar_elementos extends moodleform_mod {
         $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
         //Cojo el ejercicio  de la bd a partir de su id (id_ejercicio)
 
-        echo "mostrando formulario identificar elementos";
+        //echo "mostrando formulario identificar elementos";
         $ejercicios_bd = new Ejercicios_general();
         $ejercicios_leido = $ejercicios_bd->obtener_uno($id_ejercicio);
 
@@ -133,7 +133,7 @@ class mod_ejercicios_mostrar_identificar_elementos extends moodleform_mod {
             $modificable = false;
         }
 
-        $titulo = '<h1>' . $nombre . '</h1>';
+        $titulo = '<h1 class="instrucciones" >' . $nombre . '</h1>';
         $mform->addElement('html', $titulo);
 
 
@@ -153,8 +153,8 @@ class mod_ejercicios_mostrar_identificar_elementos extends moodleform_mod {
                 //Añado el texto de origen
                 $el_texto_origen = new Ejercicios_textos();
                 $el_texto_origen->obtener_uno_id_ejercicio($id_ejercicio);
-                echo "aki entra";
-                echo "por lo que estoy en texto texto";
+                //echo "aki entra";
+                //echo "por lo que estoy en texto texto";
                 if ($buscar == 1 || $modificable == false) { //Para que no pueda editarlo
                     $divtexto = '<div class="desctexto" name="texto" id="texto"><div class="margenes">' . nl2br((stripslashes($el_texto_origen->get('texto')))) . '</div></div>';
                 } else {
@@ -252,7 +252,7 @@ class mod_ejercicios_mostrar_identificar_elementos extends moodleform_mod {
             //Recoger el texto de las respuestas del profesor desde la base de datos
             $respuestas_prof = array();
             for ($p = 0; $p < sizeof($respuestas); $p++) {
-                echo "Respuesta del profesor " . ($p+1) . " : " . $respuestas[$p]->get('respuesta') . "<br/>";
+                //echo "Respuesta del profesor " . ($p+1) . " : " . $respuestas[$p]->get('respuesta') . "<br/>";
                 $q = $p + 1;
                 $respuestas_prof[] = $respuestas[$p]->get('respuesta'); 
             }

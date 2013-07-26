@@ -71,7 +71,7 @@ require_once("clase_log.php");
 
 header('Content-type: application/json');
 
-$log = new Log("log_dict.txt","a");
+//$log = new Log("log_dict.txt","a");
 
 
 $num = $_POST['num'];
@@ -82,8 +82,8 @@ for($k=1; $k<=$num; $k++) {
 }
 
 $resp = json_encode($ids);
-$log->write("cod: " . $id . "\t response: " . $resp);
-$log->close();
+//$log->write("cod: " . $id . "\t response: " . $resp);
+//$log->close();
 
 echo json_encode($resp);
 ?>

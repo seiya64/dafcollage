@@ -53,6 +53,8 @@ $id_curso = optional_param('id_curso', 0, PARAM_INT);
 $id_ejercicio = optional_param('id_ejercicio', 0, PARAM_INT);
 $tipo_origen = optional_param('tipo_origen',0, PARAM_INT);
 $buscar = optional_param('buscar',0,PARAM_INT);
+$tipo_respuesta = optional_param('tr', 0, PARAM_INT);
+$tipo_creacion = optional_param('tipocreacion', 0, PARAM_INT);
 
 $log = new Log('log_modificar_IERC.txt');
 $log->write('Id ejercicio: ' . $id_ejercicio);
@@ -65,8 +67,8 @@ $log->write('despues session start');
 
 //Es llamado por ejercicios_form_mostrar.php
 
-$mform = new mod_ejercicios_mostrar_ejercicio_ierc($id_curso,$id_ejercicio,$tipo_origen);
-$mform->mostrar_ejercicio_ierc($id_curso, $id_ejercicio, $buscar, $tipo_origen);
+$mform = new mod_ejercicios_mostrar_ejercicio_ierc($id_curso,$id_ejercicio,$tipo_origen, $tipo_respuesta, $tipo_creacion);
+$mform->mostrar_ejercicio_ierc($id_curso, $id_ejercicio, $buscar, $tipo_origen, $tipo_respuesta, $tipo_creacion);
 
 $num_preg= required_param('num_preg', PARAM_TEXT);
 $log->write('num preg: ' . $num_preg);
@@ -126,7 +128,11 @@ if(optional_param("submitbutton2")){ //boton para añadir a mis ejercicos visibl
                 $pregunta = 'audio'.$id_ejercicio."_".$i.".mp3";
                 break;
             case 3: //Es video
-                $pregunta = optional_param('pregunta'.$i,"",PARAM_TEXT);
+                
+                $auxUrlVideo = optional_param('pregunta'.$i, NULL, PARAM_TEXT);
+                $yvh = new YoutubeVideoHelper();
+                $id_video = $yvh->getVideoId($auxUrlVideo);
+                $pregunta = $id_video;
                 break;
         }
         $log->write('pregunta: ' . $pregunta);

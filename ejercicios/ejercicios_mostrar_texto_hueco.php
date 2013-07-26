@@ -197,13 +197,13 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
         $mform->addElement('html', $tabla_imagenes);
 
 
-        echo "tipo origen.$tipo_origen";
+        //echo "tipo origen.$tipo_origen";
         //compruebo de que tipo es el origen
         switch ($tipo_origen) {
 
             case 1: //Es de tipo texto la pregunta
 
-                echo "tipo respuesta.$tipo_respuesta";
+                //echo "tipo respuesta.$tipo_respuesta";
                 switch ($tipo_respuesta) {
                     case 1: //Es de tipo texto la respuesta
                         //Obtengo la configuracion del ejercicio
@@ -370,7 +370,7 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
                             
                             
                         } else {
-                            echo "akiiiiiiii";
+                            //echo "akiiiiiiii";
                             //$tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
                             
 
@@ -537,7 +537,7 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
                 break;
         }
         
-        echo "termino del todo";
+        //echo "termino del todo";
     }
 
 }

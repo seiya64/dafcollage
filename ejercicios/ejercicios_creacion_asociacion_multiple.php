@@ -77,7 +77,7 @@ $mform->pintarformularioasociacionmultiple($id_curso, $p, $id_ejercicio, $tipo_o
 
 switch ($tipo_origen) {
     case 1://Es un texto
-        echo "Texto -";
+        //echo "Texto -";
         switch ($tipo_respuesta) {
             case 1: //Respuesta texto
                 //echo "inserto en la bd";
@@ -107,13 +107,13 @@ switch ($tipo_origen) {
                     }
 
 
-                    echo "fin insercción";
+                    //echo "fin insercción";
                 }
                 break;
             case 2://Respuesta es Audio
                 $fichero = @fopen("log_creacion.txt","w");
                 $log="";
-                echo "es un audio";
+                //echo "es un audio";
                 
 
                 //Guardando las imagenes y los textos
@@ -133,7 +133,7 @@ switch ($tipo_origen) {
                 //Obtengo el numero de preguntas                
                 $numero_preguntas = optional_param('numeropreguntas', PARAM_INT);
                 $log.= "Numero de preguntas: " . $numero_preguntas . "\n"; 
-                echo "numero preguntas" . $numero_preguntas;
+                //echo "numero preguntas" . $numero_preguntas;
                 for ($i = 0; $i < $numero_preguntas; $i++) {
                     //Obtengo la pregunta
 
@@ -158,12 +158,12 @@ switch ($tipo_origen) {
                         if (move_uploaded_file($_FILES[$name_files_audio]['tmp_name'], './mediaplayer/audios/' . $nombre_audio)) {
                             $log.="Se ha movido correctamente el archivo de audio de " . $_FILES[$name_files_audio]['tmp_name'] . " a " . './mediaplayer/audios/' . $nombre_audio
                                     . "\n";
-                            echo "<br/>ARCHIVO DE AUDIO MOVIDO A: " . './mediaplayer/audios/' . $nombre_audio;
+                            //echo "<br/>ARCHIVO DE AUDIO MOVIDO A: " . './mediaplayer/audios/' . $nombre_audio;
                         }
                         else {
                             $log.="No se ha movido correctamente el archivo de audio de " . $_FILES[$name_files_audio]['tmp_name'] . " a " . './mediaplayer/audios/' . $nombre_audio
                                     . "\n";
-                            echo "<br/>ERROR AL MOVER EL ARCHIVO DE AUDIO A: " . './mediaplayer/audios/' . $nombre_audio;
+                            //echo "<br/>ERROR AL MOVER EL ARCHIVO DE AUDIO A: " . './mediaplayer/audios/' . $nombre_audio;
                             die;
                         }
                         
@@ -174,14 +174,14 @@ switch ($tipo_origen) {
                 }
                 fwrite($fichero, $log, strlen($log));
                 fclose($fichero);
-                echo "fin insercción";
+                //echo "fin insercción";
                 break;
             case 3://Respuesta es Video
-                echo "es un videooooooooo";
+                //echo "es un videooooooooo";
                 //Guardando las direcciones de los videos y el texto correspondiente
                 //Obtengo el numero de preguntas
                 $numero_preguntas = optional_param('numeropreguntas', PARAM_INT);
-                echo "numero preguntas" . $numero_preguntas;
+                //echo "numero preguntas" . $numero_preguntas;
                 for ($i = 0; $i < $numero_preguntas; $i++) {
                     //Obtengo la pregunta
 
@@ -213,11 +213,11 @@ switch ($tipo_origen) {
                         $mi_respuesta->insertar();
                     }
                 }
-                echo "fin insercción";
+                //echo "fin insercción";
                 break;
             case 4:// Respuesta es Foto
                 //Guardando la foto y el texto
-                echo "Foto";
+                //echo "Foto";
 
                 //SUBO LAS IMAGENES A MOODLE
                 /*$m = 1;
@@ -234,7 +234,7 @@ switch ($tipo_origen) {
                 
                 //Obtengo el numero de preguntas
                 $numero_preguntas = optional_param('numeropreguntas', PARAM_INT);
-                echo "numero preguntas" . $numero_preguntas;
+                //echo "numero preguntas" . $numero_preguntas;
                 for ($i = 0; $i < $numero_preguntas; $i++) {
                     //Obtengo la pregunta
 
@@ -254,10 +254,10 @@ switch ($tipo_origen) {
                         $name_files_img = "archivofoto" . $j . "_" . $k;
                         
                         if (move_uploaded_file($_FILES[$name_files_img]['tmp_name'], './imagenes/' . $nombre_img)) {
-                            echo "<br/>ARCHIVO DE IMAGEN MOVIDO A: " . './imagenes/' . $nombre_img;
+                            //echo "<br/>ARCHIVO DE IMAGEN MOVIDO A: " . './imagenes/' . $nombre_img;
                         }
                         else {
-                            echo "<br/>ERROR AL MOVER EL ARCHIVO DE IMAGEN A: " . './imagenes/' . $nombre_img;
+                            //echo "<br/>ERROR AL MOVER EL ARCHIVO DE IMAGEN A: " . './imagenes/' . $nombre_img;
                             die;
                         }
                         
@@ -266,7 +266,7 @@ switch ($tipo_origen) {
                         $mi_respuesta->insertar();
                     }
                 }
-                echo "fin insercción";
+                //echo "fin insercción";
 
                 break;
         }
@@ -275,7 +275,7 @@ switch ($tipo_origen) {
     case 2://Es una audio la pregunta
 
 
-        echo "la pregunta es un audio";
+        //echo "la pregunta es un audio";
         //Guardando las imagenes y los textos
         //SUBO LOS AUDIOS A MOODLE
         /*$m = 1;
@@ -291,7 +291,7 @@ switch ($tipo_origen) {
         // echo "m vale".$m;
         //Obtengo el numero de preguntas
         $numero_preguntas = optional_param('numeropreguntas', PARAM_INT);
-        echo "numero preguntas" . $numero_preguntas;
+        //echo "numero preguntas" . $numero_preguntas;
         for ($i = 0; $i < $numero_preguntas; $i++) {
             //Obtengo la pregunta
 
@@ -299,9 +299,9 @@ switch ($tipo_origen) {
             $name_files_audio = 'archivoaudio'.$j;
             $nombre_audio = 'audio_' . $id_ejercicio . '_' . $j . '.mp3';
             if (move_uploaded_file($_FILES[$name_files_audio]['tmp_name'], './mediaplayer/audios/' . $nombre_audio)) {
-                echo "<br/>ARCHIVO DE AUDIO MOVIDO A: " . './mediaplayer/audios/' . $nombre_audio;
+                //echo "<br/>ARCHIVO DE AUDIO MOVIDO A: " . './mediaplayer/audios/' . $nombre_audio;
             } else {
-                echo "<br/>ERROR AL MOVER EL ARCHIVO DE AUDIO A: " . './mediaplayer/audios/' . $nombre_audio;
+                //echo "<br/>ERROR AL MOVER EL ARCHIVO DE AUDIO A: " . './mediaplayer/audios/' . $nombre_audio;
                 die;
             }
             $preg = new Ejercicios_texto_texto_preg(NULL, $id_ejercicio, $nombre_audio);
@@ -322,17 +322,17 @@ switch ($tipo_origen) {
             
             
         }
-        echo "fin insercción";
+        //echo "fin insercción";
 
-        echo "es una audio";
+        //echo "es una audio";
         break;
     case 3://Es un video
-        echo "es un video la pregunta";
+        //echo "es un video la pregunta";
 
         //Guardando las direcciones de los videos y el texto correspondiente
         //Obtengo el numero de preguntas
         $numero_preguntas = optional_param('numeropreguntas', PARAM_INT);
-        echo "numero preguntas" . $numero_preguntas;
+        //echo "numero preguntas" . $numero_preguntas;
         for ($i = 0; $i < $numero_preguntas; $i++) {
             //Obtengo la pregunta
 
@@ -365,13 +365,13 @@ switch ($tipo_origen) {
                 $misrespuestas->insertar();
             }            
         }
-        echo "fin insercción";
+        //echo "fin insercción";
 
         break;
     case 4://Es una imagen
-        echo "es una imagen la pregunta";
+        //echo "es una imagen la pregunta";
          $numero_preguntas = optional_param('numeropreguntas', PARAM_INT);
-        echo "numero preguntas" . $numero_preguntas;
+        //echo "numero preguntas" . $numero_preguntas;
         
         //SUBO LAS FOTOS A MOODLE
         /*$m = 1;
@@ -394,9 +394,9 @@ switch ($tipo_origen) {
             $nombre_foto = 'foto_' . $id_ejercicio . '_' . $j . '.jpg';
             $name_files_img = "archivofoto" . $j;
             if (move_uploaded_file($_FILES[$name_files_img]['tmp_name'], './imagenes/' . $nombre_foto)) {
-                echo "<br/>ARCHIVO DE IMAGEN MOVIDO A: " . './imagenes/' . $nombre_foto;
+                //echo "<br/>ARCHIVO DE IMAGEN MOVIDO A: " . './imagenes/' . $nombre_foto;
             } else {
-                echo "<br/>ERROR AL MOVER EL ARCHIVO DE IMAGEN A: " . './imagenes/' . $nombre_foto;
+                //echo "<br/>ERROR AL MOVER EL ARCHIVO DE IMAGEN A: " . './imagenes/' . $nombre_foto;
                 die;
             }
             $mispreguntas = new Ejercicios_texto_texto_preg(NULL, $id_ejercicio, $nombre_foto);
@@ -414,7 +414,7 @@ switch ($tipo_origen) {
                 $misrespuestas->insertar();
             }                 
         }
-        echo "fin insercciÃ³n";
+        //echo "fin insercciÃ³n";
         
         break;
 }

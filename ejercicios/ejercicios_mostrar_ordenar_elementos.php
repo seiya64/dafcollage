@@ -151,13 +151,13 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
         $tipoorden = $matriz[0]->get('frase');
 
 
-        echo "tipo origen.$tipo_origen";
+        //echo "tipo origen.$tipo_origen";
         //compruebo de que tipo es el origen
         switch ($tipo_origen) {
 
             case 1: //Es de tipo texto la pregunta
 
-                echo "tipo respuesta.$tipo_respuesta";
+                //echo "tipo respuesta.$tipo_respuesta";
                 switch ($tipo_respuesta) {
                     case 1: //Es de tipo texto la respuesta
                         //Obtengo las preguntas
@@ -362,7 +362,7 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
                             
                             
                         } else {
-                            echo "akiiiiiiii";
+                            //echo "akiiiiiiii";
                             //$tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
                             
                             $log = new Log("log_OE_mostrar.txt");
@@ -549,7 +549,7 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
                 break;
         }
         
-        echo "termino del todo";
+        //echo "termino del todo";
     }
 
 }
