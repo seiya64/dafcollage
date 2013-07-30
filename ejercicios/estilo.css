@@ -184,6 +184,7 @@
         padding-bottom: 20px;
         padding-left: 20px;
         overflow:auto;
+        font-size:1.2em;
         width:900px;
    
 }
@@ -230,6 +231,7 @@
     margin-right: 10px;
     float:left;
     width:700px;
+    font-size:1.2em;
    
 }
 
@@ -237,7 +239,7 @@
 	overflow:auto;
         margin-bottom: 10px;
         width: 80%;
-        margin-left: 100px;
+        /*margin-left: 100px;*/
         text-align: justify;
       
 }
@@ -245,7 +247,8 @@
 	background-color: #FFFFC8;
         margin-left: 150px;
         margin-right: 170px;
-        box-shadow: 5px 10px 10px #999
+        box-shadow: 5px 10px 10px #999;
+        font-size:1.2em;            
 }
 .margenes{
     margin-bottom: 15px;
@@ -261,6 +264,7 @@
     width: 80%;
     margin-left: 100px;
     text-align: justify;
+    font-size:1.2em;
  }
  .claseaudio{
      margin-left: 300px;
@@ -357,7 +361,11 @@ margin-bottom: 40px;
         margin-left:90px
 }
 
-
+/** Cambios Angel Biedma Mesa **/
 h1.instrucciones {
-    background-color: #46C8CE;
+    background-color: #bdc7d8;
+}
+
+.descripcion, .item, .marquito {
+    font-size:1.2em;
 }

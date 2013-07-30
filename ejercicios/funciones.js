@@ -6590,92 +6590,94 @@ function OE_DelPregunta(id_ejercicio,numpreg) {
 //Boton para añadir una pregunta a un ejercicio de Ordenar Elementos
 function OE_AddPregunta(id_ejercicio) {
     var frase = prompt("Escriba la frase que quiera desordenar.");
-    var input_preg = document.getElementById("num_preg");
-    var numpregs = parseInt(input_preg.value);
-    var orden_unico = parseInt(document.getElementById("orden_unico").value)==0;
-    var npreg = numpregs+1;
-    
-    if (!orden_unico) frase = frase.toUpperCase();
-    
-    //Siempre va a haber al menos una pregunta
-    var divpregunta1 = document.getElementById("tabpregunta1");
-    var padre = divpregunta1.parentNode;
-    
-    var div = createElement("div",{id:"tabpregunta"+npreg});
-    padre.insertBefore(div,input_preg);
-    var table = createElement("table",{id:"table_pregunta"+npreg,style:"width:100%;"}); 
-    div.appendChild(table);
-    var tbody = createElement("tbody",{}); table.appendChild(tbody);
-    var tr = createElement("tr",{}); tbody.appendChild(tr);
-    var td1 = createElement("td",{style:"width:70%;"}); tr.appendChild(td1);
-    var h2 = createElement("h2",{id:"h2_pregunta"+npreg}); td1.appendChild(h2);
-    h2.appendChild(document.createTextNode("Oracion "+npreg+" :"));
-    var texta = createElement("textarea",{style:" width: 900px;",class:"pregunta",
-                                          name:"pregunta"+npreg, id:"pregunta"+npreg});
-    texta.appendChild(document.createTextNode(frase));
-    td1.appendChild(texta);
-    var td2 = createElement("td",{style:"width:5%;"}); tr.appendChild(td2);
-    var img1 = createElement("img",{id:"imgpregborrar"+npreg, src:"./imagenes/lock.svg",
-                                    alt:"Confirmar Oracion",height:"10px",width:"10px",
-                                    onclick:"OE_BloquearPregunta("+id_ejercicio+","+npreg+")",
-                                    title:"Confirmar Oracion"});
-    
-    var img2 = createElement("img",{id:"imgpreganadir"+npreg, src:"./imagenes/añadir.gif",
-                                    alt:"añadir hueco",height:"15px",width:"15px", style:"visibility:hidden;",
-                                    onclick:"OE_addOrden_Modificar("+id_ejercicio+","+npreg+")",
-                                    title:"Añadir Orden Nuevo"});
-    
-    td1.appendChild(img1);
-    td1.appendChild(document.createTextNode("  Confirmar Oracion  "));
-    td1.appendChild(img2);
-    
-    var tr2 = createElement("tr",{});
-    tbody.appendChild(tr2);
-    var td3 = createElement("td",{});
-    tr2.appendChild(td3);
-    var h4 = createElement("h4",{});
-    h4.appendChild(document.createTextNode("Puede cambiar el orden de los elementos con la ayuda de las flechas a al derecha."));
-    td3.appendChild(h4);
-    //td1.appendChild(document.createTextNode("  Añadir Orden Nuevo  "));
-    var input_orden = createElement("input",{type:"hidden",value:"0",id:"num_orden_"+npreg,
-                                             name:"num_orden_"+npreg});
-    div.appendChild(input_orden);
-    
-    input_preg.value=npreg;
-    
-    
-    //Crea el primer orden    
-    var input_orden = document.getElementById("num_orden_"+npreg);
-    var orden = parseInt(input_orden.value)+1;
-    
-    var table = createElement("table",{id:"table_h3_orden_"+npreg+"_"+orden}); div.appendChild(table);
-    var tbody = createElement("tbody",{}); table.appendChild(tbody);
-    var tr = createElement("tr",{});    tbody.appendChild(tr);
-    var td1 = createElement("td",{});   tr.appendChild(td1);
-    var h3 = createElement("h3",{id:"h3_orden_"+npreg+"_"+orden});       td1.appendChild(h3);
-    h3.appendChild(document.createTextNode("Orden "+orden+": "));
-    
-    var td2 = createElement("td",{});  tr.appendChild(td2);
-    var img1 = createElement("img",{id: "add_palabra_"+npreg+"_"+orden, src: "./imagenes/añadir.gif",
-                                    alt: "añadir palabra", height: "15px", width: "15px", title: "Añadir Palabra",
-                                    onclick: "OE_addPalabra_Seleccion("+id_ejercicio+","+npreg+","+orden+")"});
-    var img2 = createElement("img",{id: "del_orden_"+npreg+"_"+orden, src: "./imagenes/delete.gif", style:"visibility:hidden;",
-                                    alt: "delete orden", height: "15px", width: "15px", title: "Eliminar Orden",
-                                    onclick: "OE_delOrden_Modificar("+id_ejercicio+","+npreg+","+orden+")"});
-    
-    
-    td2.appendChild(img1);
-    td2.appendChild(document.createTextNode("  Añadir Palabra  "));
-    td2.appendChild(img2);
-    //td2.appendChild(document.createTextNode("  Eliminar Orden  "));
-    
-    var div_respuestas = createElement("div",{id: "orden"+npreg+"_"+orden, class: "respuesta"});
-    div.appendChild(div_respuestas);
-    var input_resp = createElement("input",{type:"hidden",name:"num_res_preg"+npreg+"_"+orden,
-                                            id:"num_res_preg"+npreg+"_"+orden, value:"0"});
-    div.appendChild(input_resp);
-    
-    input_orden.value = orden;
+    if (frase!=null && frase!="") {
+        var input_preg = document.getElementById("num_preg");
+        var numpregs = parseInt(input_preg.value);
+        var orden_unico = parseInt(document.getElementById("orden_unico").value)==0;
+        var npreg = numpregs+1;
+
+        if (!orden_unico) frase = frase.toUpperCase();
+
+        //Siempre va a haber al menos una pregunta
+        var divpregunta1 = document.getElementById("tabpregunta1");
+        var padre = divpregunta1.parentNode;
+
+        var div = createElement("div",{id:"tabpregunta"+npreg});
+        padre.insertBefore(div,input_preg);
+        var table = createElement("table",{id:"table_pregunta"+npreg,style:"width:100%;"}); 
+        div.appendChild(table);
+        var tbody = createElement("tbody",{}); table.appendChild(tbody);
+        var tr = createElement("tr",{}); tbody.appendChild(tr);
+        var td1 = createElement("td",{style:"width:70%;"}); tr.appendChild(td1);
+        var h2 = createElement("h2",{id:"h2_pregunta"+npreg}); td1.appendChild(h2);
+        h2.appendChild(document.createTextNode("Oracion "+npreg+" :"));
+        var texta = createElement("textarea",{style:" width: 900px;",class:"pregunta",
+                                              name:"pregunta"+npreg, id:"pregunta"+npreg});
+        texta.appendChild(document.createTextNode(frase));
+        td1.appendChild(texta);
+        var td2 = createElement("td",{style:"width:5%;"}); tr.appendChild(td2);
+        var img1 = createElement("img",{id:"imgpregborrar"+npreg, src:"./imagenes/lock.svg",
+                                        alt:"Confirmar Oracion",height:"10px",width:"10px",
+                                        onclick:"OE_BloquearPregunta("+id_ejercicio+","+npreg+")",
+                                        title:"Confirmar Oracion"});
+
+        var img2 = createElement("img",{id:"imgpreganadir"+npreg, src:"./imagenes/añadir.gif",
+                                        alt:"añadir hueco",height:"15px",width:"15px", style:"visibility:hidden;",
+                                        onclick:"OE_addOrden_Modificar("+id_ejercicio+","+npreg+")",
+                                        title:"Añadir Orden Nuevo"});
+
+        td1.appendChild(img1);
+        td1.appendChild(document.createTextNode("  Confirmar Oracion  "));
+        td1.appendChild(img2);
+
+        var tr2 = createElement("tr",{});
+        tbody.appendChild(tr2);
+        var td3 = createElement("td",{});
+        tr2.appendChild(td3);
+        var h4 = createElement("h4",{});
+        h4.appendChild(document.createTextNode("Puede cambiar el orden de los elementos con la ayuda de las flechas a al derecha."));
+        td3.appendChild(h4);
+        //td1.appendChild(document.createTextNode("  Añadir Orden Nuevo  "));
+        var input_orden = createElement("input",{type:"hidden",value:"0",id:"num_orden_"+npreg,
+                                                 name:"num_orden_"+npreg});
+        div.appendChild(input_orden);
+
+        input_preg.value=npreg;
+
+
+        //Crea el primer orden    
+        var input_orden = document.getElementById("num_orden_"+npreg);
+        var orden = parseInt(input_orden.value)+1;
+
+        var table = createElement("table",{id:"table_h3_orden_"+npreg+"_"+orden}); div.appendChild(table);
+        var tbody = createElement("tbody",{}); table.appendChild(tbody);
+        var tr = createElement("tr",{});    tbody.appendChild(tr);
+        var td1 = createElement("td",{});   tr.appendChild(td1);
+        var h3 = createElement("h3",{id:"h3_orden_"+npreg+"_"+orden});       td1.appendChild(h3);
+        h3.appendChild(document.createTextNode("Orden "+orden+": "));
+
+        var td2 = createElement("td",{});  tr.appendChild(td2);
+        var img1 = createElement("img",{id: "add_palabra_"+npreg+"_"+orden, src: "./imagenes/añadir.gif",
+                                        alt: "añadir palabra", height: "15px", width: "15px", title: "Añadir Palabra",
+                                        onclick: "OE_addPalabra_Seleccion("+id_ejercicio+","+npreg+","+orden+")"});
+        var img2 = createElement("img",{id: "del_orden_"+npreg+"_"+orden, src: "./imagenes/delete.gif", style:"visibility:hidden;",
+                                        alt: "delete orden", height: "15px", width: "15px", title: "Eliminar Orden",
+                                        onclick: "OE_delOrden_Modificar("+id_ejercicio+","+npreg+","+orden+")"});
+
+
+        td2.appendChild(img1);
+        td2.appendChild(document.createTextNode("  Añadir Palabra  "));
+        td2.appendChild(img2);
+        //td2.appendChild(document.createTextNode("  Eliminar Orden  "));
+
+        var div_respuestas = createElement("div",{id: "orden"+npreg+"_"+orden, class: "respuesta"});
+        div.appendChild(div_respuestas);
+        var input_resp = createElement("input",{type:"hidden",name:"num_res_preg"+npreg+"_"+orden,
+                                                id:"num_res_preg"+npreg+"_"+orden, value:"0"});
+        div.appendChild(input_resp);
+
+        input_orden.value = orden;
+    }
 }
 
 //Boton para bloquear una pregunta bloqueada

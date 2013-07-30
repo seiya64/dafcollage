@@ -56,7 +56,7 @@ $mform->pintarformulario($id_curso);
 
 
 $tipo_pregunta = optional_param('radiopregunta', PARAM_TEXT);
-$numeropreguntas = optional_param('numeropreguntas', PARAM_INT);
+$numeropreguntas = optional_param('numeropreguntas', 0, PARAM_INT);
 
 
 $error = optional_param('error', PARAM_TEXT);

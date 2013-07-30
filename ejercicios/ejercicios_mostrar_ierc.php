@@ -102,16 +102,16 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
 
         //Añado el título
         if($modificable) {
-            $titulo = '<h1 class="instrucciones" id="h1">' . $nombre . '</h1>';
+            $titulo = '<h1 id="h1" class="instrucciones" ><u>' . $nombre . '</u><span style="font-size:0.7em; float:right;"><i>' . ucwords(strtolower(htmlentities(get_string('Tipo10','ejercicios')))) . '</i></span></h1>';
             $mform->addElement('html', $titulo);
         }
 
         //Añado la descripción
 
-        $divdescripcion = '<div class=descover>';
+        $divdescripcion = '<div style="font-size:1.2em" class=descover>';
         
-        $divdescripcion.=nl2br((stripslashes($ejercicios_leido->get('descripcion'))));
-        $divdescripcion.=$parte . '<br/>';
+        $divdescripcion.='<i>'.nl2br((stripslashes($ejercicios_leido->get('descripcion'))));
+        $divdescripcion.=$parte . '<br/></i>';
 
         $divdescripcion.='</div>';
 
@@ -232,7 +232,7 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
                 $divpregunta.='<tr id="fila_0">';
                 for ($l=1; $l<=$num_cabs; $l++) {
                     $log->write("entra en el th: " . $l);
-                    $divpregunta.='<th id="celda_'.$i.'_0_'.$l.'" ><p id="cab_'.$i.'_0_'.$l.'" name="cab_'.$i.'_0_'.$l.'"  >'.$preguntas[$i - 1]->get('cab'.$l).'</p></th>';                   
+                    $divpregunta.='<th id="celda_'.$i.'_0_'.$l.'" ><p  style="font-size:1.2em" id="cab_'.$i.'_0_'.$l.'" name="cab_'.$i.'_0_'.$l.'"  >'.$preguntas[$i - 1]->get('cab'.$l).'</p></th>';                   
                 }
                 $divpregunta.='<th></th>';
                 $divpregunta.='</tr></thead>';
@@ -243,7 +243,7 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
                     $divpregunta.='<tr id="fila_'.$k.'">';
                     for ($l=1; $l<=$num_cabs; $l++) {
                         $log->write("entra en el td: " . $l);
-                        $divpregunta.='<td id="celda_'.$i.'_'.$k.'_'.$l.'" ><input style="width:98%" type="text" id="resp_'.$i.'_'.$k.'_'.$l.'" name="resp_'.$i.'_'.$k.'_'.$l.'" value="" /></td>';                   
+                        $divpregunta.='<td id="celda_'.$i.'_'.$k.'_'.$l.'" ><input style="font-size:1.2em;width:98%" type="text" id="resp_'.$i.'_'.$k.'_'.$l.'" name="resp_'.$i.'_'.$k.'_'.$l.'" value="" /></td>';                   
                     }
                     $divpregunta.='<td id="celda_'.$i.'_'.$k.'_img"><img id="corr_resp_'.$i.'_'.$k.'" name="corr_resp_'.$i.'_'.$k.'" src="" /></td>';
                     $divpregunta.='</tr>';
@@ -349,7 +349,7 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
                 $divpregunta.='<table style="width:100%; margin-bottom:15px;" id="tbl_resp_'.$i.'" name="tbl_resp_'.$i.'" /><thead>';
                 $divpregunta.='<tr id="fila_0">';
                 for ($l=1; $l<=5; $l++) {
-                    $divpregunta.='<th id="celda_'.$i.'_0_'.$l.'" ><input type="text"  id="cab_'.$i.'_0_'.$l.'" name="cab_'.$i.'_0_'.$l.'" value="'.$preguntas[$i - 1]->get('cab'.$l).'" /></th>';                   
+                    $divpregunta.='<th id="celda_'.$i.'_0_'.$l.'" ><input style="font-size:1.2em;" type="text"  id="cab_'.$i.'_0_'.$l.'" name="cab_'.$i.'_0_'.$l.'" value="'.$preguntas[$i - 1]->get('cab'.$l).'" /></th>';                   
                 }
                 $divpregunta.='<th>Acciones</th>';
                 $divpregunta.='</tr></thead>';
@@ -359,7 +359,7 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
                     $log->write("k: ".$k."\n");
                     $divpregunta.='<tr id="fila_'.$k.'">';
                     for ($l=1; $l<=5; $l++) {
-                        $divpregunta.='<td id="celda_'.$i.'_'.$k.'_'.$l.'" ><input type="text" name="resp_'.$i.'_'.$k.'_'.$l.'" value="'.$respuestas[$k-1]->get('resp'.$l).'" /></td>';                   
+                        $divpregunta.='<td id="celda_'.$i.'_'.$k.'_'.$l.'" ><input style="font-size:1.2em;" type="text" name="resp_'.$i.'_'.$k.'_'.$l.'" value="'.$respuestas[$k-1]->get('resp'.$l).'" /></td>';                   
                     }
                     $divpregunta.='<td id="celda_'.$i.'_'.$k.'_img"><img id="del_resp_'.$i.'_'.$k.'" name="del_resp_'.$i.'_'.$k.'" src="./imagenes/delete.gif" onclick="IERC_delFila('.$i.','. $k .')" >Eliminar</img></td>';
                     $divpregunta.='</tr>';
@@ -389,10 +389,10 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
 
         if ($buscar != 1 && $modificable == true) {
             //Si soy el profesor creadors
-            $tabla_imagenes='<input type="button" style="margin-left:90px; height:40px; width:150px;  margin-top:20px;" id="botonNA" name="botonNA" onclick="IERC_AddPregunta('.$id_ejercicio.')" value="' . get_string('IERC_addPregunta', 'ejercicios') . '"><br/>';
-            $tabla_imagenes.= '<input type="submit" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
+            $tabla_imagenes='<center><input type="button" style=" margin-top:20px;" id="botonNA" name="botonNA" onclick="IERC_AddPregunta('.$id_ejercicio.')" value="' . get_string('IERC_addPregunta', 'ejercicios') . '"><br/>';
+            $tabla_imagenes.= '<input type="submit" style="" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
 
-            $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
+            $tabla_imagenes.='<input type="button" style="" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
         } else {
             if ($buscar == 1) { //Si estoy buscand
                 $ejercicios_prof = new Ejercicios_prof_actividad();
@@ -414,18 +414,18 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
                 } else {
 
                     if ($modificable == true) { // Si el ejercicio era mio y estoy buscando
-                        $tabla_imagenes = '<center><input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
+                        $tabla_imagenes = '<center><input type="button" style="margin-top:20px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                     } else { //Si soy alumno
-                        $tabla_imagenes = '<center><input type="button" onclick="IERC_corregir('.$id_ejercicio.')" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
-                        $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
-                        $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
+                        $tabla_imagenes = '<center><input type="button" onclick="IERC_corregir('.$id_ejercicio.')" style="margin-top:20px;" id="botonResultado" value="Corregir">';
+                        $tabla_imagenes.='<input type="button" style="" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
+                        $tabla_imagenes.='<input type="button" style="" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                     }
                 }
             } else {
 
-                $tabla_imagenes = '<center><input type="button" onclick="IERC_corregir('.$id_ejercicio.')" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
-                $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
-                $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
+                $tabla_imagenes = '<center><input type="button" onclick="IERC_corregir('.$id_ejercicio.')" style="margin-top:20px;" id="botonResultado" value="Corregir">';
+                $tabla_imagenes.='<input type="button" style="" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
+                $tabla_imagenes.='<input type="button" style="" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
             }
         }
 

@@ -101,15 +101,15 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
         }
 
         //Añado el título
-        $titulo = '<h1 class="instrucciones" >' . $nombre . '</h1>';
+        $titulo = '<h1 class="instrucciones" ><u>' . $nombre . '</u><span style="font-size:0.7em;float:right;"><i>' . ucwords(strtolower(htmlentities(get_string('Tipo3','ejercicios')))) . '</i></span></h1>';
         $mform->addElement('html', $titulo);
 
         //Añado la descripción
 
-        $divdescripcion = '<div class=descover>';
+        $divdescripcion = '<div style="font-size:1.2em" class=descover>';
 
-        $divdescripcion.=nl2br((stripslashes($ejercicios_leido->get('descripcion'))));
-        $divdescripcion.=$parte . '<br/>';
+        $divdescripcion.='<i>'.nl2br((stripslashes($ejercicios_leido->get('descripcion'))));
+        $divdescripcion.=$parte . '<br/></i>';
 
         $divdescripcion.='</div>';
 
@@ -199,7 +199,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                             for ($j = 0; $j < sizeof($aleatorios_generados); $j++) {
                                 $tabla_imagenes.='<tr>';
 
-                                $tabla_imagenes.='<td><div class=descripcion>';
+                                $tabla_imagenes.='<td><div class="descripcion">';
                                 $tabla_imagenes.=$las_respuestas[$aleatorios_generados[$j] - 1] . '</div></td>';
 
                                 $tabla_imagenes.='<td><div  id="' . $aleatorios_generados[$j] . '" class="marquito"></div></td>';
@@ -247,64 +247,8 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
 
                         //botones
                         $mform->addElement('html', $tabla_imagenes);
-
-
-                        if ($buscar != 1 && $modificable == true) {
-                            //Si soy el profesor creadors
-                            $tabla_imagenes = '<input type="submit" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
-                            $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonNA" name="botonNA" onclick="botonTextoTexto()" value="' . get_string('NuevaAso', 'ejercicios') . '">';
-                            $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                        } else {
-                            if ($buscar == 1) { //Si estoy buscand
-                                $ejercicios_prof = new Ejercicios_prof_actividad();
-                                $ejercicios_del_prof = $ejercicios_prof->obtener_uno_idejercicio($id_ejercicio);
-                                if (sizeof($ejercicios_del_prof) == 0) {
-                                    $noagregado = true;
-                                } else {
-                                    $noagregado = false;
-                                }
-                                //si el ejercicio no es mio y soy profesor
-                                if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false) && ($modificable == false || $noagregado == true)) {
-                                    //boton añadir a mis ejercicios
-                                    $attributes = 'size="40"';
-                                    $mform->addElement('text', 'carpeta_ejercicio', get_string('carpeta', 'ejercicios'), $attributes);
-                                    $mform->addRule('carpeta_ejercicio', "Carpeta Necesaria", 'required', null, 'client');
-                                    $buttonarray = array();
-                                    $buttonarray[] = &$mform->createElement('submit', 'submitbutton2', get_string('BotonAñadir', 'ejercicios'));
-                                    $mform->addGroup($buttonarray, 'botones2', '', array(' '), false);
-                                } else {
-
-                                    if ($modificable == true) { // Si el ejercicio era mio y estoy buscando
-                                        $tabla_imagenes = '<center><input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                                    } else { //Si soy alumno
-                                        $tabla_imagenes = '<center><input type="button" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
-                                        $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
-                                        $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                                    }
-                                }
-                            } else {
-
-                                $tabla_imagenes = '<center><input type="button" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
-                                $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
-                                $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                            }
-                        }
-
-
-                        $tabla_imagenes .='</td>';
-                        $tabla_imagenes .='<td  width="10%">';
-                        //añado la parte de vocabulario para la conexión
-                        $tabla_imagenes .='<div><a  onclick=JavaScript:sele(' . $id . ')><img src="../vocabulario/imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im" title="' . get_string('guardar', 'vocabulario') . '"/></a></div>';
-                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=5"><img src="../vocabulario/imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im" title="' . get_string('admin_gr', 'vocabulario') . '"/></a></div>';
-                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=7"><img src="../vocabulario/imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im" title="' . get_string('admin_ic', 'vocabulario') . '"/></a></div>';
-                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=9"><img src="../vocabulario/imagenes/tipologias_textuales.png" id="id_tt_im" name="tt_im" title="' . get_string('admin_tt', 'vocabulario') . '"/> </a></div>';
-                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=11"><img src="../vocabulario/imagenes/estrategias_icon.png" id="id_ea_im" name="ea_im" title="' . get_string('admin_ea', 'vocabulario') . '"/> </a></div>';
-
-                        $tabla_imagenes .='</td>';
-
-                        $tabla_imagenes .='</table>';
-
-                        $mform->addElement('html', $tabla_imagenes);
+                        
+                        $boton = '<input type="button" style="" id="botonNA" name="botonNA" onclick="botonTextoTexto()" value="' . get_string('NuevaAso', 'ejercicios') . '">';
 
                         break;
                     case 2: //Es de tipo audio la respuesta
@@ -458,66 +402,8 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
 
                         //botones
                         $mform->addElement('html', $tabla_imagenes);
-
-
-                        if ($buscar != 1 && $modificable == true) {
-                            //Si soy el profesor creadors
-                            $tabla_imagenes = '<input type="submit" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
-                            $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonTextoAudio" name="botonTextoAudio" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonASTextoAudio(' . $id_ejercicio . ')">';
-                            //echo "finnnnnnnnn";
-                            $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                        } else {
-                            if ($buscar == 1) { //Si estoy buscand
-                                $ejercicios_prof = new Ejercicios_prof_actividad();
-                                $ejercicios_del_prof = $ejercicios_prof->obtener_uno_idejercicio($id_ejercicio);
-                                if (sizeof($ejercicios_del_prof) == 0) {
-                                    $noagregado = true;
-                                } else {
-                                    $noagregado = false;
-                                }
-                                //si el ejercicio no es mio y soy profesor
-                                if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false) && ($modificable == false || $noagregado == true)) {
-                                    //boton añadir a mis ejercicios
-                                    $attributes = 'size="40"';
-                                    $mform->addElement('text', 'carpeta_ejercicio', get_string('carpeta', 'ejercicios'), $attributes);
-                                    $mform->addRule('carpeta_ejercicio', "Carpeta Necesaria", 'required', null, 'client');
-                                    $buttonarray = array();
-                                    $buttonarray[] = &$mform->createElement('submit', 'submitbutton2', get_string('BotonAñadir', 'ejercicios'));
-                                    $mform->addGroup($buttonarray, 'botones2', '', array(' '), false);
-                                } else {
-
-                                    if ($modificable == true) { // Si el ejercicio era mio y estoy buscando
-                                        $tabla_imagenes = '<center><input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                                    } else { //Si soy alumno
-                                        $tabla_imagenes = '<center><input type="button" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
-                                        $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
-                                        $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                                    }
-                                }
-                            } else {
-
-                                $tabla_imagenes = '<center><input type="button" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
-                                $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
-                                $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                            }
-                        }
-
-
-                        $tabla_imagenes .='</td>';
-                        $tabla_imagenes .='<td  width="10%">';
-                        //añado la parte de vocabulario para la conexión
-                        $tabla_imagenes .='<div><a  onclick=JavaScript:sele(' . $id . ')><img src="../vocabulario/imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im" title="' . get_string('guardar', 'vocabulario') . '"/></a></div>';
-                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=5"><img src="../vocabulario/imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im" title="' . get_string('admin_gr', 'vocabulario') . '"/></a></div>';
-                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=7"><img src="../vocabulario/imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im" title="' . get_string('admin_ic', 'vocabulario') . '"/></a></div>';
-                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=9"><img src="../vocabulario/imagenes/tipologias_textuales.png" id="id_tt_im" name="tt_im" title="' . get_string('admin_tt', 'vocabulario') . '"/> </a></div>';
-                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=11"><img src="../vocabulario/imagenes/estrategias_icon.png" id="id_ea_im" name="ea_im" title="' . get_string('admin_ea', 'vocabulario') . '"/> </a></div>';
-
-                        $tabla_imagenes .='</td>';
-
-                        $tabla_imagenes .='</table>';
-
-                        $mform->addElement('html', $tabla_imagenes);
-
+                        
+                        $boton = '<input type="button" style="" id="botonTextoAudio" name="botonTextoAudio" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonASTextoAudio(' . $id_ejercicio . ')">';
                         break;
                     case 3: //Es de tipo video la respusta
 
@@ -676,68 +562,8 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
 
                         //botones
                         $mform->addElement('html', $tabla_imagenes);
-                        //echo "botones";
-                        if ($buscar != 1 && $modificable == true) {
-                            //Si soy el profesor creadors
-                            $tabla_imagenes = '<input type="submit" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
-                            $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonTextoVideo" name="botonTextoVideo" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonASTextoVideo(' . $id_ejercicio . ')">';
-                            //echo "finnnnnnnnn";
-                            $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                        } else {
-                            if ($buscar == 1) { //Si estoy buscand
-                                $ejercicios_prof = new Ejercicios_prof_actividad();
-                                $ejercicios_del_prof = $ejercicios_prof->obtener_uno_idejercicio($id_ejercicio);
-                                if (sizeof($ejercicios_del_prof) == 0) {
-                                    $noagregado = true;
-                                } else {
-                                    $noagregado = false;
-                                }
-                                //si el ejercicio no es mio y soy profesor
-                                if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false) && ($modificable == false || $noagregado == true)) {
-                                    //boton añadir a mis ejercicios
-                                    $attributes = 'size="40"';
-                                    $mform->addElement('text', 'carpeta_ejercicio', get_string('carpeta', 'ejercicios'), $attributes);
-                                    $mform->addRule('carpeta_ejercicio', "Carpeta Necesaria", 'required', null, 'client');
-                                    $buttonarray = array();
-                                    $buttonarray[] = &$mform->createElement('submit', 'submitbutton2', get_string('BotonAñadir', 'ejercicios'));
-                                    $mform->addGroup($buttonarray, 'botones2', '', array(' '), false);
-                                } else {
-
-                                    if ($modificable == true) { // Si el ejercicio era mio y estoy buscando
-                                        $tabla_imagenes = '<center><input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                                    } else { //Si soy alumno
-                                        $tabla_imagenes = '<center><input type="button" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
-                                        $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
-                                        $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                                    }
-                                }
-                            } else {
-
-                                $tabla_imagenes = '<center><input type="button" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
-                                $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
-                                $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                            }
-
-                            //echo "dentro del bucle infernal";
-                        }
-
-                        //echo "no muero";
-                        $tabla_imagenes .='</td>';
-                        $tabla_imagenes .='<td  width="10%">';
-                        //añado la parte de vocabulario para la conexión
-                        $tabla_imagenes .='<div><a  onclick=JavaScript:sele(' . $id . ')><img src="../vocabulario/imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im" title="' . get_string('guardar', 'vocabulario') . '"/></a></div>';
-                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=5"><img src="../vocabulario/imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im" title="' . get_string('admin_gr', 'vocabulario') . '"/></a></div>';
-                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=7"><img src="../vocabulario/imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im" title="' . get_string('admin_ic', 'vocabulario') . '"/></a></div>';
-                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=9"><img src="../vocabulario/imagenes/tipologias_textuales.png" id="id_tt_im" name="tt_im" title="' . get_string('admin_tt', 'vocabulario') . '"/> </a></div>';
-                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=11"><img src="../vocabulario/imagenes/estrategias_icon.png" id="id_ea_im" name="ea_im" title="' . get_string('admin_ea', 'vocabulario') . '"/> </a></div>';
-
-                        $tabla_imagenes .='</td>';
-
-                        $tabla_imagenes .='</table>';
-
-                        $mform->addElement('html', $tabla_imagenes);
-                        print_r('final');
-
+                        
+                        $boton = '<input type="button" style="" id="botonTextoVideo" name="botonTextoVideo" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonASTextoVideo(' . $id_ejercicio . ')">';
                         break;
                     case 4: //Es una imagen la respuesta
 
@@ -885,66 +711,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                         //botones
                         $mform->addElement('html', $tabla_imagenes);
 
-
-                        if ($buscar != 1 && $modificable == true) {
-                            //Si soy el profesor creadors
-                            $tabla_imagenes = '<input type="submit" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
-                            $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonTextoImagen" name="botonTextoImagen" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonASTextoImagen(' . $id_ejercicio . ')">';
-                            $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                        } else {
-                            if ($buscar == 1) { //Si estoy buscand
-                                $ejercicios_prof = new Ejercicios_prof_actividad();
-                                $ejercicios_del_prof = $ejercicios_prof->obtener_uno_idejercicio($id_ejercicio);
-                                if (sizeof($ejercicios_del_prof) == 0) {
-                                    $noagregado = true;
-                                } else {
-                                    $noagregado = false;
-                                }
-                                //si el ejercicio no es mio y soy profesor
-                                if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false) && ($modificable == false || $noagregado == true)) {
-                                    //boton añadir a mis ejercicios
-                                    $attributes = 'size="40"';
-                                    $mform->addElement('text', 'carpeta_ejercicio', get_string('carpeta', 'ejercicios'), $attributes);
-                                    $mform->addRule('carpeta_ejercicio', "Carpeta Necesaria", 'required', null, 'client');
-                                    $buttonarray = array();
-                                    $buttonarray[] = &$mform->createElement('submit', 'submitbutton2', get_string('BotonAñadir', 'ejercicios'));
-                                    $mform->addGroup($buttonarray, 'botones2', '', array(' '), false);
-                                } else {
-
-                                    if ($modificable == true) { // Si el ejercicio era mio y estoy buscando
-                                        $tabla_imagenes = '<center><input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                                    } else { //Si soy alumno
-                                        $tabla_imagenes = '<center><input type="button" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
-                                        $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
-                                        $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                                    }
-                                }
-                            } else {
-
-                                $tabla_imagenes = '<center><input type="button" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
-                                $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
-                                $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                            }
-                        }
-
-
-                        $tabla_imagenes .='</td>';
-                        $tabla_imagenes .='<td  width="10%">';
-                        //añado la parte de vocabulario para la conexión
-                        $tabla_imagenes .='<div><a  onclick=JavaScript:sele(' . $id . ')><img src="../vocabulario/imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im" title="' . get_string('guardar', 'vocabulario') . '"/></a></div>';
-                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=5"><img src="../vocabulario/imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im" title="' . get_string('admin_gr', 'vocabulario') . '"/></a></div>';
-                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=7"><img src="../vocabulario/imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im" title="' . get_string('admin_ic', 'vocabulario') . '"/></a></div>';
-                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=9"><img src="../vocabulario/imagenes/tipologias_textuales.png" id="id_tt_im" name="tt_im" title="' . get_string('admin_tt', 'vocabulario') . '"/> </a></div>';
-                        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=11"><img src="../vocabulario/imagenes/estrategias_icon.png" id="id_ea_im" name="ea_im" title="' . get_string('admin_ea', 'vocabulario') . '"/> </a></div>';
-
-                        $tabla_imagenes .='</td>';
-
-                        $tabla_imagenes .='</table>';
-
-                        $mform->addElement('html', $tabla_imagenes);
-
-
-
+                        $boton = '<input type="button" style="" id="botonTextoImagen" name="botonTextoImagen" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonASTextoImagen(' . $id_ejercicio . ')">';
                         break;
                 }
                 break;
@@ -1100,67 +867,9 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
 
                 //botones
                 $mform->addElement('html', $tabla_imagenes);
+        
 
-
-                if ($buscar != 1 && $modificable == true) {
-                    //Si soy el profesor creadors
-                    $tabla_imagenes = '<input type="submit" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
-                    $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonTextoAudio" name="botonTextoAudio" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonASTextoAudio(' . $id_ejercicio . ')">';
-                    //echo "finnnnnnnnn";
-                    $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                } else {
-                    if ($buscar == 1) { //Si estoy buscand
-                        $ejercicios_prof = new Ejercicios_prof_actividad();
-                        $ejercicios_del_prof = $ejercicios_prof->obtener_uno_idejercicio($id_ejercicio);
-                        if (sizeof($ejercicios_del_prof) == 0) {
-                            $noagregado = true;
-                        } else {
-                            $noagregado = false;
-                        }
-                        //si el ejercicio no es mio y soy profesor
-                        if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false) && ($modificable == false || $noagregado == true)) {
-                            //boton añadir a mis ejercicios
-                            $attributes = 'size="40"';
-                            $mform->addElement('text', 'carpeta_ejercicio', get_string('carpeta', 'ejercicios'), $attributes);
-                            $mform->addRule('carpeta_ejercicio', "Carpeta Necesaria", 'required', null, 'client');
-                            $buttonarray = array();
-                            $buttonarray[] = &$mform->createElement('submit', 'submitbutton2', get_string('BotonAñadir', 'ejercicios'));
-                            $mform->addGroup($buttonarray, 'botones2', '', array(' '), false);
-                        } else {
-
-                            if ($modificable == true) { // Si el ejercicio era mio y estoy buscando
-                                $tabla_imagenes = '<center><input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                            } else { //Si soy alumno
-                                $tabla_imagenes = '<center><input type="button" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
-                                $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
-                                $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                            }
-                        }
-                    } else {
-
-                        $tabla_imagenes = '<center><input type="button" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
-                        $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
-                        $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                    }
-                }
-
-
-                $tabla_imagenes .='</td>';
-                $tabla_imagenes .='<td  width="10%">';
-                //añado la parte de vocabulario para la conexión
-                $tabla_imagenes .='<div><a  onclick=JavaScript:sele(' . $id . ')><img src="../vocabulario/imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im" title="' . get_string('guardar', 'vocabulario') . '"/></a></div>';
-                $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=5"><img src="../vocabulario/imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im" title="' . get_string('admin_gr', 'vocabulario') . '"/></a></div>';
-                $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=7"><img src="../vocabulario/imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im" title="' . get_string('admin_ic', 'vocabulario') . '"/></a></div>';
-                $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=9"><img src="../vocabulario/imagenes/tipologias_textuales.png" id="id_tt_im" name="tt_im" title="' . get_string('admin_tt', 'vocabulario') . '"/> </a></div>';
-                $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=11"><img src="../vocabulario/imagenes/estrategias_icon.png" id="id_ea_im" name="ea_im" title="' . get_string('admin_ea', 'vocabulario') . '"/> </a></div>';
-
-                $tabla_imagenes .='</td>';
-
-                $tabla_imagenes .='</table>';
-
-                $mform->addElement('html', $tabla_imagenes);
-
-
+                $boton = '<input type="button" style="" id="botonTextoAudio" name="botonTextoAudio" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonASTextoAudio(' . $id_ejercicio . ')">';
                 break;
 
             case 3: //Es de tipo video la pregunta
@@ -1320,67 +1029,8 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
 
                 //botones
                 $mform->addElement('html', $tabla_imagenes);
-                //echo "botones";
-                if ($buscar != 1 && $modificable == true) {
-                    //Si soy el profesor creadors
-                    $tabla_imagenes = '<input type="submit" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
-                    $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonTextoVideo" name="botonTextoVideo" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonASTextoVideo(' . $id_ejercicio . ')">';
-                    //echo "finnnnnnnnn";
-                    $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                } else {
-                    if ($buscar == 1) { //Si estoy buscand
-                        $ejercicios_prof = new Ejercicios_prof_actividad();
-                        $ejercicios_del_prof = $ejercicios_prof->obtener_uno_idejercicio($id_ejercicio);
-                        if (sizeof($ejercicios_del_prof) == 0) {
-                            $noagregado = true;
-                        } else {
-                            $noagregado = false;
-                        }
-                        //si el ejercicio no es mio y soy profesor
-                        if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false) && ($modificable == false || $noagregado == true)) {
-                            //boton añadir a mis ejercicios
-                            $attributes = 'size="40"';
-                            $mform->addElement('text', 'carpeta_ejercicio', get_string('carpeta', 'ejercicios'), $attributes);
-                            $mform->addRule('carpeta_ejercicio', "Carpeta Necesaria", 'required', null, 'client');
-                            $buttonarray = array();
-                            $buttonarray[] = &$mform->createElement('submit', 'submitbutton2', get_string('BotonAñadir', 'ejercicios'));
-                            $mform->addGroup($buttonarray, 'botones2', '', array(' '), false);
-                        } else {
-
-                            if ($modificable == true) { // Si el ejercicio era mio y estoy buscando
-                                $tabla_imagenes = '<center><input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                            } else { //Si soy alumno
-                                $tabla_imagenes = '<center><input type="button" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
-                                $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
-                                $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                            }
-                        }
-                    } else {
-
-                        $tabla_imagenes = '<center><input type="button" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
-                        $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
-                        $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                    }
-                    
-                    //echo "dentro del bucle infernal";
-                }
-
-                //echo "no muero";
-                $tabla_imagenes .='</td>';
-                $tabla_imagenes .='<td  width="10%">';
-                //añado la parte de vocabulario para la conexión
-                $tabla_imagenes .='<div><a  onclick=JavaScript:sele(' . $id . ')><img src="../vocabulario/imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im" title="' . get_string('guardar', 'vocabulario') . '"/></a></div>';
-                $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=5"><img src="../vocabulario/imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im" title="' . get_string('admin_gr', 'vocabulario') . '"/></a></div>';
-                $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=7"><img src="../vocabulario/imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im" title="' . get_string('admin_ic', 'vocabulario') . '"/></a></div>';
-                $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=9"><img src="../vocabulario/imagenes/tipologias_textuales.png" id="id_tt_im" name="tt_im" title="' . get_string('admin_tt', 'vocabulario') . '"/> </a></div>';
-                $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=11"><img src="../vocabulario/imagenes/estrategias_icon.png" id="id_ea_im" name="ea_im" title="' . get_string('admin_ea', 'vocabulario') . '"/> </a></div>';
-
-                $tabla_imagenes .='</td>';
-
-                $tabla_imagenes .='</table>';
-
-                $mform->addElement('html', $tabla_imagenes);
-                print_r('final');
+                                
+                $boton = '<input type="button" style="margin-top:20px;" id="botonTextoVideo" name="botonTextoVideo" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonASTextoVideo(' . $id_ejercicio . ')">';
                 break;
             case 4: //Es una imagen la pregunta
                       $mform->addElement('html', '<script src="./js/ajaxupload.js" type="text/javascript"></script>');
@@ -1529,70 +1179,72 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                         $mform->addElement('html', $tabla_imagenes);
 
 
-                        if ($buscar != 1 && $modificable == true) {
-                            //Si soy el profesor creadors
-                            $tabla_imagenes = '<input type="submit" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
-                            $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonTextoImagen" name="botonTextoImagen" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonASTextoImagen(' . $id_ejercicio . ')">';
-                            $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                        } else {
-                            if ($buscar == 1) { //Si estoy buscand
-                                $ejercicios_prof = new Ejercicios_prof_actividad();
-                                $ejercicios_del_prof = $ejercicios_prof->obtener_uno_idejercicio($id_ejercicio);
-                                if (sizeof($ejercicios_del_prof) == 0) {
-                                    $noagregado = true;
-                                } else {
-                                    $noagregado = false;
-                                }
-                                //si el ejercicio no es mio y soy profesor
-                                if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false) && ($modificable == false || $noagregado == true)) {
-                                    //boton aÃ±adir a mis ejercicios
-                                    $attributes = 'size="40"';
-                                    $mform->addElement('text', 'carpeta_ejercicio', get_string('carpeta', 'ejercicios'), $attributes);
-                                    $mform->addRule('carpeta_ejercicio', "Carpeta Necesaria", 'required', null, 'client');
-                                    $buttonarray = array();
-                                    $buttonarray[] = &$mform->createElement('submit', 'submitbutton2', get_string('BotonAÃ±adir', 'ejercicios'));
-                                    $mform->addGroup($buttonarray, 'botones2', '', array(' '), false);
-                                } else {
-
-                                    if ($modificable == true) { // Si el ejercicio era mio y estoy buscando
-                                        $tabla_imagenes = '<center><input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                                    } else { //Si soy alumno
-                                        $tabla_imagenes = '<center><input type="button" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
-                                        $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
-                                        $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                                    }
-                                }
-                            } else {
-
-                                $tabla_imagenes = '<center><input type="button" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
-                                $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
-                                $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-                            }
-                        }
-
-
-                        $tabla_imagenes .='</td>';
-                        $tabla_imagenes .='<td  width="10%">';
-                        //Para alumnos
-                        if ($modificable==false) {
-                            //aÃ±ado la parte de vocabulario para la conexiÃ³n
-                            $tabla_imagenes .='<div><a  onclick=JavaScript:sele(' . $id . ')><img src="../vocabulario/imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im" title="' . get_string('guardar', 'vocabulario') . '"/></a></div>';
-                            $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=5"><img src="../vocabulario/imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im" title="' . get_string('admin_gr', 'vocabulario') . '"/></a></div>';
-                            $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=7"><img src="../vocabulario/imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im" title="' . get_string('admin_ic', 'vocabulario') . '"/></a></div>';
-                            $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=9"><img src="../vocabulario/imagenes/tipologias_textuales.png" id="id_tt_im" name="tt_im" title="' . get_string('admin_tt', 'vocabulario') . '"/> </a></div>';
-                            $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=11"><img src="../vocabulario/imagenes/estrategias_icon.png" id="id_ea_im" name="ea_im" title="' . get_string('admin_ea', 'vocabulario') . '"/> </a></div>';
-                        }
-
-                        $tabla_imagenes .='</td>';
-
-                        $tabla_imagenes .='</table>';
-
-                        $mform->addElement('html', $tabla_imagenes);
+                        $boton = '<input type="button" style="  margin-top:20px;" id="botonTextoImagen" name="botonTextoImagen" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonASTextoImagen(' . $id_ejercicio . ')">';
 
 
 
                 break;
         }
+        
+        if ($buscar != 1 && $modificable == true) {
+                //Si soy el profesor creadors
+                $tabla_imagenes = '<center><input type="submit" style="margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
+                $tabla_imagenes.=$boton;
+                $tabla_imagenes.='<input type="button" style="" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
+            } else {
+                if ($buscar == 1) { //Si estoy buscand
+                    $ejercicios_prof = new Ejercicios_prof_actividad();
+                    $ejercicios_del_prof = $ejercicios_prof->obtener_uno_idejercicio($id_ejercicio);
+                    if (sizeof($ejercicios_del_prof) == 0) {
+                        $noagregado = true;
+                    } else {
+                        $noagregado = false;
+                    }
+                    //si el ejercicio no es mio y soy profesor
+                    if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false) && ($modificable == false || $noagregado == true)) {
+                        //boton aÃ±adir a mis ejercicios
+                        $attributes = 'size="40"';
+                        $mform->addElement('text', 'carpeta_ejercicio', get_string('carpeta', 'ejercicios'), $attributes);
+                        $mform->addRule('carpeta_ejercicio', "Carpeta Necesaria", 'required', null, 'client');
+                        $buttonarray = array();
+                        $buttonarray[] = &$mform->createElement('submit', 'submitbutton2', get_string('BotonAÃ±adir', 'ejercicios'));
+                        $mform->addGroup($buttonarray, 'botones2', '', array(' '), false);
+                    } else {
+
+                        if ($modificable == true) { // Si el ejercicio era mio y estoy buscando
+                            $tabla_imagenes = '<center><input type="button" style="" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
+                        } else { //Si soy alumno
+                            $tabla_imagenes = '<center><input type="button" style="" id="botonResultado" value="Corregir">';
+                            $tabla_imagenes.='<input type="button" style="" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
+                            $tabla_imagenes.='<input type="button" style="" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
+                        }
+                    }
+                } else {
+
+                    $tabla_imagenes = '<center><input type="button" style="" id="botonResultado" value="Corregir">';
+                    $tabla_imagenes.='<input type="button" style=";" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
+                    $tabla_imagenes.='<input type="button" style="" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
+                }
+            }
+
+
+            $tabla_imagenes .='</td>';
+            $tabla_imagenes .='<td  width="10%">';
+            //Para alumnos
+            if ($modificable==false) {
+                //aÃ±ado la parte de vocabulario para la conexiÃ³n
+                $tabla_imagenes .='<div><a  onclick=JavaScript:sele(' . $id . ')><img src="../vocabulario/imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im" title="' . get_string('guardar', 'vocabulario') . '"/></a></div>';
+                $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=5"><img src="../vocabulario/imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im" title="' . get_string('admin_gr', 'vocabulario') . '"/></a></div>';
+                $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=7"><img src="../vocabulario/imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im" title="' . get_string('admin_ic', 'vocabulario') . '"/></a></div>';
+                $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=9"><img src="../vocabulario/imagenes/tipologias_textuales.png" id="id_tt_im" name="tt_im" title="' . get_string('admin_tt', 'vocabulario') . '"/> </a></div>';
+                $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=11"><img src="../vocabulario/imagenes/estrategias_icon.png" id="id_ea_im" name="ea_im" title="' . get_string('admin_ea', 'vocabulario') . '"/> </a></div>';
+            }
+
+            $tabla_imagenes .='</td>';
+
+            $tabla_imagenes .='</table>';
+
+            $mform->addElement('html', $tabla_imagenes);
         
         //echo "termino del todo";
     }

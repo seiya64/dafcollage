@@ -109,17 +109,14 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
             $modificable = false;
         }
 
-        $titulo = '<h1>' . $nombre . '</h1>';
+        $titulo = '<h1 class="instrucciones" ><u>' . $nombre . '</u><span style="font-size:0.7em;float:right;"><i>' . ucwords(strtolower(htmlentities(get_string('Tipo2','ejercicios')))) . '</i></span></h1>';
         $mform->addElement('html', $titulo);
 
 
 
-        $divdescripcion = '<div class=descover>';
-
-
-
-        $divdescripcion.=nl2br((stripslashes($ejercicios_leido->get('descripcion'))));
-        $divdescripcion.=$parte . '<br/>';
+        $divdescripcion = '<div style="font-size:1.2em" class=descover>';
+        $divdescripcion.='<i>'.nl2br((stripslashes($ejercicios_leido->get('descripcion'))));
+        $divdescripcion.=$parte . '<br/></i>';
 
         $divdescripcion.='</div>';
 
@@ -133,7 +130,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
             if ($buscar == 1 || $modificable == false) { //Para que no pueda editarlo
                 $divtexto = '<div class="desctexto" name="texto" id="texto"><div class="margenes">' . nl2br((stripslashes($el_texto_origen->get('texto')))) . '</div></div>';
             } else {
-                $divtexto = '<textarea class="adaptHeightInput" name="texto" id="texto">' . $el_texto_origen->get('texto') . '</textarea>';
+                $divtexto = '<textarea  class="adaptHeightInput" name="texto" id="texto">' . $el_texto_origen->get('texto') . '</textarea>';
             }
 
             $mform->addElement('html', $divtexto);
@@ -315,8 +312,8 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                     if ($buscar != 1 && $modificable == true) {
                         //Pinto los botones
                         //boton añadir pregunta
-                        $botones = '<input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;" id="id_Añadir" value="Añadir Pregunta" onclick="javascript:botonMasPreguntas()">';
-                        $botones.='<input type="submit" style="height:30px; width:100px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
+                        $botones = '<center><input type="button" style="margin-top:20px;" id="id_Añadir" value="Añadir Pregunta" onclick="javascript:botonMasPreguntas()">';
+                        $botones.='<input type="submit" style="margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '"></center>';
                         $mform->addElement('html', $botones);
                         /* $buttonarray = array();
                           $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('BotonGuardar','ejercicios'));
@@ -343,17 +340,17 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                                 $buttonarray[] = &$mform->createElement('submit', 'submitbutton2', get_string('BotonAñadir', 'ejercicios'));
                                 $mform->addGroup($buttonarray, 'botones2', '', array(' '), false);
                                 //boton menu principal
-                                $tabla_menu = '<center><input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal(' . $id . ')" /></center>';
+                                $tabla_menu = '<center><input type="button" style="margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal(' . $id . ')" /></center>';
 
                                 $mform->addElement('html', $tabla_menu);
                             } else {
 
                                 if ($modificable == true) { // Si el ejercicio era mio y estoy buscando
-                                    $tabla_menu = '<center><input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal(' . $id . ')" /></center>';
+                                    $tabla_menu = '<center><input type="button" style="margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal(' . $id . ')" /></center>';
 
                                     $mform->addElement('html', $tabla_menu);
                                 } else {//soy alumno
-                                    $tabla_menu = '<center><input type="button" style="height:30px; width:100px; margin-left:175px;"  value="Corregir" onClick="javascript:botonCorregirMultiChoice(' . $id . ',' . $npreg . ')"/> <input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal(' . $id . ')" /></center>';
+                                    $tabla_menu = '<center><input type="button" style="margin-top:20px;"  value="Corregir" onClick="javascript:botonCorregirMultiChoice(' . $id . ',' . $npreg . ')"/> <input type="button" style=""  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal(' . $id . ')" /></center>';
 
                                     $mform->addElement('html', $tabla_menu);
                                 }
@@ -362,13 +359,13 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                             // compruebo si soy profesor
                             if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false)) {
 
-                                $tabla_menu = '<center><input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal(' . $id . ')" /></center>';
+                                $tabla_menu = '<center><input type="button" style="margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal(' . $id . ')" /></center>';
 
                                 $mform->addElement('html', $tabla_menu);
                             } else {
 
 
-                                $tabla_menu = '<center><input type="button" style="height:30px; width:100px; margin-left:175px;"  value="Corregir" onClick="javascript:botonCorregirMultiChoice(' . $id . ',' . $npreg . ')"/> <input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Atras" value="Atrás" onClick="javascript:botonAtras(' . $id . ')" /><input type="button" style="height:30px; width:100px; margin-left:30px; margin-top:20px;"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal(' . $id . ')" /></center>';
+                                $tabla_menu = '<center><input type="button" style="margin-top:20px;"  value="Corregir" onClick="javascript:botonCorregirMultiChoice(' . $id . ',' . $npreg . ')"/> <input type="button" style=""  id="id_Atras" value="Atrás" onClick="javascript:botonAtras(' . $id . ')" /><input type="button" style=""  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal(' . $id . ')" /></center>';
 
                                 $mform->addElement('html', $tabla_menu);
                             }

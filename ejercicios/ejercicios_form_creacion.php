@@ -172,7 +172,9 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
             for($i=0;$i<$CONST_MAX_PREGUNTAS;$i++){
               $numimagenes[] = $i+1;
              }
-           $mform->addElement('select', 'numeropreguntas', get_string('numeropreguntas', 'ejercicios'), $numimagenes);
+           if ($tipocreacion==5) {
+                $mform->addElement('select', 'numeropreguntas', get_string('numeropreguntas', 'ejercicios'), $numimagenes);
+           }
            
            //Seleccione el tipo de archivo respuesta (texto/ audio/ vídeo/ foto)
        
@@ -474,7 +476,7 @@ class mod_ejercicios_creando_ejercicio_texto extends moodleform_mod {
         $mform->addElement('html',$titulo);
         
         $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
-         $titulo = '<h2>'. nl2br(get_string('IERC_descripcion','ejercicios')) . ' <br/><i><u>'.nl2br($ejercicioGeneral->get('descripcion')).'</u></i></h2>';
+         $titulo = '<div style="font-size:1.2em" >'. nl2br(get_string('IERC_descripcion','ejercicios')) . ' <br/><i><u>'.nl2br($ejercicioGeneral->get('descripcion')).'</u></i></div>';
          $mform->addElement('html',$titulo);
 
          $oculto='<input type="hidden" name="tipocreacion" id="tipocreacion" value="'.$tipocreacion.'"/>';
@@ -546,7 +548,7 @@ class mod_ejercicios_creando_ejercicio_texto extends moodleform_mod {
 
 
             $buttonarray = array();
-            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"onclick=obtenernumeroRespuestas('$p');");
+            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"style='margin-left:30%;' onclick=obtenernumeroRespuestas('$p');");
             $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
 
 
@@ -597,7 +599,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
         $mform->addElement('html',$titulo);
         
         $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
-         $titulo = '<h2>'. nl2br(get_string('IERC_descripcion','ejercicios')) . ' <br/><i><u>'.nl2br($ejercicioGeneral->get('descripcion')).'</u></i></h2>';
+         $titulo = '<div style="font-size:1.2em">'. nl2br(get_string('IERC_descripcion','ejercicios')) . ' <br/><i><u>'.nl2br($ejercicioGeneral->get('descripcion')).'</u></i></div>';
          $mform->addElement('html',$titulo);
 
          $oculto='<input type="hidden" name="tipocreacion" id="tipocreacion" value="'.$tipocreacion.'"/>';
@@ -790,7 +792,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
 
 
             $buttonarray = array();
-            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"onclick=obtenernumeroRespuestas('$p');");
+            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"style='margin-left:30%;' onclick=obtenernumeroRespuestas('$p');");
             $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
 
 
@@ -840,7 +842,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
         $mform->addElement('html',$titulo);
         
         $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
-         $titulo = '<h2>'. nl2br(get_string('IERC_descripcion','ejercicios')) . ' <br/><i><u>'.nl2br($ejercicioGeneral->get('descripcion')).'</u></i></h2>';
+         $titulo = '<div style="font-size:1.2em">'. nl2br(get_string('IERC_descripcion','ejercicios')) . ' <br/><i><u>'.nl2br($ejercicioGeneral->get('descripcion')).'</u></i></div>';
          $mform->addElement('html',$titulo);
 
          $oculto='<input type="hidden" name="tipocreacion" id="tipocreacion" value="'.$tipocreacion.'"/>';
@@ -1091,7 +1093,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
 
 
             $buttonarray = array();
-            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"onclick=obtenernumeroRespuestas('$p');");
+            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"style='margin-left:30%;' onclick=obtenernumeroRespuestas('$p');");
             $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
 
 
@@ -1140,7 +1142,7 @@ class mod_ejercicios_creando_ejercicio_texto_hueco extends moodleform_mod {
         $mform->addElement('html',$titulo);
         
         $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
-         $titulo = '<h2>'. nl2br(get_string('IERC_descripcion','ejercicios')) . ' <br/><i><u>'.nl2br($ejercicioGeneral->get('descripcion')).'</u></i></h2>';
+         $titulo = '<div style="font-size:1.2em">'. nl2br(get_string('IERC_descripcion','ejercicios')) . ' <br/><i><u>'.nl2br($ejercicioGeneral->get('descripcion')).'</u></i></div>';
          $mform->addElement('html',$titulo);
 
          $oculto='<input type="hidden" name="tipocreacion" id="tipocreacion" value="'.$tipocreacion.'"/>';
@@ -1211,7 +1213,7 @@ class mod_ejercicios_creando_ejercicio_texto_hueco extends moodleform_mod {
 
 
             $buttonarray = array();
-            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"onclick=obtenernumeroRespuestas('$p');");
+            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"style='margin-left:30%;' onclick=obtenernumeroRespuestas('$p');");
             $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
 
 
@@ -1267,7 +1269,7 @@ class mod_ejercicios_creando_ejercicio_ordenar_elementos extends moodleform_mod 
          
        
        $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
-         $titulo = '<h2>'. nl2br(get_string('IERC_descripcion','ejercicios')) . ' <br/><i><u>'.nl2br($ejercicioGeneral->get('descripcion')).'</u></i></h2>';
+         $titulo = '<div style="font-size:1.2em">'. nl2br(get_string('IERC_descripcion','ejercicios')) . ' <br/><i><u>'.nl2br($ejercicioGeneral->get('descripcion')).'</u></i></div>';
          $mform->addElement('html',$titulo);
        
        
@@ -1389,7 +1391,7 @@ class mod_ejercicios_creando_ejercicio_identificar_elementos extends moodleform_
         $mform->addElement('html',$titulo);
         
         $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
-         $titulo = '<h2>'. nl2br(get_string('IERC_descripcion','ejercicios')) . ' <br/><i><u>'.nl2br($ejercicioGeneral->get('descripcion')).'</u></i></h2>';
+         $titulo = '<div style="font-size:1.2em">'. nl2br(get_string('IERC_descripcion','ejercicios')) . ' <br/><i><u>'.nl2br($ejercicioGeneral->get('descripcion')).'</u></i></div>';
          $mform->addElement('html',$titulo);
 
          $oculto='<input type="hidden" name="tipocreacion" id="tipocreacion" value="'.$tipocreacion.'"/>';
@@ -1462,7 +1464,7 @@ class mod_ejercicios_creando_ejercicio_identificar_elementos extends moodleform_
 
 
             $buttonarray = array();
-            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"onclick=obtenernumeroRespuestas('$p');");
+            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"style='margin-left:30%;' onclick=obtenernumeroRespuestas('$p');");
             $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
 
 
@@ -1519,7 +1521,7 @@ class mod_ejercicios_creando_ejercicio_ierc extends moodleform_mod {
          
          //Pintar descripcion
          $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
-         $titulo = '<h2>'. nl2br(get_string('IERC_descripcion','ejercicios')) . ' <br/><i><u>'.nl2br($ejercicioGeneral->get('descripcion')).'</u></i></h2>';
+         $titulo = '<div style="font-size:1.2em">'. nl2br(get_string('IERC_descripcion','ejercicios')) . ' <br/><i><u>'.nl2br($ejercicioGeneral->get('descripcion')).'</u></i></div>';
          $mform->addElement('html',$titulo);
          
         /*switch($tipoorigen){
@@ -1632,7 +1634,7 @@ class mod_ejercicios_creando_ejercicio_ierc extends moodleform_mod {
 
 
             $buttonarray = array();
-            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"onclick=obtenernumeroRespuestas('$p');");
+            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"style='margin-left:30%;' onclick=obtenernumeroRespuestas('$p');");
             $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
 
 

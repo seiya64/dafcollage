@@ -40,21 +40,31 @@
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details. */
 
+
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 require_once("../../config.php");
 require_once("lib.php");
 require_once("ejercicios_clase_general.php");
 require_once("ejercicios_form_creacion.php");
 require_once("clase_log.php");
 
+
+
+$log = new Log("log_creacion_IERC.txt");
+
 // Crea ejercicio ahora
 $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
 $carpeta = unserialize($_SESSION['cosasProfe']);
 $id_ejercicio = $ejercicioGeneral->insertar();
+$log->write("insertar ejercicio: " . mysql_error());
 
 // Y para el profesor tambien
 //Tengo que asignarle el ejercicio al profesor 
 $ejercicio_profesor = new Ejercicios_prof_actividad($ejercicioGeneral->get('id'),$ejercicioGeneral->get('id_creador'),$id_ejercicio,$carpeta);
 $ejercicio_profesor->insertar();
+$log->write("insertar profesor: " . mysql_error());
 
 //Recoger parametros que hacen falta
 $id_curso = optional_param('id_curso', 0, PARAM_INT);
@@ -64,11 +74,18 @@ $tipocreacion = optional_param('tipocreacion', 0, PARAM_INT);
 $tipo_origen = optional_param('tipo_origen', 0, PARAM_INT);
 $tipo_respuesta = optional_param('tr', 0, PARAM_INT);
 
+$log->write("id_curso: " . $id_curso);
+$log->write("p: " . $p);
+$log->write("tipocreacion: " . $tipocreacion);
+$log->write("tipo origen: " . $tipo_origen);
+$log->write("tipo respuesta: " . $tipo_respuesta);
+
 echo "Guardando en base de datos Identificar Elementos";
 
+$log->write("Antes de pintar formulario");
 $mform = new mod_ejercicios_creando_ejercicio_ierc($id_curso, $p, $id_ejercicio, $tipo_origen, $tipo_respuesta, $tipocreacion);
 $mform->pintarformulario_identificarelementos($id_curso, $p, $id_ejercicio, $tipo_origen, $tipo_respuesta, $tipocreacion);
-
+$log->write("Despues de pintar formulario");
 
 
 //Obtengo el archivo origen
@@ -100,7 +117,7 @@ $mform->pintarformulario_identificarelementos($id_curso, $p, $id_ejercicio, $tip
         
 }*/
 
-$log = new Log("log_creacion_IERC.txt");
+
 
 
 
@@ -125,6 +142,7 @@ for($i=0;$i<$numero_preguntas;$i++){
             if (move_uploaded_file($_FILES['pregunta'.$j]['tmp_name'],'./mediaplayer/audios/'.$pregunta)) {
 
                 //  echo 'El archivo ha sido subido correctamente.<br/>';
+		$log->write("El archivo se ha subido correctamente");
             }            
             break;
         case 3: //Es un video
@@ -142,7 +160,8 @@ for($i=0;$i<$numero_preguntas;$i++){
     $log->write("Num cols: " . $num_cols);
     
     //Obtener los titulos de las cabeceras
-    $cabeceras = ["","","","",""];
+    //IMPORTANTE: NO USAR [..,..,..] EN MAC06 NO SE SOPORTA DEBIDO A LA VERSION DE PHP
+    $cabeceras = array("","","","","");
     for ($l=1; $l<=$num_cols; $l++)
         $cabeceras[$l-1]=optional_param('cab_'.$j.'_0_'.$l,"",PARAM_TEXT);
     $log->write("Cabeceras: " . var_export($cabeceras,true));
@@ -151,13 +170,14 @@ for($i=0;$i<$numero_preguntas;$i++){
     //Inserto la pregunta
     $mispreguntas= new ejercicios_ierc_preg(NULL, $id_ejercicio, $pregunta, $num_cols, $cabeceras[0], $cabeceras[1], $cabeceras[2], $cabeceras[3], $cabeceras[4]);
     $id_preg=$mispreguntas->insertar();
+    $log->write("insertar preguntas: " . mysql_error());
     $log->write("Id Preg: " . $id_preg);
 
     //Obtengo el numero de respuestas a cada pregunta
     $numero_respuestas = optional_param('numerorespuestas_'.$j,0,PARAM_INT);
     $log->write("Numero respuestas: " . $numero_respuestas);
     
-    $respuestas = ["","","","",""];   
+    $respuestas = array("","","","","");   
     //Obtengo la respuesta
     for($k=0;$k<$numero_respuestas;$k++){
         $l=$k+1;
@@ -167,8 +187,9 @@ for($i=0;$i<$numero_preguntas;$i++){
             $respuestas[$m-1] = optional_param('resp_'.$j.'_'.$l.'_'.$m,"",PARAM_TEXT);
         }
         $log->write("Respuesta ".$l." : " . var_export($respuestas, true));
-        $mi_respuesta = new ejercicios_ierc_resp(NULL, $id_preg, $respuestas[0], $respuestas[1], $respuestas[2], $respuestas[3], $respuestas[4]);   
+        $mi_respuesta = new ejercicios_ierc_resp(NULL, $id_preg, $respuestas[0], $respuestas[1], $respuestas[2], $respuestas[3], $respuestas[4]);  
         $mi_respuesta->insertar();     
+	$log->write("insertar respuestas: " . mysql_error());
     }
    
 

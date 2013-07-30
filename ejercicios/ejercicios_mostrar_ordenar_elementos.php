@@ -122,16 +122,16 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
 
         //Añado el título
         if($modificable) {
-            $titulo = '<h1 id="h1">' . $nombre . '</h1>';
+            $titulo = '<h1 id="h1" class="instrucciones" ><u>' . $nombre . '</u><span style="font-size:0.7em;float:right;"><i>' . ucwords(strtolower(htmlentities(get_string('Tipo9','ejercicios')))) . '</i></span></h1>';
             $mform->addElement('html', $titulo);
         }
 
         //Añado la descripción
 
-        $divdescripcion = '<div class=descover>';
+        $divdescripcion = '<div style="font-size:1.2em" class=descover>';
 
-        $divdescripcion.=nl2br((stripslashes($ejercicios_leido->get('descripcion'))));
-        $divdescripcion.=$parte . '<br/>';
+        $divdescripcion.='<i>'.nl2br((stripslashes($ejercicios_leido->get('descripcion'))));
+        $divdescripcion.=$parte . '<br/></i>';
 
         $divdescripcion.='</div>';
 
@@ -286,7 +286,7 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
                                         $ancho = ($long*10).'px';
                                         $alto='30px';
                                     }
-                                    $tabla_imagenes.='<div preg="'.$i.'"  style="'.$float.'width:'.$ancho.';height:'.$alto.';" class="item" id="resp_'.$aleatorios_generados[$j].'_'.$i.'" >';
+                                    $tabla_imagenes.='<div preg="'.$i.'"  style="'.$float.'width:'.$ancho.';height:'.$alto.';" class="item resp" id="resp_'.$aleatorios_generados[$j].'_'.$i.'" >';
                                     $tabla_imagenes.=$resp_generadas[$aleatorios_generados[$j] - 1] . '</div>';
 
                                     //Le asigno un numero aleatorio a la respuesta
@@ -485,10 +485,10 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
 
                         if ($buscar != 1 && $modificable == true) {
                             //Si soy el profesor creadors
-                            $tabla_imagenes='<input type="button" style="margin-left:90px; height:40px; width:150px;  margin-top:20px;" id="botonNA" name="botonNA" onclick="OE_AddPregunta('.$id_ejercicio.')" value="' . get_string('OE_add_pregunta', 'ejercicios') . '"><br/>';
-                            $tabla_imagenes.= '<input type="submit" onclick="return OE_Guardar('.$id_ejercicio.');" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
+                            $tabla_imagenes='<center><input type="button" style="margin-top:20px;" id="botonNA" name="botonNA" onclick="OE_AddPregunta('.$id_ejercicio.')" value="' . get_string('OE_add_pregunta', 'ejercicios') . '"><br/>';
+                            $tabla_imagenes.= '<input type="submit" onclick="return OE_Guardar('.$id_ejercicio.');" style="" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
                             
-                            $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
+                            $tabla_imagenes.='<input type="button" style="" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                         } else {
                             if ($buscar == 1) { //Si estoy buscand
                                 $ejercicios_prof = new Ejercicios_prof_actividad();
@@ -510,18 +510,18 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
                                 } else {
 
                                     if ($modificable == true) { // Si el ejercicio era mio y estoy buscando
-                                        $tabla_imagenes = '<center><input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
+                                        $tabla_imagenes = '<center><input type="button" style="margin-top:20px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                                     } else { //Si soy alumno
-                                        $tabla_imagenes = '<center><input type="button" onclick="OE_Corregir('.$id_ejercicio.')" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
-                                        $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
-                                        $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
+                                        $tabla_imagenes = '<center><input type="button" onclick="OE_Corregir('.$id_ejercicio.')" style="margin-top:20px;" id="botonResultado" value="Corregir">';
+                                        $tabla_imagenes.='<input type="button" style="" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
+                                        $tabla_imagenes.='<input type="button" style="" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                                     }
                                 }
                             } else {
 
-                                $tabla_imagenes = '<center><input type="button" onclick="OE_Corregir('.$id_ejercicio.')" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
-                                $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
-                                $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
+                                $tabla_imagenes = '<center><input type="button" onclick="OE_Corregir('.$id_ejercicio.')" style="margin-top:20px;" id="botonResultado" value="Corregir">';
+                                $tabla_imagenes.='<input type="button" style="" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
+                                $tabla_imagenes.='<input type="button" style="" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                             }
                         }
 

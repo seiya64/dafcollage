@@ -76,14 +76,15 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
      * @param {0,1} $mostrar_pistas 1 si se desea mostrar pistas, 0 en otro caso
      */
     function genera_texto_con_huecos($texto,$numpreg,$respuestas,$mostrar_pistas) {
-        //$file_log = fopen("log_TH_genera_huecos.txt","a");
+        $file_log = fopen("log_TH_genera_huecos.txt","w");
         $regexp = "/\[\[(\d)+\]\]/";
         $encontrado = preg_match_all($regexp,$texto,$coincidencias,PREG_OFFSET_CAPTURE);
-        //$log = "Numero de pregunta: " . $numpreg . "\n";
-        //$log .= "Texto: " . $texto . "\n";
-        //$log .= "Respuestas: " . var_export($respuestas,true) . "\n";
-        //$log .= "encontrado: " . $encontrado . "\n";
-        //$log .= "coincidencias: " . var_export($coincidencias, true) . "\n";
+        
+        $log = "Numero de pregunta: " . $numpreg . "\n";        
+        $log .= "Texto: " . $texto . "\n";
+        $log .= "Respuestas: " . var_export($respuestas,true) . "\n";
+        $log .= "encontrado: " . $encontrado . "\n";
+        $log .= "coincidencias: " . var_export($coincidencias, true) . "\n";
         
         $salida = "";
         $inicio=0;
@@ -92,15 +93,15 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
         if ($encontrado) {
             foreach ($coincidencias[0] as $coincide) {
                 $fin = $coincide[1]-1 - $inicio;
-                //$log .= "Inicio: " . $inicio . " Fin: " . $fin . "\n";
-                $cad = substr($texto, $inicio, $fin);
-                //$log .= "Cad: " . $cad . "\n";
+                $log .= "Inicio: " . $inicio . " Fin: " . $fin . "\n";
+                $cad = ($fin>=0) ? substr($texto, $inicio, $fin) : "";
+                $log .= "Cad: " . $cad . "\n";
                 $salida .= '<span>'.$cad.'</span>';
                 $numero = (int)substr($coincide[0],2,strlen($coincide[0])-3);
-                //$log .= "Numero: " . $numero . "\n";
-                //$log .= "Respuesta numero " . ($numero+1) . " : " . $respuestas[$numero]->get('respuesta') . "\n";
+                $log .= "Numero: " . $numero . "\n";
+                $log .= "Respuesta numero " . ($numero+1) . " : " . $respuestas[$numero]->get('respuesta') . "\n";
                 $inicio = $coincide[1] + strlen($coincide[0]);
-                //$log .= "Nuevo inicio: " . $inicio . "\n";
+                $log .= "Nuevo inicio: " . $inicio . "\n";
                 
                 $long = strlen($respuestas[$numero]->get('respuesta'));
                 $nombre = "resp" . ($numero+1) . "_" . $numpreg;
@@ -116,14 +117,14 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
             }
             if ($inicio<strlen($texto)-1) {
                 $cad = substr($texto,$inicio);
-                //$log .= "Ultima cadena: " . $cad . "\n";
+                $log .= "Ultima cadena: " . $cad . "\n";
                 $salida .= '<span>'.$cad.'</span>';
             }
         }
         
         
-        //fwrite($file_log,$log,strlen($log));
-        //fclose($file_log);    
+        fwrite($file_log,$log,strlen($log));
+        fclose($file_log);    
         
         return $salida;
     }
@@ -175,15 +176,15 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
         }
 
         //Añado el título
-        $titulo = '<h1>' . $nombre . '</h1>';
+        $titulo = '<h1 class="instrucciones" ><u>' . $nombre . '</u><span style="font-size:0.7em; float:right;"><i>' . ucwords(strtolower(htmlentities(get_string('Tipo5','ejercicios')))) . '</i></span></h1>';
         $mform->addElement('html', $titulo);
 
         //Añado la descripción
 
-        $divdescripcion = '<div class=descover>';
+        $divdescripcion = '<div style="font-size:1.2em" class=descover>';
 
-        $divdescripcion.=nl2br((stripslashes($ejercicios_leido->get('descripcion'))));
-        $divdescripcion.=$parte . '<br/>';
+        $divdescripcion.='<i>'.nl2br((stripslashes($ejercicios_leido->get('descripcion'))));
+        $divdescripcion.=$parte . '<br/></i>';
 
         $divdescripcion.='</div>';
 
@@ -330,7 +331,7 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
                                 for ($j=0; $j<sizeof($aleatorios_generados); $j++) {
                                     //$tabla_imagenes.='<tr>';
 
-                                    $tabla_imagenes.='<span class=item id="resp_'.$aleatorios_generados[$j].'" >';
+                                    $tabla_imagenes.='<span class="item resp" id="resp_'.$aleatorios_generados[$j].'" >';
                                     $tabla_imagenes.=$resp_generadas[$aleatorios_generados[$j] - 1] . '</span><span>   </span>';
 
                                     //Le asigno un numero aleatorio a la respuesta
@@ -473,9 +474,9 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
 
                         if ($buscar != 1 && $modificable == true) {
                             //Si soy el profesor creadors
-                            $tabla_imagenes = '<input type="submit" style="height:40px; width:90px; margin-left:90px; margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
-                            $tabla_imagenes.='<input type="button" style="height:40px; width:120px;  margin-top:20px;" id="botonNA" name="botonNA" onclick="TH_AddPregunta('.$id_ejercicio.')" value="' . get_string('NuevaAso', 'ejercicios') . '">';
-                            $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
+                            $tabla_imagenes = '<center><input type="submit" style="margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
+                            $tabla_imagenes.='<input type="button" style="" id="botonNA" name="botonNA" onclick="TH_AddPregunta('.$id_ejercicio.')" value="' . get_string('NuevaAso', 'ejercicios') . '">';
+                            $tabla_imagenes.='<input type="button" style="" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                         } else {
                             if ($buscar == 1) { //Si estoy buscand
                                 $ejercicios_prof = new Ejercicios_prof_actividad();
@@ -497,18 +498,18 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
                                 } else {
 
                                     if ($modificable == true) { // Si el ejercicio era mio y estoy buscando
-                                        $tabla_imagenes = '<center><input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
+                                        $tabla_imagenes = '<center><input type="button" style="margin-top:20px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                                     } else { //Si soy alumno
-                                        $tabla_imagenes = '<center><input type="button" onclick="TH_Corregir('.$id_ejercicio.','.$mostrar_soluciones.')" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
-                                        $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
-                                        $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
+                                        $tabla_imagenes = '<center><input type="button" onclick="TH_Corregir('.$id_ejercicio.','.$mostrar_soluciones.')" style="margin-top:20px;" id="botonResultado" value="Corregir">';
+                                        $tabla_imagenes.='<input type="button" style="" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
+                                        $tabla_imagenes.='<input type="button" style="" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                                     }
                                 }
                             } else {
 
-                                $tabla_imagenes = '<center><input type="button" onclick="TH_Corregir('.$id_ejercicio.','.$mostrar_soluciones.')" style="height:40px; width:60px;" id="botonResultado" value="Corregir">';
-                                $tabla_imagenes.='<input type="button" style="height:40px; width:60px;" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
-                                $tabla_imagenes.='<input type="button" style="height:40px; width:90px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
+                                $tabla_imagenes = '<center><input type="button" onclick="TH_Corregir('.$id_ejercicio.','.$mostrar_soluciones.')" style="margin-top:20px;" id="botonResultado" value="Corregir">';
+                                $tabla_imagenes.='<input type="button" style="" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
+                                $tabla_imagenes.='<input type="button" style="" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                             }
                         }
 
