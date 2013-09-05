@@ -596,8 +596,8 @@ class mod_vocabulario_opciones_form extends moodleform {
         <div class="field"><img src="./imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im"/><div class="texto">' . get_string('admin_ic', 'vocabulario') . '</div></div>
 	
 	<ul class="list">
-		<li><a href="view.php?id=' . $id . '&opcion=7">Por Categoría</a></li>
-		<li><a href="view.php?id=' . $id . '&opcion=17">Por Recurso</a></li>
+		<li><a href="view.php?id=' . $id . '&opcion=7"></a>' . get_string('ic_categoria', 'vocabulario') . '</a></li>
+		<li><a href="view.php?id=' . $id . '&opcion=17">' . get_string('ic_recurso', 'vocabulario') . '</a></li>
 		
 	</ul>
         </div></div>';
@@ -1097,6 +1097,10 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
         }
         $campodinamico .= "</div>";
         $mform->addElement('html', $campodinamico);
+        
+        $buttonarray = array();
+        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('verdesc', 'vocabulario'));
+        $mform->addGroup($buttonarray, 'boton_submit', '', array(' '), false);
 
         $gr = new Vocabulario_mis_gramaticas();
         $gr->leer($grid, $USER->id);
@@ -2327,7 +2331,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                 //tabla
                 $mform->addElement('html', '<p>');
-                $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
+                $mform->addElement('html', '<table id="tabla" class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
                //titulillos de la tabla
 
                 $avance = 4;
@@ -2359,6 +2363,8 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 }
                 $mform->addElement('html', '</table>');
                 $mform->addElement('html', '<p>');
+                $mform->addElement('html','<input type="hidden" id="avance" value="'.$i.'" />');
+                $mform->addElement('html','<center><a href="#" onclick="mis_gramaticas_addFila56()">'.get_string('masfilas','vocabulario').'</a></center>');
                 break;
 
             //8.2 Nebensatz
@@ -2366,7 +2372,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                 //tabla
                 $mform->addElement('html', '<p>');
-                $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
+                $mform->addElement('html', '<table id="tabla" class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
                 //titulillos de la tabla
 
                 $avance = 5;
@@ -2401,6 +2407,8 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 }
                 $mform->addElement('html', '</table>');
                 $mform->addElement('html', '<p>');
+                $mform->addElement('html','<input type="hidden" id="avance" value="'.$i.'" />');
+                $mform->addElement('html','<center><a href="#" onclick="mis_gramaticas_addFila57()">'.get_string('masfilas','vocabulario').'</a></center>');
                 break;
             //2.4.2.1 Pronomina, die nur Personen bezeichnen
             case 13:
@@ -3118,7 +3126,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
             //$mform->registerNoSubmitButton('desc_btn');
         }
         $mform->registerNoSubmitButton('desc_btn');
-        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('verdesc', 'vocabulario'));
+        
         $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
 
         $mform->addGroup($buttonarray, 'botones', '', array(' '), false);

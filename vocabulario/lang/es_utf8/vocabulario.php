@@ -317,4 +317,8 @@ $string['suffix'] = 'Suffix';
 $string['bedeutung'] = 'Bedeutung';
 
 $string['intencioncomunicativa']='Intención Comunicativa';
+
+// Añadido Javier Castro, cuaderno digital, intenciones comunicativas
+$string['ic_categoria'] = 'por Categoría';
+$string['ic_recurso'] = 'por Recurso';
 ?>

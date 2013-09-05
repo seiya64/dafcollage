@@ -53,7 +53,7 @@ $string['seleccionar'] = 'Auswählen';
 $string['campo_lex'] = 'Themenbereiche';
 $string['colaboradores'] = 'Mitarbeiter';
 $string['pal_campo_lex'] = 'Wörter nach Themenbereichen';
-$string['campo_gram'] = 'Spezifische grammatischen Aspekt'; //$string['campo_gram'] = 'Grammatik';
+$string['campo_gram'] = 'Spezifischer grammatischer Aspekt'; //$string['campo_gram'] = 'Grammatik';
 $string['gramatica_may'] = 'GRAMMATIK';
 $string['tipologias_may'] = 'TEXTTYPOLOGIE';
 $string['estrategias_may'] = 'LERNSTRATEGIEN';
@@ -312,4 +312,9 @@ $string['preposiciones'] = 'Präpositionen';
 $string['prafix'] = 'Präfix';
 $string['suffix'] = 'Suffix';
 $string['bedeutung'] = 'Bedeutung';
+
+
+// Añadido Javier Castro, cuaderno digital, intenciones comunicativas
+$string['ic_categoria'] = 'nach Kategorie';
+$string['ic_recurso'] = 'nach Mittel';
 ?>

@@ -101,10 +101,10 @@ $string['Tipo14']="ENTRENADOR DE VOCABULARIO";
 //DESCRIPCION DE EJERCICIOS
 $string['desc_Tipo0']="Seleccionar";
 $string['desc_Tipo1']="--";
-$string['desc_Tipo2']="ELECCIÓN MÚLTIPLE con sus diversas variantes";
-$string['desc_Tipo3']="ASOCIACIÓN SIMPLE";
-$string['desc_Tipo4']="ASOCIACIÓN COMPLEJA";
-$string['desc_Tipo5']="TEXTO HUECO";
+$string['desc_Tipo2']="Seleccionar entre varias opciones una solución correcta relacionada con preguntas acerca de un texto, vídeo, o audio. Por ejemplo para practicar la comprensión lectora, comprensión oral, o realizar actividades de gramática y/ o de léxico, etc.";
+$string['desc_Tipo3']="Coordinar un determinado número de archivos de texto, vídeo, audio o imagen con el mismo número de archivos de texto, vídeo, audio o imagen. Con este ejercicio se puede practicar la comprensión lectora, comprensión oral o elaborar reglas gramaticales, etc.";
+$string['desc_Tipo4']="Seleccionar archivos de texto, vídeo, audio o imagen para coordinarlos con una cantidad inferior o superior de archivos de texto, vídeo, audio o imagen. Al no coincidir el número de archivos de origen y solución es más difícil que los ejercicios de ASOCIACIÓN SIMPLE.";
+$string['desc_Tipo5']="Rellenar los huecos de un texto para practicar la gramática o el léxico, la ortografía, elaborar una regla gramatical, etc. El hueco puede tener entre una o varias letras, palabras, etc.";
 $string['desc_Tipo6']="IDENTIFICAR ELEMENTOS";
 $string['desc_Tipo7']="RESPUESTA ABIERTA";
 $string['desc_Tipo8']="CRUCIGRAMA";
@@ -115,6 +115,7 @@ $string['desc_Tipo12']="IDENTIFICAR ELEMENOS CON  RESPUESTA MÚLTIPLE";
 $string['desc_Tipo13']="PRACTICAR PRONUNCIACIÓN";
 //(* Angel Biedma *) Añadido Tipo Ejercicio Entrenador de Vocabulario
 $string['desc_Tipo14']="ENTRENADOR DE VOCABULARIO";
+
 
 
 
@@ -134,7 +135,6 @@ $string['componerActividades']="Crear Conjunto de Actividades";
 
 $string["FormularioCreacion"]= "Formulario de Creación";
 $string["tipopregunta"]='Tipo de archivo pregunta:';
-$string["tipopregunta1"]='Tipo de archivo pregunta:';
 $string["tipoorigen"]='Tipo de archivo origen/pregunta:';
 $string["numeropreguntas"]="Número de archivos/preguntas en total:";
 $string["tiporespuesta"]='Tipo de archivo solución:';
@@ -173,6 +173,15 @@ $string["BotonAñadir"]="Añadir a mis ejercicios";
 $string['Misejercicios']='Mis Actividades';
 $string["marcoteorico"]="Seleccionar el nivel según el marco europeo de referecia(OPCIONAL)";
 
+
+//A partir de aqui hay que traducir a ingles
+$string["textoorigen"]="Introduzca texto origen";
+$string["Asociacion_Texto"]= "Texto ";
+$string["Asociacion_Texto_Asociado"]= "Texto Asociado  ";
+$string['Video']='Introduzca la dirección del video';
+$string['NuevaAso']='Añadir Aso';
+$string['tipopregunta1']='Tipo de archivo pregunta';
+
 //Generador de Ejercicios -- Texto Hueco -- Etiqueta TH
 $string["TH_texto"]="Texto ";
 $string["TH_huecos"]="Palabras ocultadas ";
@@ -180,6 +189,7 @@ $string["TH_add_hueco"]="Añadir Hueco";
 $string["TH_mostrar_pistas"]="¿Desea que se muestren pistas sobre la longitud de las palabras que se colocan en los huecos?";
 $string["TH_mostrar_palabras"]="¿Desea que aparezcan las soluciones de los huecos en la parte inferior del ejercicio?";
 $string["TH_mostrar_soluciones"]="¿Desea que aparezcan las soluciones al pulsar el boton de Corregir los ejercicios?";
+$string["TH_introduzca_texto"]="Introduzca el texto en el cual se seleccionaran los huecos";
 $string['TH_configuracion_ejercicio']="Configuraci&oacute;n del Ejercicio";
 $string['TH_pistas']="Pistas";
 $string['TH_pista_longitud']='Ocupa {$a} simbolos';
@@ -191,6 +201,7 @@ $string['AC_title']="Asociacion Compleja";
 $string['TH_title']="Texto Hueco";
 $string['OE_title']="Ordenar Elementos";
 $string['IE_title']="Identificar Elementos";
+$string['IERC_title']="Identificar Elementos mas Respuesta Corta";
 
 //Generador de Ejercicios -- Ordenar Elementos -- Etiqueta OE
 $string['OE_seleccione']="Escriba la frase que quiera desordenar.";
@@ -226,4 +237,5 @@ $string['IERC_eliminar']="Eliminar";
 $string["IERC_instr_prof"]='Introduce el texto y las soluciones';
 $string["IERC_descripcion"]='Instrucciones del ejercicio como se le muestran al alumno';
 $string["IERC_descripcion2"]="Si tiene más de una pregunta relacionada con el elemento a identificar es recomendable que las redacte siguiendo el orden a), b), c), etc... (Hay hasta 5 opciones)";
+$string["IERC_addPregunta"]="Añadir Pregunta";
 ?>

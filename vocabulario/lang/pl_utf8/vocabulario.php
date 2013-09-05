@@ -312,4 +312,8 @@ $string['preposiciones'] = 'Präpositionen';
 $string['prafix'] = 'Präfix';
 $string['suffix'] = 'Suffix';
 $string['bedeutung'] = 'Bedeutung';
+
+// Añadido Javier Castro, cuaderno digital, intenciones comunicativas
+$string['ic_categoria'] = 'przez Kategorii';
+$string['ic_recurso'] = 'przez Zasób';
 ?>

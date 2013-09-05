@@ -312,4 +312,7 @@ $string['par_gemis'] = '(= Unregelmäβige Verben)';
 $string['kas'] = 'Kasus';
 $string['preposiciones']='Präpositionen';
 
+// Añadido Javier Castro, cuaderno digital, intenciones comunicativas
+$string['ic_categoria'] = 'par Catégorie';
+$string['ic_recurso'] = 'par Ressource';
 ?>

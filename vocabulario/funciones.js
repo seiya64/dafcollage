@@ -270,3 +270,39 @@ alert('Seleccionaste aceptar')
 else
 alert('Seleccionaste cancelar')
 }
+
+
+function mis_gramaticas_addFila57() {
+    var i = parseInt($('#avance').val());
+    var avance = 5;
+    var tabla = $('#tabla');
+    var tbody = $(tabla.children());
+    
+    var tr = '<tr class="cell">';
+    tr += '<td style="width: 80px;"><input style="width: 80px;" type="text" id="id_VORSUB' + i + '" name="VORSUB' + i + '" value=""></td>';
+    tr += '<td><input type="text" id="id_VER1' + i + '" name="VER1' + i + '" value=""></td>';
+    tr += '<td style="width: 500px;"><input style="width: 500px;" type="text" id="id_MIT' + i + '" name="MIT' + i + '" value=""></td>';
+    tr += '<td style="background: #BDC7D8;"><input type="text" style="background: #BDC7D8;" id="id_VER2' +i+  '" name="VER2' + i + '" value=""></td>';
+    tr += '<td style="background: #BDC7D8;"><input type="text" style="background: #BDC7D8;" id="id_KONSUB' + i + '" name="KONSUB' +i + '" value=""></td>';
+    tr += '</tr>';
+    
+    $(tr).appendTo(tbody);
+    $('#avance').val(i+avance);
+}
+
+function mis_gramaticas_addFila56() {
+    var $i = parseInt($('#avance').val());
+    var avance = 4;
+    var tabla = $('#tabla');
+    var tbody = $(tabla.children());
+    
+    var $titulillos = '<tr class="cell">';
+    $titulillos += '<td><input type="text" id="id_VORSUB' + $i + '" name="VORSUB' + $i + '" value=""></td>';
+    $titulillos += '<td style="background: #BDC7D8;"><input type="text" style="background: #BDC7D8;" id="id_KONSUB' + $i + '" name="KONSUB' + $i + '" value=""></td>';
+    $titulillos += '<td style="width: 500 px;"><input style="width:495px;" type="text" id="id_MIT' + $i + '" name="MIT' + $i +'" value=""></td>';
+    $titulillos += '<td style="background: #BDC7D8;"><input type="text" style="background: #BDC7D8;" id="id_VER2' + $i + '" name="VER2' + $i + '" value=""></td>';
+    $titulillos += '</tr>';
+    
+    $($titulillos).appendTo(tbody);
+    $('#avance').val($i+avance);
+}

@@ -3026,7 +3026,7 @@ function botonMasPreguntas_IE(){
     imgañadir.style.height="15px";
     imgañadir.style.width="15px";
     imgañadir.setAttribute('onclick',"anadirRespuesta_IE(respuestas"+numeropreguntas+","+numeropreguntas+")");
-    imgañadir.title="Añadir Pregunta";
+    imgañadir.title="Añadir Respuesta";
 
     nuevotd1.appendChild(imgañadir);
     nuevotr.appendChild(nuevotd);
@@ -7070,7 +7070,7 @@ function IERC_addFila(id_pregunta) {
     var aux = numresp+1;
     
     //Añadir la nueva fila
-    var celda = function(i){return '<input type="text"  name="resp_'+id_pregunta+'_'+aux+'_'+i+'" value="" />'};
+    var celda = function(i){return '<input style="font-size:1.2em;" type="text"  name="resp_'+id_pregunta+'_'+aux+'_'+i+'" value="" />'};
     var img = '<img id="del_resp_'+id_pregunta+"_"+aux+'" name="del_resp_'+id_pregunta+"_"+aux+'" src="./imagenes/delete.gif" onclick="IERC_delFila('+id_pregunta+","+aux+')" >'+frase_del+'</img>';
     oTable.fnAddData([celda(1),celda(2),celda(3),celda(4),celda(5),img]);
     
@@ -7323,7 +7323,7 @@ function IERC_AddPregunta(id_ejercicio) {
     var tr = createElement('tr',{id:"fila_0"},thead);
     for (i=1; i<=5; i++) {
         var th = createElement('th',{id:"celda_"+npreg+"_0_"+i},tr);
-        var input = createElement('input',{type:"text",id:"cab_"+npreg+"_0_"+i,name:"cab_"+npreg+"_0_"+i,value:""},th);
+        var input = createElement('input',{style: "font-size:1.2em;",type:"text",id:"cab_"+npreg+"_0_"+i,name:"cab_"+npreg+"_0_"+i,value:""},th);
     }
     var th = createElement('th',{},tr); $(th).text('Acciones');
     var tbody = createElement('tbody',{},table);
