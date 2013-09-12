@@ -15,6 +15,8 @@
   Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
   Simeón Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto(finamolinasoto@gmail.com)
+  Javier Castro Fernández (havidarou@gmail.com)
+  Angel Biedma Mesa (tekeiro@gmail.com)
 
   Original idea:
   Ruth Burbat
@@ -40,9 +42,12 @@
   GNU General Public License for more details. 
  */
 
+require_once($CFG->dirroot.'/course/moodleform_mod.php');
+
  function genera_titulos($titulo, $tipo_creacion) {
-    $cabecera = '<h1 id="h1" class="instrucciones"><div style="font-size:0.7em; height: 13px;"><i>'.$tipo_creacion.'</i></div><span style="float:right;"><a id="id_cancellink" href="/moodle/mod/ejercicios/view.php?id=2">'.get_string('Reset','ejercicios').'</a></span><u style="
-                font-size: 0.7em;">'.$titulo.'</u></h1>';
+    global $CFG, $COURSE, $USER;
+    $cabecera = '<h1 id="h1" class="instrucciones"><span style="float:right;"><a style="font-size: 1.1em" id="id_cancellink" href="/moodle/mod/ejercicios/view.php?id='.$COURSE->id.'">'.get_string('Reset','ejercicios').'</a></span><div style="font-size:0.7em; height: 13px;"><i>'.$tipo_creacion.'</i></div><u style="
+                font-size: 0.9em;">'.$titulo.'</u></h1>';
     return $cabecera;
  }
 ?>

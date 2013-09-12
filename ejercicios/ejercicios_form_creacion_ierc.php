@@ -16,6 +16,7 @@
   Simeón Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto(finamolinasoto@gmail.com)
   Angel Biedma Mesa (tekeiro@gmail.com)
+  Javier Castro Fernández (havidarou@gmail.com)
 
  Original idea:
   Ruth Burbat
@@ -61,7 +62,7 @@ $id_ejercicio = $ejercicioGeneral->insertar();
 $log->write("insertar ejercicio: " . mysql_error());
 
 // Y para el profesor tambien
-//Tengo que asignarle el ejercicio al profesor 
+// Tengo que asignarle el ejercicio al profesor 
 $ejercicio_profesor = new Ejercicios_prof_actividad($ejercicioGeneral->get('id'),$ejercicioGeneral->get('id_creador'),$id_ejercicio,$carpeta);
 $ejercicio_profesor->insertar();
 $log->write("insertar profesor: " . mysql_error());
@@ -156,7 +157,8 @@ for($i=0;$i<$numero_preguntas;$i++){
     $log->write("Pregunta: " . $pregunta);
     
     //Obtener el numero de subrespuestas (numero de columnas de la tabla)
-    $num_cols = optional_param('sel_subrespuestas_'.$j,1,PARAM_INT);
+    $num_cols = $_SESSION['IERC']['numPreguntas'];
+    $num_cols = $num_cols + 1;
     $log->write("Num cols: " . $num_cols);
     
     //Obtener los titulos de las cabeceras
