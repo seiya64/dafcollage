@@ -57,6 +57,7 @@ $string['Aceptar']='Aceptar';
 $string['Reset']='Menu Principal';
 $string['Borrar']='Borrar';
 $string['TextoEliminar']='Seleccione el ejercicio a eliminar';
+$string['Creacion']='Creación de ejercicios';
 
 
 //Interfaz Alumno
@@ -234,8 +235,8 @@ $string['IERC_pregunta']='Texto {$a}';
 $string['IERC_cabecera']='Cabecera {$a}';
 $string['IERC_click']="Pulse para editar";
 $string['IERC_eliminar']="Eliminar";
-$string["IERC_instr_prof"]='Introduce el texto y las soluciones';
-$string["IERC_descripcion"]='Instrucciones del ejercicio como se le muestran al alumno';
-$string["IERC_descripcion2"]="Si tiene más de una pregunta relacionada con el elemento a identificar es recomendable que las redacte siguiendo el orden a), b), c), etc... (Hay hasta 5 opciones)";
-$string["IERC_addPregunta"]="Añadir Pregunta";
+$string['IERC_instr_prof']='Introduce el texto y las soluciones';
+$string['IERC_descripcion']='Instrucciones del ejercicio como se le muestran al alumno';
+$string['IERC_descripcion2']='Si tiene más de una pregunta relacionada con el elemento a identificar es recomendable que las redacte siguiendo el orden a), b), c), etc... (Hay hasta 5 opciones)';
+$string['IERC_addPregunta']='Añadir Pregunta';
 ?>

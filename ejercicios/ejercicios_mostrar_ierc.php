@@ -69,6 +69,8 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
 
         global $CFG, $COURSE, $USER;
         $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
+        session_start();
+        
 
 
         //Los iconos están sacados del tema de gnome que viene con ubuntu 11.04
@@ -194,7 +196,7 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
                 //$divpregunta.='<img id="imgpregborrar' . $i . '" src="./imagenes/delete.gif" alt="Eliminar Pregunta"  height="10px"  width="10px" onClick="IERC_DelPregunta('.$id_ejercicio.",".$i.')" title="Eliminar Pregunta">&nbsp;&nbsp;Eliminar Pregunta&nbsp;&nbsp;</img>';
                 //$divpregunta.='<img id="imgpreganadir' . $i . '" src="./imagenes/añadir.gif" alt="añadir hueco"  height="15px"  width="15px" onClick="IERC_addFila('.$i.')" title="Añadir Respuesta">&nbsp;&nbsp;Añadir Respuesta&nbsp;&nbsp;</img>';                
                 //$divpregunta.='<span style="float:right;"><label for="id_sel_subrespuestas_'.$i.'">'.get_string('IERC_num_subresp','ejercicios').'</label><select onchange="IERC_cambiaCols('.$i.')" id="id_sel_subrespuestas_'.$i.'" name="sel_subrespuestas_'.$i.'" >';
-                $num_cabs = (integer)$preguntas[$i-1]->get('num_cabs');
+                $num_cabs = $_SESSION['IERC']['numPreguntas'];
                 $log->write("num_cabs: " . $num_cabs);
                 $log->write('tipo num_cabs ' . gettype($num_cabs));
                 $divpregunta.='<input type="hidden" name="num_cabs" id="num_cabs" value="'.$num_cabs.'" />';
@@ -316,6 +318,7 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
 
                 $divpregunta.='<img id="imgpregborrar' . $i . '" src="./imagenes/delete.gif" alt="Eliminar Pregunta"  height="10px"  width="10px" onClick="IERC_DelPregunta('.$id_ejercicio.",".$i.')" title="Eliminar Pregunta">&nbsp;&nbsp;Eliminar Pregunta&nbsp;&nbsp;</img>';
                 $divpregunta.='<img id="imgpreganadir' . $i . '" src="./imagenes/añadir.gif" alt="añadir hueco"  height="15px"  width="15px" onClick="IERC_addFila('.$i.')" title="Añadir Respuesta">&nbsp;&nbsp;Añadir Respuesta&nbsp;&nbsp;</img>';                
+                /*
                 $divpregunta.='<span style="float:right;"><label for="id_sel_subrespuestas_'.$i.'">'.get_string('IERC_num_subresp','ejercicios').'</label><select onchange="IERC_cambiaCols('.$i.')" id="id_sel_subrespuestas_'.$i.'" name="sel_subrespuestas_'.$i.'" >';
                 for ($m=1; $m<=5; $m++) {                    
                         $sel = ($preguntas[$i - 1]->get('num_cabs')==$m) ? 'selected="selected"' : '';
@@ -323,6 +326,7 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
                 }
                 $divpregunta.='</select></span>';               
 
+                */
                 $divpregunta.=' </td>';
 
                 $divpregunta.=' <td style="width:15%;">';

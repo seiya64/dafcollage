@@ -7027,8 +7027,8 @@ function IERC_setupTabla(id_pregunta,editable) {
     }); 
     
     //Oculta inicialmente las columnas
-    if(editable)
-        IERC_cambiaCols(id_pregunta);
+    //if(editable)
+      //  IERC_cambiaCols(id_pregunta);
 }
 
 //Pone los campos de la tabla Editables de forma dinamica
@@ -7062,47 +7062,48 @@ function IERC_cambiaCols(id_pregunta) {
 }
 
 //Añade una nueva subrespuesta 
-function IERC_addFila(id_pregunta) {
+function IERC_addFila(id_pregunta, cogerTexto) {
     var numresp = parseInt($('#numerorespuestas_'+id_pregunta).val());
-    var oTable = $('#tbl_resp_'+id_pregunta).dataTable();
+    var oTable = $('#tbl_resp_'+id_pregunta)
     var frase = $('#IERC_click').val();
     var frase_del = $('#IERC_eliminar').val();
     var aux = numresp+1;
+    var input = $('input[name=IERC_aux]');
+    var textarea = document.getElementById("pregunta"+id_pregunta);
+    var texto_sel = (cogerTexto) ? getSelectedText(textarea) : "";
+    var inputElemento = $('input[name=resp_'+id_pregunta+'_1_1]');
+
+    if (cogerTexto == true && inputElemento.val() == "" && texto_sel != "" && numresp == 1){ 
+        inputElemento.val(texto_sel);
+    }
+    else if ((cogerTexto && (inputElemento.val() != "" || numresp > 1)) || !cogerTexto){
+        //Añadir la nueva fila
+        var celda = function(i, texto){return '<td id="celda_'+id_pregunta+'_'+aux+'_'+i+'"><center><input type="text"  name="resp_'+id_pregunta+'_'+aux+'_'+i+'" value="'+texto+'" /><center></td>'};      
+        var img = '<td><center><img id="del_resp_'+id_pregunta+"_"+aux+'" name="del_resp_'+id_pregunta+"_"+aux+'" src="./imagenes/delete.gif" onclick="IERC_delFila('+id_pregunta+","+aux+')" >'+frase_del+'</img></center></td>';
+        var fila = "<tr>"
+        for (var i=1;i <= parseInt(input.val()) + 2; i++){
+            if (i == 2){
+                fila+="<td></td>"
+            }
+            if (i == 1){
+                fila+=celda(i, texto_sel);
+            }
+            if (i > 2) {
+                fila+=celda(i-1, "");    
+            }
+        }
+        fila += img+'</tr>';
     
-    //Añadir la nueva fila
-    var celda = function(i){return '<input style="font-size:1.2em;" type="text"  name="resp_'+id_pregunta+'_'+aux+'_'+i+'" value="" />'};
-    var img = '<img id="del_resp_'+id_pregunta+"_"+aux+'" name="del_resp_'+id_pregunta+"_"+aux+'" src="./imagenes/delete.gif" onclick="IERC_delFila('+id_pregunta+","+aux+')" >'+frase_del+'</img>';
-    oTable.fnAddData([celda(1),celda(2),celda(3),celda(4),celda(5),img]);
-    
-    //Coger el tr de la ultima fila
-    var ultimaFila = oTable.$('tr:last');
-    ultimaFila.attr('id','fila_'+aux);
-    ultimaFila.attr('class',(aux%2==0)?"odd":"even");
-    
-    //Mostrar todas las columnas para actualizar los ids
-    var old_num_cols = $('#id_sel_subrespuestas_'+id_pregunta).val();
-    $('#id_sel_subrespuestas_'+id_pregunta).val(5);
-    IERC_cambiaCols(id_pregunta);
-        
-    //Poner los ids a las celdas de la tabla
-    $.each(ultimaFila.children(),function(index,celda){
-        if(index<5)
-            $(celda).attr('id','celda_'+id_pregunta+"_"+aux+"_"+(index+1));
-     else
-            $(celda).attr('id','celda_'+id_pregunta+"_"+aux+"_img");
-    });
-    
-    //Volver al valor anterior del numero de columnas
-    $('#id_sel_subrespuestas_'+id_pregunta).val(old_num_cols);
-    IERC_cambiaCols(id_pregunta);
-    
-    $('#numerorespuestas_'+id_pregunta).val(aux);
+        $(oTable.find("tbody")).append(fila);
+        $('#numerorespuestas_'+id_pregunta).val(aux);
+    } 
 }
 
 //Funcion para eliminar una fila de la tabla
 function IERC_delFila(id_pregunta,id_resp) {
     var numresp = parseInt($('#numerorespuestas_'+id_pregunta).val());
-    var oTable = $('#tbl_resp_'+id_pregunta).dataTable();
+    var oTable = $('#tbl_resp_'+id_pregunta);
+    var input = $('input[name=IERC_aux]');
     
     //Controlar que no se eliminen todas las preguntas
     if (numresp<=1) {
@@ -7110,26 +7111,26 @@ function IERC_delFila(id_pregunta,id_resp) {
         return;
     }
     
-    oTable.fnDeleteRow(id_resp-1);
-    
-    //Mostrar todas las columnas para actualizar los ids
-    var old_num_cols = $('#id_sel_subrespuestas_'+id_pregunta).val();
-    $('#id_sel_subrespuestas_'+id_pregunta).val(5);
-    IERC_cambiaCols(id_pregunta);
+    $($(oTable.find('#celda_'+id_pregunta+'_'+id_resp+'_1')).parent()).remove();
     
     //Ajustar los ids de los campos para cada celda de la tabla
-    var filas = oTable.$('tr');
+    var filas = oTable.find('tbody tr');
     $.each(filas,function(f,tr){
        $(tr).attr('id','fila_'+(f+1));
        var hijos = $(tr).children();
        $.each(hijos,function(r,td){
-          if(r<5) {             
-              $(td).attr('id','celda_'+id_pregunta+'_'+(f+1)+'_'+(r+1));
-              $($(td).find('input')).attr('name','resp_'+id_pregunta+'_'+(f+1)+'_'+(r+1));
+           console.log("r"+r);
+           console.log("td"+td.innerHTML);
+          if(r<=parseInt(input.val()) + 1) {
+              var r2 = (r==0)?1:r;
+              if (r != 1){
+                    $(td).attr('id','celda_'+id_pregunta+'_'+(f+1)+'_'+(r2));
+                    $($(td).find('input')).attr('name','resp_'+id_pregunta+'_'+(f+1)+'_'+(r2));
+                }
           }
           else {
               console.log("Entra aquiiiii");
-              console.log("f: " + f);
+              console.log("f: " + r);
               $(td).attr('id','celda_'+id_pregunta+'_'+(f+1)+'_img');
               var img = $(td).find('img');
               $(img).attr('id','del_resp_'+id_pregunta+'_'+(f+1));
@@ -7138,10 +7139,6 @@ function IERC_delFila(id_pregunta,id_resp) {
           }
        });
     });
-    
-    //Volver al valor anterior del numero de columnas
-    $('#id_sel_subrespuestas_'+id_pregunta).val(old_num_cols);
-    IERC_cambiaCols(id_pregunta);
     
     $('#numerorespuestas_'+id_pregunta).val(numresp-1);
 }
@@ -7528,5 +7525,47 @@ function IERC_corregir(id_ejercicio) {
                 $('#corr_resp_'+(i+1)+"_"+(j+1)).attr("src",incorrecto);
             }
         }
+    }
+}
+
+function IERC_actualizaTitulos() {
+
+    var input = $('input[name=IERC_aux]'), comboBox = $('select[name=numPreguntas]');
+    var div = $('#divPregunta'), divIntroducir = $('#divIntroducir');
+    
+    // Si antes estaba oculto, lo hacemos visible
+    
+    if (parseInt(input.val()) == 0) {div.css("display", "block");}
+    
+    if (parseInt(input.val()) < parseInt(comboBox.val())) { // Se crean textarea
+        
+        for (var i = parseInt(input.val()) + 1; i <= parseInt(comboBox.val()); i++){
+            textArea = $('<textarea wrap="virtual" rows="1" cols="30" name="tituloPregunta'+i+'" onblur="validate_mod_ejercicios_creando_ejercicio_descripcion(this)" onchange="validate_mod_ejercicios_creando_ejercicio_descripcion(this)"></textarea>');
+            divIntroducir.append(textArea);
+        }
+    }
+    if (parseInt(input.val()) > parseInt(comboBox.val())) { // Se eliminan texarea
+        for (var i = parseInt(input.val()); i > parseInt(comboBox.val()); i--){
+            textArea = $('textarea[name=tituloPregunta'+i+']');
+            textArea.remove();
+        }
+    }
+    
+    
+    // Si se ha elegido ninguna respuesta, ocultamos el div
+    if (parseInt(comboBox.val()) == 0) {div.css("display", "none");}
+    
+    input.val(comboBox.val());
+}
+
+// Sustituye un combobox por un cuadro de texto cuando se selecciona una determinada opción
+// Se usa en el primer paso de creación de ejercicios
+function form_creacion_nueva_carpeta(obj) {
+    //var select = $('select[name=carpeta_ejercicio]');
+    var select = $(obj);
+    var val = parseInt(select.val());
+    
+    if (val==-1) {
+        select.replaceWith('<input type="text" name="'+select.attr('name')+'" id="'+select.attr('id')+'" />');
     }
 }

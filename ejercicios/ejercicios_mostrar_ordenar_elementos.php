@@ -393,7 +393,8 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
                                 //$divpregunta.='<img id="imgpregborrar' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="OE_DelPregunta('.$id_ejercicio.",".$i.')" title="Eliminar Pregunta">Eliminar Pregunta</img>';
                                 //$divpregunta.='</br><img id="imgpreganadir' . $i . '" src="./imagenes/añadir.gif" alt="añadir hueco"  height="15px"  width="15px" onClick="OE_addOrden_Modificar('.$id_ejercicio.",".$i.' )" title="Añadir Orden">Añadir Orden</img>';
                                 $divpregunta.='</td></tr>';
-                                $divpregunta.='</br><tr><td><h4>'.get_string("OE_help_flechas","ejercicios").'</h4></td></tr>';
+                                $flechas =  ($cfg_ej==1) ? '<h4>'.get_string("OE_help_flechas","ejercicios").'</h4>' : "";
+                                $divpregunta.='</br><tr><td>'.$flechas.'</td></tr>';
                                 $divpregunta.='</table> ';
                                 
                                 $id_pregunta = $preguntas[$i - 1]->get('id');
