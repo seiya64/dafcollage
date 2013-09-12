@@ -43,7 +43,7 @@
 require_once($CFG->dirroot . '/course/moodleform_mod.php');
 require_once("ejercicios_clases.php");
 require_once("ejercicios_clase_general.php");
-
+require_once('ejercicios_partes_comunes.php');
 require_once('clase_log.php');
 
 class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod {
@@ -121,10 +121,11 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
         }
 
         //Añado el título
-        if($modificable) {
-            $titulo = '<h1 id="h1" class="instrucciones" ><u>' . $nombre . '</u><span style="font-size:0.7em;float:right;"><i>' . ucwords(strtolower(htmlentities(get_string('Tipo9','ejercicios')))) . '</i></span></h1>';
+        //if($modificable) {
+            //$titulo = '<h1 id="h1" class="instrucciones" ><u>' . $nombre . '</u><span style="font-size:0.7em;float:right;"><i>' . ucwords(strtolower(htmlentities(get_string('Tipo9','ejercicios')))) . '</i></span></h1>';
+            $titulo = genera_titulos($nombre, get_string('OE_title','ejercicios'));
             $mform->addElement('html', $titulo);
-        }
+        //}
 
         //Añado la descripción
 

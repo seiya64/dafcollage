@@ -910,14 +910,14 @@ function compruebaCopyright(id_curso,tipocreacion){
     var objeto = document.getElementById("id_copyright");
   
     var eltxt =objeto.selectedIndex;
-    if(tipocreacion!=5 && tipocreacion!=9) {
+    /*if(tipocreacion!=5 && tipocreacion!=9) {
     var objeto2 = document.getElementById("id_copyrightresp");
   
     var eltxtresp =objeto2.selectedIndex;
     }
     else {
         eltxtresp=-1;
-    }
+    }*/
    
     var campotematico = document.getElementById("id_campoid");
   
@@ -927,9 +927,11 @@ function compruebaCopyright(id_curso,tipocreacion){
   
     var valorgr =temagramatical.selectedIndex;
     
-    if(eltxt==0 || eltxtresp==0 || (valorct==0 && valorgr==0 )){
+    //if(eltxt==0 || eltxtresp==0 || (valorct==0 && valorgr==0 )){
+    if(eltxt==0 || (valorct==0 && valorgr==0 )){
         
-        if(eltxt==0 || eltxtresp==0){
+        //if(eltxt==0 || eltxtresp==0){
+        if(eltxt==0 ){
             alert("Error: Debe seleccionar un tipo de copyright");
         }else{
             alert("Error: Debe realizar una clasificación al menos por Campo Temático o Por Tema Gramatical");
@@ -7565,7 +7567,14 @@ function form_creacion_nueva_carpeta(obj) {
     var select = $(obj);
     var val = parseInt(select.val());
     
-    if (val==-1) {
-        select.replaceWith('<input type="text" name="'+select.attr('name')+'" id="'+select.attr('id')+'" />');
+    if(val==-1) {
+        $('#input_carpeta').css('display','block');
+        $('#input_carpeta').attr('name','carpeta_ejercicio');
+        $(obj).removeAttr('name');
+    }
+    else {
+        $('#input_carpeta').css('display','none');
+        $('#input_carpeta').removeAttr('name');
+        $(obj).attr('name','carpeta_ejercicio');
     }
 }

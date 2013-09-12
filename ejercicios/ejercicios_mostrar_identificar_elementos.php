@@ -44,6 +44,7 @@ require_once($CFG->dirroot . '/course/moodleform_mod.php');
 require_once("ejercicios_clases.php");
 require_once("ejercicios_clase_general.php");
 require_once("YoutubeVideoHelper.php");
+require_once('ejercicios_partes_comunes.php');
 
 //Funcion para pasar una variable de PHP a Javascript
 function php2js ($var) {
@@ -133,7 +134,8 @@ class mod_ejercicios_mostrar_identificar_elementos extends moodleform_mod {
             $modificable = false;
         }
 
-        $titulo = '<h1 class="instrucciones" ><u>' . $nombre . '</u><span style="font-size:0.7em;float:right;"><i>' . ucwords(strtolower(htmlentities(get_string('Tipo6','ejercicios')))) . '</i></span></h1>';
+        //$titulo = '<h1 class="instrucciones" ><u>' . $nombre . '</u><span style="font-size:0.7em;float:right;"><i>' . ucwords(strtolower(htmlentities(get_string('Tipo6','ejercicios')))) . '</i></span></h1>';
+        $titulo = genera_titulos($nombre, get_string('IE_title','ejercicios'));
         $mform->addElement('html', $titulo);
 
 

@@ -192,6 +192,9 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
            
           switch ($tipocreacion) {
             case 5: //Texto Hueco. Solo tipo Texto
+            case 2: //Multiplechoice solo tipo texto
+            case 6: //Identificar elementos
+            case 10: //Identificar Elementos mas Respuesta Corta
                 break;
             case 9: //Ordenar Elementos, Solo tipo Texto
                 $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiotipoorden', '', get_string("OE_tipoorden_frase","ejercicios"), "Frase", null);
@@ -199,11 +202,11 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
                 $mform->addGroup($radioarray, 'radiotipoorden', get_string('OE_tipoorden', 'ejercicios'), array(' '), false);
                 $mform->setDefault('radiotipoorden', "Frase");
                 break;
-            case 2: //Multiplechoice solo tipo texto
-                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Texto", "Texto", null);
+            
+                /*$radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Texto", "Texto", null);
                 $mform->addGroup($radioarray, 'radiorespuesta', get_string('tiporespuesta', 'ejercicios'), array(' '), false);
                 $mform->setDefault('radiorespuesta', "Texto");
-                break;
+                break;*/
             case 3: //Asociacion Simple
             case 4: //Asociacion Compleja
             
@@ -236,12 +239,11 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
                 $divoculto = '</div>';
                 $mform->addElement('html', $divoculto);
                 break;
-            case 6: //Identificar elementos
-            case 10: //Identificar Elementos mas Respuesta Corta
-                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Texto", "Texto", null);
+            
+                /*$radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Texto", "Texto", null);
                 $mform->addGroup($radioarray, 'radiorespuesta', get_string('tiporespuesta', 'ejercicios'), array(' '), false);
                 $mform->setDefault('radiorespuesta', "Texto");
-                break;
+                break;*/
         }
            
           
@@ -430,6 +432,7 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
             $log->write("Carpetas: " . var_export($carpetas,true));
             $mform->addElement('select','carpeta_ejercicio',get_string('carpeta', 'ejercicios'),$carpetas,$attributes);
             $log->write("Entra aqui");
+            $mform->addElement('html','<div class="fitem"><div class="fitemtitle"></div><div class="felement ftextarea"><input type="text" id="input_carpeta" value="" style="display:none;"/></div></div>');
             //$mform->addElement('text', 'carpeta_ejercicio',get_string('carpeta', 'ejercicios') , $attributes);
             //$mform->addRule('carpeta_ejercicio', "Carpeta Necesaria", 'required', null, 'client');
 
@@ -457,8 +460,8 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
                 $cright[]="Reconocimiento-NoComercial-CompartirIgual (CC-BY-NC-SA)";
                 $cright[]="Reconocimiento-NoComercial-NoDerivadas (CC-BY-NC-ND)";
 
-                $mform->addElement('select', 'copyrightresp', get_string("copyrightresp", "ejercicios"), $cright,"onChange='javascript:cargaDescripcion(2);'");
-                $mform->addRule('copyrightresp', "Copyright Necesario", 'required', null, 'client');
+                //$mform->addElement('select', 'copyrightresp', get_string("copyrightresp", "ejercicios"), $cright,"onChange='javascript:cargaDescripcion(2);'");
+                //$mform->addRule('copyrightresp', "Copyright Necesario", 'required', null, 'client');
             }
 
             
@@ -507,7 +510,8 @@ class mod_ejercicios_creando_ejercicio_texto extends moodleform_mod {
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
         $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
         //titulo
-        $titulo= '<h1 class="instrucciones" >' . get_string('FormularioCreacionTextos', 'ejercicios') . '</h1>';
+        //$titulo= '<h1 class="instrucciones" >' . get_string('FormularioCreacionTextos', 'ejercicios') . '</h1>';
+        $titulo = genera_titulos(get_string('FormularioCreacionTextos', 'ejercicios'), get_string('MC_title','ejercicios'));
         $mform->addElement('html',$titulo);
         
         $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
@@ -630,7 +634,8 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
        //$mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
         //titulo
-        $titulo= '<h1 class="instrucciones" >' . get_string('FormularioCreacionTextos', 'ejercicios') . '</h1>';
+        //$titulo= '<h1 class="instrucciones" >' . get_string('FormularioCreacionTextos', 'ejercicios') . '</h1>';
+        $titulo = genera_titulos(get_string('FormularioCreacionTextos', 'ejercicios'), get_string('AS_title','ejercicios'));
         $mform->addElement('html',$titulo);
         
         $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
@@ -873,7 +878,8 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
         $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
         
         //titulo
-        $titulo= '<h1 class="instrucciones" >' . get_string('FormularioCreacionTextos', 'ejercicios') . '</h1>';
+        //$titulo= '<h1 class="instrucciones" >' . get_string('FormularioCreacionTextos', 'ejercicios') . '</h1>';
+        $titulo = genera_titulos(get_string('FormularioCreacionTextos', 'ejercicios'), get_string('AC_title','ejercicios'));
         $mform->addElement('html',$titulo);
         
         $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
@@ -1173,7 +1179,8 @@ class mod_ejercicios_creando_ejercicio_texto_hueco extends moodleform_mod {
         $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
         
         //titulo
-        $titulo= '<h1 class="instrucciones" >' . get_string('FormularioCreacionTextos', 'ejercicios') . '</h1>';
+        //$titulo= '<h1 class="instrucciones" >' . get_string('FormularioCreacionTextos', 'ejercicios') . '</h1>';
+        $titulo = genera_titulos(get_string('FormularioCreacionTextos', 'ejercicios'), get_string('TH_title','ejercicios'));
         $mform->addElement('html',$titulo);
         
         $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
@@ -1297,7 +1304,8 @@ class mod_ejercicios_creando_ejercicio_ordenar_elementos extends moodleform_mod 
         
         //titulo
         //$titulo= '<h1>' . get_string('OE_FormularioCreacionTextos', 'ejercicios') . '</h1>';
-        //$mform->addElement('html',$titulo);
+        $titulo = genera_titulos(get_string('OE_FormularioCreacionTextos', 'ejercicios'), get_string('OE_title','ejercicios'));
+        $mform->addElement('html',$titulo);
 
          $oculto='<input type="hidden" name="tipocreacion" id="tipocreacion" value="'.$tipocreacion.'"/>';
          $mform->addElement('html',$oculto);
@@ -1422,7 +1430,8 @@ class mod_ejercicios_creando_ejercicio_identificar_elementos extends moodleform_
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
         $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
         //titulo
-        $titulo= '<h1 class="instrucciones" >' . get_string('FormularioCreacionTextos', 'ejercicios') . '</h1>';
+        //$titulo= '<h1 class="instrucciones" >' . get_string('FormularioCreacionTextos', 'ejercicios') . '</h1>';
+        $titulo = genera_titulos(get_string('FormularioCreacionTextos', 'ejercicios'), get_string('IE_title','ejercicios'));
         $mform->addElement('html',$titulo);
         
         $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
@@ -1544,7 +1553,8 @@ class mod_ejercicios_creando_ejercicio_ierc extends moodleform_mod {
         $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js"></script>');
         $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
         //titulo
-        $titulo= '<h1 class="instrucciones" >' . get_string('IERC_instr_prof', 'ejercicios') . '</h1>';
+        //$titulo= '<h1 class="instrucciones" >' . get_string('IERC_instr_prof', 'ejercicios') . '</h1>';
+        $titulo = genera_titulos(get_string('FormularioCreacionTextos', 'ejercicios'), get_string('IERC_title','ejercicios'));
         $mform->addElement('html',$titulo);
 
          $oculto='<input type="hidden" name="tipocreacion" id="tipocreacion" value="'.$tipocreacion.'"/>';

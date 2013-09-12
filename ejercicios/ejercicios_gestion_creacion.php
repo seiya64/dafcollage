@@ -1,4 +1,4 @@
-<?php
+z<?php
 
 /*
   Daf-collage is made up of two Moodle modules which help in the process of
@@ -58,8 +58,11 @@ $mform->pintarformulario($id_curso);
 $tipo_pregunta = optional_param('radiopregunta', PARAM_TEXT);
 $numeropreguntas = optional_param('numeropreguntas', 0, PARAM_INT);
 
+$log = new Log('log_gestion_creacion.txt');
+
 
 $error = optional_param('error', PARAM_TEXT);
+$log->write('error: ' . $error);
 
 if ($error == '0') {
 
@@ -68,8 +71,11 @@ if ($error == '0') {
     $numeropreguntas = $numeropreguntas + 1;
 
     switch($tipocreacion) {
-        case 5:
-        case 9:
+        case 9: //Ordenar Elementos
+        case 5: //Texto Hueco. Solo tipo Texto
+        case 2: //Multiplechoice solo tipo texto
+        case 6: //Identificar elementos
+        case 10: //Identificar Elementos mas Respuesta Corta
             $tipo_respuesta = "Texto";
             $numerorespuestas=1;
             $numerorespuestascorrectas=1;
@@ -93,8 +99,6 @@ if ($error == '0') {
     switch ($tipocreacion) {
         case 10:
             $IERC_sesion = array("numPreguntas"=>optional_param('IERC_aux', PARAM_INT));
-            $log2 = new Log("titulo.txt");
-            $log2->write($IERC_sesion['numPreguntas']);
             $IERC_sesion['elemento']= optional_param('elemento', PARAM_TEXT);
             for ($counter = 1; $counter <= $IERC_sesion['numPreguntas']; $counter++){
                 $titulo = "titulo".$counter;
@@ -186,12 +190,13 @@ if ($error == '0') {
     $descripcion = required_param('descripcion', PARAM_TEXT);
     $copyrightpreg = required_param('copyright', PARAM_INT);
     
-    if ($tipocreacion!=5 && $tipocreacion!=9) {
+    /*if ($tipocreacion!=5 && $tipocreacion!=9) {
         $copyrightresp = required_param('copyrightresp', PARAM_INT);
     }
     else {
         $copyrightresp=0;
-    }
+    }*/
+    $copyrightresp=0;
 
     //  $descripcion=htmlspecialchars( mysql_real_escape_string($descripcion));
 
