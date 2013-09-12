@@ -135,7 +135,7 @@ class mod_ejercicios_mostrar_identificar_elementos extends moodleform_mod {
         }
 
         //$titulo = '<h1 class="instrucciones" ><u>' . $nombre . '</u><span style="font-size:0.7em;float:right;"><i>' . ucwords(strtolower(htmlentities(get_string('Tipo6','ejercicios')))) . '</i></span></h1>';
-        $titulo = genera_titulos($nombre, get_string('IE_title','ejercicios'));
+        $titulo = genera_titulos($nombre, get_string('IE_title','ejercicios'),$id);
         $mform->addElement('html', $titulo);
 
 

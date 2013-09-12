@@ -42,11 +42,11 @@
   GNU General Public License for more details. 
  */
 
-require_once($CFG->dirroot.'/course/moodleform_mod.php');
 
- function genera_titulos($titulo, $tipo_creacion) {
-    global $CFG, $COURSE, $USER;
-    $cabecera = '<h1 id="h1" class="instrucciones"><span style="float:right;"><a style="font-size: 1.1em" id="id_cancellink" href="/moodle/mod/ejercicios/view.php?id='.$COURSE->id.'">'.get_string('Reset','ejercicios').'</a></span><div style="font-size:0.7em; height: 13px;"><i>'.$tipo_creacion.'</i></div><u style="
+
+ function genera_titulos($titulo, $tipo_creacion,$id_curso) {
+    
+    $cabecera = '<h1 id="h1" class="instrucciones"><span style="float:right;"><a style="font-size: 1.1em" id="id_cancellink" href="/moodle/mod/ejercicios/view.php?id='.$id_curso.'">'.get_string('Reset','ejercicios').'</a></span><div style="font-size:0.7em; height: 13px;"><i>'.$tipo_creacion.'</i></div><u style="
                 font-size: 0.9em;">'.$titulo.'</u></h1>';
     return $cabecera;
  }

@@ -147,7 +147,7 @@ $string["visible"]="Visible (accesible por sus alumnos)";
 $string["publico"]="Público (accesible por otros profesores y alumnos)";
 //$string["carpeta"]="Introduzca la ruta del ejercicio";
 $string["carpeta"]="Seleccione la carpeta donde quiera guardar el ejercicio";
-$string["copyright"]="Seleccione el copyright de sus archivos pregunta";
+$string["copyright"]="Seleccione la licencia para su ejercicio";
 $string["copyrightresp"]="Seleccione el copyright de sus archivos respuesta";
 $string["textoclasej"]="Asigne una o varias categorías de búsqueda de los siguientes menús desplegables(Obligatorio Campo Temático o Tema gramatical):";
 //Formulario de creacion texto-texto
@@ -235,8 +235,20 @@ $string['IERC_pregunta']='Texto {$a}';
 $string['IERC_cabecera']='Cabecera {$a}';
 $string['IERC_click']="Pulse para editar";
 $string['IERC_eliminar']="Eliminar";
-$string['IERC_instr_prof']='Introduce el texto y las soluciones';
-$string['IERC_descripcion']='Instrucciones del ejercicio como se le muestran al alumno';
-$string['IERC_descripcion2']='Si tiene más de una pregunta relacionada con el elemento a identificar es recomendable que las redacte siguiendo el orden a), b), c), etc... (Hay hasta 5 opciones)';
-$string['IERC_addPregunta']='Añadir Pregunta';
+$string["IERC_instr_prof"]='Introduce el texto y las soluciones';
+$string["IERC_descripcion"]='Instrucciones del ejercicio como se le muestran al alumno';
+$string["IERC_descripcion2"]="Si tiene más de una pregunta relacionada con el elemento a identificar es recomendable que las redacte siguiendo el orden a), b), c), etc... (Hay hasta 5 opciones)";
+$string["IERC_addPregunta"]="Añadir Pregunta";
+$string["IERC_numPreguntas"]="¿Quiere hacer más de una pregunta acerca del elemento identificado? Elija cuántas:";
+$string["IERC_tituloPregunta"]="Escriba la tarea a realizar";
+$string["IERC_respuestas"]="Respuestas";
+$string["IERC_elemento"]="¿Cuál es el elemento a identificar?";
+$string["IERC_instruccionesProfesor"]="Introduzca el texto, a continuacion, seleccione el elemento a identificar, tambien lo puede escribir/modificar en la tabla correspondiente";
+$string["IERC_seleccionarPalabra"]="Añadir elemento";
+
+
+// Campo obligatorio
+$string["tituloNecesario"]="Título necesario";
+$string["descripcionNecesaria"]="Descripción necesaria";
+$string["elementoNecesario"]="Elemento necesario";
 ?>

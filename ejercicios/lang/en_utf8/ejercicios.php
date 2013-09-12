@@ -54,9 +54,10 @@ $string['Opcionespuzzlealum'] = 'Ejercicios Asociación';
 $string['Nombre']='Nombre';
 $string['Imagen']='Numero de imagenes';
 $string['Aceptar']='Aceptar';
-$string['Reset']='Menu Principal';
+$string['Reset']='Menú Principal';
 $string['Borrar']='Borrar';
 $string['TextoEliminar']='Seleccione el ejercicio a eliminar';
+$string['Creacion']='Creación de ejercicios';
 
 
 //Interfaz Alumno
@@ -208,7 +209,7 @@ $string['OE_seleccione']="Escriba la frase que quiera desordenar.";
 $string['OE_add_orden']="Añadir Orden";
 $string['OE_add_palabra']="Insertar Elemento";
 $string['OE_add_frase']="Añadir Frase o Parrafo";
-$string['OE_pregunta']='Oracion o Parrafo {$a} :';
+$string['OE_pregunta']='Texto';
 $string['OE_orden']='Orden {$a} :';
 $string['OE_introduzca_texto']='En esta area de texto puede escribir, y despues puede seleccionar texto y añadir nuevas palabras a los ordenes';
 $string['OE_add_pregunta']='Añadir Oración o Parrafo Nueva';
@@ -224,13 +225,13 @@ $string["OE_orden_multiple"]="Varios ordenes correctos.";
 $string["OE_help_flechas"]="Puede cambiar el orden de los elementos con la ayuda de las flechas a al derecha.";
 $string["OE_tipoorden"]="Se ordenarán: ";
 $string["OE_tipoorden_frase"]="Elementos de una frase";
-$string["OE_tipoorden_parrafos"]="Frases de un Párrafo/Párrafos de un texto";
+$string["OE_tipoorden_parrafos"]="Frases de un Párrafo o párrafos de un texto";
 
 
 //Generador de Ejercicios -- IE mas RC -----
 $string['IERC_num_subresp']="Numero de subrespuestas para cada respuesta";
 $string['IERC_enunciado']="Texto: ";
-$string['IERC_pregunta']='Texto';
+$string['IERC_pregunta']='Texto {$a}';
 $string['IERC_cabecera']='Cabecera {$a}';
 $string['IERC_click']="Pulse para editar";
 $string['IERC_eliminar']="Eliminar";

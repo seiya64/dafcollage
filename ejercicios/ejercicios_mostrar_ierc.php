@@ -103,7 +103,7 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
         //Añado el título
         //if($modificable) {
             //$titulo = '<h1 id="h1" class="instrucciones" ><u>' . $nombre . '</u><span style="font-size:0.7em; float:right;"><i>' . ucwords(strtolower(htmlentities(get_string('Tipo10','ejercicios')))) . '</i></span></h1>';
-            $titulo = genera_titulos($nombre, get_string('IERC_title','ejercicios'));
+            $titulo = genera_titulos($nombre, get_string('IERC_title','ejercicios'),$id);
             $mform->addElement('html', $titulo);
         //}
 

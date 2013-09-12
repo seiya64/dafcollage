@@ -178,7 +178,7 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
 
         //Añado el título
         //$titulo = '<h1 class="instrucciones" ><u>' . $nombre . '</u><span style="font-size:0.7em; float:right;"><i>' . ucwords(strtolower(htmlentities(get_string('Tipo5','ejercicios')))) . '</i></span></h1>';
-        $titulo = genera_titulos($nombre, get_string('TH_title'));
+        $titulo = genera_titulos($nombre, get_string('TH_title','ejercicios'),$id);
         $mform->addElement('html', $titulo);
 
         //Añado la descripción

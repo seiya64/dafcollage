@@ -123,7 +123,7 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
         //Añado el título
         //if($modificable) {
             //$titulo = '<h1 id="h1" class="instrucciones" ><u>' . $nombre . '</u><span style="font-size:0.7em;float:right;"><i>' . ucwords(strtolower(htmlentities(get_string('Tipo9','ejercicios')))) . '</i></span></h1>';
-            $titulo = genera_titulos($nombre, get_string('OE_title','ejercicios'));
+            $titulo = genera_titulos($nombre, get_string('OE_title','ejercicios'),$id);
             $mform->addElement('html', $titulo);
         //}
 
