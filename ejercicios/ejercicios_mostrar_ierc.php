@@ -81,8 +81,6 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
         $mform->addElement('html','<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>');
         $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.js"></script>');
-        $mform->addElement('html','<script class="jsbin" src="http://datatables.net/download/build/jquery.dataTables.nightly.js"></script>');
-        $mform->addElement('html','<script type="text/javascript" src="http://www.appelsiini.net/download/jquery.jeditable.js"></script>');
         $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
         $mform->addElement('html', '<script src="./js/ajaxupload.js" type="text/javascript"></script>');
         
@@ -126,6 +124,7 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
         
         $mform->addElement('html', $tabla_imagenes);
         
+        
         $oculto.='<input type="hidden" id="IERC_click" value="'.get_string('IERC_click','ejercicios').'" />';
         $oculto.='<input type="hidden" id="IERC_eliminar" value="'.get_string('IERC_eliminar','ejercicios').'" />';
         $oculto.='<input type="hidden" id="OE_pregunta" value="'.get_string('OE_pregunta','ejercicios').'" />';
@@ -138,6 +137,7 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
         //Obtengo las preguntas
         $mis_preguntas = new ejercicios_ierc_preg();
         $preguntas = $mis_preguntas->obtener_todos_id_ejercicio($id_ejercicio);
+        
 
         if ($buscar == 1 || $modificable == false) {
             $log = new Log("log_IERC_mostrar_alumno.txt");
@@ -150,7 +150,7 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
             
             for ($i = 1; $i <= sizeof($preguntas); $i++) {
                 $log->write("i: " . $i . "\n");
-
+                $mform->addElement('hidden', 'IERC_aux', ($preguntas[$i - 1]->get('num_cabs')-1));
                 $log->write("Numero de preguntas: " . sizeof($preguntas) . "\n");
                 //Pinto la pregunta
                 $divpregunta = '<div id="tabpregunta' . $i . '" >';
@@ -196,7 +196,7 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
                 //$divpregunta.='<img id="imgpregborrar' . $i . '" src="./imagenes/delete.gif" alt="Eliminar Pregunta"  height="10px"  width="10px" onClick="IERC_DelPregunta('.$id_ejercicio.",".$i.')" title="Eliminar Pregunta">&nbsp;&nbsp;Eliminar Pregunta&nbsp;&nbsp;</img>';
                 //$divpregunta.='<img id="imgpreganadir' . $i . '" src="./imagenes/añadir.gif" alt="añadir hueco"  height="15px"  width="15px" onClick="IERC_addFila('.$i.')" title="Añadir Respuesta">&nbsp;&nbsp;Añadir Respuesta&nbsp;&nbsp;</img>';                
                 //$divpregunta.='<span style="float:right;"><label for="id_sel_subrespuestas_'.$i.'">'.get_string('IERC_num_subresp','ejercicios').'</label><select onchange="IERC_cambiaCols('.$i.')" id="id_sel_subrespuestas_'.$i.'" name="sel_subrespuestas_'.$i.'" >';
-                $num_cabs = $_SESSION['IERC']['numPreguntas'];
+                $num_cabs = $preguntas[$i-1]->get('num_cabs');
                 $log->write("num_cabs: " . $num_cabs);
                 $log->write('tipo num_cabs ' . gettype($num_cabs));
                 $divpregunta.='<input type="hidden" name="num_cabs" id="num_cabs" value="'.$num_cabs.'" />';
@@ -251,7 +251,7 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
                     $divpregunta.='</tr>';
                 }
                 $divpregunta.='</tbody></table>';
-                $divpregunta.='<script type="text/javascript" >IERC_setupTabla('.$i.',false);</script>';
+                // $divpregunta.='<script type="text/javascript" >IERC_setupTabla('.$i.',false);</script>';
                 //Insertar el numero de respuestas                
                 $divpregunta.='</div>'; 
                 $divpregunta.='<input type="hidden" name="numerorespuestas_'.$i.'" id="numerorespuestas_'.$i.'" value="'.sizeof($respuestas).'"/>';
@@ -273,7 +273,11 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
             $log = new Log("log_IERC_mostrar.txt");
             
             for ($i = 1; $i <= sizeof($preguntas); $i++) {
+                $mform->addElement('hidden', 'IERC_aux', ($preguntas[$i - 1]->get('num_cabs')-1));
                 $log->write("i: " . $i . "\n");
+                $num_cabs = $preguntas[$i-1]->get('num_cabs');
+                $log->write("num_cabs: " . $num_cabs);
+                $log->write('tipo num_cabs ' . gettype($num_cabs));
 
                 $log->write("Numero de oraciones: " . sizeof($preguntas) . "\n");
                 //Pinto la pregunta
@@ -316,8 +320,8 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
                     
                 }
 
-                $divpregunta.='<img id="imgpregborrar' . $i . '" src="./imagenes/delete.gif" alt="Eliminar Pregunta"  height="10px"  width="10px" onClick="IERC_DelPregunta('.$id_ejercicio.",".$i.')" title="Eliminar Pregunta">&nbsp;&nbsp;Eliminar Pregunta&nbsp;&nbsp;</img>';
-                $divpregunta.='<img id="imgpreganadir' . $i . '" src="./imagenes/añadir.gif" alt="añadir hueco"  height="15px"  width="15px" onClick="IERC_addFila('.$i.')" title="Añadir Respuesta">&nbsp;&nbsp;Añadir Respuesta&nbsp;&nbsp;</img>';                
+                //$divpregunta.='<img id="imgpregborrar' . $i . '" src="./imagenes/delete.gif" alt="Eliminar Pregunta"  height="10px"  width="10px" onClick="IERC_DelPregunta('.$id_ejercicio.",".$i.')" title="Eliminar Pregunta">&nbsp;&nbsp;Eliminar Pregunta&nbsp;&nbsp;</img>';
+                $divpregunta.='<img id="imgpreganadir' . $i . '" src="./imagenes/añadir.gif" alt="añadir hueco"  height="15px"  width="15px" onClick="IERC_addFila('.$i.', false)" title="Añadir Respuesta">&nbsp;&nbsp;Añadir Respuesta&nbsp;&nbsp;</img>';                
                 /*
                 $divpregunta.='<span style="float:right;"><label for="id_sel_subrespuestas_'.$i.'">'.get_string('IERC_num_subresp','ejercicios').'</label><select onchange="IERC_cambiaCols('.$i.')" id="id_sel_subrespuestas_'.$i.'" name="sel_subrespuestas_'.$i.'" >';
                 for ($m=1; $m<=5; $m++) {                    
@@ -352,8 +356,9 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
                 //Pintar las tablas y la cabecera
                 $divpregunta.='<table style="width:100%; margin-bottom:15px;" id="tbl_resp_'.$i.'" name="tbl_resp_'.$i.'" /><thead>';
                 $divpregunta.='<tr id="fila_0">';
-                for ($l=1; $l<=5; $l++) {
-                    $divpregunta.='<th id="celda_'.$i.'_0_'.$l.'" ><input style="font-size:1.2em;" type="text"  id="cab_'.$i.'_0_'.$l.'" name="cab_'.$i.'_0_'.$l.'" value="'.$preguntas[$i - 1]->get('cab'.$l).'" /></th>';                   
+                for ($l=1; $l<=$num_cabs; $l++) {
+                    if ($l == 2) { $divpregunta.= '<th> &nbsp;&nbsp;&nbsp;&nbsp; </th>'; }
+                    $divpregunta.='<th id="celda_'.$i.'_0_'.$l.'" ><input type="text"  id="cab_'.$i.'_0_'.$l.'" name="cab_'.$i.'_0_'.$l.'" value="'.$preguntas[$i - 1]->get('cab'.$l).'" /></th>';                   
                 }
                 $divpregunta.='<th>Acciones</th>';
                 $divpregunta.='</tr></thead>';
@@ -362,14 +367,15 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
                 for ($k=1; $k<=sizeof($respuestas); $k++) {
                     $log->write("k: ".$k."\n");
                     $divpregunta.='<tr id="fila_'.$k.'">';
-                    for ($l=1; $l<=5; $l++) {
-                        $divpregunta.='<td id="celda_'.$i.'_'.$k.'_'.$l.'" ><input style="font-size:1.2em;" type="text" name="resp_'.$i.'_'.$k.'_'.$l.'" value="'.$respuestas[$k-1]->get('resp'.$l).'" /></td>';                   
+                    for ($l=1; $l<=$num_cabs; $l++) {
+                        if ($l == 2) { $divpregunta.= '<td></td>'; }
+                        $divpregunta.='<td id="celda_'.$i.'_'.$k.'_'.$l.'" ><center><input type="text" name="resp_'.$i.'_'.$k.'_'.$l.'" value="'.$respuestas[$k-1]->get('resp'.$l).'" /></center></td>';                   
                     }
-                    $divpregunta.='<td id="celda_'.$i.'_'.$k.'_img"><img id="del_resp_'.$i.'_'.$k.'" name="del_resp_'.$i.'_'.$k.'" src="./imagenes/delete.gif" onclick="IERC_delFila('.$i.','. $k .')" >Eliminar</img></td>';
+                    $divpregunta.='<td id="celda_'.$i.'_'.$k.'_img"><center><img id="del_resp_'.$i.'_'.$k.'" name="del_resp_'.$i.'_'.$k.'" src="./imagenes/delete.gif" onclick="IERC_delFila('.$i.','. $k .')" >Eliminar</img></center></td>';
                     $divpregunta.='</tr>';
                 }
                 $divpregunta.='</tbody></table>';
-                $divpregunta.='<script type="text/javascript" >IERC_setupTabla('.$i.',true);</script>';
+                // $divpregunta.='<script type="text/javascript" >IERC_setupTabla('.$i.',true);</script>';
                 //Insertar el numero de respuestas                
                 $divpregunta.='</div>'; 
                 $divpregunta.='<input type="hidden" name="numerorespuestas_'.$i.'" id="numerorespuestas_'.$i.'" value="'.sizeof($respuestas).'"/>';
@@ -393,8 +399,8 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
 
         if ($buscar != 1 && $modificable == true) {
             //Si soy el profesor creadors
-            $tabla_imagenes='<center><input type="button" style=" margin-top:20px;" id="botonNA" name="botonNA" onclick="IERC_AddPregunta('.$id_ejercicio.')" value="' . get_string('IERC_addPregunta', 'ejercicios') . '"><br/>';
-            $tabla_imagenes.= '<input type="submit" style="" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
+            //$tabla_imagenes='<center><input type="button" style=" margin-top:20px;" id="botonNA" name="botonNA" onclick="IERC_AddPregunta('.$id_ejercicio.')" value="' . get_string('IERC_addPregunta', 'ejercicios') . '"><br/>';
+            $tabla_imagenes = '<center><input type="submit" style="" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
 
             $tabla_imagenes.='<input type="button" style="" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
         } else {

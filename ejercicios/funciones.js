@@ -7063,20 +7063,19 @@ function IERC_cambiaCols(id_pregunta) {
 
 //Añade una nueva subrespuesta 
 function IERC_addFila(id_pregunta, cogerTexto) {
-    var numresp = parseInt($('#numerorespuestas_'+id_pregunta).val());
-    var oTable = $('#tbl_resp_'+id_pregunta)
-    var frase = $('#IERC_click').val();
+    var ierc_numRespuestas = parseInt($('#numerorespuestas_'+id_pregunta).val());
+    var oTable = $('#tbl_resp_'+id_pregunta);
     var frase_del = $('#IERC_eliminar').val();
-    var aux = numresp+1;
+    var aux = ierc_numRespuestas+1;
     var input = $('input[name=IERC_aux]');
     var textarea = document.getElementById("pregunta"+id_pregunta);
     var texto_sel = (cogerTexto) ? getSelectedText(textarea) : "";
     var inputElemento = $('input[name=resp_'+id_pregunta+'_1_1]');
 
-    if (cogerTexto == true && inputElemento.val() == "" && texto_sel != "" && numresp == 1){ 
+    if (cogerTexto == true && inputElemento.val() == "" && texto_sel != "" && ierc_numRespuestas == 1){ 
         inputElemento.val(texto_sel);
     }
-    else if ((cogerTexto && (inputElemento.val() != "" || numresp > 1)) || !cogerTexto){
+    else if ((cogerTexto && (inputElemento.val() != "" || ierc_numRespuestas > 1)) || !cogerTexto){
         //Añadir la nueva fila
         var celda = function(i, texto){return '<td id="celda_'+id_pregunta+'_'+aux+'_'+i+'"><center><input type="text"  name="resp_'+id_pregunta+'_'+aux+'_'+i+'" value="'+texto+'" /><center></td>'};      
         var img = '<td><center><img id="del_resp_'+id_pregunta+"_"+aux+'" name="del_resp_'+id_pregunta+"_"+aux+'" src="./imagenes/delete.gif" onclick="IERC_delFila('+id_pregunta+","+aux+')" >'+frase_del+'</img></center></td>';
