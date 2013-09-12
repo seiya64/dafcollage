@@ -369,3 +369,10 @@ h1.instrucciones {
 .descripcion, .item, .marquito {
     font-size:1.2em;
 }
+
+/** Añadido del estilo de vocabulario para ajustar el botón menú principal **/
+#id_cancellink{ 
+float: right;
+color: #EEE;
+font-size: 0.9em;
+}

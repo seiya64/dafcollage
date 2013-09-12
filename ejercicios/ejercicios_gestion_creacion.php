@@ -90,6 +90,19 @@ if ($error == '0') {
         $tipoorden = optional_param('radiotipoorden',PARAM_TEXT);
     }
     
+    switch ($tipocreacion) {
+        case 10:
+            $IERC_sesion = array("numPreguntas"=>optional_param('IERC_aux', PARAM_INT));
+            $log2 = new Log("titulo.txt");
+            $log2->write($IERC_sesion['numPreguntas']);
+            $IERC_sesion['elemento']= optional_param('elemento', PARAM_TEXT);
+            for ($counter = 1; $counter <= $IERC_sesion['numPreguntas']; $counter++){
+                $titulo = "titulo".$counter;
+                $tituloPregunta = "tituloPregunta".$counter;
+                $IERC_sesion[$titulo] = optional_param($tituloPregunta, PARAM_TEXT);
+            }
+    }
+    
     global $CFG, $COURSE, $USER;
     
     
@@ -172,13 +185,13 @@ if ($error == '0') {
     $name = required_param('nombre_ejercicio', PARAM_TEXT);
     $descripcion = required_param('descripcion', PARAM_TEXT);
     $copyrightpreg = required_param('copyright', PARAM_INT);
+    
     if ($tipocreacion!=5 && $tipocreacion!=9) {
         $copyrightresp = required_param('copyrightresp', PARAM_INT);
     }
     else {
         $copyrightresp=0;
     }
-
 
     //  $descripcion=htmlspecialchars( mysql_real_escape_string($descripcion));
 
@@ -200,6 +213,8 @@ if ($error == '0') {
     
     //Meto en sesion el tipo de orden
     $_SESSION['tipoorden']=$tipoorden;
+    
+    $_SESSION['IERC']=$IERC_sesion;
 
 
     //La comprobacion de errores esta en el javascript
