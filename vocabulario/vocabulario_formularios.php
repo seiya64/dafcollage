@@ -2364,7 +2364,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', '</table>');
                 $mform->addElement('html', '<p>');
                 $mform->addElement('html','<input type="hidden" id="avance" value="'.$i.'" />');
-                $mform->addElement('html','<center><a href="#" onclick="mis_gramaticas_addFila56()">'.get_string('masfilas','vocabulario').'</a></center>');
+                $mform->addElement('html','<div class="fitem"><div class="fitemtitle"></div><div class="felement ftextarea"><a href="#" onclick="mis_gramaticas_addFila56()">'.get_string('masfilas','vocabulario').'</a></div></div>');
                 break;
 
             //8.2 Nebensatz
