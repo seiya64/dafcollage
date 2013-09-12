@@ -224,7 +224,7 @@ $string["OE_orden_multiple"]="Varios ordenes correctos.";
 $string["OE_help_flechas"]="Puede cambiar el orden de los elementos con la ayuda de las flechas a al derecha.";
 $string["OE_tipoorden"]="Se ordenarán: ";
 $string["OE_tipoorden_frase"]="Elementos de una frase";
-$string["OE_tipoorden_parrafos"]="Frases de un Párrafo/Párrafos de un texto";
+$string["OE_tipoorden_parrafos"]="Frases de un Párrafo o párrafos de un texto";
 
 
 //Generador de Ejercicios -- IE mas RC -----
