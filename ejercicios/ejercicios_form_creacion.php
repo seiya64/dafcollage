@@ -15,6 +15,8 @@
   Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
   Simeón Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto(finamolinasoto@gmail.com)
+  Ángel Biedma Mesa (tekeiro@gmail.com)
+  Javier Castro Fernández (havidarou@gmail.com)
 
   Original idea:
   Ruth Burbat
@@ -1519,12 +1521,12 @@ class mod_ejercicios_creando_ejercicio_identificar_elementos extends moodleform_
 
 
 /*
- * Formulario para la creación de actividades de tipo Asociación simple
+ * Formulario para la creación de actividades de tipo Identificar Elementos más Respuesta(s) Corta(s)
  */
 class mod_ejercicios_creando_ejercicio_ierc extends moodleform_mod {
     function mod_ejercicios_creando_ejercicio_ierc($id,$p,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion)
         {
-         // El fichero que procesa el formulario es gestion.php
+         // El fichero que procesa el formulario es ejercicios_form_creacion_ierc.php
          parent::moodleform('ejercicios_form_creacion_ierc.php?id_curso='.$id.'&id_ejercicio='.$id_ejercicio.'&tipo_origen='.$tipo_origen.'&tr='.$trespuesta.'&tipocreacion='.$tipocreacion);
        }
 
@@ -1533,9 +1535,9 @@ class mod_ejercicios_creando_ejercicio_ierc extends moodleform_mod {
      
      
      /**
-     * Function that add a table to the forma to show the main menu
+     * Dibuja el formulario del ejercicio
      *
-     * @author Serafina Molina Soto
+     * @author Ángel Biedma Mesa y Javier Castro Fernández
      * @param $id id for the course
      * @param $p numero de preguntas
      * @param $id_ejercicio id del ejercicio que estamos creando
@@ -1543,7 +1545,8 @@ class mod_ejercicios_creando_ejercicio_ierc extends moodleform_mod {
      * @param $tiporespuesta: tipo de archivo origen( 1: Texto, )
      */
      function pintarformulario_identificarelementos($id,$p,$id_ejercicio,$tipoorigen,$tiporespuesta,$tipocreacion){
-         global $CFG, $COURSE, $USER;
+        
+        global $CFG, $COURSE, $USER;
         $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
 
         $mform =& $this->_form;
@@ -1553,8 +1556,8 @@ class mod_ejercicios_creando_ejercicio_ierc extends moodleform_mod {
         $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>');
         $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js"></script>');
         $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
-        //titulo
-        //$titulo= '<h1 class="instrucciones" >' . get_string('IERC_instr_prof', 'ejercicios') . '</h1>';
+        
+        //Título
         $titulo = genera_titulos(get_string('FormularioCreacionTextos', 'ejercicios'), get_string('IERC_title','ejercicios'),$id);
         $mform->addElement('html',$titulo);
 
@@ -1563,41 +1566,13 @@ class mod_ejercicios_creando_ejercicio_ierc extends moodleform_mod {
          $oculto.='<input type="hidden" id="IERC_eliminar" value="'.get_string('IERC_eliminar','ejercicios').'" />';
          $mform->addElement('html',$oculto);
          
-         //Pintar descripcion
+         //Instrucciones para el profesor
          $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
-         $titulo = '<div style="font-size:1.2em">'.nl2br(get_string('IERC_instruccionesProfesor', 'ejercicios')).'</div>';
-         $mform->addElement('html',$titulo);
-         
-        /*switch($tipoorigen){
-            case 1: //El archivo de origen es un texto
-                //Añade una breve introducción al ejercicio
-            echo "entra para el cuadro general";
-            $mform->addElement('textarea', 'archivoorigen', get_string('textoorigen', 'ejercicios'), 'wrap="virtual" rows="10" cols="50"');
-            $mform->addRule('archivoorigen', "Texto Origen Necesario", 'required', null, 'client');
-
-            break;
-            case 2: //El archivo de origen es un audio
-                $mform->addElement('file', 'archivoaudio',"Audio");
-                $mform->addRule('archivoaudio', "Archivo Necesario", 'required', null, 'client');
-               // "el archivo origen es un audio";
-
-            break;
-
-           case 3: //El archivo de origen es un video
-                  //Titule su ejercicio para facilitar la identificación o búsqueda
-                $attributes='size="100"';
-                $mform->addElement('text', 'archivovideo',get_string('Video', 'ejercicios') , $attributes);
-                $mform->addRule('archivovideo', "Dirección Web Necesaria", 'required', null, 'client');
-
-               // "el archivo origen es un audio";
-
-            break;
-
-
-
-        }*/
+         $instrucciones = '<div style="font-size:1.2em">'.nl2br(get_string('IERC_instruccionesProfesor', 'ejercicios')).'</div>';
+         $mform->addElement('html',$instrucciones);
 
         $mform->addElement('hidden', 'IERC_aux', $_SESSION['IERC']['numPreguntas']);
+        
         //Para cada pregunta
         for($i=0;$i<$p;$i++){
 
@@ -1607,8 +1582,6 @@ class mod_ejercicios_creando_ejercicio_ierc extends moodleform_mod {
 
             switch($tipoorigen) {
                 case 1: //El archivo origen es un texto
-                    //$mform->addElement('textarea', 'pregunta'.$aux, get_string('IERC_enunciado', 'ejercicios'), 'wrap="virtual" rows="5" cols="80"');
-                    //$mform->addElement('textarea', 'pregunta'.$aux, "", 'wrap="virtual" rows="5" cols="80"');
                     $textarea = '<textarea style="width:100%;" id="pregunta'.$aux.'" name="pregunta'.$aux.'" wrap="virtual" rows="5" cols="80"></textarea>';
                     $mform->addElement('html',$textarea);
                     $botonañadir='<center><input type="button" style="height:30px; width:140px;" value="'.get_string('IERC_seleccionarPalabra','ejercicios').'" onclick="IERC_addFila('.$aux.', true);"></center>';
@@ -1624,47 +1597,21 @@ class mod_ejercicios_creando_ejercicio_ierc extends moodleform_mod {
                     $mform->addRule('pregunta'.$aux, "Dirección Web Necesaria", 'required', null, 'client');
                     break;
             }
-            
-            
-            //$numeros = array(1=>1,2=>2,3=>3,4=>4,5=>5);
-            //$mform->addElement('select','sel_subrespuestas_'.$aux,get_string('IERC_num_subresp','ejercicios'),$numeros,' style="margin-left:100px;" onchange="IERC_cambiaCols('.$aux.')"');
-            //$mform->setDefault('sel_subrespuestas_'.$aux,5);
-            
-            /*
-            $select = '<center><label for="id_sel_subrespuestas_'.$aux.'">'.get_string('IERC_num_subresp','ejercicios').'</label>';
-            $select.= '<select style="margin-left:2%;" onchange="IERC_cambiaCols('.$aux.')" name="sel_subrespuestas_'.$aux.'" id="id_sel_subrespuestas_'.$aux.'" >';
-            for ($l=1; $l<=5; $l++) {
-                $sel = ($l==5) ? 'selected="selected"' : "";
-                $select.='<option value="'.$l.'" '.$sel.' >'.$l.'</option>';
-            }
-            $select.='</select></center>';
-            $mform->addElement('html',$select);
-            */
 
             $textarea='</br><div id="titulorespuestas" >';
-            //$textarea.='<div style="margin-left:310px;" id="respuestas_pregunta"'.$aux.'"> ';
-            //$textarea.='<textarea name="respuesta1_'.$aux.'" id="respuesta1_'.$aux.'" rows="1" cols="50"></textarea>';
-            //$textarea.='</br><div id="correctarespuesta">'.get_string('Correcta', 'ejercicios');
-            //$textarea.='<input type="radio"  name="correcta1_'.$aux.'" id="correcta1_'.$aux.'" value="Si" checked> Si </input>';
-            //$textarea.='<input type="radio" name="correcta1_'.$aux.'"  id="correcta1_'.$aux.'" value="No"> No </input>';
-            //$textarea.='</br>';
-            //$textarea.='</div>';
             
             $textarea.='<table style="width:100%; margin-bottom:15px;" id="tbl_resp_'.$aux.'" name="tbl_resp_'.$aux.'" /><thead>';
             $textarea.='<tr id="fila_0">';
-            $log = new Log("titulos.txt");
-            $log->write("esto es sesion");
-            $log->write(var_export($_SESSION, true));
+            
             for ($l=1; $l<=(integer)$_SESSION['IERC']['numPreguntas'] + 2; $l++) {
                 if ($l == 1) { // Si es la primera columna
                     $textarea.='<th id="celda_'.$aux.'_0_'.$l.'" ><input type="text"  id="cab_'.$aux.'_0_'.$l.'" name="cab_'.$aux.'_0_'.$l.'" value="'.$_SESSION['IERC']['elemento'].'" /></th>';                   
                 }
-                if ($l == 2) {
+                if ($l == 2) { // Si es la segunda columna
                     $textarea.='<th> &nbsp;&nbsp;&nbsp; </th>';                   
                 }
-                if ($l > 2) {
+                if ($l > 2) { // Si es la tercera columna en adelante
                     $titulo = "titulo".($l-2);
-                    $log->write($titulo);
                     $textarea.='<th id="celda_'.$aux.'_0_'.($l-1).'" ><input type="text"  id="cab_'.$aux.'_0_'.($l-1).'" name="cab_'.$aux.'_0_'.($l-1).'" value="'.$_SESSION['IERC'][$titulo].'" /></th>';                         
                 }
             }
@@ -1676,10 +1623,10 @@ class mod_ejercicios_creando_ejercicio_ierc extends moodleform_mod {
                 if ($l == 1) { // Si es la primera columna  
                     $textarea.='<td id="celda_'.$aux.'_1_'.$l.'" ><center><input type="text" name="resp_'.$aux.'_1_'.$l.'" value="" /></center></td>';                   
                 }
-                if ($l == 2) {
+                if ($l == 2) { // Si es la segunda columna
                     $textarea.='<td></td>';                   
                 }
-                if ($l > 2) {
+                if ($l > 2) { // Si es la tercera columna en adelante
                     $textarea.='<td id="celda_'.$aux.'_1_'.($l-1).'" ><center><input type="text" name="resp_'.$aux.'_1_'.($l-1).'" value="" /></center></td>';                   
                 }
             }
@@ -1702,14 +1649,15 @@ class mod_ejercicios_creando_ejercicio_ierc extends moodleform_mod {
         }
 
            $mform->addElement('hidden','numeropreguntas',$p);
+           
+           $fuentes = genera_fuentes();
+           $mform->addElement('html', $fuentes);
+           
+           $botonAceptar = '<center><input type="submit" style="" id="submitbutton" name="submitbutton" value="' . get_string('Aceptar', 'ejercicios') . '" onclick=obtenernumeroRespuestas('.$p.')></center>';
+           $mform->addElement('html', $botonAceptar);
 
-           $botonAceptar = '<center><input onclick="obtenernumeroRespuestas('.$p.');" name="submitbutton" value="'.get_string('Aceptar','ejercicios').' type="submit" id="id_submitbutton"></center>';
-            $buttonarray = array();
-            $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"onclick=obtenernumeroRespuestas('$p');");
-            $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
-            
-     }
+           //$mform->addElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"onclick=obtenernumeroRespuestas('$p');");
+           //$mform->addGroup($buttonarray, 'botones', '', array(' '), false);      
+       }
 }
-
 ?>
-

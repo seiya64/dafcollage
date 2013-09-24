@@ -7080,7 +7080,7 @@ function IERC_addFila(id_pregunta, cogerTexto) {
     else if ((cogerTexto && (inputElemento.val() != "" || ierc_numRespuestas > 1)) || !cogerTexto){
         //Añadir la nueva fila
         var celda = function(i, texto){return '<td id="celda_'+id_pregunta+'_'+aux+'_'+i+'"><center><input type="text"  name="resp_'+id_pregunta+'_'+aux+'_'+i+'" value="'+texto+'" /><center></td>'};      
-        var img = '<td><center><img id="del_resp_'+id_pregunta+"_"+aux+'" name="del_resp_'+id_pregunta+"_"+aux+'" src="./imagenes/delete.gif" onclick="IERC_delFila('+id_pregunta+","+aux+')" >'+frase_del+'</img></center></td>';
+        var img = '<td><center><span style="cursor:pointer" id="del_resp_'+id_pregunta+"_"+aux+'" name="del_resp_'+id_pregunta+"_"+aux+'" onclick="IERC_delFila('+id_pregunta+","+aux+')"><img  src="./imagenes/delete.gif"  >'+frase_del+'</img></span></center></td>';
         var fila = "<tr>"
         for (var i=1;i <= parseInt(input.val()) + 2; i++){
             if (i == 2){

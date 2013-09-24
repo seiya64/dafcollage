@@ -128,6 +128,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
              //echo "aki entra";
              //echo "por lo que estoy en texto texto";
             if ($buscar == 1 || $modificable == false) { //Para que no pueda editarlo
+                echo "realmente estoy aqui";
                 $divtexto = '<div class="desctexto" name="texto" id="texto"><div class="margenes">' . nl2br((stripslashes($el_texto_origen->get('texto')))) . '</div></div>';
             } else {
                 $divtexto = '<textarea  class="adaptHeightInput" name="texto" id="texto">' . $el_texto_origen->get('texto') . '</textarea>';

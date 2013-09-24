@@ -12,9 +12,6 @@
   Ruth Burbat
 
   Source code:
-  Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
-  Simeón Ruiz Romero (simeonruiz@gmail.com)
-  Serafina Molina Soto(finamolinasoto@gmail.com)
   Javier Castro Fernández (havidarou@gmail.com)
   Angel Biedma Mesa (tekeiro@gmail.com)
 
@@ -49,5 +46,11 @@
     $cabecera = '<h1 id="h1" class="instrucciones"><span style="float:right;"><a style="font-size: 1.1em" id="id_cancellink" href="/moodle/mod/ejercicios/view.php?id='.$id_curso.'">'.get_string('Reset','ejercicios').'</a></span><div style="font-size:0.7em; height: 13px;"><i>'.$tipo_creacion.'</i></div><u style="
                 font-size: 0.9em;">'.$titulo.'</u></h1>';
     return $cabecera;
+ }
+ 
+ function genera_fuentes($fuentes) {
+    $label = '<h4>'.get_string('fuentes', 'ejercicios').'</h4> <textarea style="width:100%;" id="fuentes" name="fuentes" wrap="virtual" rows="5" cols="80">'. $fuentes.'</textarea>';      
+ 
+    return $label;  
  }
 ?>

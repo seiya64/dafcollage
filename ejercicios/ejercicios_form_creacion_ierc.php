@@ -55,14 +55,24 @@ require_once("clase_log.php");
 
 $log = new Log("log_creacion_IERC.txt");
 
+//CAMBIAR
+
 // Crea ejercicio ahora
 $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
 $carpeta = unserialize($_SESSION['cosasProfe']);
+$fuentes = optional_param('fuentes',PARAM_TEXT);
+        
+$ejercicioGeneral->set_fuentes($fuentes);
 $id_ejercicio = $ejercicioGeneral->insertar();
 $log->write("insertar ejercicio: " . mysql_error());
 
 // Y para el profesor tambien
 // Tengo que asignarle el ejercicio al profesor 
+
+// Se obtienen las fuentes del textarea destinado a ello
+    
+    
+//$ejercicioGeneral->set('fuentes', $fuentes);
 $ejercicio_profesor = new Ejercicios_prof_actividad($ejercicioGeneral->get('id'),$ejercicioGeneral->get('id_creador'),$id_ejercicio,$carpeta);
 $ejercicio_profesor->insertar();
 $log->write("insertar profesor: " . mysql_error());
@@ -171,7 +181,9 @@ for($i=0;$i<$numero_preguntas;$i++){
 
     //Inserto la pregunta
     $mispreguntas= new ejercicios_ierc_preg(NULL, $id_ejercicio, $pregunta, $num_cols, $cabeceras[0], $cabeceras[1], $cabeceras[2], $cabeceras[3], $cabeceras[4]);
+    $log->write("antes");
     $id_preg=$mispreguntas->insertar();
+    $log->write("después");
     $log->write("insertar preguntas: " . mysql_error());
     $log->write("Id Preg: " . $id_preg);
 
@@ -194,6 +206,7 @@ for($i=0;$i<$numero_preguntas;$i++){
 	$log->write("insertar respuestas: " . mysql_error());
     }
    
+    
 
    // Echo "\n";
 }

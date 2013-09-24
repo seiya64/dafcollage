@@ -1,4 +1,4 @@
-z<?php
+<?php
 
 /*
   Daf-collage is made up of two Moodle modules which help in the process of
@@ -189,6 +189,7 @@ if ($error == '0') {
     $name = required_param('nombre_ejercicio', PARAM_TEXT);
     $descripcion = required_param('descripcion', PARAM_TEXT);
     $copyrightpreg = required_param('copyright', PARAM_INT);
+    $fuentes = "";
     
     /*if ($tipocreacion!=5 && $tipocreacion!=9) {
         $copyrightresp = required_param('copyrightresp', PARAM_INT);
@@ -200,7 +201,7 @@ if ($error == '0') {
 
     //  $descripcion=htmlspecialchars( mysql_real_escape_string($descripcion));
 
-    $ejercicio_general = new Ejercicios_general(NULL, $id_curso, $id_creador, $TipoActividad, $TipoArchivoPregunta, $TipoArchivoRespuesta, $visible, $privado, $carpeta, $CampoTematico, $Destreza, $TemaGramatical, $IntencionComunicativa, $TipologiaTextual, $name, $descripcion, $numeropreguntas, $copyrightpreg, $copyrightresp);
+    $ejercicio_general = new Ejercicios_general(NULL, $id_curso, $id_creador, $TipoActividad, $TipoArchivoPregunta, $TipoArchivoRespuesta, $visible, $privado, $carpeta, $CampoTematico, $Destreza, $TemaGramatical, $IntencionComunicativa, $TipologiaTextual, $name, $descripcion, $numeropreguntas, $copyrightpreg, $copyrightresp, $fuentes);
 
     /* $id_ejercicio=$ejercicio_general->insertar();   
 

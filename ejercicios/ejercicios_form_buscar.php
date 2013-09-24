@@ -426,6 +426,10 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
             //Añado un enlace por cada ejercicio dentro de la carpeta
             $id_ejercicio=$buscados[$i]->get('id');
 
+            // Añadido provisional
+            $carpeta.='<li style="width:750px;"><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'&buscar=1&tipo_origen='.$buscados[$i]->get('tipoarchivopregunta').'">'. $nombre_ejercicio.'</a></li>';
+            
+            /*
             if($buscados[$i]->get('tipoactividad')==0){ //multichoice
             $carpeta.='<li style="width:750px;"><a id="classa" href="./view.php?opcion=8&id='.$id.'&id_ejercicio='.$id_ejercicio.'&buscar=1&tipo_origen='.$buscados[$i]->get('tipoarchivopregunta').'">'. $nombre_ejercicio.'</a></li>';
                 
@@ -480,6 +484,7 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
 
 
             }
+            */
             
          }
         $carpeta.='</ul>';

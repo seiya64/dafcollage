@@ -14,6 +14,8 @@
   Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
   Simeón Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto(finamolinasoto@gmail.com)
+  Ángel Biedma Mesa (tekeiro@gmail.com)
+  Javier Castro Fernández (havidarou@gmail.com)
  
   Original idea and content design:
   Ruth Burbat
@@ -109,8 +111,8 @@ $string['desc_Tipo5']="Rellenar los huecos de un texto para practicar la gramát
 $string['desc_Tipo6']="IDENTIFICAR ELEMENTOS";
 $string['desc_Tipo7']="RESPUESTA ABIERTA";
 $string['desc_Tipo8']="CRUCIGRAMA";
-$string['desc_Tipo9']="ORDENAR ELEMENTOS";
-$string['desc_Tipo10']="IDENTIFICAR ELEMENTOS MÁS RESPUESTA CORTA";
+$string['desc_Tipo9']="Se ordenan varios elementos de un texto que pueden ser más o menos largos. Por ejemplo se ordenan las partes de una oración o los párrafos de un texto.";
+$string['desc_Tipo10']="Identificar un elemento en un texto, audio o vídeo a través de una o varias preguntas  Por ejemplo en un texto se pueden identificar los verbos de un texto y a continuación preguntar por la forma del infinitivo. En un audio o vídeo el elemento podría estar relacionado con un determinado tema que se menciona en una conversación, etc.";
 $string['desc_Tipo11']="IDENTIFICAR ELEMENOS CON ASOCIACIÓN SIMPLE";
 $string['desc_Tipo12']="IDENTIFICAR ELEMENOS CON  RESPUESTA MÚLTIPLE";
 $string['desc_Tipo13']="PRACTICAR PRONUNCIACIÓN";
@@ -174,6 +176,9 @@ $string["BotonAñadir"]="Añadir a mis ejercicios";
 $string['Misejercicios']='Mis Actividades';
 $string["marcoteorico"]="Seleccionar el nivel según el marco europeo de referecia(OPCIONAL)";
 
+//Fuentes ejercicios
+$string["fuentes"]="Fuentes de los recursos utilizados en el ejercicio:";
+
 
 //A partir de aqui hay que traducir a ingles
 $string["textoorigen"]="Introduzca texto origen";
@@ -202,7 +207,7 @@ $string['AC_title']="Asociacion Compleja";
 $string['TH_title']="Texto Hueco";
 $string['OE_title']="Ordenar Elementos";
 $string['IE_title']="Identificar Elementos";
-$string['IERC_title']="Identificar Elementos mas Respuesta Corta";
+$string['IERC_title']="Identificar Elementos mas Respuesta(s) Corta(s)";
 
 //Generador de Ejercicios -- Ordenar Elementos -- Etiqueta OE
 $string['OE_seleccione']="Escriba la frase que quiera desordenar.";
@@ -243,7 +248,7 @@ $string["IERC_numPreguntas"]="¿Quiere hacer más de una pregunta acerca del ele
 $string["IERC_tituloPregunta"]="Escriba la tarea a realizar";
 $string["IERC_respuestas"]="Respuestas";
 $string["IERC_elemento"]="¿Cuál es el elemento a identificar?";
-$string["IERC_instruccionesProfesor"]="Introduzca el texto, a continuacion, seleccione el elemento a identificar, tambien lo puede escribir/modificar en la tabla correspondiente";
+$string["IERC_instruccionesProfesor"]="Introduzca el texto; a continuacion, seleccione el elemento a identificar, tambien lo puede escribir/modificar en la tabla correspondiente";
 $string["IERC_seleccionarPalabra"]="Añadir elemento";
 
 

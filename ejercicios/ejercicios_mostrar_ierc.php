@@ -137,10 +137,11 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
                     
         //Obtengo las preguntas
         $mis_preguntas = new ejercicios_ierc_preg();
-        $preguntas = $mis_preguntas->obtener_todos_id_ejercicio($id_ejercicio);
+        $preguntas = $mis_preguntas->obtener_todos_id_ejercicio($id_ejercicio);     
         
 
         if ($buscar == 1 || $modificable == false) {
+            echo "estoy siendo un alumno";
             $log = new Log("log_IERC_mostrar_alumno.txt");
             
             
@@ -268,7 +269,7 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
             
             
         } else {
-            //echo "akiiiiiiii";
+            echo "estoy siendo un profesor";
             //$tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
 
             $log = new Log("log_IERC_mostrar.txt");
@@ -399,7 +400,13 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
 
 
         if ($buscar != 1 && $modificable == true) {
-            //Si soy el profesor creadors
+            echo "soy el profesor creador";
+            
+            $fuentes_aux = $ejercicios_leido->get('fuentes');
+            $log->write("lasfuentesson ".$fuentes_aux);
+            $fuentes = genera_fuentes($fuentes_aux);
+            
+            $mform->addElement('html', $fuentes);
             //$tabla_imagenes='<center><input type="button" style=" margin-top:20px;" id="botonNA" name="botonNA" onclick="IERC_AddPregunta('.$id_ejercicio.')" value="' . get_string('IERC_addPregunta', 'ejercicios') . '"><br/>';
             $tabla_imagenes = '<center><input type="submit" style="" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
 

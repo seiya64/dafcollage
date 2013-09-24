@@ -15,6 +15,8 @@
   Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
   Simeón Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto(finamolinasoto@gmail.com)
+  Ángel Biedma Mesa (tekeiro@gmail.com)
+  Javier Castro Fernández (havidarou@gmail.com)
 
  Original idea:
   Ruth Burbat
@@ -70,7 +72,7 @@ $log->write('despues session start');
 $mform = new mod_ejercicios_mostrar_ejercicio_ierc($id_curso,$id_ejercicio,$tipo_origen, $tipo_respuesta, $tipo_creacion);
 $mform->mostrar_ejercicio_ierc($id_curso, $id_ejercicio, $buscar, $tipo_origen, $tipo_respuesta, $tipo_creacion);
 
-$num_preg= required_param('num_preg', PARAM_TEXT);
+$num_preg = optional_param('numeropreguntas', PARAM_INT);
 $log->write('num preg: ' . $num_preg);
 
 
@@ -95,11 +97,10 @@ if(optional_param("submitbutton2")){ //boton para añadir a mis ejercicos visibl
      $ejercicio_general = new Ejercicios_general();
      $miejercicio=$ejercicio_general->obtener_uno($id_ejercicio);
      $miejercicio->set_numpregunta($num_preg);
+     $fuentes = optional_param('fuentes',PARAM_TEXT);
+     $miejercicio->set_fuentes($fuentes);
      $miejercicio->alterar();
     
-     
-     
-     
     begin_sql();
     
     //Borro todas las respuestas y preguntas del ejercicio
@@ -113,10 +114,11 @@ if(optional_param("submitbutton2")){ //boton para añadir a mis ejercicos visibl
     //Borro todas las preguntas
     $preguntas->borrar_id_ejercicio($id_ejercicio);
     
-    
+    $num_cols = $_SESSION['IERC']['numPreguntas'];
+    $num_cols = $num_cols + 1;
     //Para cada pregunta
-    for($i=1; $i<=$num_preg; $i++) {
-        $num_cols = optional_param('sel_subrespuestas_'.$i,0,PARAM_INT);
+    for($i=1; $i<=1; $i++) {
+        //$num_cols = optional_param('num_cabs',0,PARAM_INT);
         $log->write('num cols: ' . $num_cols);
         
         //Coger el texto de la pregunta
@@ -137,8 +139,9 @@ if(optional_param("submitbutton2")){ //boton para añadir a mis ejercicos visibl
         }
         $log->write('pregunta: ' . $pregunta);
         
+    
         //Coger las cabeceras
-        $cabs = ["","","","",""];
+        $cabs = array("","","","","");
         for($j=1; $j<=$num_cols; $j++) {
             $cabs[$j-1]=optional_param('cab_'.$i.'_0_'.$j,"",PARAM_TEXT);
         }
