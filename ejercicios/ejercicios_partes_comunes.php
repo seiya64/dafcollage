@@ -48,9 +48,21 @@
     return $cabecera;
  }
  
- function genera_fuentes($fuentes) {
-    $label = '<h4>'.get_string('fuentes', 'ejercicios').'</h4> <textarea style="width:100%;" id="fuentes" name="fuentes" wrap="virtual" rows="5" cols="80">'. $fuentes.'</textarea>';      
- 
+ /**
+  * 
+  * Genera un textarea para la introducción de fuentes en la creación de un ejercicio
+  * @author Javier Castro Fernández
+  * @param type $fuentes Texto a rellenar en el textarea
+  * @param type $readonly Tag para añadir la propiedad readonly al textarea
+  * @return string -
+  */
+ function genera_fuentes($fuentes, $readonly) {
+    if ($readonly == "readonly"){
+        $label = '<h4>'.get_string('fuentes', 'ejercicios').'</h4> <textarea readonly style="width:100%;" id="fuentes" name="fuentes" wrap="virtual" rows="5" cols="80">'. $fuentes.'</textarea>';      
+    }
+    else {
+        $label = '<h4>'.get_string('fuentes', 'ejercicios').'</h4> <textarea style="width:100%;" id="fuentes" name="fuentes" wrap="virtual" rows="5" cols="80">'. $fuentes.'</textarea>';      
+    }
     return $label;  
  }
 ?>

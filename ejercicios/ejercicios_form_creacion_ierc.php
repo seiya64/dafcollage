@@ -71,7 +71,7 @@ $log->write("insertar ejercicio: " . mysql_error());
 
 // Se obtienen las fuentes del textarea destinado a ello
     
-    
+$log->write("el nombre de la carpeta es: ".$carpeta);
 //$ejercicioGeneral->set('fuentes', $fuentes);
 $ejercicio_profesor = new Ejercicios_prof_actividad($ejercicioGeneral->get('id'),$ejercicioGeneral->get('id_creador'),$id_ejercicio,$carpeta);
 $ejercicio_profesor->insertar();

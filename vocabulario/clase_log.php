@@ -44,7 +44,7 @@
  * 
  * @author Angel Biedma Mesa
  */
-class Log
+class Logi 
 {
     private $file;
     
@@ -53,7 +53,7 @@ class Log
      * @param String $namefile Nombre del archivo de Log
      * @param String $atributos Atributos para fopen
      */
-    public function Log($namefile,$atributos="w") {
+    public function Logi($namefile,$atributos="w") {
         $this->file = fopen($namefile,$atributos);
     }
     

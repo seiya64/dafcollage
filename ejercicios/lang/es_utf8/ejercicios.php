@@ -67,20 +67,20 @@ $string['Creacion']='Creación de ejercicios';
 $string['Buscar']='Buscar actividades:';
 $string['Boton_Buscar']='Buscar';
 $string['Actividades']='Actividades';
-$string['Tema']='Campo Temático';
-$string['Tipo de Actividad']='Tipo de Actividad';
+$string['Tema']='Campo temático';
+$string['Tipo de Actividad']='Tipo de actividad';
 $string['Destreza comunicativa']='Destreza comunicativa';
-$string['Gramatica']='Tema Gramatical';
+$string['Gramatica']='Tema gramatical';
 $string['Realizar']='Realizar';
-$string['Crear']='Crear Actividades:';
-$string['creando']='Creando ejercicio por Tema:';
+$string['Crear']='Crear actividades:';
+$string['creando']='Creando ejercicio por tema:';
 $string['Boton_Crear']='Crear';
 $string['MisActividades']='Mis Actividades';
 $string['ActividadesCurso']='Actividades de mi Curso';
 $string['EjerciciosCurso']='Ejercicios propuestos';
 
 $string['Volver']='Atrás';
-$string['Intencion']='Intención Comunicativa';
+$string['Intencion']='Intención comunicativa';
 
 
 //CLASIFICACION TIPO DE ACTIVIDAD
@@ -148,8 +148,8 @@ $string["descripcion"]="Añade unas breves instrucciones del ejercicio para el a
 $string["visible"]="Visible (accesible por sus alumnos)";
 $string["publico"]="Público (accesible por otros profesores y alumnos)";
 //$string["carpeta"]="Introduzca la ruta del ejercicio";
-$string["carpeta"]="Seleccione la carpeta donde quiera guardar el ejercicio";
-$string["copyright"]="Seleccione la licencia para su ejercicio";
+$string["carpeta"]="Seleccione/Cree la carpeta donde quiera guardar el ejercicio";
+$string["copyright"]="Seleccione la licencia para su ejercicio   (al hacer click en la licencia se mostrará una breve descripción.)";
 $string["copyrightresp"]="Seleccione el copyright de sus archivos respuesta";
 $string["textoclasej"]="Asigne una o varias categorías de búsqueda de los siguientes menús desplegables(Obligatorio Campo Temático o Tema gramatical):";
 //Formulario de creacion texto-texto
@@ -174,10 +174,10 @@ $string["MiBusqueda"]="Mi Busqueda";
 //Buscando
 $string["BotonAñadir"]="Añadir a mis ejercicios";
 $string['Misejercicios']='Mis Actividades';
-$string["marcoteorico"]="Seleccionar el nivel según el marco europeo de referecia(OPCIONAL)";
+$string["marcoteorico"]="Seleccionar el nivel según el marco europeo de referecia (OPCIONAL)";
 
 //Fuentes ejercicios
-$string["fuentes"]="Fuentes de los recursos utilizados en el ejercicio:";
+$string['fuentes']='Fuentes de los recursos utilizados en el ejercicio:';
 
 
 //A partir de aqui hay que traducir a ingles
@@ -212,7 +212,7 @@ $string['IERC_title']="Identificar Elementos mas Respuesta(s) Corta(s)";
 //Generador de Ejercicios -- Ordenar Elementos -- Etiqueta OE
 $string['OE_seleccione']="Escriba la frase que quiera desordenar.";
 $string['OE_add_orden']="Añadir Orden";
-$string['OE_add_palabra']="Insertar Elemento";
+$string['OE_add_palabra']="Seleccionar Elemento";
 $string['OE_add_frase']="Añadir Frase o Parrafo";
 $string['OE_pregunta']='Texto';
 $string['OE_orden']='Orden {$a} :';
@@ -226,7 +226,7 @@ $string['OE_list_preguntas']="Lista de Oraciones o Parrafos";
 $string['OE_help_orden_multiple']="Se guardara todo en mayuscula. Es recomendable seleccionar lo signos de puntuacion como elementos independientes.";
 $string["OE_FormularioCreacionTextos"]="Introduzca las frases y determine los elementos";
 $string["OE_orden_unico"]="Solo un orden correcto.";
-$string["OE_orden_multiple"]="Varios ordenes correctos.";
+$string["OE_orden_multiple"]="Varios órdenes correctos.";
 $string["OE_help_flechas"]="Puede cambiar el orden de los elementos con la ayuda de las flechas a al derecha.";
 $string["OE_tipoorden"]="Se ordenarán: ";
 $string["OE_tipoorden_frase"]="Elementos de una frase";

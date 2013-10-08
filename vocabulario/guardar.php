@@ -78,7 +78,45 @@ if ($borrar > 0) {
     redirect('./view.php?id=' . $id_tocho . '&opcion=2');
 }
 
-//leo un sustantivo y lo guardo
+if ($añadiendo || $act == 1) { // añado desde la tabla o actualizo
+    //leo un sustantivo y lo guardo
+$sustantivo_leido = new Vocabulario_sustantivo(required_param('palabra_sus', PARAM_TEXT),
+                optional_param('genero', PARAM_INT),
+                optional_param('plural', PARAM_TEXT),
+                optional_param('significado_sus', PARAM_TEXT),
+                optional_param('observaciones_sus', PARAM_TEXT),
+                optional_param('finalgramatica_sus', PARAM_INT),
+                optional_param('intencion_sus', PARAM_INT),
+                optional_param('tipologia_sus', PARAM_INT),
+                optional_param('ejemplo_sus', PARAM_INT));
+//leo un verbo y lo guardo
+$verbo_leido = new Vocabulario_verbo(optional_param('infinitivo', PARAM_TEXT),
+                optional_param('ter_pers_sing', PARAM_TEXT),
+                optional_param('preterito', PARAM_TEXT),
+                optional_param('participio', PARAM_TEXT),
+                optional_param('significado_vrb', PARAM_TEXT),
+                optional_param('observaciones_vrb', PARAM_TEXT),
+                optional_param('finalgramatica_vrb', PARAM_INT),
+                optional_param('intencion_vrb', PARAM_INT),
+                optional_param('tipologia_vrb', PARAM_INT));
+//leo un adjetivo y lo guardo
+$adjetivo_leido = new Vocabulario_adjetivo(optional_param('sindeclinar', PARAM_TEXT),
+                optional_param('significado_adj', PARAM_TEXT),
+                optional_param('observaciones_adj', PARAM_TEXT),
+                optional_param('finalgramatica_adj', PARAM_INT),
+                optional_param('intencion_adj', PARAM_INT),
+                optional_param('tipologia_adj', PARAM_INT));
+//leo otra palabra y la guardo
+$otro_leido = new Vocabulario_otro(optional_param('palabra_otr', PARAM_TEXT),
+                optional_param('significado_otr', PARAM_TEXT),
+                optional_param('observaciones_otr', PARAM_TEXT),
+                optional_param('finalgramatica_otr', PARAM_INT),
+                optional_param('intencion_otr', PARAM_INT),
+                optional_param('tipologia_otr', PARAM_INT));
+$campo_leido = optional_param('campoid', PARAM_INT);
+}
+else {
+    //leo un sustantivo y lo guardo
 $sustantivo_leido = new Vocabulario_sustantivo(required_param('palabra_sus', PARAM_TEXT),
                 optional_param('genero', PARAM_INT),
                 optional_param('plural', PARAM_TEXT),
@@ -113,6 +151,7 @@ $otro_leido = new Vocabulario_otro(optional_param('palabra_otr', PARAM_TEXT),
                 optional_param('intencion_otr', PARAM_INT),
                 optional_param('tipologia_otr', PARAM_INT));
 $campo_leido = optional_param('campoid', PARAM_INT);
+}
 
 //compruebo si voy a actualizar o a insertar
 if ($act == 1) {

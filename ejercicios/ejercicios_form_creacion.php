@@ -431,11 +431,20 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
             $prof_carpetas = $prof_actividad->obtener_ejercicios_del_profesor_carpeta($USER->id);
             $carpetas = array();
             foreach ($prof_carpetas as $carp)   $carpetas[$carp->get('carpeta')] = $carp->get('carpeta');
+            $log->write("longitud ". count($carpetas));
+            if (count($carpetas) == 1) { // Si no hay carpetas creadas, arrancamos con el input
+                $crearcarpetas = true;
+            }
             $carpetas['-1']="Crear nueva carpeta";
             $log->write("Carpetas: " . var_export($carpetas,true));
-            $mform->addElement('select','carpeta_ejercicio',get_string('carpeta', 'ejercicios'),$carpetas,$attributes);
-            $log->write("Entra aqui");
-            $mform->addElement('html','<div class="fitem"><div class="fitemtitle"></div><div class="felement ftextarea"><input type="text" id="input_carpeta" value="" style="display:none;"/></div></div>');
+            if ($crearcarpetas) {
+                $mform->addElement('select','carpeta_ejercicio_no',get_string('carpeta', 'ejercicios'),$carpetas,$attributes);
+                $mform->addElement('html','<div class="fitem"><div class="fitemtitle"></div><div class="felement ftextarea"><input type="text" name="carpeta_ejercicio" id="input_carpeta" value="" style="display:block;"/></div></div>');
+            }
+            else {
+                $mform->addElement('select','carpeta_ejercicio',get_string('carpeta', 'ejercicios'),$carpetas,$attributes);
+                $mform->addElement('html','<div class="fitem"><div class="fitemtitle"></div><div class="felement ftextarea"><input type="text" id="input_carpeta" value="" style="display:none;"/></div></div>');
+            }
             //$mform->addElement('text', 'carpeta_ejercicio',get_string('carpeta', 'ejercicios') , $attributes);
             //$mform->addRule('carpeta_ejercicio', "Carpeta Necesaria", 'required', null, 'client');
 

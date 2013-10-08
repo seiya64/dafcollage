@@ -46,13 +46,15 @@ require_once("vocabulario_classes.php");
 
 $id = $_GET["id"];
 $nombre = $_GET["nombre"];
+$finalgramatica = $_GET["aux"];
 
+//echo "estoy aquí con ".$id." y ".$nombre;
 $graux = new Vocabulario_gramatica();
 $graux = $graux->obtener_hijos($USER->id, $id);
 if (count($graux) > 1) {
     echo '<div class="fitemtitle"></div>';
     echo '<div class="felement fselect">';
-    $elselect = new MoodleQuickForm_select($nombre, 'Subgramatica', $graux, "id=\"id_grid" . $id . "\" onChange='javascript:cargaContenido(this.id,\"" . $nombre . "grgeneraldinamico" . $id . "\",1)'");
+    $elselect = new MoodleQuickForm_select($nombre, 'Subgramatica', $graux, "id=\"id_grid" . $id . "\" onChange='javascript:cargaContenido(this.id,\"" . $nombre . "grgeneraldinamico" . $id . "\",1,\"".$finalgramatica."\")'");
     echo $elselect->toHtml();
     echo '</div>';
     echo "<div class=\"fitem\" id=\"" . $nombre . "grgeneraldinamico" . $id . "\" style=\"min-height: 0;\"></div>";

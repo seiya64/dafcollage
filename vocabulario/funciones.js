@@ -90,12 +90,15 @@ function eliminandonube(idtocho,idpalabra){
  * @param tipo
  */
 
-function cargaContenido(miselect, otroselect, tipo) {
+function cargaContenido(miselect, otroselect, tipo, aux) {
 
     var objeto = document.getElementById(miselect);
     var elselect = objeto.value;
     var nombre = objeto.name;
     var eltxt = objeto.options[objeto.selectedIndex].text;
+
+    var finalgramatica = $('input[name='+aux+']');
+    finalgramatica.val(elselect);
 
     oculto = document.getElementById('id_desc_btn'); // Ocultar
     if (oculto) oculto.disabled = true;
@@ -119,7 +122,7 @@ function cargaContenido(miselect, otroselect, tipo) {
         if(tipo == 0) {//campos lexicos
             xmlhttp.open("GET", "subcampos.php?id=" + elselect + "&nombre=" + nombre, true);
         } else if(tipo == 1 && eltxt != "Seleccionar") {//gramaticas
-            xmlhttp.open("GET", "subgramaticas.php?id=" + elselect + "&nombre=" + nombre, true);
+            xmlhttp.open("GET", "subgramaticas.php?id=" + elselect + "&nombre=" + nombre + "&aux="+ finalgramatica.attr("name"), true);
         } else if(tipo == 2 && eltxt != "Seleccionar") {//intenciones comunicativas
             xmlhttp.open("GET", "subintenciones.php?id=" + elselect + "&nombre=" + nombre, true);
         }

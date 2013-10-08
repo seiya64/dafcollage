@@ -1121,9 +1121,10 @@ function botonCrear(id_curso){
  
     if(objeto.selectedIndex!=0 && objeto.selectedIndex!=1){
         var eltxt = objeto.options[objeto.selectedIndex].text;
-     
-     
-        location.href="view.php?id=" + id_curso + "&opcion=5&tipocreacion=" + objeto.selectedIndex ;
+        var opcion = objeto.selectedIndex;
+        if (objeto.selectedIndex >= 6) { opcion = opcion + 1;}
+        console.log("Opcion seleccionada: " + opcion);
+        location.href="view.php?id=" + id_curso + "&opcion=5&tipocreacion=" + opcion ;
         
     }else{ //No hay nada seleccionado en crear
         alert("Debe seleccionar un Tipo de Actividad");
@@ -1139,6 +1140,7 @@ function botonBuscar(id_curso){
     //cojo el indice de tipoActividad
     var tipoActividad=document.getElementById("TipoActividad");
     var clastipoActividad=tipoActividad.selectedIndex;
+    if (tipoActividad.selectedIndex >= 6) { clastipoActividad = clastipoActividad + 1; }
     //cojo el indice de destreza comunicativa
     var dc=document.getElementById("DestrezaComunicativa");
     var clasdc=dc.selectedIndex;
@@ -7007,6 +7009,7 @@ function cargaResumenEjercicio() {
     
     texta.removeChild(texta.childNodes[0]);
     var opcion = select.selectedIndex;
+    if (opcion >=6){ opcion = opcion +1;}
     console.log("Opcion seleccionada: " + opcion);
     
     texta.appendChild(document.createTextNode(descripciones[opcion]));
@@ -7565,7 +7568,7 @@ function form_creacion_nueva_carpeta(obj) {
     //var select = $('select[name=carpeta_ejercicio]');
     var select = $(obj);
     var val = parseInt(select.val());
-    
+    console.log("Valor carpeta" + val);
     if(val==-1) {
         $('#input_carpeta').css('display','block');
         $('#input_carpeta').attr('name','carpeta_ejercicio');

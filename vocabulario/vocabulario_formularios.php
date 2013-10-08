@@ -195,12 +195,64 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 //ejemplo
                 $mform->addElement('text', 'ejemplo_sus', get_string("ejem", "vocabulario"), 'value="' . $sustantivo->get('ejemplo') . '"');
 
+                /*
                 //campo gramatical
                 $mform->addElement('select', 'gramatica_sus', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico\",1)'");
                 //probar los campos dinamicos
                 $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico\"  style=\"min-height: 0;\"></div>";
                 $mform->addElement('html', $campodinamico);
                 $mform->setDefault('gramatica_sus', $sustantivo->get('gramaticaid'));
+                */
+                
+                $padreGramatical = new Vocabulario_gramatica();
+                $padreGramatical->leer($sustantivo->get('gramaticaid'), $USER->id);
+                
+                $mform->addElement('hidden', 'finalgramatica_sus'); // Para la base de datos!!
+                $hidden = '<input type="hidden" name="finalgramatica_sus" value="'.$sustantivo->get('gramaticaid').'">';
+                echo $hidden;
+                
+                $mform->addElement('html', $hidden);
+                if ($padreGramatical->get('padre') == 0) { // Significa que no hay que profundizar; se inserta el id tal cuál
+                    $mform->addElement('select', 'gramatica_sus', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_sus\",1,\"finalgramatica_sus\")'");
+                    $mform->setDefault('gramatica_sus', $sustantivo->get('gramaticaid'));
+                    $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_sus\" style=\"min-height: 0;\"></div>";
+                    $mform->addElement('html', $campodinamico);
+                }
+                else { // Hay que profundizar: calcular los identificadores
+                    $profundidad = 0;
+                    $padreGramatical_aux = $padreGramatical;
+                    $arrayGramatical = array();
+                    while ($padreGramatical_aux->get('padre') != 0){ // Mientras no lleguemos a la raíz
+                        $arrayGramatical[$profundidad] = $padreGramatical_aux->get('id');
+                        $padreGramatical_aux->leer($padreGramatical_aux->get('padre'), $USER->id);
+                        $profundidad++;
+                    }
+                    $arrayGramatical[$profundidad] = $padreGramatical_aux->get('id');
+                    $mform->addElement('select', 'gramatica_sus', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_sus\",1, \"finalgramatica_sus\")'");
+                    $mform->setDefault('gramatica_sus', $arrayGramatical[$profundidad]);
+                    $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_sus\" style=\"min-height: 0;\">";
+                    $mform->addElement('html', $campodinamico);
+                    $profundidad--;
+                    
+                    for ($counter = $profundidad; $counter >= 0; $counter--) {
+                        $valueaux = new Vocabulario_gramatica();
+                        $arrayvalues = $valueaux->obtener_hijos($USER->id, $arrayGramatical[$counter + 1]);
+                        $campodinamico = '<div class="fitem" id="divgramatico_sus'.($profundidad - $counter).'" style=\"min-height: 0">';
+                        $mform->addElement('html', $campodinamico);
+                        $mform->addElement('select', 'selectgramatico_sus'.$arrayGramatical[$counter], "", $arrayvalues, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"divgramatico_sus".(($profundidad - $counter)+1)."\",1, \"finalgramatica_sus\")'");
+                        
+                        $mform->setDefault('selectgramatico_sus'.$arrayGramatical[$counter], $arrayGramatical[$counter]);
+                    } 
+                    
+                    $campodinamico = '<div class="fitem" id="divgramatico_sus'.($profundidad + 1).'" style=\"min-height: 0"></div>';
+                    $mform->addElement('html', $campodinamico);
+                    for ($counter = $profundidad; $counter >= 0; $counter--) {
+                        $mform->addElement('html', '</div>');
+                    }
+      
+                    $mform->addElement('html', '</div>');
+
+                }
                 $mform->addElement('hidden', 'descripcion_grsus');
 
                 //intencion comunicativa
@@ -227,12 +279,64 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 //ejemplo
                 $mform->addElement('text', 'ejemplo_sus', get_string("ejem", "vocabulario"), 'value="' . $sustantivo->get('ejemplo') . '"');
 
+                /*
                 //campo gramatical
                 $mform->addElement('select', 'gramatica_sus', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico\",1)'");
                 //probar los campos dinamicos
                 $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico\"  style=\"min-height: 0;\"></div>";
                 $mform->addElement('html', $campodinamico);
                 $mform->setDefault('gramatica_sus', $sustantivo->get('gramaticaid'));
+                */
+                
+                $padreGramatical = new Vocabulario_gramatica();
+                $padreGramatical->leer($sustantivo->get('gramaticaid'), $USER->id);
+                
+                $mform->addElement('hidden', 'finalgramatica_sus'); // Para la base de datos!!
+                $hidden = '<input type="hidden" name="finalgramatica_sus" value="'.$sustantivo->get('gramaticaid').'">';
+                echo $hidden;
+                
+                $mform->addElement('html', $hidden);
+                if ($padreGramatical->get('padre') == 0) { // Significa que no hay que profundizar; se inserta el id tal cuál
+                    $mform->addElement('select', 'gramatica_sus', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_sus\",1,\"finalgramatica_sus\")'");
+                    $mform->setDefault('gramatica_sus', $sustantivo->get('gramaticaid'));
+                    $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_sus\" style=\"min-height: 0;\"></div>";
+                    $mform->addElement('html', $campodinamico);
+                }
+                else { // Hay que profundizar: calcular los identificadores
+                    $profundidad = 0;
+                    $padreGramatical_aux = $padreGramatical;
+                    $arrayGramatical = array();
+                    while ($padreGramatical_aux->get('padre') != 0){ // Mientras no lleguemos a la raíz
+                        $arrayGramatical[$profundidad] = $padreGramatical_aux->get('id');
+                        $padreGramatical_aux->leer($padreGramatical_aux->get('padre'), $USER->id);
+                        $profundidad++;
+                    }
+                    $arrayGramatical[$profundidad] = $padreGramatical_aux->get('id');
+                    $mform->addElement('select', 'gramatica_sus', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_sus\",1, \"finalgramatica_sus\")'");
+                    $mform->setDefault('gramatica_sus', $arrayGramatical[$profundidad]);
+                    $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_sus\" style=\"min-height: 0;\">";
+                    $mform->addElement('html', $campodinamico);
+                    $profundidad--;
+                    
+                    for ($counter = $profundidad; $counter >= 0; $counter--) {
+                        $valueaux = new Vocabulario_gramatica();
+                        $arrayvalues = $valueaux->obtener_hijos($USER->id, $arrayGramatical[$counter + 1]);
+                        $campodinamico = '<div class="fitem" id="divgramatico_sus'.($profundidad - $counter).'" style=\"min-height: 0">';
+                        $mform->addElement('html', $campodinamico);
+                        $mform->addElement('select', 'selectgramatico_sus'.$arrayGramatical[$counter], "", $arrayvalues, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"divgramatico_sus".(($profundidad - $counter)+1)."\",1, \"finalgramatica_sus\")'");
+                        
+                        $mform->setDefault('selectgramatico_sus'.$arrayGramatical[$counter], $arrayGramatical[$counter]);
+                    } 
+                    
+                    $campodinamico = '<div class="fitem" id="divgramatico_sus'.($profundidad + 1).'" style=\"min-height: 0"></div>';
+                    $mform->addElement('html', $campodinamico);
+                    for ($counter = $profundidad; $counter >= 0; $counter--) {
+                        $mform->addElement('html', '</div>');
+                    }
+      
+                    $mform->addElement('html', '</div>');
+
+                }
                 $mform->addElement('hidden', 'descripcion_grsus');
 
                 //intencion comunicativa
@@ -285,12 +389,65 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $mform->addElement('html', $ocultador);
                 $mform->addElement('text', 'observaciones_vrb', get_string("comen", "vocabulario"), 'value="' . $verbo->get('observaciones') . '"');
 
+                /*
                 //campo gramatical
                 $mform->addElement('select', 'gramatica_vrb', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_vrb\",1)'");
                 //probar los campos dinamicos
                 $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_vrb\" style=\"min-height: 0;\"></div>";
                 $mform->addElement('html', $campodinamico);
                 $mform->setDefault('gramatica_vrb', $verbo->get('gramaticaid'));
+                */
+                
+                $padreGramatical = new Vocabulario_gramatica();
+                $padreGramatical->leer($verbo->get('gramaticaid'), $USER->id);
+                
+                $mform->addElement('hidden', 'finalgramatica_vrb'); // Para la base de datos!!
+                $hidden = '<input type="hidden" name="finalgramatica_vrb" value="'.$verbo->get('gramaticaid').'">';
+                echo $hidden;
+                
+                $mform->addElement('html', $hidden);
+                if ($padreGramatical->get('padre') == 0) { // Significa que no hay que profundizar; se inserta el id tal cuál
+                    $mform->addElement('select', 'gramatica_vrb', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_vrb\",1,\"finalgramatica_vrb\")'");
+                    $mform->setDefault('gramatica_vrb', $verbo->get('gramaticaid'));
+                    $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_vrb\" style=\"min-height: 0;\"></div>";
+                    $mform->addElement('html', $campodinamico);
+                }
+                else { // Hay que profundizar: calcular los identificadores
+                    $profundidad = 0;
+                    $padreGramatical_aux = $padreGramatical;
+                    $arrayGramatical = array();
+                    while ($padreGramatical_aux->get('padre') != 0){ // Mientras no lleguemos a la raíz
+                        $arrayGramatical[$profundidad] = $padreGramatical_aux->get('id');
+                        $padreGramatical_aux->leer($padreGramatical_aux->get('padre'), $USER->id);
+                        $profundidad++;
+                    }
+                    $arrayGramatical[$profundidad] = $padreGramatical_aux->get('id');
+                    $mform->addElement('select', 'gramatica_vrb', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_vrb\",1, \"finalgramatica_vrb\")'");
+                    $mform->setDefault('gramatica_vrb', $arrayGramatical[$profundidad]);
+                    $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_vrb\" style=\"min-height: 0;\">";
+                    $mform->addElement('html', $campodinamico);
+                    $profundidad--;
+                    
+                    for ($counter = $profundidad; $counter >= 0; $counter--) {
+                        $valueaux = new Vocabulario_gramatica();
+                        $arrayvalues = $valueaux->obtener_hijos($USER->id, $arrayGramatical[$counter + 1]);
+                        $campodinamico = '<div class="fitem" id="divgramatico_vrb'.($profundidad - $counter).'" style=\"min-height: 0">';
+                        $mform->addElement('html', $campodinamico);
+                        $mform->addElement('select', 'selectgramatico_vrb'.$arrayGramatical[$counter], "", $arrayvalues, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"divgramatico_vrb".(($profundidad - $counter)+1)."\",1, \"finalgramatica_vrb\")'");
+                        
+                        $mform->setDefault('selectgramatico_vrb'.$arrayGramatical[$counter], $arrayGramatical[$counter]);
+                    } 
+                    
+                    $campodinamico = '<div class="fitem" id="divgramatico_vrb'.($profundidad + 1).'" style=\"min-height: 0"></div>';
+                    $mform->addElement('html', $campodinamico);
+                    for ($counter = $profundidad; $counter >= 0; $counter--) {
+                        $mform->addElement('html', '</div>');
+                    }
+      
+                    $mform->addElement('html', '</div>');
+
+                }
+                
                 $mform->addElement('hidden', 'descripcion_grvrb');
 
                 //intencion comunicativa
@@ -311,12 +468,64 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $mform->addElement('html', $ocultador);
                 $mform->addElement('text', 'observaciones_vrb', get_string("comen", "vocabulario"), 'value="' . $verbo->get('observaciones') . '"');
 
+                /*
                 //campo gramatical
                 $mform->addElement('select', 'gramatica_vrb', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_vrb\",1)'");
                 //probar los campos dinamicos
                 $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_vrb\" style=\"min-height: 0;\"></div>";
                 $mform->addElement('html', $campodinamico);
                 $mform->setDefault('gramatica_vrb', $verbo->get('gramaticaid'));
+                */
+                
+                $padreGramatical = new Vocabulario_gramatica();
+                $padreGramatical->leer($verbo->get('gramaticaid'), $USER->id);
+                
+                $mform->addElement('hidden', 'finalgramatica_vrb'); // Para la base de datos!!
+                $hidden = '<input type="hidden" name="finalgramatica_vrb" value="'.$verbo->get('gramaticaid').'">';
+                echo $hidden;
+                
+                $mform->addElement('html', $hidden);
+                if ($padreGramatical->get('padre') == 0) { // Significa que no hay que profundizar; se inserta el id tal cuál
+                    $mform->addElement('select', 'gramatica_vrb', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_vrb\",1,\"finalgramatica_vrb\")'");
+                    $mform->setDefault('gramatica_vrb', $verbo->get('gramaticaid'));
+                    $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_vrb\" style=\"min-height: 0;\"></div>";
+                    $mform->addElement('html', $campodinamico);
+                }
+                else { // Hay que profundizar: calcular los identificadores
+                    $profundidad = 0;
+                    $padreGramatical_aux = $padreGramatical;
+                    $arrayGramatical = array();
+                    while ($padreGramatical_aux->get('padre') != 0){ // Mientras no lleguemos a la raíz
+                        $arrayGramatical[$profundidad] = $padreGramatical_aux->get('id');
+                        $padreGramatical_aux->leer($padreGramatical_aux->get('padre'), $USER->id);
+                        $profundidad++;
+                    }
+                    $arrayGramatical[$profundidad] = $padreGramatical_aux->get('id');
+                    $mform->addElement('select', 'gramatica_vrb', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_vrb\",1, \"finalgramatica_vrb\")'");
+                    $mform->setDefault('gramatica_vrb', $arrayGramatical[$profundidad]);
+                    $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_vrb\" style=\"min-height: 0;\">";
+                    $mform->addElement('html', $campodinamico);
+                    $profundidad--;
+                    
+                    for ($counter = $profundidad; $counter >= 0; $counter--) {
+                        $valueaux = new Vocabulario_gramatica();
+                        $arrayvalues = $valueaux->obtener_hijos($USER->id, $arrayGramatical[$counter + 1]);
+                        $campodinamico = '<div class="fitem" id="divgramatico_vrb'.($profundidad - $counter).'" style=\"min-height: 0">';
+                        $mform->addElement('html', $campodinamico);
+                        $mform->addElement('select', 'selectgramatico_vrb'.$arrayGramatical[$counter], "", $arrayvalues, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"divgramatico_vrb".(($profundidad - $counter)+1)."\",1, \"finalgramatica_vrb\")'");
+                        
+                        $mform->setDefault('selectgramatico_vrb'.$arrayGramatical[$counter], $arrayGramatical[$counter]);
+                    } 
+                    
+                    $campodinamico = '<div class="fitem" id="divgramatico_vrb'.($profundidad + 1).'" style=\"min-height: 0"></div>';
+                    $mform->addElement('html', $campodinamico);
+                    for ($counter = $profundidad; $counter >= 0; $counter--) {
+                        $mform->addElement('html', '</div>');
+                    }
+      
+                    $mform->addElement('html', '</div>');
+
+                }
                 $mform->addElement('hidden', 'descripcion_grvrb');
 
                 //intencion comunicativa
@@ -359,12 +568,64 @@ class mod_vocabulario_rellenar_form extends moodleform {
             $mform->addElement('html', $ocultador);
             $mform->addElement('text', 'observaciones_adj', get_string("comen", "vocabulario"), 'value="' . $adjetivo->get('observaciones') . '"');
 
+            /*
             //campo gramatical
             $mform->addElement('select', 'gramatica_adj', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_adj\",1)'");
             //probar los campos dinamicos
             $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_adj\" style=\"min-height: 0;\"></div>";
             $mform->addElement('html', $campodinamico);
             $mform->setDefault('gramatica_adj', $adjetivo->get('gramaticaid'));
+            */
+            
+            $padreGramatical = new Vocabulario_gramatica();
+                $padreGramatical->leer($adjetivo->get('gramaticaid'), $USER->id);
+                
+                $mform->addElement('hidden', 'finalgramatica_adj'); // Para la base de datos!!
+                $hidden = '<input type="hidden" name="finalgramatica_adj" value="'.$adjetivo->get('gramaticaid').'">';
+                echo $hidden;
+                
+                $mform->addElement('html', $hidden);
+                if ($padreGramatical->get('padre') == 0) { // Significa que no hay que profundizar; se inserta el id tal cuál
+                    $mform->addElement('select', 'gramatica_adj', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_adj\",1,\"finalgramatica_adj\")'");
+                    $mform->setDefault('gramatica_adj', $adjetivo->get('gramaticaid'));
+                    $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_adj\" style=\"min-height: 0;\"></div>";
+                    $mform->addElement('html', $campodinamico);
+                }
+                else { // Hay que profundizar: calcular los identificadores
+                    $profundidad = 0;
+                    $padreGramatical_aux = $padreGramatical;
+                    $arrayGramatical = array();
+                    while ($padreGramatical_aux->get('padre') != 0){ // Mientras no lleguemos a la raíz
+                        $arrayGramatical[$profundidad] = $padreGramatical_aux->get('id');
+                        $padreGramatical_aux->leer($padreGramatical_aux->get('padre'), $USER->id);
+                        $profundidad++;
+                    }
+                    $arrayGramatical[$profundidad] = $padreGramatical_aux->get('id');
+                    $mform->addElement('select', 'gramatica_adj', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_adj\",1, \"finalgramatica_adj\")'");
+                    $mform->setDefault('gramatica_adj', $arrayGramatical[$profundidad]);
+                    $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_adj\" style=\"min-height: 0;\">";
+                    $mform->addElement('html', $campodinamico);
+                    $profundidad--;
+                    
+                    for ($counter = $profundidad; $counter >= 0; $counter--) {
+                        $valueaux = new Vocabulario_gramatica();
+                        $arrayvalues = $valueaux->obtener_hijos($USER->id, $arrayGramatical[$counter + 1]);
+                        $campodinamico = '<div class="fitem" id="divgramatico_adj'.($profundidad - $counter).'" style=\"min-height: 0">';
+                        $mform->addElement('html', $campodinamico);
+                        $mform->addElement('select', 'selectgramatico_adj'.$arrayGramatical[$counter], "", $arrayvalues, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"divgramatico_adj".(($profundidad - $counter)+1)."\",1, \"finalgramatica_adj\")'");
+                        
+                        $mform->setDefault('selectgramatico_adj'.$arrayGramatical[$counter], $arrayGramatical[$counter]);
+                    } 
+                    
+                    $campodinamico = '<div class="fitem" id="divgramatico_adj'.($profundidad + 1).'" style=\"min-height: 0"></div>';
+                    $mform->addElement('html', $campodinamico);
+                    for ($counter = $profundidad; $counter >= 0; $counter--) {
+                        $mform->addElement('html', '</div>');
+                    }
+      
+                    $mform->addElement('html', '</div>');
+
+                }
             $mform->addElement('hidden', 'descripcion_gradj');
 
             //intencion comunicativa
@@ -385,12 +646,64 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $mform->addElement('html', $ocultador);
                 $mform->addElement('text', 'observaciones_adj', get_string("comen", "vocabulario"), 'value="' . $adjetivo->get('observaciones') . '"');
 
+                /*
                 //campo gramatical
                 $mform->addElement('select', 'gramatica_adj', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_adj\",1)'");
                 //probar los campos dinamicos
                 $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_adj\" style=\"min-height: 0;\"></div>";
                 $mform->addElement('html', $campodinamico);
                 $mform->setDefault('gramatica_adj', $adjetivo->get('gramaticaid'));
+                */
+                
+                $padreGramatical = new Vocabulario_gramatica();
+                $padreGramatical->leer($adjetivo->get('gramaticaid'), $USER->id);
+                
+                $mform->addElement('hidden', 'finalgramatica_adj'); // Para la base de datos!!
+                $hidden = '<input type="hidden" name="finalgramatica_adj" value="'.$adjetivo->get('gramaticaid').'">';
+                echo $hidden;
+                
+                $mform->addElement('html', $hidden);
+                if ($padreGramatical->get('padre') == 0) { // Significa que no hay que profundizar; se inserta el id tal cuál
+                    $mform->addElement('select', 'gramatica_adj', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_adj\",1,\"finalgramatica_adj\")'");
+                    $mform->setDefault('gramatica_adj', $adjetivo->get('gramaticaid'));
+                    $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_adj\" style=\"min-height: 0;\"></div>";
+                    $mform->addElement('html', $campodinamico);
+                }
+                else { // Hay que profundizar: calcular los identificadores
+                    $profundidad = 0;
+                    $padreGramatical_aux = $padreGramatical;
+                    $arrayGramatical = array();
+                    while ($padreGramatical_aux->get('padre') != 0){ // Mientras no lleguemos a la raíz
+                        $arrayGramatical[$profundidad] = $padreGramatical_aux->get('id');
+                        $padreGramatical_aux->leer($padreGramatical_aux->get('padre'), $USER->id);
+                        $profundidad++;
+                    }
+                    $arrayGramatical[$profundidad] = $padreGramatical_aux->get('id');
+                    $mform->addElement('select', 'gramatica_adj', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_adj\",1, \"finalgramatica_adj\")'");
+                    $mform->setDefault('gramatica_adj', $arrayGramatical[$profundidad]);
+                    $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_adj\" style=\"min-height: 0;\">";
+                    $mform->addElement('html', $campodinamico);
+                    $profundidad--;
+                    
+                    for ($counter = $profundidad; $counter >= 0; $counter--) {
+                        $valueaux = new Vocabulario_gramatica();
+                        $arrayvalues = $valueaux->obtener_hijos($USER->id, $arrayGramatical[$counter + 1]);
+                        $campodinamico = '<div class="fitem" id="divgramatico_adj'.($profundidad - $counter).'" style=\"min-height: 0">';
+                        $mform->addElement('html', $campodinamico);
+                        $mform->addElement('select', 'selectgramatico_adj'.$arrayGramatical[$counter], "", $arrayvalues, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"divgramatico_adj".(($profundidad - $counter)+1)."\",1, \"finalgramatica_adj\")'");
+                        
+                        $mform->setDefault('selectgramatico_adj'.$arrayGramatical[$counter], $arrayGramatical[$counter]);
+                    } 
+                    
+                    $campodinamico = '<div class="fitem" id="divgramatico_adj'.($profundidad + 1).'" style=\"min-height: 0"></div>';
+                    $mform->addElement('html', $campodinamico);
+                    for ($counter = $profundidad; $counter >= 0; $counter--) {
+                        $mform->addElement('html', '</div>');
+                    }
+      
+                    $mform->addElement('html', '</div>');
+
+                }
                 $mform->addElement('hidden', 'descripcion_gradj');
 
                 //intencion comunicativa
@@ -434,12 +747,64 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $mform->addElement('html', $ocultador);
                 $mform->addElement('text', 'observaciones_otr', get_string("comen", "vocabulario"), 'value="' . $otro->get('observaciones') . '"');
 
+                /*
                 //campo gramatical
                 $mform->addElement('select', 'gramatica_otr', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_otr\",1)'");
                 //probar los campos dinamicos
                 $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_otr\" style=\"min-height: 0;\"></div>";
                 $mform->addElement('html', $campodinamico);
                 $mform->setDefault('gramatica_otr', $otro->get('gramaticaid'));
+                */
+                
+                $padreGramatical = new Vocabulario_gramatica();
+                $padreGramatical->leer($otro->get('gramaticaid'), $USER->id);
+                
+                $mform->addElement('hidden', 'finalgramatica_otr'); // Para la base de datos!!
+                $hidden = '<input type="hidden" name="finalgramatica_otr" value="'.$otro->get('gramaticaid').'">';
+                echo $hidden;
+                
+                $mform->addElement('html', $hidden);
+                if ($padreGramatical->get('padre') == 0) { // Significa que no hay que profundizar; se inserta el id tal cuál
+                    $mform->addElement('select', 'gramatica_otr', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_otr\",1,\"finalgramatica_otr\")'");
+                    $mform->setDefault('gramatica_adj', $otro->get('gramaticaid'));
+                    $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_otr\" style=\"min-height: 0;\"></div>";
+                    $mform->addElement('html', $campodinamico);
+                }
+                else { // Hay que profundizar: calcular los identificadores
+                    $profundidad = 0;
+                    $padreGramatical_aux = $padreGramatical;
+                    $arrayGramatical = array();
+                    while ($padreGramatical_aux->get('padre') != 0){ // Mientras no lleguemos a la raíz
+                        $arrayGramatical[$profundidad] = $padreGramatical_aux->get('id');
+                        $padreGramatical_aux->leer($padreGramatical_aux->get('padre'), $USER->id);
+                        $profundidad++;
+                    }
+                    $arrayGramatical[$profundidad] = $padreGramatical_aux->get('id');
+                    $mform->addElement('select', 'gramatica_otr', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_otr\",1, \"finalgramatica_otr\")'");
+                    $mform->setDefault('gramatica_otr', $arrayGramatical[$profundidad]);
+                    $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_otr\" style=\"min-height: 0;\">";
+                    $mform->addElement('html', $campodinamico);
+                    $profundidad--;
+                    
+                    for ($counter = $profundidad; $counter >= 0; $counter--) {
+                        $valueaux = new Vocabulario_gramatica();
+                        $arrayvalues = $valueaux->obtener_hijos($USER->id, $arrayGramatical[$counter + 1]);
+                        $campodinamico = '<div class="fitem" id="divgramatico_otr'.($profundidad - $counter).'" style=\"min-height: 0">';
+                        $mform->addElement('html', $campodinamico);
+                        $mform->addElement('select', 'selectgramatico_otr'.$arrayGramatical[$counter], "", $arrayvalues, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"divgramatico_otr".(($profundidad - $counter)+1)."\",1, \"finalgramatica_otr\")'");
+                        
+                        $mform->setDefault('selectgramatico_otr'.$arrayGramatical[$counter], $arrayGramatical[$counter]);
+                    } 
+                    
+                    $campodinamico = '<div class="fitem" id="divgramatico_otr'.($profundidad + 1).'" style=\"min-height: 0"></div>';
+                    $mform->addElement('html', $campodinamico);
+                    for ($counter = $profundidad; $counter >= 0; $counter--) {
+                        $mform->addElement('html', '</div>');
+                    }
+      
+                    $mform->addElement('html', '</div>');
+
+                }
                 $mform->addElement('hidden', 'descripcion_grotr');
 
                 //intencion comunicativa
@@ -462,12 +827,63 @@ class mod_vocabulario_rellenar_form extends moodleform {
                     $mform->addElement('html', $ocultador);
                     $mform->addElement('text', 'observaciones_otr', get_string("comen", "vocabulario"), 'value="' . $otro->get('observaciones') . '"');
 
+                    /*
                     //campo gramatical
                     $mform->addElement('select', 'gramatica_otr', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_otr\",1)'");
                     //probar los campos dinamicos
                     $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_otr\" style=\"min-height: 0;\"></div>";
                     $mform->addElement('html', $campodinamico);
                     $mform->setDefault('gramatica_otr', $otro->get('gramaticaid'));
+                    */
+                    $padreGramatical = new Vocabulario_gramatica();
+                $padreGramatical->leer($otro->get('gramaticaid'), $USER->id);
+                
+                $mform->addElement('hidden', 'finalgramatica_otr'); // Para la base de datos!!
+                $hidden = '<input type="hidden" name="finalgramatica_otr" value="'.$otro->get('gramaticaid').'">';
+                echo $hidden;
+                
+                $mform->addElement('html', $hidden);
+                if ($padreGramatical->get('padre') == 0) { // Significa que no hay que profundizar; se inserta el id tal cuál
+                    $mform->addElement('select', 'gramatica_otr', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_otr\",1,\"finalgramatica_otr\")'");
+                    $mform->setDefault('gramatica_adj', $otro->get('gramaticaid'));
+                    $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_otr\" style=\"min-height: 0;\"></div>";
+                    $mform->addElement('html', $campodinamico);
+                }
+                else { // Hay que profundizar: calcular los identificadores
+                    $profundidad = 0;
+                    $padreGramatical_aux = $padreGramatical;
+                    $arrayGramatical = array();
+                    while ($padreGramatical_aux->get('padre') != 0){ // Mientras no lleguemos a la raíz
+                        $arrayGramatical[$profundidad] = $padreGramatical_aux->get('id');
+                        $padreGramatical_aux->leer($padreGramatical_aux->get('padre'), $USER->id);
+                        $profundidad++;
+                    }
+                    $arrayGramatical[$profundidad] = $padreGramatical_aux->get('id');
+                    $mform->addElement('select', 'gramatica_otr', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_otr\",1, \"finalgramatica_otr\")'");
+                    $mform->setDefault('gramatica_otr', $arrayGramatical[$profundidad]);
+                    $campodinamico = "<div class=\"fitem\" id=\"grgeneraldinamico_otr\" style=\"min-height: 0;\">";
+                    $mform->addElement('html', $campodinamico);
+                    $profundidad--;
+                    
+                    for ($counter = $profundidad; $counter >= 0; $counter--) {
+                        $valueaux = new Vocabulario_gramatica();
+                        $arrayvalues = $valueaux->obtener_hijos($USER->id, $arrayGramatical[$counter + 1]);
+                        $campodinamico = '<div class="fitem" id="divgramatico_otr'.($profundidad - $counter).'" style=\"min-height: 0">';
+                        $mform->addElement('html', $campodinamico);
+                        $mform->addElement('select', 'selectgramatico_otr'.$arrayGramatical[$counter], "", $arrayvalues, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"divgramatico_otr".(($profundidad - $counter)+1)."\",1, \"finalgramatica_otr\")'");
+                        
+                        $mform->setDefault('selectgramatico_otr'.$arrayGramatical[$counter], $arrayGramatical[$counter]);
+                    } 
+                    
+                    $campodinamico = '<div class="fitem" id="divgramatico_otr'.($profundidad + 1).'" style=\"min-height: 0"></div>';
+                    $mform->addElement('html', $campodinamico);
+                    for ($counter = $profundidad; $counter >= 0; $counter--) {
+                        $mform->addElement('html', '</div>');
+                    }
+      
+                    $mform->addElement('html', '</div>');
+
+                }
                     $mform->addElement('hidden', 'descripcion_grotr');
 
                     //intencion comunicativa
@@ -496,7 +912,6 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $buttonarray = array();
               if($op){
              $mform->addElement('hidden', 'añadiendo',1);
-
              $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('AñadirNuevo','vocabulario'));
 
          }else{

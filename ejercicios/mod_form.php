@@ -118,7 +118,9 @@ class mod_ejercicios_mod_formulario extends moodleform_mod {
         $salida .= ' var descripciones = new Array();';
         $numEjercicios = (int) get_string('TotalEjercicios','ejercicios');
         for ($i=0; $i<$numEjercicios; $i++){
+            if ($i != 6){
             $salida .= 'descripciones['.$i.']="'.get_string('desc_Tipo'.$i,'ejercicios').'";';
+            }
         }
         $salida.='</script>';
         return $salida;
@@ -194,7 +196,9 @@ class mod_ejercicios_mod_formulario extends moodleform_mod {
             $tabla_menu.='<select id="TipoActividad" style="width: 380px;" class="selectbuscar">';
              
              for($i=0;$i<sizeof($clasificaciontipo);$i++){
+                 if ($i != 6){
                  $tabla_menu.='<option value="'.$i.'">'.$clasificaciontipo[$i].'</option>';
+                 }
              }
             $tabla_menu.='</select>';
            
@@ -359,7 +363,9 @@ class mod_ejercicios_mod_formulario extends moodleform_mod {
             $tabla_menu.='<select id="TipoActividadCrear" style="width: 380px;" class="selectbuscar" onchange="cargaResumenEjercicio()" >';
              
              for($i=0;$i<sizeof($clasificaciontipo);$i++){
+                 if ($i != 6){
                  $tabla_menu.='<option value="'.$i.'">'.$clasificaciontipo[$i].'</option>';
+                 }
              }
             $tabla_menu.='</select>';
             $tabla_menu.='<textarea id="desc_TipoActividadCrear" rows="5" cols="50" style="visibility:hidden;width:380px;resize:none;" readonly="yes">aaaa</textarea>';
