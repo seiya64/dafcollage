@@ -152,6 +152,8 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
         $tipoorden = $matriz[0]->get('frase');
 
 
+        $tipo_origen = $ejercicios_leido->get('tipoarchivopregunta');
+        $tipo_respuesta = $ejercicios_leido->get('tipoarchivorespuesta');
         //echo "tipo origen.$tipo_origen";
         //compruebo de que tipo es el origen
         switch ($tipo_origen) {
@@ -360,7 +362,10 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
                             //Insertar el html                            
                             $mform->addElement('html', $tabla_imagenes);
                             
-                            
+                            $fuentes_aux = $ejercicios_leido->get('fuentes');
+            $fuentes = genera_fuentes($fuentes_aux, "readonly");
+            
+            $mform->addElement('html', $fuentes);
                             
                         } else {
                             //echo "akiiiiiiii";
@@ -486,6 +491,11 @@ class mod_ejercicios_mostrar_ejercicio_ordenar_elementos extends moodleform_mod 
 
 
                         if ($buscar != 1 && $modificable == true) {
+                            $fuentes_aux = $ejercicios_leido->get('fuentes');
+            
+            $fuentes = genera_fuentes($fuentes_aux, "");
+            
+            $mform->addElement('html', $fuentes);
                             //Si soy el profesor creadors
                             $tabla_imagenes='<center><input type="button" style="margin-top:20px;" id="botonNA" name="botonNA" onclick="OE_AddPregunta('.$id_ejercicio.')" value="' . get_string('OE_add_pregunta', 'ejercicios') . '"><br/>';
                             $tabla_imagenes.= '<input type="submit" onclick="return OE_Guardar('.$id_ejercicio.');" style="" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';

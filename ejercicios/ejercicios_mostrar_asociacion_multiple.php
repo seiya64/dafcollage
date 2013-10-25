@@ -15,6 +15,8 @@
   Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
   Simeón Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto(finamolinasoto@gmail.com)
+  Javier Castro Fernández (havidarou@gmail.com)
+  Ángel Biedma Mesa (tekeiro@gmail.com)
 
   Original idea:
   Ruth Burbat
@@ -126,6 +128,8 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
         $mform->addElement('html', $tabla_imagenes);
 
 
+        $tipo_origen = $ejercicios_leido->get('tipoarchivopregunta');
+        $tipo_respuesta = $ejercicios_leido->get('tipoarchivorespuesta');
         //echo "tipo origen.$tipo_origen";
         //compruebo de que tipo es el origen
         switch ($tipo_origen) {
@@ -338,7 +342,10 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                             //Insertar el html                            
                             $mform->addElement('html', $tabla_imagenes);
                             
-                            
+                            $fuentes_aux = $ejercicios_leido->get('fuentes');
+                            $fuentes = genera_fuentes($fuentes_aux, "readonly");
+            
+                            $mform->addElement('html', $fuentes);
                             
                         } else {
                             //echo "akiiiiiiii";
@@ -427,6 +434,11 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
 
 
                         if ($buscar != 1 && $modificable == true) {
+                            $fuentes_aux = $ejercicios_leido->get('fuentes');
+            
+            $fuentes = genera_fuentes($fuentes_aux, "");
+            
+            $mform->addElement('html', $fuentes);
                             //Si soy el profesor creadors
                             $tabla_imagenes = '<center><input type="submit" style="margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
                             $tabla_imagenes.='<input type="button" style="" id="botonNA" name="botonNA" onclick="botonMasPreguntas_IE()" value="' . get_string('NuevaAso', 'ejercicios') . '">';
@@ -677,6 +689,11 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                             
                             //Insertar el html                            
                             $mform->addElement('html', $tabla_imagenes);
+                            
+                            $fuentes_aux = $ejercicios_leido->get('fuentes');
+            $fuentes = genera_fuentes($fuentes_aux, "readonly");
+            
+            $mform->addElement('html', $fuentes);
                         } else {
                             //echo "akiiiiiiii";
                             //$tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
@@ -777,6 +794,11 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
 
 
                         if ($buscar != 1 && $modificable == true) {
+                            $fuentes_aux = $ejercicios_leido->get('fuentes');
+            
+            $fuentes = genera_fuentes($fuentes_aux, "");
+            
+            $mform->addElement('html', $fuentes);
                             //Si soy el profesor creadors
                             $tabla_imagenes = '<center><input type="submit" style="margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
                             $tabla_imagenes.='<input type="button" style="" id="botonTextoAudio" name="botonTextoAudio" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonMasPreguntas_TextoAudio_AM('.$id_ejercicio.')">';
@@ -1030,6 +1052,10 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                             //Insertar el html                            
                             $mform->addElement('html', $tabla_imagenes);
                             
+                            $fuentes_aux = $ejercicios_leido->get('fuentes');
+            $fuentes = genera_fuentes($fuentes_aux, "readonly");
+            
+            $mform->addElement('html', $fuentes);
                         } else {
                             //echo "akiiiiiiii podemos cambiar";
 
@@ -1129,6 +1155,11 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                         //$mform->addElement('html', $tabla_imagenes);
                         //echo "botones";
                         if ($buscar != 1 && $modificable == true) {
+                            $fuentes_aux = $ejercicios_leido->get('fuentes');
+            
+            $fuentes = genera_fuentes($fuentes_aux, "");
+            
+            $mform->addElement('html', $fuentes);
                             //Si soy el profesor creadors
                             $tabla_imagenes = '<center><input type="submit" style="margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
                             $tabla_imagenes.='<input type="button" style="" id="botonTextoVideo" name="botonTextoVideo" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonMasPreguntas_TextoVideo_AM(' . $id_ejercicio . ')">';
@@ -1361,6 +1392,10 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                             
                             //Insertar el html                            
                             $mform->addElement('html', $tabla_imagenes);
+                            $fuentes_aux = $ejercicios_leido->get('fuentes');
+            $fuentes = genera_fuentes($fuentes_aux, "readonly");
+            
+            $mform->addElement('html', $fuentes);
                         } else {
                             //echo "akiiiiiiii";
                             //$tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
@@ -1468,6 +1503,11 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
 
 
                         if ($buscar != 1 && $modificable == true) {
+                            $fuentes_aux = $ejercicios_leido->get('fuentes');
+            
+            $fuentes = genera_fuentes($fuentes_aux, "");
+            
+            $mform->addElement('html', $fuentes);
                             //Si soy el profesor creadors
                             $tabla_imagenes = '<center><input type="submit" style="margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
                             $tabla_imagenes.='<input type="button" style="" id="botonTextoImagen" name="botonTextoImagen" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonMasPreguntas_TextoFoto_AM(' . $id_ejercicio . ')">';
@@ -1711,6 +1751,11 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
 
                     //Insertar el html                            
                     $mform->addElement('html', $tabla_imagenes);
+                    
+                    $fuentes_aux = $ejercicios_leido->get('fuentes');
+            $fuentes = genera_fuentes($fuentes_aux, "readonly");
+            
+            $mform->addElement('html', $fuentes);
                 } else {
                     //echo "akiiiiiiii   3333";
                     //$tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
@@ -1815,6 +1860,11 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
 
 
                 if ($buscar != 1 && $modificable == true) {
+                    $fuentes_aux = $ejercicios_leido->get('fuentes');
+            
+            $fuentes = genera_fuentes($fuentes_aux, "");
+            
+            $mform->addElement('html', $fuentes);
                     //Si soy el profesor creadors
                     $tabla_imagenes = '<center><input type="submit" style="margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
                     $tabla_imagenes.='<input type="button" style="" id="botonTextoAudio" name="botonTextoAudio" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonMasPreguntas_AudioTexto_AM(' . $id_ejercicio . ')">';
@@ -2067,7 +2117,10 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                     //Insertar el html                            
                     $mform->addElement('html', $tabla_imagenes);
                     
-                    
+                    $fuentes_aux = $ejercicios_leido->get('fuentes');
+            $fuentes = genera_fuentes($fuentes_aux, "readonly");
+            
+            $mform->addElement('html', $fuentes);
                 } else {
                     //echo "akiiiiiiii podemos cambiar";
                     
@@ -2178,6 +2231,11 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                 
                 //echo "botones";
                 if ($buscar != 1 && $modificable == true) {
+                    $fuentes_aux = $ejercicios_leido->get('fuentes');
+            
+            $fuentes = genera_fuentes($fuentes_aux, "");
+            
+            $mform->addElement('html', $fuentes);
                     //Si soy el profesor creadors
                     $tabla_imagenes = '<center><input type="submit" style="margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
                     $tabla_imagenes.='<input type="button" style="" id="botonTextoVideo" name="botonTextoVideo" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonMasPreguntas_VideoTexto_AM(' . $id_ejercicio . ')">';
@@ -2405,7 +2463,10 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
                             
                             //Insertar el html                            
                             $mform->addElement('html', $tabla_imagenes);
-                            
+                            $fuentes_aux = $ejercicios_leido->get('fuentes');
+            $fuentes = genera_fuentes($fuentes_aux, "readonly");
+            
+            $mform->addElement('html', $fuentes);
                         } else {
                             //echo "akiiiiiiii";
                             //$tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
@@ -2518,6 +2579,11 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_multiple extends moodleform_mo
 
 
                         if ($buscar != 1 && $modificable == true) {
+                            $fuentes_aux = $ejercicios_leido->get('fuentes');
+            
+            $fuentes = genera_fuentes($fuentes_aux, "");
+            
+            $mform->addElement('html', $fuentes);
                             //Si soy el profesor creadors
                             $tabla_imagenes = '<center><input type="submit" style="margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
                             $tabla_imagenes.='<input type="button" style="" id="botonTextoImagen" name="botonTextoImagen" value="' . get_string('NuevaAso', 'ejercicios') . '" onclick="botonMasPreguntas_FotoTexto_AM(' . $id_ejercicio . ')">';

@@ -151,7 +151,7 @@ $string["publico"]="Público (accesible por otros profesores y alumnos)";
 $string["carpeta"]="Seleccione/Cree la carpeta donde quiera guardar el ejercicio";
 $string["copyright"]="Seleccione la licencia para su ejercicio   (al hacer click en la licencia se mostrará una breve descripción.)";
 $string["copyrightresp"]="Seleccione el copyright de sus archivos respuesta";
-$string["textoclasej"]="Asigne una o varias categorías de búsqueda de los siguientes menús desplegables(Obligatorio Campo Temático o Tema gramatical):";
+$string["textoclasej"]="Asigne una o varias categorías de búsqueda de los siguientes menús desplegables (Obligatorio Campo Temático o Tema gramatical):";
 //Formulario de creacion texto-texto
 
 $string["FormularioCreacionTextos"]="Introduzca las preguntas y respuestas del ejercicio";
@@ -168,7 +168,7 @@ $string["BotonGuardar"]="Guardar";
 //Mis ejercicios(Ejercicios profesor)
 $string["MisEjercicios"]="Mis Ejercicios";
 $string["Ejercicios"]="Ejercicios";
-$string["MiBusqueda"]="Mi Busqueda";
+$string["MiBusqueda"]="Mi Búsqueda";
 
 
 //Buscando
@@ -177,7 +177,7 @@ $string['Misejercicios']='Mis Actividades';
 $string["marcoteorico"]="Seleccionar el nivel según el marco europeo de referecia (OPCIONAL)";
 
 //Fuentes ejercicios
-$string['fuentes']='Fuentes de los recursos utilizados en el ejercicio:';
+$string["fuentes"]="Fuentes utilizadas en el ejercicio:";
 
 
 //A partir de aqui hay que traducir a ingles
@@ -191,7 +191,7 @@ $string['tipopregunta1']='Tipo de archivo pregunta';
 //Generador de Ejercicios -- Texto Hueco -- Etiqueta TH
 $string["TH_texto"]="Texto ";
 $string["TH_huecos"]="Palabras ocultadas ";
-$string["TH_add_hueco"]="Añadir Hueco";
+$string["TH_add_hueco"]="Seleccionar Hueco";
 $string["TH_mostrar_pistas"]="¿Desea que se muestren pistas sobre la longitud de las palabras que se colocan en los huecos?";
 $string["TH_mostrar_palabras"]="¿Desea que aparezcan las soluciones de los huecos en la parte inferior del ejercicio?";
 $string["TH_mostrar_soluciones"]="¿Desea que aparezcan las soluciones al pulsar el boton de Corregir los ejercicios?";
@@ -199,15 +199,16 @@ $string["TH_introduzca_texto"]="Introduzca el texto en el cual se seleccionaran 
 $string['TH_configuracion_ejercicio']="Configuraci&oacute;n del Ejercicio";
 $string['TH_pistas']="Pistas";
 $string['TH_pista_longitud']='Ocupa {$a} simbolos';
+$string['TH_anadir']='Añadir campo de texto';
 
 //Titulos de Ejercicios
 $string['MC_title']="Multiple Choice";
-$string['AS_title']="Asociacion Simple";
-$string['AC_title']="Asociacion Compleja";
+$string['AS_title']="Asociación Simple";
+$string['AC_title']="Asociación Compleja";
 $string['TH_title']="Texto Hueco";
 $string['OE_title']="Ordenar Elementos";
 $string['IE_title']="Identificar Elementos";
-$string['IERC_title']="Identificar Elementos mas Respuesta(s) Corta(s)";
+$string['IERC_title']="Identificar Elementos más Respuesta(s) Corta(s)";
 
 //Generador de Ejercicios -- Ordenar Elementos -- Etiqueta OE
 $string['OE_seleccione']="Escriba la frase que quiera desordenar.";
@@ -241,7 +242,7 @@ $string['IERC_cabecera']='Cabecera {$a}';
 $string['IERC_click']="Pulse para editar";
 $string['IERC_eliminar']="Eliminar";
 $string["IERC_instr_prof"]='Introduce el texto y las soluciones';
-$string["IERC_descripcion"]='Instrucciones del ejercicio como se le muestran al alumno';
+$string["IERC_descripcion"]='Instrucciones del ejercicio como se le muestran al alumno:';
 $string["IERC_descripcion2"]="Si tiene más de una pregunta relacionada con el elemento a identificar es recomendable que las redacte siguiendo el orden a), b), c), etc... (Hay hasta 5 opciones)";
 $string["IERC_addPregunta"]="Añadir Pregunta";
 $string["IERC_numPreguntas"]="¿Quiere hacer más de una pregunta acerca del elemento identificado? Elija cuántas:";
@@ -255,5 +256,15 @@ $string["IERC_seleccionarPalabra"]="Añadir elemento";
 // Campo obligatorio
 $string["tituloNecesario"]="Título necesario";
 $string["descripcionNecesaria"]="Descripción necesaria";
+
+
+
+// Añadidos correcciones ejercicios
+
 $string["elementoNecesario"]="Elemento necesario";
+$string["asociacion"]="Asociación";
+$string["aContinuacion"]="(a continuación puede añadir más preguntas)";
+$string["foto"]="Foto asociada";
+$string["audio"]="Audio asociado";
+$string["videoAsociado"]="Video asociado";
 ?>

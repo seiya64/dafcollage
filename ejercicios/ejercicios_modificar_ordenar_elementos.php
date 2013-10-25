@@ -66,6 +66,13 @@ $numeropreguntas = optional_param('num_preg', 0, PARAM_INT);
 echo "El numero de pregunas es" . $numeropreguntas;
 
 
+$ejercicio_general = new Ejercicios_general();
+     $miejercicio=$ejercicio_general->obtener_uno($id_ejercicio);
+     $miejercicio->set_numpregunta($numeropreguntas);
+     $fuentes = optional_param('fuentes',PARAM_TEXT);
+     $miejercicio->set_fuentes($fuentes);
+     $miejercicio->alterar();
+     
 begin_sql();
 
 if ($tipo_origen == 1) { //la pregunta es un texto

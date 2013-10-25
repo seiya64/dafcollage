@@ -93,6 +93,8 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
         $nombre = $ejercicios_leido->get('name');
         $npreg = $ejercicios_leido->get('numpreg');
         $creador = $ejercicios_leido->get('id_creador');
+        $tipo_origen = $ejercicios_leido->get('tipoarchivopregunta');
+        $tipo_respuesta = $ejercicios_leido->get('tipoarchivorespuesta');
 
         if ($creador == $USER->id && has_capability('moodle/legacy:editingteacher', $context, $USER->id, false)) {
             $modificable = true;
@@ -409,6 +411,7 @@ class mod_ejercicios_mostrar_ejercicio_ierc extends moodleform_mod {
             
             $fuentes_aux = $ejercicios_leido->get('fuentes');
             $log->write("lasfuentesson ".$fuentes_aux);
+            
             $fuentes = genera_fuentes($fuentes_aux, "");
             
             $mform->addElement('html', $fuentes);

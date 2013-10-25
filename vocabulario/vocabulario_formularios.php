@@ -15,6 +15,7 @@
   Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
   Simeón Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto(finamolinasoto@gmail.com)
+  Javier Castro Fernández (havidarou@gmail.com)
 
   Original idea:
   Ruth Burbat
@@ -1011,7 +1012,7 @@ class mod_vocabulario_opciones_form extends moodleform {
         <div class="field"><img src="./imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im"/><div class="texto">' . get_string('admin_ic', 'vocabulario') . '</div></div>
 	
 	<ul class="list">
-		<li><a href="view.php?id=' . $id . '&opcion=7"></a>' . get_string('ic_categoria', 'vocabulario') . '</a></li>
+		<li><a href="view.php?id=' . $id . '&opcion=7">' . get_string('ic_categoria', 'vocabulario') . '</a></li>
 		<li><a href="view.php?id=' . $id . '&opcion=17">' . get_string('ic_recurso', 'vocabulario') . '</a></li>
 		
 	</ul>

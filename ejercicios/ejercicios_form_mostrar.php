@@ -125,10 +125,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
             //Añado el texto de origen
             $el_texto_origen = new Ejercicios_textos();
             $el_texto_origen->obtener_uno_id_ejercicio($id_ejercicio);
-             //echo "aki entra";
-             //echo "por lo que estoy en texto texto";
             if ($buscar == 1 || $modificable == false) { //Para que no pueda editarlo
-                echo "realmente estoy aqui";
                 $divtexto = '<div class="desctexto" name="texto" id="texto"><div class="margenes">' . nl2br((stripslashes($el_texto_origen->get('texto')))) . '</div></div>';
             } else {
                 $divtexto = '<textarea  class="adaptHeightInput" name="texto" id="texto">' . $el_texto_origen->get('texto') . '</textarea>';
@@ -311,6 +308,11 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
 
                     //Si soy el dueño del ejercicio y no estoy buscando boton guardar
                     if ($buscar != 1 && $modificable == true) {
+                        
+                        $fuentes_aux = $ejercicios_leido->get('fuentes');
+            
+                        $fuentes = genera_fuentes($fuentes_aux, "");
+                        $mform->addElement('html', $fuentes);
                         //Pinto los botones
                         //boton añadir pregunta
                         $botones = '<center><input type="button" style="margin-top:20px;" id="id_Añadir" value="Añadir Pregunta" onclick="javascript:botonMasPreguntas()">';
@@ -351,6 +353,11 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
 
                                     $mform->addElement('html', $tabla_menu);
                                 } else {//soy alumno
+                                    $fuentes_aux = $ejercicios_leido->get('fuentes');
+
+                                    $fuentes = genera_fuentes($fuentes_aux, "readonly");
+            
+                                    $mform->addElement('html', $fuentes);
                                     $tabla_menu = '<center><input type="button" style="margin-top:20px;"  value="Corregir" onClick="javascript:botonCorregirMultiChoice(' . $id . ',' . $npreg . ')"/> <input type="button" style=""  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal(' . $id . ')" /></center>';
 
                                     $mform->addElement('html', $tabla_menu);

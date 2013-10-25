@@ -341,13 +341,14 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
       case 8:// Mostrando ejercicios a profesores o a alumnos
           $ejercicios_bd = new Ejercicios_general();
             $ejercicios_leido = $ejercicios_bd->obtener_uno($id_ejercicio);
-          echo "hasta aquí sí llego";
+          //echo "hasta aquí sí llego";
             $tipocreacion = $ejercicios_leido->get('tipoactividad');
-            echo "tipocreacionalcambiares es:".$tipocreacion;
+            //echo "tipocreacionalcambiares es:".$tipocreacion;
              //echo "mostrando ejerciciossssss".$tipocreacion;
             switch($tipocreacion){
+                
                     case 0: //Multichoice texto-texto a profesores o a alumnos
-                        echo "mostrando multichoice texto-texto";
+                        //echo "mostrando multichoice texto-texto";
                      $mform= new mod_ejercicios_mostrar_ejercicio($id,$id_ejercicio,$tipo_origen);
                      $mform->mostrar_ejercicio($id,$id_ejercicio,$buscar,$tipo_origen);
                         //echo "mostrando ejercicio multichoice";
@@ -382,7 +383,7 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
                         $mform->mostrar_ejercicio_ordenar_elementos($id,$id_ejercicio,$buscar,$tipo_origen,$trespuesta,$tipocreacion);
                         break;
                     case 8: //si es IE mas RC
-                        echo "mostrando ejercicio IE+RC";
+                        //echo "mostrando ejercicio IE+RC";
                         $mform = new mod_ejercicios_mostrar_ejercicio_ierc($id, $id_ejercicio, $tipo_origen,$trespuesta,$tipocreacion);
                         $mform->mostrar_ejercicio_ierc($id, $id_ejercicio, $buscar, $tipo_origen,$trespuesta,$tipocreacion);
                         break;

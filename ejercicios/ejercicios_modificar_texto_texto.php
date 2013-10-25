@@ -78,6 +78,8 @@ if(optional_param("submitbutton2")){ //boton para añadir a mis ejercicos visibl
      $ejercicio_general = new Ejercicios_general();
      $miejercicio=$ejercicio_general->obtener_uno($id_ejercicio);
      $miejercicio->set_numpregunta($num_preg);
+     $fuentes = optional_param('fuentes',PARAM_TEXT);
+     $miejercicio->set_fuentes($fuentes);
      $miejercicio->alterar();
     
      

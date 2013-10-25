@@ -16,6 +16,7 @@
   Simeón Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto(finamolinasoto@gmail.com)
   Angel Biedma Mesa (tekeiro@gmail.com)
+  Javier Castro Fernández (havidarou@gmail.com)
 
   Original idea:
   Ruth Burbat
@@ -50,6 +51,9 @@ $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']);
 $carpeta = unserialize($_SESSION['cosasProfe']);
 $tipoorden = $_SESSION['tipoorden'];
 $tipoorden = ($tipoorden=="Frase") ? 1 : 0;
+$fuentes = optional_param('fuentes',PARAM_TEXT);
+        
+$ejercicioGeneral->set_fuentes($fuentes);
 $id_ejercicio = $ejercicioGeneral->insertar();
 
 // Y para el profesor tambien

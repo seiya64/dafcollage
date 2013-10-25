@@ -111,9 +111,9 @@ if ($mform->is_cancelled()) { //Elimino el ejercicio
              $nelem=required_param('numeroimagenes', PARAM_INT);
              $Classtipo=required_param('ClasificacionTipo', PARAM_TEXT);
              $elemAsociacion=required_param('comb', PARAM_TEXT);
-             echo $nelem+1;
-             echo $Classtipo;
-             echo $elemAsociacion;
+             //echo $nelem+1;
+             //echo $Classtipo;
+             //echo $elemAsociacion;
            
         
         //leo un ejercicio y lo guardo

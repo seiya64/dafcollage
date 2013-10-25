@@ -200,6 +200,8 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
         $mform->addElement('html', $tabla_imagenes);
 
 
+        $tipo_origen = $ejercicios_leido->get('tipoarchivopregunta');
+        $tipo_respuesta = $ejercicios_leido->get('tipoarchivorespuesta');
         //echo "tipo origen.$tipo_origen";
         //compruebo de que tipo es el origen
         switch ($tipo_origen) {
@@ -330,11 +332,17 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
                             //Se van a pintar las respuestas
                             if ($mostrar_palabras) {
                                 $tabla_imagenes .= '<h1>'.get_string('TH_pistas','ejercicios').'</h1>';
+                                $tabla_imagenes.="<i>(</i>";
                                 for ($j=0; $j<sizeof($aleatorios_generados); $j++) {
                                     //$tabla_imagenes.='<tr>';
-
-                                    $tabla_imagenes.='<span class="item resp" id="resp_'.$aleatorios_generados[$j].'" >';
-                                    $tabla_imagenes.=$resp_generadas[$aleatorios_generados[$j] - 1] . '</span><span>   </span>';
+                                    if ($j == sizeof($aleatorios_generados)-1){
+                                        $tabla_imagenes.="<i>".$resp_generadas[$aleatorios_generados[$j] - 1].")</i>";
+                                    }
+                                    else {
+                                        $tabla_imagenes.="<i>".$resp_generadas[$aleatorios_generados[$j] - 1].", </i>";
+                                    }
+                                    //$tabla_imagenes.='<span class="item resp" id="resp_'.$aleatorios_generados[$j].'" >';
+                                    //$tabla_imagenes.=$resp_generadas[$aleatorios_generados[$j] - 1] . '</span><span>   </span>';
 
                                     //Le asigno un numero aleatorio a la respuesta
                                     //$hash[$aleatorios_generados[$j]] = $pregs_indice[$aleatorios_generados[$j] - 1] . "_" . $resp_indice[$aleatorios_generados[$j] - 1];
@@ -370,7 +378,10 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
                             //Insertar el html                            
                             $mform->addElement('html', $tabla_imagenes);
                             
-                            
+                            $fuentes_aux = $ejercicios_leido->get('fuentes');
+            $fuentes = genera_fuentes($fuentes_aux, "readonly");
+            
+            $mform->addElement('html', $fuentes);
                             
                         } else {
                             //echo "akiiiiiiii";
@@ -475,9 +486,14 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
 
 
                         if ($buscar != 1 && $modificable == true) {
+                            $fuentes_aux = $ejercicios_leido->get('fuentes');
+            
+                            $fuentes = genera_fuentes($fuentes_aux, "");
+            
+                            $mform->addElement('html', $fuentes);
                             //Si soy el profesor creadors
                             $tabla_imagenes = '<center><input type="submit" style="margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
-                            $tabla_imagenes.='<input type="button" style="" id="botonNA" name="botonNA" onclick="TH_AddPregunta('.$id_ejercicio.')" value="' . get_string('NuevaAso', 'ejercicios') . '">';
+                            $tabla_imagenes.='<input type="button" style="" id="botonNA" name="botonNA" onclick="TH_AddPregunta('.$id_ejercicio.')" value="' . get_string('TH_anadir', 'ejercicios') . '">';
                             $tabla_imagenes.='<input type="button" style="" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
                         } else {
                             if ($buscar == 1) { //Si estoy buscand

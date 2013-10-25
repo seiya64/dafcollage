@@ -15,6 +15,7 @@
   Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
   Simeón Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto(finamolinasoto@gmail.com)
+  Javier Castro Fernández (havidarou@gmail.com)
 
   Original idea:
   Ruth Burbat
@@ -47,6 +48,9 @@ require_once("ejercicios_form_creacion.php");
 // Crea ejercicio ahora
 $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
 $carpeta = unserialize($_SESSION['cosasProfe']);
+$fuentes = optional_param('fuentes',PARAM_TEXT);
+        
+$ejercicioGeneral->set_fuentes($fuentes);
 $id_ejercicio = $ejercicioGeneral->insertar();
 
 // Y para el profesor tambien

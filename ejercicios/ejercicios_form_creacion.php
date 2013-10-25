@@ -432,7 +432,7 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
             $carpetas = array();
             foreach ($prof_carpetas as $carp)   $carpetas[$carp->get('carpeta')] = $carp->get('carpeta');
             $log->write("longitud ". count($carpetas));
-            if (count($carpetas) == 1) { // Si no hay carpetas creadas, arrancamos con el input
+            if (count($carpetas) == 0) { // Si no hay carpetas creadas, arrancamos con el input
                 $crearcarpetas = true;
             }
             $carpetas['-1']="Crear nueva carpeta";
@@ -567,7 +567,7 @@ class mod_ejercicios_creando_ejercicio_texto extends moodleform_mod {
         for($i=0;$i<$p;$i++){
 
              $aux=$i+1;
-             $titulo= '</br><h3> Pregunta ' .$aux. '</h3>';
+             $titulo= '</br><h3> Pregunta ' .$aux." ". get_string('aContinuacion', 'ejercicios'). '</h3>';
              $mform->addElement('html',$titulo);
 
             $mform->addElement('textarea', 'pregunta'.$aux, get_string('pregunta', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
@@ -588,7 +588,7 @@ class mod_ejercicios_creando_ejercicio_texto extends moodleform_mod {
             $mform->addElement('html',$textarea);
 
            // $mform->addElement('text', 'numerorespuestas_'.$aux,"hola");
-            $botonañadir='<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestas('.$aux.');"></center>';
+            $botonañadir='<left><input type="button" style="height:30px; width:140px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestas('.$aux.');"></left>';
 
             $mform->addElement('html', $botonañadir);
 
@@ -598,6 +598,8 @@ class mod_ejercicios_creando_ejercicio_texto extends moodleform_mod {
            $mform->addElement('hidden','numeropreguntas',$p);
 
 
+           $fuentes = genera_fuentes();
+           $mform->addElement('html', $fuentes);
             $buttonarray = array();
             $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"style='margin-left:30%;' onclick=obtenernumeroRespuestas('$p');");
             $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
@@ -668,7 +670,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
                         for($i=0;$i<$p;$i++){
 
                              $aux=$i+1;
-                             $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
+                             $titulo= '</br><h3>'.get_string('asociacion','ejercicios') .$aux. " ". get_string('aContinuacion', 'ejercicios'). '</h3>';
                              $mform->addElement('html',$titulo);
 
                             //Archivo Asociacion
@@ -690,13 +692,13 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
                             for($i=0;$i<$p;$i++){
 
                             $aux=$i+1;
-                            $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
+                            $titulo= '</br><h3> '.get_string('asociacion','ejercicios').$aux. " ". get_string('aContinuacion', 'ejercicios').'</h3>';
                              $mform->addElement('html',$titulo);
 
                            //Archivo Asociacion
                             $mform->addElement('textarea', 'pregunta'.$aux, get_string('Asociacion_Texto', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
                             //Archivo Asociado
-                            $mform->addElement('file', 'archivoaudio'.$aux,"Audio");
+                            $mform->addElement('file', 'archivoaudio'.$aux,get_string('audio', 'ejercicios'));
                             $mform->addRule('archivoaudio'.$aux, "Archivo Necesario", 'required', null, 'client');
 
                            }
@@ -709,7 +711,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
                          for($i=0;$i<$p;$i++){
 
                             $aux=$i+1;
-                            $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
+                            $titulo= '</br><h3> '.get_string('asociacion','ejercicios').$aux. " ". get_string('aContinuacion', 'ejercicios').'</h3>';
                              $mform->addElement('html',$titulo);
 
                            //Archivo Asociacion
@@ -734,13 +736,12 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
                             for($i=0;$i<$p;$i++){
 
                             $aux=$i+1;
-                            $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
-                             $mform->addElement('html',$titulo);
-                             //echo "aki si llega";
-                           //Archivo Asociacion
+                            $titulo= '</br><h3>'.get_string('asociacion','ejercicios') .$aux. " ". get_string('aContinuacion', 'ejercicios').'</h3>';
+                            $mform->addElement('html',$titulo);
+                            //Archivo Asociacion
                             $mform->addElement('textarea', 'pregunta'.$aux, get_string('Asociacion_Texto', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
                             //Archivo Asociado
-                            $mform->addElement('file', 'archivofoto'.$aux,"Foto");
+                            $mform->addElement('file', 'archivofoto'.$aux,get_string('foto', 'ejercicios'));
                             $mform->addRule('archivofoto'.$aux, "Archivo Necesario", 'required', null, 'client');
 
 
@@ -748,7 +749,6 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
                            }
 
                            $mform->addElement('hidden','numeropreguntas',$p);
-                           //echo "aki llega con angel";
                       
                         
                     break;
@@ -762,20 +762,20 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
                 switch($tiporespuesta){
 
                     case 1: //El archivo respuesta es un texto
-                        //echo "audio-texto aaaa";
 
                           for($i=0;$i<$p;$i++){
 
                             $aux=$i+1;
-                            $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
-                             $mform->addElement('html',$titulo);
+                            $titulo= '</br><h3> '.get_string('asociacion','ejercicios') .$aux. " ". get_string('aContinuacion', 'ejercicios').'</h3>';
+                            $mform->addElement('html',$titulo);
 
-                           //Archivo Asociacion
-                            $mform->addElement('textarea', 'pregunta'.$aux, get_string('Asociacion_Texto', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
                             //Archivo Asociado
-                            $mform->addElement('file', 'archivoaudio'.$aux,"Audio");
+                            $mform->addElement('file', 'archivoaudio'.$aux,get_string('audio', 'ejercicios'));
                             $mform->addRule('archivoaudio'.$aux, "Archivo Necesario", 'required', null, 'client');
 
+                            //Archivo Asociacion
+                            $mform->addElement('textarea', 'pregunta'.$aux, get_string('Asociacion_Texto', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
+                            
                            }
 
                            $mform->addElement('hidden','numeropreguntas',$p);
@@ -797,25 +797,23 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
                           for($i=0;$i<$p;$i++){
 
                             $aux=$i+1;
-                            $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
-                             $mform->addElement('html',$titulo);
+                            $titulo= '</br><h3>'. get_string('asociacion','ejercicios') .$aux. " ". get_string('aContinuacion', 'ejercicios').'</h3>';
+                            $mform->addElement('html',$titulo);
 
-                           //Archivo Asociacion
-                            $mform->addElement('textarea', 'pregunta'.$aux, get_string('Asociacion_Texto', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
                             //Archivo Asociado
                             $attributes='size="100"';
                             $mform->addElement('text', 'archivovideo'.$aux,get_string('Video', 'ejercicios') , $attributes);
                             $mform->addRule('archivovideo'.$aux, "Dirección Web Necesaria", 'required', null, 'client');
-
-
-                           }
+                            //Archivo Asociacion
+                            $mform->addElement('textarea', 'pregunta'.$aux, get_string('Asociacion_Texto', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
+                           
+                            
+                          }
 
                            $mform->addElement('hidden','numeropreguntas',$p);
                     break;
                   
                 }
-               
-               // "el archivo origen es un audio";
 
             break;
 
@@ -825,14 +823,15 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
                     for ($i = 0; $i < $p; $i++) {
 
                         $aux = $i + 1;
-                        $titulo = '</br><h3> AsociaciÃ³n ' . $aux . '</h3>';
+                        $titulo = '</br><h3> '.get_string('asociacion','ejercicios') . $aux . " ". get_string('aContinuacion', 'ejercicios').'</h3>';
                         $mform->addElement('html', $titulo);
 
+                        //Archivo Asociado
+                        $mform->addElement('file', 'archivofoto' . $aux, get_string('foto', 'ejercicios'));
+                        $mform->addRule('archivofoto' . $aux, "Archivo Necesario", 'required', null, 'client');
                         //Archivo Asociacion
                         $mform->addElement('textarea', 'pregunta' . $aux, get_string('Asociacion_Texto', 'ejercicios') . $aux, 'wrap="virtual" rows="5" cols="50"');
-                        //Archivo Asociado
-                        $mform->addElement('file', 'archivofoto' . $aux, "Foto");
-                        $mform->addRule('archivofoto' . $aux, "Archivo Necesario", 'required', null, 'client');
+                        
                     }
 
                     $mform->addElement('hidden', 'numeropreguntas', $p);
@@ -841,7 +840,9 @@ class mod_ejercicios_creando_ejercicio_asociacion_simple extends moodleform_mod 
 
         }
 
-
+        $mform->addElement('html', '<br></br>');
+        $fuentes = genera_fuentes();
+           $mform->addElement('html', $fuentes);
 
             $buttonarray = array();
             $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"style='margin-left:30%;' onclick=obtenernumeroRespuestas('$p');");
@@ -912,7 +913,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
                         for($i=0;$i<$p;$i++){
 
                              $aux=$i+1;
-                             $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
+                             $titulo= '</br><h3>'.get_string('asociacion','ejercicios') .$aux. " ". get_string('aContinuacion', 'ejercicios'). '</h3>';
                              $mform->addElement('html',$titulo);
 
                             //Archivo Asociacion
@@ -928,7 +929,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
                             $mform->addElement('html',$textarea);
                             
                             // TODO COMPROBAR SI FUNCIONA LA FUNCION DE JAVASCRIPT DE MAS RESPUESTAS DE IE PARA ESTOS EJERCICIOS
-                            $botonañadir='<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestas_IE('.$aux.');"></center>';
+                            $botonañadir='<left><input type="button" style="height:30px; width:140px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestas_IE('.$aux.');"></left>';
                             $mform->addElement('html', $botonañadir);
 
 
@@ -947,7 +948,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
                             for($i=0;$i<$p;$i++){
 
                             $aux=$i+1;
-                            $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
+                            $titulo= '</br><h3>'.get_string('asociacion','ejercicios') .$aux. " ". get_string('aContinuacion', 'ejercicios'). '</h3>';
                              $mform->addElement('html',$titulo);
 
                            //Archivo Asociacion
@@ -960,7 +961,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
                             $mform->addElement('html','<input type="hidden" name="numerorespuestas_'.$aux.'" id="numerorespuestas_'.$aux.'" value="1"/>');
                             $mform->addElement('html','</div>');
                             
-                            $botonañadir='<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestasAudio_AM('.$aux.');"></center>';
+                            $botonañadir='<left><input type="button" style="height:30px; width:140px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestasAudio_AM('.$aux.');"></left>';
                             $mform->addElement('html', $botonañadir);
 
                            }
@@ -976,7 +977,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
                          for($i=0;$i<$p;$i++){
 
                             $aux=$i+1;
-                            $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
+                            $titulo= '</br><h3>'.get_string('asociacion','ejercicios') .$aux. " ". get_string('aContinuacion', 'ejercicios'). '</h3>';
                              $mform->addElement('html',$titulo);
 
                            //Archivo Asociacion
@@ -989,7 +990,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
                             $mform->addElement('html','<input type="hidden" name="numerorespuestas_'.$aux.'" id="numerorespuestas_'.$aux.'" value="1"/>');
                             $mform->addElement('html','</div>');
                             
-                            $botonañadir='<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestasVideo_AM('.$aux.');"></center>';
+                            $botonañadir='<left><input type="button" style="height:30px; width:140px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestasVideo_AM('.$aux.');"></left>';
                             $mform->addElement('html', $botonañadir);
                            }
                            
@@ -1010,19 +1011,19 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
                             for($i=0;$i<$p;$i++){
 
                             $aux=$i+1;
-                            $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
+                            $titulo= '</br><h3>'.get_string('asociacion','ejercicios') .$aux. " ". get_string('aContinuacion', 'ejercicios'). '</h3>';
                              $mform->addElement('html',$titulo);
                              //echo "aki si llega";
                            //Archivo Asociacion
                             $mform->addElement('textarea', 'pregunta'.$aux, get_string('Asociacion_Texto', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
                             //Archivo Asociado
                             $mform->addElement('html','<div id="respuestas_pregunta'.$aux.'"> ');
-                            $mform->addElement('file', 'archivofoto'.$aux,"Foto");
+                            $mform->addElement('file', 'archivofoto'.$aux,get_string('foto', 'ejercicios'));
                             $mform->addRule('archivofoto'.$aux, "Archivo Necesario", 'required', null, 'client');
                             $mform->addElement('html','<input type="hidden" name="numerorespuestas_'.$aux.'" id="numerorespuestas_'.$aux.'" value="1"/>');
                             $mform->addElement('html','</div>');
                             
-                            $botonañadir='<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestasFoto_AM('.$aux.');"></center>';
+                            $botonañadir='<left><input type="button" style="height:30px; width:140px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestasFoto_AM('.$aux.');"></left>';
                             $mform->addElement('html', $botonañadir);
                            }
 
@@ -1046,7 +1047,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
                           for($i=0;$i<$p;$i++){
 
                             $aux=$i+1;
-                            $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
+                            $titulo= '</br><h3>'.get_string('asociacion','ejercicios') .$aux. " ". get_string('aContinuacion', 'ejercicios'). '</h3>';
                              $mform->addElement('html',$titulo);
 
                            //Archivo Asociacion
@@ -1059,7 +1060,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
                             $mform->addElement('html','<input type="hidden" name="numerorespuestas_'.$aux.'" id="numerorespuestas_'.$aux.'" value="1"/>');
                             $mform->addElement('html','</div>');
                             
-                            $botonañadir='<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestasAFV_Texto_AM('.$aux.');"></center>';
+                            $botonañadir='<left><input type="button" style="height:30px; width:140px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestasAFV_Texto_AM('.$aux.');"></left>';
                             $mform->addElement('html', $botonañadir);
 
                            }
@@ -1083,7 +1084,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
                           for($i=0;$i<$p;$i++){
 
                             $aux=$i+1;
-                            $titulo= '</br><h3> Asociación ' .$aux. '</h3>';
+                            $titulo= '</br><h3>'.get_string('asociacion','ejercicios') .$aux. " ". get_string('aContinuacion', 'ejercicios'). '</h3>';
                              $mform->addElement('html',$titulo);
 
                            //Archivo Asociacion
@@ -1098,7 +1099,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
                             $mform->addElement('html','<input type="hidden" name="numerorespuestas_'.$aux.'" id="numerorespuestas_'.$aux.'" value="1"/>');
                             $mform->addElement('html','</div>');
                             
-                            $botonañadir='<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestasAFV_Texto_AM('.$aux.');"></center>';
+                            $botonañadir='<left><input type="button" style="height:30px; width:140px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestasAFV_Texto_AM('.$aux.');"></left>';
                             $mform->addElement('html', $botonañadir);
 
 
@@ -1119,11 +1120,11 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
                     for ($i = 0; $i < $p; $i++) {
 
                         $aux = $i + 1;
-                        $titulo = '</br><h3> Asociación ' . $aux . '</h3>';
+                        $titulo = '</br><h3>'.get_string('asociacion','ejercicios') .$aux. " ". get_string('aContinuacion', 'ejercicios'). '</h3>';
                         $mform->addElement('html', $titulo);
 
                         //Archivo Asociacion
-                        $mform->addElement('file', 'archivofoto' . $aux, "Foto");
+                        $mform->addElement('file', 'archivofoto' . $aux, get_string('foto', 'ejercicios'));
                         $mform->addRule('archivofoto' . $aux, "Archivo Necesario", 'required', null, 'client');
                         
                         
@@ -1133,7 +1134,7 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
                         $mform->addElement('html','<input type="hidden" name="numerorespuestas_'.$aux.'" id="numerorespuestas_'.$aux.'" value="1"/>');
                         $mform->addElement('html','</div>');
                             
-                        $botonañadir='<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestasAFV_Texto_AM('.$aux.');"></center>';
+                        $botonañadir='<left><input type="button" style="height:30px; width:140px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestasAFV_Texto_AM('.$aux.');"></left>';
                         $mform->addElement('html', $botonañadir);
                     }
 
@@ -1145,6 +1146,9 @@ class mod_ejercicios_creando_ejercicio_asociacion_multiple extends moodleform_mo
 
 
 
+        $fuentes = genera_fuentes();
+           $mform->addElement('html', $fuentes);
+           
             $buttonarray = array();
             $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"style='margin-left:30%;' onclick=obtenernumeroRespuestas('$p');");
             $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
@@ -1263,8 +1267,10 @@ class mod_ejercicios_creando_ejercicio_texto_hueco extends moodleform_mod {
 
             break;
         }
+        $mform->addElement('html', '<br></br>');
 
-
+        $fuentes = genera_fuentes();
+           $mform->addElement('html', $fuentes);
 
             $buttonarray = array();
             $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar','ejercicios'),"style='margin-left:30%;' onclick=obtenernumeroRespuestas('$p');");
@@ -1394,6 +1400,8 @@ class mod_ejercicios_creando_ejercicio_ordenar_elementos extends moodleform_mod 
             $html = '<input type="hidden" name="numeropreguntas" id="numeropreguntas" value="'.$p.'" />';
             $mform->addElement('html',$html);
             
+            $fuentes = genera_fuentes();
+           $mform->addElement('html', $fuentes);
             
             
             //$buttonarray = array();

@@ -15,6 +15,8 @@
   Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
   Simeón Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto(finamolinasoto@gmail.com)
+  Javier Castro Fernández (havidarou@gmail.com)
+  Ángel Biedma Mesa (tekeiro@gmail.com)
 
   Original idea:
   Ruth Burbat
@@ -99,6 +101,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
             $modificable = true;
         } else {
             $modificable = false;
+            echo "soy alumno";
         }
 
         //Añado el título
@@ -122,12 +125,13 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
 
         $tabla_imagenes .='<td>'; #columna
 
-
+        $tipo_origen = $ejercicios_leido->get('tipoarchivopregunta');
+        $tipo_respuesta = $ejercicios_leido->get('tipoarchivorespuesta');
 
         //echo "tipo origen.$tipo_origen";
         //compruebo de que tipo es el origen
         switch ($tipo_origen) {
-
+            
             case 1: //Es de tipo texto la pregunta
 
                 //echo "tipo respuesta.$tipo_respuesta";
@@ -219,8 +223,9 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                             //inserto el número de preguntas
 
                             $tabla_imagenes.='<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
-                        } else {
-                            //echo "akiiiiiiii";
+                        
+
+                            } else {
                             $tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
 
                             for ($i = 1; $i <= sizeof($preguntas); $i++) {
@@ -256,7 +261,7 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                     case 2: //Es de tipo audio la respuesta
 
                         //echo "tipo respuesta es audio";
-
+                        echo "deberia estar aqui";
                         $mform->addElement('html', '<script src="./js/ajaxupload.js" type="text/javascript"></script>');
 
 
@@ -354,7 +359,9 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                             //inserto el número de preguntas
 
                             $tabla_imagenes.='<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
-                        } else {
+                        
+
+                            } else {
                             //echo "akiiiiiiii";
                             $tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
 
@@ -518,7 +525,10 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                             //inserto el número de preguntas
 
                             $tabla_imagenes.='<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
-                        } else {
+                        
+
+                            
+                            } else {
                             //echo "akiiiiiiii podemos cambiar";
 
                             $tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
@@ -660,8 +670,10 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                             //inserto el número de preguntas
 
                             $tabla_imagenes.='<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
-                        } else {
-                            //echo "akiiiiiiii";
+                        
+
+                            
+                            } else {
                             $tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
 
                             for ($i = 1; $i <= sizeof($preguntas); $i++) {
@@ -819,8 +831,11 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                     //inserto el número de preguntas
 
                     $tabla_imagenes.='<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
-                } else {
-                    //echo "akiiiiiiii   3333";
+                
+
+                    
+                    } else {
+
                     $tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
 
                     for ($i = 1; $i <= sizeof($preguntas); $i++) {
@@ -978,14 +993,15 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                     }
 
                     $tabla_imagenes.='</table></center>';
-                    //echo"aki llega";
                     $tabla_imagenes.='<p class="numero" id="' . sizeof($preguntas) . '"></p>';
 
                     //inserto el número de preguntas
 
                     $tabla_imagenes.='<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
-                } else {
-                    //echo "akiiiiiiii podemos cambiar";
+                
+
+                    
+                    } else {
                     
                     $tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
                     //echo sizeof($preguntas);
@@ -1126,8 +1142,9 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                             //inserto el nÃºmero de preguntas
 
                             $tabla_imagenes.='<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
-                        } else {
-                            //echo "akiiiiiiii";
+                        
+                            
+                            } else {
                             $tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
 
                             for ($i = 1; $i <= sizeof($preguntas); $i++) {
@@ -1188,13 +1205,26 @@ class mod_ejercicios_mostrar_ejercicio_asociacion_simple extends moodleform_mod 
                 break;
         }
         
+        if ($buscar == 1 || $modificable == false) {
+                            $fuentes_aux = $ejercicios_leido->get('fuentes');
+                            $fuentes = genera_fuentes($fuentes_aux, "readonly");
+            
+                            $mform->addElement('html', $fuentes);
+        }
+        
         if ($buscar != 1 && $modificable == true) {
-                //Si soy el profesor creadors
+            //Si soy el profesor creador
+            
+            $fuentes_aux = $ejercicios_leido->get('fuentes');
+            
+            $fuentes = genera_fuentes($fuentes_aux, "");
+            
+            $mform->addElement('html', $fuentes);
                 $tabla_imagenes = '<center><input type="submit" style="margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
                 $tabla_imagenes.=$boton;
                 $tabla_imagenes.='<input type="button" style="" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
             } else {
-                if ($buscar == 1) { //Si estoy buscand
+                if ($buscar == 1) { //Si estoy buscando
                     $ejercicios_prof = new Ejercicios_prof_actividad();
                     $ejercicios_del_prof = $ejercicios_prof->obtener_uno_idejercicio($id_ejercicio);
                     if (sizeof($ejercicios_del_prof) == 0) {

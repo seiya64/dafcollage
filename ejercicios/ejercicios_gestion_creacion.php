@@ -15,6 +15,7 @@
   Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
   Simeón Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto(finamolinasoto@gmail.com)
+  Javier Castro Fernández (havidarou@gmail.com)
 
   Original idea:
   Ruth Burbat
@@ -47,8 +48,6 @@ require_once('clase_log.php');
 
 $id_curso = optional_param('id_curso', 0, PARAM_INT);
 $tipocreacion = optional_param('tipocreacion', 0, PARAM_INT);
-
-echo "tipocreacion" . $tipocreacion;
 
 $mform = new mod_ejercicios_creando_ejercicio($id_curso);
 $mform->pintarformulario($id_curso);
@@ -111,7 +110,7 @@ if ($error == '0') {
     
     
     //Si hemos elegido Texto - Texto
-    echo "tipo_pregunta" . $tipo_pregunta;
+    //echo "tipo_pregunta" . $tipo_pregunta;
     if ($tipo_pregunta == "Texto") {
 
         //Guardar el ejercicio en la BD
@@ -129,7 +128,7 @@ if ($error == '0') {
             if ($tipo_respuesta == "Audio") {
 
                 $TipoArchivoRespuesta = 2; //2 va a ser Audio
-                echo "tipo_respuesta audio";
+                //echo "tipo_respuesta audio";
             } else {
                 if ($tipo_respuesta == "Video") {
 
@@ -137,7 +136,7 @@ if ($error == '0') {
                 } else {
                     if ($tipo_respuesta == "Foto") {
                         $TipoArchivoRespuesta = 4; //4 va a ser Foto
-                        echo "Texto-Foto";
+                        //echo "Texto-Foto";
                     }
                 }
             }

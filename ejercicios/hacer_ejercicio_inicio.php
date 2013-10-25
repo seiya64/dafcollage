@@ -89,7 +89,7 @@ if ($mform->is_submitted()) { //Boton realizar (el boton buscar y crear estan en
                                  }else{
 
                                      if($ejercicio->get('tipoarchivorespuesta')==1 || $ejercicio->get('tipoarchivorespuesta')==3){ //La respuesta es una video
-                                         echo "entra";
+                                         //echo "entra";
                                        
                                           redirect("./view.php?opcion=8&id=".$id_curso.'&id_ejercicio='.$id_ejercicio.'&buscar=1&tipo_origen='.$ejercicio->get('tipoarchivopregunta').'&tr='.$ejercicio->get('tipoarchivorespuesta').'&tipocreacion='.$ejercicio->get('tipoactividad'));
 

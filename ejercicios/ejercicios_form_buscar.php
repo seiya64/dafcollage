@@ -416,7 +416,6 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod{
 
       
         $numencontrados=sizeof($buscados);
-        echo "numero encontrados".$numencontrados;
           $carpeta='<ul id="menuaux">';
          for($i=0;$i<$numencontrados;$i++){
     
