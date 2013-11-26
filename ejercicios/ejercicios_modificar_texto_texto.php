@@ -15,6 +15,7 @@
   Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
   Simeón Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto(finamolinasoto@gmail.com)
+  Javier Castro Fernández (havidarou@gmail.com)
 
  Original idea:
   Ruth Burbat
@@ -44,19 +45,29 @@ require_once("lib.php");
 require_once("ejercicios_clase_general.php");
 require_once("ejercicios_form_creacion.php");
 require_once("YoutubeVideoHelper.php");
+require_once("clase_log.php");
 
-$id_curso = optional_param('id_curso', 0, PARAM_INT);
+// Carga de datos almacenados en sesión y formulario
+$ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); 
+$carpeta = unserialize($_SESSION['cosasProfe']);
+$fuentes = optional_param('fuentes',PARAM_TEXT); 
+
+// Actualización del ejercicio general (se ha tenido que hacer así porque las fuentes fueron un añadido posterior)
+$ejercicioGeneral->set_fuentes($fuentes);
+$ejercicioGeneral->alterar();
+
 $id_ejercicio = optional_param('id_ejercicio', 0, PARAM_INT);
-$tipo_origen = optional_param('tipo_origen',0, PARAM_INT);
+$id_curso = optional_param('id_curso', 0, PARAM_INT);
+$tipocreacion = optional_param('tipocreacion', 0, PARAM_INT);
+//$id_ejercicio = optional_param('id_ejercicio', 0, PARAM_INT);
+$tipo_origen = optional_param('tipo_origen', 0, PARAM_INT);
 
 //Es llamado por ejercicios_form_mostrar.php
-
-$mform = new  mod_ejercicios_mostrar_ejercicio($id_curso,$id_ejercicio);
-$mform->mostrar_ejercicio($id_curso,$id_ejercicio);
+$mform = new  mod_ejercicios_mostrar_ejercicio($id,$p,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
+$mform->mostrar_ejercicio($id,$p,$id_ejercicio,$tipo_origen,$buscar);
 
 $num_preg= required_param('num_preg', PARAM_TEXT);
 
- 
 if(optional_param("submitbutton2")){ //boton para añadir a mis ejercicos visible desde la busqueda
      
     global $USER;

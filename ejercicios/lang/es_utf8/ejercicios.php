@@ -267,4 +267,5 @@ $string["aContinuacion"]="(a continuación puede añadir más preguntas)";
 $string["foto"]="Foto asociada";
 $string["audio"]="Audio asociado";
 $string["videoAsociado"]="Video asociado";
+$string["autoria"]="Ejercicio creado por";
 ?>

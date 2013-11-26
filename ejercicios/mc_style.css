@@ -38,49 +38,22 @@
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details. */
 
-#menuaux{
--moz-border-radius:5px;
--webkit-border-radius:5px;
-border-radius:5px;
--webkit-box-shadow:1px 1px 3px #888;
--moz-box-shadow:1px 1px 3px #888;
-background-color:#d6dfec;
 
-}
-#menuaux li{border-bottom:1px solid #fff; }
-#menuaux ul li, #menuaux li:last-child{border:none} 
-#classa{
-display:inline-block;
-text-decoration:none;
-font-family:'Helvetica', Arial, sans-serif;
-font-size:15px;
-padding:3px 5px;
-text-shadow:1px 1px 1px #000000;
-width:90%;
-}
-#menuaux #classa:hover{
-color:#d6dfec;
--webkit-transition: color 0.2s linear;
-}
-#menuaux ul #classa{
-    background-color:#F2F2F2;
-    -webkit-box-shadow:1px 1px 3px #888;
-    -moz-box-shadow:1px 1px 3px #888;
-    -webkit-border-radius:5px;
-    border-radius:5px;
-    width:90%;
-}
-#menuaux ul #classa:hover{
-color:#375d84;
-text-shadow:none;
--webkit-transition: color, background-color 0.2s linear;
-}
-#classul{
-display:inline-block;
-margin:0;
-padding:0;
-list-style:none;
+div.fitem {
+clear: both;
+width: 100%;
+min-height: 1.5em;
 }
 
-#menuaux li ul {display:none;}
+.mform div.felement, .mform fieldset.felement {
+display: block;
+float: none;
+margin: 5px 0 0 10px;
+padding: 0;
+text-align: left;
+width: 96%;
+}
 
+.mform .fitemtitle {
+text-align: left;
+}

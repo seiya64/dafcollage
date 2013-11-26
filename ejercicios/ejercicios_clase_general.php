@@ -219,7 +219,7 @@ class Ejercicios_general {
         $this->name = $ejer->name;
         $this->descripcion = $ejer->descripcion;
         $this->numpreg = $ejer->numpreg;
-         $this->copyrightpreg = $ejer->copyrightpreg;
+        $this->copyrightpreg = $ejer->copyrightpreg;
         $this->copyrightresp = $ejer->copyrightresp;
         $this->fuentes = $ejer->fuentes;
         return $this;

@@ -52,21 +52,17 @@ $tipocreacion = optional_param('tipocreacion', 0, PARAM_INT);
 $mform = new mod_ejercicios_creando_ejercicio($id_curso);
 $mform->pintarformulario($id_curso);
 
-
-
 $tipo_pregunta = optional_param('radiopregunta', PARAM_TEXT);
 $numeropreguntas = optional_param('numeropreguntas', 0, PARAM_INT);
 
 $log = new Log('log_gestion_creacion.txt');
 
-
 $error = optional_param('error', PARAM_TEXT);
 $log->write('error: ' . $error);
 
-if ($error == '0') {
+if ($error == '0') { // Solamente si no ha habido errores
 
-
-//Le sumo uno porque me coge los indices
+    // Se suma uno por los índices
     $numeropreguntas = $numeropreguntas + 1;
 
     switch($tipocreacion) {
@@ -200,8 +196,16 @@ if ($error == '0') {
 
     //  $descripcion=htmlspecialchars( mysql_real_escape_string($descripcion));
 
+    $carpeta = required_param('carpeta_ejercicio', PARAM_TEXT);
+    $_SESSION['cosasProfe'] = serialize($carpeta);
+    
     $ejercicio_general = new Ejercicios_general(NULL, $id_curso, $id_creador, $TipoActividad, $TipoArchivoPregunta, $TipoArchivoRespuesta, $visible, $privado, $carpeta, $CampoTematico, $Destreza, $TemaGramatical, $IntencionComunicativa, $TipologiaTextual, $name, $descripcion, $numeropreguntas, $copyrightpreg, $copyrightresp, $fuentes);
-
+    $ejercicio_general->insertar();
+    
+    // Y para el profesor tambien
+    //Tengo que asignarle el ejercicio al profesor 
+    $ejercicio_profesor = new Ejercicios_prof_actividad($ejercicio_general->get('id_curso'),$ejercicio_general->get('id_creador'),$ejercicio_general->get('id'),$carpeta);
+    $ejercicio_profesor->insertar();
     /* $id_ejercicio=$ejercicio_general->insertar();   
 
       //Tengo que asignarle el ejercico al profesor
@@ -213,19 +217,18 @@ if ($error == '0') {
     $_SESSION['ejercicioGeneral'] = serialize($ejercicio_general);
 
     // Cosas del profe a session tambien (necesita id_ejercicio)
-    $carpeta = required_param('carpeta_ejercicio', PARAM_TEXT);
-    $_SESSION['cosasProfe'] = serialize($carpeta);
+    
     
     //Meto en sesion el tipo de orden
     $_SESSION['tipoorden']=$tipoorden;
     
     $_SESSION['IERC']=$IERC_sesion;
 
-
+    $log->write($_SESSION);
     //La comprobacion de errores esta en el javascript
     //redirect('./view.php?id=' . $id_curso . '&opcion=7'. '&p='.$numeropreguntas. '&id_ejercicio=' .$id_ejercicio.'&tipo_origen='.$TipoArchivoPregunta."&tipocreacion=".$TipoActividad.'&tr='.$TipoArchivoRespuesta);
-    //La comprobacion de errores esta en el javascript
-    redirect('./view.php?id=' . $id_curso . '&opcion=7' . '&p=' . $numeropreguntas . '&tipo_origen=' . $TipoArchivoPregunta . "&tipocreacion=" . $TipoActividad . '&tr=' . $TipoArchivoRespuesta);
+
+    redirect('./view.php?id=' . $id_curso . '&opcion=7' . '&p=' . $numeropreguntas . '&tipo_origen=' . $TipoArchivoPregunta . "&tipocreacion=" . $TipoActividad . '&tr=' . $TipoArchivoRespuesta . '&id_ejercicio='.$ejercicio_general->get('id') . '&buscar='. 0);
 } else {
 
     redirect("view.php?id=" . $id_curso . "&opcion=5&tipocreacion=" . $tipocreacion);

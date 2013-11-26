@@ -48,19 +48,18 @@ require_once("clase_log.php");
 require_once("ejercicios_partes_comunes.php");
 
 
-/* Formulario generico de ejercicos de cualquier tipo de actidad
- * @author Serafina Molina Soto
- * Multichoice con sus variantes 1
- * Asocicacion simple 2
- * Asociacion complejo 3
+/* Formulario para el primer paso de creación de los ejercicios
+ * @author Serafina Molina Soto; Modificado Javier Castro Fernández
  */
-
-
 class mod_ejercicios_creando_ejercicio extends moodleform_mod {
 
     function mod_ejercicios_creando_ejercicio($id,$tipocreacion)
         {
-         // El fichero que procesa el formulario es gestion.php
+        /* // Comentarios añadidos por Javier Castro Fernández //
+         * Constructor de clase
+         * LLama al archivo ejercicios_gestion_creacion.php
+         * Se encarga de guardar el esqueleto del ejercicio en el primer paso de creación
+         */
          parent::moodleform('ejercicios_gestion_creacion.php?id_curso='.$id.'&tipocreacion='.$tipocreacion);
        }
        
@@ -114,7 +113,7 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
                 $title=get_string('FormularioCreacion', 'ejercicios');
                 break;
         }
-         //$titulo= '<h2>' . $title . '</h2>';
+        //$titulo= '<h2>' . $title . '</h2>';
         $creacion = get_string('Creacion', 'ejercicios');
         $log = new Log('pruebatitulo.txt');
         $log->write($creacion);
@@ -432,6 +431,7 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
             $carpetas = array();
             foreach ($prof_carpetas as $carp)   $carpetas[$carp->get('carpeta')] = $carp->get('carpeta');
             $log->write("longitud ". count($carpetas));
+            $crearcarpetas = false;
             if (count($carpetas) == 0) { // Si no hay carpetas creadas, arrancamos con el input
                 $crearcarpetas = true;
             }
@@ -487,6 +487,34 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
         
     }
 }
+
+
+/* *****************************************************************************************************
+ * *****************************************************************************************************
+ * *****************************************************************************************************
+ * *****************************************************************************************************
+ * *****************************************************************************************************
+ * *****************************************************************************************************
+ * *****************************************************************************************************
+ * *****************************************************************************************************
+ * *****************************************************************************************************
+ * *****************************************************************************************************
+ * *****************************************************************************************************
+ * ********************************** CÓDIGO EN VÍAS DE ELIMINACIÓN ************************************
+ * *****************************************************************************************************
+ * *****************************************************************************************************
+ * ********************************ELIMINACIÓN 2OS PASOS DE CREACIÓN************************************
+ * *****************************************************************************************************
+ * *****************************************************************************************************
+ * *****************************************************************************************************
+ * *****************************************************************************************************
+ * *****************************************************************************************************
+ * *****************************************************************************************************
+ * *****************************************************************************************************
+ * *****************************************************************************************************
+ * *****************************************************************************************************
+ * *****************************************************************************************************
+ */
 
 
 //Formulario de creación actividades de tipo: "MULTIPLECHOICE"

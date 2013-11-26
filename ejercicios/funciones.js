@@ -1253,10 +1253,12 @@ function botonCorregirMultiChoice(id_curso,npreg){
 
 
 function insertAfter(e,i){
-    if(e.nextSibling){
-        e.parentNode.insertBefore(i,e.nextSibling);
-    } else {
-        e.parentNode.appendChild(i);
+    if (e !== null && e.parentNode !== null){
+        if(e.nextSibling){
+            e.parentNode.insertBefore(i,e.nextSibling);
+        } else {
+            e.parentNode.appendChild(i);
+        }
     }
 }
 
@@ -1264,6 +1266,7 @@ function botonMasPreguntas(){
     //alert("añadiendo pregunta");
 
     divnumpreguntas = document.getElementById('num_preg');
+    console.log(divnumpreguntas);
     numeropreguntas=divnumpreguntas.value;
     //alert("numero actual es"+ numeropreguntas);
     anterior=document.getElementById('num_res_preg'+ numeropreguntas);

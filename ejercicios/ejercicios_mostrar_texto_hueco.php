@@ -15,6 +15,7 @@
   Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
   Simeón Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto(finamolinasoto@gmail.com)
+  Javier Castro Fernández (havidarou@gmail.com)
 
   Original idea:
   Ruth Burbat

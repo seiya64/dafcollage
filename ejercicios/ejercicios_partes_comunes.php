@@ -41,7 +41,7 @@
 
 
 
- function genera_titulos($titulo, $tipo_creacion,$id_curso) {
+ function genera_titulos($titulo, $tipo_creacion, $id_curso) {
     
     $cabecera = '<h1 id="h1" class="instrucciones"><span style="float:right;"><a style="font-size: 1.1em" id="id_cancellink" href="/moodle/mod/ejercicios/view.php?id='.$id_curso.'">'.get_string('Reset','ejercicios').'</a></span><div style="font-size:0.7em; height: 13px;"><i>'.$tipo_creacion.'</i></div><u style="
                 font-size: 0.9em;">'.$titulo.'</u></h1>';
@@ -63,6 +63,30 @@
     else {
         $label = '<h4>'.get_string('fuentes', 'ejercicios').'</h4> <textarea style="width:100%;" id="fuentes" name="fuentes" wrap="virtual" rows="5" cols="80">'. $fuentes.'</textarea>';      
     }
+    return $label;  
+ }
+ 
+  /**
+  * 
+  * Genera una descripción para los ejercicios (un tag <i> dentro de uno <div>)
+  * @author Javier Castro Fernández
+  * @param type $descripcion Texto con la descripción
+  * @return string -
+  */
+ function genera_descripcion($descripcion) {
+    $label = '<div style="font-size:1.2em" class=descover><i>' . nl2br((stripslashes($descripcion))) . '<br/></i></div>';
+    return $label;  
+ }
+ 
+ /**
+  * 
+  * Genera una descripción para la autoría de los ejercicios con el nombre del profesor
+  * @author Javier Castro Fernández
+  * @param type $autor Nombre del autor del ejercicio
+  * @return string -
+  */
+ function genera_autoria($autor) {
+    $label = '<div style="font-size:1.2em" class=descover><i><br/><b>'.get_string("autoria", "ejercicios"). " ". $autor->firstname . " " . $autor->lastname . '.<b><br/></i></div>';
     return $label;  
  }
 ?>

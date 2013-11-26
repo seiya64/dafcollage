@@ -260,6 +260,8 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
     
     
     $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
+    
+    
   
       switch ($op) {
         default:
@@ -271,39 +273,32 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
 	
            break;
 
-	case 5:// Pulsado botón crear por profesor en la Interfaz principal
-	   
-	
+	case 5:// Pulsado botón crear por profesor en la Interfaz Principal
 	   
             $mform= new  mod_ejercicios_creando_ejercicio($id);
-	    //Tipo creación indica el tipo, si es Elección multiple (0) o asociación simple (1)...etc
+	    //Tipo creación indica el tipo, si es multiple choice (0), asociación simple (1), etc
             $mform->pintarformulario($id,$tipocreacion);
             break;
 
-	case 7:// Segundo paso del formulario de creación caso texto-texto
+	case 7:// Segundo paso de creación de los ejercicios
 
             switch($tipocreacion){
 
-                case 0: //es de tipo multichoice
-                    $mform= new mod_ejercicios_creando_ejercicio_texto($id,$p,$id_ejercicio,$tipo_origen,$tipocreacion);
-                    $mform->pintarformulariotexto($id,$p,$id_ejercicio,$tipo_origen,$tipocreacion);
+                case 0: // Multiple Choice
+                    $mform= new mod_ejercicios_mostrar_ejercicio($id,$p,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
+                    $mform->mostrar_ejercicio($id,$p,$id_ejercicio,$tipo_origen,0);
                     break;
-                case 1: //es de tipo asociacion simple
-                    
-                    ////echo "Asociación simple";
+                 
+                case 1: // Asociación Simple
+                    $mform= new mod_ejercicios_creando_ejercicio_asociacion_simple($id,$p,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
+                    $mform->pintarformularioasociacionsimple($id,$p,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
+                    break;
                 
-                   $mform= new mod_ejercicios_creando_ejercicio_asociacion_simple($id,$p,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
-                    
-                   $mform->pintarformularioasociacionsimple($id,$p,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
-                    //echo "akiii";
-                   
-                    break;
-               case 2: //es de tipo asociacion multiple
-
-                    //echo "Asociación multiple";
+               case 2: // Asociación Múltiple
                     $mform = new mod_ejercicios_creando_ejercicio_asociacion_multiple($id,$p,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
                     $mform->pintarformularioasociacionmultiple($id,$p,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
                     break;
+                
                 case 4: //Identificar elementos
                     //echo "Identificar elementos";
                     $mform = new mod_ejercicios_creando_ejercicio_identificar_elementos($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
@@ -311,7 +306,9 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
                     break;
                 case 3: //Texto Hueco
                     //echo "Texto Hueco";
-                    $mform = new mod_ejercicios_creando_ejercicio_texto_hueco($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
+                    $mform= new mod_ejercicios_mostrar_ejercicio($id,$p,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
+                    $mform->mostrar_ejercicio($id,$p,$id_ejercicio,$tipo_origen,0);
+                    $mform = new mod_ejercicios_mostrar_ejercicio_texto_hueco($id,$p,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
                     $mform->pintarformulariotextohueco($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
                     break;
                 case 7: //Ordenar Elementos
@@ -324,34 +321,25 @@ function ejercicios_vista($id, $op = 0,$error=-1,$name_ej,$tipo,$tipocreacion,$p
                     $mform->pintarformulario_identificarelementos($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
                     break;
             }
-           
             break;
 
       case 6:// Pulsado botón Buscar tanto por alumno como por profesor
-
-             //echo "id del curso".$id;
-             //echo "tipo de actividad".$cta;
-             //echo "campo lexico".$ccl;
-             
-
-             $mform= new mod_ejercicios_mostrar_ejercicios_buscados($id);
-             $mform->mostrar_ejercicios_buscados($id,$ccl,$cta,$cdc,$cgr,$cic,$ctt);
+          
+            $mform= new mod_ejercicios_mostrar_ejercicios_buscados($id);
+            $mform->mostrar_ejercicios_buscados($id,$ccl,$cta,$cdc,$cgr,$cic,$ctt);
             break;
 
       case 8:// Mostrando ejercicios a profesores o a alumnos
-          $ejercicios_bd = new Ejercicios_general();
+            $ejercicios_bd = new Ejercicios_general();
             $ejercicios_leido = $ejercicios_bd->obtener_uno($id_ejercicio);
-          //echo "hasta aquí sí llego";
             $tipocreacion = $ejercicios_leido->get('tipoactividad');
-            //echo "tipocreacionalcambiares es:".$tipocreacion;
-             //echo "mostrando ejerciciossssss".$tipocreacion;
+
             switch($tipocreacion){
-                
-                    case 0: //Multichoice texto-texto a profesores o a alumnos
-                        //echo "mostrando multichoice texto-texto";
-                     $mform= new mod_ejercicios_mostrar_ejercicio($id,$id_ejercicio,$tipo_origen);
-                     $mform->mostrar_ejercicio($id,$id_ejercicio,$buscar,$tipo_origen);
-                        //echo "mostrando ejercicio multichoice";
+                    
+                    case 0: //Multichoice texto-texto a profesores o a alumnos          
+                     $mform= new mod_ejercicios_mostrar_ejercicio($id,$p,$id_ejercicio,$tipo_origen,$trespuesta,$tipocreacion);
+                     $mform->mostrar_ejercicio($id,$p,$id_ejercicio,$tipo_origen, 1);
+                     
                     break;
                     case 1: // si es asociacion simple
 

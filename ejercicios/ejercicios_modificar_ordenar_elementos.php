@@ -20,6 +20,8 @@
   Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
   Simeón Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto(finamolinasoto@gmail.com)
+  Javier Castro Fernández (havidarou@gmail.com)
+  Ángel Biedma Mesa (tekeiro@gmail.com)
 
   Original idea:
   Ruth Burbat
@@ -56,15 +58,10 @@ $tipo_origen = optional_param('tipo_origen', 0, PARAM_INT);
 $tipo_respuesta = optional_param('tr', 0, PARAM_INT);
 $tipo_creacion = optional_param('tipocreacion', 0, PARAM_INT);
 
-ECHO "MODIFICANDO";
-
 $mform = new mod_ejercicios_mostrar_ejercicio_ordenar_elementos($id_curso, $id_ejercicio, $tipo_origen, $tipo_respuesta, $tipo_creacion);
 $mform->mostrar_ejercicio_ordenar_elementos($id_curso, $id_ejercicio, 0, $tipo_origen, $tipo_respuesta, $tipo_creacion);
 
 $numeropreguntas = optional_param('num_preg', 0, PARAM_INT);
-
-echo "El numero de pregunas es" . $numeropreguntas;
-
 
 $ejercicio_general = new Ejercicios_general();
      $miejercicio=$ejercicio_general->obtener_uno($id_ejercicio);
