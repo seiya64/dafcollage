@@ -631,205 +631,8 @@ $(document).ready(function(){
         
     }
     
-
-    /*var correcto=new Array();
-    var puesto=new Array();
-    
-    $numimagen = $(".numero").attr('id');
-    
-    for(i=0;i<=parseInt($numimagen);i++){
-        correcto[i]=false;
-        puesto[i]=false;
-    }
-     
-
-    $('.item').draggable({
-        helper: 'clone'
-    });
-    $('.marquito').droppable( {
-        drop: handleDropEvent
-    } );
-  
-
-
-    function handleDropEvent( event, ui ) {
-        var draggable = ui.draggable;
-        alert( 'The square with ID "' + draggable.attr('id') + '" was dropped onto "'+$(this).attr('id')+ '"!' );
-        if( ($( this ).find( ".item" ).length)==0){
-            $(this).append($(ui.draggable));
-  
-           
  
-
-            var Idimagen = $(ui.draggable).attr('id');
-            var Idmarquito = $(this).attr('id');
-            alert("idmgen"+Idimagen);
-            alert("idmarquito"+Idmarquito);
-            if(Idimagen == Idmarquito){
-                correcto[Idimagen]=true;
-                puesto[Idimagen]=true;
-
-            }else{
-                correcto[Idimagen]=false;
-                puesto[Idimagen]=true;
-            }
-
-        
-        }
-
-    }*/
-
-//
-//   
-//
-//    $("#botonNA").click(function () {
-//        alert("añadiendooooooo asociacion");
-//        num_preg=document.getElementById('num_preg');
-//        alert("eL numero de preguntas es"+num_preg.value);
-//        sig_preg=parseInt(num_preg.value)+1;
-//
-//        alert("aki llega");
-//
-//        //obtengo la tabla donde lo voy a insertar
-//        tabla_insertar = document.getElementById('tablarespuestas');
-//        alert(tabla_insertar);
-//        tbody_insertar = tabla_insertar.lastChild;
-//        alert(tbody_insertar);
-//        //Para el texto
-//        tabla_nuevotr = document.createElement('tr');
-//        tabla_nuevotd = document.createElement('td');
-//        tabla_nuevotd.id="texto"+sig_preg;
-//        textarea = document.createElement('textarea');
-//        textarea.id="pregunta"+sig_preg;
-//        textarea.name="pregunta"+sig_preg;
-//        textarea.setAttribute("style","height: 197px; width: 396px;");
-//        textarea.appendChild(document.createTextNode("Nuevo Texto"));
-//        alert("insertado el texto");
-//
-//        //Para el texto asociado
-//
-//
-//        tabla_nuevotd1 = document.createElement('td');
-//
-//        textarea1 = document.createElement('textarea');
-//        textarea1.id="respuesta"+sig_preg;
-//        textarea1.name="respuesta"+sig_preg;
-//        textarea1.setAttribute("class","descripcion");
-//        textarea1.setAttribute("style","height: 192px; width: 401px;");
-//        textarea1.appendChild(document.createTextNode("Nuevo Texto Asociado"));
-//
-//
-//        tabla_nuevotd.appendChild(textarea);
-//        tabla_nuevotd1.appendChild(textarea1);
-//        tabla_nuevotr.appendChild(tabla_nuevotd);
-//        tabla_nuevotr.appendChild(tabla_nuevotd1);
-//        tbody_insertar.appendChild(tabla_nuevotr);
-//
-//
-//        //Actualizo el número de preguntas a 1 mas
-//
-//        num_preg.value=sig_preg;
-//    });
-
-
-
-//    $("#botonNA").click(function () {
-//        alert("añadiendooooooo asociacion");
-//        num_preg=document.getElementById('num_preg');
-//        alert("eL numero de preguntas es"+num_preg.value);
-//        sig_preg=parseInt(num_preg.value)+1;
-//
-//        alert("aki llega");
-//
-//        //obtengo la tabla donde lo voy a insertar
-//        tabla_insertar = document.getElementById('tablarespuestas');
-//        alert(tabla_insertar);
-//        tbody_insertar = tabla_insertar.lastChild;
-//        alert(tbody_insertar);
-//        //Para el texto
-//        tabla_nuevotr = document.createElement('tr');
-//        tabla_nuevotd = document.createElement('td');
-//        tabla_nuevotd.id="texto"+sig_preg;
-//        textarea = document.createElement('textarea');
-//        textarea.id="pregunta"+sig_preg;
-//        textarea.name="pregunta"+sig_preg;
-//        textarea.setAttribute("style","height: 197px; width: 396px;");
-//        textarea.appendChild(document.createTextNode("Nuevo Texto"));
-//        alert("insertado el texto");
-//            
-//        //Para el texto asociado
-//
-//         
-//        tabla_nuevotd1 = document.createElement('td');
-//            
-//        textarea1 = document.createElement('textarea');
-//        textarea1.id="respuesta"+sig_preg;
-//        textarea1.name="respuesta"+sig_preg;
-//        textarea1.setAttribute("class","descripcion");
-//        textarea1.setAttribute("style","height: 192px; width: 401px;");
-//        textarea1.appendChild(document.createTextNode("Nuevo Texto Asociado"));
-//
-//            
-//        tabla_nuevotd.appendChild(textarea);
-//        tabla_nuevotd1.appendChild(textarea1);
-//        tabla_nuevotr.appendChild(tabla_nuevotd);
-//        tabla_nuevotr.appendChild(tabla_nuevotd1);
-//        tbody_insertar.appendChild(tabla_nuevotr);
-//
-//
-//        //Actualizo el número de preguntas a 1 mas
-//
-//        num_preg.value=sig_preg;
-//    });
-
     
-    /*$("#botonResultado").click(function () {
-
-                 
-        $puestos=0;
-        for(i=1;i<=parseInt($numimagen);i++){
-            if (puesto[i]==true){
-                $puestos++;
-            }
-        }
-      
-        if ($puestos==$numimagen) {
-            alert("puestos todos");
-            for(i=1;i<=parseInt($numimagen);i++){
-                alert(correcto[i]);
-                if (correcto[i]==true){
-                    
-                    variable="#aceptado"+i;
-                    $(variable).html( '<img style="margin-top: 20px; margin-left: 20px;" src="./imagenes/correcto.png"/>');
-                }else{
-                    variable="#aceptado"+i;
-                    $(variable).html( '<img style="margin-top: 20px; margin-left: 20px;" src="./imagenes/incorrecto.png"/>');
-                }
-            }
-
-
-        }else{
-            alert("Debe rellenar todos los campos");
-                       
-        }
-
-    });
- 
-    $('#menuaux li #classa').click(function(event){
-       
-        var elem = $(this).next().next();
-   
-        if(elem.is('ul')){
-           
-            event.preventDefault(event);
-         
-            $('#menuaux ul:visible').not(elem).slideUp();
-           
-            elem.slideToggle();
-        }
-    });*/
-
-
 });
   
 
@@ -7583,3 +7386,18 @@ function form_creacion_nueva_carpeta(obj) {
         $(obj).attr('name','carpeta_ejercicio');
     }
 }
+
+function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(200);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+ }

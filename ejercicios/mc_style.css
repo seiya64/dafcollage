@@ -56,4 +56,6 @@ width: 96%;
 
 .mform .fitemtitle {
 text-align: left;
+width: inherit;
+margin: 0;
 }

@@ -63,9 +63,10 @@ class Ejercicios_general {
     var $copyrightpreg;
     var $copyrightresp;
     var $fuentes;
+    var $fotoAsociada;
 
     //Contructor
-    function Ejercicios_general($id = NULL, $id_curso = NULL, $id_creador = NULL, $tipoactividad = NULL, $tipoarchivopregunta = NULL, $tipoarchivorespuesta = NULL, $visible = NULL, $publico = NULL, $carpeta = NULL, $campotematico = NULL, $destreza = NULL, $temagramatical = NULL, $intencioncomunicativa = NULL, $tipologiatextual = NULL, $name = NULL, $descripcion = NULL, $numpreg = NULL,$copyrightpreg=NULL,$copyrightresp=NULL, $fuentes=NULL) {
+    function Ejercicios_general($id = NULL, $id_curso = NULL, $id_creador = NULL, $tipoactividad = NULL, $tipoarchivopregunta = NULL, $tipoarchivorespuesta = NULL, $visible = NULL, $publico = NULL, $carpeta = NULL, $campotematico = NULL, $destreza = NULL, $temagramatical = NULL, $intencioncomunicativa = NULL, $tipologiatextual = NULL, $name = NULL, $descripcion = NULL, $numpreg = NULL,$copyrightpreg=NULL,$copyrightresp=NULL, $fuentes=NULL, $fotoAsociada=NULL) {
 
 
         $this->id = $id;
@@ -88,6 +89,7 @@ class Ejercicios_general {
         $this->copyrightpreg=$copyrightpreg;
         $this->copyrightresp=$copyrightresp;
         $this->fuentes=$fuentes;
+        $this->fotoAsociada=$fotoAsociada;
        
     }
 
@@ -132,6 +134,9 @@ class Ejercicios_general {
             case 'tipologiatextual':
                 return $this->tipologiatextual;
                 break;
+            case 'publico':
+                return $this->publico;
+                break;
             case 'name':
                 return $this->name;
                 break;
@@ -149,6 +154,9 @@ class Ejercicios_general {
                 break;
             case 'fuentes':
                 return $this->fuentes;
+                break;
+            case 'fotoAsociada':
+                return $this->fotoAsociada;
                 break;
         }
     }
@@ -175,6 +183,36 @@ class Ejercicios_general {
       */
      function set_fuentes($param) {
          $this->fuentes=$param;
+     }
+     
+     /**
+      * 
+      * Cambia el atributo foto asociada de la clase por otro proporcionado por el usuario
+      * @author Javier Castro Fernández
+      * @param type $param
+      */
+     function set_foto($param) {
+         $this->fotoAsociada=$param;
+     }
+     
+     /**
+      * 
+      * Cambia el atributo visible de la clase por otro proporcionado por el usuario
+      * @author Javier Castro Fernández
+      * @param type $param
+      */
+     function set_visibilidad($param) {
+         $this->visible=$param;
+     }
+     
+     /**
+      * 
+      * Cambia el atributo privado de la clase por otro proporcionado por el usuario
+      * @author Javier Castro Fernández
+      * @param type $param
+      */
+     function set_privacidad($param) {
+         $this->publico=$param;
      }
 
     function insertar() {
@@ -222,6 +260,7 @@ class Ejercicios_general {
         $this->copyrightpreg = $ejer->copyrightpreg;
         $this->copyrightresp = $ejer->copyrightresp;
         $this->fuentes = $ejer->fuentes;
+        $this->fotoAsociada = $ejer->fotoAsociada;
         return $this;
     }
 
@@ -248,6 +287,7 @@ class Ejercicios_general {
         $this->copyrightpreg = $ejer->copyrightpreg;
         $this->copyrightresp = $ejer->copyrightresp;
         $this->fuentes = $ejer->fuentes;
+        $this->fotoAsociada = $ejer->fotoAsociada;
         return $this;
     }
 

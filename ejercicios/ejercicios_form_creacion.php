@@ -391,6 +391,9 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
             $mform->addRule('descripcion', get_string('descripcionNecesaria', 'ejercicios'), 'required', null, 'client');
             //botones
             
+            
+         
+            
             switch ($tipocreacion) {
                 // Identificar elementos más respuesta corta
                 case 10:
@@ -406,20 +409,7 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
                     
                     break;
             }
-            
-           $radioarray=array();
-           $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiovisible', '', "Si","Si", null);
-           $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiovisible', '', "No", "No", null);
-              
-           $mform->addGroup($radioarray, 'radiovisible',  get_string('visible', 'ejercicios'), array(' '), false);
-           $mform->setDefault('radiovisible',"Si");
            
-           $radioarray=array();
-           $radioarray[] = &MoodleQuickForm::createElement('radio', 'radioprivado', '', "Si","Si", null);
-           $radioarray[] = &MoodleQuickForm::createElement('radio', 'radioprivado', '', "No", "No", null);
-              
-           $mform->addGroup($radioarray, 'radioprivado',  get_string('publico', 'ejercicios'), array(' '), false);
-           $mform->setDefault('radioprivado',"Si");
            
            
             $attributes='onchange="form_creacion_nueva_carpeta(this)"';

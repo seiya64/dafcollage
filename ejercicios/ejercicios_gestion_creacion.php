@@ -159,7 +159,7 @@ if ($error == '0') { // Solamente si no ha habido errores
         }
     }
 
-
+    /* Pasado al segundo paso de creación, revisión de código más adelante -- Javier Castro Fernández
     if (optional_param('radiovisible', PARAM_TEXT) == "Si") {
         $visible = 1;
     } else {
@@ -170,7 +170,7 @@ if ($error == '0') { // Solamente si no ha habido errores
     } else {
         $privado = 0;
     }
-
+    */
     $CampoTematico = optional_param('campoid', PARAM_INT);
 
     $Destreza = optional_param('DestrezaComunicativa', PARAM_INT);
@@ -199,13 +199,10 @@ if ($error == '0') { // Solamente si no ha habido errores
     $carpeta = required_param('carpeta_ejercicio', PARAM_TEXT);
     $_SESSION['cosasProfe'] = serialize($carpeta);
     
-    $ejercicio_general = new Ejercicios_general(NULL, $id_curso, $id_creador, $TipoActividad, $TipoArchivoPregunta, $TipoArchivoRespuesta, $visible, $privado, $carpeta, $CampoTematico, $Destreza, $TemaGramatical, $IntencionComunicativa, $TipologiaTextual, $name, $descripcion, $numeropreguntas, $copyrightpreg, $copyrightresp, $fuentes);
-    $ejercicio_general->insertar();
+    $ejercicio_general = new Ejercicios_general(NULL, $id_curso, $id_creador, $TipoActividad, $TipoArchivoPregunta, $TipoArchivoRespuesta, 0, 0, $carpeta, $CampoTematico, $Destreza, $TemaGramatical, $IntencionComunicativa, $TipologiaTextual, $name, $descripcion, $numeropreguntas, $copyrightpreg, $copyrightresp, $fuentes);
     
     // Y para el profesor tambien
     //Tengo que asignarle el ejercicio al profesor 
-    $ejercicio_profesor = new Ejercicios_prof_actividad($ejercicio_general->get('id_curso'),$ejercicio_general->get('id_creador'),$ejercicio_general->get('id'),$carpeta);
-    $ejercicio_profesor->insertar();
     /* $id_ejercicio=$ejercicio_general->insertar();   
 
       //Tengo que asignarle el ejercico al profesor
@@ -218,11 +215,17 @@ if ($error == '0') { // Solamente si no ha habido errores
 
     // Cosas del profe a session tambien (necesita id_ejercicio)
     
-    
     //Meto en sesion el tipo de orden
     $_SESSION['tipoorden']=$tipoorden;
     
     $_SESSION['IERC']=$IERC_sesion;
+
+    foreach ($_FILES as $name => $values) { // Ruta de la imagen asociada
+        $_SESSION['fotoAsociada']=$values['tmp_name'];
+        if (move_uploaded_file($values['tmp_name'], $CFG->dataroot.$values['tmp_name'])) {
+            //echo 'El archivo ha sido subido correctamente.<br/>'; 
+        }
+    }
 
     $log->write($_SESSION);
     //La comprobacion de errores esta en el javascript

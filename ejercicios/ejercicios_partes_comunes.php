@@ -86,7 +86,48 @@
   * @return string -
   */
  function genera_autoria($autor) {
-    $label = '<div style="font-size:1.2em" class=descover><i><br/><b>'.get_string("autoria", "ejercicios"). " ". $autor->firstname . " " . $autor->lastname . '.<b><br/></i></div>';
+    $label = '<div style="font-size:1.2em" class=descover><i><br/><b>'.get_string("autoria", "ejercicios"). " ". $autor->firstname . " " . $autor->lastname . '<b><br/></i></div>';
+    return $label;  
+ }
+ 
+  /**
+  * 
+  * Imagen y referencia a la licencia
+  * @author Javier Castro Fernández
+  * @param type $tipoLicencia Nombre del autor del ejercicio
+  * @return string -
+  */
+ function genera_licencia($tipoLicencia) {
+     
+     switch ($tipoLicencia) {
+         case 1: //"cc-by"
+             $ref = "http://creativecommons.org/licenses/by/4.0";
+             $licenciaConLetra = "cc-by";
+             break;
+         case 2: //"cc-by-sa"
+             $ref = "http://creativecommons.org/licenses/by-sa/4.0";
+             $licenciaConLetra = "cc-by-sa";
+             break;
+         case 3: //"cc-by-nd"
+             $ref = "http://creativecommons.org/licenses/by-nd/4.0";
+             $licenciaConLetra = "cc-by-nd";
+             break;
+         case 4: //"cc-by-nc"
+             $ref = "http://creativecommons.org/licenses/by-nc/4.0";
+             $licenciaConLetra = "cc-by-nc";
+             break;
+         case 5: //"cc-by-nc-sa"
+             $ref = "http://creativecommons.org/licenses/by-nc-sa/4.0";
+             $licenciaConLetra = "cc-by-nc-sa";
+             break;
+         case 6: //"cc-by-nc-nd"
+             $ref = "http://creativecommons.org/licenses/by-nc-nd/4.0";
+             $licenciaConLetra = "cc-by-nc-nd";
+             break;
+         default:
+             $ref = get_string("licenciaGenerada", "ejercicios");
+     }
+    $label = '<a href="'.$ref.'" target="_blank"><img id="imglicencia" src="./imagenes/'.$licenciaConLetra.'.png"   alt="'.get_string("altLicencia", "ejercicios").'"></img></a><br/>';
     return $label;  
  }
 ?>

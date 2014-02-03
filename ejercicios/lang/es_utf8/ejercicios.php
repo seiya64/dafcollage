@@ -268,4 +268,7 @@ $string["foto"]="Foto asociada";
 $string["audio"]="Audio asociado";
 $string["videoAsociado"]="Video asociado";
 $string["autoria"]="Ejercicio creado por";
+$string["licenciaGenerada"]="Licencia no válida";
+$string["altLicencia"]="Imagen de la licencia";
+$string["fotoAsociada"]="Imagen asociada al ejercicio (opcional)"
 ?>
