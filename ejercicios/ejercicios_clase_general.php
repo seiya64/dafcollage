@@ -63,10 +63,10 @@ class Ejercicios_general {
     var $copyrightpreg;
     var $copyrightresp;
     var $fuentes;
-    var $fotoAsociada;
+    var $foto_asociada;
 
     //Contructor
-    function Ejercicios_general($id = NULL, $id_curso = NULL, $id_creador = NULL, $tipoactividad = NULL, $tipoarchivopregunta = NULL, $tipoarchivorespuesta = NULL, $visible = NULL, $publico = NULL, $carpeta = NULL, $campotematico = NULL, $destreza = NULL, $temagramatical = NULL, $intencioncomunicativa = NULL, $tipologiatextual = NULL, $name = NULL, $descripcion = NULL, $numpreg = NULL,$copyrightpreg=NULL,$copyrightresp=NULL, $fuentes=NULL, $fotoAsociada=NULL) {
+    function Ejercicios_general($id = NULL, $id_curso = NULL, $id_creador = NULL, $tipoactividad = NULL, $tipoarchivopregunta = NULL, $tipoarchivorespuesta = NULL, $visible = NULL, $publico = NULL, $carpeta = NULL, $campotematico = NULL, $destreza = NULL, $temagramatical = NULL, $intencioncomunicativa = NULL, $tipologiatextual = NULL, $name = NULL, $descripcion = NULL, $numpreg = NULL,$copyrightpreg=NULL,$copyrightresp=NULL, $fuentes=NULL, $foto_asociada=NULL) {
 
 
         $this->id = $id;
@@ -89,7 +89,7 @@ class Ejercicios_general {
         $this->copyrightpreg=$copyrightpreg;
         $this->copyrightresp=$copyrightresp;
         $this->fuentes=$fuentes;
-        $this->fotoAsociada=$fotoAsociada;
+        $this->foto_asociada=$foto_asociada;
        
     }
 
@@ -155,8 +155,8 @@ class Ejercicios_general {
             case 'fuentes':
                 return $this->fuentes;
                 break;
-            case 'fotoAsociada':
-                return $this->fotoAsociada;
+            case 'foto_asociada':
+                return $this->foto_asociada;
                 break;
         }
     }
@@ -192,7 +192,7 @@ class Ejercicios_general {
       * @param type $param
       */
      function set_foto($param) {
-         $this->fotoAsociada=$param;
+         $this->foto_asociada=$param;
      }
      
      /**
@@ -260,7 +260,7 @@ class Ejercicios_general {
         $this->copyrightpreg = $ejer->copyrightpreg;
         $this->copyrightresp = $ejer->copyrightresp;
         $this->fuentes = $ejer->fuentes;
-        $this->fotoAsociada = $ejer->fotoAsociada;
+        $this->foto_asociada = $ejer->foto_asociada;
         return $this;
     }
 
@@ -287,7 +287,7 @@ class Ejercicios_general {
         $this->copyrightpreg = $ejer->copyrightpreg;
         $this->copyrightresp = $ejer->copyrightresp;
         $this->fuentes = $ejer->fuentes;
-        $this->fotoAsociada = $ejer->fotoAsociada;
+        $this->foto_asociada = $ejer->foto_asociada;
         return $this;
     }
 

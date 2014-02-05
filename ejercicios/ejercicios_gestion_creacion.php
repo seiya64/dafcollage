@@ -193,13 +193,14 @@ if ($error == '0') { // Solamente si no ha habido errores
         $copyrightresp=0;
     }*/
     $copyrightresp=0;
+    $foto_asociada = -1;
 
     //  $descripcion=htmlspecialchars( mysql_real_escape_string($descripcion));
 
     $carpeta = required_param('carpeta_ejercicio', PARAM_TEXT);
     $_SESSION['cosasProfe'] = serialize($carpeta);
     
-    $ejercicio_general = new Ejercicios_general(NULL, $id_curso, $id_creador, $TipoActividad, $TipoArchivoPregunta, $TipoArchivoRespuesta, 0, 0, $carpeta, $CampoTematico, $Destreza, $TemaGramatical, $IntencionComunicativa, $TipologiaTextual, $name, $descripcion, $numeropreguntas, $copyrightpreg, $copyrightresp, $fuentes);
+    $ejercicio_general = new Ejercicios_general(NULL, $id_curso, $id_creador, $TipoActividad, $TipoArchivoPregunta, $TipoArchivoRespuesta, 0, 0, $carpeta, $CampoTematico, $Destreza, $TemaGramatical, $IntencionComunicativa, $TipologiaTextual, $name, $descripcion, $numeropreguntas, $copyrightpreg, $copyrightresp, $fuentes, $foto_asociada);
     
     // Y para el profesor tambien
     //Tengo que asignarle el ejercicio al profesor 
@@ -226,7 +227,7 @@ if ($error == '0') { // Solamente si no ha habido errores
             //echo 'El archivo ha sido subido correctamente.<br/>'; 
         }
     }
-
+        
     $log->write($_SESSION);
     //La comprobacion de errores esta en el javascript
     //redirect('./view.php?id=' . $id_curso . '&opcion=7'. '&p='.$numeropreguntas. '&id_ejercicio=' .$id_ejercicio.'&tipo_origen='.$TipoArchivoPregunta."&tipocreacion=".$TipoActividad.'&tr='.$TipoArchivoRespuesta);
