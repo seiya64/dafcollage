@@ -170,7 +170,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $mform->addElement('html', $autoria);
         
         $imagenLicencia = genera_licencia($licencia);
-        $mform->addElement('html', $imagenLicencia);
+        $mform->addElement('html', $imagenLicencia);   
         
         $radioarray = array();
         $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiovisible', '', "Si", "Si", null);

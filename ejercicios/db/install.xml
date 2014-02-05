@@ -75,6 +75,7 @@
         <FIELD NAME="copyrightpreg" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="copyright de los archivos preguntas" PREVIOUS="numpreg" NEXT="copyrightresp"/>
         <FIELD NAME="copyrightresp" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="copyright de los archivos respuesta" PREVIOUS="copyrightpreg" NEXT="fuentes"/>
         <FIELD NAME="fuentes" TYPE="char" LENGTH="255" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="Fuentes del ejercicio" PREVIOUS="copyrightresp"/>
+        <FIELD NAME="fotoAsociada" TYPE="char" LENGTH="255" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" ENUM="false" COMMENT="Foto asociada al ejercicio" PREVIOUS="fuentes"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id" />
