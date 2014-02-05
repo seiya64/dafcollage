@@ -74,9 +74,6 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $ejercicio_general = unserialize($_SESSION['ejercicioGeneral']);
         $carpeta = unserialize($_SESSION['cosasProfe']);
         
-        // Identificador del ejercicio para la foto asociada. A la espera de una mejor solución.
-        $mform->addElement('html', '<input id="idFoto" type="hidden" value="temporal">');
-        
         // Se obtienen los datos del ejercicio a partir de los datos almacenados en sesión
         // Hay que tener en cuenta que parte de los datos del ejercicioGeneral se van a rellenar en este paso
         // debido a añadidos posteriores (las fuentes y la imagen asociada)
@@ -88,6 +85,9 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $licencia = $ejercicio_general->get("copyrightpreg");
         $visible = $ejercicio_general->get("visible");
         $publico = $ejercicio_general->get("publico");
+        
+        // Identificador del ejercicio para la foto asociada. A la espera de una mejor solución.
+        $mform->addElement('html', '<input id="idFoto" type="hidden" value="temporal'.$creador.'">');
         
         // Se imprime el título del ejercicio
         $titulo = genera_titulos($nombre, get_string('Tipo2', 'ejercicios'), $id);

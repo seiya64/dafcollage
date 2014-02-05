@@ -202,16 +202,6 @@ if ($error == '0') { // Solamente si no ha habido errores
     
     $ejercicio_general = new Ejercicios_general(NULL, $id_curso, $id_creador, $TipoActividad, $TipoArchivoPregunta, $TipoArchivoRespuesta, 0, 0, $carpeta, $CampoTematico, $Destreza, $TemaGramatical, $IntencionComunicativa, $TipologiaTextual, $name, $descripcion, $numeropreguntas, $copyrightpreg, $copyrightresp, $fuentes, $foto_asociada);
     
-    // Y para el profesor tambien
-    //Tengo que asignarle el ejercicio al profesor 
-    /* $id_ejercicio=$ejercicio_general->insertar();   
-
-      //Tengo que asignarle el ejercico al profesor
-      $carpeta=required_param('carpeta_ejercicio', PARAM_TEXT);
-      $ejercicio_profesor = new Ejercicios_prof_actividad($id,$id_creador,$id_ejercicio,$carpeta);
-
-      $ejercicio_profesor->insertar(); */
-    // $id_ejercicio=$ejercicio_general->insertar(); Sustituido por la linea de abajo
     $_SESSION['ejercicioGeneral'] = serialize($ejercicio_general);
 
     // Cosas del profe a session tambien (necesita id_ejercicio)
@@ -229,9 +219,8 @@ if ($error == '0') { // Solamente si no ha habido errores
     }
         
     $log->write($_SESSION);
-    //La comprobacion de errores esta en el javascript
-    //redirect('./view.php?id=' . $id_curso . '&opcion=7'. '&p='.$numeropreguntas. '&id_ejercicio=' .$id_ejercicio.'&tipo_origen='.$TipoArchivoPregunta."&tipocreacion=".$TipoActividad.'&tr='.$TipoArchivoRespuesta);
-
+    
+    //La comprobacion de errores esta en Javascript
     redirect('./view.php?id=' . $id_curso . '&opcion=7' . '&p=' . $numeropreguntas . '&tipo_origen=' . $TipoArchivoPregunta . "&tipocreacion=" . $TipoActividad . '&tr=' . $TipoArchivoRespuesta . '&id_ejercicio='.$ejercicio_general->get('id') . '&buscar='. 0);
 } else {
 
