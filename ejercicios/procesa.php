@@ -1,4 +1,5 @@
 <?php
+
 $fichero = @fopen("log_procesa.txt","w");
 $log = "llega\n";
 $nombre=$_GET['nombre'];
@@ -10,7 +11,7 @@ $log.= "Nombre: ".$nombre . "\n";
     fwrite($fichero,$log,strlen($log)); $log="";
     if(isset($_FILES['image'])){
         $log.="Entra en el if\n";
-        $temp   = $_FILES['image']['tmp_name'];
+        $temp = $_FILES['image']['tmp_name'];
         $log.="tmp name: ".$temp."\n";
         fwrite($fichero,$log,strlen($log)); $log="";
 
@@ -26,7 +27,7 @@ $log.= "Nombre: ".$nombre . "\n";
 
        
     }
-    
+	
     fwrite($fichero,$log,strlen($log));
     fclose($fichero);
 

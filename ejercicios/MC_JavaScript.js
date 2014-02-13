@@ -12,15 +12,15 @@ $(document).ready(function(){
     var text='#botonFoto';
     var button = $(text), interval;
     var id='#idFoto';
-    var id_ejercicio = $(id).val();
-    
+    var nombre = $(id).val();
+	
     new AjaxUpload(button,{
-        action: 'procesa.php?nombre='+id_ejercicio,
+        action: 'procesa_imagenes_ejercicios.php?nombre='+nombre,
         name: 'image',
         autoSubmit: true,
         onSubmit : function(file, ext){
             
-            // cambiar el texto del boton cuando se selecicione la imagen
+	        // cambiar el texto del boton cuando se selecicione la imagen
             button.text('Subiendo');
             // desabilitar el boton
             this.disable();
@@ -35,18 +35,14 @@ $(document).ready(function(){
             }, 200);
         },
         onComplete: function(file, response){
-            button.text('Cambiar Foto');
+			button.text('Cambiar Foto');
 
-            window.clearInterval(interval);
+			window.clearInterval(interval);
 
-            // Habilitar boton otra vez
-            this.enable();
-                 
-            respuesta = document.getElementById('fotoAsociada');
-              
-            respuesta.src="./imagenes/"+id_ejercicio;
-            respuesta.removeAttribute("src");
-            respuesta.setAttribute("src","./imagenes/"+id_ejercicio);
-        }
+			// Habilitar boton otra vez
+			this.enable();
+			
+			$('#fotoAsociada').attr('src', response);
+		}
     });
 });

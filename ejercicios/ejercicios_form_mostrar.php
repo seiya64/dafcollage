@@ -41,12 +41,11 @@
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details. */
-
+require_once("../../config.php");
 require_once($CFG->dirroot . '/course/moodleform_mod.php');
 require_once("ejercicios_clases.php");
 require_once("ejercicios_clase_general.php");
 require_once("YoutubeVideoHelper.php");
-
 
 
 /* Formulario que muestra el tipo de ejercicio MULTIPLE CHOICE
@@ -70,6 +69,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
     
     function creando_ejercicio (&$mform, $id, $p, $id_ejercicio, $tipo_origen) {
         
+		global $CFG;
         $ejercicio_general = unserialize($_SESSION['ejercicioGeneral']);
         $carpeta = unserialize($_SESSION['cosasProfe']);
         
@@ -86,7 +86,8 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $publico = $ejercicio_general->get("publico");
         
         // Identificador del ejercicio para la foto asociada. A la espera de una mejor solución.
-        $mform->addElement('html', '<input id="idFoto" type="hidden" value="temporal'.$creador.'">');
+		// Mejor solucion?? se le pasa la ruta de destino completa.
+        $mform->addElement('html', '<input id="idFoto" type="hidden" value="/temporal'.$creador.'">');
         
         // Se imprime el título del ejercicio
         $titulo = genera_titulos($nombre, get_string('Tipo2', 'ejercicios'), $id);
@@ -95,12 +96,12 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         // Se imprime la descripción del ejercicio
         $descripcion = genera_descripcion($ejercicio_general->get('descripcion'));
         $mform->addElement('html', $descripcion);
-
+		
         $tabla_imagenesHTML = '<div id="capa1">';
         $tabla_imagenesHTML.= '<a id="botonFoto" class="up">Cambiar Foto</a>';
         $tabla_imagenesHTML.= '</div>';
         $tabla_imagenesHTML.= '<div id="capa2"> ';
-        $tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="./imagenes/ejercicio_' . $id_ejercicio . '"   style="height: 300px;></img>';
+        $tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="./" style="height: 300px;></img>';
         $tabla_imagenesHTML.= '</div>';
         $mform->addElement('html', $tabla_imagenesHTML);
         
