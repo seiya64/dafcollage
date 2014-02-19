@@ -67,6 +67,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
     
     }
     
+    // Creando el ejercicio
     function creando_ejercicio (&$mform, $id, $p, $id_ejercicio, $tipo_origen) {
         
 		global $CFG;
