@@ -115,6 +115,8 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
         }
         //$titulo= '<h2>' . $title . '</h2>';
         $creacion = get_string('Creacion', 'ejercicios');
+        $log = new Log('pruebatitulo.txt');
+        $log->write($creacion);
          $titulo = genera_titulos($creacion, $title,$id);       
          $mform->addElement('html',$titulo);
          
