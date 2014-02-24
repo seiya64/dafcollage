@@ -41,7 +41,6 @@
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details. */
-require_once("../../config.php");
 require_once($CFG->dirroot . '/course/moodleform_mod.php');
 require_once("ejercicios_clases.php");
 require_once("ejercicios_clase_general.php");
@@ -68,7 +67,6 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
     }
     
     function creando_ejercicio (&$mform, $id, $p, $id_ejercicio, $tipo_origen) {
-        
 		global $CFG;
         $ejercicio_general = unserialize($_SESSION['ejercicioGeneral']);
         $carpeta = unserialize($_SESSION['cosasProfe']);
@@ -87,7 +85,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         
         // Identificador del ejercicio para la foto asociada. A la espera de una mejor solución.
 		// Mejor solucion?? se le pasa la ruta de destino completa.
-        $mform->addElement('html', '<input id="idFoto" type="hidden" value="/temporal'.$creador.'">');
+        $mform->addElement('html', '<input id="idFoto" name="idFoto" type="hidden" value="/temporal'.$creador.'" />');
         
         // Se imprime el título del ejercicio
         $titulo = genera_titulos($nombre, get_string('Tipo2', 'ejercicios'), $id);
