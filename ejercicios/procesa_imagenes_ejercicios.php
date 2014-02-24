@@ -48,7 +48,9 @@ global $CFG;
 $valid_exts = array('jpeg', 'jpg', 'png', 'gif'); // valid extensions
 $max_size = 200 * 1024; // max file size
 $path = $CFG->dataroot.'/temp/'; // upload directory
-//$path = './imagenes/';
+
+//PRUEBAS
+//unlink($path);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	if( ! empty($_FILES['image']) ) {
@@ -57,11 +59,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		// looking for format and size validity
 		if (in_array($ext, $valid_exts) AND $_FILES['image']['size'] < $max_size) {
 			$image_unique_name = uniqid();
-			$path = $path .$image_unique_name . '.' .$ext;
+			$path = $path.$image_unique_name .'.'.$ext;
 			// move uploaded file from temp to uploads directory
 			//echo 'otra evz '.$path;
 			if (move_uploaded_file($_FILES['image']['tmp_name'], $path)) {
-				echo './ejercicios_get_imagen.php?name='.$image_unique_name. '.' .$ext;
+				echo './ejercicios_get_imagen.php?name='.$image_unique_name.'.'.$ext;
 			}
 		} else {
 			echo 'Invalid file!';

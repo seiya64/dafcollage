@@ -45,7 +45,11 @@ require_once("lib.php");
 require_once("ejercicios_clase_general.php");
 require_once("ejercicios_form_creacion.php");
 require_once("YoutubeVideoHelper.php");
-
+//PRUEBAS
+//require_once('clase_log.php');
+//
+//global $USER;
+//global $CFG;
 
  /******************************************************************************
  *******************************************************************************
@@ -61,6 +65,12 @@ $tipocreacion = optional_param('tipocreacion', 0, PARAM_INT);
 $tipo_origen = optional_param('tipo_origen', 0, PARAM_INT);      
 $num_preg = optional_param('num_preg', PARAM_TEXT);
 $id_curso = optional_param ('id_curso', 0, PARAM_INT);
+//PRUEBAS
+//$nombreUnico = optional_param('idFoto', 0, PARAM_TEXT);
+//$foto=0;
+//if(nombreUnico != "/temporal".$USER->id) {
+//	$foto=1;
+//}
 
 if (optional_param('radiovisible', PARAM_TEXT) == "Si") {
     $visible = 1;
@@ -82,8 +92,6 @@ if (optional_param('radioprivado', PARAM_TEXT) == "Si") {
 
 if (!$buscar) { // Se está creando el ejercicio *********************************
     // Obtener la foto ---> pendiente
-    
-    global $USER;
 
     // Carga de datos de sesión
     $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); // Datos generales del ejercicio
@@ -93,8 +101,22 @@ if (!$buscar) { // Se está creando el ejercicio *******************************
     $ejercicioGeneral->set_fuentes($fuentes);
     $ejercicioGeneral->set_visibilidad($visible);
     $ejercicioGeneral->set_privacidad($privado);
+	$ejercicioGeneral->set_foto($foto);
     $id_ejercicio=$ejercicioGeneral->insertar();
-    
+	
+	//PRUEBAS
+//	$origen=$CFG->dataroot."/temp/".$nombreUnico;
+//	$destino=$CFG->dataroot."/user/0/".$USER->id."/".$id_ejercicio;
+//    
+//	echo "Nombre Antiguo: /temporal".$USER->id."<br/>";
+//	echo "Foto: ".$_POST['idFoto']."<br/>";
+//	echo "nombre unico: ".$nombreUnico."<br/>";
+//	echo "Origen: ".$origen."<br/>";
+//	echo "Destino: ".$destino."<br/>";
+////	die();
+//	// Se mueve la foto a su ubicacion final
+//	copy($origen, $destino);
+	
     // Se asocia al profesor creador
     $ejercicio_profesor = new Ejercicios_prof_actividad($id,$USER->id,$id_ejercicio,$carpeta);
     $ejercicio_profesor->insertar();

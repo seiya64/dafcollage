@@ -41,8 +41,12 @@ $(document).ready(function(){
 
 			// Habilitar boton otra vez
 			this.enable();
+//			console.log("file: "+file);
+//			console.log("response: "+response);
 			
 			$('#fotoAsociada').attr('src', response);
+			var nombreUnico=response.slice(response.indexOf("=")+1);
+			$(id).val(nombreUnico);
 		}
     });
 });
