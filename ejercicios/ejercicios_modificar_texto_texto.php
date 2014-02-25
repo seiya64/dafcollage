@@ -45,11 +45,9 @@ require_once("lib.php");
 require_once("ejercicios_clase_general.php");
 require_once("ejercicios_form_creacion.php");
 require_once("YoutubeVideoHelper.php");
-//PRUEBAS
-//require_once('clase_log.php');
-//
-//global $USER;
-//global $CFG;
+
+global $USER;
+global $CFG;
 
  /******************************************************************************
  *******************************************************************************
@@ -65,12 +63,12 @@ $tipocreacion = optional_param('tipocreacion', 0, PARAM_INT);
 $tipo_origen = optional_param('tipo_origen', 0, PARAM_INT);      
 $num_preg = optional_param('num_preg', PARAM_TEXT);
 $id_curso = optional_param ('id_curso', 0, PARAM_INT);
-//PRUEBAS
-//$nombreUnico = optional_param('idFoto', 0, PARAM_TEXT);
-//$foto=0;
-//if(nombreUnico != "/temporal".$USER->id) {
-//	$foto=1;
-//}
+$nombreUnico = optional_param('idFoto', 0, PARAM_TEXT);
+
+$foto=0;
+if(nombreUnico != "/temporal".$USER->id) {
+	$foto=1;
+}
 
 if (optional_param('radiovisible', PARAM_TEXT) == "Si") {
     $visible = 1;
@@ -104,18 +102,10 @@ if (!$buscar) { // Se está creando el ejercicio *******************************
 	$ejercicioGeneral->set_foto($foto);
     $id_ejercicio=$ejercicioGeneral->insertar();
 	
-	//PRUEBAS
-//	$origen=$CFG->dataroot."/temp/".$nombreUnico;
-//	$destino=$CFG->dataroot."/user/0/".$USER->id."/".$id_ejercicio;
-//    
-//	echo "Nombre Antiguo: /temporal".$USER->id."<br/>";
-//	echo "Foto: ".$_POST['idFoto']."<br/>";
-//	echo "nombre unico: ".$nombreUnico."<br/>";
-//	echo "Origen: ".$origen."<br/>";
-//	echo "Destino: ".$destino."<br/>";
-////	die();
-//	// Se mueve la foto a su ubicacion final
-//	copy($origen, $destino);
+	$origen=$CFG->dataroot.'/temp/'.$USER->id.'/'.$nombreUnico;
+	$destino=$CFG->dataroot.'/'.$USER->id.'/'.$id_ejercicio;
+
+	copy($origen, $destino);
 	
     // Se asocia al profesor creador
     $ejercicio_profesor = new Ejercicios_prof_actividad($id,$USER->id,$id_ejercicio,$carpeta);

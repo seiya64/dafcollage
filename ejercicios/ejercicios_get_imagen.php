@@ -45,7 +45,13 @@
 //
 require_once("../../config.php");
 global $CFG;
-$path = $CFG->dataroot.'/temp/'.$_GET['name']; // upload directory
+global $USER;
+
+if($_GET['ubicacion']==1) {
+	$path = $CFG->dataroot.'/'.$USER->id.'/'.$_GET['name']; // upload directory
+} else {
+	$path = $CFG->dataroot.'/temp/'.$USER->id.'/'.$_GET['name']; // upload directory
+}
 
 header("Content-Type: image/png");
 readfile($path);
