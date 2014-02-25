@@ -39,13 +39,17 @@ $(document).ready(function(){
 
 			window.clearInterval(interval);
 
-			// Habilitar boton otra vez
+			// Habilitar boton otra vez	
 			this.enable();
 //			console.log("file: "+file);
 //			console.log("response: "+response);
 			
 			$('#fotoAsociada').attr('src', response);
-			var nombreUnico=response.slice(response.indexOf("=")+1);
+			var inicio=response.search("=")+1;
+			var final=response.search("ubicacion");
+			
+			console.log(inicio+"---"+final);
+			var nombreUnico=response.slice(inicio, final);
 			$(id).val(nombreUnico);
 		}
     });

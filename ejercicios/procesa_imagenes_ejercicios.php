@@ -44,13 +44,11 @@
 
 require_once("../../config.php");
 global $CFG;
+global $USER;
 
 $valid_exts = array('jpeg', 'jpg', 'png', 'gif'); // valid extensions
 $max_size = 200 * 1024; // max file size
-$path = $CFG->dataroot.'/temp/'; // upload directory
-
-//PRUEBAS
-//unlink($path);
+$path = $CFG->dataroot.'/temp/'.$USER->id.'/'; // upload directory
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	if( ! empty($_FILES['image']) ) {
@@ -63,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			// move uploaded file from temp to uploads directory
 			//echo 'otra evz '.$path;
 			if (move_uploaded_file($_FILES['image']['tmp_name'], $path)) {
-				echo './ejercicios_get_imagen.php?name='.$image_unique_name.'.'.$ext;
+				echo './ejercicios_get_imagen.php?name='.$image_unique_name.'.'.$ext.'&ubicacion=0';
 			}
 		} else {
 			echo 'Invalid file!';
