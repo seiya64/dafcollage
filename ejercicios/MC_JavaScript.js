@@ -46,9 +46,8 @@ $(document).ready(function(){
 			
 			$('#fotoAsociada').attr('src', response);
 			var inicio=response.search("=")+1;
-			var final=response.search("ubicacion");
+			var final=response.search("&amp;ubicacion");
 			
-			console.log(inicio+"---"+final);
 			var nombreUnico=response.slice(inicio, final);
 			$(id).val(nombreUnico);
 		}

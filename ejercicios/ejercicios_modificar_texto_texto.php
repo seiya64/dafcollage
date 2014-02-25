@@ -55,14 +55,12 @@ global $CFG;
  *******************************************************************************
  ******************************************************************************/
 
-$buscar = optional_param ('buscar', 0, PARAM_BOOL); // Esta opción de carga y la de abajo son muy cutres
-
-$id = optional_param ('id_curso', 0, PARAM_INT); // Quizá se pueda acceder de otra forma
+$buscar = $_SESSION['buscar'];
+$id_curso = $_SESSION['id_curso'];
 $fuentes = optional_param('fuentes',PARAM_TEXT);
 $tipocreacion = optional_param('tipocreacion', 0, PARAM_INT);
 $tipo_origen = optional_param('tipo_origen', 0, PARAM_INT);      
 $num_preg = optional_param('num_preg', PARAM_TEXT);
-$id_curso = optional_param ('id_curso', 0, PARAM_INT);
 $nombreUnico = optional_param('idFoto', 0, PARAM_TEXT);
 
 $foto=0;
@@ -87,9 +85,7 @@ if (optional_param('radioprivado', PARAM_TEXT) == "Si") {
  *******************************************************************************
  ******************************************************************************/
 
-
-if (!$buscar) { // Se está creando el ejercicio *********************************
-    // Obtener la foto ---> pendiente
+if ($buscar == 0) { // Se está creando el ejercicio *********************************
 
     // Carga de datos de sesión
     $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); // Datos generales del ejercicio
@@ -99,23 +95,46 @@ if (!$buscar) { // Se está creando el ejercicio *******************************
     $ejercicioGeneral->set_fuentes($fuentes);
     $ejercicioGeneral->set_visibilidad($visible);
     $ejercicioGeneral->set_privacidad($privado);
-	$ejercicioGeneral->set_foto($foto);
-    $id_ejercicio=$ejercicioGeneral->insertar();
-	
-	$origen=$CFG->dataroot.'/temp/'.$USER->id.'/'.$nombreUnico;
-	$destino=$CFG->dataroot.'/'.$USER->id.'/'.$id_ejercicio;
+    $ejercicioGeneral->set_foto($foto);
+    $id_ejercicio = $ejercicioGeneral->insertar();
 
-	copy($origen, $destino);
-	
+    $origen = $CFG->dataroot . '/temp/' . $USER->id . '/' . $nombreUnico;
+    $destino = $CFG->dataroot . '/' . $USER->id . '/' . $id_ejercicio;
+
+    // Se copia la imagen definitiva del ejercicio a la carpeta destinada a ello
+    copy($origen, $destino);
+
     // Se asocia al profesor creador
-    $ejercicio_profesor = new Ejercicios_prof_actividad($id,$USER->id,$id_ejercicio,$carpeta);
+    $ejercicio_profesor = new Ejercicios_prof_actividad($id_curso, $USER->id, $id_ejercicio, $carpeta);
     $ejercicio_profesor->insertar();
     
 } else { // Se está modificando el ejercicio ***********************************
-    $modificable = optional_param('modificable', false, PARAM_BOOL);
+    $modificable = $_SESSION['modificable'];
     if ($modificable) { // Esta comprobación es, hasta mi conocimiento de la arquitectura del sistema, innecesaria, pero aún así prefiero hacerla
         // Se obtiene el identificador del ejercicio
-        $id_ejercicio = optional_param('id_ejercicio', 0, PARAM_INT);
+        $id_ejercicio = $_SESSION['id_ejercicio'];
+        $ejercicios_bd = new Ejercicios_general();
+        $ejercicios_leido = $ejercicios_bd->obtener_uno($id_ejercicio);
+        $ejercicios_leido->set_fuentes($fuentes);
+        $ejercicios_leido->set_visibilidad($visible);
+        $ejercicios_leido->set_privacidad($privado);
+        $ejercicios_leido->set_foto($foto);
+        $ejercicios_leido->alterar();
+        
+        $origen = $CFG->dataroot . '/temp/' . $USER->id . '/' . $nombreUnico;
+        $destino = $CFG->dataroot . '/' . $USER->id . '/' . $id_ejercicio;
+
+        // Se copia la imagen definitiva del ejercicio a la carpeta destinada a ello
+        copy($origen, $destino); 
+    }
+}
+
+//SE BORRAN LOS TEMPORALES CREADOS EN OTRAS SESIONES CUANDO EL USUARIO NO GUARDA EL EJERCICIO EN BASE DE DATOS
+$ruta=$CFG->dataroot.'/temp/'.$USER->id.'/';
+$handle = opendir($ruta);
+while ($file = readdir($handle)) {
+    if (is_file($ruta . $file)) {
+        unlink($ruta . $file);
     }
 }
 

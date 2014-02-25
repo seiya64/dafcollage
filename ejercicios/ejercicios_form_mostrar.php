@@ -68,7 +68,8 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
     
     // Creando el ejercicio
     function creando_ejercicio (&$mform, $id, $p, $id_ejercicio, $tipo_origen) {
-		global $CFG;
+        
+        global $CFG;
         $ejercicio_general = unserialize($_SESSION['ejercicioGeneral']);
         $carpeta = unserialize($_SESSION['cosasProfe']);
         
@@ -650,7 +651,9 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $mform->addElement('html', '<script src="./js/ajaxupload.js" type="text/javascript"></script>');
         $mform->addElement('html', '<script type="text/javascript" src="./MC_JavaScript.js"></script>');
         
-        $id_interno = $id; // Solución ultra cutre ----> buscar nueva en cuanto se pueda
+        // Se añade en sesión la variable $buscar 
+        $_SESSION['buscar'] = $buscar;
+        $_SESSION['id_curso'] = $id;
         
         if ($buscar == 0) { // Se está creando el ejercicio
             $this->creando_ejercicio($mform, $id, $p, $id_ejercicio, $tipo_origen);
@@ -666,6 +669,8 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                 $modificable = false;
             }
             
+            $_SESSION['id_ejercicio']=$id_ejercicio;
+            $_SESSION['modificable']=$modificable;
             if ($modificable) {
                 $this->mostrar_con_permisos($mform, $id, $p, $id_ejercicio, $tipo_origen, $ejercicios_leido);
             } else {
