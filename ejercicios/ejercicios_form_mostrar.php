@@ -251,9 +251,6 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="./ejercicios_get_imagen.php?name='.$id_ejercicio.'&ubicacion=1" style="height: 300px;></img>';
         $tabla_imagenesHTML.= '</div>';
         $mform->addElement('html', $tabla_imagenesHTML);  
-		
-        // Sacamos la imagen de la bd
-        $fotoAsociada = $ejercicios_leido->get("fotoAsociada");
 
         // Cargamos el origen según su tipo 
         switch ($tipo_origen) {
@@ -463,7 +460,23 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
             $licencia = $ejercicios_leido->get("copyrightpreg");
             $visible = $ejercicios_leido->get("visible");
             $publico = $ejercicios_leido->get("publico");
+			$foto_asociada = $ejercicios_leido->get("foto_asociada");
 
+			if($foto_asociada==1) {
+				// Carga el campo hidden html con el value = al id del ejercicio por que existe foto asociada
+				$mform->addElement('html', '<input id="idFoto" name="idFoto" type="hidden" value="'.$id_ejercicio.'" />');
+			} else {
+				// Carga el campo hidden html con el value = al /temporal+id_profesor por que no existe foto asociada
+				// ejercicios_modificar_texto_texto.php se encarga de obviar la foto
+				$mform->addElement('html', '<input id="idFoto" name="idFoto" type="hidden" value="/temporal'.$creador.'" />');
+			}
+			
+//			//Campo de la imagen del ejercicio
+			$tabla_imagenesHTML.= '<div id="capa2"> ';
+			$tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="./ejercicios_get_imagen.php?name='.$id_ejercicio.'&ubicacion=1" style="height: 300px;></img>';
+			$tabla_imagenesHTML.= '</div>';
+			$mform->addElement('html', $tabla_imagenesHTML); 
+			
             // Se imprime el título del ejercicio
             $titulo = genera_titulos($nombre, get_string('Tipo2', 'ejercicios'), $id);
             $mform->addElement('html', $titulo);
@@ -471,8 +484,6 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
             // Se imprime la descripción del ejercicio
             $descripcion = genera_descripcion($ejercicios_leido->get('descripcion'));
             $mform->addElement('html', $descripcion);
-
-                $fotoAsociada = $ejercicios_leido->get("fotoAsociada");
 
             // Cargamos el origen según su tipo 
             switch ($tipo_origen) {
