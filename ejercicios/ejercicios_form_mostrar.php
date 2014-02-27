@@ -101,7 +101,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $tabla_imagenesHTML.= '<a id="botonFoto" class="up">Cambiar Foto</a>';
         $tabla_imagenesHTML.= '</div>';
         $tabla_imagenesHTML.= '<div id="capa2"> ';
-        $tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="./" style="height: 300px;></img>';
+        $tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="./" style="height: 300px;"/>';
         $tabla_imagenesHTML.= '</div>';
         $mform->addElement('html', $tabla_imagenesHTML);
         
@@ -143,8 +143,8 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $divpregunta.='<textarea style="width: 900px;" class="pregunta" name="pregunta1" id="pregunta1"> Introduzca la pregunta... </textarea>';
         $divpregunta.='</td>';
         $divpregunta.='<td style="width:5%;">';
-        $divpregunta.='<img id="imgpregborrar" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarPregunta(tabpregunta1, 1)" title="Eliminar Pregunta"></img>';
-        $divpregunta.='</br><img id="imgpreganadir" src="./imagenes/añadir.gif" alt="eliminar respuesta"  height="15px"  width="15px" onClick="anadirRespuesta(respuestas1, 1)" title="Añadir Respuesta"></img>';
+        $divpregunta.='<img id="imgpregborrar" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarPregunta(tabpregunta1, 1)" title="Eliminar Pregunta"/>';
+        $divpregunta.='</br><img id="imgpreganadir" src="./imagenes/añadir.gif" alt="eliminar respuesta"  height="15px"  width="15px" onClick="anadirRespuesta(respuestas1, 1)" title="Añadir Respuesta"/>';
         $divpregunta.='</td> ';
         $divpregunta.='</br> ';
         $divpregunta.='</table> ';
@@ -234,7 +234,6 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
 			$mform->addElement('html', '<input id="idFoto" name="idFoto" type="hidden" value="/temporal'.$creador.'" />');
 		}
 		
-		
         // Se imprime el título del ejercicio
         $titulo = genera_titulos($nombre, get_string('Tipo2', 'ejercicios'), $id);
         $mform->addElement('html', $titulo);
@@ -248,7 +247,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $tabla_imagenesHTML.= '<a id="botonFoto" class="up">Cambiar Foto</a>';
         $tabla_imagenesHTML.= '</div>';
         $tabla_imagenesHTML.= '<div id="capa2"> ';
-        $tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="./ejercicios_get_imagen.php?name='.$id_ejercicio.'&ubicacion=1" style="height: 300px;></img>';
+        $tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="./ejercicios_get_imagen.php?name='.$id_ejercicio.'&ubicacion=1" style="height: 300px;"/>';
         $tabla_imagenesHTML.= '</div>';
         $mform->addElement('html', $tabla_imagenesHTML);  
 
@@ -318,11 +317,11 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                 $divpregunta.=' </td>';
 
                 // Se añaden botones de edición si se tiene permiso
-                    $divpregunta.=' <td style="width:5%;">';
-                    $divpregunta.='<img id="imgpregborrar' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarPregunta(tabpregunta' . $i . ',' . $i . ')" title="Eliminar Pregunta"></img>';
-                    $divpregunta.='</br><img id="imgpreganadir' . $i . '" src="./imagenes/añadir.gif" alt="eliminar respuesta"  height="15px"  width="15px" onClick="anadirRespuesta(respuestas' . $i . ',' . $i . ')" title="Añadir Respuesta"></img>';
-                    $divpregunta.='</td> ';
-                    $divpregunta.='</br> ';
+				$divpregunta.=' <td style="width:5%;">';
+				$divpregunta.='<img id="imgpregborrar' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarPregunta(tabpregunta' . $i . ',' . $i . ')" title="Eliminar Pregunta"></img>';
+				$divpregunta.='</br><img id="imgpreganadir' . $i . '" src="./imagenes/añadir.gif" alt="eliminar respuesta"  height="15px"  width="15px" onClick="anadirRespuesta(respuestas' . $i . ',' . $i . ')" title="Añadir Respuesta"></img>';
+				$divpregunta.='</td> ';
+				$divpregunta.='</br> ';
 
                 $divpregunta.='</table> ';
 
@@ -359,7 +358,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
 
                     // Se añaden botones de edición si se tiene permiso
                         // La imagen para eliminar las respuestas
-                        $divpregunta.='<img id="eliminarrespuesta' . $q . '_' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarRespuesta(tablarespuesta' . $q . '_' . $i . ',' . $i . ')" title="Eliminar Respuesta"></img>';
+                        $divpregunta.='<img id="eliminarrespuesta' . $q . '_' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarRespuestaMC(tablarespuesta' . $q . '_' . $i . ',' . $i . ')" title="Eliminar Respuesta"></img>';
 
                         // La imagen para cambiar las respuestas
                         if ($correc) {
@@ -461,29 +460,30 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
             $visible = $ejercicios_leido->get("visible");
             $publico = $ejercicios_leido->get("publico");
 			$foto_asociada = $ejercicios_leido->get("foto_asociada");
-
-			if($foto_asociada==1) {
-				// Carga el campo hidden html con el value = al id del ejercicio por que existe foto asociada
-				$mform->addElement('html', '<input id="idFoto" name="idFoto" type="hidden" value="'.$id_ejercicio.'" />');
-			} else {
-				// Carga el campo hidden html con el value = al /temporal+id_profesor por que no existe foto asociada
-				// ejercicios_modificar_texto_texto.php se encarga de obviar la foto
-				$mform->addElement('html', '<input id="idFoto" name="idFoto" type="hidden" value="/temporal'.$creador.'" />');
-			}
-			
-//			//Campo de la imagen del ejercicio
-			$tabla_imagenesHTML.= '<div id="capa2"> ';
-			$tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="./ejercicios_get_imagen.php?name='.$id_ejercicio.'&ubicacion=1" style="height: 300px;></img>';
-			$tabla_imagenesHTML.= '</div>';
-			$mform->addElement('html', $tabla_imagenesHTML); 
 			
             // Se imprime el título del ejercicio
             $titulo = genera_titulos($nombre, get_string('Tipo2', 'ejercicios'), $id);
             $mform->addElement('html', $titulo);
 
-            // Se imprime la descripción del ejercicio
+			// Se imprime la descripción del ejercicio
             $descripcion = genera_descripcion($ejercicios_leido->get('descripcion'));
             $mform->addElement('html', $descripcion);
+
+			if($foto_asociada==1) {
+				// Carga el campo hidden html con el value = al id del ejercicio por que existe foto asociada
+				// Y cargo el campo que contendrá la foto en el formulario
+				$mform->addElement('html', '<input id="idFoto" name="idFoto" type="hidden" value="'.$id_ejercicio.'" />');
+
+	//			//Campo de la imagen del ejercicio
+				$tabla_imagenesHTML.= '<div id="capa2"> ';
+				$tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="./ejercicios_get_imagen.php?name='.$id_ejercicio.'&ubicacion=1" style="height: 300px;"/>';
+				$tabla_imagenesHTML.= '</div>';
+				$mform->addElement('html', $tabla_imagenesHTML);
+			} else {
+				// Carga el campo hidden html con el value = al /temporal+id_profesor por que no existe foto asociada
+				// ejercicios_modificar_texto_texto.php se encarga de obviar la foto
+				$mform->addElement('html', '<input id="idFoto" name="idFoto" type="hidden" value="/temporal'.$creador.'" />');
+			}
 
             // Cargamos el origen según su tipo 
             switch ($tipo_origen) {

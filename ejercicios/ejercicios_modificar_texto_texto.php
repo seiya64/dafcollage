@@ -64,7 +64,7 @@ $num_preg = optional_param('num_preg', PARAM_TEXT);
 $nombreUnico = optional_param('idFoto', 0, PARAM_TEXT);
 
 $foto=0;
-if(nombreUnico != "/temporal".$USER->id) {
+if($nombreUnico != "/temporal".$USER->id) {
 	$foto=1;
 }
 
@@ -117,6 +117,7 @@ if ($buscar == 0) { // Se está creando el ejercicio ***************************
         $ejercicios_leido = $ejercicios_bd->obtener_uno($id_ejercicio);
         $ejercicios_leido->set_fuentes($fuentes);
         $ejercicios_leido->set_visibilidad($visible);
+		$ejercicios_leido->set_numpregunta($num_preg);
         $ejercicios_leido->set_privacidad($privado);
         $ejercicios_leido->set_foto($foto);
         $ejercicios_leido->alterar();
@@ -157,16 +158,6 @@ if (optional_param("submitbutton2")) { // Botón para añadir a mis ejercicos vi
         // Se borran todas las preguntas para volver a insertarlo
         // Para ello, se comienza una transacción que hace que las tablas se modifiquen una detrás de otra
         // Si hay algún fallo, se revierten todos los cambios
-        $ejercicio_general = new Ejercicios_general();
-        $miejercicio = $ejercicio_general->obtener_uno($id_ejercicio);
-        $miejercicio->set_numpregunta($num_preg);
-
-        $miejercicio->set_visibilidad($visible);
-        $miejercicio->set_privacidad($privado);
-        $miejercicio->set_fuentes($fuentes);
-        $miejercicio->alterar();
-        
-        
 
         begin_sql();
 
