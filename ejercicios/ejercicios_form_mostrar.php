@@ -68,7 +68,6 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
     
     // Creando el ejercicio
     function creando_ejercicio (&$mform, $id, $p, $id_ejercicio, $tipo_origen) {
-        
         global $CFG;
         $ejercicio_general = unserialize($_SESSION['ejercicioGeneral']);
         $carpeta = unserialize($_SESSION['cosasProfe']);
@@ -317,11 +316,11 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                 $divpregunta.=' </td>';
 
                 // Se añaden botones de edición si se tiene permiso
-				$divpregunta.=' <td style="width:5%;">';
-				$divpregunta.='<img id="imgpregborrar' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarPregunta(tabpregunta' . $i . ',' . $i . ')" title="Eliminar Pregunta"></img>';
-				$divpregunta.='</br><img id="imgpreganadir' . $i . '" src="./imagenes/añadir.gif" alt="eliminar respuesta"  height="15px"  width="15px" onClick="anadirRespuesta(respuestas' . $i . ',' . $i . ')" title="Añadir Respuesta"></img>';
-				$divpregunta.='</td> ';
-				$divpregunta.='</br> ';
+                $divpregunta.=' <td style="width:5%;">';
+                $divpregunta.='<img id="imgpregborrar' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarPregunta(tabpregunta' . $i . ',' . $i . ')" title="Eliminar Pregunta"></img>';
+                $divpregunta.='</br><img id="imgpreganadir' . $i . '" src="./imagenes/añadir.gif" alt="eliminar respuesta"  height="15px"  width="15px" onClick="anadirRespuesta(respuestas' . $i . ',' . $i . ')" title="Añadir Respuesta"></img>';
+                $divpregunta.='</td> ';
+                $divpregunta.='</br> ';
 
                 $divpregunta.='</table> ';
 
