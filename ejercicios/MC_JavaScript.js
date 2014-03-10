@@ -16,6 +16,7 @@ $(document).ready(function(){
         autoSubmit: true,
         onSubmit : function(file, ext){
             
+            
 	        // cambiar el texto del boton cuando se selecicione la imagen
             button.text('Subiendo');
             // desabilitar el boton

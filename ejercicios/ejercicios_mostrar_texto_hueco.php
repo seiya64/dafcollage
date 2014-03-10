@@ -194,23 +194,22 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
             $mform->addElement('textarea', 'pregunta' . $aux, get_string("TH_introduzca_texto", 'ejercicios'), 'wrap="virtual" rows="5" cols="50"');
 
             //Se añade un boton para que se cree un nuevo hueco. 
-            $boton = '<center><input type="button" name="add_hueco' . $aux . '" id="add_hueco' . $aux . '" value="' . get_string('TH_add_hueco', 'ejercicios') . '" onclick="TH_addHueco_Creacion(' . $id_ejercicio . "," . $aux . ')" /></center>';
+            $boton = '<center><input type="button" name="add_hueco' . $aux . '" id="add_hueco' . $aux . '" value="' . get_string('TH_add_hueco', 'ejercicios') . '" onclick="TH_addHueco_Creaciontemporal(' . $id_ejercicio . "," . $aux . ')" /></center>';
             $mform->addElement('html', $boton);
 
-//
-//            //Archivo Asociado
-//            //$mform->addElement('textarea', 'respuesta'.$aux, get_string('Asociacion_Texto_Asociado', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
-//            $textarea = '</br><div id="titulorespuestas" style="margin-left:130px;">' . get_string('TH_huecos', 'ejercicios') . '</div>';
-//            $textarea.='<div style="margin-left:310px;" id="respuestas_pregunta' . $aux . '"> ';
-//            //$textarea.='<textarea name="respuesta1_'.$aux.'" id="respuesta1_'.$aux.'" rows="1" cols="50"></textarea>';
-//
-//            $textarea.='<input type="hidden" name="numerorespuestas_' . $aux . '" id="numerorespuestas_' . $aux . '" value="0"/>';
-//            $textarea.='</div>';
-//            $mform->addElement('html', $textarea);
+            //Archivo Asociado
+            $mform->addElement('textarea', 'respuesta'.$aux, get_string('Asociacion_Texto_Asociado', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
+            $textarea = '</br><div id="titulorespuestas" style="margin-left:130px;">' . get_string('TH_huecos', 'ejercicios') . '</div>';
+            $textarea.='<div style="margin-left:310px;" id="respuestas_pregunta' . $aux . '"> ';
+            $textarea.='<textarea name="respuesta1_'.$aux.'" id="respuesta1_'.$aux.'" rows="1" cols="50"></textarea>';
 
-            // TODO COMPROBAR SI FUNCIONA LA FUNCION DE JAVASCRIPT DE MAS RESPUESTAS DE IE PARA ESTOS EJERCICIOS
-            //$botonañadir='<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="botonMasRespuestas_IE('.$aux.');"></center>';
-            //$mform->addElement('html', $botonañadir);
+            $textarea.='<input type="hidden" name="numerorespuestas_' . $aux . '" id="numerorespuestas_' . $aux . '" value="0"/>';
+            $textarea.='</div>';
+            $mform->addElement('html', $textarea);
+
+            //TODO COMPROBAR SI FUNCIONA LA FUNCION DE JAVASCRIPT DE MAS RESPUESTAS DE IE PARA ESTOS EJERCICIOS
+            $botonañadir='<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="'.get_string('BotonAñadirRespuesta','ejercicios').'" onclick="introducirRespuestas();"></center>';
+            $mform->addElement('html', $botonañadir);
         }
 
 //        $mform->addElement('hidden', 'numeropreguntas', $npreguntas);
@@ -680,8 +679,7 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
         $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
         //$mform->addElement('html', '<script type="text/javascript" src="./js/jquery.form.js"></script>');
         //$mform->addElement('html', '<script src="./js/ajaxupload.js" type="text/javascript"></script>');
-        //HACER EL JAVASCRIPT DE th_javasc
-        //$mform->addElement('html', '<script type="text/javascript" src="./MC_JavaScript.js"></script>');
+        $mform->addElement('html', '<script type="text/javascript" src="./TH_JavaScript.js"></script>');
 
         //generamos titulo del ejercicio FALTA HACER!! traer variables $nombre,$npreg,$creador....
 
