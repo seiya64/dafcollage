@@ -158,7 +158,7 @@ $string["FormularioCreacionTextos"]="Introduzca las preguntas y respuestas del e
 $string["pregunta"]="Pregunta ";
 $string["respuesta"]="Respuesta ";
 $string["Correcta"]="Correcta ";
-$string["BotonAñadirRespuesta"]="Añadir otra Respuesta";
+$string["BotonMasPreguntas"]="Añadir otra Pregunta";
 
 $string["BotonCorregir"]="Corregir";
 $string["BotonGuardar"]="Guardar";
@@ -190,12 +190,14 @@ $string['tipopregunta1']='Tipo de archivo pregunta';
 
 //Generador de Ejercicios -- Texto Hueco -- Etiqueta TH
 $string["TH_texto"]="Texto ";
-$string["TH_huecos"]="Palabras ocultadas ";
+$string["TH_huecos"]="Palabra ocultada";
 $string["TH_add_hueco"]="Seleccionar Hueco";
+$string["TH_introducir_texto"]="Insertar texto";
 $string["TH_mostrar_pistas"]="¿Desea que se muestren pistas sobre la longitud de las palabras que se colocan en los huecos?";
 $string["TH_mostrar_palabras"]="¿Desea que aparezcan las soluciones de los huecos en la parte inferior del ejercicio?";
 $string["TH_mostrar_soluciones"]="¿Desea que aparezcan las soluciones al pulsar el boton de Corregir los ejercicios?";
-$string["TH_introduzca_texto"]="Introduzca el texto en el cual se seleccionaran los huecos";
+$string["TH_introduzca_texto"]="Introduzca el texto y seleccione los huecos";
+$string["TH_texto_original"]="Texto original";
 $string['TH_configuracion_ejercicio']="Configuraci&oacute;n del Ejercicio";
 $string['TH_pistas']="Pistas";
 $string['TH_pista_longitud']='Ocupa {$a} simbolos';
