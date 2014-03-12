@@ -19,7 +19,7 @@
   Carlos Aguilar Miguel (cagmiteleco@gmail.com)
   Borja Arroba Hernández (b.arroba.h@gmail.com)
 
- Original idea:
+  Original idea:
   Ruth Burbat
 
   Content design:
@@ -48,29 +48,31 @@ global $USER;
 
 $valid_exts = array('jpeg', 'jpg', 'png', 'gif'); // valid extensions
 $max_size = 200 * 1024; // max file size
-$path = $CFG->dataroot.'/temp/'.$USER->id.'/'; // upload directory
+$path = $CFG->dataroot . '/temp/' . $USER->id . '/'; // upload directory
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	if( ! empty($_FILES['image']) ) {
-		// get uploaded file extension
-		$ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
-		// looking for format and size validity
-		if (in_array($ext, $valid_exts) AND $_FILES['image']['size'] < $max_size) {
-			$image_unique_name = uniqid();
-			$path = $path.$image_unique_name .'.'.$ext;
-			// move uploaded file from temp to uploads directory
-			//echo 'otra evz '.$path;
-			if (move_uploaded_file($_FILES['image']['tmp_name'], $path)) {
-				echo './ejercicios_get_imagen.php?name='.$image_unique_name.'.'.$ext.'&ubicacion=0';
-			}
-		} else {
-			echo 'Invalid file!';
-		}
-	} else {
-		echo 'File not uploaded!';
-	}
+    if (!empty($_FILES['image'])) {
+        // get uploaded file extension
+        $ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+        // looking for format and size validity
+        if (in_array($ext, $valid_exts) AND $_FILES['image']['size'] < $max_size) {
+            //$image_unique_name = uniqid();
+            $image_unique_name = substr( md5( $USER->id ), 0, 10 );
+            //$path = $path . $image_unique_name . '.' . $ext;
+            $path = $path . $image_unique_name;
+            // move uploaded file from temp to uploads directory
+            //echo 'otra evz '.$path;
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $path)) {
+                echo './ejercicios_get_imagen.php?userPath='.$USER->id.'&name='.$image_unique_name.'&ubicacion=1';
+            }
+        } else {
+            echo 'Invalid file!';
+        }
+    } else {
+        echo 'File not uploaded!';
+    }
 } else {
-	echo 'Bad request!';
+    echo 'Bad request!';
 }
 
 ?>

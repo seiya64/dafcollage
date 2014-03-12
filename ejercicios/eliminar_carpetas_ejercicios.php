@@ -50,7 +50,7 @@ $id_ejercicio = optional_param('id_ejercicio', 0, PARAM_INT);
 //Es llamado por ejercicios_form_misejercicios.php
 //desde los enlaces
 
-$mform = new  mod_ejercicios_mis_ejercicios($id_curso);
+$mform = new mod_ejercicios_mis_ejercicios($id_curso);
 $mform->pintaropciones($id_curso);
 
 
@@ -60,40 +60,44 @@ $mform->pintaropciones($id_curso);
 
 
 if ($mform->is_submitted()) {  //Boton Menu Principal
-     redirect('./view.php?id=' . $id_curso );
-  
-}else{
-$ejercicio_profesor_actividad = new Ejercicios_prof_actividad();
+    redirect('./view.php?id=' . $id_curso);
+} else {
+    $ejercicio_profesor_actividad = new Ejercicios_prof_actividad();
 
-  $id_profesor=$USER->id;
- 
-  $los_ejercicios=$ejercicio_profesor_actividad->obtener_ejercicos_del_profesor($id_profesor);
-  
-  for($i=0;$i<sizeof($los_ejercicios);$i++){
-     
-      $id_bd_ej=$los_ejercicios[$i]->get('id_ejercicio');
+    $id_profesor = $USER->id;
+
+    $los_ejercicios = $ejercicio_profesor_actividad->obtener_ejercicos_del_profesor($id_profesor);
+
+    for ($i = 0; $i < sizeof($los_ejercicios); $i++) {
+
+        $id_bd_ej = $los_ejercicios[$i]->get('id_ejercicio');
 
 
-      //Si estoy usando el ejercicio lo elimino
-      
-      if($id_bd_ej == $id_ejercicio){
-        
-          $ejercicio_profesor_actividad->borrar_id_ejercicio($id_ejercicio, $id_profesor);
-      }
-      
-      //Compruebo si hay alguien más usuando el ejercicio
-      
-       $todos_ejercicios=$ejercicio_profesor_actividad->obtener_todos_idejercicio($id_ejercicio);
-       
-       if(sizeof($todos_ejercicios)==0){
+        //Si estoy usando el ejercicio lo elimino
+
+        if ($id_bd_ej == $id_ejercicio) {
+            $ejercicio_profesor_actividad->borrar_id_ejercicio($id_ejercicio, $id_profesor);
+        }
+
+        //Compruebo si hay alguien más usuando el ejercicio
+        $todos_ejercicios = $ejercicio_profesor_actividad->obtener_todos_idejercicio($id_ejercicio);
+
+        if (sizeof($todos_ejercicios) == 0) {
             echo "no hay gente usandolo";
-           //Lo elimino de la tabla de ejercicios correspondiente y de la tabla de ejercicios general
-           
-            $ejercicio_general=new Ejercicios_general();
-            $ejercicio=$ejercicio_general->obtener_uno($id_ejercicio);
+            //Lo elimino de la tabla de ejercicios correspondiente y de la tabla de ejercicios general
+            $ejercicio_general = new Ejercicios_general();
+            $ejercicio = $ejercicio_general->obtener_uno($id_ejercicio);
+
+            //Elimino la foto asociada al ejercicio
+            if (is_file($CFG->dataroot . '/' . $id_profesor . '/' . substr(md5($id_ejercicio), 0, 10))) {
+                if (!unlink($CFG->dataroot . '/' . $id_profesor . '/' . substr(md5($id_ejercicio), 0, 10))) {
+                    echo 'ERROR EN LA ELIMINACION LA FOTO ASOCIADA';
+                    die();
+                }
+            }
+
             //lo borro
             $ejercicio_general->borrar($ejercicio->get('id'));
-            
             switch ($ejercicio->get('tipoactividad')) {
                 case 0: //Multiple choice
                     switch ($ejercicio->get('tipoarchivopregunta')) {
@@ -115,9 +119,6 @@ $ejercicio_profesor_actividad = new Ejercicios_prof_actividad();
                             break;
                     }
 
-
-
-
                     //borro las respuestas
                     $ejercicio_texto_texto_preg = new Ejercicios_texto_texto_preg();
                     $num_preguntas = $ejercicio_texto_texto_preg->obtener_todas_preguntas_ejercicicio($id_ejercicio);
@@ -135,14 +136,14 @@ $ejercicio_profesor_actividad = new Ejercicios_prof_actividad();
                 case 1: //Asociacion simple
                     switch ($ejercicio->get('tipoarchivopregunta')) {
                         case 1: //Hay un texto
-                           
-                            switch($ejercicio->get('tipoarchivorespuesta')){
+
+                            switch ($ejercicio->get('tipoarchivorespuesta')) {
                                 //No ponemos 1 porque lo vamos a poner de manera general fuera de este switch
                                 case 2: //Es un audio
                                     $ej_audio = new Ejercicios_audios_asociados();
                                     $audios_filename = $ej_audio->obtener_todos_id_ejercicio($id_ejercicio);
-                                    for ($i = 0; $i < sizeof($audios_filename); $i++) { 
-                                       unlink('./mediaplayer/audios/' . $audios_filename[$i]->get('nombre_audio'));
+                                    for ($i = 0; $i < sizeof($audios_filename); $i++) {
+                                        unlink('./mediaplayer/audios/' . $audios_filename[$i]->get('nombre_audio'));
                                     }
                                     $ej_audio->borrar_id_ejercicio($id_ejercicio);
                                     break;
@@ -175,13 +176,13 @@ $ejercicio_profesor_actividad = new Ejercicios_prof_actividad();
                         case 4:
                             $ej_img = new Ejercicios_imagenes_asociadas();
                             $img_filenames = $ej_img->obtener_todos_id_ejercicio($id_ejercicio);
-                            for($i=0; $i<sizeof($img_filenames); $i++) {
+                            for ($i = 0; $i < sizeof($img_filenames); $i++) {
                                 unlink('./imagenes/' . $img_filenames[$i]->get('nombre_imagen'));
                             }
                             $ej_img->borrar_id_ejercicio($id_ejercicio);
                             break;
                     }
-                    
+
                     //borro las respuestas
                     $ejercicio_texto_texto_preg = new Ejercicios_texto_texto_preg();
                     $num_preguntas = $ejercicio_texto_texto_preg->obtener_todas_preguntas_ejercicicio($id_ejercicio);
@@ -191,7 +192,7 @@ $ejercicio_profesor_actividad = new Ejercicios_prof_actividad();
                         $id_pregunta = $num_preguntas[$j]->get('id');
                         $ejercicio_texto_texto_resp->borrar_id_pregunta($id_pregunta);
                     }
-                    
+
                     //echo "borrando de texto texto preg"
                     $ejercicio_texto_texto_preg->borrar_id_ejercicio($id_ejercicio);
                     break;
@@ -215,9 +216,6 @@ $ejercicio_profesor_actividad = new Ejercicios_prof_actividad();
                             break;
                     }
 
-
-
-
                     //borro las respuestas
                     $ejercicio_texto_texto_preg = new Ejercicios_texto_texto_preg();
                     $num_preguntas = $ejercicio_texto_texto_preg->obtener_todas_preguntas_ejercicicio($id_ejercicio);
@@ -232,18 +230,10 @@ $ejercicio_profesor_actividad = new Ejercicios_prof_actividad();
                     $ejercicio_texto_texto_preg->borrar_id_ejercicio($id_ejercicio);
                     break;
             }
-         
-           
-         
-       }
-  }
+        }
+    }
 
-
-   //Muestro mis ejercicios
-
-     redirect('./view.php?id=' . $id_curso . '&opcion=9'. '&id='.$id_curso);
-        
+    //Muestro mis ejercicios
+    redirect('./view.php?id=' . $id_curso . '&opcion=9' . '&id=' . $id_curso);
 }
-    
-
 ?>

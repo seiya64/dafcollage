@@ -215,14 +215,6 @@ if ($error == '0') { // Solamente si no ha habido errores
 	$ruta=$CFG->dataroot.'/temp/'.$USER->id.'/';
 	mkdir($ruta);
 	
-	//SE BORRAN LOS TEMPORALES CREADOS EN OTRAS SESIONES CUANDO EL USUARIO NO GUARDA EL EJERCICIO EN BASE DE DATOS
-	$handle = opendir($ruta);
-	while ($file = readdir($handle)) {
-		if (is_file($ruta.$file)) {
-		   unlink($ruta.$file);
-		}
-	}
-	
 	$ruta=$CFG->dataroot.'/'.$USER->id.'/';
 	mkdir($ruta);
 	

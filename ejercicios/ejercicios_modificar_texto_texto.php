@@ -17,7 +17,7 @@
   Serafina Molina Soto(finamolinasoto@gmail.com)
   Javier Castro Fernández (havidarou@gmail.com)
 
- Original idea:
+  Original idea:
   Ruth Burbat
 
   Content design:
@@ -49,24 +49,27 @@ require_once("YoutubeVideoHelper.php");
 global $USER;
 global $CFG;
 
- /******************************************************************************
- *******************************************************************************
+/* * ****************************************************************************
+ * ******************************************************************************
  *        CARGA DE DATOS DE SESIÓN Y VARIABLES AUXILIARES DEL FORMULARIO       *
- *******************************************************************************
- ******************************************************************************/
+ * ******************************************************************************
+ * **************************************************************************** */
 
 $buscar = $_SESSION['buscar'];
 $id_curso = $_SESSION['id_curso'];
-$fuentes = optional_param('fuentes',PARAM_TEXT);
+$fuentes = optional_param('fuentes', PARAM_TEXT);
 $tipocreacion = optional_param('tipocreacion', 0, PARAM_INT);
-$tipo_origen = optional_param('tipo_origen', 0, PARAM_INT);      
+$tipo_origen = optional_param('tipo_origen', 0, PARAM_INT);
 $num_preg = optional_param('num_preg', PARAM_TEXT);
-$nombreUnico = optional_param('idFoto', 0, PARAM_TEXT);
 
+//Se comprueba si se ha subido una foto al ejercicio
+$path = $CFG->dataroot.'/temp/'.$USER->id.'/';  
+$name = substr(md5($USER->id), 0, 10);
 $foto=0;
-if($nombreUnico != "/temporal".$USER->id) {
-	$foto=1;
+if(file_exists($path.$name)) {
+    $foto=1;
 }
+
 
 if (optional_param('radiovisible', PARAM_TEXT) == "Si") {
     $visible = 1;
@@ -79,18 +82,16 @@ if (optional_param('radioprivado', PARAM_TEXT) == "Si") {
     $privado = 0;
 }
 
- /******************************************************************************
- *******************************************************************************
+/* * ****************************************************************************
+ * ******************************************************************************
  *                            FIN CARGA DE DATOS                               *
- *******************************************************************************
- ******************************************************************************/
+ * ******************************************************************************
+ * **************************************************************************** */
 
 if ($buscar == 0) { // Se está creando el ejercicio *********************************
-
     // Carga de datos de sesión
     $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); // Datos generales del ejercicio
     $carpeta = unserialize($_SESSION['cosasProfe']); // Carpeta del profesor
-
     // Se procede a insertar en la base de datos el ejercicio, comenzando por su descripción general
     $ejercicioGeneral->set_fuentes($fuentes);
     $ejercicioGeneral->set_visibilidad($visible);
@@ -98,16 +99,16 @@ if ($buscar == 0) { // Se está creando el ejercicio ***************************
     $ejercicioGeneral->set_foto($foto);
     $id_ejercicio = $ejercicioGeneral->insertar();
 
-    $origen = $CFG->dataroot . '/temp/' . $USER->id . '/' . $nombreUnico;
-    $destino = $CFG->dataroot . '/' . $USER->id . '/' . $id_ejercicio;
+    //el USER->id siempre es el creador de ejercicio, no puede modificarlo nadie mas
+    $origen = $CFG->dataroot . '/temp/' . $USER->id . '/' . substr(md5($USER->id), 0, 10);
+    $destino = $CFG->dataroot . '/' . $USER->id . '/' . substr(md5($id_ejercicio), 0, 10);
 
     // Se copia la imagen definitiva del ejercicio a la carpeta destinada a ello
-    copy($origen, $destino);
+    rename($origen, $destino);
 
     // Se asocia al profesor creador
     $ejercicio_profesor = new Ejercicios_prof_actividad($id_curso, $USER->id, $id_ejercicio, $carpeta);
     $ejercicio_profesor->insertar();
-    
 } else { // Se está modificando el ejercicio ***********************************
     $modificable = $_SESSION['modificable'];
     if ($modificable) { // Esta comprobación es, hasta mi conocimiento de la arquitectura del sistema, innecesaria, pero aún así prefiero hacerla
@@ -115,27 +116,20 @@ if ($buscar == 0) { // Se está creando el ejercicio ***************************
         $id_ejercicio = $_SESSION['id_ejercicio'];
         $ejercicios_bd = new Ejercicios_general();
         $ejercicios_leido = $ejercicios_bd->obtener_uno($id_ejercicio);
+
         $ejercicios_leido->set_fuentes($fuentes);
         $ejercicios_leido->set_visibilidad($visible);
-		$ejercicios_leido->set_numpregunta($num_preg);
+        $ejercicios_leido->set_numpregunta($num_preg);
         $ejercicios_leido->set_privacidad($privado);
         $ejercicios_leido->set_foto($foto);
         $ejercicios_leido->alterar();
-        
-        $origen = $CFG->dataroot . '/temp/' . $USER->id . '/' . $nombreUnico;
-        $destino = $CFG->dataroot . '/' . $USER->id . '/' . $id_ejercicio;
+
+        //el USER->id siempre es el creador, no puede modificarlo nadie mas
+        $origen = $CFG->dataroot . '/temp/' . $USER->id . '/' . substr(md5($USER->id), 0, 10);
+        $destino = $CFG->dataroot . '/' . $USER->id . '/' . substr(md5($id_ejercicio), 0, 10);
 
         // Se copia la imagen definitiva del ejercicio a la carpeta destinada a ello
-        copy($origen, $destino); 
-    }
-}
-
-//SE BORRAN LOS TEMPORALES CREADOS EN OTRAS SESIONES CUANDO EL USUARIO NO GUARDA EL EJERCICIO EN BASE DE DATOS
-$ruta=$CFG->dataroot.'/temp/'.$USER->id.'/';
-$handle = opendir($ruta);
-while ($file = readdir($handle)) {
-    if (is_file($ruta . $file)) {
-        unlink($ruta . $file);
+        rename($origen, $destino);
     }
 }
 
@@ -154,11 +148,9 @@ if (optional_param("submitbutton2")) { // Botón para añadir a mis ejercicos vi
     redirect('./view.php?id=' . $id_curso . '&opcion=9');
 } else {
     if (optional_param("submitbutton")) { // Botón para guardar el ejercicio
-   
         // Se borran todas las preguntas para volver a insertarlo
         // Para ello, se comienza una transacción que hace que las tablas se modifiquen una detrás de otra
         // Si hay algún fallo, se revierten todos los cambios
-
         begin_sql();
 
         if ($tipo_origen == 1) {//Es texto-texto

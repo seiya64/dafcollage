@@ -84,9 +84,6 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $visible = $ejercicio_general->get("visible");
         $publico = $ejercicio_general->get("publico");
 
-        // Identificador del ejercicio para la foto asociada. A la espera de una mejor solución.
-        $mform->addElement('html', '<input id="idFoto" name="idFoto" type="hidden" value="/temporal' . $creador . '" />');
-
         // Se imprime el título del ejercicio
         $titulo = genera_titulos($nombre, get_string('Tipo2', 'ejercicios'), $id);
         $mform->addElement('html', $titulo);
@@ -99,8 +96,8 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $tabla_imagenesHTML = '<div id="capa1">';
         $tabla_imagenesHTML.= '<a id="botonFoto" class="up">Cambiar Foto</a>';
         $tabla_imagenesHTML.= '</div>';
-        $tabla_imagenesHTML.= '<div id="capa2"> ';
-        $tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="./" style="height: 300px;"/>';
+        $tabla_imagenesHTML.= '<div id="capa2" style="min-height: 100px;"> ';
+        $tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="./ejercicios_get_imagen.php?ubicacion=0" style="height: 300px;"/>';
         $tabla_imagenesHTML.= '</div>';
         $mform->addElement('html', $tabla_imagenesHTML);
 
@@ -224,15 +221,6 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $publico = $ejercicios_leido->get("publico");
         $foto_asociada = $ejercicios_leido->get("foto_asociada");
 
-        if ($foto_asociada == 1) {
-            // Carga el campo hidden html con el value = al id del ejercicio por que existe foto asociada
-            $mform->addElement('html', '<input id="idFoto" name="idFoto" type="hidden" value="' . $id_ejercicio . '" />');
-        } else {
-            // Carga el campo hidden html con el value = al /temporal por que no existe foto asociada
-            // ejercicios_modificar_texto_texto.php se encarga de obviar la foto
-            $mform->addElement('html', '<input id="idFoto" name="idFoto" type="hidden" value="/temporal' . $creador . '" />');
-        }
-
         // Se imprime el título del ejercicio
         $titulo = genera_titulos($nombre, get_string('Tipo2', 'ejercicios'), $id);
         $mform->addElement('html', $titulo);
@@ -241,12 +229,20 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $descripcion = genera_descripcion($ejercicios_leido->get('descripcion'));
         $mform->addElement('html', $descripcion);
 
+        if ($foto_asociada == 1) {
+            // src para la foto cuando existe
+            $srcImage='./ejercicios_get_imagen.php?userPath='.$creador.'&name='.substr(md5($id_ejercicio), 0, 10).'&ubicacion=2';
+        } else {
+            // src para la foto por defecto
+            $srcImage="./ejercicios_get_imagen.php?ubicacion=0";
+        }
         //Campo de la imagen del ejercicio
+        //el nombre que se le da a la foto es el los 10 primero caracteres del md5 del id del ejercicio para que este sea unico
         $tabla_imagenesHTML = '<div id="capa1">';
         $tabla_imagenesHTML.= '<a id="botonFoto" class="up">Cambiar Foto</a>';
         $tabla_imagenesHTML.= '</div>';
         $tabla_imagenesHTML.= '<div id="capa2"> ';
-        $tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="./ejercicios_get_imagen.php?name=' . $id_ejercicio . '&ubicacion=1" style="height: 300px;"/>';
+        $tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="'.$srcImage.'" style="height: 300px;"/>';
         $tabla_imagenesHTML.= '</div>';
         $mform->addElement('html', $tabla_imagenesHTML);
 
@@ -467,20 +463,18 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $mform->addElement('html', $descripcion);
 
         if ($foto_asociada == 1) {
-            // Carga el campo hidden html con el value = al id del ejercicio por que existe foto asociada
-            // Y cargo el campo que contendrá la foto en el formulario
-            $mform->addElement('html', '<input id="idFoto" name="idFoto" type="hidden" value="' . $id_ejercicio . '" />');
-
-            //			//Campo de la imagen del ejercicio
-            $tabla_imagenesHTML.= '<div id="capa2"> ';
-            $tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="./ejercicios_get_imagen.php?name=' . $id_ejercicio . '&ubicacion=1" style="height: 300px;"/>';
-            $tabla_imagenesHTML.= '</div>';
-            $mform->addElement('html', $tabla_imagenesHTML);
+            // src para la foto cuando existe
+            $srcImage='./ejercicios_get_imagen.php?userPath='.$creador.'&name='.substr(md5($id_ejercicio), 0, 10).'&ubicacion=2';
         } else {
-            // Carga el campo hidden html con el value = al /temporal+id_profesor por que no existe foto asociada
-            // ejercicios_modificar_texto_texto.php se encarga de obviar la foto
-            $mform->addElement('html', '<input id="idFoto" name="idFoto" type="hidden" value="/temporal' . $creador . '" />');
+            // src para la foto por defecto
+            $srcImage="./ejercicios_get_imagen.php?ubicacion=0";
         }
+        //Campo de la imagen del ejercicio
+        //el nombre que se le da a la foto es el los 10 primero caracteres del md5 del id del ejercicio para que este sea unico
+        $tabla_imagenesHTML.= '<div id="capa2"> ';
+        $tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="'.$srcImage.'" style="height: 300px;"/>';
+        $tabla_imagenesHTML.= '</div>';
+        $mform->addElement('html', $tabla_imagenesHTML);
 
         // Cargamos el origen según su tipo 
         switch ($tipo_origen) {
