@@ -170,7 +170,6 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
         // Identificador del ejercicio para la foto asociada. A la espera de una mejor solución.
         $mform->addElement('html', '<input id="idFoto" name="idFoto" type="hidden" value="/temporal' . $creador . '" />');
 
-
         //Campo de la imagen del ejercicio
         $tabla_imagenesHTML = '<div id="capa1">';
         $tabla_imagenesHTML.= '<a id="botonFoto" class="up">Cambiar Foto</a>';
@@ -184,38 +183,62 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
         //En el ejercicio texto hueco, no hace falta poner un switch para los tipos de pregunta y respuesta ya que solo es de tipo texto.
         //Tipo origen = tipo respuesta = texto
         for ($i = 0; $i < $npreguntas; $i++) {
-            $aux = $i + 1;
+            $aux = $i + 1; //variable para saber el número de la pregunta que estamos tratando
             $titulo = '</br><h3>' . get_string('TH_texto', 'ejercicios') . $aux . '</h3>';
             $mform->addElement('html', $titulo);
-            
-            //Cuadro de texto donde se introducira el texto y seleccionaran los huecos                          
-            $mform->addElement('textarea', 'pregunta' . $aux, get_string("TH_introduzca_texto", 'ejercicios'), 'wrap="virtual" rows="5" cols="50"');
-            
-            //Se añade un boton para insertar el texto el segundo campo. 
-            $boton = '<center><input type="button" name="insertarTexto' . $aux . '" id="insertarTexto' . $aux . '" value="' . get_string('TH_introducir_texto', 'ejercicios') . '" onclick="TH_insertarTexto()" /></center>';
-            $mform->addElement('html', $boton);
-             
-            //Se añade un boton para que se cree un nuevo hueco. 
-            $boton = '<center><input type="button" name="add_hueco' . $aux . '" id="add_hueco' . $aux . '" value="' . get_string('TH_add_hueco', 'ejercicios') . '" onclick="TH_addHueco()" /></center>';
-            $mform->addElement('html', $boton);
-            
+                 
+            //Boton para crear texto huecos 
+            $opciones = '<center><span>Crear hueco cada <select id="distanciaHueco'.$aux.'" name="distanciaHueco'.$aux.'"> <option>--</option> <option value="5">5ª</option> <option value="6">6ª</option> <option value="7">7ª</option> <option value="8">8ª</option> <option value="9">9ª</option></select> palabra</span></center>';
+            $mform->addElement('html', $opciones);
+            $boton = '<center><input type="button" name="textoHueco'.$aux.'" id="textoHueco'.$aux.'" value="Crear texto hueco" onclick="ocultarPalabras(this.id)" /></center>';
+            $mform->addElement('html', $boton);  
+                
             //Cuadro de texto con texto original                          
             $mform->addElement('textarea', 'original' . $aux, get_string("TH_texto_original", 'ejercicios'), 'wrap="virtual" rows="5" cols="50"');
+              
+            //Se añade un boton para insertar el texto el segundo campo. 
+//            $boton = '<center><input type="button" name="insertarTexto' . $aux . '" id="insertarTexto' . $aux . '" value="' . get_string('TH_introducir_texto', 'ejercicios') . '" onclick="copiaTextoOriginal()" /></center>';
+//            $mform->addElement('html', $boton);
+              
+            //Cuadro de texto donde se introducira el texto y seleccionaran los huecos                          
+            $mform->addElement('textarea', 'pregunta' . $aux, get_string("TH_introduzca_texto", 'ejercicios'), ' disabled="disabled" wrap="virtual" rows="5" cols="50"');
 
+            //Se añade un boton para que se cree un nuevo hueco. 
+            $boton = '<center><input type="button" name="add_hueco' . $aux . '" id="add_hueco' . $aux . '" value="' . get_string('TH_add_hueco', 'ejercicios') . '" onclick="TH_addHueco(this.id)" /> </center>'; 
+            $mform->addElement('html', $boton);
+             
+            //boton para limpiar los campos del textarea
+            $boton = '<input type="button" name="borrarTextos'.$aux.'" id="borrarTextos'.$aux.'" value="Limpiar texto original" onclick="limpiarContenidos(this.id)" />';
+            $mform->addElement('html', $boton);
+            
+            //div donde se van guardando las diferentes palabras ocultadas
+            $palabras = '<br><div id="contenedor'.$aux.'" class="contenedor'.$aux.'"></br>';
+            $palabras.= '</div>';
+            $mform->addElement('html', $palabras);
+            
+            //boton para añadir pregunta 
+            $boton = '<br><center><input type="button" name="masPreguntas" id="masPreguntas" value="Añadir más preguntas"/></center></br>';
+            $mform->addElement('html', $boton);
+            
             //Palabras ocultadas
+            //$mform->addElement('textarea', 'ocultas' . $aux, get_string("TH_texto_original", 'ejercicios'), 'wrap="virtual" rows="1" cols="50"');
+            
             //$mform->addElement('textarea', 'respuesta'.$aux, get_string('Asociacion_Texto_Asociado', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
-            $textarea ='<div id="titulorespuestas" style="margin-left:130px;">' . get_string('TH_huecos', 'ejercicios') . '</div>';
-            $textarea.='<div style="margin-left:310px;" id="respuestas_pregunta' . $aux . '"> ';
-            $textarea.='<textarea name="respuesta1_' . $aux . '" id="respuesta1_' . $aux . '" rows="1" cols="50"></textarea>';
+//            $textarea ='<div id="titulorespuestas" style="margin-left:130px;">' . get_string('TH_huecos', 'ejercicios') . '</div>';
+//            $textarea.='<div style="margin-left:310px;" id="respuestas_pregunta' . $aux . '"> ';
+//            $textarea.='<textarea name="respuesta1_' . $aux . '" id="respuesta1_' . $aux . '" rows="1" cols="50"></textarea>';
 
             //$textarea.='<input type="hidden" name="numerorespuestas_' . $aux . '" id="numerorespuestas_' . $aux . '" value="0"/>';
-            $textarea.='</div>';
-            $mform->addElement('html', $textarea);
-
+//            $textarea.='</div>';
+//            $mform->addElement('html', $textarea);
+ 
             //Botón para añadir más preguntas al formulario
-            $botonmasrespuestas = '<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="' . get_string('BotonMasPreguntas', 'ejercicios') . '" onclick="introducirPreguntas();"></center>';
-            $mform->addElement('html', $botonmasrespuestas);
+//            $botonmasrespuestas = '<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="' . get_string('BotonMasPreguntas', 'ejercicios') . '" onclick="introducirPreguntas();"></center>';
+//            $mform->addElement('html', $botonmasrespuestas);
         }
+        //boton para guardar el ejercicio 
+        $boton = '<br><center><input type="button" name="guardarEjercicio" id="guardarEjercicio" value="Guardar ejercicio"/></center></br>';
+        $mform->addElement('html', $boton);
 
         $mform->addElement('hidden', 'numeropreguntas', $npreguntas);
 
@@ -223,11 +246,11 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
         //   - Si desea que aparezcan pistas sobre la longitud de las respuestas
         //   - Si desea que aparezcan las palabras que van en los huecos en la parte inferior de la pagina
         //   - Si desea que al darle a corregir se le mostrara cuales son las respuestas correctas o solo indicar si es correcta o no
-        $mform->addElement('html', '<br/><br/><br/>');
-        $mform->addElement('advcheckbox', 'TH_mostrar_pistas', get_string('TH_mostrar_pistas', 'ejercicios'));
-        $mform->addElement('advcheckbox', 'TH_mostrar_palabras', get_string('TH_mostrar_palabras', 'ejercicios'));
-        $mform->addElement('advcheckbox', 'TH_mostrar_soluciones', get_string('TH_mostrar_soluciones', 'ejercicios'));
-        $mform->addElement('html', '<br></br>');
+//        $mform->addElement('html', '<br/><br/><br/>');
+//        $mform->addElement('advcheckbox', 'TH_mostrar_pistas', get_string('TH_mostrar_pistas', 'ejercicios'));
+//        $mform->addElement('advcheckbox', 'TH_mostrar_palabras', get_string('TH_mostrar_palabras', 'ejercicios'));
+//        $mform->addElement('advcheckbox', 'TH_mostrar_soluciones', get_string('TH_mostrar_soluciones', 'ejercicios'));
+//        $mform->addElement('html', '<br></br>');
 
         $fuentes = genera_fuentes();
         $mform->addElement('html', $fuentes);
@@ -674,11 +697,11 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
         $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
 
         $mform = & $this->_form;
-
+ 
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./style.css">');
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
         //FALTA HACERLO. se esta siguiento para todos los ejercicios pero aun no estan definidos bien los estilos de cada uno
-        //$mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./th_style.css">'); 
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./th_style.css">'); 
         //$mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>');
         //$mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js"></script>');
         $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');

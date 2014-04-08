@@ -168,14 +168,14 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
 
 
         //Seleccione el número total de archivos pregunta (solo para texto hueco)
-        if ($tipocreacion == 5) {
-            $numimagenes = array();
-            $CONST_MAX_PREGUNTAS = 12;    //Cambio Angel Biedma: Incremento del Maximo de preguntas a 12
-            for ($i = 0; $i < $CONST_MAX_PREGUNTAS; $i++) {
-                $numimagenes[] = $i + 1;
-            }
-            $mform->addElement('select', 'numeropreguntas', get_string('numeropreguntas', 'ejercicios'), $numimagenes);
-        }
+//        if ($tipocreacion == 5) {
+//            $numimagenes = array();
+//            $CONST_MAX_PREGUNTAS = 12;    //Cambio Angel Biedma: Incremento del Maximo de preguntas a 12
+//            for ($i = 0; $i < $CONST_MAX_PREGUNTAS; $i++) {
+//                $numimagenes[] = $i + 1;
+//            }
+//            $mform->addElement('select', 'numeropreguntas', get_string('numeropreguntas', 'ejercicios'), $numimagenes);
+//        }
 
         //Seleccione el tipo de archivo respuesta (texto/ audio/ vídeo/ foto)
 
