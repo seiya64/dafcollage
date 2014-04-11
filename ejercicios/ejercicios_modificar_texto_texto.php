@@ -62,14 +62,14 @@ $tipocreacion = optional_param('tipocreacion', 0, PARAM_INT);
 $tipo_origen = optional_param('tipo_origen', 0, PARAM_INT);
 $num_preg = optional_param('num_preg', PARAM_TEXT);
 
+
 //Se comprueba si se ha subido una foto al ejercicio
-$path = $CFG->dataroot.'/temp/'.$USER->id.'/';  
+$path = $CFG->dataroot.'/'.$USER->id.'/';
 $name = substr(md5($USER->id), 0, 10);
 $foto=0;
 if(file_exists($path.$name)) {
     $foto=1;
 }
-
 
 if (optional_param('radiovisible', PARAM_TEXT) == "Si") {
     $visible = 1;
@@ -99,12 +99,17 @@ if ($buscar == 0) { // Se está creando el ejercicio ***************************
     $ejercicioGeneral->set_foto($foto);
     $id_ejercicio = $ejercicioGeneral->insertar();
 
-    //el USER->id siempre es el creador de ejercicio, no puede modificarlo nadie mas
-    $origen = $CFG->dataroot . '/temp/' . $USER->id . '/' . substr(md5($USER->id), 0, 10);
-    $destino = $CFG->dataroot . '/' . $USER->id . '/' . substr(md5($id_ejercicio), 0, 10);
-
-    // Se copia la imagen definitiva del ejercicio a la carpeta destinada a ello
-    rename($origen, $destino);
+    //la foto no ha sido modificada por lo tanto cargo lo que hubiera
+    if($foto == 0) {
+        $foto=$ejercicioGeneral->get("foto_asociada");
+    } else { //la foto ha sido modificada asi que la guardo con el nuevo nombre
+        //el USER->id siempre es el creador de ejercicio, no puede modificarlo nadie mas
+        $origen = $CFG->dataroot . '/' . $USER->id . '/' . substr(md5($USER->id), 0, 10);
+        $destino = $CFG->dataroot . '/' . $USER->id . '/' . substr(md5($id_ejercicio), 0, 10);
+        
+        // Se renombra la foto con el md5 del id del ejercicio
+        rename($origen, $destino);
+    }
 
     // Se asocia al profesor creador
     $ejercicio_profesor = new Ejercicios_prof_actividad($id_curso, $USER->id, $id_ejercicio, $carpeta);
@@ -117,6 +122,13 @@ if ($buscar == 0) { // Se está creando el ejercicio ***************************
         $ejercicios_bd = new Ejercicios_general();
         $ejercicios_leido = $ejercicios_bd->obtener_uno($id_ejercicio);
 
+        //Se comprueba si ya existia foto asociada
+        $path = $CFG->dataroot.'/'.$USER->id.'/';
+        $name = substr(md5($id_ejercicio), 0, 10);
+        if(file_exists($path.$name)) {
+            $foto=1;
+        }
+        
         $ejercicios_leido->set_fuentes($fuentes);
         $ejercicios_leido->set_visibilidad($visible);
         $ejercicios_leido->set_numpregunta($num_preg);
@@ -125,7 +137,7 @@ if ($buscar == 0) { // Se está creando el ejercicio ***************************
         $ejercicios_leido->alterar();
 
         //el USER->id siempre es el creador, no puede modificarlo nadie mas
-        $origen = $CFG->dataroot . '/temp/' . $USER->id . '/' . substr(md5($USER->id), 0, 10);
+        $origen = $CFG->dataroot . '/' . $USER->id . '/' . substr(md5($USER->id), 0, 10);
         $destino = $CFG->dataroot . '/' . $USER->id . '/' . substr(md5($id_ejercicio), 0, 10);
 
         // Se copia la imagen definitiva del ejercicio a la carpeta destinada a ello
@@ -134,8 +146,8 @@ if ($buscar == 0) { // Se está creando el ejercicio ***************************
 }
 
 // Es llamado por ejercicios_form_mostrar.php
-$mform = new mod_ejercicios_mostrar_ejercicio($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
-$mform->mostrar_ejercicio($id, $p, $id_ejercicio, $tipo_origen, $buscar);
+//$mform = new mod_ejercicios_mostrar_ejercicio($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
+//$mform->mostrar_ejercicio($id, $p, $id_ejercicio, $tipo_origen, $buscar);
 
 if (optional_param("submitbutton2")) { // Botón para añadir a mis ejercicos visible desde la búsqueda ---> Creo que esto ahora mismo no está funcionando
     global $USER;

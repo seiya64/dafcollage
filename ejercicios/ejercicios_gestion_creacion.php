@@ -212,12 +212,11 @@ if ($error == '0') { // Solamente si no ha habido errores
     $_SESSION['IERC']=$IERC_sesion;
 	
 	//SE CREAN LAS CARPETAS EN MOODLEDATA Y EN MOODLEDATA/TEMP DE LOS PROFESORES PARA GUARDAR LAS IMAGENES DE LOS EJERCICIOS
-	$ruta=$CFG->dataroot.'/temp/'.$USER->id.'/';
-	mkdir($ruta);
-	
-	$ruta=$CFG->dataroot.'/'.$USER->id.'/';
-	mkdir($ruta);
-	
+//	$ruta=$CFG->dataroot.'/temp/'.$USER->id.'/';
+//	mkdir($ruta);
+//	
+//	$ruta=$CFG->dataroot.'/'.$USER->id.'/';
+//	mkdir($ruta);
 //    foreach ($_FILES as $name => $values) { // Ruta de la imagen asociada
 //        $_SESSION['fotoAsociada']=$values['tmp_name'];
 //        if (move_uploaded_file($values['tmp_name'], $CFG->dataroot.$values['tmp_name'])) {

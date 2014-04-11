@@ -85,7 +85,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $publico = $ejercicio_general->get("publico");
 
         // Se imprime el título del ejercicio
-        $titulo = genera_titulos($nombre, get_string('Tipo2', 'ejercicios'), $id);
+        $titulo = genera_titulos($nombre, get_string('MC_title', 'ejercicios'), $id);
         $mform->addElement('html', $titulo);
 
         // Se imprime la descripción del ejercicio
@@ -222,7 +222,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $foto_asociada = $ejercicios_leido->get("foto_asociada");
 
         // Se imprime el título del ejercicio
-        $titulo = genera_titulos($nombre, get_string('Tipo2', 'ejercicios'), $id);
+        $titulo = genera_titulos($nombre, get_string('MC_title', 'ejercicios'), $id);
         $mform->addElement('html', $titulo);
 
         // Se imprime la descripción del ejercicio
@@ -231,7 +231,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
 
         if ($foto_asociada == 1) {
             // src para la foto cuando existe
-            $srcImage='./ejercicios_get_imagen.php?userPath='.$creador.'&name='.substr(md5($id_ejercicio), 0, 10).'&ubicacion=2';
+            $srcImage='./ejercicios_get_imagen.php?userPath='.$creador.'&name='.substr(md5($id_ejercicio), 0, 10).'&ubicacion=1';
         } else {
             // src para la foto por defecto
             $srcImage="./ejercicios_get_imagen.php?ubicacion=0";
@@ -455,7 +455,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $foto_asociada = $ejercicios_leido->get("foto_asociada");
 
         // Se imprime el título del ejercicio
-        $titulo = genera_titulos($nombre, get_string('Tipo2', 'ejercicios'), $id);
+        $titulo = genera_titulos($nombre, get_string('MC_title', 'ejercicios'), $id);
         $mform->addElement('html', $titulo);
 
         // Se imprime la descripción del ejercicio
@@ -464,7 +464,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
 
         if ($foto_asociada == 1) {
             // src para la foto cuando existe
-            $srcImage='./ejercicios_get_imagen.php?userPath='.$creador.'&name='.substr(md5($id_ejercicio), 0, 10).'&ubicacion=2';
+            $srcImage='./ejercicios_get_imagen.php?userPath='.$creador.'&name='.substr(md5($id_ejercicio), 0, 10).'&ubicacion=1';
         } else {
             // src para la foto por defecto
             $srcImage="./ejercicios_get_imagen.php?ubicacion=0";
@@ -664,8 +664,8 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
             $ejercicios_bd = new Ejercicios_general();
             $ejercicios_leido = $ejercicios_bd->obtener_uno($id_ejercicio);
             $creador = $ejercicios_leido->get('id_creador');
-
-            if ($creador == $USER->id && has_capability('moodle/legacy:editingteacher', $context, $USER->id, false)) {
+            
+            if ($creador == $USER->id && has_capability('moodle/legacy:editingteacher', $context, $USER->id, true)) {
                 $modificable = true; // En ese caso el ejercicio se puede modificar
             } else { // En caso contrario no se puede
                 $modificable = false;

@@ -13,13 +13,13 @@ $(document).ready(function() {
         name: 'image',
         autoSubmit: true,
         onSubmit: function(file, ext) {
-
-
             // cambiar el texto del boton cuando se selecicione la imagen
             button.text('Subiendo');
             // desabilitar el boton
             this.disable();
 
+//            console.log(file);
+//            console.log(ext);
             interval = window.setInterval(function() {
                 var text = button.text();
                 if (text.length < 11) {
@@ -33,10 +33,17 @@ $(document).ready(function() {
             button.text('Cambiar Foto');
             // Habilitar boton otra vez	
             this.enable();
-
             window.clearInterval(interval);
-            $('#fotoAsociada').attr('src',  response.replace(/&amp;/g, '&'));
-//            console.log($('#fotoAsociada').attr('src'));
+            console.log($('#fotoAsociada').attr('src'));
+            //La variable d es para resolver un problema de mozilla, que ocurre por que la url de la imagen
+            //no cambia cuando se suben varias fotos seguidas, al no cambiar la url creo que mozilla piensa que
+            //la imagen no ha cambiado y no recarga la vista de la foto, al pasarle d como argumento, aunque este
+            //no se utiliza para nada la url cambia cada vez que se cambia la imagen y esta se refresca.S
+            d=new Date();
+            $('#fotoAsociada').attr('src', response.replace(/&amp;/g, '&')+'&d='+d.getTime());
+//            $("#fotoAsociada").removeAttr("src");
+
+            console.log($('#fotoAsociada').attr('src'));
         }
     });
 });

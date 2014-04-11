@@ -50,12 +50,8 @@ global $USER;
 //echo 'Var $ get: -'.$_GET['userPath'].'-'.$_GET['name'].'-'.$_GET['ubicacion'].'-';
 switch ($_GET['ubicacion']) {
     case 1:
-        //Ubicacion temporal (moodledata/temp/[id-profesor]/[nombrefoto])
-	$path = $CFG->dataroot.'/temp/'.$_GET["userPath"].'/'.$_GET["name"];
-        break;
-    case 2:
         //Ubicacion final (moodledata/[id-profesor]/[nombrefoto])
-	$path = $CFG->dataroot.'/'.$_GET["userPath"].'/'.$_GET["name"];
+	$path = $CFG->dataroot.'/'.$_GET['userPath'].'/'.$_GET['name'];
         break;
     default:
         $path = $CFG->dataroot.'/precarga';
