@@ -368,17 +368,17 @@ function ejercicios_vista($id, $op = 0, $error = -1, $name_ej, $tipo, $tipocreac
 
         case 9:// Mostrando mis ejercicios (ejercicios profesor) 
 
-            $mform = new mod_ejercicios_mis_ejercicios($id);
-            $mform->pintaropciones($id);
+            $mform = new mod_ejercicios_mostrar_ejercicios_buscados($id);
+            $mform->mostrar_ejercicios_profesor($id);
 
 
             break;
         case 10://  Mostrando los ejercicios del curso (INTERFAZ DEL ALUMNO)
 
-            $mform = new mod_ejercicios_curso($id);
-            $mform->pintarejercicios($id);
-
-
+//            $mform = new mod_ejercicios_curso($id);
+//            $mform->pintarejercicios($id);
+            $mform = new mod_ejercicios_mostrar_ejercicios_buscados($id);
+            $mform->mostrar_ejercicios_alumno($id);
             break;
     }
 

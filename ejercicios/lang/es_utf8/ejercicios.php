@@ -149,7 +149,7 @@ $string["visible"]="Visible (accesible por sus alumnos)";
 $string["publico"]="Público (accesible por otros profesores y alumnos)";
 //$string["carpeta"]="Introduzca la ruta del ejercicio";
 $string["carpeta"]="Seleccione/Cree la carpeta donde quiera guardar el ejercicio";
-$string["copyright"]="Seleccione la licencia para su ejercicio   (al hacer click en la licencia se mostrará una breve descripción.)";
+$string["copyright"]="Seleccione la licencia para su ejercicio (al hacer click en la licencia se mostrará una breve descripción.)";
 $string["copyrightresp"]="Seleccione el copyright de sus archivos respuesta";
 $string["textoclasej"]="Asigne una o varias categorías de búsqueda de los siguientes menús desplegables (Obligatorio Campo Temático o Tema gramatical):";
 //Formulario de creacion texto-texto
@@ -158,7 +158,7 @@ $string["FormularioCreacionTextos"]="Introduzca las preguntas y respuestas del e
 $string["pregunta"]="Pregunta ";
 $string["respuesta"]="Respuesta ";
 $string["Correcta"]="Correcta ";
-$string["BotonMasPreguntas"]="Añadir otra Pregunta";
+$string["BotonAñadirRespuesta"]="Añadir otra Respuesta";
 
 $string["BotonCorregir"]="Corregir";
 $string["BotonGuardar"]="Guardar";
@@ -190,21 +190,19 @@ $string['tipopregunta1']='Tipo de archivo pregunta';
 
 //Generador de Ejercicios -- Texto Hueco -- Etiqueta TH
 $string["TH_texto"]="Texto ";
-$string["TH_huecos"]="Palabra ocultada";
-$string["TH_add_hueco"]="Seleccionar Hueco";
-$string["TH_introducir_texto"]="Insertar texto";
+$string["TH_huecos"]="Palabras ocultadas ";
+$string["TH_add_hueco"]="Añadir Hueco";
 $string["TH_mostrar_pistas"]="¿Desea que se muestren pistas sobre la longitud de las palabras que se colocan en los huecos?";
 $string["TH_mostrar_palabras"]="¿Desea que aparezcan las soluciones de los huecos en la parte inferior del ejercicio?";
 $string["TH_mostrar_soluciones"]="¿Desea que aparezcan las soluciones al pulsar el boton de Corregir los ejercicios?";
-$string["TH_introduzca_texto"]="Seleccione los huecos";
-$string["TH_texto_original"]="Texto original";
+$string["TH_introduzca_texto"]="Introduzca el texto en el cual se seleccionaran los huecos";
 $string['TH_configuracion_ejercicio']="Configuraci&oacute;n del Ejercicio";
 $string['TH_pistas']="Pistas";
 $string['TH_pista_longitud']='Ocupa {$a} simbolos';
 $string['TH_anadir']='Añadir campo de texto';
 
 //Titulos de Ejercicios
-$string['MC_title']="Multiple Choice";
+$string['MC_title']="Elección Múltiple";
 $string['AS_title']="Asociación Simple";
 $string['AC_title']="Asociación Compleja";
 $string['TH_title']="Texto Hueco";
@@ -215,7 +213,7 @@ $string['IERC_title']="Identificar Elementos más Respuesta(s) Corta(s)";
 //Generador de Ejercicios -- Ordenar Elementos -- Etiqueta OE
 $string['OE_seleccione']="Escriba la frase que quiera desordenar.";
 $string['OE_add_orden']="Añadir Orden";
-$string['OE_add_palabra']="Seleccionar Elemento";
+$string['OE_add_palabra']="Insertar Elemento";
 $string['OE_add_frase']="Añadir Frase o Parrafo";
 $string['OE_pregunta']='Texto';
 $string['OE_orden']='Orden {$a} :';
@@ -258,6 +256,7 @@ $string["IERC_seleccionarPalabra"]="Añadir elemento";
 // Campo obligatorio
 $string["tituloNecesario"]="Título necesario";
 $string["descripcionNecesaria"]="Descripción necesaria";
+$string["elementoNecesario"]="Elemento necesario";
 
 
 

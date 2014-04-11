@@ -50,8 +50,8 @@ $id_ejercicio = optional_param('id_ejercicio', 0, PARAM_INT);
 //Es llamado por ejercicios_form_misejercicios.php
 //desde los enlaces
 
-$mform = new mod_ejercicios_mis_ejercicios($id_curso);
-$mform->pintaropciones($id_curso);
+$mform = new mod_ejercicios_mostrar_ejercicios_buscados($id_curso);
+$mform->mostrar_ejercicios_profesor($id_curso);
 
 
 

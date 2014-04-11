@@ -290,7 +290,40 @@ class Ejercicios_general {
         $this->foto_asociada = $ejer->foto_asociada;
         return $this;
     }
+    
+    function buscar_ejercicios($camposBusqueda=NULL) {
+        //camposBusqueda debe ser un array asociativo donde cada indice coincida con el nombre del campo en la tabla de la BBDD
+        //si no se le pasa nada a la funcion por defecto es NULL y la funcion devuelve todos los ejercicios de la tabla (todos los ejercicios de todos los cursos)
+        $sql = "SELECT * FROM mdl_ejercicios_general";
+        
+        //Añado el resto de campos a la busqueda
+        $primero=true;
+        foreach ($camposBusqueda as $campo=>$var) {
+            if($primero) {
+                $sql.=" WHERE ".$campo."=".$var;
+            }
+            else {
+                $sql.=" and ".$campo."=".$var;
+            }
+            $primero=false;
+        }
+        
+        $todos = get_records_sql($sql);
+//        var_dump($sql);
+        $todos_mis_ejercicios = array();
 
+        foreach ($todos as $cosa) {
+            $mp = new Ejercicios_general();
+            $mp->obtener_uno($cosa->id);
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+        return $todos_mis_ejercicios;
+    }
+    
+    //Sustituyo todas las funciones de busqueda de ejercicios por  la funcion buscar_ejercicios
+    //valida para cualquier parametro que se le pase
+    
     function obtener_ejercicios_curso($id) {
 
         $sql = 'SELECT * FROM  mdl_ejercicios_general WHERE  id_curso=' . $id;
@@ -328,7 +361,6 @@ class Ejercicios_general {
 
             $todos_mis_ejercicios[] = $mp;
         }
-
 
         return $todos_mis_ejercicios;
     }
@@ -1782,7 +1814,8 @@ class Ejercicios_general {
 
         return $todos_mis_ejercicios;
     }
-
+    
+    
     function obtener_todos() {
 
 
