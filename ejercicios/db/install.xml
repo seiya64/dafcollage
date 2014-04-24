@@ -207,14 +207,18 @@
         <KEY NAME="clave_ejercicio" TYPE="foreign" FIELDS="id_ejercicio" REFTABLE="ejercicios_general" REFFIELDS="id" COMMENT="id del ejercicio" PREVIOUS="primary" NEXT="clave_pregunta"/>
         <KEY NAME="clave_pregunta" TYPE="foreign" FIELDS="id_pregunta" REFTABLE="ejercicios_texto_texto_preg" REFFIELDS="id" COMMENT="id de la pregunta" PREVIOUS="clave_ejercicio"/>
       </KEYS>
-    </TABLE>
+    </TABLE>   
     <TABLE NAME="ejercicios_texto_hueco" COMMENT="Se guarda la configuracion de un ejercicio de Texto Hueco" PREVIOUS="ejercicios_ie_respuestas" NEXT="ejercicios_ordenar_elementos_resp">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="id_ejercicio"/>
-        <FIELD NAME="id_ejercicio" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Identificacion del ejercicio" PREVIOUS="id" NEXT="mostrar_pistas"/>
-        <FIELD NAME="mostrar_pistas" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Indica si se debe mostrar pistas" PREVIOUS="id_ejercicio" NEXT="mostrar_palabras"/>
-        <FIELD NAME="mostrar_palabras" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Indica si se debe mostrar las palabras" PREVIOUS="mostrar_pistas" NEXT="mostrar_solucion"/>
-        <FIELD NAME="mostrar_solucion" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Indica si se debe mostrar las soluciones" PREVIOUS="mostrar_palabras" />
+        <FIELD NAME="id_ejercicio" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Identificacion del ejercicio" PREVIOUS="id" NEXT="id_texto"/>
+        <FIELD NAME="id_texto" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Identificacion del texto" PREVIOUS="id_ejercicio" NEXT="mostrar_pistas"/>
+        <FIELD NAME="mostrar_pistas" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Indica si se debe mostrar pistas" PREVIOUS="id_texto" NEXT="mostrar_longitud"/>
+        <FIELD NAME="mostrar_longitud" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Indica si se debe mostrar las palabras" PREVIOUS="mostrar_pistas" NEXT="mostrar_solucion"/>
+        <FIELD NAME="mostrar_solucion" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Indica si se debe mostrar las soluciones" PREVIOUS="mostrar_longitud" NEXT="palabra"/>
+        <FIELD NAME="palabra" TYPE="text" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Palabra oculta en el texto" PREVIOUS="mostrar_solucion" NEXT="pista"/>
+        <FIELD NAME="pista" TYPE="text" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Pista de la palabra oculta en el texto" PREVIOUS="palabra" NEXT="ubicacion_palabra"/>
+        <FIELD NAME="ubicacion_palabra" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="ubiciacion de la palabra dentro del texto" PREVIOUS="pista"/>
     </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_ejercicio"/>
