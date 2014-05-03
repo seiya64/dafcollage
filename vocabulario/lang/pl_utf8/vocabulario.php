@@ -40,6 +40,7 @@
 //traducir esas partes al idioma que se quiere ense√±ar para que sirva para cualquiera
 $string['vocabulario'] = 'słownictwo';
 $string['vocabulario_may'] = 'SŁOWNICTWO';
+$string['impr_vocab_corto'] = 'Lernkartei';
 $string['impr_vocab'] = 'słownictwo';
 $string['impr_gram'] = 'gramatyka';
 $string['impr_tipol'] = 'Rodzajaje tekstów';

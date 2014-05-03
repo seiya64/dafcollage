@@ -40,6 +40,7 @@
 //traducir esas partes al idioma que se quiere enseñar para que sirva para cualquiera
 $string['vocabulario'] = 'Vokabular';
 $string['vocabulario_may'] = 'VOKABULAR';
+$string['impr_vocab_corto'] = 'Lernkartei';
 $string['impr_vocab'] = 'Vokabular';
 $string['impr_gram'] = 'Grammatik';
 $string['impr_tipol'] = 'Texttypologie';

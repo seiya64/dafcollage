@@ -4055,11 +4055,13 @@ class mod_vocabulario_pdf_form extends moodleform {
         $mform->addElement('html', '<h1>' . get_string('imprcuaderno', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
 
         //opcion de eliminar un campo
+        $mform->addElement('checkbox', 'impr_vocab_corto', get_string('impr_vocab_corto', 'vocabulario'));
         $mform->addElement('checkbox', 'impr_vocab', get_string('impr_vocab', 'vocabulario'));
         $mform->addElement('checkbox', 'impr_gram', get_string('impr_gram', 'vocabulario'));
         $mform->addElement('checkbox', 'impr_tipol', get_string('impr_tipol', 'vocabulario'));
         $mform->addElement('checkbox', 'impr_inten', get_string('impr_inten', 'vocabulario'));
         $mform->addElement('checkbox', 'impr_estra', get_string('impr_estra', 'vocabulario'));
+        $mform->setDefault('impr_vocab_corto', 1);
         $mform->setDefault('impr_vocab', 1);
         $mform->setDefault('impr_gram', 1);
         $mform->setDefault('impr_tipol', 1);

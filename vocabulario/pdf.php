@@ -63,6 +63,7 @@ $usuario = $USER->id;
 
 //Captamos los campos que queremos imprimir
 
+$impr_vocab_corto = optional_param('impr_vocab_corto', 0, PARAM_INT);
 $impr_vocab = optional_param('impr_vocab', 0, PARAM_INT);
 $impr_gram = optional_param('impr_gram', 0, PARAM_INT);
 $impr_tipol = optional_param('impr_tipol', 0, PARAM_INT);
@@ -96,6 +97,120 @@ $pdf->SetFont('', 'B', '12');
 $pdf->writeHTMLCell(0, 0, 50, 100, '<h1>' . get_string('cuad_digital_may', 'vocabulario') . '</h1>', 0, 1, 0);
 $pdf->writeHTMLCell(0, 0, 20, 200, $USER->firstname . ' ' . $USER->lastname, 0, 1, 0);
 $pdf->writeHTMLCell(0, 0, 20, 205, $USER->email, 0, 1, 0);
+
+if($impr_vocab_corto) {
+    $mis_palabras_aux = new Vocabulario_mis_palabras();
+    $mis_palabras = $mis_palabras_aux->obtener_todas($usuario);
+    $genero = array("der", "die", "das");
+    
+    foreach($mis_palabras as $cosa) {
+        //Recojo los datos para imprimir de todas mis palabras
+        $palabra=$cosa->get('sustantivo')->get('palabra');
+        $significadoPalabra=$cosa->get('sustantivo')->get('significado');
+        $g=$cosa->get('sustantivo')->get('genero');
+        $gen=$genero[$g];
+        $plural=$cosa->get('sustantivo')->get('plural');
+        $ejemplo=$cosa->get('sustantivo')->get('ejemplo');
+        $infinitivo=$cosa->get('verbo')->get('infinitivo');
+        $ter_pers_sing=$cosa->get('verbo')->get('ter_pers_sing');
+        $participio=$cosa->get('verbo')->get('participio');
+        $significadoVerbo=$cosa->get('verbo')->get('significado');
+        $campo=$cosa->get('campo')->get('campo');
+        //echo $palabra." ".$genero." ".$plural." ".$ejemplo." ".$infinitivo." ".$ter_pers_sing." ".$participio."<br>";
+        
+        //Creo el array de 4 dimensiones que contendra los datos que se van a imprimir en el pdf
+        if(!array_key_exists($palabra, $datos[$campo])) {
+            $datos[$campo][$palabra]=array("genero"=>$gen, "plural"=>$plural, "significado"=>$significadoPalabra);
+        }
+        $datos[$campo][$palabra][]=array($infinitivo, $ter_pers_sing, $participio, $significadoVerbo, $ejemplo);
+    }
+    
+    foreach($datos as $ct=>$palabras) {
+        $pdf->AddPage();
+        $pdf->SetFillColor(59, 89, 152); //azul oscuro
+        $pdf->SetTextColor(TEXT_WHITE);
+        $pdf->SetLineWidth(0.5);
+        if((((float)$ct)*10)%10==0) {
+            $pdf->SetFont('', 'B', '20');
+        } else {
+            $pdf->SetFont('', 'B', '17');
+        }
+
+        $pdf->Cell(190, 15, $ct, 1, 1, 'L', 1);
+        
+        foreach($palabras as $pal=>$atrs) {
+            $pdf->SetFillColor(255, 255, 255); //blanco
+            $pdf->SetTextColor(TEXT_AUTO);
+            $pdf->SetFont('', 'B', '12');
+            
+            $pdf->Cell(60, 12, $atrs['genero']." ".$pal, "LTB", 0, "J", 1);
+            $pdf->Cell(40, 12, " ", "TB", 0, "J", 1);
+            
+            $pdf->SetFont('', '', '12');
+            
+            $pdf->Cell(40, 12, $atrs['plural'], "TRB", 0, "L", 1);
+            $pdf->Cell(50, 12, $atrs['significado'], "LTRB", 1, "J", 1);
+            $color=0;
+            
+            foreach($atrs as $verbo=>$atrv) {
+                //Solo los array asociativos numericos se recorren para imprimir el contenido
+                if(is_numeric($verbo)) {
+                    if($color%2 == 0) {
+                        $pdf->SetFillColor(224, 224, 224); //gris claro
+                    }else {
+                        $pdf->SetFillColor(189, 199, 216); //azul claro
+                    }
+                    $pdf->SetLineWidth(0.3);
+                    $pdf->SetFont('', '', '10');
+                    
+                    $pdf->Cell(60, 10, " ", "L", 0, "J", 1);
+                    $pdf->Cell(40, 10, "$atrv[0]", " ", 0, "J", 1);
+                    $pdf->Cell(40, 10, " ", " ", 0, "J", 1);
+                    
+                    $pdf->SetFillColor(255, 255, 255); //blanco
+                    $pdf->Cell(50, 10, $atrv[3], "LR", 1, "J", 1);
+                    
+                    if($color%2 == 0) {
+                        $pdf->SetFillColor(224, 224, 224); //gris claro
+                    }else {
+                        $pdf->SetFillColor(189, 199, 216); //azul claro
+                    }
+                    $pdf->Cell(60, 10, " ", "L", 0, "J", 1);
+                    $pdf->Cell(40, 10, " ", " ", 0, "J", 1);
+                    $pdf->Cell(40, 10, $atrv[1], " ", 0, "J", 1);
+                    
+                    $pdf->SetFillColor(255, 255, 255); //blanco
+                    $pdf->Cell(50, 10, " ", "LR", 1, "J", 1);
+                    
+                    if($color%2 == 0) {
+                        $pdf->SetFillColor(224, 224, 224); //gris claro
+                    }else {
+                        $pdf->SetFillColor(189, 199, 216); //azul claro
+                    }
+                    $pdf->Cell(60, 10, " ", "L", 0, "J", 1);
+                    $pdf->Cell(40, 10, " ", " ", 0, "J", 1);
+                    $pdf->Cell(40, 10, $atrv[2], " ", 0, "J", 1);
+                    
+                    $pdf->SetFillColor(255, 255, 255); //blanco
+                    $pdf->Cell(50, 10, " ", "LR", 1, "J", 1);
+                    
+                    if($color%2 == 0) {
+                        $pdf->SetFillColor(224, 224, 224); //gris claro
+                    }else {
+                        $pdf->SetFillColor(189, 199, 216); //azul claro
+                    }
+                    $pdf->SetFont('', '', '13');
+                    $pdf->Cell(140, 20, $atrv[4], 1, 0, "LTRB", 1, "", "", "", "", "T");
+                    $pdf->SetFillColor(255, 255, 255); //blanco
+                    $pdf->Cell(50, 20, " ", 1, 1, "LTRB", 1);
+                    $color++;
+                }
+            }
+        }
+    }
+    
+    $pdf->Ln();
+}
 
 if ($impr_vocab == 1) {
     //Portada vocabulario
