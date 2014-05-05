@@ -4062,11 +4062,11 @@ class mod_vocabulario_pdf_form extends moodleform {
         $mform->addElement('checkbox', 'impr_inten', get_string('impr_inten', 'vocabulario'));
         $mform->addElement('checkbox', 'impr_estra', get_string('impr_estra', 'vocabulario'));
         $mform->setDefault('impr_vocab_corto', 1);
-        $mform->setDefault('impr_vocab', 1);
-        $mform->setDefault('impr_gram', 1);
-        $mform->setDefault('impr_tipol', 1);
-        $mform->setDefault('impr_inten', 1);
-        $mform->setDefault('impr_estra', 1);
+        $mform->setDefault('impr_vocab', 0);
+        $mform->setDefault('impr_gram', 0);
+        $mform->setDefault('impr_tipol', 0);
+        $mform->setDefault('impr_inten', 0);
+        $mform->setDefault('impr_estra', 0);
 
 
         $buttonarray = array();
