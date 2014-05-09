@@ -4048,7 +4048,7 @@ class mod_vocabulario_pdf_form extends moodleform {
     function definition() {
         global $USER;
         $mform = & $this->_form;
-
+        
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
 
         //titulo de la seccion
