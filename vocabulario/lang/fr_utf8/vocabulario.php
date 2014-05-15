@@ -42,7 +42,7 @@ GNU General Public License for more details.*/
 //traducir esas partes al idioma que se quiere enseñar para que sirva para cualquiera
 $string['vocabulario'] = 'vocabulaire';
 $string['vocabulario_may'] = 'VOCABULAIRE';
-$string['impr_vocab_corto'] = 'Fiche d étude';
+$string['impr_vocab_corto'] = 'Carte d`apprentissage';
 $string['impr_vocab'] = 'Vocabulaire';
 $string['impr_gram'] = 'Grammaire';
 $string['impr_tipol'] = 'Typologies textuelles';
