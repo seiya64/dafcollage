@@ -2987,21 +2987,29 @@ class ejercicios_texto_hueco {
 
     var $id;
     var $id_ejercicio;
+    var $id_texto;
     var $mostrar_pistas;
-    var $mostrar_palabras;
+    var $mostrar_longuitud;
     var $mostrar_solucion;
+    var $palabra;
+    var $pista;
+    var $ubicacion_palabra;
     
    
 
 
     //Contructor por defecto y con parametros
-    function ejercicios_texto_hueco($id = NULL,$id_ejercicio=NULL,$mostrar_pistas=NULL, $mostrar_palabras=NULL, $mostrar_solucion=NULL) {
+    function ejercicios_texto_hueco($id = NULL,$id_ejercicio=NULL,$id_texto=NULL,$mostrar_pistas=NULL,$mostrar_longuitud=NULL,$mostrar_solucion=NULL,$palabra=NULL,$pista=NULL,$ubicacion_palabra=NULL) {
         
         $this->id = $id;
         $this->id_ejercicio = $id_ejercicio;
+        $this->id_texto = $id_texto;
         $this->mostrar_pistas = $mostrar_pistas;
-        $this->mostrar_palabras = $mostrar_palabras;
+        $this->mostrar_longuitud = $mostrar_longuitud;
         $this->mostrar_solucion = $mostrar_solucion;
+        $this->palabra = $palabra;
+        $this->pista = $pista;
+        $this->ubicacion_palabra = $ubicacion_palabra;
         
         
     }
@@ -3015,19 +3023,29 @@ class ejercicios_texto_hueco {
             case 'id':
                 return $this->id;
                 break;
-
             case 'id_ejercicio':
                 return $this->id_ejercicio;
                 break;
-            
+            case 'id_texto':
+                return $this->id_texto;
+                break;
             case 'mostrar_pistas':
                 return $this->mostrar_pistas;
                 break;
-            case 'mostrar_palabras':
-                return $this->mostrar_palabras;
+            case 'mostrar_longuitud':
+                return $this->mostrar_longuitud;
                 break;
             case 'mostrar_solucion':
                 return $this->mostrar_solucion;
+                break;
+            case 'palabra':
+                return $this->palabra;
+                break;
+            case 'pista':
+                return $this->pista;
+                break;
+            case 'ubicacion_palabra':
+                return $this->ubicacion_palabra;
                 break;
         }
     }
@@ -3062,9 +3080,13 @@ class ejercicios_texto_hueco {
         $ejer = get_record('ejercicios_texto_hueco', 'id', $id);
         $this->id = $ejer->id;
         $this->id_ejercicio = $ejer->id_ejercicio;
+        $this->id_texto = $ejer->id_texto;
         $this->mostrar_palabras = $ejer->mostrar_palabras;
-        $this->mostrar_pistas = $ejer->mostrar_pistas;
-        $this->mostrar_solucion = $ejer->mostrar_solucion;      
+        $this->mostrar_longuitud = $ejer->mostrar_longuitud;
+        $this->mostrar_solucion = $ejer->mostrar_solucion; 
+        $this->palabra = $ejer->palabra;
+        $this->pista = $ejer->pista;
+        $this->ubicacion_palabra = $ejer->ubicacion_palabra;
      
         return $this;
     }

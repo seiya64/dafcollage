@@ -7,7 +7,40 @@ and open the template in the editor.
     Created on : 01-abr-2014, 10:52:06
     Author     : Carlos
 */
+.divGeneral {
+    width:100%;
+}
 
+.divDerecha {
+    float:right;
+    width:42%;
+}
+.divBoton {
+    float:left;
+    width:50%;
+}
+.mform .fitemtitle {
+  display: block;
+  float: left;
+  width: inherit;
+  padding: 0;
+  margin: 5px 0 0 10px;
+  text-align: left;
+}
+.mform div.fitem {
+    
+  clear: both;
+  width: 50%;
+  min-height: 1.5em;
+}
+.mform div.felement,  .mform fieldset.felement{
+  display: block;
+  float: left;
+  margin: 5px 0 0 10px;
+  padding: 0;
+  text-align:left;
+  width: initial;
+}
 .pistas { 
     font-size: 7pt; 
     margin-left:155px; 

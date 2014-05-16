@@ -146,7 +146,7 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
         $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
 
         $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']);
-        // Se obtienen los datos del ejercicio a partir de los datos almacenados en sesión
+        // Se obtienen los datos del ejercicio a partir de los datos almacenados en sesión (gestionados por ejercicios_gestion_creacion)
         // Hay que tener en cuenta que parte de los datos del ejercicioGeneral se van a rellenar en este paso
         // debido a añadidos posteriores (las fuentes y la imagen asociada)
         // para la posterior creación (manejada por ejercicio_modificar_texto_texto.php)
@@ -158,9 +158,6 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
         $visible = $ejercicioGeneral->get("visible");
         $publico = $ejercicioGeneral->get("publico");
 
-        //creemos que no se utiliza
-        //$oculto = '<input type="hidden" name="tipocreacion" id="tipocreacion" value="' . $tipocreacion . '"/>';
-        //$mform->addElement('html', $oculto);
         //generamos titulo del ejercicio
         $title = get_string('TH_title', 'ejercicios');
         $creacion = get_string('Creacion', 'ejercicios');
@@ -182,82 +179,75 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
 
         //En el ejercicio texto hueco, no hace falta poner un switch para los tipos de pregunta y respuesta ya que solo es de tipo texto.
         //Tipo origen = tipo respuesta = texto
-        for ($i = 0; $i < $npreguntas; $i++) {
-            $aux = $i + 1; //variable para saber el número de la pregunta que estamos tratando
-            $titulo = '</br><h3>' . get_string('TH_texto', 'ejercicios') . $aux . '</h3>';
-            $mform->addElement('html', $titulo);
-                 
-            //Boton para crear texto huecos 
-            $opciones = '<center><span>Crear hueco cada <select id="distanciaHueco'.$aux.'" name="distanciaHueco'.$aux.'"> <option>--</option> <option value="5">5ª</option> <option value="6">6ª</option> <option value="7">7ª</option> <option value="8">8ª</option> <option value="9">9ª</option></select> palabra</span></center>';
-            $mform->addElement('html', $opciones);
-            $boton = '<center><input type="button" name="textoHueco'.$aux.'" id="textoHueco'.$aux.'" value="Crear texto hueco" onclick="ocultarPalabras(this.id)" /></center>';
-            $mform->addElement('html', $boton);  
-                
-            //Cuadro de texto con texto original                          
-            $mform->addElement('textarea', 'original' . $aux, get_string("TH_texto_original", 'ejercicios'), 'wrap="virtual" rows="5" cols="50"');
-              
-            //Se añade un boton para insertar el texto el segundo campo. 
-//            $boton = '<center><input type="button" name="insertarTexto' . $aux . '" id="insertarTexto' . $aux . '" value="' . get_string('TH_introducir_texto', 'ejercicios') . '" onclick="copiaTextoOriginal()" /></center>';
-//            $mform->addElement('html', $boton);
-              
-            //Cuadro de texto donde se introducira el texto y seleccionaran los huecos                          
-            $mform->addElement('textarea', 'pregunta' . $aux, get_string("TH_introduzca_texto", 'ejercicios'), ' disabled="disabled" wrap="virtual" rows="5" cols="50"');
+        //$aux = 1; variable para saber el número de la pregunta que estamos tratando
+        
+        //para saber el número de la pregunta que estamos tratando
+        $divnumpregunta = '<input type="hidden" value="1" id="num_preg" name="num_preg" />';
+        $mform->addElement('html', $divnumpregunta);
+        
+        $divGeneralPlus = '<div name="divGeneralPlus" id="divGeneralPlus" class="divGeneralPlus">';
+        $mform->addElement('html', $divGeneralPlus);
+        
+        $divGeneral = '<div name="divGeneral" id="divGeneral" class="divGeneral">';
+        $mform->addElement('html', $divGeneral);
+        
+        $divPregunta = '<div name="divPregunta1" id="divPregunta1" class="divPregunta">';
+        $mform->addElement('html', $divPregunta);
+        
+        //Campo hidden para contabilizar el numero de palabras
+        $divnumpalabras = '<input type="hidden" value="0" id="num_palabras1" name="num_palabras1" />';
+        $mform->addElement('html', $divnumpalabras);
+        
+        $titulo = '</br><h3>' . get_string('TH_texto', 'ejercicios') . '1' . '</h3>';
+        $mform->addElement('html', $titulo);
 
-            //Se añade un boton para que se cree un nuevo hueco. 
-            $boton = '<center><input type="button" name="add_hueco' . $aux . '" id="add_hueco' . $aux . '" value="' . get_string('TH_add_hueco', 'ejercicios') . '" onclick="TH_addHueco(this.id)" /> </center>'; 
-            $mform->addElement('html', $boton);
-             
-            //boton para limpiar los campos del textarea
-            $boton = '<input type="button" name="borrarTextos'.$aux.'" id="borrarTextos'.$aux.'" value="Limpiar texto original" onclick="limpiarContenidos(this.id)" />';
-            $mform->addElement('html', $boton);
-            
-            //div donde se van guardando las diferentes palabras ocultadas
-            $palabras = '<br><div id="contenedor'.$aux.'" class="contenedor'.$aux.'"></br>';
-            $palabras.= '</div>';
-            $mform->addElement('html', $palabras);
-            
-            //boton para añadir pregunta 
-            $boton = '<br><center><input type="button" name="masPreguntas" id="masPreguntas" value="Añadir más preguntas"/></center></br>';
-            $mform->addElement('html', $boton);
-            
-            //Palabras ocultadas
-            //$mform->addElement('textarea', 'ocultas' . $aux, get_string("TH_texto_original", 'ejercicios'), 'wrap="virtual" rows="1" cols="50"');
-            
-            //$mform->addElement('textarea', 'respuesta'.$aux, get_string('Asociacion_Texto_Asociado', 'ejercicios').$aux, 'wrap="virtual" rows="5" cols="50"');
-//            $textarea ='<div id="titulorespuestas" style="margin-left:130px;">' . get_string('TH_huecos', 'ejercicios') . '</div>';
-//            $textarea.='<div style="margin-left:310px;" id="respuestas_pregunta' . $aux . '"> ';
-//            $textarea.='<textarea name="respuesta1_' . $aux . '" id="respuesta1_' . $aux . '" rows="1" cols="50"></textarea>';
-
-            //$textarea.='<input type="hidden" name="numerorespuestas_' . $aux . '" id="numerorespuestas_' . $aux . '" value="0"/>';
-//            $textarea.='</div>';
-//            $mform->addElement('html', $textarea);
- 
-            //Botón para añadir más preguntas al formulario
-//            $botonmasrespuestas = '<center><input type="button" style="height:30px; width:140px; margin-left:175px;" value="' . get_string('BotonMasPreguntas', 'ejercicios') . '" onclick="introducirPreguntas();"></center>';
-//            $mform->addElement('html', $botonmasrespuestas);
-        }
-        //boton para guardar el ejercicio 
-        $boton = '<br><center><input type="button" name="guardarEjercicio" id="guardarEjercicio" value="Guardar ejercicio"/></center></br>';
+        //Boton para crear texto huecos 
+        $opciones = '<center><span>Crear hueco cada <select id="distanciaHueco1" name="distanciaHueco1"> <option>--</option> <option value="5">5ª</option> <option value="6">6ª</option> <option value="7">7ª</option> <option value="8">8ª</option> <option value="9">9ª</option></select> palabra</span></center>';
+        $mform->addElement('html', $opciones);
+        $boton = '<center><input type="button" name="textoHueco1" id="textoHueco1" value="Crear texto hueco" onclick="ocultarPalabras(this.id)" /> <input type="button" name="borrarTextos1" id="borrarTextos1" value="Limpiar texto original" onclick="limpiarContenidosBoton(this.id)" /> </center>';
         $mform->addElement('html', $boton);
+        
+       
+        $mform->addElement('textarea', 'original1', get_string("TH_texto_original", 'ejercicios'), 'wrap="virtual" rows="5" cols="70"');
+        $mform->addElement('textarea', 'pregunta1', get_string("TH_introduzca_texto", 'ejercicios'), ' disabled="disabled" wrap="virtual" rows="5" cols="70"');
+        
+        $divDerecha = '<div name="divDerecha1" id="divDerecha1" class="divDerecha">';
+        $divDerecha.= '</div>';
+        $mform->addElement('html', $divDerecha);
+        
+        //Se añade un boton para que se cree un nuevo hueco. 
+        $divBoton = '<div name="divBoton" id="divBoton" class="divBoton">';
+        $divBoton.= '<center><input type="button" name="add_hueco1" id="add_hueco1" value="' . get_string('TH_add_hueco', 'ejercicios') . '" onclick="TH_addHueco(this.id)" /> </center>';
+        $divBoton.= '</div>';
+        $mform->addElement('html', $divBoton);
+        
+        $divPalabras = '<div name="divPalabrasN1" id="divPalabrasN1" >';
+        $divPalabras.= '</div>';
+        $mform->addElement('html', $divPalabras);
 
-        $mform->addElement('hidden', 'numeropreguntas', $npreguntas);
-
-        //Añadir las opciones de configuracion:
-        //   - Si desea que aparezcan pistas sobre la longitud de las respuestas
-        //   - Si desea que aparezcan las palabras que van en los huecos en la parte inferior de la pagina
-        //   - Si desea que al darle a corregir se le mostrara cuales son las respuestas correctas o solo indicar si es correcta o no
-//        $mform->addElement('html', '<br/><br/><br/>');
-//        $mform->addElement('advcheckbox', 'TH_mostrar_pistas', get_string('TH_mostrar_pistas', 'ejercicios'));
-//        $mform->addElement('advcheckbox', 'TH_mostrar_palabras', get_string('TH_mostrar_palabras', 'ejercicios'));
-//        $mform->addElement('advcheckbox', 'TH_mostrar_soluciones', get_string('TH_mostrar_soluciones', 'ejercicios'));
-//        $mform->addElement('html', '<br></br>');
+        $divPregunta = '</div>';
+        $mform->addElement('html', $divPregunta);
+        
+        $divGeneral = '</div>'; 
+        $mform->addElement('html', $divGeneral);
+        
+        $divGeneralPlus = '</div>'; 
+        $mform->addElement('html', $divGeneralPlus);
+        
+        //Botón para añadir más preguntas
+        $boton = '<br><center><input type="button" name="masPreguntas" id="masPreguntas" value="Añadir más preguntas" onclick="clonar()" /></center></br>';
+        $mform->addElement('html', $boton);
 
         $fuentes = genera_fuentes();
         $mform->addElement('html', $fuentes);
 
-        $buttonarray = array();
-        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar', 'ejercicios'), "style='margin-left:30%;' onclick=obtenernumeroRespuestas('$npreguntas');");
-        $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
+//        $buttonarray = array();
+//        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar', 'ejercicios'), "style='margin-left:50%;' onclick=obtenernumeroRespuestas('$npreguntas');");
+//        $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
+        
+        // Botón guardar
+        $botones = '<center><input type="submit" style="margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '"></center>';
+        $mform->addElement('html', $botones);
     }
 
     //TENEMOS Q MODIFICARLA
@@ -697,11 +687,11 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
         $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
 
         $mform = & $this->_form;
- 
+
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./style.css">');
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
         //FALTA HACERLO. se esta siguiento para todos los ejercicios pero aun no estan definidos bien los estilos de cada uno
-        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./th_style.css">'); 
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./th_style.css">');
         //$mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>');
         //$mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js"></script>');
         $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');

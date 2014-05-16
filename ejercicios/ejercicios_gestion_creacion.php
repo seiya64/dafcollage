@@ -200,6 +200,7 @@ if ($error == '0') { // Solamente si no ha habido errores
     $carpeta = required_param('carpeta_ejercicio', PARAM_TEXT);
     $_SESSION['cosasProfe'] = serialize($carpeta);
     
+    //crea la instancia de Ejercicio_general
     $ejercicio_general = new Ejercicios_general(NULL, $id_curso, $id_creador, $TipoActividad, $TipoArchivoPregunta, $TipoArchivoRespuesta, 0, 0, $carpeta, $CampoTematico, $Destreza, $TemaGramatical, $IntencionComunicativa, $TipologiaTextual, $name, $descripcion, $numeropreguntas, $copyrightpreg, $copyrightresp, $fuentes, $foto_asociada);
     
     $_SESSION['ejercicioGeneral'] = serialize($ejercicio_general);

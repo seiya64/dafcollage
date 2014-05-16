@@ -56,7 +56,7 @@ $tipo_origen = optional_param('tipo_origen', 0, PARAM_INT);
 $tipo_respuesta = optional_param('tr', 0, PARAM_INT);
 $tipo_creacion = optional_param('tipocreacion', 0, PARAM_INT);
 
-ECHO "MODIFICANDO";
+ECHO "MODIFICANDO_texto_hueco";
 
 $mform = new mod_ejercicios_mostrar_ejercicio_texto_hueco($id_curso, $id_ejercicio, $tipo_origen, $tipo_respuesta, $tipo_creacion);
 $mform->mostrar_ejercicio_texto_hueco($id_curso, $id_ejercicio, 0, $tipo_origen, $tipo_respuesta, $tipo_creacion);
@@ -102,6 +102,8 @@ $log.="Numero de preguntas: " . $numeropreguntas . "\n";
 $mostrar_pistas = optional_param('TH_mostrar_pistas',0,PARAM_INT);
 $mostrar_palabras = optional_param('TH_mostrar_palabras',0,PARAM_INT);
 $mostrar_soluciones = optional_param('TH_mostrar_solucion',0,PARAM_INT);
+
+//creacion de la instancia de texto_hueco
 $cfg_ej = new ejercicios_texto_hueco(NULL, $id_ejercicio, $mostrar_pistas, $mostrar_palabras, $mostrar_soluciones);
 $cfg_ej->insertar();
 
