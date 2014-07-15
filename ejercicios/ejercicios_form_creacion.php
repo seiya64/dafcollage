@@ -191,10 +191,12 @@ class mod_ejercicios_creando_ejercicio extends moodleform_mod {
             case 10: //Identificar Elementos mas Respuesta Corta
                 break;
             case 9: //Ordenar Elementos, Solo tipo Texto
-                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiotipoorden', '', get_string("OE_tipoorden_frase", "ejercicios"), "Frase", null);
-                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiotipoorden', '', get_string("OE_tipoorden_parrafos", "ejercicios"), "Parrafo", null);
-                $mform->addGroup($radioarray, 'radiotipoorden', get_string('OE_tipoorden', 'ejercicios'), array(' '), false);
-                $mform->setDefault('radiotipoorden', "Frase");
+            //TODO ESTO ESTA COMENTADO PORQUE EL PRIMER PASO TIENE QUE SER COMUN A TODOS LOS EJERCICIOS, ADEMAS LOS TIPOS DE ORDENACION SE SELECCIONARAN EN EL SIGUIENTE PASO
+//                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiotipoorden', '', get_string("OE_tipoorden_frase", "ejercicios"), "Frase", null);
+//                $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiotipoorden', '', get_string("OE_tipoorden_parrafos", "ejercicios"), "Parrafo", null);
+//                $mform->addGroup($radioarray, 'radiotipoorden', get_string('OE_tipoorden', 'ejercicios'), array(' '), false);
+//                $mform->setDefault('radiotipoorden', "Frase");
+                //DEJAMOS EL BREAK PARA QUE NO ENTRE EN EL SIGUIENTE CASE!
                 break;
 
             /* $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiorespuesta', '', "Texto", "Texto", null);

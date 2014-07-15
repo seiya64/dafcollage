@@ -97,7 +97,12 @@ if ($buscar == 0) { // Se está creando el ejercicio ***************************
     $ejercicioGeneral->set_visibilidad($visible);
     $ejercicioGeneral->set_privacidad($privado);
     $ejercicioGeneral->set_foto($foto);
+//    print_r($ejercicioGeneral);
+
+    
     $id_ejercicio = $ejercicioGeneral->insertar();
+//    echo "    id: ".$id_ejercicio;
+  
 
     //la foto no ha sido modificada por lo tanto cargo lo que hubiera
     if($foto == 0) {

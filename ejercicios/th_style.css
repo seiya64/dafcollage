@@ -45,3 +45,9 @@ and open the template in the editor.
     font-size: 7pt; 
     margin-left:155px; 
 } 
+
+:target{
+text-decoration: line-through;
+
+}
+

@@ -74,6 +74,8 @@ $id_actualizable = 0;
 $leido = optional_param('idleido', PARAM_INT);
 
 if ($borrar > 0) {
+    echo "palabra: ".$borrar;
+    exit();
     delete_records('vocabulario_mis_palabras', 'id', $borrar);
     redirect('./view.php?id=' . $id_tocho . '&opcion=2');
 }

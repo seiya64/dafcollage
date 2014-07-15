@@ -218,11 +218,10 @@ class Ejercicios_general {
     function insertar() {
         
       // nl2br
-        
-        //insert_record('ejercicios_tipo_puzzledoble',"pepe",true,'id');
+//        insert_record('ejercicios_general',"pepe",true);
         $this->id = insert_record('ejercicios_general', $this, true);
         //Devuelve el identificador del ejercicios creado
-	
+      
         return $this->id;
     }
 
@@ -2149,7 +2148,6 @@ class Ejercicios_textos {
         $this->id = $id;
         $this->id_ejercicio = $id_ejercicio;
         $this->texto = $texto;
-       
     }
 
     //Obtener cada uno de los atributos de la tabla
@@ -2213,7 +2211,28 @@ class Ejercicios_textos {
 
         return $this;
     }
+    
+    function obtener_todos_textos_ejercicicio($id_ejercicio) {
 
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_textos WHERE id_ejercicio=' . $id_ejercicio;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_textos();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
    
 
 
@@ -2983,7 +3002,7 @@ class ejercicios_ie_respuestas {
 
 //------- Tablas para ejercicios Texto Hueco ------------------
 //Tabla que sirve para guardar la configuracion de un ejercicio de texto hueco
-class ejercicios_texto_hueco {
+class Ejercicios_texto_hueco {
 
     var $id;
     var $id_ejercicio;
@@ -2999,7 +3018,7 @@ class ejercicios_texto_hueco {
 
 
     //Contructor por defecto y con parametros
-    function ejercicios_texto_hueco($id = NULL,$id_ejercicio=NULL,$id_texto=NULL,$mostrar_pistas=NULL,$mostrar_longuitud=NULL,$mostrar_solucion=NULL,$palabra=NULL,$pista=NULL,$ubicacion_palabra=NULL) {
+    function Ejercicios_texto_hueco($id = NULL,$id_ejercicio=NULL,$id_texto=NULL,$mostrar_pistas=NULL,$mostrar_longuitud=NULL,$mostrar_solucion=NULL,$palabra=NULL,$pista=NULL,$ubicacion_palabra=NULL) {
         
         $this->id = $id;
         $this->id_ejercicio = $id_ejercicio;
@@ -3053,10 +3072,9 @@ class ejercicios_texto_hueco {
     //Inserta en la bd la instancia correspondiente a la clase y devuelve el identificador
     //de la nueva instancia creada
     function insertar() {
-        $id = insert_record('ejercicios_texto_hueco', $this, true);
-        //Devuelve el identificador del ejercicios creado
-
-        return $id;
+//        var_dump($this);
+        $sql="INSERT INTO mdl_ejercicios_texto_hueco (id, id_ejercicio, id_texto, mostrar_pistas, mostrar_longitud, mostrar_solucion, palabra, pista, ubicacion_palabra) VALUES (NULL,'$this->id_ejercicio','$this->id_texto','$this->mostrar_longuitud','$this->mostrar_pistas','$this->mostrar_solucion','$this->palabra','$this->pista','$this->ubicacion_palabra')";
+        execute_sql($sql);
     }
 
     //Modifica una instacia
@@ -3106,6 +3124,27 @@ class ejercicios_texto_hueco {
 
             $todos_mis_ejercicios[] = $mp;
 
+        }
+
+
+        return $todos_mis_ejercicios;
+    }
+    function obtener_todas_preguntas_ejercicicio($id_ejercicio) {
+
+
+        $sql = 'SELECT * FROM  mdl_ejercicios_texto_hueco WHERE id_ejercicio=' . $id_ejercicio;
+
+        $todos = get_records_sql($sql);
+
+        $todos_mis_ejercicios = array();
+
+        foreach ($todos as $cosa) {
+
+            $mp = new Ejercicios_texto_hueco();
+
+            $mp->obtener_uno($cosa->id);
+
+            $todos_mis_ejercicios[] = $mp;
         }
 
 

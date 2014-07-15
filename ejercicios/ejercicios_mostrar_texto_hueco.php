@@ -197,6 +197,9 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
         //Campo hidden para contabilizar el numero de palabras
         $divnumpalabras = '<input type="hidden" value="0" id="num_palabras1" name="num_palabras1" />';
         $mform->addElement('html', $divnumpalabras);
+        //campo hidden para guardar de manera auxiliar el texto con huecos
+        $guardarTextoHuecos = '<input type="hidden" value="" id="guardarTextoHuecos1" name="guardarTextoHuecos1" />';
+        $mform->addElement('html', $guardarTextoHuecos);
         
         $titulo = '</br><h3>' . get_string('TH_texto', 'ejercicios') . '1' . '</h3>';
         $mform->addElement('html', $titulo);
@@ -207,9 +210,9 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
         $boton = '<center><input type="button" name="textoHueco1" id="textoHueco1" value="Crear texto hueco" onclick="ocultarPalabras(this.id)" /> <input type="button" name="borrarTextos1" id="borrarTextos1" value="Limpiar texto original" onclick="limpiarContenidosBoton(this.id)" /> </center>';
         $mform->addElement('html', $boton);
         
-       
+//       disabled="disabled"
         $mform->addElement('textarea', 'original1', get_string("TH_texto_original", 'ejercicios'), 'wrap="virtual" rows="5" cols="70"');
-        $mform->addElement('textarea', 'pregunta1', get_string("TH_introduzca_texto", 'ejercicios'), ' disabled="disabled" wrap="virtual" rows="5" cols="70"');
+        $mform->addElement('textarea', 'pregunta1', get_string("TH_introduzca_texto", 'ejercicios'), 'wrap="virtual" rows="5" cols="70" disabled="disabled"');
         
         $divDerecha = '<div name="divDerecha1" id="divDerecha1" class="divDerecha">';
         $divDerecha.= '</div>';
@@ -667,11 +670,139 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
 
     //buscando ejercico sin permisos (alumno y profesores no creadores)
     function mostrar_sin_permisos(&$mform, $id, $npreguntas, $id_ejercicio, $tipo_origen, $tipo_respuesta, $ejercicios_leido) {
-        echo 'mostrar_sin permisos';
+        
+        $nombre = $ejercicios_leido->get('name');
+        $creador = $ejercicios_leido->get('id_creador');
+        $licencia = $ejercicios_leido->get("copyrightpreg");
+        $visible = $ejercicios_leido->get("visible");
+        $publico = $ejercicios_leido->get("publico");
+        $foto_asociada = $ejercicios_leido->get("foto_asociada");
 
+        // Se imprime el título del ejercicio
+        $titulo = genera_titulos($nombre, get_string('TH_title', 'ejercicios'), $id);
+        $mform->addElement('html', $titulo);
+        
         //generamos la descripcion
         $descripcion = genera_descripcion($ejercicios_leido->get('descripcion'));
         $mform->addElement('html', $descripcion);
+        
+        if ($foto_asociada == 1) {
+            // src para la foto cuando existe
+            $srcImage='./ejercicios_get_imagen.php?userPath='.$creador.'&name='.substr(md5($id_ejercicio), 0, 10).'&ubicacion=1';
+        } else {
+            // src para la foto por defecto
+            $srcImage="./ejercicios_get_imagen.php?ubicacion=0";
+        }
+        
+        //Campo de la imagen del ejercicio
+        //el nombre que se le da a la foto es el los 10 primero caracteres del md5 del id del ejercicio para que este sea unico
+        $tabla_imagenesHTML.= '<div id="capa2"> ';
+        $tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="'.$srcImage.'" style="height: 300px;"/>';
+        $tabla_imagenesHTML.= '</div>';
+        $mform->addElement('html', $tabla_imagenesHTML);
+
+        // Se crea una tabla en la que se incluirán los distintos elementos del formulario para añadir las respuestas
+        $tabla_imagenes = '<table width="100%">';
+        $tabla_imagenes .='<td>';
+        $mform->addElement('html', $tabla_imagenes);
+        
+        //cargamos los datos de la BD
+        $mis_textos = new Ejercicios_textos();
+        $textos = $mis_textos->obtener_todos_textos_ejercicicio($id_ejercicio);
+        $n_textos = '<input type="hidden" value='.  sizeof($textos).' id="n_textos" name="n_textos" />';
+        $mform->addElement('html', $n_textos);
+
+//        var_dump($textos);
+        
+//        for ($i = 1; $i <= sizeof($textos); $i++){
+//            echo $textos[$i-1]->get('texto');
+//            echo $textos[$i-1]->get('id');
+//        }
+        $mis_palabras = new Ejercicios_texto_hueco();
+        $palabras = $mis_palabras->obtener_todas_preguntas_ejercicicio($id_ejercicio);
+        $n_palabras = '<input type="hidden" value='.  sizeof($palabras).' id="n_palabras" name="n_palabras" />';
+        $mform->addElement('html', $n_palabras);
+//        var_dump($palabras);
+        
+        //variable para designar los nuevos div
+        $valor = 0;
+        //bucle para cada uno de los textos
+        for ($i = 1; $i <= sizeof($textos); $i++) {
+            $id_texto = $textos[$i-1]->get('id');
+            $arrayPalabras = array();
+            //div para ver las palabras y los textos
+            $divpregunta ='<div id="tabtexto' . $i . '" >';
+            $divpregunta.='<br/><br/>';
+            $divpregunta.='<table style="width:100%;">';
+            $divpregunta.='<td style="width:80%;">';
+            $divpregunta.='<div id="palabrasSolucion' . $i . '" class="palabrasSolucion">';
+            //bucle para cada uno de las palabras ocultadas respecto al texto i
+            for ($j = 1; $j <= sizeof($palabras); $j++){
+                //mostramos las palabras de cada uno de los textos
+                if ($id_texto == $palabras[$j-1]->get('id_texto')){
+                    $arrayPalabras[$j]=$palabras[$j-1]->get('palabra');
+                    shuffle($arrayPalabras);
+                }  
+            }
+            for ($j = 0; $j <= sizeof($arrayPalabras)-1; $j++){
+                $valor = $valor +1;
+                    $divpregunta.='<div style="width: 100px;" class="palabras" name="palabras' .$i . $valor . '" id="palabras' .$i . $valor .'" value="'. $arrayPalabras[$j] .'">' . $arrayPalabras[$j] . '</div>';
+
+            }
+            $divpregunta.='</div>';
+            $valor = 0;
+//            $divpregunta.='<div style="width: 100px;" class="palabras" name="palabras' .$i . '" id="palabras' .$i . '">' . $arrayPalabras[1] . '</div>';
+            $divpregunta.='<div style="width: 900px;" class="pregunta" name="pregunta' . $i . '" id="pregunta' . $i . '">' . $textos[$i - 1]->get('texto') . '</div>';
+            $divpregunta.=' </td>';
+            $divpregunta.='</table> ';
+            $divpregunta.='<br/><br/>';
+            $divpregunta.='</div>';
+            $mform->addElement('html', $divpregunta);
+            
+            for ($j = 1; $j <= sizeof($palabras); $j++){
+                //mostramos las palabras de cada uno de los textos
+                if ($id_texto == $palabras[$j-1]->get('id_texto')){
+            //div para la respuesta del alumno
+            $divrespuestas = '<div id="tabrespuestas' . $j . '" >';
+            $divrespuestas.='<span>'.$j.'</span><input type="text" class="respuestas" name="respuesta' . $j . '" id="respuesta' . $j . '" value="" /> <img id="borrarTachar'. $i . $j .'0" src="./imagenes/delete.gif" alt="eliminarOculta"  height="10px"  width="10px" onclick="tachar(this.id)" /> <img name="imagenRespuesta'.$j.'" id="imagenRespuesta'.$j.'" src="" width="15" height="15" "><span></span>';
+            $divrespuestas.='</div>';
+            $mform->addElement('html', $divrespuestas);
+                }
+            }
+        }
+
+        
+        // Autoría del ejercicio
+        $userid = get_record('user', 'id', $creador);
+        $autoria = genera_autoria($userid);
+        $mform->addElement('html', $autoria);
+
+        $imagenLicencia = genera_licencia($licencia);
+        $mform->addElement('html', $imagenLicencia);
+        
+        $fuentes_aux = $ejercicios_leido->get('fuentes');
+        $fuentes = genera_fuentes($fuentes_aux, "readonly");
+        $mform->addElement('html', $fuentes);
+
+        $tabla_menu = '<center><input type="button" style="margin-top:20px;"  value="Corregir" onClick="TH_corregir()"/> <input type="button" style=""  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal(' . $id . ')" /></center>';
+        $mform->addElement('html', $tabla_menu);
+        
+        $tabla_imagenes = '</td>';
+        $tabla_imagenes .='<td  width="10%">';
+        
+        //Para alumnos
+        //Mis palabras
+        $tabla_imagenes .='<div><a  onclick=JavaScript:sele(' . $id . ')><img src="../vocabulario/imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im" title="' . get_string('guardar', 'vocabulario') . '"/></a></div>';
+        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=5" target="_blank"><img src="../vocabulario/imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im" title="' . get_string('admin_gr', 'vocabulario') . '"/></a></div>';
+        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=7" target="_blank"><img src="../vocabulario/imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im" title="' . get_string('admin_ic', 'vocabulario') . '"/></a></div>';
+        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=9" target="_blank"><img src="../vocabulario/imagenes/tipologias_textuales.png" id="id_tt_im" name="tt_im" title="' . get_string('admin_tt', 'vocabulario') . '"/> </a></div>';
+        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=11" target="_blank"><img src="../vocabulario/imagenes/estrategias_icon.png" id="id_ea_im" name="ea_im" title="' . get_string('admin_ea', 'vocabulario') . '"/> </a></div>';
+
+        $tabla_imagenes .='</td>';
+        $tabla_imagenes .='</table>';
+        $mform->addElement('html', $tabla_imagenes);
+
+
     }
 
     /**
@@ -681,7 +812,7 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
      * @param $id id de la instancia del curso
      * @param $id_ejercicio id del ejercicio a mostrar
      */
-    function mostrar_ejercicio($id, $npreguntas, $id_ejercicios, $tipo_origen, $tipo_respuesta, $buscar) {
+    function mostrar_ejercicio($id, $id_ejercicio, $tipo_origen, $buscar) {
 
         global $CFG, $COURSE, $USER;
         $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
@@ -692,11 +823,11 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
         //FALTA HACERLO. se esta siguiento para todos los ejercicios pero aun no estan definidos bien los estilos de cada uno
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./th_style.css">');
-        //$mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>');
-        //$mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js"></script>');
+        $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>');
+        $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js"></script>');
         $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
-        //$mform->addElement('html', '<script type="text/javascript" src="./js/jquery.form.js"></script>');
-        //$mform->addElement('html', '<script src="./js/ajaxupload.js" type="text/javascript"></script>');
+        $mform->addElement('html', '<script type="text/javascript" src="./js/jquery.form.js"></script>');
+//        $mform->addElement('html', '<script src="./js/ajaxupload.js" type="text/javascript"></script>');
         $mform->addElement('html', '<script type="text/javascript" src="./TH_JavaScript.js"></script>');
 
         //generamos titulo del ejercicio FALTA HACER!! traer variables $nombre,$npreg,$creador....
@@ -711,7 +842,7 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
             $ejercicios_bd = new Ejercicios_general();
             $ejercicios_leido = $ejercicios_bd->obtener_uno($id_ejercicio);
             $creador = $ejercicios_leido->get('id_creador');
-
+            
             if ($creador == $USER->id && has_capability('moodle/legacy:editingteacher', $context, $USER->id, false)) {
                 $modificable = true; // En ese caso el ejercicio se puede modificar
             } else { // En caso contrario no se puede

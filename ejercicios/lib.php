@@ -298,12 +298,14 @@ function ejercicios_vista($id, $op = 0, $error = -1, $name_ej, $tipo, $tipocreac
                 case 3: //Texto Hueco 
                     //echo "Texto Hueco";
                     $mform = new mod_ejercicios_mostrar_ejercicio_texto_hueco($id, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
-                    $mform->mostrar_ejercicio($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, 0);
+                    $mform->mostrar_ejercicio($id, $id_ejercicio, $tipo_origen, 0);
                     break;
                 case 7: //Ordenar Elementos 
                     //echo "Ordenar Elementos";
-                    $mform = new mod_ejercicios_creando_ejercicio_ordenar_elementos($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
-                    $mform->pintarformularioordenarelementos($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
+//                    $mform = new mod_ejercicios_creando_ejercicio_identificar_elementos($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
+                    $mform = new mod_ejercicios_mostrar_ejercicio_ordenar_elementos($id, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
+                    $mform->mostrar_ejercicio($id, $id_ejercicio, $tipo_origen, 0);
+//                    $mform->pintarformulario_ordenarelementos($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
                     break;
                 case 8: //Identificar Elementos mas Respuesta Corta
                     $mform = new mod_ejercicios_creando_ejercicio_ierc($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
@@ -343,7 +345,7 @@ function ejercicios_vista($id, $op = 0, $error = -1, $name_ej, $tipo, $tipocreac
                 case 3: //si es Texto Hueco
                     //echo "mostrando ejercicio texto hueco";
                     $mform = new mod_ejercicios_mostrar_ejercicio_texto_hueco($id, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
-                    $mform->mostrar_ejercicio($id, $id_ejercicio, $buscar, $tipo_origen, $trespuesta, 1);
+                    $mform->mostrar_ejercicio($id, $id_ejercicio, $tipo_origen, 1);
                     break;
                 case 4: // si es identificar elementos
                     //echo "mostrando ejercicio identificar elementos";

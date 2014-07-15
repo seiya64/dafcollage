@@ -535,9 +535,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
             $divpregunta.='<br/><br/>';
             $divpregunta.='<table style="width:100%;">';
             $divpregunta.='<td style="width:80%;">';
-
             $divpregunta.='<div style="width: 900px;" class="pregunta" name="pregunta' . $i . '" id="pregunta' . $i . '">' . $preguntas[$i - 1]->get('pregunta') . '</div>';
-
 
             $divpregunta.=' </td>';
 

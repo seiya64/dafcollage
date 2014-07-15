@@ -211,11 +211,14 @@ $string['IE_title']="Identificar Elementos";
 $string['IERC_title']="Identificar Elementos más Respuesta(s) Corta(s)";
 
 //Generador de Ejercicios -- Ordenar Elementos -- Etiqueta OE
+$string["OE_texto"]="Texto ";
 $string['OE_seleccione']="Escriba la frase que quiera desordenar.";
 $string['OE_add_orden']="Añadir Orden";
 $string['OE_add_palabra']="Insertar Elemento";
 $string['OE_add_frase']="Añadir Frase o Parrafo";
 $string['OE_pregunta']='Texto';
+$string['OE_desorden']="Texto desordenado";
+$string['OE_boton']="Desordenar";
 $string['OE_orden']='Orden {$a} :';
 $string['OE_introduzca_texto']='En esta area de texto puede escribir, y despues puede seleccionar texto y añadir nuevas palabras a los ordenes';
 $string['OE_add_pregunta']='Añadir Oración o Parrafo Nueva';
