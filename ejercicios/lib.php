@@ -247,34 +247,23 @@ function ejercicios_uninstall() {
 
 function ejercicios_vista($id, $op = 0, $error = -1, $name_ej, $tipo, $tipocreacion, $p = 1, $id_ejercicio, $ccl, $cta, $cdc, $cgr, $cic, $ctt, $buscar, $tipo_origen = null, $trespuesta = null) {
     global $CFG, $COURSE, $USER;
-
-
-
     $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
-
-
 
     switch ($op) {
         default:
         case 0: //Interfaz principal de ejercicios tanto para alumno como para profesor
-
             $mform = new mod_ejercicios_mod_formulario($id);
-
             $mform->pintaropciones($id);
-
             break;
 
         case 5:// Pulsado botón crear por profesor en la Interfaz Principal
-
             $mform = new mod_ejercicios_creando_ejercicio($id);
             //Tipo creación indica el tipo, si es multiple choice (0), asociación simple (1), etc
             $mform->pintarformulario($id, $tipocreacion);
             break;
 
         case 7:// Segundo paso de creación de los ejercicios
-
             switch ($tipocreacion) {
-
                 case 0: // Multiple Choice
                     $mform = new mod_ejercicios_mostrar_ejercicio($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
                     $mform->mostrar_ejercicio($id, $p, $id_ejercicio, $tipo_origen, 0);
@@ -315,7 +304,6 @@ function ejercicios_vista($id, $op = 0, $error = -1, $name_ej, $tipo, $tipocreac
             break;
 
         case 6:// Pulsado botón Buscar tanto por alumno como por profesor
-
             $mform = new mod_ejercicios_mostrar_ejercicios_buscados($id);
             $mform->mostrar_ejercicios_buscados($id, $ccl, $cta, $cdc, $cgr, $cic, $ctt);
             break;
@@ -326,7 +314,6 @@ function ejercicios_vista($id, $op = 0, $error = -1, $name_ej, $tipo, $tipocreac
             $tipocreacion = $ejercicios_leido->get('tipoactividad');
 
             switch ($tipocreacion) {
-
                 case 0: //Multichoice texto-texto a profesores o a alumnos          
                     $mform = new mod_ejercicios_mostrar_ejercicio($id, $p, $id_ejercicio, $tipo_origen, $trespuesta, $tipocreacion);
                     $mform->mostrar_ejercicio($id, $p, $id_ejercicio, $tipo_origen, 1);
@@ -369,22 +356,16 @@ function ejercicios_vista($id, $op = 0, $error = -1, $name_ej, $tipo, $tipocreac
             break;
 
         case 9:// Mostrando mis ejercicios (ejercicios profesor) 
-
             $mform = new mod_ejercicios_mostrar_ejercicios_buscados($id);
             $mform->mostrar_ejercicios_profesor($id);
-
-
             break;
+        
         case 10://  Mostrando los ejercicios del curso (INTERFAZ DEL ALUMNO)
-
-//            $mform = new mod_ejercicios_curso($id);
-//            $mform->pintarejercicios($id);
             $mform = new mod_ejercicios_mostrar_ejercicios_buscados($id);
             $mform->mostrar_ejercicios_alumno($id);
             break;
     }
-
-
+    
     $mform->display();
     return true;
 }

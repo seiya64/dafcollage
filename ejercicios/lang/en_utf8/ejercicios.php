@@ -264,7 +264,6 @@ $string["elementoNecesario"]="Elemento necesario";
 
 
 // Añadidos correcciones ejercicios
-
 $string["elementoNecesario"]="Elemento necesario";
 $string["asociacion"]="Asociación";
 $string["aContinuacion"]="(a continuación puede añadir más preguntas)";

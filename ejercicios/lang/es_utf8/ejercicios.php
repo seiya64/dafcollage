@@ -189,17 +189,17 @@ $string['NuevaAso']='Añadir Aso';
 $string['tipopregunta1']='Tipo de archivo pregunta';
 
 //Generador de Ejercicios -- Texto Hueco -- Etiqueta TH
-$string["TH_texto"]="Texto ";
+$string["TH_titulo"]="Texto";
 $string["TH_huecos"]="Palabras ocultadas ";
 $string["TH_add_hueco"]="Añadir Hueco";
 $string["TH_mostrar_pistas"]="¿Desea que se muestren pistas sobre la longitud de las palabras que se colocan en los huecos?";
 $string["TH_mostrar_palabras"]="¿Desea que aparezcan las soluciones de los huecos en la parte inferior del ejercicio?";
 $string["TH_mostrar_soluciones"]="¿Desea que aparezcan las soluciones al pulsar el boton de Corregir los ejercicios?";
-$string["TH_introduzca_texto"]="Introduzca el texto en el cual se seleccionaran los huecos";
+$string["TH_texto"]="Introduzca el texto en el cual se seleccionaran los huecos";
+$string['TH_anadir']='Seleccione con dos clicks las palabras a ocultar';
 $string['TH_configuracion_ejercicio']="Configuraci&oacute;n del Ejercicio";
 $string['TH_pistas']="Pistas";
 $string['TH_pista_longitud']='Ocupa {$a} simbolos';
-$string['TH_anadir']='Añadir campo de texto';
 
 //Titulos de Ejercicios
 $string['MC_title']="Elección Múltiple";
@@ -264,7 +264,6 @@ $string["elementoNecesario"]="Elemento necesario";
 
 
 // Añadidos correcciones ejercicios
-
 $string["elementoNecesario"]="Elemento necesario";
 $string["asociacion"]="Asociación";
 $string["aContinuacion"]="(a continuación puede añadir más preguntas)";
