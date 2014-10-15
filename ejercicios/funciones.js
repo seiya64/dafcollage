@@ -1065,114 +1065,115 @@ function insertAfter(e,i){
     }
 }
 
-function botonMasPreguntas(){
-    //alert("añadiendo pregunta");
-
-    divnumpreguntas = document.getElementById('num_preg');
-    console.log(divnumpreguntas);
-    numeropreguntas=divnumpreguntas.value;
-    //alert("numero actual es"+ numeropreguntas);
-    anterior=document.getElementById('num_res_preg'+ numeropreguntas);
-    //alert(anterior.id);
-    numeropreguntas= parseInt(numeropreguntas) +1;
-    divnumpreguntas.value=numeropreguntas;
-    //alert("llega");
-    nuevodiv = document.createElement('div');
-    //alert("aki tb llega");
-    nuevodiv.id= "tabpregunta"+numeropreguntas;
-    //Creo un nuevo hijo a la tabla general para la pregunta
-    //alert("si");
-    var br = document.createElement('br');
-    var br1 = document.createElement('br');
-    var br2 = document.createElement('br');
-    tablapreg = document.createElement('table');
-    tablapreg.style.width="100%";
-
-    body= document.createElement('tbody');
-    nuevotr=document.createElement('tr');
-
-    body.appendChild(nuevotr);
-    nuevotd=document.createElement('td');
-    nuevotd.style.width="80%";
-    textareapreg=document.createElement('textarea');
-    textareapreg.style.width="900px";
-    textareapreg.setAttribute('class', 'pregunta');
-    textareapreg.name="pregunta"+numeropreguntas;
-    textareapreg.id="pregunta"+numeropreguntas;
-    //Añado el textarea de la prgunta
-    nuevotd.appendChild(textareapreg);
-
-    nuevotd1=document.createElement('td');
-    nuevotd1.style.width="5%";
-    imgborrar=document.createElement('img');
-    imgborrar.id="imgpregborrar"+numeropreguntas ;
-    imgborrar.src="./imagenes/delete.gif";
-    imgborrar.alt="eliminar respuesta";
-    imgborrar.style.height="10px";
-    imgborrar.style.width="10px";
-    imgborrar.setAttribute('onclick',"EliminarPregunta(tabpregunta"+numeropreguntas+","+numeropreguntas+")");
-    imgborrar.title="Eliminar Pregunta";
-
-    //
-
-    //icono de borrar pregunta
-    nuevotd1.appendChild(imgborrar);
-    nuevotd1.appendChild(br);
-
-    //Creación imagen añadir
-
-    imgañadir=document.createElement('img');
-    imgañadir.id="imgpreganadir"+numeropreguntas ;
-    imgañadir.src="./imagenes/añadir.gif";
-    imgañadir.alt="añadir respuesta";
-    imgañadir.style.height="15px";
-    imgañadir.style.width="15px";
-    imgañadir.setAttribute('onclick',"anadirRespuesta(respuestas"+numeropreguntas+","+numeropreguntas+")");
-    imgañadir.title="Añadir Pregunta";
-
-    nuevotd1.appendChild(imgañadir);
-    nuevotr.appendChild(nuevotd);
-    nuevotr.appendChild(nuevotd1);
-    tablapreg.appendChild(body);
-    //le añado sus br
-    nuevodiv.appendChild(br);
-    nuevodiv.appendChild(br1);
-    nuevodiv.appendChild(br2);
-    nuevodiv.appendChild(tablapreg);
-    nuevodiv.appendChild(br);
-
-    //div de respuestas
-
-
-    divrespuesta=document.createElement('div');
-    divrespuesta.id="respuestas"+numeropreguntas;
-    divrespuesta.setAttribute('class',"respuesta");
-
-      
-
-    nuevodiv.appendChild(divrespuesta);
-
-         
-
-    //lo inserto despues de anterior
-    insertAfter(anterior,nuevodiv);
-
-
-    //<input type="hidden" value="1" id="num_res_preg3" name="num_res_preg3
-
-    nuevoinput=document.createElement('input');
-    nuevoinput.type="hidden";
-    nuevoinput.value="0";
-    nuevoinput.id="num_res_preg"+numeropreguntas;
-    nuevoinput.name="num_res_preg"+numeropreguntas;
-
-    //añado el numero de respuestas de la nueva pregunta
-    insertAfter(nuevodiv,nuevoinput)
-
-    //alert("fin");
-
-      
-}
+//FUNCION COMENTADA POR DESUSO SI SE NECESITA IMPLEMENTAR DIRECTAMENTE EN EL JS DEL EJERCICIO ESPECIFICO
+//function botonMasPreguntas(){
+//    //alert("añadiendo pregunta");
+//
+//    divnumpreguntas = document.getElementById('num_preg');
+//    console.log(divnumpreguntas);
+//    numeropreguntas=divnumpreguntas.value;
+//    //alert("numero actual es"+ numeropreguntas);
+//    anterior=document.getElementById('num_res_preg'+ numeropreguntas);
+//    //alert(anterior.id);
+//    numeropreguntas= parseInt(numeropreguntas) +1;
+//    divnumpreguntas.value=numeropreguntas;
+//    //alert("llega");
+//    nuevodiv = document.createElement('div');
+//    //alert("aki tb llega");
+//    nuevodiv.id= "tabpregunta"+numeropreguntas;
+//    //Creo un nuevo hijo a la tabla general para la pregunta
+//    //alert("si");
+//    var br = document.createElement('br');
+//    var br1 = document.createElement('br');
+//    var br2 = document.createElement('br');
+//    tablapreg = document.createElement('table');
+//    tablapreg.style.width="100%";
+//
+//    body= document.createElement('tbody');
+//    nuevotr=document.createElement('tr');
+//
+//    body.appendChild(nuevotr);
+//    nuevotd=document.createElement('td');
+//    nuevotd.style.width="80%";
+//    textareapreg=document.createElement('textarea');
+//    textareapreg.style.width="900px";
+//    textareapreg.setAttribute('class', 'pregunta');
+//    textareapreg.name="pregunta"+numeropreguntas;
+//    textareapreg.id="pregunta"+numeropreguntas;
+//    //Añado el textarea de la prgunta
+//    nuevotd.appendChild(textareapreg);
+//
+//    nuevotd1=document.createElement('td');
+//    nuevotd1.style.width="5%";
+//    imgborrar=document.createElement('img');
+//    imgborrar.id="imgpregborrar"+numeropreguntas ;
+//    imgborrar.src="./imagenes/delete.gif";
+//    imgborrar.alt="eliminar respuesta";
+//    imgborrar.style.height="10px";
+//    imgborrar.style.width="10px";
+//    imgborrar.setAttribute('onclick',"EliminarPregunta(tabpregunta"+numeropreguntas+","+numeropreguntas+")");
+//    imgborrar.title="Eliminar Pregunta";
+//
+//    //
+//
+//    //icono de borrar pregunta
+//    nuevotd1.appendChild(imgborrar);
+//    nuevotd1.appendChild(br);
+//
+//    //Creación imagen añadir
+//
+//    imgañadir=document.createElement('img');
+//    imgañadir.id="imgpreganadir"+numeropreguntas ;
+//    imgañadir.src="./imagenes/añadir.gif";
+//    imgañadir.alt="añadir respuesta";
+//    imgañadir.style.height="15px";
+//    imgañadir.style.width="15px";
+//    imgañadir.setAttribute('onclick',"anadirRespuesta(respuestas"+numeropreguntas+","+numeropreguntas+")");
+//    imgañadir.title="Añadir Pregunta";
+//
+//    nuevotd1.appendChild(imgañadir);
+//    nuevotr.appendChild(nuevotd);
+//    nuevotr.appendChild(nuevotd1);
+//    tablapreg.appendChild(body);
+//    //le añado sus br
+//    nuevodiv.appendChild(br);
+//    nuevodiv.appendChild(br1);
+//    nuevodiv.appendChild(br2);
+//    nuevodiv.appendChild(tablapreg);
+//    nuevodiv.appendChild(br);
+//
+//    //div de respuestas
+//
+//
+//    divrespuesta=document.createElement('div');
+//    divrespuesta.id="respuestas"+numeropreguntas;
+//    divrespuesta.setAttribute('class',"respuesta");
+//
+//      
+//
+//    nuevodiv.appendChild(divrespuesta);
+//
+//         
+//
+//    //lo inserto despues de anterior
+//    insertAfter(anterior,nuevodiv);
+//
+//
+//    //<input type="hidden" value="1" id="num_res_preg3" name="num_res_preg3
+//
+//    nuevoinput=document.createElement('input');
+//    nuevoinput.type="hidden";
+//    nuevoinput.value="0";
+//    nuevoinput.id="num_res_preg"+numeropreguntas;
+//    nuevoinput.name="num_res_preg"+numeropreguntas;
+//
+//    //añado el numero de respuestas de la nueva pregunta
+//    insertAfter(nuevodiv,nuevoinput)
+//
+//    //alert("fin");
+//
+//      
+//}
 
 function botonMasRespuestas(i){
   
@@ -1854,141 +1855,142 @@ function EliminarRespuesta(respuesta,numpreg){
    
 }
 
-function anadirRespuesta(respuesta,numpreg){
-  
-    // var idrespuesta=respuesta.id;
-  
-    /*  switch(idrespuesta){
-        case 'respuestas1':
-            
-            numpreg="1";
-           
-            break;
-        case 'respuestas2':
-            
-            numpreg="2";
-            
-            break;
-        case 'respuestas3':
-            
-            numpreg="3";
-           
-            break;
-        case 'respuestas4':
-            
-            numpreg="4";
-            
-            break;
-        case 'respuestas5':
-            
-            numpreg="5";
-           
-            break;
-        case 'respuestas6':
-            
-            numpreg="6";
-            
-            break;
-            
-        case 'respuestas7':
-            
-            numpreg="7";
-           
-            break;
-        case 'respuestas8':
-            
-            numpreg="8";
-            
-            break;
-         case 'respuestas9':
-            
-            numpreg="9";
-            
-            break;
-    }*/
-    
-    var table = document.createElement("table");
-    var tr = document.createElement("tr");
-         
-            
-      
-    //-1 por el text del div
-    var numresp=(respuesta.childNodes.length/2) +1;
-          
-    table.width="100%";
-    table.id="tablarespuesta"+numresp+"_"+numpreg;
-        
-    var tbody = document.createElement("tbody");
-          
-            
-           
-    tr.id="trrespuesta"+numresp+"_"+numpreg;
-    var td = document.createElement("td");
-    td.style.width="80%";
-    var radioInput = document.createElement("input");
-    radioInput.setAttribute("class","over");
-    radioInput.type="radio";
-    radioInput.name="crespuesta"+numresp+"_"+numpreg;
-    radioInput.id="crespuesta"+numresp+"_"+numpreg;
-    radioInput.value="0";  
-    radioInput.setAttribute("onclick","BotonRadio(crespuesta"+numresp+"_"+numpreg+")");  
-    var div = document.createElement("textarea");
-    div.style.width="700px";
-    div.setAttribute("class","resp");
-    div.name="respuesta"+numresp+"_"+numpreg;
-    div.id="respuesta"+numresp+"_"+numpreg;
-    var text = document.createTextNode("Introduzca su respuesta..");
-           
-    div.appendChild(text);
-            
-    var td2 = document.createElement("td");
-    td2.style.width="5%"
-         
-         
-    var img= document.createElement("img");
-    img.id="eliminarrespuesta"+numresp+"_"+numpreg;
-    img.src="./imagenes/delete.gif";
-    img.style.height="10px";
-    img.style.width="10px";
-    img.setAttribute("onclick","EliminarRespuesta(tablarespuesta"+numresp+"_"+numpreg+","+numpreg+")");
-    img.title="Eliminar Respuesta";
-            
-            
-    var img2= document.createElement("img");
-    img2.src="./imagenes/incorrecto.png";
-    img2.style.height="15px";
-    img2.style.width="15x";
-    img2.id="correcta"+numresp+"_"+numpreg;
-    img2.setAttribute("onclick","InvertirRespuesta(correcta"+numresp+"_"+numpreg+",0)");
-    img2.title="Cambiar a Correcta";
-    var hidden= document.createElement("input");
-    hidden.type="hidden";
-    hidden.value="0";
-    hidden.id="valorcorrecta"+numresp+"_"+numpreg;
-    hidden.name="valorcorrecta"+numresp+"_"+numpreg;
-    //$divpregunta.='<input type="hidden" value="0"  id="valorcorrecta'.$q.'_'.$i.'" name="valorcorrecta'.$q.'_'.$i.'" />';
-    td2.appendChild(img);
-    td2.appendChild(img2);
-    td2.appendChild(hidden);
-    td.appendChild(radioInput);
-    td.appendChild(div);
-    tr.appendChild(document.createTextNode(""));
-    tr.appendChild(td);
-    tr.appendChild(document.createTextNode(""));
-    tr.appendChild(td2);
-    tbody.appendChild(tr);
-    table.appendChild(tbody);
-            
-    respuesta.appendChild(table);
-    respuesta.appendChild(document.createTextNode(""));
-     
-    //Sumo 1 al número de respuesas
-    numerorespuestas = document.getElementById('num_res_preg'+numpreg);
-       
-    numerorespuestas.value=parseInt(numerorespuestas.value)+1;
- 
-// respuesta.parentNode.addChild(respuesta);
-}
+//SE COMENTA ESTA FUNCION POR DESUSO, SI HACE FALTA IMPLEMENTAR EN ALGUN EJERCICIO HACERLO EN EL JS ESPECIFICO DE DICHO EJERCICIO
+//function anadirRespuesta(respuesta,numpreg){
+//  
+//    // var idrespuesta=respuesta.id;
+//  
+//    /*  switch(idrespuesta){
+//        case 'respuestas1':
+//            
+//            numpreg="1";
+//           
+//            break;
+//        case 'respuestas2':
+//            
+//            numpreg="2";
+//            
+//            break;
+//        case 'respuestas3':
+//            
+//            numpreg="3";
+//           
+//            break;
+//        case 'respuestas4':
+//            
+//            numpreg="4";
+//            
+//            break;
+//        case 'respuestas5':
+//            
+//            numpreg="5";
+//           
+//            break;
+//        case 'respuestas6':
+//            
+//            numpreg="6";
+//            
+//            break;
+//            
+//        case 'respuestas7':
+//            
+//            numpreg="7";
+//           
+//            break;
+//        case 'respuestas8':
+//            
+//            numpreg="8";
+//            
+//            break;
+//         case 'respuestas9':
+//            
+//            numpreg="9";
+//            
+//            break;
+//    }*/
+//    
+//    var table = document.createElement("table");
+//    var tr = document.createElement("tr");
+//         
+//            
+//      
+//    //-1 por el text del div
+//    var numresp=(respuesta.childNodes.length/2) +1;
+//          
+//    table.width="100%";
+//    table.id="tablarespuesta"+numresp+"_"+numpreg;
+//        
+//    var tbody = document.createElement("tbody");
+//          
+//            
+//           
+//    tr.id="trrespuesta"+numresp+"_"+numpreg;
+//    var td = document.createElement("td");
+//    td.style.width="80%";
+//    var radioInput = document.createElement("input");
+//    radioInput.setAttribute("class","over");
+//    radioInput.type="radio";
+//    radioInput.name="crespuesta"+numresp+"_"+numpreg;
+//    radioInput.id="crespuesta"+numresp+"_"+numpreg;
+//    radioInput.value="0";  
+//    radioInput.setAttribute("onclick","BotonRadio(crespuesta"+numresp+"_"+numpreg+")");  
+//    var div = document.createElement("textarea");
+//    div.style.width="700px";
+//    div.setAttribute("class","resp");
+//    div.name="respuesta"+numresp+"_"+numpreg;
+//    div.id="respuesta"+numresp+"_"+numpreg;
+//    var text = document.createTextNode("Introduzca su respuesta..");
+//           
+//    div.appendChild(text);
+//            
+//    var td2 = document.createElement("td");
+//    td2.style.width="5%"
+//         
+//         
+//    var img= document.createElement("img");
+//    img.id="eliminarrespuesta"+numresp+"_"+numpreg;
+//    img.src="./imagenes/delete.gif";
+//    img.style.height="10px";
+//    img.style.width="10px";
+//    img.setAttribute("onclick","EliminarRespuesta(tablarespuesta"+numresp+"_"+numpreg+","+numpreg+")");
+//    img.title="Eliminar Respuesta";
+//            
+//            
+//    var img2= document.createElement("img");
+//    img2.src="./imagenes/incorrecto.png";
+//    img2.style.height="15px";
+//    img2.style.width="15x";
+//    img2.id="correcta"+numresp+"_"+numpreg;
+//    img2.setAttribute("onclick","InvertirRespuesta(correcta"+numresp+"_"+numpreg+",0)");
+//    img2.title="Cambiar a Correcta";
+//    var hidden= document.createElement("input");
+//    hidden.type="hidden";
+//    hidden.value="0";
+//    hidden.id="valorcorrecta"+numresp+"_"+numpreg;
+//    hidden.name="valorcorrecta"+numresp+"_"+numpreg;
+//    //$divpregunta.='<input type="hidden" value="0"  id="valorcorrecta'.$q.'_'.$i.'" name="valorcorrecta'.$q.'_'.$i.'" />';
+//    td2.appendChild(img);
+//    td2.appendChild(img2);
+//    td2.appendChild(hidden);
+//    td.appendChild(radioInput);
+//    td.appendChild(div);
+//    tr.appendChild(document.createTextNode(""));
+//    tr.appendChild(td);
+//    tr.appendChild(document.createTextNode(""));
+//    tr.appendChild(td2);
+//    tbody.appendChild(tr);
+//    table.appendChild(tbody);
+//            
+//    respuesta.appendChild(table);
+//    respuesta.appendChild(document.createTextNode(""));
+//     
+//    //Sumo 1 al número de respuesas
+//    numerorespuestas = document.getElementById('num_res_preg'+numpreg);
+//       
+//    numerorespuestas.value=parseInt(numerorespuestas.value)+1;
+// 
+//// respuesta.parentNode.addChild(respuesta);
+//}
 
 function InvertirRespuesta(correcta,valor){
     
@@ -7401,3 +7403,54 @@ function readURL(input) {
             reader.readAsDataURL(input.files[0]);
         }
  }
+
+
+/*
+ * Funcion para cargar las fotos en los ejercicios 
+ * @author Javier Castro Fernandez, Borja Arroba Hernandez, Carlos Aguilar Miguel
+ * 
+ */
+$(document).ready(function() {
+
+    var text = '#botonFoto';
+    var button = $(text), interval;
+
+    new AjaxUpload(button, {
+        action: 'procesa_imagenes_ejercicios.php',
+        name: 'image',
+        autoSubmit: true,
+        onSubmit: function(file, ext) {
+            // cambiar el texto del boton cuando se selecicione la imagen
+            button.text('Subiendo');
+            // desabilitar el boton
+            this.disable();
+
+//            console.log(file);
+//            console.log(ext);
+            interval = window.setInterval(function() {
+                var text = button.text();
+                if (text.length < 11) {
+                    button.text(text + '.');
+                } else {
+                    button.text('Subiendo');
+                }
+            }, 200);
+        },
+        onComplete: function(file, response) {
+            button.text('Cambiar Foto');
+            // Habilitar boton otra vez	
+            this.enable();
+            window.clearInterval(interval);
+            console.log($('#fotoAsociada').attr('src'));
+            //La variable d es para resolver un problema de mozilla, que ocurre por que la url de la imagen
+            //no cambia cuando se suben varias fotos seguidas, al no cambiar la url creo que mozilla piensa que
+            //la imagen no ha cambiado y no recarga la vista de la foto, al pasarle d como argumento, aunque este
+            //no se utiliza para nada, la url cambia cada vez que se cambia la imagen y esta se refresca.
+            d=new Date();
+            $('#fotoAsociada').attr('src', response.replace(/&amp;/g, '&')+'&d='+d.getTime());
+//            $("#fotoAsociada").removeAttr("src");
+
+            console.log($('#fotoAsociada').attr('src'));
+        }
+    });
+});
