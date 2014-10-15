@@ -40,7 +40,7 @@
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details. */
-
+           
 class Ejercicios_general {
 
     var $id;
@@ -65,7 +65,7 @@ class Ejercicios_general {
     var $fuentes;
     var $foto_asociada;
 
-    //Contructor
+    //Constructor
     function Ejercicios_general($id = NULL, $id_curso = NULL, $id_creador = NULL, $tipoactividad = NULL, $tipoarchivopregunta = NULL, $tipoarchivorespuesta = NULL, $visible = NULL, $publico = NULL, $carpeta = NULL, $campotematico = NULL, $destreza = NULL, $temagramatical = NULL, $intencioncomunicativa = NULL, $tipologiatextual = NULL, $name = NULL, $descripcion = NULL, $numpreg = NULL,$copyrightpreg=NULL,$copyrightresp=NULL, $fuentes=NULL, $foto_asociada=NULL) {
 
 
@@ -2119,17 +2119,6 @@ class Ejercicios_texto_texto_resp{
   
 }
 
-
-
-
-
-
-
-
-
-
-
-
 /*
  * Clase que gestiona la tabla mdl_ejercicios_textos de la BD, es decir si el arichivo origen
  * es texto en el formulario de creación estará almacenado en esta tabla.
@@ -2140,14 +2129,17 @@ class Ejercicios_textos {
     var $id;
     var $id_ejercicio;
     var $texto;
+    var $textoauxiliar;
 
 
     //Contructor por defecto y con parametros
-    function Ejercicios_textos($id = NULL,$id_ejercicio=NULL,$texto = NULL) {
+    function Ejercicios_textos($id = NULL,$id_ejercicio=NULL,$texto = NULL, $textoauxiliar=NULL) {
 
         $this->id = $id;
         $this->id_ejercicio = $id_ejercicio;
         $this->texto = $texto;
+        //Texto auxiliar para almacenar datos de algunos ejercicios (no se utiliza en todos)
+        $this->textoauxiliar = $textoauxiliar;
     }
 
     //Obtener cada uno de los atributos de la tabla
@@ -2159,13 +2151,14 @@ class Ejercicios_textos {
             case 'id':
                 return $this->id;
                 break;
-
             case 'id_ejercicio':
                 return $this->id_ejercicio;
                 break;
-            
             case 'texto':
                 return $this->texto;
+                break;
+            case 'textoauxiliar':
+                return $this->textoauxiliar;
                 break;
         }
     }
@@ -2197,6 +2190,7 @@ class Ejercicios_textos {
         $this->id = $ejer->id;
         $this->id_ejercicio = $ejer->id_ejercicio;
         $this->texto = $ejer->texto;  
+        $this->textoauxiliar = $ejer->textoauxiliar;  
      
         return $this;
     }
@@ -2207,7 +2201,7 @@ class Ejercicios_textos {
         $this->id = $ejer->id;
         $this->id_ejercicio = $ejer->id_ejercicio;
         $this->texto=$ejer->texto;
-      
+        $this->textoauxiliar=$ejer->textoauxiliar;
 
         return $this;
     }
@@ -2237,19 +2231,6 @@ class Ejercicios_textos {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*
  * Clase que gestiona la tabla mdl_ejercicios_textos de la BD, es decir si el arichivo origen
@@ -2432,13 +2413,9 @@ class Ejercicios_texto_texto_preg{
 
 }
 
-
-//Clase para gestionar las imagenes asociadas de los ejercicios
-
-
-
-
 /*
+ * Clase para gestionar las imagenes asociadas de los ejercicios
+ * 
  * Clase que gestiona la tabla mdl_ejercicios_textos de la BD, es decir si el arichivo origen
  * es texto en el formulario de creación estará almacenado en esta tabla.
  */
@@ -2566,35 +2543,6 @@ class Ejercicios_imagenes_asociadas{
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*
  * Clase que gestiona la tabla mdl_ejercicios_textos de la BD, es decir si el arichivo origen
@@ -2863,8 +2811,6 @@ class Ejercicios_videos_asociados{
 
 }
 
-
-
 //tabla para gestionar asociacion simple (Videos asociados a textos)
 
 //------- Tablas para ejercicios Identificar Elementos ------------------
@@ -2999,7 +2945,6 @@ class ejercicios_ie_respuestas {
 
 }
 
-
 //------- Tablas para ejercicios Texto Hueco ------------------
 //Tabla que sirve para guardar la configuracion de un ejercicio de texto hueco
 class Ejercicios_texto_hueco {
@@ -3008,7 +2953,7 @@ class Ejercicios_texto_hueco {
     var $id_ejercicio;
     var $id_texto;
     var $mostrar_pistas;
-    var $mostrar_longuitud;
+    var $mostrar_longitud;
     var $mostrar_solucion;
     var $palabra;
     var $pista;
@@ -3018,13 +2963,13 @@ class Ejercicios_texto_hueco {
 
 
     //Contructor por defecto y con parametros
-    function Ejercicios_texto_hueco($id = NULL,$id_ejercicio=NULL,$id_texto=NULL,$mostrar_pistas=NULL,$mostrar_longuitud=NULL,$mostrar_solucion=NULL,$palabra=NULL,$pista=NULL,$ubicacion_palabra=NULL) {
+    function Ejercicios_texto_hueco($id = NULL,$id_ejercicio=NULL,$id_texto=NULL,$mostrar_pistas=NULL,$mostrar_longitud=NULL,$mostrar_solucion=NULL,$palabra=NULL,$pista=NULL,$ubicacion_palabra=NULL) {
         
         $this->id = $id;
         $this->id_ejercicio = $id_ejercicio;
         $this->id_texto = $id_texto;
         $this->mostrar_pistas = $mostrar_pistas;
-        $this->mostrar_longuitud = $mostrar_longuitud;
+        $this->mostrar_longitud = $mostrar_longitud;
         $this->mostrar_solucion = $mostrar_solucion;
         $this->palabra = $palabra;
         $this->pista = $pista;
@@ -3051,8 +2996,8 @@ class Ejercicios_texto_hueco {
             case 'mostrar_pistas':
                 return $this->mostrar_pistas;
                 break;
-            case 'mostrar_longuitud':
-                return $this->mostrar_longuitud;
+            case 'mostrar_longitud':
+                return $this->mostrar_longitud;
                 break;
             case 'mostrar_solucion':
                 return $this->mostrar_solucion;
@@ -3073,7 +3018,7 @@ class Ejercicios_texto_hueco {
     //de la nueva instancia creada
     function insertar() {
 //        var_dump($this);
-        $sql="INSERT INTO mdl_ejercicios_texto_hueco (id, id_ejercicio, id_texto, mostrar_pistas, mostrar_longitud, mostrar_solucion, palabra, pista, ubicacion_palabra) VALUES (NULL,'$this->id_ejercicio','$this->id_texto','$this->mostrar_longuitud','$this->mostrar_pistas','$this->mostrar_solucion','$this->palabra','$this->pista','$this->ubicacion_palabra')";
+        $sql="INSERT INTO mdl_ejercicios_texto_hueco (id, id_ejercicio, id_texto, mostrar_pistas, mostrar_longitud, mostrar_solucion, palabra, pista, ubicacion_palabra) VALUES (NULL,'$this->id_ejercicio','$this->id_texto','$this->mostrar_pistas','$this->mostrar_longitud','$this->mostrar_solucion','$this->palabra','$this->pista','$this->ubicacion_palabra')";
         execute_sql($sql);
     }
 
@@ -3100,7 +3045,7 @@ class Ejercicios_texto_hueco {
         $this->id_ejercicio = $ejer->id_ejercicio;
         $this->id_texto = $ejer->id_texto;
         $this->mostrar_palabras = $ejer->mostrar_palabras;
-        $this->mostrar_longuitud = $ejer->mostrar_longuitud;
+        $this->mostrar_longitud = $ejer->mostrar_longitud;
         $this->mostrar_solucion = $ejer->mostrar_solucion; 
         $this->palabra = $ejer->palabra;
         $this->pista = $ejer->pista;
@@ -3129,10 +3074,10 @@ class Ejercicios_texto_hueco {
 
         return $todos_mis_ejercicios;
     }
-    function obtener_todas_preguntas_ejercicicio($id_ejercicio) {
+    function obtener_todos_id_texto($id_texto) {
 
 
-        $sql = 'SELECT * FROM  mdl_ejercicios_texto_hueco WHERE id_ejercicio=' . $id_ejercicio;
+        $sql = 'SELECT * FROM  mdl_ejercicios_texto_hueco WHERE id_texto=' . $id_texto;
 
         $todos = get_records_sql($sql);
 
@@ -3151,8 +3096,6 @@ class Ejercicios_texto_hueco {
         return $todos_mis_ejercicios;
     }
 }
-
-
 
 //------- Tablas para ejercicios Ordenar Elementos ------------------
 //Tabla que sirve para guardar las respuestas de los ejercicios Ordenar Elementos
@@ -3261,7 +3204,6 @@ class ejercicios_ordenar_elementos_resp {
     
 }
 
-
 //Tabla que sirve para guardar la configuracion de un ejercicio de ordenar elementos
 class ejercicios_ordenar_elementos {
 
@@ -3357,7 +3299,6 @@ class ejercicios_ordenar_elementos {
         return $todos_mis_ejercicios;
     }
 }
-
 
 //Tabla que sirve para guardar las preguntas de un ejercicio de IE mas RC
 class ejercicios_ierc_preg {
@@ -3485,7 +3426,6 @@ class ejercicios_ierc_preg {
         return $todos_mis_ejercicios;
     }
 }
-
 
 //Tabla que sirve para guardar las respuestas de un ejercicio de IE mas RC
 class ejercicios_ierc_resp {

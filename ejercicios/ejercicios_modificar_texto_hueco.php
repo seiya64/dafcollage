@@ -48,7 +48,6 @@ require_once("../../config.php");
 require_once("lib.php");
 require_once("ejercicios_clase_general.php");
 require_once("ejercicios_form_creacion.php");
-require_once("YoutubeVideoHelper.php");
 
 //código copiado de Multiple Choice
 global $USER;
@@ -61,45 +60,36 @@ global $CFG;
  * **************************************************************************** */
 
 $buscar = $_SESSION['buscar'];
-
-//$tipocreacion = optional_param('tipocreacion', 0, PARAM_INT);
-//$tipo_origen = optional_param('tipo_origen', 0, PARAM_INT);
-$num_preg = optional_param('num_preg', PARAM_TEXT);
+$id_curso = $_SESSION['id_curso'];
+$fuentes = optional_param('fuentes', PARAM_TEXT);
+$tipocreacion = optional_param('tipocreacion', 0, PARAM_INT);
+$tipo_origen = optional_param('tipo_origen', 0, PARAM_INT);
+$numText = optional_param('numText', PARAM_TEXT);
 
 //bucle para recoger campo hidden de numero de palabras ocultadas en cada una de los textos
-$num_palabras = array();
-for ($i = 1; $i <= $num_preg; $i++){
-    $num_palabras[$i]=optional_param('num_palabras'.$i.'', 0, PARAM_INT);
+$numPalabras = array();
+for ($i = 1; $i <= $numText; $i++){
+    $numPalabras[$i]=optional_param('num_palabras'.$i.'', 0, PARAM_INT);
 }
 
-$ejercicioOrigen = unserialize($_SESSION['ejercicioGeneral']); // Datos generales del ejercicio
-$id_curso = $ejercicioOrigen->get('id_curso');
-$id_creador = $ejercicioOrigen->get('id_creador');
-$TipoActividad = $ejercicioOrigen->get('tipoactividad');
-$TipoArchivoPregunta = $ejercicioOrigen->get('tipoarchivopregunta');
-$TipoArchivoRespuesta = $ejercicioOrigen->get('tipoarchivorespuesta');
-$visible = $ejercicioOrigen->get('visible');
-$publico = $ejercicioOrigen->get('publico'); 
-//$carpeta = unserialize($_SESSION['carpeta']); // Carpeta del profesor
-$CampoTematico = $ejercicioOrigen->get('campotematico');
-$Destreza = $ejercicioOrigen->get('destreza');
-$TemaGramatical = $ejercicioOrigen->get('temagramatical');
-$IntencionComunicativa = $ejercicioOrigen->get('intencioncomunicativa');
-$TipologiaTextual = $ejercicioOrigen->get('tipologiatextual');
-$name = $ejercicioOrigen->get('name');
-$descripcion = $ejercicioOrigen->get('descripcion');
-$copyrightpreg = $ejercicioOrigen->get('copyrightpreg');
-$copyrightresp = $ejercicioOrigen->get('copyrightresp');
-$fuentes = $ejercicioOrigen->get('fuentes');
-$foto_asociada = $ejercicioOrigen->get('foto_asociada');
+//Se comprueba si se ha subido una foto al ejercicio
+$path = $CFG->dataroot.'/'.$USER->id.'/';
+$name = substr(md5($USER->id), 0, 10);
+$foto=0;
+if(file_exists($path.$name)) {
+    $foto=1;
+}
 
-//**Comprobar carpeta, destreza y foto_asociada
-//$ejercicioGeneral = new Ejercicios_general(NULL, $id_curso, $id_curso, $TipoActividad, $TipoArchivoPregunta, $TipoArchivoRespuesta, $visible, $publico, $carpeta, $CampoTematico, $Destreza, $TemaGramatical, $IntencionComunicativa, $TipologiaTextual, $name, $descripcion, NULL, $copyrightpreg, $copyrightresp, $fuentes, $foto_asociada);
-$ejercicioGeneral = new Ejercicios_general(NULL, $id_curso, $id_creador, $TipoActividad, $TipoArchivoPregunta, $TipoArchivoRespuesta, $visible, $publico, '0', $CampoTematico, $Destreza, $TemaGramatical, $IntencionComunicativa, $TipologiaTextual, $name, $descripcion, $num_preg,$copyrightpreg, $copyrightresp, $fuentes, 0);
-
-
-
-
+if (optional_param('radiovisible', PARAM_TEXT) == "Si") {
+    $visible = 1;
+} else {
+    $visible = 0;
+}
+if (optional_param('radioprivado', PARAM_TEXT) == "Si") {
+    $privado = 1;
+} else {
+    $privado = 0;
+}
 
 /* * ****************************************************************************
  * ******************************************************************************
@@ -107,125 +97,104 @@ $ejercicioGeneral = new Ejercicios_general(NULL, $id_curso, $id_creador, $TipoAc
  * ******************************************************************************
  * **************************************************************************** */
 
-if ($buscar == 0) { // Se está creando el ejercicio *********************************
-    // Carga de datos de sesión
-    // Se procede a insertar en la base de datos el ejercicio, comenzando por su descripción general
-
-//    $ejercicioGeneral->set_visibilidad($visible);
-//    $ejercicioGeneral->set_privacidad($privado);
-//    $ejercicioGeneral->set_foto($foto);
-    $id_ejercicio = $ejercicioGeneral->insertar();
-//    echo $id_ejercicio;
-    // Se asocia al profesor creador   **Comprobar carpeta!
-    $ejercicio_profesor = new Ejercicios_prof_actividad($id_curso, $USER->id, $id_ejercicio, '0');
-    $ejercicio_profesor->insertar();
+//SE ESTA CREANDO EL EJERCICIO
+if($buscar==0) {
+    $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']); // Datos generales del ejercicio
+    $carpeta = unserialize($_SESSION['cosasProfe']); // Carpeta del profesor
     
+    // Se procede a insertar en la base de datos el ejercicio, comenzando por su descripción general
+    $ejercicioGeneral->set_fuentes($fuentes);
+    $ejercicioGeneral->set_visibilidad($visible);
+    $ejercicioGeneral->set_privacidad($privado);
+    $ejercicioGeneral->set_foto($foto);
+
+    $idEjercicio = $ejercicioGeneral->insertar();
+  
+    //la foto no ha sido modificada por lo tanto cargo lo que hubiera
+    if($foto == 0) {
+        $foto=$ejercicioGeneral->get("foto_asociada");
+    } else { //la foto ha sido modificada asi que la guardo con el nuevo nombre
+        //el USER->id siempre es el creador de ejercicio, no puede modificarlo nadie mas
+        $origen = $CFG->dataroot . '/' . $USER->id . '/' . substr(md5($USER->id), 0, 10);
+        $destino = $CFG->dataroot . '/' . $USER->id . '/' . substr(md5($idEjercicio), 0, 10);
+        
+        // Se renombra la foto con el md5 del id del ejercicio
+        rename($origen, $destino);
+    }
+
+    // Se asocia al profesor creador
+    $ejercicio_profesor = new Ejercicios_prof_actividad($id_curso, $USER->id, $idEjercicio, $carpeta);
+    $ejercicio_profesor->insertar();
+    //Para guardar los textos y las palabras
     //$i -> referido al texto   $j -> referido a la palabra dentro del texto
-    for ($i = 1; $i <= $num_preg; $i++){
-        $texto = optional_param('guardarTextoHuecos'.$i.'', PARAM_TEXT);
-        $nuevotexto = new Ejercicios_textos(NULL, $id_ejercicio, $texto);
-        $id_texto = $nuevotexto->insertar();
-        for ($j=1; $j <= $num_palabras[$i]; $j++){
-            $palabra = optional_param('palabra'.$i.$j.'', PARAM_TEXT);
-            $nuevapalabra = new Ejercicios_texto_hueco( NULL, $id_ejercicio, $id_texto, '1', '1', '1', $palabra, 'pista', '1');
+    for ($i = 1; $i <= $numText; $i++){
+        $texto = optional_param("id_original".$i, PARAM_TEXT);
+        $textoHuecos = optional_param("id_pregunta".$i, PARAM_TEXT);
+        $nuevotexto = new Ejercicios_textos(NULL, $idEjercicio, $texto, $textoHuecos);
+        $idTexto = $nuevotexto->insertar();
+        for ($j=1; $j <= $numPalabras[$i]; $j++){
+            $palabra = optional_param("palabra".$i.$j, PARAM_TEXT);
+            $pista = optional_param("pista".$i.$j, PARAM_INT);
+            $longitud = optional_param("longitud".$i.$j, PARAM_INT);
+            $solucion = optional_param("solucion".$i.$j, PARAM_INT);
+            $campoPista = optional_param("campo".$i.$j, PARAM_INT);
+            $start = optional_param("start".$i.$j, PARAM_TEXT);
+            $nuevapalabra = new Ejercicios_texto_hueco( NULL, $idEjercicio, $idTexto, $pista, $longitud, $solucion, $palabra, $campoPista, $start);
             $nuevapalabra->insertar(); 
         }
-
-
     }
+} else {
+    // Se obtiene el identificador del ejercicio
+    $idEjercicio = $_SESSION['id_ejercicio'];
+    $ejercicios_bd = new Ejercicios_general();
+    $ejercicios_leido = $ejercicios_bd->obtener_uno($idEjercicio);
+
+    //Se comprueba si ya existia foto asociada
+    $path = $CFG->dataroot.'/'.$USER->id.'/';
+    $name = substr(md5($idEjercicio), 0, 10);
+    if(file_exists($path.$name)) {
+        $foto=1;
+    }
+
+    $ejercicios_leido->set_fuentes($fuentes);
+    $ejercicios_leido->set_visibilidad($visible);
+    $ejercicios_leido->set_numpregunta($num_preg);
+    $ejercicios_leido->set_privacidad($privado);
+    $ejercicios_leido->set_foto($foto);
+    $ejercicios_leido->alterar();
+
+    //el USER->id siempre es el creador, no puede modificarlo nadie mas
+    $origen = $CFG->dataroot . '/' . $USER->id . '/' . substr(md5($USER->id), 0, 10);
+    $destino = $CFG->dataroot . '/' . $USER->id . '/' . substr(md5($idEjercicio), 0, 10);
+
+    // Se copia la imagen definitiva del ejercicio a la carpeta destinada a ello
+    rename($origen, $destino);
     
-    redirect('./view.php?id=' . $id_curso . '&opcion=9');
-
+    //Se eliminan tanto los textos como las palabras asociadas al ejercicio para insertarlas de nuevo
+    $textos = new Ejercicios_textos();
+    $textos->borrar_id_ejercicio($idEjercicio);
+    
+    $palabras = new Ejercicios_texto_hueco();
+    $palabras->borrar_id_ejercicio($idEjercicio);
+    
+    //Para guardar los textos y las palabras
+    //$i -> referido al texto   $j -> referido a la palabra dentro del texto
+    for ($i = 1; $i <= $numText; $i++){
+        $texto = optional_param("id_original".$i, PARAM_TEXT);
+        $textoHuecos = optional_param("id_pregunta".$i, PARAM_TEXT);
+        $nuevotexto = new Ejercicios_textos(NULL, $idEjercicio, $texto, $textoHuecos);
+        $idTexto = $nuevotexto->insertar();
+        for ($j=1; $j <= $numPalabras[$i]; $j++){
+            $palabra = optional_param("palabra".$i.$j, PARAM_TEXT);
+            $pista = optional_param("pista".$i.$j, PARAM_INT);
+            $longitud = optional_param("longitud".$i.$j, PARAM_INT);
+            $solucion = optional_param("solucion".$i.$j, PARAM_INT);
+            $campoPista = optional_param("campo".$i.$j, PARAM_INT);
+            $start = optional_param("start".$i.$j, PARAM_TEXT);
+            $nuevapalabra = new Ejercicios_texto_hueco( NULL, $idEjercicio, $idTexto, $pista, $longitud, $solucion, $palabra, $campoPista, $start);
+            $nuevapalabra->insertar(); 
+        }
+    }
 }
-
-//// si es la primera vez que entramos todavia no tendra id_ejercicio (este la obtenemos al guardar por primera vez el ejercicio en la BD)
-//$id_curso = optional_param('id_curso', 0, PARAM_INT);
-//$id_ejercicio = optional_param('id_ejercicio', 0, PARAM_INT);
-//$tipo_origen = optional_param('tipo_origen', 0, PARAM_INT);
-//$tipo_respuesta = optional_param('tr', 0, PARAM_INT);
-//$tipo_creacion = optional_param('tipocreacion', 0, PARAM_INT);
-//
-//ECHO "MODIFICANDO_texto_hueco"; 
-//
-//$mform = new mod_ejercicios_mostrar_ejercicio_texto_hueco($id_curso, $id_ejercicio, $tipo_origen, $tipo_respuesta, $tipo_creacion);
-//$mform->mostrar_ejercicio_texto_hueco($id_curso, $id_ejercicio, 0, $tipo_origen, $tipo_respuesta, $tipo_creacion);
-//
-//$numeropreguntas = optional_param('num_preg', 0, PARAM_INT);
-//
-//echo "El numero de pregunas es" . $numeropreguntas;
-//
-//$ejercicio_general = new Ejercicios_general();
-//     $miejercicio=$ejercicio_general->obtener_uno($id_ejercicio);
-//     $miejercicio->set_numpregunta($numeropreguntas);
-//     $fuentes = optional_param('fuentes',PARAM_TEXT);
-//     $miejercicio->set_fuentes($fuentes);
-//     $miejercicio->alterar();
-//     
-//begin_sql();
-//
-//if ($tipo_origen == 1) { //la pregunta es un texto
-//    if ($tipo_respuesta == 1) {//Es un texto
-//        //obtengo los id de las preguntas del ejercicio
-//        //$id_preguntas = array();
-//
-//        $mis_preguntas = new Ejercicios_texto_texto_preg();
-//
-//        $id_preguntas = $mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
-//        //borro las respuestas
-//
-//        for ($s = 0; $s < sizeof($id_preguntas); $s++) {
-//            delete_records('ejercicios_texto_texto_resp', 'id_pregunta', $id_preguntas[$s]->get('id'));
-//        }
-//    } 
-//
-//    //borro las preguntas y la configuracion del ejercicio
-//    delete_records('ejercicios_texto_texto_preg', 'id_ejercicio', $id_ejercicio);
-//    delete_records('ejercicios_texto_hueco','id_ejercicio',$id_ejercicio);
-//}
-//
-//$file_log = @fopen("log_modificarAM.txt","w");
-//$log = "";
-//$log.="Numero de preguntas: " . $numeropreguntas . "\n";
-//
-////Guardo la nueva configuracion del ejercicio
-//$mostrar_pistas = optional_param('TH_mostrar_pistas',0,PARAM_INT);
-//$mostrar_palabras = optional_param('TH_mostrar_palabras',0,PARAM_INT);
-//$mostrar_soluciones = optional_param('TH_mostrar_solucion',0,PARAM_INT);
-//
-////creacion de la instancia de texto_hueco
-//$cfg_ej = new ejercicios_texto_hueco(NULL, $id_ejercicio, $mostrar_pistas, $mostrar_palabras, $mostrar_soluciones);
-//$cfg_ej->insertar();
-//
-//
-////Guardo las nuevas
-//for ($i = 0; $i < $numeropreguntas; $i++) {
-//    //Obtengo el numero de respuestas a cada pregunta
-//    $j = $i + 1;
-//    $log.="Pregunta numero: " . $j . "\n";
-//
-//    if ($tipo_origen == 1) { //Si la pregunta es un texto
-//        $preg = required_param('pregunta' . $j, PARAM_TEXT);
-//        $ejercicio_texto_preg = new Ejercicios_texto_texto_preg(NULL, $id_ejercicio, $preg);
-//        $id_pregunta = $ejercicio_texto_preg->insertar();
-//
-//
-//        if ($tipo_respuesta == 1) { //Si la respuesta es un texto
-//            $num_resp = required_param('num_res_preg'.$j,PARAM_INT);
-//            
-//            for ($k=1; $k<=$num_resp; $k++) {
-//                $resp = required_param('respuesta'.$k.'_'.$j, PARAM_TEXT);
-//
-//                $correcta = $k-1;
-//
-//                $ejercicio_texto_resp = new Ejercicios_texto_texto_resp(NULL, $id_pregunta, $resp, $correcta);
-//                $ejercicio_texto_resp->insertar();
-//            }
-//        } 
-//    } 
-//}
-//fwrite($file_log,$log,strlen($log));
-//fclose($file_log);
-//commit_sql();
-//
-//redirect('./view.php?id=' . $id_curso . '&opcion=9');
+redirect('./view.php?id=' . $id_curso . '&opcion=9');
 ?>

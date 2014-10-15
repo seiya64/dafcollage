@@ -88,7 +88,8 @@
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="id_ejercicio"/>
         <FIELD NAME="id_ejercicio" TYPE="int" LENGTH="11" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Identificacion del ejrcicio" PREVIOUS="id" NEXT="texto"/>
-        <FIELD NAME="texto" TYPE="text" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Texto origen del ejercicio" PREVIOUS="id_ejercicio"/>
+        <FIELD NAME="texto" TYPE="text" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Texto origen del ejercicio" PREVIOUS="id_ejercicio" NEXT="textoAuxiliar"/>
+        <FIELD NAME="textoAuxiliar" TYPE="text" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" ENUM="false" COMMENT="Texto para guardar otros datos del ejercicio" PREVIOUS="texto"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_ejercicio" />

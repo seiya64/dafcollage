@@ -55,756 +55,8 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
     function definition() {
         
     }
-
-    //Genera el codigo para almacenar en una variable de javascript las respuestas
-    function genera_matriz_respuestas_js($respuestas) {
-        $salida = '<script type="text/javascript">';
-        $salida .= ' var respuestas = new Array();';
-        for ($i = 0; $i < sizeof($respuestas); $i++) {
-            $salida .= 'respuestas[' . $i . ']=new Array();';
-            for ($j = 0; $j < sizeof($respuestas[$i]); $j++) {
-                $salida .= 'respuestas[' . $i . '][' . $j . ']="' . $respuestas[$i][$j]->get('respuesta') . '";';
-            }
-        }
-        $salida.='</script>';
-        return $salida;
-    }
-
-    // no funciona?? boton generar huecos
-    /**
-     * Genera el codigo html para presentar el texto de la pregunta con los huecos
-     * @param string $texto Texto de la pregunta
-     * @param integer $numpreg Numero de pregunta
-     * @param array $respuestas Array con las respuestas de la pregunta
-     * @param {0,1} $mostrar_pistas 1 si se desea mostrar pistas, 0 en otro caso
-     */
-    function genera_texto_con_huecos($texto, $numpreg, $respuestas, $mostrar_pistas) {
-        $file_log = fopen("log_TH_genera_huecos.txt", "w");
-        $regexp = "/\[\[(\d)+\]\]/";
-        $encontrado = preg_match_all($regexp, $texto, $coincidencias, PREG_OFFSET_CAPTURE);
-
-        $log = "Numero de pregunta: " . $numpreg . "\n";
-        $log .= "Texto: " . $texto . "\n";
-        $log .= "Respuestas: " . var_export($respuestas, true) . "\n";
-        $log .= "encontrado: " . $encontrado . "\n";
-        $log .= "coincidencias: " . var_export($coincidencias, true) . "\n";
-
-        $salida = "";
-        $inicio = 0;
-        $fin = 0;
-
-        if ($encontrado) {
-            foreach ($coincidencias[0] as $coincide) {
-                $fin = $coincide[1] - 1 - $inicio;
-                $log .= "Inicio: " . $inicio . " Fin: " . $fin . "\n";
-                $cad = ($fin >= 0) ? substr($texto, $inicio, $fin) : "";
-                $log .= "Cad: " . $cad . "\n";
-                $salida .= '<span>' . $cad . '</span>';
-                $numero = (int) substr($coincide[0], 2, strlen($coincide[0]) - 3);
-                $log .= "Numero: " . $numero . "\n";
-                $log .= "Respuesta numero " . ($numero + 1) . " : " . $respuestas[$numero]->get('respuesta') . "\n";
-                $inicio = $coincide[1] + strlen($coincide[0]);
-                $log .= "Nuevo inicio: " . $inicio . "\n";
-
-                $long = strlen($respuestas[$numero]->get('respuesta'));
-                $nombre = "resp" . ($numero + 1) . "_" . $numpreg;
-                $nombre_help = "help" . ($numero + 1) . "_" . $numpreg;
-                $salida .= '<textarea style="resize:none;" name="' . $nombre . '" id="' . $nombre . '" rows="1" cols="' . $long . '" ></textarea>';
-                $salida .= '<img id="img_' . $nombre . '" />';
-                if ($mostrar_pistas) {
-                    //$salida .= '<div id="'.$nombre_help.'" style="display:none;" >' . get_string('TH_pista_longitud','ejercicios',$long) . '</div>';
-                    //$salida .= '<script type="text/javascript" >$("#'.$nombre_help.'").tooltip({track: true,my: "left+15 center", at: "right center"}););</script>';
-                    //$salida .= '<img id="'.$nombre_help.'" src="http://localhost/moodle/pix/help.gif" onmouseover="document.getElementById(\''.$nombre_help.'\').style.display=\'block\'" onmouseout="document.getElementById(\''.$nombre_help.'\').style.display=\'none\'" />';
-                    $salida .= '<img id="' . $nombre_help . '" src="http://localhost/moodle/pix/help.gif" title="' . get_string('TH_pista_longitud', 'ejercicios', $long) . '"  />';
-                }
-            }
-            if ($inicio < strlen($texto) - 1) {
-                $cad = substr($texto, $inicio);
-                $log .= "Ultima cadena: " . $cad . "\n";
-                $salida .= '<span>' . $cad . '</span>';
-            }
-        }
-
-
-        fwrite($file_log, $log, strlen($log));
-        fclose($file_log);
-
-        return $salida;
-    }
-
-    //funcion para crear ejercicio texto hueco
-    function creando_ejercicio(&$mform, $id, $npreguntas, $tipoorigen, $tiporespuesta) {
-
-        global $CFG, $COURSE, $USER;
-        $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
-
-        $mform = & $this->_form;
-
-        $mform->addElement('html', '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>');
-        $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.js"></script>');
-        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
-        $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
-
-        $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']);
-        // Se obtienen los datos del ejercicio a partir de los datos almacenados en sesión (gestionados por ejercicios_gestion_creacion)
-        // Hay que tener en cuenta que parte de los datos del ejercicioGeneral se van a rellenar en este paso
-        // debido a añadidos posteriores (las fuentes y la imagen asociada)
-        // para la posterior creación (manejada por ejercicio_modificar_texto_texto.php)
-        $nombre = $ejercicioGeneral->get('name');
-        $npreg = $ejercicioGeneral->get('numpreg');
-        $creador = $ejercicioGeneral->get('id_creador');
-        $tipo_origen = $ejercicioGeneral->get('tipoarchivopregunta');
-        $licencia = $ejercicioGeneral->get("copyrightpreg");
-        $visible = $ejercicioGeneral->get("visible");
-        $publico = $ejercicioGeneral->get("publico");
-
-        //generamos titulo del ejercicio
-        $title = get_string('TH_title', 'ejercicios');
-        $creacion = get_string('Creacion', 'ejercicios');
-        $titulo = genera_titulos($creacion, $title, $id);
-        $mform->addElement('html', $titulo);
-
-        // Identificador del ejercicio para la foto asociada. A la espera de una mejor solución.
-        $mform->addElement('html', '<input id="idFoto" name="idFoto" type="hidden" value="/temporal' . $creador . '" />');
-
-        //Campo de la imagen del ejercicio
-        $tabla_imagenesHTML = '<div id="capa1">';
-        $tabla_imagenesHTML.= '<a id="botonFoto" class="up">Cambiar Foto</a>';
-        $tabla_imagenesHTML.= '</div>';
-        $tabla_imagenesHTML.= '<div id="capa2"> ';
-        $tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="./" style="height: 300px;"/>';
-        $tabla_imagenesHTML.= '</div>';
-        $mform->addElement('html', $tabla_imagenesHTML);
-
-
-        //En el ejercicio texto hueco, no hace falta poner un switch para los tipos de pregunta y respuesta ya que solo es de tipo texto.
-        //Tipo origen = tipo respuesta = texto
-        //$aux = 1; variable para saber el número de la pregunta que estamos tratando
-        
-        //para saber el número de la pregunta que estamos tratando
-        $divnumpregunta = '<input type="hidden" value="1" id="num_preg" name="num_preg" />';
-        $mform->addElement('html', $divnumpregunta);
-        
-        $divGeneralPlus = '<div name="divGeneralPlus" id="divGeneralPlus" class="divGeneralPlus">';
-        $mform->addElement('html', $divGeneralPlus);
-        
-        $divGeneral = '<div name="divGeneral" id="divGeneral" class="divGeneral">';
-        $mform->addElement('html', $divGeneral);
-        
-        $divPregunta = '<div name="divPregunta1" id="divPregunta1" class="divPregunta">';
-        $mform->addElement('html', $divPregunta);
-        
-        //Campo hidden para contabilizar el numero de palabras
-        $divnumpalabras = '<input type="hidden" value="0" id="num_palabras1" name="num_palabras1" />';
-        $mform->addElement('html', $divnumpalabras);
-        //campo hidden para guardar de manera auxiliar el texto con huecos
-        $guardarTextoHuecos = '<input type="hidden" value="" id="guardarTextoHuecos1" name="guardarTextoHuecos1" />';
-        $mform->addElement('html', $guardarTextoHuecos);
-        
-        $titulo = '</br><h3>' . get_string('TH_texto', 'ejercicios') . '1' . '</h3>';
-        $mform->addElement('html', $titulo);
-
-        //Boton para crear texto huecos 
-        $opciones = '<center><span>Crear hueco cada <select id="distanciaHueco1" name="distanciaHueco1"> <option>--</option> <option value="5">5ª</option> <option value="6">6ª</option> <option value="7">7ª</option> <option value="8">8ª</option> <option value="9">9ª</option></select> palabra</span></center>';
-        $mform->addElement('html', $opciones);
-        $boton = '<center><input type="button" name="textoHueco1" id="textoHueco1" value="Crear texto hueco" onclick="ocultarPalabras(this.id)" /> <input type="button" name="borrarTextos1" id="borrarTextos1" value="Limpiar texto original" onclick="limpiarContenidosBoton(this.id)" /> </center>';
-        $mform->addElement('html', $boton);
-        
-//       disabled="disabled"
-        $mform->addElement('textarea', 'original1', get_string("TH_texto_original", 'ejercicios'), 'wrap="virtual" rows="5" cols="70"');
-        $mform->addElement('textarea', 'pregunta1', get_string("TH_introduzca_texto", 'ejercicios'), 'wrap="virtual" rows="5" cols="70" disabled="disabled"');
-        
-        $divDerecha = '<div name="divDerecha1" id="divDerecha1" class="divDerecha">';
-        $divDerecha.= '</div>';
-        $mform->addElement('html', $divDerecha);
-        
-        //Se añade un boton para que se cree un nuevo hueco. 
-        $divBoton = '<div name="divBoton" id="divBoton" class="divBoton">';
-        $divBoton.= '<center><input type="button" name="add_hueco1" id="add_hueco1" value="' . get_string('TH_add_hueco', 'ejercicios') . '" onclick="TH_addHueco(this.id)" /> </center>';
-        $divBoton.= '</div>';
-        $mform->addElement('html', $divBoton);
-        
-        $divPalabras = '<div name="divPalabrasN1" id="divPalabrasN1" >';
-        $divPalabras.= '</div>';
-        $mform->addElement('html', $divPalabras);
-
-        $divPregunta = '</div>';
-        $mform->addElement('html', $divPregunta);
-        
-        $divGeneral = '</div>'; 
-        $mform->addElement('html', $divGeneral);
-        
-        $divGeneralPlus = '</div>'; 
-        $mform->addElement('html', $divGeneralPlus);
-        
-        //Botón para añadir más preguntas
-        $boton = '<br><center><input type="button" name="masPreguntas" id="masPreguntas" value="Añadir más preguntas" onclick="clonar()" /></center></br>';
-        $mform->addElement('html', $boton);
-
-        $fuentes = genera_fuentes();
-        $mform->addElement('html', $fuentes);
-
-//        $buttonarray = array();
-//        $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('Aceptar', 'ejercicios'), "style='margin-left:50%;' onclick=obtenernumeroRespuestas('$npreguntas');");
-//        $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
-        
-        // Botón guardar
-        $botones = '<center><input type="submit" style="margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '"></center>';
-        $mform->addElement('html', $botones);
-    }
-
-    //TENEMOS Q MODIFICARLA
-    //buscando ejercicio con permisos (creador)
-    function mostrar_con_permisos(&$mform, $id, $npreguntas, $id_ejercicio, $tipo_origen, $tipo_respuesta, $ejercicios_leido) {
-
-        //generamos la descripcion
-        $descripcion = genera_descripcion($ejercicios_leido->get('descripcion'));
-        $mform->addElement('html', $descripcion);
-
-        //Campo de la imagen del ejercicio
-        $tabla_imagenesHTML = '<div id="capa1">';
-        $tabla_imagenesHTML.= '<a id="botonFoto" class="up">Cambiar Foto</a>';
-        $tabla_imagenesHTML.= '</div>';
-        $tabla_imagenesHTML.= '<div id="capa2"> ';
-        $tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="./ejercicios_get_imagen.php?name=' . $id_ejercicio . '&ubicacion=1" style="height: 300px;"/>';
-        $tabla_imagenesHTML.= '</div>';
-        $mform->addElement('html', $tabla_imagenesHTML);
-
-
-//        global $CFG, $COURSE, $USER;
-//        $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
-//
-//
-//        //Los iconos están sacados del tema de gnome que viene con ubuntu 11.04
-//        //inclusion del javascript para las funciones
-//
-//        $mform = & $this->_form;
-//        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./style.css">');
-//        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
-//        //$mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>');
-//        //$mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js"></script>');
-//        //$mform->addElement('html', '<script type="text/javascript" src="./js/jquery.min.js"></script>');
-//
-//
-//        $mform->addElement('html', '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>');
-//        $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.js"></script>');
-//
-//        $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
-//        //Cojo el ejercicio  de la bd a partir de su id (id_ejercicio)
-//        //Obtengo el ejercicio de la bd
-//        $ejercicios_bd = new Ejercicios_general();
-//        $ejercicios_leido = $ejercicios_bd->obtener_uno($id_ejercicio);
-//
-//        $nombre = $ejercicios_leido->get('name');
-//        $npreg = $ejercicios_leido->get('numpreg');
-//        $creador = $ejercicios_leido->get('id_creador');
-//
-//        if ($creador == $USER->id && has_capability('moodle/legacy:editingteacher', $context, $USER->id, false)) {
-//            $modificable = true;
-//        } else {
-//            $modificable = false;
-//        }
-//
-//        //Añado el título
-//        //$titulo = '<h1 class="instrucciones" ><u>' . $nombre . '</u><span style="font-size:0.7em; float:right;"><i>' . ucwords(strtolower(htmlentities(get_string('Tipo5','ejercicios')))) . '</i></span></h1>';
-//        $titulo = genera_titulos($nombre, get_string('TH_title', 'ejercicios'), $id);
-//        $mform->addElement('html', $titulo);
-//
-//        //Añado la descripción
-//
-//        $divdescripcion = '<div style="font-size:1.2em" class=descover>';
-//
-//        $divdescripcion.='<i>' . nl2br((stripslashes($ejercicios_leido->get('descripcion'))));
-//        $divdescripcion.=$npreguntasarte . '<br/></i>';
-//
-//        $divdescripcion.='</div>';
-//
-//        $mform->addElement('html', $divdescripcion);
-//
-//
-//        $tabla_imagenes = '<table width="100%">';
-//
-//        $tabla_imagenes .='<td>'; #columna
-//
-//        $mform->addElement('html', $tabla_imagenes);
-//
-//
-//        $tipo_origen = $ejercicios_leido->get('tipoarchivopregunta');
-//        $tipo_respuesta = $ejercicios_leido->get('tipoarchivorespuesta');
-//        //echo "tipo origen.$tipo_origen";
-//        //compruebo de que tipo es el origen
-//        switch ($tipo_origen) {
-//
-//            case 1: //Es de tipo texto la pregunta
-//                //echo "tipo respuesta.$tipo_respuesta";
-//                switch ($tipo_respuesta) {
-//                    case 1: //Es de tipo texto la respuesta
-//                        //Obtengo la configuracion del ejercicio
-//                        $cfg_ej = new ejercicios_texto_hueco();
-//                        $array = $cfg_ej->obtener_todos_id_ejercicio($id_ejercicio);
-//                        $cfg_ej = $array[0];
-//                        $mostrar_palabras = $cfg_ej->get('mostrar_palabras');
-//                        $mostrar_pistas = $cfg_ej->get('mostrar_pistas');
-//                        $mostrar_soluciones = $cfg_ej->get('mostrar_solucion');
-//
-//                        //Obtengo las preguntas
-//                        $mis_preguntas = new Ejercicios_texto_texto_preg();
-//                        $preguntas = $mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
-//
-//                        if ($buscar == 1 || $modificable == false) {
-//                            //Escribir log de registro
-//                            $fichero = @fopen("log_TH_alumno.txt", "w");
-//                            $log = "";
-//
-//                            //$tabla_imagenes.='<center><table id="tablapreg" name="tablapreg">';
-//                            //$tabla_imagenes.="<tr>";
-//
-//                            $total_respuestas = 0;
-//                            $respuestas = array();
-//                            $pregs_indice = array();
-//                            $resp_indice = array();
-//
-//                            $tabla_imagenes = "";
-//                            //Inserto las preguntas con clase "item" es decir dragables(mirar javascript.js)
-//                            for ($i = 1; $i <= sizeof($preguntas); $i++) {
-//                                //Pinto la pregunta
-//                                $tabla_imagenes.= '<div id="tabpregunta' . $i . '" >';
-//                                $tabla_imagenes.='<br/><br/>';
-//                                $tabla_imagenes.='<table style="width:100%;">';
-//                                $tabla_imagenes.=' <td style="width:80%;">';
-//
-//                                //Obtengo la respuestas
-//                                $id_pregunta = $preguntas[$i - 1]->get('id');
-//                                $mis_respuestas = new Ejercicios_texto_texto_resp();
-//                                $respuestas[] = $mis_respuestas->obtener_todas_respuestas_pregunta($id_pregunta);
-//                                $total_respuestas += sizeof($respuestas[$i - 1]);
-//
-//                                //-------
-//                                $log.="Id de ejercicio: " . $id_ejercicio . "\n";
-//                                $log.="Id de pregunta " . $i . " : " . $id_pregunta . "\n";
-//                                $log.="Total de respuestas: " . $total_respuestas . "\n";
-//                                //-------
-//                                //Genero la pregunta con los huecos
-//                                $salida = $this->genera_texto_con_huecos($preguntas[$i - 1]->get('pregunta'), $i, $respuestas[$i - 1], $mostrar_pistas);
-//                                //Pinto la pregunta
-//                                $tabla_imagenes.='<div style="width: 900px;" class="pregunta" name="pregunta' . $i . '" id="pregunta' . $i . '">' . $salida . '</div>';
-//                                $tabla_imagenes.=' </td>';
-//
-//                                //Obtengo la pregunta
-//                                //$tabla_imagenes.='<td id="texto' . $i . '"> <div class="item" id="' . $i . '">';
-//                                //$tabla_imagenes.='<td id="texto' . $i . '"> <div class="marquito" id="' . $i . '">';
-//
-//                                $tabla_imagenes.=' <td style="width:5%;">';
-//                                $tabla_imagenes.='</td> ';
-//                                $tabla_imagenes.='</br> ';
-//                                $tabla_imagenes.='</table> ';
-//
-//
-//                                $tabla_imagenes.='</div>';
-//                                $tabla_imagenes.='</div>';
-//
-//                                /* $tabla_imagenes.='<div style="margin-top: 10%;">' . $salida . '</div>';
-//
-//                                  $tabla_imagenes.='</div></div></td>';
-//                                  if ($i % 2 == 0) { //Si es impar lo bajo
-//                                  $tabla_imagenes.="</tr>";
-//                                  } */
-//                            }
-//                            /* $tabla_imagenes.="</tr>";
-//                              $tabla_imagenes.='</table></center>';
-//                              $tabla_imagenes.="</br>";
-//                              $tabla_imagenes.="</br>";
-//                              $tabla_imagenes.='<input type="hidden" name="tipo_ej" id="tipo_ej" value="AM"/>';
-//                              $tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>'; */
-//
-//                            //Añadir las respuestas en una variable en javascript
-//                            $tabla_imagenes .= $this->genera_matriz_respuestas_js($respuestas);
-//
-//
-//                            //------------------
-//                            //$aleatorios_generados = array();    
-//                            $resp_generadas = array();          //Array con todas las respuestas desordenadas.
-//                            srand(time());                      //Inicializar el generador de numeros aleatorios
-//                            //Array de aleatorios generados. 
-//                            //Almacena un orden aleatorio de respuestas para que no aparezcan todas ordenadas
-//                            if ($total_respuestas >= 1) {
-//                                $aleatorios_generados = range(1, $total_respuestas);
-//                                shuffle($aleatorios_generados);
-//                                $i = 0;
-//                                foreach ($aleatorios_generados as $al) {
-//                                    $log.="" . $i . ": " . $al . "\n";
-//                                    $i+=1;
-//                                }
-//                            } else {
-//                                $aleatorios_generados = array();
-//                                $log.="No hay respuestas\n";
-//                            }
-//
-//                            //Guarda todas las respuestas en un array
-//                            for ($i = 1; $i <= sizeof($respuestas); $i++) {
-//                                for ($j = 1; $j <= sizeof($respuestas[$i - 1]); $j++) {
-//
-//                                    //Se guarda la posicion en la que se pondra la respuesta
-//                                    //$aleatorios_generados[] = $azar;
-//                                    $resp_generadas[] = $respuestas[$i - 1][$j - 1]->get('respuesta');
-//                                    $pregs_indice[] = $i;
-//                                    $resp_indice[] = $j;
-//                                }
-//                            }
-//
-//
-//
-//                            //Se van a pintar las respuestas
-//                            if ($mostrar_palabras) {
-//                                $tabla_imagenes .= '<h1>' . get_string('TH_pistas', 'ejercicios') . '</h1>';
-//                                $tabla_imagenes.="<i>(</i>";
-//                                for ($j = 0; $j < sizeof($aleatorios_generados); $j++) {
-//                                    //$tabla_imagenes.='<tr>';
-//                                    if ($j == sizeof($aleatorios_generados) - 1) {
-//                                        $tabla_imagenes.="<i>" . $resp_generadas[$aleatorios_generados[$j] - 1] . ")</i>";
-//                                    } else {
-//                                        $tabla_imagenes.="<i>" . $resp_generadas[$aleatorios_generados[$j] - 1] . ", </i>";
-//                                    }
-//                                    //$tabla_imagenes.='<span class="item resp" id="resp_'.$aleatorios_generados[$j].'" >';
-//                                    //$tabla_imagenes.=$resp_generadas[$aleatorios_generados[$j] - 1] . '</span><span>   </span>';
-//                                    //Le asigno un numero aleatorio a la respuesta
-//                                    //$hash[$aleatorios_generados[$j]] = $pregs_indice[$aleatorios_generados[$j] - 1] . "_" . $resp_indice[$aleatorios_generados[$j] - 1];
-//                                    //$log .= "Para la respuesta " . $resp_indice[$aleatorios_generados[$j] - 1] . " de la pregunta " . $pregs_indice[$aleatorios_generados[$j] - 1] 
-//                                    //        . " se le ha asignado el numero aleatorio " . $aleatorios_generados[$j] . "\n";
-//                                    //$tabla_imagenes.='<td><div  id="' . $aleatorios_generados[$j] . '" class="marquito"></div></td>';
-//                                    //$tabla_imagenes.='<td><div  style="width:100px; height:100px;" id="resp_' . $aleatorios_generados[$j] . '" class="item"><p>'.$resp_generadas[$aleatorios_generados[$j] - 1].'</p></div></td>';
-//                                    //$tabla_imagenes.='<td id="aceptado' . $aleatorios_generados[$j] . '" class="marquitoaceptado"></td>';
-//                                    //$tabla_imagenes.='</tr>';
-//                                }
-//                                //$tabla_imagenes.='</table></center>';
-//                                //$tabla_imagenes.='<p class="numero" id="' . sizeof($preguntas) . '"></p>';
-//                                $tabla_imagenes.='<p class="numero" id="' . $total_respuestas . '"></p>';
-//                            }
-//
-//
-//                            //Escribir en el archivo
-//                            fwrite($fichero, $log, strlen($log));
-//                            fclose($fichero);
-//                            //------------------
-//                            //inserto el número de preguntas
-//                            $tabla_imagenes.='<input type="hidden" name="tipo_ej" id="tipo_ej" value="TH"/>';
-//                            $tabla_imagenes.='<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
-//                            for ($l = 0; $l < sizeof($preguntas); $l++) {
-//                                $tabla_imagenes.='<input type="hidden" id="num_resp_preg' . ($l + 1) . '" name="num_resp_preg' . ($l + 1) . '" value="' . sizeof($respuestas[$l]) . '"/>';
-//                            }
-//
-//                            //Insertar el html                            
-//                            $mform->addElement('html', $tabla_imagenes);
-//
-//                            $fuentes_aux = $ejercicios_leido->get('fuentes');
-//                            $fuentes = genera_fuentes($fuentes_aux, "readonly");
-//
-//                            $mform->addElement('html', $fuentes);
-//                        } else {
-//                            //echo "akiiiiiiii";
-//                            //$tabla_imagenes.='<table id="tablarespuestas" name="tablarespuestas"><center>';
-//
-//
-//                            for ($i = 1; $i <= sizeof($preguntas); $i++) {
-//
-//                                //Pinto la pregunta
-//                                $divpregunta = '<div id="tabpregunta' . $i . '" >';
-//                                $divpregunta.='<br/><br/>';
-//                                $divpregunta.='<table style="width:100%;">';
-//                                $divpregunta.=' <td style="width:80%;">';
-//
-//
-//                                $divpregunta.='<textarea style="width: 900px;" class="pregunta" name="pregunta' . $i . '" id="pregunta' . $i . '">' . $preguntas[$i - 1]->get('pregunta') . '</textarea>';
-//                                $divpregunta.=' </td>';
-//
-//                                $divpregunta.=' <td style="width:5%;">';
-//                                $divpregunta.='<img id="imgpregborrar' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="TH_DelPregunta(' . $id_ejercicio . "," . $i . ')" title="Eliminar Pregunta"></img>';
-//                                $divpregunta.='</br><img id="imgpreganadir' . $i . '" src="./imagenes/añadir.gif" alt="añadir hueco"  height="15px"  width="15px" onClick="TH_addHueco_Modificar(' . $id_ejercicio . "," . $i . ' )" title="Añadir Hueco"></img>';
-//                                $divpregunta.='</td> ';
-//                                $divpregunta.='</br> ';
-//                                $divpregunta.='</table> ';
-//
-//                                $id_pregunta = $preguntas[$i - 1]->get('id');
-//                                $mis_respuestas = new Ejercicios_texto_texto_resp();
-//                                $respuestas = $mis_respuestas->obtener_todas_respuestas_pregunta($id_pregunta);
-//
-//                                $divpregunta.='</br><div id="respuestas' . $i . '" class=respuesta>';
-//                                for ($npreguntas = 0; $npreguntas < sizeof($respuestas); $npreguntas++) {
-//                                    /* $tabla_imagenes.= '<tr><td/><td><textarea name="respuesta' . $i . "_" . ($j+1) . '" id="respuesta' . $i . "_" . ($j+1) . '" class=descripcion style="height: 192px; width: 401px;" >';
-//                                      $tabla_imagenes.=$respuestas[$j]->get('respuesta') . '</textarea></td>';
-//                                      $tabla_imagenes .= '<td><img id="imgpregpborrar' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarRespuesta_TextoTexto_AM(tabpregunta' . $i . ',' . $i . ')" title="Eliminar Respuesta"></img></td></tr>';
-//                                     */
-//                                    $q = $npreguntas + 1;
-//
-//                                    if ($q % 2 == 0 || $q == sizeof($respuestas)) {
-//                                        $divpregunta.='<table  id="tablarespuesta' . $q . '_' . $i . '" style="width:50%;">';
-//                                    } else {
-//                                        $divpregunta.='<table  id="tablarespuesta' . $q . '_' . $i . '" style="width:50%;float:left;">';
-//                                    }
-//                                    $divpregunta.='<tr id="trrespuesta' . $q . "_" . $i . '"> ';
-//                                    $divpregunta.=' <td style="width:80%;">';
-//                                    $divpregunta.='<textarea style="width: 300px;" readonly="yes" class="resp" name="respuesta' . $q . "_" . $i . '" id="respuesta' . $q . "_" . $i . '" value="' . $respuestas[$npreguntas]->get('respuesta') . '">' . $respuestas[$npreguntas]->get('respuesta') . '</textarea>';
-//                                    $divpregunta.=' </td>';
-//                                    $divpregunta.=' <td style="width:5%;" id="tdcorregir' . $q . "_" . $i . '">';
-//                                    $divpregunta.='<img id="eliminarrespuesta' . $q . '_' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="TH_EliminarHueco(' . $id_ejercicio . "," . $i . "," . $q . ')" title="Eliminar Hueco"></img>';
-//
-//                                    $divpregunta.='</td> ';
-//                                    $divpregunta.='<tr>';
-//
-//                                    $divpregunta.='</table> ';
-//                                }
-//
-//
-//                                //$tabla_imagenes.="</tr>";                                
-//                                //Inserto el numero de respuestas para cada pregunta
-//                                //$tabla_imagenes.='<input type="hidden" name="numrespuestas_' . $i . '" id="numrespuestas_' . $i . '" value="' . sizeof($respuestas) . '" />';
-//                                $divpregunta.='</div>';
-//                                $divpregunta.='</div>';
-//                                $divpregunta.='<input type="hidden" value=' . sizeof($respuestas) . ' id="num_res_preg' . $i . '" name="num_res_preg' . $i . '" />';
-//                                $mform->addElement('html', $divpregunta);
-//                            }
-//                            //$tabla_imagenes.='</table></center>';
-//                            //inserto el número de preguntas
-//                            $divnumpregunta = '<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
-//                            $mform->addElement('html', $divnumpregunta);
-//                            //$tabla_imagenes.='<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
-//                            //Añadir los checkboxes para la configuracion del ejercicio
-//                            $file_log = fopen("log_mostrar_texto_hueco.txt", "w");
-//                            $cfg_ej = new ejercicios_texto_hueco();
-//                            $array = $cfg_ej->obtener_todos_id_ejercicio($id_ejercicio);
-//                            $cfg_ej = $array[0];
-//                            $log = "cfg_ej: " . var_export($array, true);
-//                            fwrite($file_log, $log, strlen($log));
-//                            fclose($file_log);
-//
-//                            $chk = '<div id="conf_chk">';
-//                            $chk .= '<h1>' . get_string('TH_configuracion_ejercicio', 'ejercicios') . '</h1>';
-//                            $chk .= '<p><label for="TH_mostrar_pistas">' . get_string('TH_mostrar_pistas', 'ejercicios') . '</label>';
-//                            $chk .= '<input type="checkbox" name="TH_mostrar_pistas" value="1" id="TH_mostrar_pistas" ' . (($cfg_ej->get('mostrar_pistas') == 1) ? "checked" : "") . '/></p>';
-//                            $chk .= '<p><label for="TH_mostrar_palabras">' . get_string('TH_mostrar_palabras', 'ejercicios') . '</label>';
-//                            $chk .= '<input type="checkbox" name="TH_mostrar_palabras" value="1" id="TH_mostrar_palabras" ' . (($cfg_ej->get('mostrar_palabras') == 1) ? "checked" : "") . '/></p>';
-//                            $chk .= '<p><label for="TH_mostrar_solucion">' . get_string('TH_mostrar_soluciones', 'ejercicios') . '</label>';
-//                            $chk .= '<input type="checkbox" name="TH_mostrar_solucion" value="1" id="TH_mostrar_solucion" ' . (($cfg_ej->get('mostrar_solucion') == 1) ? "checked" : "") . '/></p>';
-//                            $chk .= '</div>';
-//                            $mform->addElement('html', $chk);
-//                        }
-//
-//
-//
-//                        //botones
-//                        //$mform->addElement('html', $tabla_imagenes);
-//
-//
-//                        if ($buscar != 1 && $modificable == true) {
-//                            $fuentes_aux = $ejercicios_leido->get('fuentes');
-//
-//                            $fuentes = genera_fuentes($fuentes_aux, "");
-//
-//                            $mform->addElement('html', $fuentes);
-//                            //Si soy el profesor creadors
-//                            $tabla_imagenes = '<center><input type="submit" style="margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '">';
-//                            $tabla_imagenes.='<input type="button" style="" id="botonNA" name="botonNA" onclick="TH_AddPregunta(' . $id_ejercicio . ')" value="' . get_string('TH_anadir', 'ejercicios') . '">';
-//                            $tabla_imagenes.='<input type="button" style="" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-//                        } else {
-//                            if ($buscar == 1) { //Si estoy buscand
-//                                $ejercicios_prof = new Ejercicios_prof_actividad();
-//                                $ejercicios_del_prof = $ejercicios_prof->obtener_uno_idejercicio($id_ejercicio);
-//                                if (sizeof($ejercicios_del_prof) == 0) {
-//                                    $noagregado = true;
-//                                } else {
-//                                    $noagregado = false;
-//                                }
-//                                //si el ejercicio no es mio y soy profesor
-//                                if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false) && ($modificable == false || $noagregado == true)) {
-//                                    //boton añadir a mis ejercicios
-//                                    $attributes = 'size="40"';
-//                                    $mform->addElement('text', 'carpeta_ejercicio', get_string('carpeta', 'ejercicios'), $attributes);
-//                                    $mform->addRule('carpeta_ejercicio', "Carpeta Necesaria", 'required', null, 'client');
-//                                    $buttonarray = array();
-//                                    $buttonarray[] = &$mform->createElement('submit', 'submitbutton2', get_string('BotonAñadir', 'ejercicios'));
-//                                    $mform->addGroup($buttonarray, 'botones2', '', array(' '), false);
-//                                } else {
-//
-//                                    if ($modificable == true) { // Si el ejercicio era mio y estoy buscando
-//                                        $tabla_imagenes = '<center><input type="button" style="margin-top:20px;" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-//                                    } else { //Si soy alumno
-//                                        $tabla_imagenes = '<center><input type="button" onclick="TH_Corregir(' . $id_ejercicio . ',' . $mostrar_soluciones . ')" style="margin-top:20px;" id="botonResultado" value="Corregir">';
-//                                        $tabla_imagenes.='<input type="button" style="" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
-//                                        $tabla_imagenes.='<input type="button" style="" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-//                                    }
-//                                }
-//                            } else {
-//
-//                                $tabla_imagenes = '<center><input type="button" onclick="TH_Corregir(' . $id_ejercicio . ',' . $mostrar_soluciones . ')" style="margin-top:20px;" id="botonResultado" value="Corregir">';
-//                                $tabla_imagenes.='<input type="button" style="" id="botonRehacer" value="Rehacer" onClick="location.href=\'./view.php?id=' . $id . '&opcion=8' . '&id_ejercicio=' . $id_ejercicio . '&tipo_origen=' . $tipo_origen . '&tr=' . $tipo_respuesta . '&tipocreacion=' . $tipocreacion . '\'">';
-//                                $tabla_imagenes.='<input type="button" style="" id="botonMPrincipal" value="Menu Principal" onClick="location.href=\'./view.php?id=' . $id . '\'"></center>';
-//                            }
-//                        }
-//
-//
-//                        $tabla_imagenes .='</td>';
-//                        $tabla_imagenes .='<td  width="10%">';
-//                        //añado la parte de vocabulario para la conexión
-//                        //Para alumnos
-//                        if ($modificable == false) {
-//                            $tabla_imagenes .='<div><a  onclick=JavaScript:sele(' . $id . ')><img src="../vocabulario/imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im" title="' . get_string('guardar', 'vocabulario') . '"/></a></div>';
-//                            $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=5"><img src="../vocabulario/imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im" title="' . get_string('admin_gr', 'vocabulario') . '"/></a></div>';
-//                            $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=7"><img src="../vocabulario/imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im" title="' . get_string('admin_ic', 'vocabulario') . '"/></a></div>';
-//                            $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=9"><img src="../vocabulario/imagenes/tipologias_textuales.png" id="id_tt_im" name="tt_im" title="' . get_string('admin_tt', 'vocabulario') . '"/> </a></div>';
-//                            $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=11"><img src="../vocabulario/imagenes/estrategias_icon.png" id="id_ea_im" name="ea_im" title="' . get_string('admin_ea', 'vocabulario') . '"/> </a></div>';
-//                        }
-//
-//                        $tabla_imagenes .='</td>';
-//
-//                        $tabla_imagenes .='</table>';
-//
-//                        $mform->addElement('html', $tabla_imagenes);
-//
-//                        break;
-//                }
-//                break;
-//        }
-
-        echo "termino del todo mostrar con permisos";
-    }
-
-    //buscando ejercico sin permisos (alumno y profesores no creadores)
-    function mostrar_sin_permisos(&$mform, $id, $npreguntas, $id_ejercicio, $tipo_origen, $tipo_respuesta, $ejercicios_leido) {
-        
-        $nombre = $ejercicios_leido->get('name');
-        $creador = $ejercicios_leido->get('id_creador');
-        $licencia = $ejercicios_leido->get("copyrightpreg");
-        $visible = $ejercicios_leido->get("visible");
-        $publico = $ejercicios_leido->get("publico");
-        $foto_asociada = $ejercicios_leido->get("foto_asociada");
-
-        // Se imprime el título del ejercicio
-        $titulo = genera_titulos($nombre, get_string('TH_title', 'ejercicios'), $id);
-        $mform->addElement('html', $titulo);
-        
-        //generamos la descripcion
-        $descripcion = genera_descripcion($ejercicios_leido->get('descripcion'));
-        $mform->addElement('html', $descripcion);
-        
-        if ($foto_asociada == 1) {
-            // src para la foto cuando existe
-            $srcImage='./ejercicios_get_imagen.php?userPath='.$creador.'&name='.substr(md5($id_ejercicio), 0, 10).'&ubicacion=1';
-        } else {
-            // src para la foto por defecto
-            $srcImage="./ejercicios_get_imagen.php?ubicacion=0";
-        }
-        
-        //Campo de la imagen del ejercicio
-        //el nombre que se le da a la foto es el los 10 primero caracteres del md5 del id del ejercicio para que este sea unico
-        $tabla_imagenesHTML.= '<div id="capa2"> ';
-        $tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="'.$srcImage.'" style="height: 300px;"/>';
-        $tabla_imagenesHTML.= '</div>';
-        $mform->addElement('html', $tabla_imagenesHTML);
-
-        // Se crea una tabla en la que se incluirán los distintos elementos del formulario para añadir las respuestas
-        $tabla_imagenes = '<table width="100%">';
-        $tabla_imagenes .='<td>';
-        $mform->addElement('html', $tabla_imagenes);
-        
-        //cargamos los datos de la BD
-        $mis_textos = new Ejercicios_textos();
-        $textos = $mis_textos->obtener_todos_textos_ejercicicio($id_ejercicio);
-        $n_textos = '<input type="hidden" value='.  sizeof($textos).' id="n_textos" name="n_textos" />';
-        $mform->addElement('html', $n_textos);
-
-//        var_dump($textos);
-        
-//        for ($i = 1; $i <= sizeof($textos); $i++){
-//            echo $textos[$i-1]->get('texto');
-//            echo $textos[$i-1]->get('id');
-//        }
-        $mis_palabras = new Ejercicios_texto_hueco();
-        $palabras = $mis_palabras->obtener_todas_preguntas_ejercicicio($id_ejercicio);
-        $n_palabras = '<input type="hidden" value='.  sizeof($palabras).' id="n_palabras" name="n_palabras" />';
-        $mform->addElement('html', $n_palabras);
-//        var_dump($palabras);
-        
-        //variable para designar los nuevos div
-        $valor = 0;
-        //bucle para cada uno de los textos
-        for ($i = 1; $i <= sizeof($textos); $i++) {
-            $id_texto = $textos[$i-1]->get('id');
-            $arrayPalabras = array();
-            //div para ver las palabras y los textos
-            $divpregunta ='<div id="tabtexto' . $i . '" >';
-            $divpregunta.='<br/><br/>';
-            $divpregunta.='<table style="width:100%;">';
-            $divpregunta.='<td style="width:80%;">';
-            $divpregunta.='<div id="palabrasSolucion' . $i . '" class="palabrasSolucion">';
-            //bucle para cada uno de las palabras ocultadas respecto al texto i
-            for ($j = 1; $j <= sizeof($palabras); $j++){
-                //mostramos las palabras de cada uno de los textos
-                if ($id_texto == $palabras[$j-1]->get('id_texto')){
-                    $arrayPalabras[$j]=$palabras[$j-1]->get('palabra');
-                    shuffle($arrayPalabras);
-                }  
-            }
-            for ($j = 0; $j <= sizeof($arrayPalabras)-1; $j++){
-                $valor = $valor +1;
-                    $divpregunta.='<div style="width: 100px;" class="palabras" name="palabras' .$i . $valor . '" id="palabras' .$i . $valor .'" value="'. $arrayPalabras[$j] .'">' . $arrayPalabras[$j] . '</div>';
-
-            }
-            $divpregunta.='</div>';
-            $valor = 0;
-//            $divpregunta.='<div style="width: 100px;" class="palabras" name="palabras' .$i . '" id="palabras' .$i . '">' . $arrayPalabras[1] . '</div>';
-            $divpregunta.='<div style="width: 900px;" class="pregunta" name="pregunta' . $i . '" id="pregunta' . $i . '">' . $textos[$i - 1]->get('texto') . '</div>';
-            $divpregunta.=' </td>';
-            $divpregunta.='</table> ';
-            $divpregunta.='<br/><br/>';
-            $divpregunta.='</div>';
-            $mform->addElement('html', $divpregunta);
-            
-            for ($j = 1; $j <= sizeof($palabras); $j++){
-                //mostramos las palabras de cada uno de los textos
-                if ($id_texto == $palabras[$j-1]->get('id_texto')){
-            //div para la respuesta del alumno
-            $divrespuestas = '<div id="tabrespuestas' . $j . '" >';
-            $divrespuestas.='<span>'.$j.'</span><input type="text" class="respuestas" name="respuesta' . $j . '" id="respuesta' . $j . '" value="" /> <img id="borrarTachar'. $i . $j .'0" src="./imagenes/delete.gif" alt="eliminarOculta"  height="10px"  width="10px" onclick="tachar(this.id)" /> <img name="imagenRespuesta'.$j.'" id="imagenRespuesta'.$j.'" src="" width="15" height="15" "><span></span>';
-            $divrespuestas.='</div>';
-            $mform->addElement('html', $divrespuestas);
-                }
-            }
-        }
-
-        
-        // Autoría del ejercicio
-        $userid = get_record('user', 'id', $creador);
-        $autoria = genera_autoria($userid);
-        $mform->addElement('html', $autoria);
-
-        $imagenLicencia = genera_licencia($licencia);
-        $mform->addElement('html', $imagenLicencia);
-        
-        $fuentes_aux = $ejercicios_leido->get('fuentes');
-        $fuentes = genera_fuentes($fuentes_aux, "readonly");
-        $mform->addElement('html', $fuentes);
-
-        $tabla_menu = '<center><input type="button" style="margin-top:20px;"  value="Corregir" onClick="TH_corregir()"/> <input type="button" style=""  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal(' . $id . ')" /></center>';
-        $mform->addElement('html', $tabla_menu);
-        
-        $tabla_imagenes = '</td>';
-        $tabla_imagenes .='<td  width="10%">';
-        
-        //Para alumnos
-        //Mis palabras
-        $tabla_imagenes .='<div><a  onclick=JavaScript:sele(' . $id . ')><img src="../vocabulario/imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im" title="' . get_string('guardar', 'vocabulario') . '"/></a></div>';
-        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=5" target="_blank"><img src="../vocabulario/imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im" title="' . get_string('admin_gr', 'vocabulario') . '"/></a></div>';
-        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=7" target="_blank"><img src="../vocabulario/imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im" title="' . get_string('admin_ic', 'vocabulario') . '"/></a></div>';
-        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=9" target="_blank"><img src="../vocabulario/imagenes/tipologias_textuales.png" id="id_tt_im" name="tt_im" title="' . get_string('admin_tt', 'vocabulario') . '"/> </a></div>';
-        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=11" target="_blank"><img src="../vocabulario/imagenes/estrategias_icon.png" id="id_ea_im" name="ea_im" title="' . get_string('admin_ea', 'vocabulario') . '"/> </a></div>';
-
-        $tabla_imagenes .='</td>';
-        $tabla_imagenes .='</table>';
-        $mform->addElement('html', $tabla_imagenes);
-
-
-    }
-
+    
+    
     /**
      * Muestra el ejercicio texto hueco con vistas separadas para alumno y profesor
      *
@@ -813,30 +65,28 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
      * @param $id_ejercicio id del ejercicio a mostrar
      */
     function mostrar_ejercicio($id, $id_ejercicio, $tipo_origen, $buscar) {
-
+        
         global $CFG, $COURSE, $USER;
         $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
 
         $mform = & $this->_form;
-
-        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./style.css">');
-        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
-        //FALTA HACERLO. se esta siguiento para todos los ejercicios pero aun no estan definidos bien los estilos de cada uno
+        
+        //Estilos y javascript concretos de texto hueco
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./th_style.css">');
+        $mform->addElement('html', '<script type="text/javascript" src="./TH_JavaScript.js"></script>');
+        
         $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>');
         $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js"></script>');
         $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
         $mform->addElement('html', '<script type="text/javascript" src="./js/jquery.form.js"></script>');
-//        $mform->addElement('html', '<script src="./js/ajaxupload.js" type="text/javascript"></script>');
-        $mform->addElement('html', '<script type="text/javascript" src="./TH_JavaScript.js"></script>');
-
-        //generamos titulo del ejercicio FALTA HACER!! traer variables $nombre,$npreg,$creador....
-
-
+        $mform->addElement('html', '<script src="./js/ajaxupload.js" type="text/javascript"></script>');
+        
+        // Se añade en sesión la variable $buscar 
         $_SESSION['buscar'] = $buscar;
+        $_SESSION['id_curso'] = $id;
 
         if ($buscar == 0) { // Se está creando el ejercicio
-            $this->creando_ejercicio($mform, $id, $npreguntas, $tipo_origen, $tipo_respuesta);
+            $this->creando_ejercicio($mform, $id);
         } else {
             // Se determina si el usuario es el creador
             $ejercicios_bd = new Ejercicios_general();
@@ -852,13 +102,459 @@ class mod_ejercicios_mostrar_ejercicio_texto_hueco extends moodleform_mod {
             $_SESSION['id_ejercicio'] = $id_ejercicio;
             $_SESSION['modificable'] = $modificable;
             if ($modificable) {
-                $this->mostrar_con_permisos($mform, $id, $npreguntas, $id_ejercicio, $tipo_origen, $tipo_respuesta, $ejercicios_leido);
+                $this->mostrar_con_permisos($mform, $id, $ejercicios_leido);
             } else {
-                $this->mostrar_sin_permisos($mform, $id, $npreguntas, $id_ejercicio, $tipo_origen, $tipo_respuesta, $ejercicios_leido);
+                $this->mostrar_sin_permisos($mform, $id, $ejercicios_leido);
             }
         }
     }
 
+    //funcion para crear ejercicio texto hueco
+    function creando_ejercicio(&$mform, $id) {
+        $mform = & $this->_form;
+
+        $ejercicioGeneral = unserialize($_SESSION['ejercicioGeneral']);
+        // Se obtienen los datos del ejercicio a partir de los datos almacenados en sesión (gestionados por ejercicios_gestion_creacion)
+        // Hay que tener en cuenta que parte de los datos del ejercicioGeneral se van a rellenar en este paso
+        // debido a añadidos posteriores (las fuentes y la imagen asociada)
+        // para la posterior creación (manejada por ejercicio_modificar_texto_texto.php)
+        $nombre = $ejercicioGeneral->get('name');
+        $creador = $ejercicioGeneral->get('id_creador');
+        $licencia = $ejercicioGeneral->get("copyrightpreg");
+        $visible = $ejercicioGeneral->get("visible");
+        $publico = $ejercicioGeneral->get("publico");
+        
+        // Se imprime el título del ejercicio
+        $titulo = genera_titulos($nombre, get_string('TH_title', 'ejercicios'), $id);
+        $mform->addElement('html', $titulo);
+
+        // Se imprime la descripción del ejercicio
+        $descripcion = genera_descripcion($ejercicioGeneral->get('descripcion'));
+        $mform->addElement('html', $descripcion);
+
+        //Campo de la imagen del ejercicio
+        $tabla_imagenesHTML = '<div id="capa1">';
+        $tabla_imagenesHTML.= '<a id="botonFoto" class="up">Cambiar Foto</a>';
+        $tabla_imagenesHTML.= '</div>';
+        $tabla_imagenesHTML.= '<div id="capa2" style="min-height: 100px;"> ';
+        $tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="./ejercicios_get_imagen.php?ubicacion=0" style="height: 300px;"/>';
+        $tabla_imagenesHTML.= '</div>';
+        $mform->addElement('html', $tabla_imagenesHTML);
+
+        //En el ejercicio texto hueco, no hace falta poner un switch para los tipos de pregunta y respuesta ya que solo es de tipo texto.
+        //Tipo origen = tipo respuesta = texto
+        $divEjercicio = '<div name="divEjercicio" id="divEjercicio" class="divEjercicio">';
+        $mform->addElement('html', $divEjercicio);
+        //para saber el número de la pregunta que estamos tratando
+        $numText = '<input type="hidden" value="1" id="numText" name="numText" />';
+        $mform->addElement('html', $numText);
+        
+        //div para cada uno de los textos
+        $divTexto = '<div name="divTexto1" id="divTexto1" class="divTexto">';
+        $mform->addElement('html', $divTexto);
+        
+        //Abro el primer div estara alineado a la izq
+        $divIzq = '<div name="divIzq1" id="divIzq1" class="divIzq">';
+        $mform->addElement('html', $divIzq);
+        //Titulo del texto
+        $titulo = '<h3>'.get_string('TH_titulo', 'ejercicios').' 1'.'</h3>';
+        $mform->addElement('html', $titulo);
+        //Boton para crear texto huecos 
+        $opciones = '<center><span>Crear hueco cada <select id="distanciaHueco1" name="distanciaHueco1"> <option>--</option> <option value="5">5ª</option> <option value="6">6ª</option> <option value="7">7ª</option> <option value="8">8ª</option> <option value="9">9ª</option></select> palabra</span></center>';
+        $mform->addElement('html', $opciones);
+        $boton = '<center><input type="button" class="button" name="textoHueco1" id="textoHueco1" value="Crear" onclick="ocultarPalabras(this.id)" /> <input type="button" class="button" name="borrarTextos1" id="borrarTextos1" value="Limpiar" onclick="limpiarContenidosBoton(this.id)" /> </center>';
+        $mform->addElement('html', $boton);
+        //TextArea para visualizar los textos
+        $mform->addElement("textarea", "id_original1", get_string("TH_texto", "ejercicios"), 'wrap="virtual" rows="8"');
+        $mform->addElement("textarea", "id_pregunta1", get_string("TH_anadir", "ejercicios"), 'wrap="virtual" rows="8" readonly"');
+        $mform->addElement("html", "</fieldset>");
+        //Se añade un boton para que se cree un nuevo hueco. 
+        $divBoton = '<div name="divBoton" id="divBoton" class="divBoton">';
+        $divBoton.= '<center><input type="button" class="button" name="add_hueco1" id="add_hueco1" value="' . get_string('TH_add_hueco', 'ejercicios') . '" onclick="TH_addHueco(this.id)" /> </center>';
+        $divBoton.= '</div>';
+        $mform->addElement('html', $divBoton);
+        //Campo hidden para contabilizar el numero de palabras
+        $divnumpalabras = '<input type="hidden" value="0" id="num_palabras1" name="num_palabras1" />';
+        $mform->addElement('html', $divnumpalabras);
+        //Div guardar los datos de las palabras que oculto
+        $divPalabras = '<div name="divPalabrasN1" id="divPalabrasN1"></div>';
+        $mform->addElement('html', $divPalabras);
+        //Cierro el div alineado a la iz
+        $divIzqCierre = '</div>';
+        $mform->addElement('html', $divIzqCierre);
+        
+        //Abro el div que estara alineado a la derecha
+        $divDer = '<div name="divDer1" id="divDer1" class="divDer">';
+        $mform->addElement('html', $divDer);
+        //Cierro el div alineado a la derecha
+        $divDerCierre = '</div>';
+        $mform->addElement('html', $divDerCierre);
+        
+        $divTextoCierre = '</div>';
+        $mform->addElement('html', $divTextoCierre);
+        
+        $divEjercicioCierre = '</div>';
+        $mform->addElement('html', $divEjercicioCierre);
+        
+        //Botón para añadir más preguntas
+        $masPreguntas = '<br><center><input type="button" class="button" name="masPreguntas" id="masPreguntas" value="Añadir pregunta" onclick="clonar()" /></center></br>';
+        $mform->addElement('html', $masPreguntas);
+
+        // Autoría del ejercicio
+        $userid = get_record('user', 'id', $creador);
+        $autoria = genera_autoria($userid);
+        $mform->addElement('html', $autoria);
+
+        $imagenLicencia = genera_licencia($licencia);
+        $mform->addElement('html', $imagenLicencia);
+
+        $radioarrayVisib = array();
+        $radioarrayVisib[] = &MoodleQuickForm::createElement('radio', 'radiovisible', '', "Si", "Si", null);
+        $radioarrayVisib[] = &MoodleQuickForm::createElement('radio', 'radiovisible', '', "No", "No", null);
+
+        $mform->addGroup($radioarrayVisib, 'radiovisible', get_string('visible', 'ejercicios'), array(' '), false);
+        if ($visible == 1) {
+            $mform->setDefault('radiovisible', "Si");
+        } else {
+            $mform->setDefault('radiovisible', "No");
+        }
+
+        $radioarrayPriv = array();
+        $radioarrayPriv[] = &MoodleQuickForm::createElement('radio', 'radioprivado', '', "Si", "Si", null);
+        $radioarrayPriv[] = &MoodleQuickForm::createElement('radio', 'radioprivado', '', "No", "No", null);
+
+        $mform->addGroup($radioarrayPriv, 'radioprivado', get_string('publico', 'ejercicios'), array(' '), false);
+        if ($publico == 1) {
+            $mform->setDefault('radioprivado', "Si");
+        } else {
+            $mform->setDefault('radioprivado', "No");
+        }
+
+        // Se añade el botón guardar y el texto para las fuentes editable si es modificable
+        // Text area para reflejar las fuentes empleadas en el ejercicio
+        $fuentes_aux = "";
+        $fuentes = genera_fuentes($fuentes_aux, "");
+        $mform->addElement('html', $fuentes);
+        
+        // Botón guardar
+        $guardar = '<div name="divBoton" id="divBoton" class="divBoton">';
+        $guardar.=  '<center><input type="submit" class="button" id="submitbutton" name="submitbutton" value="'.get_string('BotonGuardar', 'ejercicios').'"></center>';
+        $guardar.= '</div>';
+        $mform->addElement('html', $guardar);
+    }
+
+    //mostrar ejercicio con permisos (creador)
+    function mostrar_con_permisos(&$mform, $id, $ejercicios_leido) {
+        // Y se cargan sus datos en algunas variables
+        $nombre = $ejercicios_leido->get('name');
+        $idEjercicio = $ejercicios_leido->get('id');
+        $creador = $ejercicios_leido->get('id_creador');
+        $licencia = $ejercicios_leido->get('copyrightpreg');
+        $visible = $ejercicios_leido->get('visible');
+        $publico = $ejercicios_leido->get('publico');
+        $foto_asociada = $ejercicios_leido->get('foto_asociada');
+
+        // Se imprime el título del ejercicio
+        $titulo = genera_titulos($nombre, get_string('TH_title', 'ejercicios'), $id);
+        $mform->addElement('html', $titulo);
+
+        // Se imprime la descripción del ejercicio
+        $descripcion = genera_descripcion($ejercicios_leido->get('descripcion'));
+        $mform->addElement('html', $descripcion);
+
+        if ($foto_asociada == 1) {
+            // src para la foto cuando existe
+            $srcImage='./ejercicios_get_imagen.php?userPath='.$creador.'&name='.substr(md5($idEjercicio), 0, 10).'&ubicacion=1';
+        } else {
+            // src para la foto por defecto
+            $srcImage="./ejercicios_get_imagen.php?ubicacion=0";
+        }
+        //Campo de la imagen del ejercicio
+        //el nombre que se le da a la foto es el los 10 primero caracteres del md5 del id del ejercicio para que este sea unico
+        $tabla_imagenesHTML = '<div id="capa1">';
+        $tabla_imagenesHTML.= '<a id="botonFoto" class="up">Cambiar Foto</a>';
+        $tabla_imagenesHTML.= '</div>';
+        $tabla_imagenesHTML.= '<div id="capa2"> ';
+        $tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="'.$srcImage.'" style="height: 300px;"/>';
+        $tabla_imagenesHTML.= '</div>';
+        $mform->addElement('html', $tabla_imagenesHTML);
+        
+         //cargamos los datos de la BD
+        $textosEjercicio = new Ejercicios_textos();
+        $textos = $textosEjercicio->obtener_todos_textos_ejercicicio($idEjercicio);
+        
+        //En el ejercicio texto hueco, no hace falta poner un switch para los tipos de pregunta y respuesta ya que solo es de tipo texto.
+        //Tipo origen = tipo respuesta = texto
+        $divEjercicio = '<div name="divEjercicio" id="divEjercicio" class="divEjercicio">';
+        $mform->addElement('html', $divEjercicio);
+        //para saber el número de la pregunta que estamos tratando
+        $numText = '<input type="hidden" value='.sizeof($textos).' id="numText" name="numText" />';
+        $mform->addElement('html', $numText);
+        
+        for($i=1; $i<=sizeof($textos); $i++) {
+            //Cargo todas las palabras del texto i-esimo de BBDD
+            $ejercicioth = new Ejercicios_texto_hueco();
+            $palabras=$ejercicioth->obtener_todos_id_texto($textos[$i-1]->get('id'));
+            
+            //div para cada uno de los textos
+            $divTexto = '<div name="divTexto'.$i.'" id="divTexto'.$i.'" class="divTexto">';
+            $mform->addElement('html', $divTexto);
+
+            //Abro el primer div estara alineado a la izq
+            $divIzq = '<div name="divIzq'.$i.'" id="divIzq'.$i.'" class="divIzq">';
+            $mform->addElement('html', $divIzq);
+            //Titulo del texto
+            $titulo = '<h3>'.get_string('TH_titulo', 'ejercicios').' '.$i.'</h3>';
+            $mform->addElement('html', $titulo);
+            //Boton para crear texto huecos 
+            $opciones = '<center><span>Crear hueco cada <select id="distanciaHueco'.$i.'" name="distanciaHueco'.$i.'"> <option>--</option> <option value="5">5ª</option> <option value="6">6ª</option> <option value="7">7ª</option> <option value="8">8ª</option> <option value="9">9ª</option></select> palabra</span></center>';
+            $mform->addElement('html', $opciones);
+            $boton = '<center><input type="button" class="button" name="textoHueco'.$i.'" id="textoHueco'.$i.'" value="Crear" onclick="ocultarPalabras(this.id)" /> <input type="button" class="button" name="borrarTextos'.$i.'" id="borrarTextos'.$i.'" value="Limpiar" onclick="limpiarContenidosBoton(this.id)" /> </center>';
+            $mform->addElement('html', $boton);
+            //TextArea para visualizar los textos
+            $mform->addElement("textarea", "id_original$i", get_string("TH_texto", "ejercicios"), 'wrap="virtual" rows="8" ');
+            $mform->addElement("textarea", "id_pregunta$i", get_string("TH_anadir", "ejercicios"), 'wrap="virtual" rows="8" readonly"');
+            $mform->setDefault("id_original$i", $textos[$i-1]->get('texto'));
+            $mform->setDefault("id_pregunta$i", $textos[$i-1]->get('textoauxiliar'));
+            //lo siguiente por que creo que falla el addElement textarea y no cierra bien el fieldset...lo añado a pelo
+            $mform->addElement('html', "</fieldset>");
+            //Se añade un boton para que se cree un nuevo hueco. 
+            $divBoton = '<div name="divBoton" id="divBoton" class="divBoton">';
+            $divBoton.= '<center><input type="button" class="button" name="add_hueco'.$i.'" id="add_hueco'.$i.'" value="' . get_string('TH_add_hueco', 'ejercicios') . '" onclick="TH_addHueco(this.id)" /> </center>';
+            $divBoton.= '</div>';
+            $mform->addElement('html', $divBoton);
+            //Campo hidden para contabilizar el numero de palabras
+            $divnumpalabras = '<input type="hidden" value='.sizeof($palabras).' id="num_palabras'.$i.'" name="num_palabras'.$i.'" />';
+            $mform->addElement('html', $divnumpalabras);
+            //Div para guardar los datos de las palabras que oculto
+            $divPalabras = '<div name="divPalabrasN'.$i.'" id="divPalabrasN'.$i.'">';
+            $mform->addElement('html', $divPalabras);
+            //Cierro el div que guarda los datos de las palabras que oculto
+            $divPalabrasCierre = '</div>';
+            $mform->addElement('html', $divPalabrasCierre);
+            //Cierro el div alineado a la iz
+            $divIzqCierre = '</div>';
+            $mform->addElement('html', $divIzqCierre);
+
+            //Abro el div que estara alineado a la derecha
+            $divDer = '<div name="divDer'.$i.'" id="divDer'.$i.'" class="divDer">';
+            $mform->addElement('html', $divDer);
+            //Menu para las palabras ocultadas
+            $pistas='<div class="pistas"><img id="pista" src="./imagenes/pista_descripcion.png" title="Seleccionar todo" onclick="selectAll('.$i.', this.id)"> '
+                                .'<img style="margin-left:6px" id="longitud" src="./imagenes/pista_longitud.png" title="Seleccionar todo" onclick="selectAll('.$i.', this.id)"> '
+                                .'<img style="margin-left:6px" id="solucion" src="./imagenes/pista_palabra.png" title="Seleccionar todo" onclick="selectAll('.$i.', this.id)"></div>';
+            $mform->addElement("html", $pistas);
+            
+            for($j=1; $j<=sizeof($palabras); $j++) {
+                //Palabras ocultadas
+                $pal='<div id="oculta'.$i.$j.'">'
+                        . '<input type="text" name="palabra'.$i.$j.'" id="palabra'.$i.$j.'" value="'.$palabras[$j-1]->get("palabra").'" readonly>'
+                        . '<input type="hidden" name="start'.$i.$j.'" id="start'.$i.$j.'" value="'.$i.$j.'">'
+                        . ' <img id="borrarOculta'.$i.$j.'" src="./imagenes/delete.gif" onclick=replaceHuecoTH("borrarOculta'.$i.$j.'") alt="eliminarOculta"  height="13px"  width="13px">  '
+                        . '<input value="o" name="pista'.$i.$j.'" id="pista'.$i.$j.'" type="checkbox" checked="1"> '
+                        . '<input value="o" name="longitud'.$i.$j.'" id="longitud'.$i.$j.'" type="checkbox" checked="1"> '
+                        . '<input value="o" name="solucion'.$i.$j.'" id="solucion'.$i.$j.'" type="checkbox" checked="1"> '
+                        . '<input type="text" name="campo'.$i.$j.'" id="campo'.$i.$j.'" value="'.$palabras[$j-1]->get('pista').'">'
+                      . '</div>';
+                $mform->addElement("html", $pal);
+                
+            }
+            //Cierro el div alineado a la derecha
+            $divDerCierre = '</div>';
+            $mform->addElement('html', $divDerCierre);
+
+            $divTextoCierre = '</div>';
+            $mform->addElement('html', $divTextoCierre);
+        }
+        
+        $divEjercicioCierre = '</div>';
+        $mform->addElement('html', $divEjercicioCierre);
+        
+        //Botón para añadir más preguntas
+        $masPreguntas = '<br><center><input type="button" class="button" name="masPreguntas" id="masPreguntas" value="Añadir pregunta" onclick="clonar()" /></center></br>';
+        $mform->addElement('html', $masPreguntas);
+
+        // Autoría del ejercicio
+        $userid = get_record('user', 'id', $creador);
+        $autoria = genera_autoria($userid);
+        $mform->addElement('html', $autoria);
+
+        $imagenLicencia = genera_licencia($licencia);
+        $mform->addElement('html', $imagenLicencia);
+
+        $radioarrayVisib = array();
+        $radioarrayVisib[] = &MoodleQuickForm::createElement('radio', 'radiovisible', '', "Si", "Si", null);
+        $radioarrayVisib[] = &MoodleQuickForm::createElement('radio', 'radiovisible', '', "No", "No", null);
+
+        $mform->addGroup($radioarrayVisib, 'radiovisible', get_string('visible', 'ejercicios'), array(' '), false);
+        if ($visible == 1) {
+            $mform->setDefault('radiovisible', "Si");
+        } else {
+            $mform->setDefault('radiovisible', "No");
+        }
+
+        $radioarrayPriv = array();
+        $radioarrayPriv[] = &MoodleQuickForm::createElement('radio', 'radioprivado', '', "Si", "Si", null);
+        $radioarrayPriv[] = &MoodleQuickForm::createElement('radio', 'radioprivado', '', "No", "No", null);
+
+        $mform->addGroup($radioarrayPriv, 'radioprivado', get_string('publico', 'ejercicios'), array(' '), false);
+        if ($publico == 1) {
+            $mform->setDefault('radioprivado', "Si");
+        } else {
+            $mform->setDefault('radioprivado', "No");
+        }
+
+        // Se añade el botón guardar y el texto para las fuentes editable si es modificable
+        $fuentes_aux = $ejercicios_leido->get('fuentes');
+        $fuentes = genera_fuentes($fuentes_aux, "");
+        $mform->addElement('html', $fuentes);
+        
+        $guardar = '<div name="divBoton" id="divBoton" class="divBoton">';
+        $guardar.=  '<center><input type="submit" class="button" id="submitbutton" name="submitbutton" value="'.get_string('BotonGuardar', 'ejercicios').'"></center>';
+        $guardar.= '</div>';
+        $mform->addElement('html', $guardar);
+    }
+
+    //buscando ejercico sin permisos (alumno y profesores no creadores)
+    function mostrar_sin_permisos(&$mform, $id, $ejercicios_leido) {
+        $nombre = $ejercicios_leido->get('name');
+        $idEjercicio =  $ejercicios_leido->get('id');
+        $creador = $ejercicios_leido->get('id_creador');
+        $licencia = $ejercicios_leido->get("copyrightpreg");
+        $foto_asociada = $ejercicios_leido->get("foto_asociada");
+
+        // Se imprime el título del ejercicio
+        $titulo = genera_titulos($nombre, get_string('TH_title', 'ejercicios'), $id);
+        $mform->addElement('html', $titulo);
+
+        // Se imprime la descripción del ejercicio
+        $descripcion = genera_descripcion($ejercicios_leido->get('descripcion'));
+        $mform->addElement('html', $descripcion);
+        
+        if ($foto_asociada == 1) {
+            // src para la foto cuando existe
+            $srcImage='./ejercicios_get_imagen.php?userPath='.$creador.'&name='.substr(md5($idEjercicio), 0, 10).'&ubicacion=1';
+        } else {
+            // src para la foto por defecto
+            $srcImage="./ejercicios_get_imagen.php?ubicacion=0";
+        }
+        //Campo de la imagen del ejercicio
+        //el nombre que se le da a la foto es el los 10 primero caracteres del md5 del id del ejercicio para que este sea unico
+        $imagen = '<div id="capa2"> ';
+        $imagen.= '<img  name="fotoAsociada" id="fotoAsociada" src="' . $srcImage . '" style="height: 300px;"/>';
+
+        //Para alumnos
+        //Mis palabras
+        $imagen .= '<div class="herramientas">';
+        $imagen .= '<div><a  onclick=JavaScript:sele(' . $id . ')><img src="../vocabulario/imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im" title="' . get_string('guardar', 'vocabulario') . '"/></a></div>';
+        $imagen .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=5" target="_blank"><img src="../vocabulario/imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im" title="' . get_string('admin_gr', 'vocabulario') . '"/></a></div>';
+        $imagen .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=7" target="_blank"><img src="../vocabulario/imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im" title="' . get_string('admin_ic', 'vocabulario') . '"/></a></div>';
+        $imagen .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=9" target="_blank"><img src="../vocabulario/imagenes/tipologias_textuales.png" id="id_tt_im" name="tt_im" title="' . get_string('admin_tt', 'vocabulario') . '"/> </a></div>';
+        $imagen .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=11" target="_blank"><img src="../vocabulario/imagenes/estrategias_icon.png" id="id_ea_im" name="ea_im" title="' . get_string('admin_ea', 'vocabulario') . '"/> </a></div>';
+        $imagen .="</div>";
+        $imagen.= '</div>';
+        $mform->addElement('html', $imagen);
+        
+         //cargamos los datos del ejercicio
+        $textosEjercicio = new Ejercicios_textos();
+        $textos = $textosEjercicio->obtener_todos_textos_ejercicicio($idEjercicio);
+        $n_textos = '<input type="hidden" value="'.sizeof($textos).'" id="n_textos" name="n_textos">';
+        $mform->addElement('html', $n_textos);
+        
+        //Para mostrar los textos
+        for($i=1; $i<=sizeof($textos); $i++) {
+            //Cargo todas las palabras del texto i-esimo de BBDD
+            $ejercicioth = new Ejercicios_texto_hueco();
+            $palabras=$ejercicioth->obtener_todos_id_texto($textos[$i-1]->get('id'));
+            
+            $divtexto = '<div class="texto" id="texto'.$i.'" name="texto'.$i.'">'.$textos[$i-1]->get('textoauxiliar');
+            $divtexto .= '<input type="hidden" value="'.sizeof($palabras).'" id="n_palabras" name="n_palabras">';
+            $divtexto .= '<input type="hidden" value="" id="guardapalabras" name="guardapalabras">';
+            $mform->addElement("html", $divtexto);
+            $divtextocierre = '</div>';
+            $mform->addElement("html", $divtextocierre);
+            
+            //Para mostrar las palabras si el campo solucion esta activo
+            for($j=1; $j<=sizeof($palabras); $j++) {
+                if($palabras[$j-1]->get('mostrar_solucion')==0){
+                    $arrayPalabras[]=$palabras[$j-1]->get('palabra');
+                }
+            }
+            shuffle($arrayPalabras);
+            $divpalabras="";
+            for ($j=1; $j<=sizeof($arrayPalabras); $j++){
+                if(($j-1)%6==0){
+                    $divpalabras.='<div class="flex" name="palabras'.$j.'" id="palabras'.$j.'">';
+                }
+                $divpalabras.='<div class="palabra" "name="palabra'.$i.$j.'" id="palabra'.$i.$j.'" value="'.$arrayPalabras[$j-1].'" onclick="seleccionapalabra(this.id)">'.$arrayPalabras[$j-1].'</div>';
+                if(($j-1)%6==5) {
+                    $divpalabras.="</div>";
+                }
+            }
+            $divpalabras.="</div>";
+            $mform->addElement("html", $divpalabras);
+            
+            $soluciones = '<div class="flex opciones">';
+            $soluciones .= '<div class="divnumero">Numero</div>';
+            $soluciones .= '<div class="inputrespuestas">Palabra</div>';
+            $soluciones .= '<div class="borrarpalabra">Borrar</div>';
+            $soluciones .= '<div class="divpista">Pista</div>';
+            $soluciones .= '<div class="divlongitud">Longitud</div>';
+            $soluciones .= "</div>";
+            $mform->addElement("html", $soluciones);
+            
+            //Muestro los campos donde se van a insertar las soluciones
+            for($j=1; $j<=sizeof($palabras); $j++) {
+                if($palabras[$j-1]->get("mostrar_pistas")==0) {
+                    $pista=$palabras[$j-1]->get("pista");
+                }
+                if($palabras[$j-1]->get("mostrar_longitud")==0) {
+                    $longitud=strlen($palabras[$j-1]->get("palabra"));
+                }
+                $divrespuesta='<div class="flex">';
+                $mform->addElement("html", $divrespuesta);
+                
+                $numero='<div class="divnumero">'.$j.'</div>';
+                $inputrespuesta='<div class="inputrespuestas"><input type="text" onclick="copiarrespuesta(this.id)" value="" id="respuesta'.$i.$j.'" name="respuesta'.$i.$j.'" ></div>';
+                $botonborrar='<div class="borrarpalabra"><img onClick="borrarpalabra(this.id)" id="'.$i.$j.'" src="./imagenes/delete.gif" alt="borrar palabra" height="15px"  width="15px" title="Borrar palabra"/></div>';
+                $inputpista='<div class="divpista" id="pista'.$i.$j.'" name="pista'.$i.$j.'">'.$pista.'</div>';
+                $inputlongitud='<div class="divlongitud" id="longitud'.$i.$j.'" name="longitud'.$i.$j.'">'.$longitud.'</div>';
+                
+                $mform->addElement("html", $numero);
+                $mform->addElement("html", $inputrespuesta);
+                $mform->addElement("html", $botonborrar);
+                $mform->addElement("html", $inputpista);
+                $mform->addElement("html", $inputlongitud);
+                
+                $divrespuestacierre="</div>";
+                $mform->addElement("html", $divrespuestacierre);
+            }
+            unset($arrayPalabras);
+        }
+        
+        // Autoría del ejercicio
+        $userid = get_record('user', 'id', $creador);
+        $autoria = genera_autoria($userid);
+        $mform->addElement('html', $autoria);
+
+        $imagenLicencia = genera_licencia($licencia);
+        $mform->addElement('html', $imagenLicencia);
+
+        $ejercicios_prof = new Ejercicios_prof_actividad();
+        $ejercicios_del_prof = $ejercicios_prof->obtener_uno_idejercicio($idEjercicio);
+        if (sizeof($ejercicios_del_prof) == 0) {
+            $noagregado = true;
+        } else {
+            $noagregado = false;
+        }
+
+        $fuentes_aux = $ejercicios_leido->get('fuentes');
+        $fuentes = genera_fuentes($fuentes_aux, "readonly");
+        $mform->addElement('html', $fuentes);
+
+        $tabla_menu = '<center><input type="button" class="button" value="Corregir" onClick=""/> <input type="button" class="button" id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal('.$id.')" /></center>';
+        $mform->addElement('html', $tabla_menu);
+    }
 }
 
 ?>

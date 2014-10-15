@@ -1,53 +1,297 @@
 /*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+  Daf-collage is made up of two Moodle modules which help in the process of
+  German language learning. It facilitates the content organization like
+  vocabulary or the main grammar features and gives the chance to create
+  exercises in order to consolidate knowledge.
+
+  Copyright (C) 2011
+
+  Coordination:
+  Ruth Burbat
+
+  Source code:
+  Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
+  Simeón Ruiz Romero (simeonruiz@gmail.com)
+  Serafina Molina Soto(finamolinasoto@gmail.com)
+  Javier Castro Fernández (havidarou@gmail.com)
+
+  Original idea:
+  Ruth Burbat
+
+  Content design:
+  Ruth Burbat
+  AInmaculada Almahano Güeto
+  Andrea Bies
+  Julia Möller Runge
+  Blanca Rodríguez Gómez
+  Antonio Salmerón Matilla
+  María José Varela Salinas
+  Karin Vilar Sánchez
+
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 */
-/* 
-    Created on : 01-abr-2014, 10:52:06
-    Author     : Carlos
-*/
-.divGeneral {
+
+#mform1 {
     width:100%;
 }
 
-.divDerecha {
+
+/** FOTO **/
+#capa1 {
+    position:absolute;
+    z-index:1;
+}
+
+.up {
+    padding:12px;
+    font:bold 12px Arial, Helvetica, sans-serif;
+    text-align:center;
+    background:#f2f2f2;
+    color:#3366cc;
+    border:1px solid #ccc;
+    width:150px;
+    display:block;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    margin:0 auto;
+    text-decoration:none
+}
+/** ---- **/
+
+.titulo {
+    margin-left: 0px;
+    font-family:'Helvetica', Arial, sans-serif;
+    font-size:13px;
+}
+
+/** Añadido del estilo de vocabulario para ajustar el botón menú principal **/
+#id_cancellink { 
+    float: right;
+    color: #EEE;
+    font-size: 0.9em;
+}
+
+.class_cancellink { 
+    float: right;
+    color: #EEE;
+    font-size: 0.9em;
+}
+
+.herramientas {
+    float: right;
+}
+/** ---- **/
+
+
+/** EJERCICIO **/
+.divEjercicio .divTexto {
+    overflow: hidden;
+    width:100%;
+}
+
+.divDer {
+    margin-top: 15%;
     float:right;
-    width:42%;
+    width:49.5%;
+    overflow: hidden;
+}
+
+.divIzq {
+    float:left;
+    width:49.5%;
+    overflow: hidden;
 }
 .divBoton {
     float:left;
-    width:50%;
+    width:100%;
 }
-.mform .fitemtitle {
-  display: block;
-  float: left;
-  width: inherit;
-  padding: 0;
-  margin: 5px 0 0 10px;
-  text-align: left;
+.pistas {
+    margin-left:42%;
 }
-.mform div.fitem {
+
+textarea {
+    width: 95%;
+}
+
+.flex {
+    display: flex;
+    width: 100%;
+}
+
+.opciones {
+    margin-top: 2%;
+    font-size: 1.2em;
+    font-style: oblique;
+}
+.palabra {
+    margin: 2px 2px 2px 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     
-  clear: both;
-  width: 50%;
-  min-height: 1.5em;
+    font-size: 1.4em;
+    font-family: Arial,Helvetica,sans-serif;
+    font-style: normal;
+    text-align: center;
+    
+    
+    width: 100%;
+    height: 40%;
+    background-color: #FFFFFF;
 }
-.mform div.felement,  .mform fieldset.felement{
-  display: block;
-  float: left;
-  margin: 5px 0 0 10px;
-  padding: 0;
-  text-align:left;
-  width: initial;
+.palabra:hover {
+    border-radius: 2px 2px 2px 2px;
+    -moz-border-radius: 2px 2px 2px 2px;
+    -webkit-border-radius: 2px 2px 2px 2px;
+    background-color: #81BEF7;
 }
-.pistas { 
-    font-size: 7pt; 
-    margin-left:155px; 
-} 
+.palabraSel {
+    margin: 2px 2px 2px 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+    font-size: 1.4em;
+    font-family: Arial,Helvetica,sans-serif;
+    font-style: italic;
+    text-align: center;
+    
+    
+    width: 100%;
+    height: 40%;
+    background-color: #2E9AFE;
+}
+.palabraMarc {
+    margin: 2px 2px 2px 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+    font-size: 1.4em;
+    font-family: Arial,Helvetica,sans-serif;
+    font-style: italic;
+    text-align: center;
+    
+    
+    width: 100%;
+    height: 40%;
+    background-color: #A4A4A4;
+}
+
+.texto {
+    border-radius: 2px 2px 2px 2px;
+    -moz-border-radius: 2px 2px 2px 2px;
+    -webkit-border-radius: 2px 2px 2px 2px;
+    padding: 20px 20px 20px 20px;
+    font-family: Arial,Helvetica,sans-serif;
+    overflow: auto;
+    font-size: 1.4em;
+    line-height: 1.5;
+    text-align: justify;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    
+    background-color: #DFDFDF;
+    box-shadow: 5px 10px 10px #999;
+    width: 98%;
+}
+.soluciones {
+    float: left;
+    padding: 10px;
+}
+
+.divnumero {
+    width: 8%;
+    margin-bottom: 10px;
+    text-align: center;
+    line-height: 3;
+}
+
+
+.inputrespuestas {
+    width: 30%;
+    line-height: 3;
+}
+
+.borrarpalabra {
+    width: 2%;
+    line-height: 3;
+}
+
+.divpista {
+    width: 60%;
+    margin-right: 10px;
+    text-align: right;
+    line-height: 3;
+}
+
+.divlongitud {
+    width: 5%;
+    text-align: right;
+    line-height: 3;
+}
 
 :target{
-text-decoration: line-through;
-
+    text-decoration: line-through;
 }
 
+input[type='text'] {
+    height: 30px;
+}
+/** ---- **/
+
+
+/** BOTONES PRIVADO/PUBLICO (EJERCICIOS) **/
+.mform div.fitem {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 3%;
+}
+
+.mform .fitemtitle {
+    width: 100%;
+    float: left;
+    text-align: left;
+}
+
+.mform div.felement{
+    width: 100%;
+    height: 40%;
+    float: left;
+}
+/** ---- **/
+
+
+/** BOTONES **/
+.button {
+  background: #5ca3e0;
+  background-image: -webkit-linear-gradient(top, #5ca3e0, #0f1e45);
+  background-image: -moz-linear-gradient(top, #5ca3e0, #0f1e45);
+  background-image: -ms-linear-gradient(top, #5ca3e0, #0f1e45);
+  background-image: -o-linear-gradient(top, #5ca3e0, #0f1e45);
+  background-image: linear-gradient(to bottom, #5ca3e0, #0f1e45);
+  -webkit-border-radius: 6;
+  -moz-border-radius: 6;
+  border-radius: 6px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 15px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.button:hover {
+  background: #5ca3e0;
+  background-image: -webkit-linear-gradient(top, #5ca3e0, #000000);
+  background-image: -moz-linear-gradient(top, #5ca3e0, #000000);
+  background-image: -ms-linear-gradient(top, #5ca3e0, #000000);
+  background-image: -o-linear-gradient(top, #5ca3e0, #000000);
+  background-image: linear-gradient(to bottom, #5ca3e0, #000000);
+  text-decoration: none;
+}
+/** ---- **/
