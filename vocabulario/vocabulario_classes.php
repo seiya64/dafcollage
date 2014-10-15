@@ -709,7 +709,7 @@ class Vocabulario_mis_palabras {
         $this->id = $id;
     }
 
-    function set($sustantivo = null, $verbo = null, $adjetivo = null, $otro = null) {
+    function set($sustantivo = null, $verbo = null, $adjetivo = null, $otro = null, $campoid = null) {
         if ($sustantivo != null && $sustantivo != $this->sustantivo) {
             $this->sustantivo = $sustantivo;
         }
@@ -722,6 +722,19 @@ class Vocabulario_mis_palabras {
         if ($otro != null && $otro != $this->otro) {
             $this->otro = $otro;
         }
+        if($campoid != null) {
+            $camp = new Vocabulario_campo_lexico();
+            $camp->leer($campoid);
+            $this->campo = $camp;
+        }
+    }
+    
+    function set_ids($sustantivoid = null, $verboid = null, $adjetivoid = null, $otroid = null, $campoid = null) {
+        $this->sustantivoid = $sustantivoid;
+        $this->adjetivoid = $adjetivoid;
+        $this->verboid = $verboid;
+        $this->otroid = $otroid;
+        $this->campoid = $campoid;
     }
 
     function get($param) {
@@ -959,89 +972,52 @@ class Vocabulario_mis_palabras {
         }
     }
 
-    function actualizar() {
-        $todas = $this->obtener_todas($this->usuarioid);
-
-        $insertar_sustantivo = true;
-        $insertar_adjetivo = true;
-        $insertar_verbo = true;
-        $insertar_otro = true;
-
-        $insertar_combinacion = true;
-
-        $id_actualizable = 0;
-
-        //de las palabras que tengo guardadas miro a ver cual esta de antes
-        foreach ($todas as $cosa) {
-            if ($cosa->get('sustantivo')->get('palabra') == $this->sustantivo->get('palabra') && $insertar_sustantivo) {
-                $this->sustantivo->set(null, null, null, null, null, null, null, null, null, $cosa->get('sustantivo')->get('id'));
-                update_record('vocabulario_sustantivos', $this->sustantivo, true);
-                $insertar_sustantivo = false;
+    function actualizar($sus, $ver, $adj, $otr, $cam) {
+        //Borja Arroba: Cambio de la funcion completa, antes se actualizaba cualquier campo de los 4 
+        //machacando la primera ocurrencia de dicho campo de la base de datos. Por lo tanto si se modificaba
+        //cualquier campo de una tupla mis palabras se cambiaba la primera ocurrencia que encontraba no la que queremos
+        //El cambio permite modificar una tupla de "mis_palabras" o bien añadir cualquier campo en caso de que no estuviera,
+        //es decir, si dentro de la tupla de mis palabras no exisita el campo previamente, lo inserta como uno nuevo (nuevo id), 
+        //si ya existia lo modifica (hace un update con el id que tenia)
+        
+        if($this->get("sustantivoid")==1) { //Si hay un uno es que queremos añadir no modificar
+            if($sus->get("palabra")!="") { //Si este campo es null no se añade ni se modifica
+                $sus->leer(insert_record('vocabulario_sustantivos', $sus, true));
             }
-            if ($cosa->get('adjetivo')->get('sin_declinar') == $this->adjetivo->get('sin_declinar') && $insertar_adjetivo) {
-                $this->adjetivo->set(null, null, null, null, null, null, $cosa->get('adjetivo')->get('id'));
-                update_record('vocabulario_adjetivos', $this->adjetivo, true);
-                $insertar_adjetivo = false;
-            }
-            if ($cosa->get('verbo')->get('infinitivo') == $this->verbo->get('infinitivo') && $insertar_verbo) {
-                $this->verbo->set(null, null, null, null, null, null, null, null, null, $cosa->get('verbo')->get('id'));
-                update_record('vocabulario_verbos', $this->verbo, true);
-                $insertar_verbo = false;
-            }
-            if ($cosa->get('otro')->get('palabra') == $this->otro->get('palabra') && $insertar_otro) {
-                $this->otro->set(null, null, null, null, null, null, $cosa->get('otro')->get('id'));
-                update_record('vocabulario_otros', $this->otro, true);
-                $insertar_otro = false;
-            }
+        } else { //Si no modificamos
+            $sus->set(null, null, null, null, null, null, null, null, null, $this->get("sustantivoid"));
+            update_record('vocabulario_sustantivos', $sus, true);
         }
-
-        //inserto nuevas las que tenga que insertar
-        if ($insertar_sustantivo && $this->get('sustantivo')->get('palabra')) {
-            $id = insert_record('vocabulario_sustantivos', $this->get('sustantivo'), true);
-            $this->sustantivo->set(null, null, null, null, null, null, null, null, null, $id);
-        }
-        if ($insertar_adjetivo && $this->get('adjetivo')->get('sin_declinar')) {
-            $id = insert_record('vocabulario_adjetivos', $this->get('adjetivo'), true);
-            $this->adjetivo->set(null, null, null, null, null, null, $id);
-        }
-        if ($insertar_verbo && $this->get('verbo')->get('infinitivo')) {
-            $id = insert_record('vocabulario_verbos', $this->get('verbo'), true);
-            $this->verbo->set(null, null, null, null, null, null, null, null, null, $id);
-        }
-        if ($insertar_otro && $this->get('otro')->get('palabra')) {
-            $id = insert_record('vocabulario_otros', $this->get('otro'), true);
-            $this->otro->set(null, null, null, null, null, null, $id);
-        }
-
-        foreach ($todas as $cosa) {
-            $actualizable1 = false;
-            $actualizable2 = false;
-            $actualizable3 = false;
-            $actualizable4 = false;
-
-            if ($cosa->get('sustantivo')->get('id') == $this->get('sustantivo')->get('id')) {
-                $actualizable1 = true;
+        
+        if($this->get("verboid")==1) { //Si hay un uno es que queremos añadir no modificar
+            if($ver->get("palabra")!="") { //Si este campo es null no se añade ni se modifica
+                $ver->leer(insert_record('vocabulario_verbos', $ver, true));
             }
-            if ($cosa->get('adjetivo')->get('id') == $this->get('adjetivo')->get('id') || $cosa->get('adjetivo')->get('id') == 1) {
-                $actualizable2 = true;
-            }
-            if ($cosa->get('verbo')->get('id') == $this->get('verbo')->get('id') || $cosa->get('verbo')->get('id') == 1) {
-                $actualizable3 = true;
-            }
-            if ($cosa->get('otro')->get('id') == $this->get('otro')->get('id') || $cosa->get('otro')->get('id') == 1) {
-                $actualizable4 = true;
-            }
-
-            if ($actualizable1 && $actualizable2 && $actualizable3 && $actualizable4 && !$id_actualizable) {
-                $id_actualizable = $cosa->get('id');
-            }
+        } else { //Si no modificamos
+            $ver->set(null, null, null, null, null, null, null, null, null, $this->get("verboid"));
+            update_record('vocabulario_verbos', $ver, true);
         }
-
-        $this->sustantivoid = $this->sustantivo->id;
-        $this->adjetivoid = $this->adjetivo->id;
-        $this->verboid = $this->verbo->id;
-        $this->otroid = $this->otro->id;
-
+        
+        if($this->get("adjetivoid")==1) { //Si hay un uno es que queremos añadir no modificar
+            if($adj->get("palabra")!="") { //Si este campo es null no se añade ni se modifica
+                $adj->leer(insert_record('vocabulario_adjetivos', $adj, true));
+            }
+        } else { //Si no modificamos
+            $adj->set(null, null, null, null, null, null, $this->get("adjetivoid"));
+            update_record('vocabulario_adjetivos', $adj, true);
+        }
+        
+        if($this->get("otroid")==1) { //Si hay un uno es que queremos añadir no modificar
+            if($otr->get("palabra")!="") { //Si este campo es null no se añade ni se modifica
+                $otr->leer(insert_record('vocabulario_otros', $otr, true));
+            }
+        } else { //Si no modificamos
+            $otr->set(null, null, null, null, null, null, $this->get("otroid"));
+            update_record('vocabulario_otros', $otr, true);
+        }
+        
+        
+        $this->set_ids($sus->get("id"), $ver->get("id"), $adj->get("id"), $otr->get("id"), $cam);
         update_record('vocabulario_mis_palabras', $this, true);
     }
 

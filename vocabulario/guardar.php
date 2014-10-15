@@ -68,14 +68,12 @@ $id_sustantivo;
 $id_adjetivo = 1;
 $id_verbo = 1;
 $id_otro = 1;
-
+ 
 $id_actualizable = 0;
 
 $leido = optional_param('idleido', PARAM_INT);
 
 if ($borrar > 0) {
-    echo "palabra: ".$borrar;
-    exit();
     delete_records('vocabulario_mis_palabras', 'id', $borrar);
     redirect('./view.php?id=' . $id_tocho . '&opcion=2');
 }
@@ -159,8 +157,10 @@ $campo_leido = optional_param('campoid', PARAM_INT);
 if ($act == 1) {
     $id_actualizable = optional_param('idleido', PARAM_INT);
     if ($id_actualizable > 0) {
-        $cosa_leida = new Vocabulario_mis_palabras($USER->id, $sustantivo_leido, $verbo_leido, $adjetivo_leido, $otro_leido, $campo_leido, $id_actualizable);
-        $cosa_leida->actualizar();
+        $cosa_leida = new Vocabulario_mis_palabras();
+        $cosa_leida->leer($id_actualizable);
+//        print_r($cosa_leida);die();
+        $cosa_leida->actualizar($sustantivo_leido, $verbo_leido, $adjetivo_leido, $otro_leido, $campo_leido);
     }
 } else {
     $cosa_leida = new Vocabulario_mis_palabras($USER->id, $sustantivo_leido, $verbo_leido, $adjetivo_leido, $otro_leido, $campo_leido);
