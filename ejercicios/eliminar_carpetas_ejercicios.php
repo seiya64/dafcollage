@@ -196,6 +196,15 @@ if ($mform->is_submitted()) {  //Boton Menu Principal
                     //echo "borrando de texto texto preg"
                     $ejercicio_texto_texto_preg->borrar_id_ejercicio($id_ejercicio);
                     break;
+                case 3: //texto hueco
+                    //Se borran los textos asociados al ejercicio
+                    $textos = new Ejercicios_textos();
+                    $textos->borrar_id_ejercicio($id_ejercicio);
+                    //Se borran las palabras asociadas al ejercicio
+                    $palabras = new Ejercicios_texto_hueco();
+                    $palabras->borrar_id_ejercicio($id_ejercicio);
+                    
+                    break;
                 case 4: //Identificar elementos
                     switch ($ejercicio->get('tipoarchivopregunta')) {
                         case 1: //Hay un texto

@@ -401,20 +401,20 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod {
         if ($ctt >= 2) {
             $camposBusqueda["tipologiatextual"] = $ctt;
         }
-        
-        //Obtengo el rol del usuario que esta buscando, si es estudiante añado a los campos de busqueda visible=1 y curso=curso del alumno
-        $context = get_context_instance(CONTEXT_COURSE,$COURSE->id);
 
-        if (has_capability('moodle/legacy:student', $context, $USER->id, false) ) {
+        //Obtengo el rol del usuario que esta buscando, si es estudiante añado a los campos de busqueda visible=1 y curso=curso del alumno
+        $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
+
+        if (has_capability('moodle/legacy:student', $context, $USER->id, false)) {
             $camposBusqueda["visible"] = 1;
             $camposBusqueda["id_curso"] = $id;
         }
-        
+
         //Añado este campo por que desde aqui unicamente pueden verse los ejercicios que sean publicos
         $camposBusqueda["publico"] = 1;
         $buscados = $ejercicios_general->buscar_ejercicios($camposBusqueda);
 
-        $lista = $this->listar_ejercicios($id, $buscados);
+        $lista = $this->listar_ejercicios($id, $buscados, false);
 
         $mform->addElement('html', $lista);
 
@@ -449,7 +449,7 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod {
         $camposBusqueda["visible"] = 1;
 
         $todos_ejer_curso = $ejercicios_curso->buscar_ejercicios($camposBusqueda);
-        $lista = $this->listar_ejercicios($id, $todos_ejer_curso);
+        $lista = $this->listar_ejercicios($id, $todos_ejer_curso, false);
 
         $mform->addElement('html', $lista);
 
@@ -497,7 +497,7 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod {
                 $listaEjercicios[] = $general->obtener_uno($ejercicios_prof_carp[$j]->get('id_ejercicio'));
             }
             //Se añade la lista de los ejercicios a mostrar
-            $lista = $this->listar_ejercicios($id, $listaEjercicios);
+            $lista = $this->listar_ejercicios($id, $listaEjercicios, true);
             $carpeta.=$lista;
             $carpeta.='</li>';
         }
@@ -513,44 +513,32 @@ class mod_ejercicios_mostrar_ejercicios_buscados extends moodleform_mod {
     /**
      * Crea la lista de los ejercicios que se van a mostrar como una lista no ordenada
      * @author Borja Arroba Hernández
-     * @param array $ejercicios Lista de los ejercicios a mostrar
-     *        int   $id id de la instancia del curso
+     * @param array $ejercicios     Lista de los ejercicios a mostrar
+     *        int   $id             id de la instancia del curso
+     *        boolean $profesor     para mostrar la opcion de eliminar el ejercicio (solo para profesores)
      * @return string Código html con una lista sin ordenar con los ejercicios a mostrar
      */
-    function listar_ejercicios($id, $ejercicios) {
+    function listar_ejercicios($id, $ejercicios, $profesor) {
         $numeroencontrados = sizeof($ejercicios);
-        $html.='<ul id="classul">';
+        $html = '<ul id="classul">';
 
         for ($i = 0; $i < $numeroencontrados; $i++) {
             $nombre_ejercicio = $ejercicios[$i]->get('name');
             $id_ejercicio = $ejercicios[$i]->get('id');
             $tipo_creacion = $ejercicios[$i]->get('tipoactividad');
             $id_creador = $ejercicios[$i]->get('id_creador');
-            
-            //Añado un enlace por cada ejercicio
-            switch ($tipo_creacion) {
-                case 0: //Multiple Choice
-                case 4: //Identificar elementos
-                    $html.='<li style="width:750px;">'
-                            . '<a id="classa" '
-                            . 'href="./view.php?opcion=8&id=' . $id . '&id_ejercicio=' . $id_ejercicio . '&buscar=1&tipocreacion=' . $tipo_creacion . '">' . $nombre_ejercicio;
-                    break;
-                case 1: // Asociacion simple
-                case 2: // Asociacion multiple
-                case 3: // Texto Hueco
-                case 7: // Ordenar Elementos
-                case 8: // IE mas RC
-                    $html.='<li style="width:750px;">'
-                            . '<a id="classa" '
-                            . 'href="./view.php?opcion=8&id=' . $id . '&id_ejercicio=' . $id_ejercicio . '&buscar=1&tipo_origen=' . $ejercicios[$i]->get('tipoarchivopregunta') . '&tr=' . $ejercicios[$i]->get('tipoarchivorespuesta') . '&tipocreacion=' . $ejercicios[$i]->get('tipoactividad') . '">' . $nombre_ejercicio;
-                    break;
-            }
             $autor = get_record('user', 'id', $id_creador);
-            $html.='<div>Autor: ' .$autor->firstname. ' ' .$autor->lastname. '</div>'
-                    . '</a></li>';
-        }
-        $html.='</ul>';
 
+            $html.='<li style="width:750px;">'
+                    . '<a id="classa" href="./view.php?opcion=8&id=' . $id . '&id_ejercicio=' . $id_ejercicio . '&buscar=1&tipo_origen=' . $ejercicios[$i]->get('tipoarchivopregunta') . '&tr=' . $ejercicios[$i]->get('tipoarchivorespuesta') . '&tipocreacion=' . $ejercicios[$i]->get('tipoactividad') . '">' . $nombre_ejercicio
+                    . '<div>Autor: ' . $autor->firstname . ' ' . $autor->lastname . '</div>';
+            if($profesor) {
+                $html .= '<a href="eliminar_carpetas_ejercicios.php?id_curso=' . $id . '&id_ejercicio=' . $id_ejercicio . '""><img src="./imagenes/delete.gif"/></a>';
+            }
+            $html .= '</a></li>';
+        }
+        $html .= '</ul>';
+        
         return $html;
     }
 
