@@ -178,9 +178,23 @@ if (optional_param("submitbutton2")) { // Botón para añadir a mis ejercicos vi
             delete_records('ejercicios_textos', 'id', $texto->get('id'));
             //vuelvo a insertarlo
             $elmodificado = optional_param('texto', PARAM_TEXT);
-            $nuevotexto = new Ejercicios_textos(NULL, $id_ejercicio, $elmodificado);
+            $nuevotexto = new Ejercicios_textos(NULL, $id_ejercicio, $elmodificado, NULL);
             $nuevotexto->insertar();
         } else {
+            if($tipo_origen == 2) {//Es un audio
+                $audios = new Ejercicios_audios_asociados(NULL, $id_ejercicio, 0, 'audio'.$id_ejercicio.'.mp3');
+                
+                $audios->borrar_id_ejercicio($id_ejercicio);
+                $audios->insertar();
+                //Mover el archivo subido
+                if (move_uploaded_file($_FILES['archivoaudio']['tmp_name'], './mediaplayer/audios/audio'.$id_ejercicio.'.mp3')) {
+                    echo "<br/>ARCHIVO DE AUDIO MOVIDO A: " . './mediaplayer/audios/';
+                }
+                else {
+                    echo "<br/>ERROR AL MOVER EL ARCHIVO DE AUDIO A: " . './mediaplayer/audios/';
+                }
+                
+            }
             if ($tipo_origen == 3) { //Es con video       
                 //obtengo el texto
                 $videos = new Ejercicios_videos();

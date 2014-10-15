@@ -66,6 +66,60 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         
     }
 
+    /**
+     * Muestra el ejercicio Multiple Choice con vistas separadas para alumno y profesores
+     *
+     * @author Serafina Molina Soto; Modificado Javier Castro Fernández
+     * @param $id id for the course
+     * @param $id_ejercicio id del ejercicio a mostrar
+     */
+    function mostrar_ejercicio($id, $p, $id_ejercicio, $tipo_origen, $buscar) {
+
+        global $CFG, $COURSE, $USER;
+        $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
+
+        //Los iconos están sacados del tema de gnome que viene con ubuntu 11.04
+
+        $mform = & $this->_form;
+        
+        //Estilos y javascript concretos de multiple choice
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./mc_style.css">');
+        $mform->addElement('html', '<script type="text/javascript" src="./MC_JavaScript.js"></script>');
+        
+        $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>');
+        $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js"></script>');
+        $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
+        $mform->addElement('html', '<script type="text/javascript" src="./js/jquery.form.js"></script>');
+        $mform->addElement('html', '<script src="./js/ajaxupload.js" type="text/javascript"></script>');
+
+        // Se añade en sesión la variable $buscar 
+        $_SESSION['buscar'] = $buscar;
+        $_SESSION['id_curso'] = $id;
+
+        if ($buscar == 0) { // Se está creando el ejercicio
+            $this->creando_ejercicio($mform, $id, $p, $id_ejercicio, $tipo_origen);
+        } else {
+            // Se determina si el usuario es el creador
+            $ejercicios_bd = new Ejercicios_general();
+            $ejercicios_leido = $ejercicios_bd->obtener_uno($id_ejercicio);
+            $creador = $ejercicios_leido->get('id_creador');
+
+            if ($creador == $USER->id && has_capability('moodle/legacy:editingteacher', $context, $USER->id, true)) {
+                $modificable = true; // En ese caso el ejercicio se puede modificar
+            } else { // En caso contrario no se puede
+                $modificable = false;
+            }
+
+            $_SESSION['id_ejercicio'] = $id_ejercicio;
+            $_SESSION['modificable'] = $modificable;
+            if ($modificable) {
+                $this->mostrar_con_permisos($mform, $id, $p, $id_ejercicio, $tipo_origen, $ejercicios_leido);
+            } else {
+                $this->mostrar_sin_permisos($mform, $id, $p, $id_ejercicio, $tipo_origen, $ejercicios_leido);
+            }
+        }
+    }
+
     // Creando el ejercicio
     function creando_ejercicio(&$mform, $id, $p, $id_ejercicio, $tipo_origen) {
         global $CFG;
@@ -105,13 +159,14 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         switch ($tipo_origen) {
 
             case 1: // En caso de que sea texto
-                $mform->addElement('textarea', 'texto', get_string('textoorigen', 'ejercicios'), 'wrap="virtual" style="width: inherit;"');
+                $mform->addElement('textarea', 'texto', get_string('textoorigen', 'ejercicios'), 'wrap="virtual" rows="5" style="width: 98%;"');
                 $mform->addRule('texto', "Texto Origen Necesario", 'required', null, 'client');
                 break;
 
             case 2: // En caso de que sea audio
                 $mform->addElement('file', 'archivoaudio', "Audio");
                 $mform->addRule('archivoaudio', "Archivo Necesario", 'required', null, 'client');
+
                 break;
 
             case 3: // En caso de que sea un vídeo
@@ -129,24 +184,23 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
 
         // Se crea una tabla en la que se incluirán los distintos elementos del formulario para añadir las respuestas
         $tabla_imagenes = '<table width="100%">';
-        $tabla_imagenes .='<td>';
+        $tabla_imagenes .='<td width="100%">';
         $mform->addElement('html', $tabla_imagenes);
 
-        $divpregunta = '<div id="tabpregunta1" >';
+        $divpregunta = '<div id="tabpregunta1" style="width:100%;" >';
         $divpregunta.='<br/><br/>';
         $divpregunta.='<table style="width:100%;">';
-        $divpregunta.='<td style="width:80%;">';
-        $divpregunta.='<textarea style="width: 900px;" class="pregunta" name="pregunta1" id="pregunta1"> Introduzca la pregunta... </textarea>';
+        $divpregunta.='<td style="width:95%;">';
+        $divpregunta.='<textarea class="pregunta" name="pregunta1" id="pregunta1"> Introduzca la pregunta... </textarea>';
         $divpregunta.='</td>';
-        $divpregunta.='<td style="width:5%;">';
-        $divpregunta.='<img id="imgpregborrar" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarPregunta(tabpregunta1, 1)" title="Eliminar Pregunta"/>';
-        $divpregunta.='</br><img id="imgpreganadir" src="./imagenes/añadir.gif" alt="eliminar respuesta"  height="15px"  width="15px" onClick="anadirRespuesta(respuestas1, 1)" title="Añadir Respuesta"/>';
+        $divpregunta.='<td style="width:10%; padding: 10px;">';
+        $divpregunta.='<img id="imgpregborrar" src="./imagenes/delete.gif" alt="Eliminar pregunta"  height="10px"  width="10px" onClick="EliminarPregunta(tabpregunta1, 1)" title="Eliminar Pregunta"/>';
+        $divpregunta.='</br><img id="imgpreganadir" src="./imagenes/añadir.gif" alt="Añadir respuesta"  height="15px"  width="15px" onClick="anadirRespuesta(respuestas1, 1)" title="Añadir Respuesta"/>';
         $divpregunta.='</td> ';
-        $divpregunta.='</br> ';
         $divpregunta.='</table> ';
 
         // Para cada respuesta...
-        $divpregunta.='</br><div id="respuestas1" class=respuesta>';
+        $divpregunta.='<div id="respuestas1" class="respuesta">';
         $divpregunta.='</div>';
         $divpregunta.='</div>';
 
@@ -154,7 +208,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $mform->addElement('html', $divpregunta);
 
         // Botón añadir preguntas
-        $botones = '<left><input type="button" style="margin-top:20px;" id="id_Añadir" value="Añadir Pregunta" onclick="javascript:botonMasPreguntas()"></left>';
+        $botones = '<center><input type="button" class="button" id="id_Añadir" value="Añadir Pregunta" onclick="javascript:botonMasPreguntas()"></center>';
         $mform->addElement('html', $botones);
 
         $divnumpregunta = '<input type="hidden" value=1 id="num_preg" name="num_preg" />';
@@ -168,22 +222,22 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $imagenLicencia = genera_licencia($licencia);
         $mform->addElement('html', $imagenLicencia);
 
-        $radioarray = array();
-        $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiovisible', '', "Si", "Si", null);
-        $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiovisible', '', "No", "No", null);
+        $radioarrayVisib = array();
+        $radioarrayVisib[] = &MoodleQuickForm::createElement('radio', 'radiovisible', '', "Si", "Si", null);
+        $radioarrayVisib[] = &MoodleQuickForm::createElement('radio', 'radiovisible', '', "No", "No", null);
 
-        $mform->addGroup($radioarray, 'radiovisible', get_string('visible', 'ejercicios'), array(' '), false);
+        $mform->addGroup($radioarrayVisib, 'radiovisible', get_string('visible', 'ejercicios'), array(' '), false);
         if ($visible == 1) {
             $mform->setDefault('radiovisible', "Si");
         } else {
             $mform->setDefault('radiovisible', "No");
         }
 
-        $radioarray = array();
-        $radioarray[] = &MoodleQuickForm::createElement('radio', 'radioprivado', '', "Si", "Si", null);
-        $radioarray[] = &MoodleQuickForm::createElement('radio', 'radioprivado', '', "No", "No", null);
+        $radioarrayPriv = array();
+        $radioarrayPriv[] = &MoodleQuickForm::createElement('radio', 'radioprivado', '', "Si", "Si", null);
+        $radioarrayPriv[] = &MoodleQuickForm::createElement('radio', 'radioprivado', '', "No", "No", null);
 
-        $mform->addGroup($radioarray, 'radioprivado', get_string('publico', 'ejercicios'), array(' '), false);
+        $mform->addGroup($radioarrayPriv, 'radioprivado', get_string('publico', 'ejercicios'), array(' '), false);
         if ($publico == 1) {
             $mform->setDefault('radioprivado', "Si");
         } else {
@@ -197,7 +251,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $mform->addElement('html', $fuentes);
 
         // Botón guardar
-        $botones = '<center><input type="submit" style="margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '"></center>';
+        $botones = '<center><input type="submit" class="button"" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '"></center>';
         $mform->addElement('html', $botones);
 
         $tabla_imagenes = '</td>';
@@ -231,10 +285,10 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
 
         if ($foto_asociada == 1) {
             // src para la foto cuando existe
-            $srcImage='./ejercicios_get_imagen.php?userPath='.$creador.'&name='.substr(md5($id_ejercicio), 0, 10).'&ubicacion=1';
+            $srcImage = './ejercicios_get_imagen.php?userPath=' . $creador . '&name=' . substr(md5($id_ejercicio), 0, 10) . '&ubicacion=1';
         } else {
             // src para la foto por defecto
-            $srcImage="./ejercicios_get_imagen.php?ubicacion=0";
+            $srcImage = "./ejercicios_get_imagen.php?ubicacion=0";
         }
         //Campo de la imagen del ejercicio
         //el nombre que se le da a la foto es el los 10 primero caracteres del md5 del id del ejercicio para que este sea unico
@@ -242,7 +296,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $tabla_imagenesHTML.= '<a id="botonFoto" class="up">Cambiar Foto</a>';
         $tabla_imagenesHTML.= '</div>';
         $tabla_imagenesHTML.= '<div id="capa2"> ';
-        $tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="'.$srcImage.'" style="height: 300px;"/>';
+        $tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="' . $srcImage . '" style="height: 300px;"/>';
         $tabla_imagenesHTML.= '</div>';
         $mform->addElement('html', $tabla_imagenesHTML);
 
@@ -255,8 +309,10 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                 $origen_texto->obtener_uno_id_ejercicio($id_ejercicio);
 
                 // Buscamos y tenemos permiso de edición
-                $divtexto = '<textarea  class="adaptHeightInput" name="texto" id="texto">' . $origen_texto->get('texto') . '</textarea>';
-                $mform->addElement('html', $divtexto);
+                $mform->addElement("textarea", "texto", get_string("textoorigen", "ejercicios"), 'class="desctexto", rows=8"');
+                $mform->setDefault("texto", $origen_texto->get('texto'));
+                $mform->addRule('texto', "Texto Origen Necesario", 'required', null, 'client');
+                $mform->addElement("html", "</fieldset>");
                 break;
 
             case 2: // En caso de que sea audio
@@ -268,12 +324,10 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                         so.addParam("allowfullscreen","true");
                         so.addVariable("file","./mediaplayer/audios/audio' . $id_ejercicio . '.mp3");
                         so.addVariable("height","20");
-                        so.addVariable("width","320");
+                        so.addVariable("width","290");
                         so.write("player1");
                         </script>');
-
                 break;
-
             case 3: // En caso de que sea un vídeo
 
                 $origen_video = new Ejercicios_videos();
@@ -283,7 +337,6 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                              </param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param>
                              <embed src="http://www.youtube.com/v/' . $origen_video->get('video') . '?hl=es_ES&amp;version=3" type="application/x-shockwave-flash" width="560" height="315" allowscriptaccess="always" allowfullscreen="true">
                              </embed></object>';
-
 
                 $yvh = YoutubeVideoHelper::generarVideoUrl($origen_video->get('video'));
                 $vervideo.= '<textarea class="video" name="archivovideo" id="archivovideo">' . $yvh . '</textarea>';
@@ -305,18 +358,17 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
             $divpregunta = '<div id="tabpregunta' . $i . '" >';
             $divpregunta.='<br/><br/>';
             $divpregunta.='<table style="width:100%;">';
-            $divpregunta.='<td style="width:80%;">';
+            $divpregunta.='<td style="width:95%;">';
 
-            $divpregunta.='<textarea style="width: 900px;" class="pregunta" name="pregunta' . $i . '" id="pregunta' . $i . '">' . $preguntas[$i - 1]->get('pregunta') . '</textarea>';
+            $divpregunta.='<textarea class="pregunta" name="pregunta' . $i . '" id="pregunta' . $i . '">' . $preguntas[$i - 1]->get('pregunta') . '</textarea>';
 
             $divpregunta.=' </td>';
 
             // Se añaden botones de edición si se tiene permiso
-            $divpregunta.=' <td style="width:5%;">';
+            $divpregunta.=' <td style="width:5%;padding: 10px;">';
             $divpregunta.='<img id="imgpregborrar' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarPregunta(tabpregunta' . $i . ',' . $i . ')" title="Eliminar Pregunta"></img>';
             $divpregunta.='</br><img id="imgpreganadir' . $i . '" src="./imagenes/añadir.gif" alt="eliminar respuesta"  height="15px"  width="15px" onClick="anadirRespuesta(respuestas' . $i . ',' . $i . ')" title="Añadir Respuesta"></img>';
             $divpregunta.='</td> ';
-            $divpregunta.='</br> ';
 
             $divpregunta.='</table> ';
 
@@ -326,13 +378,13 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
             $respuestas = $mis_respuestas->obtener_todas_respuestas_pregunta($id_pregunta);
 
             // Para cada respuesta...
-            $divpregunta.='</br><div id="respuestas' . $i . '" class=respuesta>';
+            $divpregunta.='<div id="respuestas' . $i . '" class=respuesta>';
             for ($p = 0; $p < sizeof($respuestas); $p++) {
                 $q = $p + 1;
 
                 $divpregunta.='<table  id="tablarespuesta' . $q . '_' . $i . '" style="width:100%;">';
                 $divpregunta.='<tr id="trrespuesta' . $q . "_" . $i . '"> ';
-                $divpregunta.=' <td style="width:80%;">';
+                $divpregunta.=' <td style="width:95%;">';
 
                 $correc = $respuestas[$p]->get('correcta');
 
@@ -341,19 +393,14 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                 } else {
                     $divpregunta.='<input type="hidden" value=0 id="res' . $q . "_" . $i . '" name="res' . $i . '" />';
                 }
-                $divpregunta.='<input class=over type="radio" name="crespuesta' . $q . '_' . $i . '" id="id_crespuesta' . $q . '_' . $i . '" value="0" onclick="BotonRadio(crespuesta' . $q . '_' . $i . ')"/>';
 
-                //   $divpregunta.='<div class="resp" name="respuesta'.$q."_".$i.'" id="respuesta'.$q."_".$i.'" contentEditable=true>';
-                //   $divpregunta.=$preguntas[$p]->get('Respuesta');
-                //   $divpregunta.='</div>';
-
-                $divpregunta.='<textarea style="width: 700px;" class="resp" name="respuesta' . $q . "_" . $i . '" id="respuesta' . $q . "_" . $i . '" value="' . $respuestas[$p]->get('respuesta') . '">' . $respuestas[$p]->get('respuesta') . '</textarea>';
+                $divpregunta.='<textarea class="resp" name="respuesta' . $q . "_" . $i . '" id="respuesta' . $q . "_" . $i . '" value="' . $respuestas[$p]->get('respuesta') . '">' . $respuestas[$p]->get('respuesta') . '</textarea>';
                 $divpregunta.=' </td>';
-                $divpregunta.=' <td style="width:5%;">';
+                $divpregunta.=' <td style="width:5%; padding: 10px;">';
 
                 // Se añaden botones de edición si se tiene permiso
                 // La imagen para eliminar las respuestas
-                $divpregunta.='<img id="eliminarrespuesta' . $q . '_' . $i . '" src="./imagenes/delete.gif" alt="eliminar respuesta"  height="10px"  width="10px" onClick="EliminarRespuestaMC(tablarespuesta' . $q . '_' . $i . ',' . $i . ')" title="Eliminar Respuesta"></img>';
+                $divpregunta.='<img id="eliminarrespuesta' . $q . '_' . $i . '" src="./imagenes/delete.gif" alt="Eliminar respuesta"  height="10px"  width="10px" onClick="eliminarRespuestaMC(tablarespuesta' . $q . '_' . $i . ',' . $i . ')" title="Eliminar Respuesta"></img> ';
 
                 // La imagen para cambiar las respuestas
                 if ($correc) {
@@ -380,7 +427,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
 
         // Botón añadir preguntas
 
-        $botones = '<left><input type="button" style="margin-top:20px;" id="id_Añadir" value="Añadir Pregunta" onclick="javascript:botonMasPreguntas()"></left>';
+        $botones = '<center><input type="button" class="button" id="id_Añadir" value="Añadir Pregunta" onclick="javascript:botonMasPreguntas()"></center>';
         $mform->addElement('html', $botones);
 
         $divnumpregunta = '<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
@@ -396,22 +443,22 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $mform->addElement('html', $imagenLicencia);
 
 
-        $radioarray = array();
-        $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiovisible', '', "Si", "Si", null);
-        $radioarray[] = &MoodleQuickForm::createElement('radio', 'radiovisible', '', "No", "No", null);
+        $radioarrayvisible = array();
+        $radioarrayvisible[] = &MoodleQuickForm::createElement('radio', 'radiovisible', '', "Si", "Si", null);
+        $radioarrayvisible[] = &MoodleQuickForm::createElement('radio', 'radiovisible', '', "No", "No", null);
 
-        $mform->addGroup($radioarray, 'radiovisible', get_string('visible', 'ejercicios'), array(' '), false);
+        $mform->addGroup($radioarrayvisible, 'radiovisible', get_string('visible', 'ejercicios'), array(' '), false);
         if ($visible == 1) {
             $mform->setDefault('radiovisible', "Si");
         } else {
             $mform->setDefault('radiovisible', "No");
         }
 
-        $radioarray = array();
-        $radioarray[] = &MoodleQuickForm::createElement('radio', 'radioprivado', '', "Si", "Si", null);
-        $radioarray[] = &MoodleQuickForm::createElement('radio', 'radioprivado', '', "No", "No", null);
+        $radioarrayprivado = array();
+        $radioarrayprivado[] = &MoodleQuickForm::createElement('radio', 'radioprivado', '', "Si", "Si", null);
+        $radioarrayprivado[] = &MoodleQuickForm::createElement('radio', 'radioprivado', '', "No", "No", null);
 
-        $mform->addGroup($radioarray, 'radioprivado', get_string('publico', 'ejercicios'), array(' '), false);
+        $mform->addGroup($radioarrayprivado, 'radioprivado', get_string('publico', 'ejercicios'), array(' '), false);
         if ($publico == 1) {
             $mform->setDefault('radioprivado', "Si");
         } else {
@@ -427,15 +474,12 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $mform->addElement('html', $fuentes);
 
         // Botón guardar
-        $botones = '<center><input type="submit" style="margin-top:20px;" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '"></center>';
+        $botones = '<center><input type="submit" class="button" id="submitbutton" name="submitbutton" value="' . get_string('BotonGuardar', 'ejercicios') . '"></center>';
         $mform->addElement('html', $botones);
 
-        $tabla_imagenes = '</td>';
-        $tabla_imagenes .='<td  width="10%">';
-
-        $tabla_imagenes .='</td>';
-        $tabla_imagenes .='</table>';
-        $mform->addElement('html', $tabla_imagenes);
+        $tabla_imagenes_cierre = '</td>';
+        $tabla_imagenes_cierre .='</table>';
+        $mform->addElement('html', $tabla_imagenes_cierre);
     }
 
     // Buscando y sin permisos
@@ -464,17 +508,27 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
 
         if ($foto_asociada == 1) {
             // src para la foto cuando existe
-            $srcImage='./ejercicios_get_imagen.php?userPath='.$creador.'&name='.substr(md5($id_ejercicio), 0, 10).'&ubicacion=1';
+            $srcImage = './ejercicios_get_imagen.php?userPath=' . $creador . '&name=' . substr(md5($id_ejercicio), 0, 10) . '&ubicacion=1';
         } else {
             // src para la foto por defecto
-            $srcImage="./ejercicios_get_imagen.php?ubicacion=0";
+            $srcImage = "./ejercicios_get_imagen.php?ubicacion=0";
         }
         //Campo de la imagen del ejercicio
         //el nombre que se le da a la foto es el los 10 primero caracteres del md5 del id del ejercicio para que este sea unico
-        $tabla_imagenesHTML.= '<div id="capa2"> ';
-        $tabla_imagenesHTML.= '<img  name="fotoAsociada" id="fotoAsociada" src="'.$srcImage.'" style="height: 300px;"/>';
-        $tabla_imagenesHTML.= '</div>';
-        $mform->addElement('html', $tabla_imagenesHTML);
+        $imagen = '<div id="capa2"> ';
+        $imagen.= '<img  name="fotoAsociada" id="fotoAsociada" src="' . $srcImage . '" style="height: 300px;"/>';
+
+        //Para alumnos
+        //Mis palabras
+        $imagen .= '<div class="herramientas">';
+        $imagen .= '<div><a  onclick=JavaScript:sele(' . $id . ')><img src="../vocabulario/imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im" title="' . get_string('guardar', 'vocabulario') . '"/></a></div>';
+        $imagen .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=5" target="_blank"><img src="../vocabulario/imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im" title="' . get_string('admin_gr', 'vocabulario') . '"/></a></div>';
+        $imagen .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=7" target="_blank"><img src="../vocabulario/imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im" title="' . get_string('admin_ic', 'vocabulario') . '"/></a></div>';
+        $imagen .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=9" target="_blank"><img src="../vocabulario/imagenes/tipologias_textuales.png" id="id_tt_im" name="tt_im" title="' . get_string('admin_tt', 'vocabulario') . '"/> </a></div>';
+        $imagen .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=11" target="_blank"><img src="../vocabulario/imagenes/estrategias_icon.png" id="id_ea_im" name="ea_im" title="' . get_string('admin_ea', 'vocabulario') . '"/> </a></div>';
+        $imagen .="</div>";
+        $imagen.= '</div>';
+        $mform->addElement('html', $imagen);
 
         // Cargamos el origen según su tipo 
         switch ($tipo_origen) {
@@ -484,9 +538,10 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                 $origen_texto = new Ejercicios_textos();
                 $origen_texto->obtener_uno_id_ejercicio($id_ejercicio);
 
-                $divtexto = '<div class="desctexto" name="texto" id="texto"><div class="margenes">' . nl2br((stripslashes($origen_texto->get('texto')))) . '</div></div>';
+                $mform->addElement('html', '<div class="desctexto" name="texto" id="texto">');
+                $divtexto = '<div class="margenes">' . nl2br((stripslashes($origen_texto->get('texto')))) . '</div>';
                 $mform->addElement('html', $divtexto);
-
+                $mform->addElement("html", "</div>");
                 break;
 
             case 2: // En caso de que sea audio
@@ -521,6 +576,7 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                 break;
         }
 
+
         // Se crea una tabla en la que se incluirán los distintos elementos del formulario para añadir las respuestas
         $tabla_imagenes = '<table width="100%">';
         $tabla_imagenes .='<td>';
@@ -531,14 +587,12 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $preguntas = $mis_preguntas->obtener_todas_preguntas_ejercicicio($id_ejercicio);
 
         for ($i = 1; $i <= sizeof($preguntas); $i++) {
-            $divpregunta = '<div id="tabpregunta' . $i . '" >';
+            $divpregunta = '<div id="tabpregunta' . $i . '">';
             $divpregunta.='<br/><br/>';
-            $divpregunta.='<table style="width:100%;">';
-            $divpregunta.='<td style="width:80%;">';
-            $divpregunta.='<div style="width: 900px;" class="pregunta" name="pregunta' . $i . '" id="pregunta' . $i . '">' . $preguntas[$i - 1]->get('pregunta') . '</div>';
-
-            $divpregunta.=' </td>';
-
+            $divpregunta.='<table width="95%">';
+            $divpregunta.='<td>';
+            $divpregunta.='<div class="pregunta" name="pregunta' . $i . '" id="pregunta' . $i . '">' . $preguntas[$i - 1]->get('pregunta') . '</div>';
+            $divpregunta.='</td>';
             $divpregunta.='</table> ';
 
             // Se obtienen las respuestas de la pregunta
@@ -547,13 +601,13 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
             $respuestas = $mis_respuestas->obtener_todas_respuestas_pregunta($id_pregunta);
 
             // Para cada respuesta...
-            $divpregunta.='</br><div id="respuestas' . $i . '" class=respuesta>';
+            $divpregunta.='<div id="respuestas' . $i . '" class="respuesta">';
             for ($p = 0; $p < sizeof($respuestas); $p++) {
                 $q = $p + 1;
 
                 $divpregunta.='<table  id="tablarespuesta' . $q . '_' . $i . '" style="width:100%;">';
                 $divpregunta.='<tr id="trrespuesta' . $q . "_" . $i . '"> ';
-                $divpregunta.=' <td style="width:80%;">';
+                $divpregunta.=' <td>';
 
                 $correc = $respuestas[$p]->get('correcta');
 
@@ -562,31 +616,23 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
                 } else {
                     $divpregunta.='<input type="hidden" value=0 id="res' . $q . "_" . $i . '" name="res' . $i . '" />';
                 }
-                $divpregunta.='<input class=over type="radio" name="crespuesta' . $q . '_' . $i . '" id="id_crespuesta' . $q . '_' . $i . '" value="0" onclick="BotonRadio(crespuesta' . $q . '_' . $i . ')"/>';
-
-                $divpregunta.='<div style="width: 700px;" class="resp" name="respuesta' . $q . "_" . $i . '" id="respuesta' . $q . "_" . $i . '" value="' . $respuestas[$p]->get('respuesta') . '">' . $respuestas[$p]->get('respuesta') . '</div>';
-
-                $divpregunta.=' </td>';
-                $divpregunta.=' <td style="width:5%;">';
-
+                $divpregunta.='<div class="resp" name="respuesta' . $q . "_" . $i . '" id="respuesta' . $q . "_" . $i . '" value="' . $respuestas[$p]->get('respuesta') . '">';
+                $divpregunta.='<input type="radio" name="crespuesta' . $q . '_' . $i . '" id="id_crespuesta' . $q . '_' . $i . '" value="0" onclick="BotonRadio(crespuesta' . $q . '_' . $i . ')"/>';
+                $divpregunta.=$respuestas[$p]->get('respuesta') . '</div>';
+                
                 $divpregunta.='</td> ';
                 $divpregunta.='<tr>';
-
                 $divpregunta.='</table> ';
             }
-
             $divpregunta.='</div>';
             $divpregunta.='</div>';
-
             $divpregunta.='<input type="hidden" value=' . sizeof($respuestas) . ' id="num_res_preg' . $i . '" name="num_res_preg' . $i . '" />';
             $mform->addElement('html', $divpregunta);
         }
-
         $divnumpregunta = '<input type="hidden" value=' . sizeof($preguntas) . ' id="num_preg" name="num_preg" />';
         $mform->addElement('html', $divnumpregunta);
 
         // Autoría del ejercicio
-
         $userid = get_record('user', 'id', $creador);
         $autoria = genera_autoria($userid);
         $mform->addElement('html', $autoria);
@@ -607,76 +653,11 @@ class mod_ejercicios_mostrar_ejercicio extends moodleform_mod {
         $fuentes = genera_fuentes($fuentes_aux, "readonly");
         $mform->addElement('html', $fuentes);
 
-        $tabla_menu = '<center><input type="button" style="margin-top:20px;"  value="Corregir" onClick="javascript:botonCorregirMultiChoice(' . $id . ',' . $npreg . ')"/> <input type="button" style=""  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal(' . $id . ')" /></center>';
+        $tabla_menu = '<center><input type="button" class="button"  value="Corregir" onClick="javascript:botonCorregirMultiChoice(' . $id . ',' . $npreg . ')"/> <input type="button" class="button"  id="id_Menu" value="Menu Principal" onClick="javascript:botonPrincipal(' . $id . ')" /></center>';
         $mform->addElement('html', $tabla_menu);
-
         $tabla_imagenes = '</td>';
-        $tabla_imagenes .='<td  width="10%">';
-        //Para alumnos
-        //Mis palabras
-        $tabla_imagenes .='<div><a  onclick=JavaScript:sele(' . $id . ')><img src="../vocabulario/imagenes/guardar_palabras.png" id="id_guardar_im" name="guardar_im" title="' . get_string('guardar', 'vocabulario') . '"/></a></div>';
-        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=5" target="_blank"><img src="../vocabulario/imagenes/administrar_gramaticas.png" id="id_gram_im" name="gram_im" title="' . get_string('admin_gr', 'vocabulario') . '"/></a></div>';
-        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=7" target="_blank"><img src="../vocabulario/imagenes/intenciones_comunicativas.png" id="id_ic_im" name="ic_im" title="' . get_string('admin_ic', 'vocabulario') . '"/></a></div>';
-        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=9" target="_blank"><img src="../vocabulario/imagenes/tipologias_textuales.png" id="id_tt_im" name="tt_im" title="' . get_string('admin_tt', 'vocabulario') . '"/> </a></div>';
-        $tabla_imagenes .='<div><a href="../vocabulario/view.php?id=' . $id . '&opcion=11" target="_blank"><img src="../vocabulario/imagenes/estrategias_icon.png" id="id_ea_im" name="ea_im" title="' . get_string('admin_ea', 'vocabulario') . '"/> </a></div>';
-
-        $tabla_imagenes .='</td>';
-        $tabla_imagenes .='</table>';
+        $tabla_imagenes.='</table>';
         $mform->addElement('html', $tabla_imagenes);
-    }
-
-    /**
-     * Muestra el ejercicio Multiple Choice con vistas separadas para alumno y profesores
-     *
-     * @author Serafina Molina Soto; Modificado Javier Castro Fernández
-     * @param $id id for the course
-     * @param $id_ejercicio id del ejercicio a mostrar
-     */
-    function mostrar_ejercicio($id, $p, $id_ejercicio, $tipo_origen, $buscar) {
-
-        global $CFG, $COURSE, $USER;
-        $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
-
-        //Los iconos están sacados del tema de gnome que viene con ubuntu 11.04
-        //Inclusión del javascript para las funciones
-
-        $mform = & $this->_form;
-        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./style.css">');
-        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
-        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./mc_style.css">');
-        $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>');
-        $mform->addElement('html', '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js"></script>');
-        $mform->addElement('html', '<script type="text/javascript" src="./funciones.js"></script>');
-        $mform->addElement('html', '<script type="text/javascript" src="./js/jquery.form.js"></script>');
-        $mform->addElement('html', '<script src="./js/ajaxupload.js" type="text/javascript"></script>');
-        $mform->addElement('html', '<script type="text/javascript" src="./MC_JavaScript.js"></script>');
-
-        // Se añade en sesión la variable $buscar 
-        $_SESSION['buscar'] = $buscar;
-        $_SESSION['id_curso'] = $id;
-
-        if ($buscar == 0) { // Se está creando el ejercicio
-            $this->creando_ejercicio($mform, $id, $p, $id_ejercicio, $tipo_origen);
-        } else {
-            // Se determina si el usuario es el creador
-            $ejercicios_bd = new Ejercicios_general();
-            $ejercicios_leido = $ejercicios_bd->obtener_uno($id_ejercicio);
-            $creador = $ejercicios_leido->get('id_creador');
-            
-            if ($creador == $USER->id && has_capability('moodle/legacy:editingteacher', $context, $USER->id, true)) {
-                $modificable = true; // En ese caso el ejercicio se puede modificar
-            } else { // En caso contrario no se puede
-                $modificable = false;
-            }
-
-            $_SESSION['id_ejercicio'] = $id_ejercicio;
-            $_SESSION['modificable'] = $modificable;
-            if ($modificable) {
-                $this->mostrar_con_permisos($mform, $id, $p, $id_ejercicio, $tipo_origen, $ejercicios_leido);
-            } else {
-                $this->mostrar_sin_permisos($mform, $id, $p, $id_ejercicio, $tipo_origen, $ejercicios_leido);
-            }
-        }
     }
 
 }
