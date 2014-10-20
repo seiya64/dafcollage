@@ -859,7 +859,7 @@ class Vocabulario_mis_palabras {
         $sql = 'SELECT count(*) num FROM ' . $CFG->prefix . 'vocabulario_mis_palabras WHERE verboid = ' . $this->verboid;
         $numverbos = get_records_sql($sql);
         if ($numverbos->num == 1) {
-            delete_records('vocabulario_adjetivos', 'id', $this->verboid);
+            delete_records('vocabulario_verbos', 'id', $this->verboid);
         }
 
         $sql = 'SELECT count(*) num FROM ' . $CFG->prefix . 'vocabulario_mis_palabras WHERE otroid = ' . $this->otroid;
