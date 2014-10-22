@@ -132,33 +132,36 @@ if($impr_vocab_corto) {
         $pdf->SetTextColor(TEXT_WHITE);
         $pdf->SetLineWidth(0.5);
         if((((float)$ct)*10)%10==0) {
-            $pdf->SetFont('', 'B', '20');
+            $pdf->SetFont('', 'B', '14');
         } else {
-            $pdf->SetFont('', 'B', '17');
+            $pdf->SetFont('', 'B', '14');
         }
         
         $pdf->Cell(190, 15, $ct, 1, 1, 'L', 1);
         
         foreach($palabras as $pal=>$atrs) {
-            //Sustantivo
+            //Sustantivo con el genero
             $pdf->SetLineWidth(0.3);
             $pdf->SetFillColor(255, 255, 255); //blanco
             $pdf->SetTextColor(TEXT_AUTO);
             $pdf->SetFont('', 'B', '12');
             
-            $pdf->Cell(40, 10, $atrs['genero']." ".$pal, "LT", 0, "J", 1);
-            $pdf->Cell(40, 10, " ", "T", 0, "J", 1);
+            $pdf->Cell(59, 10, $atrs['genero']." ".$pal, "LT", 0, "J", 1);
+            $pdf->Cell(2, 10, " ", "T", 0, "J", 1);
             
+            //Plural
             $pdf->SetFont('', '', '12');
+            $pdf->Cell(59, 10, $atrs['plural'], "TR", 0, "L", 1);
             
-            $pdf->Cell(40, 10, $atrs['plural'], "TR", 0, "L", 1);
+            //Significado
+            $pdf->SetFont('', 'B', '12');
             $pdf->Cell(70, 10, $atrs['significado'], "LTR", 1, "J", 1);
                     
                     
             //EJEMPLO
             $pdf->SetFont('', 'I', '10');
             $pdf->Cell(120, 10, $atrs['ejemplo'], "LBR", 0, "L", 1);
-            $pdf->SetFillColor(255, 255, 255); //blanco
+            //$pdf->SetFillColor(255, 255, 255); //blanco
             $pdf->Cell(70, 10, " ", "LBR", 1, "L", 1);
             $color=0;
             
@@ -173,12 +176,13 @@ if($impr_vocab_corto) {
                     }
                     $pdf->SetFont('', 'B', '12');
                     
-                    $pdf->Cell(40, 6, " ", "L", 0, "J", 1);
-                    $pdf->Cell(40, 6, "$atrv[0]", " ", 0, "J", 1);
-                    $pdf->Cell(40, 6, " ", " ", 0, "J", 1);
+                    //Infinitivo
+                    $pdf->Cell(59, 6, "$atrv[0]", "L", 0, "R", 1);
+                    $pdf->Cell(2, 6, " ", " ", 0, "J", 1);
+                    $pdf->Cell(59, 6, " ", " ", 0, "J", 1);
                     
                     $pdf->SetFont('', '', '12');
-                    $pdf->SetFillColor(255, 255, 255); //blanco
+                    //$pdf->SetFillColor(255, 255, 255); //blanco
                     $pdf->Cell(70, 6, $atrv[3], "LR", 1, "J", 1);
                     
                     if($color%2 == 0) {
@@ -186,12 +190,13 @@ if($impr_vocab_corto) {
                     }else {
                         $pdf->SetFillColor(189, 199, 216); //azul claro
                     }
+                    //Tercera persona
                     $pdf->SetFont('', '', '10');
-                    $pdf->Cell(40, 6, " ", "L", 0, "J", 1);
-                    $pdf->Cell(40, 6, " ", " ", 0, "J", 1);
-                    $pdf->Cell(40, 6, $atrv[1], " ", 0, "J", 1);
+                    $pdf->Cell(59, 6, " ", "L", 0, "J", 1);
+                    $pdf->Cell(2, 6, " ", " ", 0, "J", 1);
+                    $pdf->Cell(59, 6, "$atrv[1]", " ", 0, "J", 1);
                     
-                    $pdf->SetFillColor(255, 255, 255); //blanco
+                    //$pdf->SetFillColor(255, 255, 255); //blanco
                     $pdf->Cell(70, 6, " ", "LR", 1, "J", 1);
                     
                     if($color%2 == 0) {
@@ -199,12 +204,13 @@ if($impr_vocab_corto) {
                     }else {
                         $pdf->SetFillColor(189, 199, 216); //azul claro
                     }
-                    $pdf->Cell(40, 6, " ", "LB", 0, "J", 1);
-                    $pdf->Cell(40, 6, " ", "B", 0, "J", 1);
-                    $pdf->Cell(40, 6, $atrv[2], "B", 0, "J", 1);
+                    //Participio
+                    $pdf->Cell(59, 6, " ", "LB", 0, "J", 1);
+                    $pdf->Cell(2, 6, " ", "B", 0, "J", 1);
+                    $pdf->Cell(59, 6, $atrv[2], "B", 0, "J", 1);
                     
                     $pdf->SetFont('', '', '10');
-                    $pdf->SetFillColor(255, 255, 255); //blanco
+                    //$pdf->SetFillColor(255, 255, 255); //blanco
                     $pdf->Cell(70, 6, " ", "LBR", 1, "J", 1);
                     
                     //Espacio para que el alumno pueda escribir mas ejemplos a mano
@@ -214,7 +220,7 @@ if($impr_vocab_corto) {
                         $pdf->SetFillColor(189, 199, 216); //azul claro
                     }
                     $pdf->Cell(120, 8, " ", "LRB", 0, "L", 1);
-                    $pdf->SetFillColor(255, 255, 255); //blanco
+                    //$pdf->SetFillColor(255, 255, 255); //blanco
                     $pdf->Cell(70, 8, " ", "LRB", 1, "L", 1);
                     $color++;
                 }
