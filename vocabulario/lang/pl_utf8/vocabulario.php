@@ -12,18 +12,18 @@
   Ruth Burbat
 
   Source code:
-  Francisco Javier Rodr√≠guez L√≥pez (seiyadesagitario@gmail.com)
-  Sime√≥n Ruiz Romero (simeonruiz@gmail.com)
+  Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
+  Simeón Ruiz Romero (simeonruiz@gmail.com)
 
   Original idea and content design:
   Ruth Burbat
-  Inmaculada Almahano G√ºeto
+  Inmaculada Almahano Güeto
   Andrea Bies
-  Julia M√∂ller Runge
-  Blanca Rodr√≠guez G√≥mez
-  Antonio Salmer√≥n Matilla
-  Mar√≠a Jos√© Varela Salinas
-  Karin Vilar S√°nchez
+  Julia Möller Runge
+  Blanca Rodríguez Gómez
+  Antonio Salmerón Matilla
+  María José Varela Salinas
+  Karin Vilar Sánchez
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -104,6 +104,9 @@ $string['error_sus'] = 'Nie wprowadziłeś żadnego słowa do zapisu';
 $string['ver'] = 'Moje słowa';
 $string['add_palabra'] = 'Nowe słowo';
 $string['buscar'] = 'Szukaj';
+$string['verintenciones'] = 'Buscar Intenciones';
+$string['buscintenciones']='Recurso: ';
+$string['botbuscintenciones']='Buscar';
 $string['guardar'] = 'Moje słowniciwo';
 $string['modificar'] = 'Zmienić';
 $string['eliminar'] = 'Usuń';
@@ -317,4 +320,7 @@ $string['bedeutung'] = 'Bedeutung';
 // Añadido Javier Castro, cuaderno digital, intenciones comunicativas
 $string['ic_categoria'] = 'przez Kategorii';
 $string['ic_recurso'] = 'przez Zasób';
+$string['intencioncomunicativa']='Intención Comunicativa';
+$string['titlesignificado']='Significado sin contexto';
+$string['titlecolocacion']='Significado con contexto';
 ?>

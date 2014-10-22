@@ -165,7 +165,9 @@ class mod_vocabulario_rellenar_form extends moodleform {
         //------ sustantivo
         $mform->addElement('header', 'sus', get_string('sust', 'vocabulario'));
 
-        $mform->addElement('text', 'palabra_sus', get_string("pal", "vocabulario"), 'value=' . $sustantivo->get('palabra'));
+        //enlace a traduccion
+        $enlace_diccionario = "<a href='javascript:traducir(1)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string('pal', 'vocabulario') . "]</a>";
+        $mform->addElement('text', 'palabra_sus', $enlace_diccionario, "value=" . $sustantivo->get('palabra'));
         //tiene que estar relleno
         $mform->addRule('palabra_sus', get_string('error_sus', 'vocabulario'), 'required', null, 'client');
 
@@ -181,8 +183,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $mform->addElement('text', 'plural', get_string("plural", "vocabulario"), 'value="' . $sustantivo->get('plural') . '"');
 
         //traduccion
-        $enlace_diccionario = '<a href="javascript:traducir(1)">[' . get_string("Tpal", "vocabulario") . ']</a>';
-        $mform->addElement('text', 'significado_sus', $enlace_diccionario, 'value="' . $sustantivo->get('significado') . '"');
+        $mform->addElement('text', 'significado_sus', get_string("Tpal", "vocabulario"), 'value="' . $sustantivo->get('significado') . '" title="'.get_string('titlecolocacion', 'vocabulario').'"');
 
 
         //añadido por mi
@@ -368,7 +369,9 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $mform->addElement('header', 'vrb', get_string('vrb', 'vocabulario'));
 
         //infinitivo
-        $mform->addElement('text', 'infinitivo', get_string("infi", "vocabulario"), 'value="' . $verbo->get('infinitivo') . '"');
+        //enlace a traduccion
+        $enlace_diccionario = "<a href='javascript:traducir(2)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string('infi', 'vocabulario') . "]</a>";
+        $mform->addElement('text', 'infinitivo', $enlace_diccionario, 'value="' . $verbo->get('infinitivo') . '"');
 
         //tercera persona
         $mform->addElement('text', 'ter_pers_sing', get_string("3per", "vocabulario"), 'value="' . $verbo->get('ter_pers_sing') . '"');
@@ -380,8 +383,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $mform->addElement('text', 'participio', get_string("part", "vocabulario"), 'value="' . $verbo->get('participio') . '"');
 
         //traduccion
-        $enlace_diccionario = '<a href="javascript:traducir(2)">[' . get_string("Tpal", "vocabulario") . ']</a>';
-        $mform->addElement('text', 'significado_vrb', $enlace_diccionario, 'value="' . $verbo->get('significado') . '"');
+        $mform->addElement('text', 'significado_vrb', get_string("Tpal", "vocabulario"), 'value="' . $verbo->get('significado') . '" title="'.get_string('titlecolocacion', 'vocabulario').'"');
 
         //Comentarios
 
@@ -556,11 +558,12 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $mform->addElement('header', 'adj', get_string('adj', 'vocabulario'));
 
         //sin declinacion
-        $mform->addElement('text', 'sindeclinar', get_string("sindec", "vocabulario"), 'value="' . $adjetivo->get('sin_declinar') . '"');
+        //enlace a traduccion
+        $enlace_diccionario = "<a href='javascript:traducir(2)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string("sindec", "vocabulario") . "]</a>";
+        $mform->addElement('text', 'sindeclinar', $enlace_diccionario, 'value="' . $adjetivo->get('sin_declinar') . '"');
 
         //traduccion
-        $enlace_diccionario = '<a href="javascript:traducir(3)">[' . get_string("Tpal", "vocabulario") . ']</a>';
-        $mform->addElement('text', 'significado_adj', $enlace_diccionario, 'value="' . $adjetivo->get('significado') . '"');
+        $mform->addElement('text', 'significado_adj', get_string("Tpal", "vocabulario"), 'value="' . $adjetivo->get('significado') . '" title="'.get_string('titlecolocacion', 'vocabulario').'"');
 
         //Comentarios
 
@@ -735,11 +738,12 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $mform->addElement('header', 'otr', get_string('otr', 'vocabulario'));
 
         //sustantivo
-        $mform->addElement('text', 'palabra_otr', get_string("otr_sus", "vocabulario"), 'value="' . $otro->get('palabra') . '"');
+        //enlace a traduccion
+        $enlace_diccionario = "<a href='javascript:traducir(2)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string("otr_sus", "vocabulario") . "]</a>";
+        $mform->addElement('text', 'palabra_otr', $enlace_diccionario, 'value="' . $otro->get('palabra') . '"');
 
         //traduccion
-        $enlace_diccionario = '<a href="javascript:traducir(4)">[' . get_string("Tpal", "vocabulario") . ']</a>';
-        $mform->addElement('text', 'significado_otr', $enlace_diccionario, 'value="' . $otro->get('significado') . '"');
+        $mform->addElement('text', 'significado_otr', get_string("Tpal", "vocabulario"), 'value="' . $otro->get('significado') . '" title="'.get_string('titlecolocacion', 'vocabulario').'"');
 
         //Comentarios
 

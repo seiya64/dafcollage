@@ -104,6 +104,9 @@ $string['error_sus'] = 'Sie haben kein Wort zum Speichern geschrieben';
 $string['ver'] = 'Meine Worte';
 $string['add_palabra'] = 'Neues Wort';
 $string['buscar'] = 'Suchen';
+$string['verintenciones'] = 'Buscar Intenciones';
+$string['buscintenciones']='Recurso: ';
+$string['botbuscintenciones']='Buscar';
 $string['guardar'] = 'Meine Wörter';
 $string['modificar']='Bearbeiten';
 $string['eliminar'] = 'Löschen';
@@ -314,8 +317,10 @@ $string['prafix'] = 'Präfix';
 $string['suffix'] = 'Suffix';
 $string['bedeutung'] = 'Bedeutung';
 
-
 // Añadido Javier Castro, cuaderno digital, intenciones comunicativas
 $string['ic_categoria'] = 'nach Kategorie';
 $string['ic_recurso'] = 'nach Mittel';
+$string['intencioncomunicativa']='Intención Comunicativa';
+$string['titlesignificado']='Significado sin contexto';
+$string['titlecolocacion']='Significado con contexto';
 ?>

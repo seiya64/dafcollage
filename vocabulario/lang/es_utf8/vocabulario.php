@@ -70,7 +70,7 @@ $string['campo_estrategia'] = 'Seleccionar actividad';
 $string['miestrategia'] = 'Estrategia de aprendizaje';
 $string['ejem'] = 'Ejemplo';
 $string['pal'] = 'Palabra';
-$string['Tpal'] = 'Significado';
+$string['Tpal'] = 'Significado/Colocación';
 $string['gen'] = 'Género';
 $string['masc'] = 'Masculino';
 $string['fem'] = 'Femenino';
@@ -317,9 +317,10 @@ $string['prafix'] = 'Präfix';
 $string['suffix'] = 'Suffix';
 $string['bedeutung'] = 'Bedeutung';
 
-$string['intencioncomunicativa']='Intención Comunicativa';
-
 // Añadido Javier Castro, cuaderno digital, intenciones comunicativas
 $string['ic_categoria'] = 'por Categoría';
 $string['ic_recurso'] = 'por Recurso';
+$string['intencioncomunicativa']='Intención Comunicativa';
+$string['titlesignificado']='Significado sin contexto';
+$string['titlecolocacion']='Significado con contexto';
 ?>
