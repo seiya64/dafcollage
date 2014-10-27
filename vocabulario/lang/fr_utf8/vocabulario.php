@@ -70,7 +70,7 @@ $string['campo_estrategia'] = 'Sélectionner l’activité';
 $string['miestrategia'] = 'Stratégie pour l’apprentissage';
 $string['ejem'] = 'Exemple';
 $string['pal'] = 'Mot';
-$string['Tpal'] = 'Signification';
+$string['Tpal'] = 'Signification/Collocation';
 $string['gen'] = 'Genre';
 $string['masc'] = 'Masculin';
 $string['fem'] = 'Féminin';
@@ -104,9 +104,9 @@ $string['error_sus'] = 'Il n’y a aucun mot à sauvegarder';
 $string['ver'] = 'Mes Mots';
 $string['add_palabra'] = 'Nouveau mot';
 $string['buscar'] = 'Rechercher';
-$string['verintenciones'] = 'Buscar Intenciones';
-$string['buscintenciones']='Recurso: ';
-$string['botbuscintenciones']='Buscar';
+$string['verintenciones'] = 'Chercher pour intentions de communication';
+$string['buscintenciones']='Ressource: ';
+$string['botbuscintenciones']='Rechercher';
 $string['guardar'] = 'Mes mots';
 $string['modificar'] = 'Modifier';
 $string['eliminar'] = 'Supprimer';
@@ -320,7 +320,8 @@ $string['bedeutung'] = 'Bedeutung';
 // Añadido Javier Castro, cuaderno digital, intenciones comunicativas
 $string['ic_categoria'] = 'par Catégorie';
 $string['ic_recurso'] = 'par Ressource';
-$string['intencioncomunicativa']='Intención Comunicativa';
-$string['titlesignificado']='Significado sin contexto';
-$string['titlecolocacion']='Significado con contexto';
+$string['intencioncomunicativa']='Intention de communication';
+// Añadido Borja Arroba, cuaderno digital, intenciones comunicativas
+$string['titlesignificado']='Signification sans contexte';
+$string['titlecolocacion']='Significaction en contexte';
 ?>

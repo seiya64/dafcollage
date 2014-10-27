@@ -105,8 +105,8 @@ $string['ver'] = 'Mis Palabras';
 $string['add_palabra'] = 'Nueva palabra';
 $string['buscar'] = 'Buscar';
 $string['verintenciones'] = 'Buscar Intenciones';
-$string['buscintenciones']='Recurso: ';
-$string['botbuscintenciones']='Buscar';
+$string['buscintenciones'] = 'Recurso: ';
+$string['botbuscintenciones'] = 'Buscar';
 $string['guardar'] = 'Mis palabras';
 $string['modificar'] = 'Modificar';
 $string['eliminar'] = 'Eliminar';
@@ -321,6 +321,7 @@ $string['bedeutung'] = 'Bedeutung';
 $string['ic_categoria'] = 'por Categoría';
 $string['ic_recurso'] = 'por Recurso';
 $string['intencioncomunicativa']='Intención Comunicativa';
+// Añadido Borja Arroba, cuaderno digital, intenciones comunicativas
 $string['titlesignificado']='Significado sin contexto';
 $string['titlecolocacion']='Significado con contexto';
 ?>

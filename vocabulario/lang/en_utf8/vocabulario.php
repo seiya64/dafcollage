@@ -70,7 +70,7 @@ $string['campo_estrategia'] = 'Define an activity';
 $string['miestrategia'] = 'Learning strategy';
 $string['ejem'] = 'Example';
 $string['pal'] = 'Word';
-$string['Tpal'] = 'Meaning';
+$string['Tpal'] = 'Meaning/Collocation';
 $string['gen'] = 'Gender';
 $string['masc'] = 'Masculine';
 $string['fem'] = 'Femenine';
@@ -104,9 +104,9 @@ $string['error_sus'] = 'You have not written any word to save';
 $string['ver'] = 'My Words';
 $string['add_palabra'] = 'New Word';
 $string['buscar'] = 'Search';
-$string['verintenciones'] = 'Buscar Intenciones';
+$string['verintenciones'] = 'Search for communicative intentions';
 $string['buscintenciones']='Resource: ';
-$string['botbuscintenciones']='Buscar';
+$string['botbuscintenciones']='Search';
 $string['guardar'] = 'My words';
 $string['modificar'] = 'Edit';
 $string['eliminar'] = 'Delete';
@@ -320,7 +320,8 @@ $string['bedeutung'] = 'Bedeutung';
 // Añadido Javier Castro, cuaderno digital, intenciones comunicativas
 $string['ic_categoria'] = 'by Category';
 $string['ic_recurso'] = 'by Resource';
-$string['intencioncomunicativa']='Intención Comunicativa';
-$string['titlesignificado']='Significado sin contexto';
-$string['titlecolocacion']='Significado con contexto';
+$string['intencioncomunicativa']='Communicative Intention';
+// Añadido Borja Arroba, cuaderno digital, intenciones comunicativas
+$string['titlesignificado']='Meaning without context';
+$string['titlecolocacion']='Meaning in context';
 ?>
