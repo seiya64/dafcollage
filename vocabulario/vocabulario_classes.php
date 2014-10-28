@@ -67,7 +67,7 @@ class Vocabulario_sustantivo {
      * @param type $ejemplo
      * @param type $id
      */
-    function Vocabulario_sustantivo($pal = ' ', $gen = 2, $plu = '', $sig = '', $obs = '', $grid = 1, $inid = 1, $tipid = 1, $ejemplo = '', $id = 1) {
+    function Vocabulario_sustantivo($pal = ' ', $gen = 3, $plu = '', $sig = '', $obs = '', $grid = 1, $inid = 1, $tipid = 1, $ejemplo = '', $id = 1) {
         $this->palabra = $pal;
         $this->genero = $gen;
         $this->plural = $plu;

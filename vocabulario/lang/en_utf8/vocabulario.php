@@ -324,4 +324,5 @@ $string['intencioncomunicativa']='Communicative Intention';
 // Añadido Borja Arroba, cuaderno digital, intenciones comunicativas
 $string['titlesignificado']='Meaning without context';
 $string['titlecolocacion']='Meaning in context';
+$string['sin_genero']='without gender';
 ?>

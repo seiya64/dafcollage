@@ -68,7 +68,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         if ( $palabra=optional_param('palabra', "", PARAM_TEXT)) {
             $sustantivo = new Vocabulario_sustantivo($palabra);
         }else{
-          $sustantivo = new Vocabulario_sustantivo();
+            $sustantivo = new Vocabulario_sustantivo();
         }
         $adjetivo = new Vocabulario_adjetivo();
         $verbo = new Vocabulario_verbo();
@@ -176,6 +176,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $radioarray[] = &MoodleQuickForm::createElement('radio', 'genero', '', get_string("masc_corto", "vocabulario"), '0');
         $radioarray[] = &MoodleQuickForm::createElement('radio', 'genero', '', get_string("fem_corto", "vocabulario"), '1');
         $radioarray[] = &MoodleQuickForm::createElement('radio', 'genero', '', get_string("neu_corto", "vocabulario"), '2');
+        $radioarray[] = &MoodleQuickForm::createElement('radio', 'genero', '', get_string("sin_genero", "vocabulario"), '3');
         $mform->addGroup($radioarray, 'Genero', get_string("gen", "vocabulario"), '', false);
         $mform->setDefault('genero', $sustantivo->get('genero'));
 
@@ -3666,26 +3667,26 @@ class mod_vocabulario_nuevo_ic_form extends moodleform {
         $campodinamico .= "</div>";
         $mform->addElement('html', $campodinamico);
 
-        switch ($icid) {
-            case 28:
-                $mform->addElement('static', 'intencion', '', get_string('desc_inten3.2', 'vocabulario'));
-                break;
-            case 37:
-                $mform->addElement('static', 'intencion', '', get_string('desc_inten3.3', 'vocabulario'));
-                break;
-            case 47:
-                $mform->addElement('static', 'intencion', '', get_string('desc_inten4.1', 'vocabulario'));
-                break;
-            case 56:
-                $mform->addElement('static', 'intencion', '', get_string('desc_inten4.2', 'vocabulario'));
-                break;
-            case 66:
-                $mform->addElement('static', 'intencion', '', get_string('desc_inten5.1', 'vocabulario'));
-                break;
-            case 75:
-                $mform->addElement('static', 'intencion', '', get_string('desc_inten5.2', 'vocabulario'));
-                break;
-        }
+//        switch ($icid) {
+//            case 28:
+//                $mform->addElement('static', 'intencion', '', get_string('desc_inten3.2', 'vocabulario'));
+//                break;
+//            case 37:
+//                $mform->addElement('static', 'intencion', '', get_string('desc_inten3.3', 'vocabulario'));
+//                break;
+//            case 47:
+//                $mform->addElement('static', 'intencion', '', get_string('desc_inten4.1', 'vocabulario'));
+//                break;
+//            case 56:
+//                $mform->addElement('static', 'intencion', '', get_string('desc_inten4.2', 'vocabulario'));
+//                break;
+//            case 66:
+//                $mform->addElement('static', 'intencion', '', get_string('desc_inten5.1', 'vocabulario'));
+//                break;
+//            case 75:
+//                $mform->addElement('static', 'intencion', '', get_string('desc_inten5.2', 'vocabulario'));
+//                break;
+//        }
 
 
         if ($icid > 1) {
