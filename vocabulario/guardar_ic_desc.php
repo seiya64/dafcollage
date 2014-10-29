@@ -65,7 +65,7 @@ if ($mform->is_cancelled()) {
 
 $sufijos = get_todos_sufijos_lenguaje();
 
-if (optional_param('eliminar', 0, PARAM_INT) && $intencion->get('padre') > 146) {
+if (optional_param('eliminar', 0, PARAM_INT) && $intencion->get('padre') > 67) {
     //comenzamos una transacción para que en todas las tablas se haga seguido
     // en caso de error en algun delete, no se hace ninguno
     begin_sql();
