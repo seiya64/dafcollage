@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<table name="vocabulario_camposlexicos_es">
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>--</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>1 SER HUMANO</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>2</padre>
+	<campo>1.1 Datos personales</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>2</padre>
+	<campo>1.2 Relaciones personales</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>2</padre>
+	<campo>1.3 Aspecto físico</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>2</padre>
+	<campo>1.4 Cualidades/ características</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>2</padre>
+	<campo>1.5 Emociones</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>2</padre>
+	<campo>1.6 Salud</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>2 COMIDA / GASTRONOMÍA</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>9</padre>
+	<campo>2.1 Alimentos</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>9</padre>
+	<campo>2.2 Platos culinarios</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>11</padre>
+	<campo>2.2.1 Recetas</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>11</padre>
+	<campo>2.2.2 Restaurantes/ Bares etc.</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>9</padre>
+	<campo>2.3 Utensilios de cocina</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>3 VIVIENDA/ INMOBILIARIA</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>15</padre>
+	<campo>
+	3.1 Tipos de vivienda/ edificios/ partes de la casa
+	</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>15</padre>
+	<campo>3.2 Decoración/ mobiliario</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>15</padre>
+	<campo>3.3 Alquiler/ compra-venta</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>4 CENTRO COMERCIAL / DE TIENDAS / HACER LA COMPRA</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>19</padre>
+	<campo>4.1 Moda/ Ropa</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>19</padre>
+	<campo>4.2 Complementos</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>19</padre>
+	<campo>4.3 Perfumería y cuidado personal</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>5 OCIO/ CULTURA/ ARTE</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>23</padre>
+	<campo>5.1 Aficiones</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>24</padre>
+	<campo>5.1.1 Deporte</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>25</padre>
+	<campo>5.1.1.1 Actividades deportivas</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>25</padre>
+	<campo>5.1.1.2 Organizaciones deportivas</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>23</padre>
+	<campo>5.2 Eventos</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>28</padre>
+	<campo>5.2.1 Eventos personales</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>28</padre>
+	<campo>5.2.2 Eventos públicos</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>23</padre>
+	<campo>5.3 Música</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>31</padre>
+	<campo>5.3.1 Géneros</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>31</padre>
+	<campo>5.3.2 Instrumentos musicales</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>23</padre>
+	<campo>5.4 Literatura</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>34</padre>
+	<campo>5.4.1 Géneros</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>34</padre>
+	<campo>5.4.2 Épocas</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>23</padre>
+	<campo>5.5 Teatro/ Cine</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>37</padre>
+	<campo>5.5.1 Cartelera y programa</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>37</padre>
+	<campo>5.5.2 Géneros</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>23</padre>
+	<campo>5.6 Fotografía</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>23</padre>
+	<campo>5.7 Pintura</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>41</padre>
+	<campo>5.7.1 Colores</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>41</padre>
+	<campo>5.7.2 Estilos</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>6 COMUNICACIÓN: FORMAS Y MEDIOS</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>44</padre>
+	<campo>6.1 Comunicación oral</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>45</padre>
+	<campo>6.1.1 Comunicación oral a nivel privado</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>46</padre>
+	<campo>6.1.1.1 Interactiva</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>46</padre>
+	<campo>6.1.1.2 Discursiva</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>45</padre>
+	<campo>6.1.2 Comunicación oral a nivel público</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>49</padre>
+	<campo>6.1.2.1 Interactiva</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>49</padre>
+	<campo>6.1.2.2 Discursiva</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>44</padre>
+	<campo>6.2 Correspondencia</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>52</padre>
+	<campo>6.2.1 Correspondencia privada</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>52</padre>
+	<campo>6.2.2 Correspondencia formal</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>44</padre>
+	<campo>6.3 Prensa</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>55</padre>
+	<campo>6.3.1 Encuestas</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>44</padre>
+	<campo>6.4 Radio/ televisión</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>44</padre>
+	<campo>6.5 Telefonía</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>44</padre>
+	<campo>6.6 Internet</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>7 VIAJES/ TURISMO</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>60</padre>
+	<campo>7.1 Formas de viajar</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>61</padre>
+	<campo>7.1.1 Viajes de lujo</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>61</padre>
+	<campo>7.1.2 Viajes de mochila</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>61</padre>
+	<campo>7.1.3 Viajes culturales</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>61</padre>
+	<campo>7.1.4 Viajes familiares</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>60</padre>
+	<campo>7.2 Alojamientos</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>66</padre>
+	<campo>7.2.1 Tipos de alojamiento</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>66</padre>
+	<campo>7.2.2 Prestaciones y servicios de alojamiento</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>8 TRASLADO/ ORIENTACIÓN</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>69</padre>
+	<campo>8.1 Medios de transporte</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>69</padre>
+	<campo>8.2 Tráfico</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>69</padre>
+	<campo>8.3 Orientación</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>72</padre>
+	<campo>8.3.1 Puntos cardinales</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>72</padre>
+	<campo>8.3.2 Otros indicadores direccionales</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>9 DIVISIONES DEL TIEMPO</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>75</padre>
+	<campo>9.1 Términos generales</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>75</padre>
+	<campo>9.2 Estaciones/ meses del año</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>75</padre>
+	<campo>9.3 Días de la semana y partes del día</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>75</padre>
+	<campo>9.4 Hora</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>10 GEOGRAFÍA/ NATURALEZA</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>11 SOCIEDAD</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>81</padre>
+	<campo>11.1 Estado/ Política</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>81</padre>
+	<campo>11.2 Derecho/ Normativas/ Administración</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>81</padre>
+	<campo>11.3 Ideologías/ Religiones</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>12 MUNDO LABORAL</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>85</padre>
+	<campo>12.1 Profesiones y oficios</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>85</padre>
+	<campo>12.2 Lugar de trabajo</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>85</padre>
+	<campo>12.3 Condiciones laborales</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>13 MUNDO EMPRESARIAL/ ECONOMÍA</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>89</padre>
+	<campo>13.1 Empresas y negocios</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>89</padre>
+	<campo>13.2 Industria</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>89</padre>
+	<campo>13.3 Aspectos económicos y financieros</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>89</padre>
+	<campo>13.4 Publicidad/ Marketing</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>14 FORMACIÓN Y ENSEÑANZA</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>94</padre>
+	<campo>14.1 Sistema educativo</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>94</padre>
+	<campo>14.2 Formación profesional</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>94</padre>
+	<campo>14.3 Formación universitaria</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>15 INFORMÁTICA</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>98</padre>
+	<campo>15.1 Hardware</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>98</padre>
+	<campo>15.2 Software</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>16 CIENCIA/ TECNOLOGÍA</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>17 MEDICINA/ SANIDAD</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>18 LA LENGUA Y SUS ASPECTOS</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>103</padre>
+	<campo>18.1 Idiomas</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>103</padre>
+	<campo>18.2 Aspectos lingüsticos (p.ej: FACHCHINESISCH)</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>103</padre>
+	<campo>18.3 Denominaciones gramaticales</campo>
+	</record>
+</table>

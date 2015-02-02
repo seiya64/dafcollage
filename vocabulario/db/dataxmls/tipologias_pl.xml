@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<table name="vocabulario_tipologias_pl">
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>--</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Og?oszenie reklamowe</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Biografia</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Listy oficjalne</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Karta da?</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Podanie o prac?</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Oferta reklamowa</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>List czytelnika</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>List rekomendacyjny</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Menu</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Plakat informacyjny</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Repertuar kinowy</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Program wydarze? kulturalnych</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>?wiadectwo szkolne</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Konferencja</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Kontrakt w pracy</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Konwersacja</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Curriculum Vitae</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Sonda?</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Wywiad</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Slogan</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Schemat informacyjny</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Statystyka</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Faktura</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Formularz</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Ulotka turystyczna</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Gwarancja</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Rozk?ad godzin</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Informacja o produkcie</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Raport</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Sprawozdanie ocen</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Mapa</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Nomina?</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Lista cen</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Lista ofert nieruchomo?ci</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Ranking</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Instrukcja obs?ugi</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Narracja</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Oferta pracy</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Pro?ba</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Poemat</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Prospekt farmaceutyczny</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Reporta?</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Przepis kulinarny</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Reklamacja</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Przypomnienie</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Regulamin</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Reporta?</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Notatka</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Tekst naukowy</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Tekst opisowy</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Tekst informacyjny-dziennikarski</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Tekst narracyjny</tipo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<tipo>Tekst stopka</tipo>
+	</record>
+</table>	
+		
+	  

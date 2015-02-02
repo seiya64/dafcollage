@@ -1,0 +1,164 @@
+/*
+  Daf-collage is made up of two Moodle modules which help in the process of
+  German language learning. It facilitates the content organization like
+  vocabulary or the main grammar features and gives the chance to create
+  exercises in order to consolidate knowledge.
+
+  Copyright (C) 2011
+
+  Coordination:
+  Ruth Burbat
+
+  Source code:
+  Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
+  Simeón Ruiz Romero (simeonruiz@gmail.com)
+  Serafina Molina Soto(finamolinasoto@gmail.com)
+
+  Original idea:
+  Ruth Burbat
+
+  Content design:
+  Ruth Burbat
+  AInmaculada Almahano Güeto
+  Andrea Bies
+  Julia Möller Runge
+  Blanca Rodríguez Gómez
+  Antonio Salmerón Matilla
+  María José Varela Salinas
+  Karin Vilar Sánchez
+
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details. */
+
+/*
+Ahora mismo está en desuso, pero volverá a estar activo para ver la parte de
+guardar palabras por columnas
+*/
+
+#mform1 {
+    display: table;
+}
+
+#sus {
+    width: 48%;
+    float: left;
+    min-height: 250px;
+    display: table-cell;
+    clear: left;
+}
+
+#vrb {
+    width: 48%;
+    float: right;
+    min-height: 250px;
+    display: table-cell;
+}
+
+
+#adj {
+    width: 48%;
+    float: left;
+    min-height: 250px;
+    vertical-align: 20px;
+    display: table-cell;
+    clear: left;
+}
+
+#otr {
+    width: 48%;
+    float: right;
+    min-height: 250px;
+    display: table-cell;
+}
+
+#viewcanvas{ padding-top:10px;}
+.menurow{ clear:both; padding-top:15px;}
+.menurow a {text-decoration:none;}
+.menuitem {opacity:0.8;}
+.menuitem:hover {opacity:1;}
+.menuitem{ clear:none;  width:30%; }
+.submenuitemizq{
+    float:left;
+    display:inline-block;
+}
+.submenuitemdcha{
+    float:right;
+    display:inline-block;
+}
+.left{ float:left; }
+.center{ margin-right:auto; margin-left:auto;}
+.right{ float:right; }
+
+.cajagranancho { width: 100%; }
+.twitter{ width: 252px; padding-left: 10px;}
+#mform1 { width:90%; }
+          
+#id_cancellink{ 
+float: right;
+color: #EEE;
+font-size: 0.9em;
+}
+
+.buscador{
+    margin-left:300px;
+}
+
+.mimittel{
+    
+    text-align: center;
+    width: 100px;
+}
+
+.mimittelintencion{
+    
+    text-align: center;
+    width: 400px;
+}
+
+
+
+
+/* Cambios de Angel Biedma y Serafina Molina Soto */
+.size { position:relative }
+.size .field {
+	/*width:300px; background:#EC6603; color:#fff; padding:5px; border:none;*/ cursor:pointer;
+	font-family:'lucida sans unicode',sans-serif; font-size:1em;
+	/*border:solid 1px #EC6603;*/
+	-webkit-transition: all .4s ease-in-out;
+	transition: all .4s ease-in-out;
+        color:#0033CC;
+}
+.size .field:hover {
+	border:solid 1px #fff;
+	-moz-box-shadow:0 0 5px #999; -webkit-box-shadow:0 0 5px #999; box-shadow:0 0 5px #999
+}
+.size>ul.list { display:none;
+	position:absolute; left:30px; top:-30px; z-index:999;
+	width:300px;
+	margin:0; padding:10px; list-style:none;
+	background:#fff; color:#333;
+	-moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px;
+	-moz-box-shadow:0 0 5px #999; -webkit-box-shadow:0 0 5px #999; box-shadow:0 0 5px #999
+}
+.size>ul.list li {
+	padding:10px;
+	/*border-bottom: solid 1px #ccc;*/
+}
+.size>ul.list li:hover {
+	background:rgb(180, 205, 228);
+}
+.size>ul.list li:last-child { border:none }
+
+
+/*Añadido por Salim ya que cuando vocabulario se instala como módulo, En la opción "Mis Palabras" -> los enlaces "[Combinación con otras palabras (interactivo)],... aparecen con tamaño de fuente heredado de H1, esta selector que he añadido lo resuelve*/
+
+h1 a{
+	font-size:14px;
+}

@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<table name="vocabulario_camposlexicos_en">	
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>--</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>1 HUMAN BEING</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>2</padre>
+	<campo>1.1 Personal data</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>2</padre>
+	<campo>1.2 Personal relations</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>2</padre>
+	<campo>1.3 Physical aspect</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>2</padre>
+	<campo>1.4 Characteristics</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>2</padre>
+	<campo>1.5 Emotions</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>2</padre>
+	<campo>1.6 Health</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>2 FOOD</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>9</padre>
+	<campo>2.1 Food</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>9</padre>
+	<campo>2.2 Dishes</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>11</padre>
+	<campo>2.2.1 Recipes</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>11</padre>
+	<campo>2.2.2 Restaurants, bars...</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>9</padre>
+	<campo>2.3 Kitchen utensils</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>3 HOUSES</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>15</padre>
+	<campo>3.1 Types of houses</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>15</padre>
+	<campo>3.2 Decoration</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>15</padre>
+	<campo>3.3 Renting</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>4 SHOPPING</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>19</padre>
+	<campo>4.1 Clothes</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>19</padre>
+	<campo>4.2 Complements</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>19</padre>
+	<campo>4.3 Personal care</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>5 CULTURE AND ART</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>23</padre>
+	<campo>5.1 Free time</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>24</padre>
+	<campo>5.1.1 Sport</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>25</padre>
+	<campo>5.1.1.1 Activities</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>25</padre>
+	<campo>5.1.1.2 Organizations</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>23</padre>
+	<campo>5.2 Events</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>28</padre>
+	<campo>5.2.1 Personal events</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>28</padre>
+	<campo>5.2.2 Public events</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>23</padre>
+	<campo>5.3 Music</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>31</padre>
+	<campo>5.3.1 Genres</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>31</padre>
+	<campo>5.3.2 Musical instruments</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>23</padre>
+	<campo>5.4 Literature</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>34</padre>
+	<campo>5.4.1 Genres</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>34</padre>
+	<campo>5.4.2 Periods</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>23</padre>
+	<campo>5.5 Theater, cinema</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>37</padre>
+	<campo>5.5.1 Films</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>37</padre>
+	<campo>5.5.2 Genres</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>23</padre>
+	<campo>5.6 Fotography</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>23</padre>
+	<campo>5.7 Painting</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>41</padre>
+	<campo>5.7.1 Colours</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>41</padre>
+	<campo>5.7.2 Styles</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>6 COMMUNICATION</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>44</padre>
+	<campo>6.1 Oral</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>45</padre>
+	<campo>6.1.1 Oral, but not in public</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>46</padre>
+	<campo>6.1.1.1 Interactive</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>46</padre>
+	<campo>6.1.1.2 Discursive</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>45</padre>
+	<campo>6.1.2 Oral in public</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>49</padre>
+	<campo>6.1.2.1 Interactive</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>49</padre>
+	<campo>6.1.2.2 Discursive</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>44</padre>
+	<campo>6.2 Correspondence</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>52</padre>
+	<campo>6.2.1 Private correspondence</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>52</padre>
+	<campo>6.2.2 Formal correspondence</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>44</padre>
+	<campo>6.3 Press</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>55</padre>
+	<campo>6.3.1 Surveys</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>44</padre>
+	<campo>6.4 Radio/ tv</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>44</padre>
+	<campo>6.5 Telephone</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>44</padre>
+	<campo>6.6 Internet</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>7 TRAVELLING AND TOURISM</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>60</padre>
+	<campo>7.1 Ways of travelling</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>61</padre>
+	<campo>7.1.1 Luxury travels</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>61</padre>
+	<campo>7.1.2 Backpacking</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>61</padre>
+	<campo>7.1.3 Cultural travels</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>61</padre>
+	<campo>7.1.4 Family travels</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>60</padre>
+	<campo>7.2 Accommodation</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>66</padre>
+	<campo>7.2.1 Types of accommodation</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>66</padre>
+	<campo>7.2.2 Facilities</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>8 ORIENTATION</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>69</padre>
+	<campo>8.1 Ways of travelling</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>69</padre>
+	<campo>8.2 Traffic</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>69</padre>
+	<campo>8.3 Orientation</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>72</padre>
+	<campo>8.3.1 North, south, east and west</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>72</padre>
+	<campo>8.3.2 Others</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>9 TIME DIVISIONS</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>75</padre>
+	<campo>9.1 General terms</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>75</padre>
+	<campo>9.2 Months of the year</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>75</padre>
+	<campo>9.3 Weeks</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>75</padre>
+	<campo>9.4 Time</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>10 GEOGRAPHY</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>11 SOCIETY</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>81</padre>
+	<campo>11.1 State</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>81</padre>
+	<campo>11.2 Law</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>81</padre>
+	<campo>11.3 Religion</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>12 WORKING</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>85</padre>
+	<campo>12.1 Professions and jobs</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>85</padre>
+	<campo>12.2 Working place</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>85</padre>
+	<campo>12.3 Labour conditions</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>13 ECONOMY</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>89</padre>
+	<campo>13.1 Enterprises</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>89</padre>
+	<campo>13.2 Industry</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>89</padre>
+	<campo>13.3 Finances</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>89</padre>
+	<campo>13.4 Marketing</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>14 EDUCATION</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>94</padre>
+	<campo>14.1 Education system</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>94</padre>
+	<campo>14.2 Job training</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>94</padre>
+	<campo>14.3 University</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>15 COMPUTERS</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>98</padre>
+	<campo>15.1 Hardware</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>98</padre>
+	<campo>15.2 Software</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>16 SCIENCE AND TECHNOLOGY</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>17 MEDICINE AND HEALTH</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<campo>18 LANGUAGES</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>103</padre>
+	<campo>18.1 LANGUAGES</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>103</padre>
+	<campo>18.2 Technical aspects (p.ej: FACHCHINESISCH)</campo>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>103</padre>
+	<campo>18.3 Grammar</campo>
+	</record>
+</table>	
+
+	 
+	  

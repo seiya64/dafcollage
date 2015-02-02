@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<table name="vocabulario_intenciones_en">
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>--</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>1. SOCIAL RELATIONSHIPS</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>2</padre>
+	<intencion>1.1 Forms of address</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>2</padre>
+	<intencion>1.2 Designation of people</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>5. JUSTIFY SOMETHING (CAUSALITY)</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>6. EXPRESSING CONDITION</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>6</padre>
+	<intencion>6.1 Possible condition</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>6</padre>
+	<intencion>6.2 Unlikely condition</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>6</padre>
+	<intencion>6.3 Impossible condition</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>4. GETTING SOMETHING (PURPOSE)</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>10</padre>
+	<intencion>4.1 Acts towards a goal</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>10</padre>
+	<intencion>4.2 Means for achieving a goal</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>7. EXPRESSING CONSEQUENCE</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>9. CONTRADICTION</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>10. COMPARISON</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>15</padre>
+	<intencion>10.1 Equality and similarity</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>15</padre>
+	<intencion>10.2 Proportionality</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>15</padre>
+	<intencion>10.3 Difference</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>15</padre>
+	<intencion>10.4 Contraposition/ adversativity</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>2 APPEALING THE INTERLOCUTOR</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>20</padre>
+	<intencion>2.1 Give orders</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>20</padre>
+	<intencion>2.2 Advise and warn</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>20</padre>
+	<intencion>2.3 Asking for something</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>20</padre>
+	<intencion>2.4 Incite</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>20</padre>
+	<intencion>2.5 Propose</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>20</padre>
+	<intencion>2.6 Offer</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>20</padre>
+	<intencion>2.7 Recommend</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>20</padre>
+	<intencion>2.8 Give instructions</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>3. EXPRESSING LIKES, WISHES, AND FEELINGS</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>13. MAKING ASSUMPTIONS</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>3</padre>
+	<intencion>1.1.1 Using personal expressions</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>3</padre>
+	<intencion>1.1.2 Using impersonal expressions</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>4</padre>
+	<intencion>1.2.1 Using personal expressions</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>4</padre>
+	<intencion>1.2.2 Using impersonal expressions</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>2</padre>
+	<intencion>1.3 Interpersonal acts</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>35</padre>
+	<intencion>1.3.1 Introducing oneself and introducing others</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>35</padre>
+	<intencion>1.3.2 Greeting</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>35</padre>
+	<intencion>1.3.3 Give thanks</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>35</padre>
+	<intencion>1.3 4 Congratulate</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>35</padre>
+	<intencion>1.3 5 Apologize</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>35</padre>
+	<intencion>1.3.6 Expressing good wishes</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>35</padre>
+	<intencion>1.3.7 Expressing interest</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>35</padre>
+	<intencion>1.3.8 Showing compassion</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>35</padre>
+	<intencion>1.3.9 Expressing incredulity</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>29</padre>
+	<intencion>3.1 Expressing likes and preferences</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>29</padre>
+	<intencion>3.2 Expressing wishes</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>29</padre>
+	<intencion>3.3 Showing feelings</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>47</padre>
+	<intencion>3.3 1 Resignation</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>47</padre>
+	<intencion>3.3 2 Surprise</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>47</padre>
+	<intencion>3.3 3 Worry, concern, anxiety</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>47</padre>
+	<intencion>3.3.4 Anger, annoyance</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>47</padre>
+	<intencion>3.3.5 Joy, gladness</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>8. EXPRESSING AGREEMENT / DISAGREEMENT</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>11. EXPRESSING RESTRICTION</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>12. ADDING INFORMATION/ ENUMERATING</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>14. RELATING INFORMATION</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>15. EXPRESSING TEMPORARINESS</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>57</padre>
+	<intencion>15.1 Previously done</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>57</padre>
+	<intencion>15.2 Done afterwards</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>57</padre>
+	<intencion>15.3 Simultaneity</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>57</padre>
+	<intencion>15.4 Length, duration</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>57</padre>
+	<intencion>15.5 Repetition</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>16. EXPRESSING NECESSITY, POSSIBILITY, AND CAPACIT</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>63</padre>
+	<intencion>16.1 Necessity</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>63</padre>
+	<intencion>16.2 Possibility</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>63</padre>
+	<intencion>16.3 Capacity</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>17. EXPLAINING FACTS</intencion>
+	</record>
+</table>
+	 
+	  
