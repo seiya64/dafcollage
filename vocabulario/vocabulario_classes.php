@@ -15,6 +15,7 @@
   Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
   Simeón Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto(finamolinasoto@gmail.com)
+  Salim Tieb Mohamedi (profesiglo21@gmai.com)
 
   Original idea:
   Ruth Burbat
@@ -1385,7 +1386,6 @@ class Vocabulario_intenciones {
     en las intenciones que se muestran en el formulario a través del SELECT. 
     */
     function obtener_todos($usuarioid) {
-        global $orden;
         global $ic; 
         global $DB;
      
@@ -1400,9 +1400,8 @@ class Vocabulario_intenciones {
           
             $contador = 0;
             foreach ($gr as $i) {   
-                $ic[$orden] = $contador . "." . "&nbsp;&nbsp;&nbsp;&nbsp;" .$i->intencion;               
-                 
-                $orden++;               
+                $ic[$i->id] = $contador . ". " .$i->intencion;               
+                             
                 $this->obtener_todos_subnumerados($usuarioid, $i->id, $contador); 
                 $contador++;
                 
@@ -1412,7 +1411,6 @@ class Vocabulario_intenciones {
     }   
     
     function obtener_todos_subnumerados($usuarioid, $id_padre, $contador_padre) {
-        global $orden;
         global $ic;
         global $DB;
          
@@ -1423,12 +1421,10 @@ class Vocabulario_intenciones {
        
         $gr = $DB->get_records_select($table, $select, null, $sort);
          
-             
             $contador = 1;
             foreach ($gr as $i) {   
                 $contador_padre_padre = $contador_padre . "." . $contador;
-                $ic[$orden] = $contador_padre . "." . $contador . "." . "&nbsp;&nbsp;&nbsp;&nbsp;" .$i->intencion;
-                $orden++;
+                $ic[$i->id] = $contador_padre . "." . $contador . ". " . $i->intencion;
                 $contador++;
                 $padre = $i->id;
                 
@@ -1550,7 +1546,7 @@ class Vocabulario_intenciones {
          
         foreach ($gr as $i) { 
             $orden = $this->obtener_orden($usuarioid, $i->id);
-            $ic[$i->id] = $orden . "." . "&nbsp;&nbsp;&nbsp;&nbsp;" .$i->intencion;  
+            $ic[$i->id] = $orden . ". " . $i->intencion;  
         }
     return $ic;
     }
