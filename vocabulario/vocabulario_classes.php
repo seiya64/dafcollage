@@ -1392,7 +1392,7 @@ class Vocabulario_intenciones {
         $sufijotabla = get_sufijo_lenguaje_tabla();
         $table = 'vocabulario_intenciones_'.$sufijotabla;
         $select = 'padre= 0';
-        $sort = 'ordenid';
+        $sort = 'usuarioid, ordenid';
          
        
         $gr = $DB->get_records_select($table, $select, null, $sort);
@@ -1441,7 +1441,7 @@ class Vocabulario_intenciones {
         $sufijotabla = get_sufijo_lenguaje_tabla();
         $table = 'vocabulario_intenciones_'.$sufijotabla;
         $select = 'padre= 0';
-        $sort = 'ordenid';
+        $sort = 'usuarioid, ordenid';
          
        
         $gr = $DB->get_records_select($table, $select, null, $sort);
@@ -1533,7 +1533,7 @@ class Vocabulario_intenciones {
         $sort = '';        
         
         if($padreid == 0)
-                $sort = 'ordenid';                     
+                $sort = 'usuarioid, ordenid';                     
         
          
         $gr = $DB->get_records_select($table, $select, null, $sort);
