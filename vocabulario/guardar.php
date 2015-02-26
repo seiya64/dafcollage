@@ -53,7 +53,7 @@ $sustantivo_leido = new Vocabulario_sustantivo(required_param('palabra_sus',  PA
                 optional_param('finalgramatica_sus', 1, PARAM_INT),
                 optional_param('intencion_sus', 1, PARAM_INT),
                 optional_param('tipologia_sus', 1, PARAM_INT),
-                optional_param('ejemplo_sus', 0, PARAM_INT));
+                optional_param('ejemplo_sus', " ", PARAM_TEXT));
 //leo un verbo y lo guardo
 $verbo_leido = new Vocabulario_verbo(optional_param('infinitivo', ' ', PARAM_TEXT),
                 optional_param('ter_pers_sing', ' ', PARAM_TEXT),
@@ -90,7 +90,7 @@ $sustantivo_leido = new Vocabulario_sustantivo(required_param('palabra_sus', PAR
                 optional_param('gramatica_sus', 1, PARAM_INT),
                 optional_param('intencion_sus', 1, PARAM_INT),
                 optional_param('tipologia_sus', 1, PARAM_INT),
-                optional_param('ejemplo_sus', 1, PARAM_INT));
+                optional_param('ejemplo_sus', " ", PARAM_TEXT));
 //leo un verbo y lo guardo
 $verbo_leido = new Vocabulario_verbo(optional_param('infinitivo', '', PARAM_TEXT),
                 optional_param('ter_pers_sing', ' ', PARAM_TEXT),
