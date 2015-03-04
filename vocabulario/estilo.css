@@ -110,7 +110,7 @@ guardar palabras por columnas
     float: left;
     min-height: 250px;
     vertical-align: 20px;
-    display: inline-table;
+    display: table-cell;
     clear: left;
 }
 
