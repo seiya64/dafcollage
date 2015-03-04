@@ -13,6 +13,8 @@
   Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
   Simeón Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto(finamolinasoto@gmail.com)
+  Luis Redondo Expósito(luis.redondo.exposito@gmail.com)
+  Ramón Rueda Delgado (ramonruedadelgado@gmail.com)
 
   Original idea:
   Ruth Burbat
@@ -79,6 +81,13 @@ guardar palabras por columnas
 }
 */
 
+
+/***************************************************************/
+/*********Cambios CSS del tema BCU en Moodle 2.8****************/
+/*********Autores:                              ****************/
+/*********Luis Redondo Expósito                 ****************/
+/*********Ramón Rueda Delgado                   ****************/
+/***************************************************************/
 
 #id_sus {
     width: 48%;
@@ -205,13 +214,6 @@ h1 a{
 	font-size:14px;
 }
 
-
-/***************************************************************/
-/*********Cambios CSS del tema BCU en Moodle 2.8****************/
-/*********Autores:                              ****************/
-/*********Luis Redondo Expósito                 ****************/
-/*********Ramón Rueda Delgado                   ****************/
-/***************************************************************/
 
 /*input, textarea, .uneditable-input {
 	width: 100%;
