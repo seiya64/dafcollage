@@ -45,7 +45,7 @@ guardar palabras por columnas
 #mform1 {
     display: table;
 }
-
+/*
 #sus {
     width: 48%;
     float: left;
@@ -77,6 +77,42 @@ guardar palabras por columnas
     min-height: 250px;
     display: table-cell;
 }
+*/
+
+
+#id_sus {
+    width: 48%;
+    float: left;
+    min-height: 250px;
+    display: table-cell;
+    clear: left;
+}
+
+#id_vrb {
+    width: 48%;
+    float: right;
+    min-height: 250px;
+    display: table-cell;
+}
+
+
+#id_adj {
+    width: 48%;
+    float: left;
+    min-height: 250px;
+    vertical-align: 20px;
+    display: inline-table;
+    clear: left;
+}
+
+#id_otr {
+    width: 48%;
+    float: right;
+    min-height: 250px;
+    display: table-cell;
+}
+
+
 
 #viewcanvas{ padding-top:10px;}
 .menurow{ clear:both; padding-top:15px;}
@@ -100,13 +136,16 @@ guardar palabras por columnas
 .twitter{ width: 252px; padding-left: 10px;}
 #mform1 { 
 	width:90%;
-	display:block; 
+	display:table-cell; 
 }
           
 #id_cancellink{ 
 float: right;
 color: #B4BBBF;
 font-size: 0.9em;
+}
+#fgroup_id_botones{
+    text-align: center;
 }
 
 .buscador{
