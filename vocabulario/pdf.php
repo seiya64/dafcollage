@@ -66,7 +66,7 @@ $impr_tipol = optional_param('impr_tipol', 0, PARAM_INT);
 $impr_inten = optional_param('impr_inten', 0, PARAM_INT);
 $impr_estra = optional_param('impr_estra', 0, PARAM_INT);
 
-$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, TRUE, 'UTF-8', FALSE);
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 $pdf->SetTitle(get_string('cuad_digital_min', 'vocabulario'));
@@ -146,7 +146,8 @@ if($impr_vocab_corto) {
             $pdf->SetLineWidth(0.3);
             $pdf->SetFillColor(255, 255, 255); //blanco
             $pdf->SetTextColor(0,0,0);
-            $pdf->SetFont('', 'B', '12');
+            //La fuente 'freeserif' contiene codificación de caracteres especiales "β"
+            $pdf->SetFont('freeserif', 'B', '12');
             
             $pdf->Cell(59, 10, $atrs['genero']." ".$pal, "LT", 0, "J", 1);
             $pdf->Cell(2, 10, " ", "T", 0, "J", 1);
