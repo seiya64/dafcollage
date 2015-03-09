@@ -147,8 +147,7 @@ if($impr_vocab_corto) {
             $pdf->SetFillColor(255, 255, 255); //blanco
             $pdf->SetTextColor(0,0,0);
             //La fuente 'freeserif' contiene codificación de caracteres especiales "β"
-            $pdf->SetFont('freese'
-                    . 'rif', 'B', '12');
+            $pdf->SetFont('freeserif', 'B', '12');
             
             $pdf->Cell(59, 10, $atrs['genero']." ".$pal, "LT", 0, "J", 1);
             $pdf->Cell(2, 10, " ", "T", 0, "J", 1);
@@ -539,7 +538,7 @@ if ($impr_gram == 1) {
                     if ($pintartochaco) {
                         $pdf->AddPage();
                         $pdf->SetFont('', 'B', '12');
-                        $pdf->writeHTMLCell(0, 0, 10, 0, '<h2>' . $mi_gram . '</h2>', 0, 1, 0);
+                        $pdf->writeHTMLCell(0, 0, 10, 5, '<h2>' . $mi_gram . '</h2>', 0, 1, 0);
 
 
                         $grid = $palabra->gramaticaid;
@@ -551,7 +550,7 @@ if ($impr_gram == 1) {
                             case 3:
                                 
                                 $pdf->setLeftMargin(MARGIN);
-                                $pdf->SetFont('', '', 10);
+                                $pdf->SetFont('freeserif', 'B', '10');
                                 $pdf->SetFillColor(59, 89, 152); //#3B5998
                                 //masculino
                                 $pdf->SetTextColor(59,89,152);
@@ -600,7 +599,7 @@ if ($impr_gram == 1) {
 
                                 $pdf->setLeftMargin(MARGIN);
                                 $pdf->SetTextColor(59,89,152);
-                                $pdf->SetFont('', '', 10);
+                                $pdf->SetFont('freeserif', 'B', '10');
                                 $pdf->SetFillColor(59, 89, 152); //#3B5998
 
                                 $pdf->writeHTMLCell(0, 0, 10, 20, '<h3>' . get_string('endungs', 'vocabulario') . '</h3>', 0, 1, 0);
@@ -662,7 +661,7 @@ if ($impr_gram == 1) {
                             case 26:
                                 $pdf->setLeftMargin(MARGIN);
                                 $pdf->SetTextColor(TEXT_AUTO);
-                                $pdf->SetFont('', '', 10);
+                                $pdf->SetFont('freeserif', 'B', '10');
 
                                 if ($grid == 25) {
                                     $titulo = get_string("futuro1", "vocabulario");
@@ -675,10 +674,13 @@ if ($impr_gram == 1) {
                                 } elseif ($grid == 63 && $grid == 64 && $grid == 65) {
                                     $titulo = get_string('func', 'vocabulario');
                                 }
-
-                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>' . $titulo . '</h3>', 0, 1, 0);
+                                
+                                $pdf->Ln();
+                                $pdf->SetTextColor(59,89,152);
+                                $pdf->writeHTMLCell(0, 0, 10, null, '<h3>' . $titulo . '</h3>', 0, 1, 0);
                                 $pdf->setLeftMargin(MARGIN_L2);
-                                $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
+                                $pdf->SetTextColor(TEXT_AUTO);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'L', 0);
                                 $pdf->setLeftMargin(MARGIN);
                                 $pdf->Ln();
                                 break;
@@ -698,25 +700,35 @@ if ($impr_gram == 1) {
                                 }
 
                                 $pdf->SetTextColor(TEXT_AUTO);
-                                $pdf->SetFont('', '', 10);
+                                $pdf->SetFont('freeserif', 'B', '10');
                                 $pdf->SetFillColor(59, 89, 152); //#3B5998
                                 $pdf->setLeftMargin(MARGIN);
 
-                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>' . $titulo0 . '</h3>', 0, 1, 0);
+                                $pdf->Ln();
+                                $pdf->SetTextColor(59,89,152);
+                                $pdf->writeHTMLCell(0, 0, 10, null, '<h3>' . $titulo0 . '</h3>', 0, 1, 0);
+                                $pdf->Ln();
+                                $pdf->SetTextColor(TEXT_AUTO);
                                 $pdf->setLeftMargin(MARGIN_L2);
-                                $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'L', 0);
                                 $pdf->setLeftMargin(MARGIN);
                                 $pdf->Ln();
 
-                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>' . $titulo1 . '</h3>', 0, 1, 0);
+                                $pdf->SetTextColor(59,89,152);
+                                $pdf->writeHTMLCell(0, 0, 10, null, '<h3>' . $titulo1 . '</h3>', 0, 1, 0);
+                                $pdf->Ln();
+                                $pdf->SetTextColor(TEXT_AUTO);
                                 $pdf->setLeftMargin(MARGIN_L2);
-                                $pdf->MultiCell(0, 5, $descripcion_troceada[1], 0, 'J', 0);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[1], 0, 'L', 0);
                                 $pdf->setLeftMargin(MARGIN);
                                 $pdf->Ln();
 
-                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>' . $titulo2 . '</h3>', 0, 1, 0);
+                                $pdf->SetTextColor(59,89,152);
+                                $pdf->writeHTMLCell(0, 0, 10, null, '<h3>' . $titulo2 . '</h3>', 0, 1, 0);
+                                $pdf->Ln();
                                 $pdf->setLeftMargin(MARGIN_L2);
-                                $pdf->MultiCell(0, 5, $descripcion_troceada[2], 0, 'J', 0);
+                                $pdf->SetTextColor(TEXT_AUTO);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[2], 0, 'L', 0);
                                 $pdf->setLeftMargin(MARGIN);
                                 $pdf->Ln();
 
