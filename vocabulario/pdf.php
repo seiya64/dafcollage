@@ -746,21 +746,26 @@ if ($impr_gram == 1) {
                                     $titulo1 = get_string('indefinido', 'vocabulario');
                                 }
 
-
-                                $pdf->SetTextColor(TEXT_AUTO);
-                                $pdf->SetFont('', '', 10);
+                                $pdf->Ln();
+                                $pdf->SetFont('freeserif', 'B', '10');
                                 $pdf->SetFillColor(59, 89, 152); //#3B5998
                                 $pdf->setLeftMargin(MARGIN);
 
-                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>' . $titulo0 . '</h3>', 0, 1, 0);
+                                $pdf->SetTextColor(59,89,152);
+                                $pdf->writeHTMLCell(0, 0, 10, null, '<h3>' . $titulo0 . '</h3>', 0, 1, 0);
+                                $pdf->Ln();
                                 $pdf->setLeftMargin(MARGIN_L2);
-                                $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
+                                $pdf->SetTextColor(TEXT_AUTO);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'L', 0);
                                 $pdf->setLeftMargin(MARGIN);
                                 $pdf->Ln();
 
-                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>' . $titulo1 . '</h3>', 0, 1, 0);
+                                $pdf->SetTextColor(59,89,152);
+                                $pdf->writeHTMLCell(0, 0, 10, null, '<h3>' . $titulo1 . '</h3>', 0, 1, 0);
+                                $pdf->Ln();
                                 $pdf->setLeftMargin(MARGIN_L2);
-                                $pdf->MultiCell(0, 5, $descripcion_troceada[1], 0, 'J', 0);
+                                $pdf->SetTextColor(TEXT_AUTO);
+                                $pdf->MultiCell(0, 5, $descripcion_troceada[1], 0, 'L', 0);
                                 $pdf->setLeftMargin(MARGIN);
                                 $pdf->Ln();
 
