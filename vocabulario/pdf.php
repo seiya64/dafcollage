@@ -822,18 +822,18 @@ if ($impr_gram == 1) {
                             case 47:
                                 //Tabla 1
                                 //primera Cabecera
+
                                 $pdf->setLeftMargin(MARGIN);
                                 $pdf->SetTextColor(TEXT_WHITE);
-                                $pdf->SetFont('', 'B', 12);
+                                $pdf->SetFont('freeserif', 'B', '12');
                                 $pdf->SetFillColor(59, 89, 152); //#3B5998
                                 $pdf->setLineWidth(0.3);
-
+                                $pdf->Ln();
                                 $pdf->Cell(190, 8, get_string('declinacion1', 'vocabulario'), 1, 1, 'C', 1);
 
                                 //Cabeceras
 
-                                $pdf->SetFont('', 'B', 10);
-
+                                $pdf->SetFont('freeserif', 'B', '10');
                                 $pdf->Cell(30, 5, '', 1, 0, 'C', 1);
                                 $pdf->Cell(40, 5, get_string('masculino', 'vocabulario'), 1, 0, 'C', 1);
                                 $pdf->Cell(40, 5, get_string('femenino', 'vocabulario'), 1, 0, 'C', 1);
@@ -842,7 +842,7 @@ if ($impr_gram == 1) {
 
                                 //filas
                                 $pdf->setTextColor(TEXT_AUTO);
-                                $pdf->SetFont('', '', 10);
+                                $pdf->SetFont('freeserif', 'B', '10');
                                 $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
 
                                 $pdf->Cell(30, 5, get_string('nominativo', 'vocabulario'), 1, 0, 'C', 1);
@@ -871,11 +871,16 @@ if ($impr_gram == 1) {
 
                                 $pdf->Ln();
                                 $pdf->setLeftMargin(MARGIN_L2);
-
-                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>' . get_string('particular', 'vocabulario') . '</h4>', 0, 1, 0);
+                                $pdf->SetTextColor(59,89,152);
+                                $pdf->writeHTMLCell(0, 0, 10, null, '<h4>' . get_string('particular', 'vocabulario') . '</h4>', 0, 1, 0);
+                                $pdf->Ln();
+                                $pdf->SetTextColor(TEXT_AUTO);
                                 $pdf->MultiCell(170, 5, $descripcion_troceada[16], 0, 'L', 0);
                                 $pdf->Ln();
-                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>' . get_string('despuesde', 'vocabulario') . '</h4>', 0, 1, 0);
+                                $pdf->SetTextColor(59,89,152);
+                                $pdf->writeHTMLCell(0, 0, 10, null, '<h4>' . get_string('despuesde', 'vocabulario') . '</h4>', 0, 1, 0);
+                                $pdf->Ln();
+                                $pdf->SetTextColor(TEXT_AUTO);
                                 $pdf->MultiCell(170, 5, $descripcion_troceada[17], 0, 'L', 0);
 
                                 $pdf->setLeftMargin(MARGIN);
@@ -885,7 +890,7 @@ if ($impr_gram == 1) {
                                 //Tabla 2
                                 //primera Cabecera
                                 $pdf->SetTextColor(TEXT_WHITE);
-                                $pdf->SetFont('', 'B', 12);
+                                $pdf->SetFont('freeserif', 'B', '12');
                                 $pdf->SetFillColor(59, 89, 152); //#3B5998
                                 $pdf->setLineWidth(0.3);
 
@@ -893,7 +898,7 @@ if ($impr_gram == 1) {
 
                                 //Cabeceras
 
-                                $pdf->SetFont('', 'B', 10);
+                                $pdf->SetFont('freeserif', 'B', '10');
 
                                 $pdf->Cell(30, 5, '', 1, 0, 'C', 1);
                                 $pdf->Cell(40, 5, get_string('masculino', 'vocabulario'), 1, 0, 'C', 1);
@@ -903,7 +908,7 @@ if ($impr_gram == 1) {
 
                                 //filas
                                 $pdf->setTextColor(TEXT_AUTO);
-                                $pdf->SetFont('', '', 10);
+                                $pdf->SetFont('freeserif', 'B', '10');
                                 $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
 
                                 $pdf->Cell(30, 5, get_string('nominativo', 'vocabulario'), 1, 0, 'C', 1);
@@ -932,11 +937,16 @@ if ($impr_gram == 1) {
 
                                 $pdf->Ln();
                                 $pdf->setLeftMargin(MARGIN_L2);
-
-                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>' . get_string('particular', 'vocabulario') . '</h4>', 0, 1, 0);
+                                
+                                $pdf->SetTextColor(59,89,152);
+                                $pdf->writeHTMLCell(0, 0, 10, null, '<h4>' . get_string('particular', 'vocabulario') . '</h4>', 0, 1, 0);
+                                $pdf->Ln();
+                                $pdf->SetTextColor(TEXT_AUTO);
                                 $pdf->MultiCell(170, 5, $descripcion_troceada[34], 0, 'L', 0);
                                 $pdf->Ln();
-                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>' . get_string('despuesde', 'vocabulario') . '</h4>', 0, 1, 0);
+                                $pdf->SetTextColor(59,89,152);
+                                $pdf->writeHTMLCell(0, 0, 10, null, '<h4>' . get_string('despuesde', 'vocabulario') . '</h4>', 0, 1, 0);
+                                $pdf->SetTextColor(TEXT_AUTO);
                                 $pdf->MultiCell(170, 5, $descripcion_troceada[35], 0, 'L', 0);
 
                                 $pdf->setLeftMargin(MARGIN);
@@ -946,7 +956,7 @@ if ($impr_gram == 1) {
                                 //Tabla 3
                                 //primera Cabecera
                                 $pdf->SetTextColor(TEXT_WHITE);
-                                $pdf->SetFont('', 'B', 12);
+                                $pdf->SetFont('freeserif', 'B', '12');
                                 $pdf->SetFillColor(59, 89, 152); //#3B5998
                                 $pdf->setLineWidth(0.3);
 
@@ -954,7 +964,7 @@ if ($impr_gram == 1) {
 
                                 //Cabeceras
 
-                                $pdf->SetFont('', 'B', 10);
+                                $pdf->SetFont('freeserif', 'B', '10');
 
                                 $pdf->Cell(30, 5, '', 1, 0, 'C', 1);
                                 $pdf->Cell(40, 5, get_string('masculino', 'vocabulario'), 1, 0, 'C', 1);
@@ -964,7 +974,7 @@ if ($impr_gram == 1) {
 
                                 //filas
                                 $pdf->setTextColor(TEXT_AUTO);
-                                $pdf->SetFont('', '', 10);
+                                $pdf->SetFont('freeserif', 'B', '10');
                                 $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
 
                                 $pdf->Cell(30, 5, get_string('nominativo', 'vocabulario'), 1, 0, 'C', 1);
@@ -992,12 +1002,17 @@ if ($impr_gram == 1) {
                                 $pdf->Cell(40, 5, $descripcion_troceada[51], 1, 1, 'C', 0);
 
                                 $pdf->Ln();
-                                $pdf->setLeftMargin(MARGIN_L2);
-
-                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>' . get_string('particular', 'vocabulario') . '</h4>', 0, 1, 0);
+                                $pdf->setLeftMargin(MARGIN_L2); 
+                                $pdf->SetTextColor(59,89,152);
+                                $pdf->writeHTMLCell(0, 0, 10, null, '<h4>' . get_string('particular', 'vocabulario') . '</h4>', 0, 1, 0);
+                                $pdf->Ln();
+                                $pdf->SetTextColor(TEXT_AUTO);
                                 $pdf->MultiCell(170, 5, $descripcion_troceada[52], 0, 'L', 0);
                                 $pdf->Ln();
-                                $pdf->writeHTMLCell(0, 0, 0, 0, '<h4>' . get_string('despuesde', 'vocabulario') . '</h4>', 0, 1, 0);
+                                $pdf->SetTextColor(59,89,152);
+                                $pdf->writeHTMLCell(0, 0, 10, null, '<h4>' . get_string('despuesde', 'vocabulario') . '</h4>', 0, 1, 0);
+                                $pdf->Ln();
+                                $pdf->SetTextColor(TEXT_AUTO);
                                 $pdf->MultiCell(170, 5, $descripcion_troceada[53], 0, 'L', 0);
 
                                 $pdf->setLeftMargin(MARGIN);
