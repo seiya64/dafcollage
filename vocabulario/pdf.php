@@ -14,6 +14,8 @@
   Source code:
   Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
   Simeón Ruiz Romero (simeonruiz@gmail.com)
+  Luis Redondo Expósito (luis.redondo.exposito@gmail.com)
+  Ramón Rueda Delgado (ramonruedadelgado@gmail.com)
 
   Original idea and content design:
   Ruth Burbat
@@ -2649,7 +2651,7 @@ if ($impr_inten == 1) {
     //nueva pagina para las estrategias
     $pdf->AddPage();
     $pdf->SetFont('freeserif', 'B', '12');
-    $pdf->writeHTMLCell(0, 0, 50, 100, '<h1>' . get_string('intenciones_may', 'vocabulario') . '</h1>', 0, 1, 0);
+    $pdf->writeHTMLCell(0, 0, 20, 5, '<h1>' . get_string('intenciones_may', 'vocabulario') . '</h1>', 0, 1, 0);
     
     foreach ($todas as $intencion) {
         foreach ($todas_mis_intenciones as $cosa) {
@@ -2673,17 +2675,18 @@ if ($impr_inten == 1) {
                         $ic->leer($cosa->intencionesid, $usuario);
                         $mic = $ic->get('palabra');
                         $icid = $cosa->intencionesid;
-                        $pdf->SetTextColor(TEXT_AUTO);
+                        $pdf->SetTextColor(59,89,152);
                         $pdf->setLeftMargin(MARGIN);
                         $pdf->SetFillColor(59, 89, 152); //#3B5998
                         $pdf->SetLineWidth(0.3);
                         $pdf->SetFont('freeserif', 'B', 12);
-                        $pdf->writeHTMLCell(0, 0, 0, 0, '<h2>' . $mic . '</h2>', 0, 1, 0);
+                        $pdf->writeHTMLCell(0, 0, 10, null, '<h2>' . $mic . '</h2>', 0, 1, 0);
+                        $pdf->Ln();
 
-
+                        $pdf->SetTextColor(TEXT_AUTO);
                         //Primer cuadro, el de la descripcion
-                        $pdf->writeHTMLCell(0, 0, 0, 0, '<h3>' . get_string('desc', 'vocabulario') . '</h3>', 0, 1, 0);
-
+                        $pdf->writeHTMLCell(0, 0, 10, null, '<h3>' . get_string('desc', 'vocabulario') . '</h3>', 0, 1, 0);
+                        $pdf->Ln();
                         $pdf->setLeftMargin(MARGIN_L2);
                         $pdf->SetFont('freeserif', 'B', 10);
 
