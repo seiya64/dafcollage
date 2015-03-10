@@ -16,6 +16,8 @@
   Simeón Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto(finamolinasoto@gmail.com)
   Salim Tieb Mohamedi (profesiglo21@gmai.com)
+  Luis Redondo Expósito (luis.redondo.exposito@gmail.com)
+  Ramón Rueda Delgado (ramonruedadelgado@gmail.com)
 
   Original idea:
   Ruth Burbat
@@ -576,20 +578,24 @@ class Vocabulario_otro {
 }
 
 class Vocabulario_campo_lexico {
-
+        
     var $id;
     var $usuarioid;
     var $padre;
     var $campo;
+    var $ordenid;
+   
 
-    function Vocabulario_campo_lexico($id = null, $usuarioid = null, $padre = null, $campo = null) {
+    function Vocabulario_campo_lexico($usuarioid = null, $padre = null, $intencion = null, $ordenid = null, $id = null) {
         $this->id = $id;
         $this->usuarioid = $usuarioid;
         $this->padre = $padre;
-        $this->campo = $campo;
+        $this->intencion = $intencion;
+        $this->ordenid = $ordenid;
     }
 
-    function set($id = null, $usuarioid = null, $padre = null, $campo = null) {
+    
+     function set($id = null, $usuarioid = null, $padre = null, $campo = null) {
         if ($id != null && $id != $this->id) {
             $this->id = $id;
         }
@@ -603,15 +609,15 @@ class Vocabulario_campo_lexico {
             $this->campo = $campo;
         }
     }
-
+    
     function get($param) {
         $param = strtolower($param);
         switch ($param) {
-            default:
-            case 'id':
-                return $this->id;
-                break;
-            case 'usuarioid':
+         default:
+             case 'id':
+                 return $this->id;
+                 break;
+             case 'usuarioid':
                 return $this->usuarioid;
                 break;
             case 'padre':
@@ -621,59 +627,203 @@ class Vocabulario_campo_lexico {
             case 'palabra':
                 return $this->campo;
                 break;
-        }
     }
+}
 
     function leer($campoid) {
         global $DB;
         $sufijotabla = get_sufijo_lenguaje_tabla();
         $cl = $DB->get_record('vocabulario_camposlexicos_'.$sufijotabla, array("id" => $campoid));
-
         $this->usuarioid = $cl->usuarioid;
         $this->padre = $cl->padre;
         $this->campo = $cl->campo;
         $this->id = $cl->id;
     }
 
+    
+     /*
+    Autor: Salim Tieb Mohamedi
+    Fecha: 15-nov-2014
+    Las dos funciones obtener_todos y obtener_todos_subnumerados resuelve el problema del desorden de
+    en las intenciones que se muestran en el formulario a través del SELECT. 
+    */
     function obtener_todos($usuarioid) {
+        global $ic; 
         global $DB;
-
+     
         $sufijotabla = get_sufijo_lenguaje_tabla();
-        $campos_lexicos = $DB->get_records_select('vocabulario_camposlexicos_'.$sufijotabla, 'usuarioid=' . $usuarioid . ' or usuarioid=0');
-        $clex = array();
-        $orden = $this->ordena($campos_lexicos);
-        foreach ($orden as $i) {
-            $clex[$campos_lexicos[$i]->id] = $campos_lexicos[$i]->campo;
-        }
-        return $clex;
+        $table = 'vocabulario_camposlexicos_'.$sufijotabla;
+        $select = 'padre= 0';
+        $sort = 'usuarioid, ordenid';
+         
+       
+        $gr = $DB->get_records_select($table, $select, null, $sort);
+             
+          
+            $contador = 0;
+            foreach ($gr as $i) {   
+                $ic[$i->id] = $contador . ". " .$i->campo;               
+                             
+                $this->obtener_todos_subnumerados($usuarioid, $i->id, $contador); 
+                $contador++;
+                
+            }
+        
+        return $ic;
+    }   
+    
+    function obtener_todos_subnumerados($usuarioid, $id_padre, $contador_padre) {
+        global $ic;
+        global $DB;
+         
+        $sufijotabla = get_sufijo_lenguaje_tabla();
+        $table = 'vocabulario_camposlexicos_'.$sufijotabla;
+        $select = 'padre=' . $id_padre. ' AND (usuarioid= 0 OR usuarioid=' . $usuarioid . ')' ;
+        $sort = 'id';         
+       
+        $gr = $DB->get_records_select($table, $select, null, $sort);
+         
+            $contador = 1;
+            foreach ($gr as $i) {   
+                $contador_padre_padre = $contador_padre . "." . $contador;
+                $ic[$i->id] = $contador_padre . "." . $contador . ". " . $i->campo;
+                $contador++;
+                $padre = $i->id;
+                
+                $this->obtener_todos_subnumerados($usuarioid, $padre, $contador_padre_padre);              
+            }
+            return;
+      
+    }
+    
+    function obtener_orden($usuarioid, $hijoid) {
+        global $ordinal;
+        global $DB;
+         
+        $sufijotabla = get_sufijo_lenguaje_tabla();
+        $table = 'vocabulario_camposlexicos_'.$sufijotabla;
+        $select = 'padre= 0';
+        $sort = 'usuarioid, ordenid';
+         
+       
+        $gr = $DB->get_records_select($table, $select, null, $sort);
+                  
+            $contador = 0;
+            foreach ($gr as $i) { 
+                if($hijoid==$i->id)
+                {    $ordinal = $contador;
+                     //echo "la posición ordinal de " . $hijoid . " es " . $ordinal;
+                     break;    
+                
+                }
+                             
+                $this->obtener_suborden($usuarioid,$hijoid, $i->id, $contador); 
+                $contador++;
+                
+            }
+        
+        
+        return $ordinal;
+    }  
+    
+    function obtener_suborden($usuarioid, $hijoid, $id_padre, $contador_padre) {
+     
+        global $ordinal;
+        global $DB;
+         
+        $sufijotabla = get_sufijo_lenguaje_tabla();
+        $table = 'vocabulario_camposlexicos_'.$sufijotabla;
+        $select = 'padre=' . $id_padre. ' AND (usuarioid= 0 OR usuarioid=' . $usuarioid . ')' ;
+        $sort = 'id';
+         
+       
+        $gr = $DB->get_records_select($table, $select, null, $sort);
+        
+                
+            $contador = 1;
+            foreach ($gr as $i) {   
+                $contador_padre_padre = $contador_padre . "." . $contador;
+                
+                if($hijoid==$i->id)
+                {    $ordinal = $contador_padre_padre;
+                     //echo "la posición ordinal de " . $hijoid . " es " . $ordinal;
+                     break;
+                }
+              
+                $contador++;
+                $padre = $i->id;
+                
+                $this->obtener_suborden($usuarioid, $hijoid, $padre, $contador_padre_padre);              
+            }
+            return;
+      
+      
     }
 
-
-    function obtener_hijos($usuarioid, $padreid, $insertar=false) {
+    function obtener_todos_ids($usuarioid) {
         global $DB;
-
+         
         $sufijotabla = get_sufijo_lenguaje_tabla();
-        $campos_lexicos = $DB->get_records_select('vocabulario_camposlexicos_'.$sufijotabla, '(usuarioid=' . $usuarioid . ' or usuarioid=0) and padre=' . $padreid);
-        $clex = array();
-        if($padreid != 0 || $insertar){
-         $clex[$padreid] = get_string('seleccionar','vocabulario');
-        }
-        $orden = $this->ordena($campos_lexicos, $padreid);
+        $table = 'vocabulario_camposlexicos_'.$sufijotabla;
+        $select = 'usuarioid= 0 OR usuarioid=' . $usuarioid ;
+                 
+       
+        $intenciones  = $DB->get_records_select($table, $select);
+        $ic = array();
+        $orden = $this->ordena($intenciones);
         foreach ($orden as $i) {
-            $clex[$campos_lexicos[$i]->id] = $campos_lexicos[$i]->campo;
+            $ic[$intenciones[$i]->id] = $intenciones[$i]->id;
         }
-        return $clex;
+        return $ic;
     }
+    /*
+    Autor: Salim Tieb Mohamedi
+    Fecha: 4-dic-2014
+    Las dos funciones obtener_todos y obtener_todos_subnumerados resuelve el problema del desorden de
+    en las intenciones que se muestran en el formulario a través del SELECT. No depende del usuarioid por eso no 
+    recibe parámetros, más bien el id.
+    Para ver una demostración usar la función /test/testintenciones.php
+    */
+    function obtener_hijos($usuarioid, $padreid, $insertar=false) 
+    {
+        global $DB;
+        $orden = '';
+         
+        $sufijotabla = get_sufijo_lenguaje_tabla();
+        $table = 'vocabulario_camposlexicos_'.$sufijotabla;
+        $select = 'padre=' . $padreid. ' AND (usuarioid= 0 OR usuarioid=' . $usuarioid . ')' ;
+        $sort = '';        
+        
+        if($padreid == 0)
+                $sort = 'usuarioid, ordenid';                     
+        
+         
+        $gr = $DB->get_records_select($table, $select, null, $sort);
+        $ic = array();
+        if($padreid!=0 || $insertar){
+           $ic[$padreid] = get_string('seleccionar','vocabulario');
+        }
+                
+        
+         
+        foreach ($gr as $i) { 
+            $orden = $this->obtener_orden($usuarioid, $i->id);
+            $ic[$i->id] = $orden . ". " . $i->campo;  
+        }
+    return $ic;
+    }
+    
 
-    function obtener_padres($usuarioid, $hijoid) {
+    function obtener_padres($hijoid) {
         $clex = array();
 
         $clex[] = $hijoid;
         $padre = $hijoid;
 
         while ($padre != 0) {
-            $cl = new Vocabulario_campo_lexico();
-            $cl->leer($padre);
+            $cl = new Vocabulario_intenciones();
+            //pongo 0 porque el usarioid no es necesario, ya que no se usa en la funcion
+            $cl->leer($padre, 0);
             $padre = $cl->get('padre');
             $clex[] = $padre;
         }
@@ -686,13 +836,15 @@ class Vocabulario_campo_lexico {
         foreach ($lista as $cosa) {
             $milista[$cosa->id] = $cosa->padre;
         }
+//        echo " </br>milista </br>"; var_dump($lista);
         $encontrados = array_keys($milista, $padre);
+        //echo " </br>encontrados </br>"; var_dump($encontrados);
         foreach ($encontrados as $cosa) {
             $salida[] = $cosa;
             $salida = $this->ordena($lista, $cosa, $salida);
         }
         return $salida;
-    }
+    }    
 
 }
 
