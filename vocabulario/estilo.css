@@ -234,9 +234,6 @@ table.flexible, .generaltable {
 table#explaincaps tbody > tr:nth-child(2n) > td, table#defineroletable tbody > tr:nth-child(2n) > td, table.grading-report tbody > tr:nth-child(2n) > td, table#listdirectories tbody > tr:nth-child(2n) > td, table.rolecaps tbody > tr:nth-child(2n) > td, table.userenrolment tbody > tr:nth-child( 2n) > td, table#form tbody > tr:nth-child( 2n) > td, form#movecourses table tbody > tr:nth-child( 2n) > td, #page-admin-course-index .editcourse tbody > tr:nth-child( 2n) > td, .forumheaderlist tbody > tr:nth-child( 2n) > td, table.flexible tbody > tr:nth-child( 2n) > td, .generaltable tbody > tr:nth-child( 2n) > td, table#explaincaps tbody > tr:nth-child( 2n) > th, table#defineroletable tbody > tr:nth-child( 2n) > th, table.grading-report tbody > tr:nth-child( 2n) > th, table#listdirectories tbody > tr:nth-child( 2n) > th, table.rolecaps tbody > tr:nth-child( 2n) > th, table.userenrolment tbody > tr:nth-child( 2n) > th, table#form tbody > tr:nth-child( 2n) > th, form#movecourses table tbody > tr:nth-child( 2n) > th, #page-admin-course-index .editcourse tbody > tr:nth-child( 2n) > th, .forumheaderlist tbody > tr:nth-child( 2n) > th, table.flexible tbody > tr:nth-child( 2n) > th, .generaltable tbody > tr:nth-child( 2n) > th {
     background-color: LightGrey;
     font-size:16px;
-   /* border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-bottom-color: black;*/
 }
 
 /*Modificamos el color de las filas pares*/
@@ -244,11 +241,12 @@ table#explaincaps tbody > tr:nth-child(2n) > td, table#defineroletable tbody > t
 table#explaincaps tbody > tr:nth-child(2n+1) > td, table#defineroletable tbody > tr:nth-child(2n+1) > td, table.grading-report tbody > tr:nth-child(2n+1) > td, table#listdirectories tbody > tr:nth-child(2n+1) > td, table.rolecaps tbody > tr:nth-child(2n+1) > td, table.userenrolment tbody > tr:nth-child(2n+1) > td, table#form tbody > tr:nth-child(2n+1) > td, form#movecourses table tbody > tr:nth-child(2n+1) > td, #page-admin-course-index .editcourse tbody > tr:nth-child(2n+1) > td, .forumheaderlist tbody > tr:nth-child(2n+1) > td, table.flexible tbody > tr:nth-child(2n+1) > td, .generaltable tbody > tr:nth-child(2n+1) > td, table#explaincaps tbody > tr:nth-child(2n+1) > th, table#defineroletable tbody > tr:nth-child(2n+1) > th, table.grading-report tbody > tr:nth-child(2n+1) > th, table#listdirectories tbody > tr:nth-child(2n+1) > th, table.rolecaps tbody > tr:nth-child(2n+1) > th, table.userenrolment tbody > tr:nth-child(2n+1) > th, table#form tbody > tr:nth-child(2n+1) > th, form#movecourses table tbody > tr:nth-child(2n+1) > th, #page-admin-course-index .editcourse tbody > tr:nth-child(2n+1) > th, .forumheaderlist tbody > tr:nth-child(2n+1) > th, table.flexible tbody > tr:nth-child(2n+1) > th, .generaltable tbody > tr:nth-child(2n+1) > th {
     background-color: LightGrey;
     font-size:16px;
-  /*  border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-bottom-color: black;*/
 }
-/*
-textarea[cols], input[size] {
-    width: 98%;
-}*/
+
+input, textarea, .uneditable-input {
+    width: 90%;
+}
+.boxaligncenter{
+   margin-right:auto;
+   margin-left:0px;
+}

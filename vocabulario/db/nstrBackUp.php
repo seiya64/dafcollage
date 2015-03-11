@@ -66,8 +66,40 @@ $filenames = array(
         'verbos',
         'gramatica'
         );
+
+
+function eliminaNumeros($filename){
+
+    //necesitamos renombrar el fichero, porque con la función fopen no podemos leer
+    $copia = $filename;
+    $filename = $filename . ".sql";
+
+    $fp = fopen("/tmp/".$filename, "a+");	
+    $res = fopen("/home/dafcollage/Escritorio/salida".$filename,"w");
+
+    while(!feof($fp)){
+            $linea = fgets($fp);
+            $columnas = explode("\t", $linea);
+            //Con esta expresión regular lo que hacemos es eliminar de la última columna
+            //los números seguidos o no de puntos
+            $aux = preg_replace('/[0-9]+./', '', $columnas[3]);
+            //Una vez hemos modificado la columna, escribimos el resultado en un fichero 
+            //de salida, y ya estaría listo para instalarlo.
+            fwrite($res,$columnas[0]."\t".$columnas[1]."\t".$columnas[2]."\t".$aux);		
+    }	
+
+    rename("/home/dafcollage/Escritorio/salida".$filename, "/tmp/".$filename);
+   // copy("/home/dafcollage/Escritorio/salida".$filename, "/tmp/".$filename);
+    fclose($res);
+    fclose($fp);    
+	
+    return $copia;
+}
+
+
 //Recorremos todas las tablas a las que queremos hacer la copia
 foreach ($filenames as $filename) {
+    
         $table_name = "mdl_vocabulario_".$filename;
         $backup_file  = "/tmp/".$filename.".sql";
         //Para cada tabla realizamos una copia y la almacenamos en /tmp
@@ -79,6 +111,12 @@ foreach ($filenames as $filename) {
         {
                 die('No ha sido posible realizar la copia de seguridad: ' . mysql_error());
         }
+        if ($filename == 'camposlexicos_de' || $filename == 'camposlexicos_en'
+                || $filename == 'camposlexicos_es' || $filename == 'camposlexicos_fr'
+                || $filename == 'camposlexicos_pl' || $filename == 'gramatica'){
+            
+            $filename = eliminaNumeros($filename);
+        } 
 
 }
 //Si todo ha salido OK, mostramos un mensaje y cerramos la conexión con 
