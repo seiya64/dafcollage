@@ -1,4 +1,3 @@
-añadido por ambos: ayudas/Ayudas_en.pdf
 	añadido por ambos: buscarintenciones.php
 	añadido por ambos: clase_log.php
 	añadido por ambos: css/demo_page.css
