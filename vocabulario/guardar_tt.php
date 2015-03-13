@@ -44,6 +44,11 @@ require_once("lib.php");
 require_once("vocabulario_classes.php");
 require_once("vocabulario_formularios.php");
 
+<<<<<<< HEAD
+=======
+global $DB;
+
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 $id_tocho = optional_param('id_tocho', 0, PARAM_INT);
 
 $mform = new mod_vocabulario_nuevo_tipologia_form();
@@ -53,13 +58,20 @@ if ($mform->is_cancelled()) {
 }
 
 //averiguo quien soy
+<<<<<<< HEAD
 $user_object = get_record('user', 'id', $USER->id);
 
 $tipologia = new Vocabulario_tipologias($user_object->id, required_param('campott', PARAM_TEXT), optional_param('tipologia', PARAM_TEXT));
+=======
+$user_object = $DB->get_record('user', array('id'=>$USER->id));
+
+$tipologia = new Vocabulario_tipologias($user_object->id, required_param('campott', PARAM_TEXT), optional_param('tipologia', '', PARAM_TEXT));
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
 //print_object($tipologia);
 $desc = '';
 for ($i = 1; $i < 6; $i++) {
+<<<<<<< HEAD
     $desc .= optional_param('quien' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('finalidad' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
     $desc .= optional_param('a_quien' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('medio' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
     $desc .= optional_param('donde' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('cuando' . $i, null, PARAM_TEXT) . __SEPARADORCAMPOS__;
@@ -75,6 +87,23 @@ $desc .= optional_param('miraren', null, PARAM_TEXT);
 //vemos que botón hemos pulsado
 if ($mform->no_submit_button_pressed()) {
     if (optional_param('desc_btn')) {
+=======
+    $desc .= optional_param('quien' . $i, '', PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('finalidad' . $i, '', PARAM_TEXT) . __SEPARADORCAMPOS__;
+    $desc .= optional_param('a_quien' . $i, '', PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('medio' . $i, '', PARAM_TEXT) . __SEPARADORCAMPOS__;
+    $desc .= optional_param('donde' . $i, '', PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('cuando' . $i, '', PARAM_TEXT) . __SEPARADORCAMPOS__;
+    $desc .= optional_param('motivo' . $i, '', PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('funcion' . $i, '', PARAM_TEXT) . __SEPARADORCAMPOS__;
+    $desc .= optional_param('sobre_que' . $i, '', PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('que' . $i, '', PARAM_TEXT) . __SEPARADORCAMPOS__;
+    $desc .= optional_param('orden' . $i, '', PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('medios_nonverbales' . $i, '', PARAM_TEXT) . __SEPARADORCAMPOS__;
+    $desc .= optional_param('que_palabras' . $i, '', PARAM_TEXT) . __SEPARADORCAMPOS__ . optional_param('que_frases' . $i, '', PARAM_TEXT) . __SEPARADORCAMPOS__;
+    $desc .= optional_param('que_tono' . $i, '', PARAM_TEXT) . __SEPARADORCAMPOS__;
+}
+
+$desc .= optional_param('miraren', '', PARAM_TEXT);
+
+//vemos que botón hemos pulsado
+if ($mform->no_submit_button_pressed()) {
+    if (optional_param('desc_btn', 0, PARAM_INT)) {
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
         $tipologiaaux = new Vocabulario_mis_tipologias();
         $tipologiaaux->leer($tipologia->get('padre'));
         $tipologiaaux->set($USER->id, $tipologia->get('padre'), $desc);

@@ -1,0 +1,33 @@
+Tam mis palabras: 2
+mis palabras: array (
+  1 => 
+  stdClass::__set_state(array(
+     '@a:=@a+1' => '1',
+     'pal' => 'adios',
+     'sig' => '',
+     'campo' => '1.1 Datos personales',
+     'gramatica' => '1 Nomen',
+     'intencion' => 'RELACIONARSE SOCIALMENTE...',
+     'tipo' => '--',
+     'mpid' => '12',
+     'icid' => '2',
+     'gramaticaid' => '2',
+     'intencionid' => '2',
+     'tiptexid' => '1',
+  )),
+  2 => 
+  stdClass::__set_state(array(
+     '@a:=@a+1' => '2',
+     'pal' => 'adjetivo',
+     'sig' => '',
+     'campo' => '3 VIVIENDA/ INMOBILIARIA',
+     'gramatica' => '--',
+     'intencion' => '--',
+     'tipo' => '--',
+     'mpid' => '13',
+     'icid' => '1',
+     'gramaticaid' => '1',
+     'intencionid' => '1',
+     'tiptexid' => '1',
+  )),
+)

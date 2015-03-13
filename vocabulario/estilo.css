@@ -13,6 +13,11 @@
   Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
   Simeón Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto(finamolinasoto@gmail.com)
+<<<<<<< HEAD
+=======
+  Luis Redondo Expósito(luis.redondo.exposito@gmail.com)
+  Ramón Rueda Delgado (ramonruedadelgado@gmail.com)
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
   Original idea:
   Ruth Burbat
@@ -45,7 +50,11 @@ guardar palabras por columnas
 #mform1 {
     display: table;
 }
+<<<<<<< HEAD
 
+=======
+/*
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 #sus {
     width: 48%;
     float: left;
@@ -77,6 +86,52 @@ guardar palabras por columnas
     min-height: 250px;
     display: table-cell;
 }
+<<<<<<< HEAD
+=======
+*/
+
+
+/***************************************************************/
+/*********Cambios CSS del tema BCU en Moodle 2.8****************/
+/*********Autores:                              ****************/
+/*********Luis Redondo Expósito                 ****************/
+/*********Ramón Rueda Delgado                   ****************/
+/***************************************************************/
+
+#id_sus {
+    width: 48%;
+    float: left;
+    min-height: 250px;
+    display: table-cell;
+    clear: left;
+}
+
+#id_vrb {
+    width: 48%;
+    float: right;
+    min-height: 250px;
+    display: table-cell;
+}
+
+
+#id_adj {
+    width: 48%;
+    float: left;
+    min-height: 250px;
+    vertical-align: 20px;
+    display: table-cell;
+    clear: left;
+}
+
+#id_otr {
+    width: 48%;
+    float: right;
+    min-height: 250px;
+    display: table-cell;
+}
+
+
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
 #viewcanvas{ padding-top:10px;}
 .menurow{ clear:both; padding-top:15px;}
@@ -98,6 +153,7 @@ guardar palabras por columnas
 
 .cajagranancho { width: 100%; }
 .twitter{ width: 252px; padding-left: 10px;}
+<<<<<<< HEAD
 #mform1 { width:90%; }
           
 #id_cancellink{ 
@@ -105,6 +161,21 @@ float: right;
 color: #EEE;
 font-size: 0.9em;
 }
+=======
+#mform1 { 
+	width:100%;
+	display:table-cell; 
+}
+          
+#id_cancellink{ 
+float: right;
+color: #B4BBBF;
+font-size: 0.9em;
+}
+#fgroup_id_botones{
+    text-align: center;
+}
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
 .buscador{
     margin-left:300px;
@@ -155,3 +226,50 @@ font-size: 0.9em;
 	background:rgb(180, 205, 228);
 }
 .size>ul.list li:last-child { border:none }
+<<<<<<< HEAD
+=======
+
+
+/*Añadido por Salim ya que cuando vocabulario se instala como módulo, En la opción "Mis Palabras" -> los enlaces "[Combinación con otras palabras (interactivo)],... aparecen con tamaño de fuente heredado de H1, esta selector que he añadido lo resuelve*/
+
+h1 a{
+	font-size:12px;
+}
+
+
+/*input, textarea, .uneditable-input {
+	width: 100%;
+}
+
+table.flexible, .generaltable {
+	margin-bottom: 20px;
+	width: 80%;
+}
+
+.boxaligncenter {
+	margin-right: auto;
+	margin-left: 0px;
+}*/
+
+/*Modificamos el color de las filas pares*/
+
+table#explaincaps tbody > tr:nth-child(2n) > td, table#defineroletable tbody > tr:nth-child(2n) > td, table.grading-report tbody > tr:nth-child(2n) > td, table#listdirectories tbody > tr:nth-child(2n) > td, table.rolecaps tbody > tr:nth-child(2n) > td, table.userenrolment tbody > tr:nth-child( 2n) > td, table#form tbody > tr:nth-child( 2n) > td, form#movecourses table tbody > tr:nth-child( 2n) > td, #page-admin-course-index .editcourse tbody > tr:nth-child( 2n) > td, .forumheaderlist tbody > tr:nth-child( 2n) > td, table.flexible tbody > tr:nth-child( 2n) > td, .generaltable tbody > tr:nth-child( 2n) > td, table#explaincaps tbody > tr:nth-child( 2n) > th, table#defineroletable tbody > tr:nth-child( 2n) > th, table.grading-report tbody > tr:nth-child( 2n) > th, table#listdirectories tbody > tr:nth-child( 2n) > th, table.rolecaps tbody > tr:nth-child( 2n) > th, table.userenrolment tbody > tr:nth-child( 2n) > th, table#form tbody > tr:nth-child( 2n) > th, form#movecourses table tbody > tr:nth-child( 2n) > th, #page-admin-course-index .editcourse tbody > tr:nth-child( 2n) > th, .forumheaderlist tbody > tr:nth-child( 2n) > th, table.flexible tbody > tr:nth-child( 2n) > th, .generaltable tbody > tr:nth-child( 2n) > th {
+    background-color: LightGrey;
+    font-size:16px;
+}
+
+/*Modificamos el color de las filas pares*/
+
+table#explaincaps tbody > tr:nth-child(2n+1) > td, table#defineroletable tbody > tr:nth-child(2n+1) > td, table.grading-report tbody > tr:nth-child(2n+1) > td, table#listdirectories tbody > tr:nth-child(2n+1) > td, table.rolecaps tbody > tr:nth-child(2n+1) > td, table.userenrolment tbody > tr:nth-child(2n+1) > td, table#form tbody > tr:nth-child(2n+1) > td, form#movecourses table tbody > tr:nth-child(2n+1) > td, #page-admin-course-index .editcourse tbody > tr:nth-child(2n+1) > td, .forumheaderlist tbody > tr:nth-child(2n+1) > td, table.flexible tbody > tr:nth-child(2n+1) > td, .generaltable tbody > tr:nth-child(2n+1) > td, table#explaincaps tbody > tr:nth-child(2n+1) > th, table#defineroletable tbody > tr:nth-child(2n+1) > th, table.grading-report tbody > tr:nth-child(2n+1) > th, table#listdirectories tbody > tr:nth-child(2n+1) > th, table.rolecaps tbody > tr:nth-child(2n+1) > th, table.userenrolment tbody > tr:nth-child(2n+1) > th, table#form tbody > tr:nth-child(2n+1) > th, form#movecourses table tbody > tr:nth-child(2n+1) > th, #page-admin-course-index .editcourse tbody > tr:nth-child(2n+1) > th, .forumheaderlist tbody > tr:nth-child(2n+1) > th, table.flexible tbody > tr:nth-child(2n+1) > th, .generaltable tbody > tr:nth-child(2n+1) > th {
+    background-color: LightGrey;
+    font-size:16px;
+}
+
+input, textarea, .uneditable-input {
+    width: 90%;
+}
+.boxaligncenter{
+   margin-right:auto;
+   margin-left:0px;
+}
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d

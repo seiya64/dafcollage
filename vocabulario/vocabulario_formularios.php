@@ -40,7 +40,11 @@
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details. */
 
+<<<<<<< HEAD
 require_once("$CFG->libdir/formslib.php");
+=======
+require_once ($CFG->libdir.'/formslib.php');
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 require_once("vocabulario_classes.php");
 
 /**
@@ -99,6 +103,10 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $aux = new Vocabulario_campo_lexico();
         $clex = $aux->obtener_hijos($USER->id, 0);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
         $aux = new Vocabulario_gramatica();
         $cgra = $aux->obtener_hijos($USER->id, 0);
 
@@ -123,6 +131,10 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $mform->addElement('html', '<h1>' . get_string('add_palabra', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
         if ($leido) {
             $mform->addElement('hidden', 'idleido', $leido);
+<<<<<<< HEAD
+=======
+	    $mform->setType('idleido', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
         }
 
 //        //campo lexico
@@ -168,7 +180,14 @@ class mod_vocabulario_rellenar_form extends moodleform {
         //enlace a traduccion
         $enlace_diccionario = "<a href='javascript:traducir(1)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string('pal', 'vocabulario') . "]</a>";
         $mform->addElement('text', 'palabra_sus', $enlace_diccionario, "value=" . $sustantivo->get('palabra'));
+<<<<<<< HEAD
         //tiene que estar relleno
+=======
+        $mform->setType('palabras_sus', PARAM_TEXT);
+
+        //tiene que estar relleno
+        
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
         $mform->addRule('palabra_sus', get_string('error_sus', 'vocabulario'), 'required', null, 'client');
 
         //genero
@@ -182,6 +201,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
         //plural
         $mform->addElement('text', 'plural', get_string("plural", "vocabulario"), 'value="' . $sustantivo->get('plural') . '"');
+<<<<<<< HEAD
 
         //traduccion
         $mform->addElement('text', 'significado_sus', get_string("Tpal", "vocabulario"), 'value="' . $sustantivo->get('significado') . '" title="'.get_string('titlecolocacion', 'vocabulario').'"');
@@ -189,14 +209,33 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
         //añadido por mi
         if($op){ //estoy añadiendo sustantivo
+=======
+        $mform->setType('plural', PARAM_TEXT);
+
+        //traduccion
+        $mform->addElement('text', 'significado_sus', get_string("Tpal", "vocabulario"), 'value="' . $sustantivo->get('significado') . '" title="'.get_string('titlecolocacion', 'vocabulario').'"');
+        $mform->setType('significado_sus', PARAM_TEXT);
+
+
+        //añadido por mi
+        if($op){ //estoy anadiendo sustantivo
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
           //Comentarios
                 $ocultador = '<div id=\"ocultador_sus\" style=\"display:""\">';
 
                 $mform->addElement('html', $ocultador);
                 $mform->addElement('text', 'observaciones_sus', get_string("comen", "vocabulario"), 'value="' . $sustantivo->get('observaciones') . '"');
+<<<<<<< HEAD
 
                 //ejemplo
                 $mform->addElement('text', 'ejemplo_sus', get_string("ejem", "vocabulario"), 'value="' . $sustantivo->get('ejemplo') . '"');
+=======
+                $mform->setType('observaciones_sus', PARAM_TEXT);
+
+                //ejemplo
+                $mform->addElement('text', 'ejemplo_sus', get_string("ejem", "vocabulario"), 'value="' . $sustantivo->get('ejemplo') . '"');
+                $mform->setType('ejemplo_sus', PARAM_TEXT);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
                 /*
                 //campo gramatical
@@ -211,6 +250,10 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $padreGramatical->leer($sustantivo->get('gramaticaid'), $USER->id);
                 
                 $mform->addElement('hidden', 'finalgramatica_sus'); // Para la base de datos!!
+<<<<<<< HEAD
+=======
+		$mform->setType('finalgramatica_sus', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 $hidden = '<input type="hidden" name="finalgramatica_sus" value="'.$sustantivo->get('gramaticaid').'">';
                 echo $hidden;
                 
@@ -257,16 +300,28 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
                 }
                 $mform->addElement('hidden', 'descripcion_grsus');
+<<<<<<< HEAD
+=======
+		$mform->setType('descripcion_grsus', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
                 //intencion comunicativa
                 $mform->addElement('select', 'intencion_sus', get_string("campo_intencion", "vocabulario"), $cintencion, "style=\"width:200px;\"");
                 $mform->setDefault('intencion_sus', $sustantivo->get('intencionid'));
                 $mform->addElement('hidden', 'descripcion_intensus');
+<<<<<<< HEAD
+=======
+		$mform->setType('descripcion_intensus', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
                 //tipologia textual
                 $mform->addElement('select', 'tipologia_sus', get_string("campo_tipologia", "vocabulario"), $ctipologia, "style=\"width:200px;\"");
                 $mform->setDefault('tipologia_sus', $sustantivo->get('tipologiaid'));
                 $mform->addElement('hidden', 'descripcion_tiposus');
+<<<<<<< HEAD
+=======
+		$mform->setType('descripcion_tiposus', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 $ocultador = "</div>";
                 $mform->addElement('html', $ocultador);
 
@@ -278,9 +333,17 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
                 $mform->addElement('html', $ocultador);
                 $mform->addElement('text', 'observaciones_sus', get_string("comen", "vocabulario"), 'value="' . $sustantivo->get('observaciones') . '"');
+<<<<<<< HEAD
 
                 //ejemplo
                 $mform->addElement('text', 'ejemplo_sus', get_string("ejem", "vocabulario"), 'value="' . $sustantivo->get('ejemplo') . '"');
+=======
+                $mform->setType('observaciones_sus', PARAM_TEXT);
+
+                //ejemplo
+                $mform->addElement('text', 'ejemplo_sus', get_string("ejem", "vocabulario"), 'value="' . $sustantivo->get('ejemplo') . '"');
+                $mform->setType('ejemplo_sus', PARAM_TEXT);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
                 /*
                 //campo gramatical
@@ -295,6 +358,10 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $padreGramatical->leer($sustantivo->get('gramaticaid'), $USER->id);
                 
                 $mform->addElement('hidden', 'finalgramatica_sus'); // Para la base de datos!!
+<<<<<<< HEAD
+=======
+		$mform->setType('finalgramatica_sus', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 $hidden = '<input type="hidden" name="finalgramatica_sus" value="'.$sustantivo->get('gramaticaid').'">';
                 echo $hidden;
                 
@@ -341,16 +408,28 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
                 }
                 $mform->addElement('hidden', 'descripcion_grsus');
+<<<<<<< HEAD
 
+=======
+		$mform->setType('descripcion_grsus', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 //intencion comunicativa
                 $mform->addElement('select', 'intencion_sus', get_string("campo_intencion", "vocabulario"), $cintencion, "style=\"width:200px;\"");
                 $mform->setDefault('intencion_sus', $sustantivo->get('intencionid'));
                 $mform->addElement('hidden', 'descripcion_intensus');
+<<<<<<< HEAD
+=======
+		$mform->setType('descripcion_intensus', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
                 //tipologia textual
                 $mform->addElement('select', 'tipologia_sus', get_string("campo_tipologia", "vocabulario"), $ctipologia, "style=\"width:200px;\"");
                 $mform->setDefault('tipologia_sus', $sustantivo->get('tipologiaid'));
                 $mform->addElement('hidden', 'descripcion_tiposus');
+<<<<<<< HEAD
+=======
+		$mform->setType('descripcion_tiposus', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 $ocultador = "</div>";
                 $mform->addElement('html', $ocultador);
 
@@ -373,6 +452,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         //enlace a traduccion
         $enlace_diccionario = "<a href='javascript:traducir(2)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string('infi', 'vocabulario') . "]</a>";
         $mform->addElement('text', 'infinitivo', $enlace_diccionario, 'value="' . $verbo->get('infinitivo') . '"');
+<<<<<<< HEAD
 
         //tercera persona
         $mform->addElement('text', 'ter_pers_sing', get_string("3per", "vocabulario"), 'value="' . $verbo->get('ter_pers_sing') . '"');
@@ -385,6 +465,21 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
         //traduccion
         $mform->addElement('text', 'significado_vrb', get_string("Tpal", "vocabulario"), 'value="' . $verbo->get('significado') . '" title="'.get_string('titlecolocacion', 'vocabulario').'"');
+=======
+        $mform->setType('infinitivo', PARAM_TEXT);
+        //tercera persona
+        $mform->addElement('text', 'ter_pers_sing', get_string("per3", "vocabulario"), 'value="' . $verbo->get('ter_pers_sing') . '"');
+	$mform->setType('ter_pers_sing', PARAM_TEXT);
+        //preterito
+        $mform->addElement('text', 'preterito', get_string("pret", "vocabulario"), 'value="' . $verbo->get('preterito') . '"');
+        $mform->setType('preterito', PARAM_TEXT);
+        //participio
+        $mform->addElement('text', 'participio', get_string("part", "vocabulario"), 'value="' . $verbo->get('participio') . '"');
+        $mform->setType('participio', PARAM_TEXT);
+        //traduccion
+        $mform->addElement('text', 'significado_vrb', get_string("Tpal", "vocabulario"), 'value="' . $verbo->get('significado') . '" title="'.get_string('titlecolocacion', 'vocabulario').'"');
+        $mform->setType('significado_vrb', PARAM_TEXT);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
         //Comentarios
 
@@ -392,7 +487,11 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $ocultador = '<div id=\"ocultador_verb\" style=\"display:""\">';
                 $mform->addElement('html', $ocultador);
                 $mform->addElement('text', 'observaciones_vrb', get_string("comen", "vocabulario"), 'value="' . $verbo->get('observaciones') . '"');
+<<<<<<< HEAD
 
+=======
+        	$mform->setType('observaciones_vrb', PARAM_TEXT);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 /*
                 //campo gramatical
                 $mform->addElement('select', 'gramatica_vrb', get_string("campo_gram", "vocabulario"), $cgra, "style=\"width:200px;\" onChange='javascript:cargaContenido(this.id,\"grgeneraldinamico_vrb\",1)'");
@@ -406,6 +505,10 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $padreGramatical->leer($verbo->get('gramaticaid'), $USER->id);
                 
                 $mform->addElement('hidden', 'finalgramatica_vrb'); // Para la base de datos!!
+<<<<<<< HEAD
+=======
+		$mform->setType('finalgramatica_vrb', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 $hidden = '<input type="hidden" name="finalgramatica_vrb" value="'.$verbo->get('gramaticaid').'">';
                 echo $hidden;
                 
@@ -453,16 +556,28 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 }
                 
                 $mform->addElement('hidden', 'descripcion_grvrb');
+<<<<<<< HEAD
 
+=======
+		$mform->setType('descripcion_grvrb', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 //intencion comunicativa
                 $mform->addElement('select', 'intencion_vrb', get_string("campo_intencion", "vocabulario"), $cintencion, "style=\"width:200px;\"");
                 $mform->setDefault('intencion_vrb', $verbo->get('intencionid'));
                 $mform->addElement('hidden', 'descripcion_intenvrb');
+<<<<<<< HEAD
+=======
+		$mform->setType('descripcion_intenvrb', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
                 //tipologia textual
                 $mform->addElement('select', 'tipologia_vrb', get_string("campo_tipologia", "vocabulario"), $ctipologia, "style=\"width:200px;\"");
                 $mform->setDefault('tipologia_vrb', $verbo->get('tipologiaid'));
                 $mform->addElement('hidden', 'descripcion_tipovrb');
+<<<<<<< HEAD
+=======
+		$mform->setType('descripcion_tipovrb', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
                 //opciones
                 $ocultador = "</div>";
@@ -471,6 +586,10 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $ocultador = "<div id=\"ocultador_verb\" style=\"display:none\">";
                 $mform->addElement('html', $ocultador);
                 $mform->addElement('text', 'observaciones_vrb', get_string("comen", "vocabulario"), 'value="' . $verbo->get('observaciones') . '"');
+<<<<<<< HEAD
+=======
+         	$mform->setType('observaciones_vrb', PARAM_TEXT);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
                 /*
                 //campo gramatical
@@ -485,6 +604,10 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $padreGramatical->leer($verbo->get('gramaticaid'), $USER->id);
                 
                 $mform->addElement('hidden', 'finalgramatica_vrb'); // Para la base de datos!!
+<<<<<<< HEAD
+=======
+		$mform->setType('finalgramatica_vrb', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 $hidden = '<input type="hidden" name="finalgramatica_vrb" value="'.$verbo->get('gramaticaid').'">';
                 echo $hidden;
                 
@@ -531,17 +654,29 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
                 }
                 $mform->addElement('hidden', 'descripcion_grvrb');
+<<<<<<< HEAD
+=======
+		$mform->setType('descripcion_grvrb', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
                 //intencion comunicativa
                 $mform->addElement('select', 'intencion_vrb', get_string("campo_intencion", "vocabulario"), $cintencion, "style=\"width:200px;\"");
                 $mform->setDefault('intencion_vrb', $verbo->get('intencionid'));
                 $mform->addElement('hidden', 'descripcion_intenvrb');
+<<<<<<< HEAD
 
+=======
+		$mform->setType('descripcion_intenvrb', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 //tipologia textual
                 $mform->addElement('select', 'tipologia_vrb', get_string("campo_tipologia", "vocabulario"), $ctipologia,"style=\"width:200px;\"");
                 $mform->setDefault('tipologia_vrb', $verbo->get('tipologiaid'));
                 $mform->addElement('hidden', 'descripcion_tipovrb');
+<<<<<<< HEAD
 
+=======
+		$mform->setType('descripcion_tipovrb', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 //opciones
                 $ocultador = "</div>";
                 $mform->addElement('html', $ocultador);
@@ -562,9 +697,16 @@ class mod_vocabulario_rellenar_form extends moodleform {
         //enlace a traduccion
         $enlace_diccionario = "<a href='javascript:traducir(2)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string("sindec", "vocabulario") . "]</a>";
         $mform->addElement('text', 'sindeclinar', $enlace_diccionario, 'value="' . $adjetivo->get('sin_declinar') . '"');
+<<<<<<< HEAD
 
         //traduccion
         $mform->addElement('text', 'significado_adj', get_string("Tpal", "vocabulario"), 'value="' . $adjetivo->get('significado') . '" title="'.get_string('titlecolocacion', 'vocabulario').'"');
+=======
+        $mform->setType('sindeclinar', PARAM_TEXT);
+        //traduccion
+        $mform->addElement('text', 'significado_adj', get_string("Tpal", "vocabulario"), 'value="' . $adjetivo->get('significado') . '" title="'.get_string('titlecolocacion', 'vocabulario').'"');
+        $mform->setType('significado_adj', PARAM_TEXT);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
         //Comentarios
 
@@ -572,6 +714,10 @@ class mod_vocabulario_rellenar_form extends moodleform {
             $ocultador = '<div id=\"ocultador_adj\" style=\"display:""\">';
             $mform->addElement('html', $ocultador);
             $mform->addElement('text', 'observaciones_adj', get_string("comen", "vocabulario"), 'value="' . $adjetivo->get('observaciones') . '"');
+<<<<<<< HEAD
+=======
+            $mform->setType('observaciones_adj', PARAM_TEXT);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
             /*
             //campo gramatical
@@ -586,6 +732,10 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $padreGramatical->leer($adjetivo->get('gramaticaid'), $USER->id);
                 
                 $mform->addElement('hidden', 'finalgramatica_adj'); // Para la base de datos!!
+<<<<<<< HEAD
+=======
+		$mform->setType('finalgramatica_adj', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 $hidden = '<input type="hidden" name="finalgramatica_adj" value="'.$adjetivo->get('gramaticaid').'">';
                 echo $hidden;
                 
@@ -632,16 +782,28 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
                 }
             $mform->addElement('hidden', 'descripcion_gradj');
+<<<<<<< HEAD
 
+=======
+	    $mform->setType('descripcion_gradj', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
             //intencion comunicativa
             $mform->addElement('select', 'intencion_adj', get_string("campo_intencion", "vocabulario"), $cintencion,"style=\"width:200px;\"");
             $mform->setDefault('intencion_adj', $adjetivo->get('intencionid'));
             $mform->addElement('hidden', 'descripcion_intenadj');
+<<<<<<< HEAD
 
+=======
+	    $mform->setType('descripcion_intenadj', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
             //tipologia textual
             $mform->addElement('select', 'tipologia_adj', get_string("campo_tipologia", "vocabulario"), $ctipologia, "style=\"width:200px;\"");
             $mform->setDefault('tipologia_adj', $adjetivo->get('tipologiaid'));
             $mform->addElement('hidden', 'descripcion_tipoadj');
+<<<<<<< HEAD
+=======
+	    $mform->setType('descripcion_tipoadj', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
             //opciones
             $ocultador = "</div>";
@@ -650,6 +812,10 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $ocultador = "<div id=\"ocultador_adj\" style=\"display:none\">";
                 $mform->addElement('html', $ocultador);
                 $mform->addElement('text', 'observaciones_adj', get_string("comen", "vocabulario"), 'value="' . $adjetivo->get('observaciones') . '"');
+<<<<<<< HEAD
+=======
+	        $mform->setType('observaciones_adj', PARAM_TEXT);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
                 /*
                 //campo gramatical
@@ -664,6 +830,10 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $padreGramatical->leer($adjetivo->get('gramaticaid'), $USER->id);
                 
                 $mform->addElement('hidden', 'finalgramatica_adj'); // Para la base de datos!!
+<<<<<<< HEAD
+=======
+		$mform->setType('finalgramatica_adj', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 $hidden = '<input type="hidden" name="finalgramatica_adj" value="'.$adjetivo->get('gramaticaid').'">';
                 echo $hidden;
                 
@@ -710,17 +880,29 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
                 }
                 $mform->addElement('hidden', 'descripcion_gradj');
+<<<<<<< HEAD
 
+=======
+		$mform->setType('descripcion_gradj', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 //intencion comunicativa
                 $mform->addElement('select', 'intencion_adj', get_string("campo_intencion", "vocabulario"), $cintencion, "style=\"width:200px;\"");
                 $mform->setDefault('intencion_adj', $adjetivo->get('intencionid'));
                 $mform->addElement('hidden', 'descripcion_intenadj');
+<<<<<<< HEAD
 
+=======
+		$mform->setType('descripcion_intenadj', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 //tipologia textual
                 $mform->addElement('select', 'tipologia_adj', get_string("campo_tipologia", "vocabulario"), $ctipologia,"style=\"width:200px;\"");
                 $mform->setDefault('tipologia_adj', $adjetivo->get('tipologiaid'));
                 $mform->addElement('hidden', 'descripcion_tipoadj');
+<<<<<<< HEAD
 
+=======
+		$mform->setType('descripcion_tipoadj', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 //opciones
                 $ocultador = "</div>";
                 $mform->addElement('html', $ocultador);
@@ -742,16 +924,27 @@ class mod_vocabulario_rellenar_form extends moodleform {
         //enlace a traduccion
         $enlace_diccionario = "<a href='javascript:traducir(2)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string("otr_sus", "vocabulario") . "]</a>";
         $mform->addElement('text', 'palabra_otr', $enlace_diccionario, 'value="' . $otro->get('palabra') . '"');
+<<<<<<< HEAD
 
         //traduccion
         $mform->addElement('text', 'significado_otr', get_string("Tpal", "vocabulario"), 'value="' . $otro->get('significado') . '" title="'.get_string('titlecolocacion', 'vocabulario').'"');
 
+=======
+        $mform->setType('palabra_otr', PARAM_TEXT);
+        //traduccion
+        $mform->addElement('text', 'significado_otr', get_string("Tpal", "vocabulario"), 'value="' . $otro->get('significado') . '" title="'.get_string('titlecolocacion', 'vocabulario').'"');
+        $mform->setType('significado_otr', PARAM_TEXT);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
         //Comentarios
 
         if($op){
                 $ocultador = '<div id=\"ocultador_otr\" style=\"display:""\">';
                 $mform->addElement('html', $ocultador);
                 $mform->addElement('text', 'observaciones_otr', get_string("comen", "vocabulario"), 'value="' . $otro->get('observaciones') . '"');
+<<<<<<< HEAD
+=======
+                $mform->setType('observaciones_otr', PARAM_TEXT);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
                 /*
                 //campo gramatical
@@ -766,6 +959,10 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $padreGramatical->leer($otro->get('gramaticaid'), $USER->id);
                 
                 $mform->addElement('hidden', 'finalgramatica_otr'); // Para la base de datos!!
+<<<<<<< HEAD
+=======
+		$mform->setType('finalgramatica_otr', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 $hidden = '<input type="hidden" name="finalgramatica_otr" value="'.$otro->get('gramaticaid').'">';
                 echo $hidden;
                 
@@ -812,16 +1009,28 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
                 }
                 $mform->addElement('hidden', 'descripcion_grotr');
+<<<<<<< HEAD
 
+=======
+		$mform->setType('descripcion_grotr', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 //intencion comunicativa
                 $mform->addElement('select', 'intencion_otr', get_string("campo_intencion", "vocabulario"), $cintencion,"style=\"width:200px;\"");
                 $mform->setDefault('intencion_otr', $otro->get('intencionid'));
                 $mform->addElement('hidden', 'descripcion_intenotr');
+<<<<<<< HEAD
 
+=======
+		$mform->setType('descripcion_intenotr', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 //tipologia textual
                 $mform->addElement('select', 'tipologia_otr', get_string("campo_tipologia", "vocabulario"), $ctipologia,"style=\"width:200px;\"");
                 $mform->setDefault('tipologia_otr', $otro->get('tipologiaid'));
                 $mform->addElement('hidden', 'descripcion_tipootr');
+<<<<<<< HEAD
+=======
+		$mform->setType('descripcion_tipootr', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
                 //opciones
                 $ocultador = "</div>";
@@ -832,6 +1041,10 @@ class mod_vocabulario_rellenar_form extends moodleform {
                     $ocultador = "<div id=\"ocultador_otr\" style=\"display:none\">";
                     $mform->addElement('html', $ocultador);
                     $mform->addElement('text', 'observaciones_otr', get_string("comen", "vocabulario"), 'value="' . $otro->get('observaciones') . '"');
+<<<<<<< HEAD
+=======
+                    $mform->setType('observaciones_otr', PARAM_TEXT);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
                     /*
                     //campo gramatical
@@ -845,6 +1058,10 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $padreGramatical->leer($otro->get('gramaticaid'), $USER->id);
                 
                 $mform->addElement('hidden', 'finalgramatica_otr'); // Para la base de datos!!
+<<<<<<< HEAD
+=======
+		$mform->setType('finalgramatica_otr', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 $hidden = '<input type="hidden" name="finalgramatica_otr" value="'.$otro->get('gramaticaid').'">';
                 echo $hidden;
                 
@@ -891,17 +1108,29 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
                 }
                     $mform->addElement('hidden', 'descripcion_grotr');
+<<<<<<< HEAD
 
+=======
+		    $mform->setType('descripcion_grotr', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                     //intencion comunicativa
                     $mform->addElement('select', 'intencion_otr', get_string("campo_intencion", "vocabulario"), $cintencion, "style=\"width:200px;\"");
                     $mform->setDefault('intencion_otr', $otro->get('intencionid'));
                     $mform->addElement('hidden', 'descripcion_intenotr');
+<<<<<<< HEAD
+=======
+		    $mform->setType('descripcion_intenotr', PARAM_RAW); 
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
                     //tipologia textual
                     $mform->addElement('select', 'tipologia_otr', get_string("campo_tipologia", "vocabulario"), $ctipologia,"style=\"width:200px;\"");
                     $mform->setDefault('tipologia_otr', $otro->get('tipologiaid'));
                     $mform->addElement('hidden', 'descripcion_tipootr');
+<<<<<<< HEAD
 
+=======
+		    $mform->setType('descripcion_tipootr', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                     //opciones
                     $ocultador = "</div>";
                     $mform->addElement('html', $ocultador);
@@ -917,11 +1146,21 @@ class mod_vocabulario_rellenar_form extends moodleform {
         //botones
         $buttonarray = array();
               if($op){
+<<<<<<< HEAD
              $mform->addElement('hidden', 'añadiendo',1);
              $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('AñadirNuevo','vocabulario'));
 
          }else{
              $mform->addElement('hidden', 'añadiendo',0);
+=======
+             $mform->addElement('hidden', 'anadiendo',1);
+	     $mform->setType('anadiendo', PARAM_INT);
+             $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('anadirNuevo','vocabulario'));
+
+         }else{
+             $mform->addElement('hidden', 'anadiendo',0);
+	     $mform->setType('anadiendo', PARAM_INT);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
              $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('savechanges'));
 
          }
@@ -968,7 +1207,11 @@ class mod_vocabulario_opciones_form extends moodleform {
      */
     function aniadircosas($id) {
         global $CFG, $COURSE, $USER;
+<<<<<<< HEAD
         $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
+=======
+        $context = context_course::instance($COURSE->id);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
         //Los iconos están sacados del tema de gnome que viene con ubuntu 11.04
         //No se si habrá que poner alguna referencia o algo raro por el tema de licencias
@@ -1099,12 +1342,19 @@ class mod_vocabulario_opciones_form extends moodleform {
  *
  */
 class mod_vocabulario_ver_form extends moodleform {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
     var $id_tocho;
 
     function definition() {
         global $CFG, $COURSE, $USER;
+<<<<<<< HEAD
         $context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
+=======
+        $context = context_course::instance($COURSE->id);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
         $mform = & $this->_form;
 
         $mform->addElement('html', '<LINK rel="stylesheet" type="text/css" href="./style.css">');
@@ -1150,6 +1400,11 @@ class mod_vocabulario_ver_form extends moodleform {
 
         if ($todasp) {
             $mis_palabras = vocabulario_todas_palabras($usuarioid);
+<<<<<<< HEAD
+=======
+            //$mis_palabras = null;
+            //$mform->addElement('html', '<h1>La id es '. $usuarioid . '</h1>');
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
             $viene=1;
         } else if ($cl) {
 
@@ -1178,6 +1433,10 @@ class mod_vocabulario_ver_form extends moodleform {
             $aux = new Vocabulario_gramatica();
             $clex = $aux->obtener_hijos($usuarioid, 0);
             $mform->addElement('hidden', 'tipo', 'gr');
+<<<<<<< HEAD
+=======
+	    $mform->setType('tipo', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
             $mform->addElement('select', 'campoid', get_string("campo_gram", "vocabulario"), $clex, "onChange='javascript:cargaContenido(this.id,\"clgeneraldinamico\",1)' style=\"min-height: 0;\"");
             if ($valor_campoid) {
                 $mform->setDefault('campoid', $valor_campoid);
@@ -1199,6 +1458,10 @@ class mod_vocabulario_ver_form extends moodleform {
             $aux = new Vocabulario_tipologias();
             $clex = $aux->obtener_todos($usuarioid);
             $mform->addElement('hidden', 'tipo', 'tt');
+<<<<<<< HEAD
+=======
+	    $mform->setType('tipo', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
             $mform->addElement('select', 'campoid', get_string("campo_tipologia", "vocabulario"), $clex, "style=\"min-height: 0;\"");
             if ($valor_campoid) {
                 $mform->setDefault('campoid', $valor_campoid);
@@ -1220,6 +1483,10 @@ class mod_vocabulario_ver_form extends moodleform {
             $aux = new Vocabulario_intenciones();
             $clex = $aux->obtener_todos($usuarioid);
             $mform->addElement('hidden', 'tipo', 'ic');
+<<<<<<< HEAD
+=======
+	    $mform->setType('anadiendo', PARAM_RAW);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
             $mform->addElement('select', 'campoid', get_string("campo_intencion", "vocabulario"), $clex, "style=\"min-height: 0;\"");
             if ($valor_campoid) {
                 $mform->setDefault('campoid', $valor_campoid);
@@ -1288,7 +1555,11 @@ class mod_vocabulario_ver_form extends moodleform {
 
                 //modificado o quitado por mi fina (cambiado editar por modificar)
                $titulillos .= '<td> <a href="./view.php?id=' . $this->id_tocho . '&opcion=4&viene=0&act=1&id_mp=' . $palabra->mpid . '">[' . get_string('modificar', 'vocabulario') . ']</a></td>';
+<<<<<<< HEAD
                $titulillos .= '<td> <a href="./view.php?id=' . $this->id_tocho . '&opcion=4&op=1&viene=0&act=1&id_mp=' . $palabra->mpid . '">[' . get_string('Añadir', 'vocabulario') . ']</a></td>';
+=======
+               $titulillos .= '<td> <a href="./view.php?id=' . $this->id_tocho . '&opcion=4&op=1&viene=0&act=1&id_mp=' . $palabra->mpid . '">[' . get_string('anadir', 'vocabulario') . ']</a></td>';
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                $titulillos .= '<td> <a href="#" style="color:#CC0000;" onclick="javascript:eliminandonube('.$this->id_tocho.','. $palabra->mpid . ')" >[' . get_string('eliminar', 'vocabulario') . ']</a></td>';
 
                 $titulillos .= '</tr>';
@@ -1446,7 +1717,11 @@ class mod_vocabulario_nuevo_cl_form extends moodleform {
         $aux = new Vocabulario_campo_lexico();
       
         $clex= $aux->obtener_hijos($USER->id, 0, true);
+<<<<<<< HEAD
 
+=======
+     
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
 
         //titulo de la seccion
@@ -1458,7 +1733,11 @@ class mod_vocabulario_nuevo_cl_form extends moodleform {
         $campodinamico = "<div class=\"fitem\" id=\"clgeneraldinamico\"></div>";
         $mform->addElement('html', $campodinamico);
         $mform->addElement('text', 'campo', get_string("campo_lexico_nuevo", "vocabulario"));
+<<<<<<< HEAD
 
+=======
+        $mform->setType('campo', PARAM_TEXT);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
         //opcion de eliminar un campo
         $mform->addElement('checkbox', 'eliminar', get_string("eliminar", "vocabulario"));
         $mform->setDefault('eliminar', 0);
@@ -2268,6 +2547,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
                     //titulillos de la tabla
 
+<<<<<<< HEAD
                     $titulillos = '<tr class="header">';
                     $titulillos .= '<th colspan = "10">' . get_string('possessiv1', 'vocabulario') . '</th>';
                     $titulillos .= '</tr>';
@@ -2292,10 +2572,35 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $titulillos .= '<th>m</th>';
                     $titulillos .= '<th>n</th>';
                     $titulillos .= '<th>f</th>';
+=======
+		    //Plantilla adaptada para Moodle 2.8:
+	   	    //Luis Redondo Expósito
+		    //Ramón Rueda Delgado
+
+                    $titulillos = '<tr class="header">';
+                    $titulillos .= '<th colspan = 10><p align="center">' . get_string('possessiv1', 'vocabulario') . '</p></th>';
+                    $titulillos .= '</tr>';
+                    $titulillos .= '<tr class="header">';
+                    
+                    $titulillos .= '<th colspan=1><p> </p></th>';           
+                    $titulillos .= '<th colspan=1><p align="center">ich</p></th>';
+                    $titulillos .= '<th colspan=1><p align="center">du</p></th>';
+                    $titulillos .= '<th colspan=1><p align="center">er</p></th>';
+                    $titulillos .= '<th colspan=1><p align="center">es</p></th>';
+                    $titulillos .= '<th colspan=1><p align="center">sie</p></th>';
+                    $titulillos .= '<th colspan=1><p align="center">wir</p></th>';
+                    $titulillos .= '<th colspan=1><p align="center">ihr</p></th>';
+                    $titulillos .= '<th colspan=1><p align="center">sie</p></th>';
+                    $titulillos .= '<th colspan=1><p align="center">Sie</p></th>';
+                    
+                    
+                    
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                     $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
                     $titulillos = '<tr class="cell">';
                     $titulillos .= '<td class="cell">' . get_string('snominativo', 'vocabulario') . '</td>';
+<<<<<<< HEAD
                     $titulillos .= '<td><input type="text" size="8" id="id_NS1' . $i . '" name="NS1' . $i . '" value="' . $descripcion_troceada[(25 * $i) + 0] . '"></td>';
                     $titulillos .= '<td><input type="text" size="8" id="id_NS2' . $i . '" name="NS2' . $i . '" value="' . $descripcion_troceada[(25 * $i) + 1] . '"></td>';
                     $titulillos .= '<td><input type="text" size="8" id="id_NS3M' . $i . '" name="NS3M' . $i . '" value="' . $descripcion_troceada[(25 * $i) + 2] . '"></td>';
@@ -2305,6 +2610,17 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $titulillos .= '<td><input type="text" size="8" id="id_NP2' . $i . '" name="NP2' . $i . '" value="' . $descripcion_troceada[(25 * $i) + 6] . '"></td>';
                     $titulillos .= '<td><input type="text" size="8" id="id_NP3' . $i . '" name="NP3' . $i . '" value="' . $descripcion_troceada[(25 * $i) + 7] . '"></td>';
                     $titulillos .= '<td><input type="text" size="8" id="id_NSIE' . $i . '" name="NSIE' . $i . '" value="' . $descripcion_troceada[(25 * $i) + 8] . '"></td>';
+=======
+                    $titulillos .= '<td><input type="text" size="4" id="id_NS1' . $i . '" name="NS1' . $i . '" value="' . $descripcion_troceada[(20 * $i) + 0] . '"></td>';
+                    $titulillos .= '<td><input type="text" size="4" id="id_NS2' . $i . '" name="NS2' . $i . '" value="' . $descripcion_troceada[(20 * $i) + 1] . '"></td>';
+                    $titulillos .= '<td><input type="text" size="4" id="id_NS3M' . $i . '" name="NS3M' . $i . '" value="' . $descripcion_troceada[(20 * $i) + 2] . '"></td>';
+                    $titulillos .= '<td><input type="text" size="4" id="id_NS3N' . $i . '" name="NS3N' . $i . '" value="' . $descripcion_troceada[(20 * $i) + 3] . '"></td>';
+                    $titulillos .= '<td><input type="text" size="4" id="id_NS3F' . $i . '" name="NS3F' . $i . '" value="' . $descripcion_troceada[(20 * $i) + 4] . '"></td>';
+                    $titulillos .= '<td><input type="text" size="4" id="id_NP1' . $i . '" name="NP1' . $i . '" value="' . $descripcion_troceada[(20 * $i) + 5] . '"></td>';
+                    $titulillos .= '<td><input type="text" size="4" id="id_NP2' . $i . '" name="NP2' . $i . '" value="' . $descripcion_troceada[(20 * $i) + 6] . '"></td>';
+                    $titulillos .= '<td><input type="text" size="4" id="id_NP3' . $i . '" name="NP3' . $i . '" value="' . $descripcion_troceada[(20 * $i) + 7] . '"></td>';
+                    $titulillos .= '<td><input type="text" size="4" id="id_NSIE' . $i . '" name="NSIE' . $i . '" value="' . $descripcion_troceada[(20 * $i) + 8] . '"></td>';
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                     $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
                     $mform->addElement('html', '</table>');
@@ -2316,7 +2632,11 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
                     //titulillos de la tabla
                     $titulillos = '<tr class="header">';
+<<<<<<< HEAD
                     $titulillos .= '<th colspan = "5">' . get_string('declinacion_siehe', 'vocabulario') . '</th>';
+=======
+                    $titulillos .= '<th colspan = "5"> <p align="center">'.get_string('declinacion_siehe', 'vocabulario').'</p></th>';
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                     $titulillos .= '</tr>';
                     $titulillos .= '<tr class="header">';
                     $titulillos .= '<th></th>';
@@ -2370,6 +2690,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter boxwidthwide">');
                 //titulillos de la tabla
                 $titulillos = '<tr class="header">';
+<<<<<<< HEAD
                 $titulillos .= '<th colspan="6">' . get_string('possessiv2', 'vocabulario') . '</th>';
                 $titulillos .= '</tr>';
                 $titulillos .= '<tr>';
@@ -2390,15 +2711,47 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $titulillos .= '<th>m</th>';
                 $titulillos .= '<th>n</th>';
                 $titulillos .= '<th>f</th>';
+=======
+                $titulillos .= '<th colspan="10">' . get_string('possessiv2', 'vocabulario') . '</th>';
+                $titulillos .= '</tr>';
+
+                $titulillos .= '<tr class="header">';
+
+                
+                $titulillos .= '<th colspan=1><p> </p></th>';           
+                $titulillos .= '<th colspan=1><p align="center">ich</p></th>';
+                $titulillos .= '<th colspan=1><p align="center">du</p></th>';
+                $titulillos .= '<th colspan=1><p align="center">er</p></th>';
+                $titulillos .= '<th colspan=1><p align="center">es</p></th>';
+                $titulillos .= '<th colspan=1><p align="center">sie</p></th>';
+                
+                $titulillos .= '<th colspan=1><p align="center">wir</p></th>';
+                $titulillos .= '<th colspan=1><p align="center">ihr</p></th>';
+                $titulillos .= '<th colspan=1><p align="center">sie</p></th>';
+                $titulillos .= '<th colspan=1><p align="center">Sie</p></th>';
+                
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
                 $titulillos = '<tr class="cell">';
                 $titulillos .= '<td class="cell">' . get_string('nominativo', 'vocabulario') . '</td>';
+<<<<<<< HEAD
                 $titulillos .= '<td><input type="text" size="10" id="id_NS1" name="NS1" value="' . $descripcion_troceada[0] . '"></td>';
                 $titulillos .= '<td><input type="text" size="10" id="id_NS2" name="NS2" value="' . $descripcion_troceada[1] . '"></td>';
                 $titulillos .= '<td><input type="text" size="10" id="id_NS3M" name="NS3M" value="' . $descripcion_troceada[2] . '"></td>';
                 $titulillos .= '<td><input type="text" size="10" id="id_NS3N" name="NS3N" value="' . $descripcion_troceada[3] . '"></td>';
                 $titulillos .= '<td><input type="text" size="10" id="id_NS3F" name="NS3F" value="' . $descripcion_troceada[4] . '"></td>';
+=======
+                $titulillos .= '<td><input type="text" size="4" id="id_NS1" name="NS1" value="' . $descripcion_troceada[0] . '"></td>';
+                $titulillos .= '<td><input type="text" size="4" id="id_NS2" name="NS2" value="' . $descripcion_troceada[1] . '"></td>';
+                $titulillos .= '<td><input type="text" size="4" id="id_NS3M" name="NS3M" value="' . $descripcion_troceada[2] . '"></td>';
+                $titulillos .= '<td><input type="text" size="4" id="id_NS3N" name="NS3N" value="' . $descripcion_troceada[3] . '"></td>';
+                $titulillos .= '<td><input type="text" size="4" id="id_NS3F" name="NS3F" value="' . $descripcion_troceada[4] . '"></td>';
+                $titulillos .= '<td><input type="text" size="4" id="id_NP1" name="NP1" value="' . $descripcion_troceada[5] . '"></td>';
+                $titulillos .= '<td><input type="text" size="4" id="id_NP2" name="NP2" value="' . $descripcion_troceada[6] . '"></td>';
+                $titulillos .= '<td><input type="text" size="4" id="id_NP3" name="NP3" value="' . $descripcion_troceada[7] . '"></td>';
+                $titulillos .= '<td><input type="text" size="4" id="id_NSIE" name="NSIE" value="' . $descripcion_troceada[8] . '"></td>';
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
                 $mform->addElement('html', '</table>');
@@ -2406,6 +2759,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
                 $mform->addElement('html', '<p>');
                 $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter">');
+<<<<<<< HEAD
                 //titulillos de la tabla
                 $titulillos = '<tr class="header">';
                 $titulillos .= '<th>&nbsp;</th>';
@@ -2429,6 +2783,9 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', $titulillos);
                 $mform->addElement('html', '</table>');
                 $mform->addElement('html', '<p>');
+=======
+                
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
                 //la tabla que se muestra de forma opcional al pulsar un boton
 
@@ -2597,6 +2954,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $mform->addElement('html', $titulillos);
                     $titulillos = '<tr class="cell">';
                     $titulillos .= '<td class="cell">' . get_string('nominativo', 'vocabulario') . '</td>';
+<<<<<<< HEAD
                     $titulillos .= '<td><input type="text" id="id_NM1' . $i . '" name="NM1' . $i . '" value="' . $descripcion_troceada[(16 * $i) + 0] . '"></td>';
                     $titulillos .= '<td><input type="text" id="id_NN1' . $i . '" name="NN1' . $i . '" value="' . $descripcion_troceada[(16 * $i) + 1] . '"></td>';
                     $titulillos .= '<td><input type="text" id="id_NF1' . $i . '" name="NF1' . $i . '" value="' . $descripcion_troceada[(16 * $i) + 2] . '"></td>';
@@ -2622,6 +2980,33 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $titulillos .= '<td><input type="text" id="id_GN1' . $i . '" name="GN1' . $i . '" value="' . $descripcion_troceada[(16 * $i) + 13] . '"></td>';
                     $titulillos .= '<td><input type="text" id="id_GF1' . $i . '" name="GF1' . $i . '" value="' . $descripcion_troceada[(16 * $i) + 14] . '"></td>';
                     $titulillos .= '<td><input type="text" id="id_GP1' . $i . '" name="GP1' . $i . '" value="' . $descripcion_troceada[(16 * $i) + 15] . '"></td>';
+=======
+                    $titulillos .= '<td><input type="text" size="10" id="id_NM1' . $i . '" name="NM1' . $i . '" value="' . $descripcion_troceada[(16 * $i) + 0] . '"></td>';
+                    $titulillos .= '<td><input type="text" size="10" id="id_NN1' . $i . '" name="NN1' . $i . '" value="' . $descripcion_troceada[(16 * $i) + 1] . '"></td>';
+                    $titulillos .= '<td><input type="text" size="10" id="id_NF1' . $i . '" name="NF1' . $i . '" value="' . $descripcion_troceada[(16 * $i) + 2] . '"></td>';
+                    $titulillos .= '<td><input type="text" size="10" id="id_NP1' . $i . '" name="NP1' . $i . '" value="' . $descripcion_troceada[(16 * $i) + 3] . '"></td>';
+                    $titulillos .= '</tr>';
+                    $titulillos .= '<tr class="cell">';
+                    $titulillos .= '<td class="cell">' . get_string('acusativo', 'vocabulario') . '</td>';
+                    $titulillos .= '<td><input type="text" size="10" id="id_AM1' . $i . '" name="AM1' . $i . '" value="' . $descripcion_troceada[(16 * $i) + 4] . '"></td>';
+                    $titulillos .= '<td><input type="text" size="10" id="id_AN1' . $i . '" name="AN1' . $i . '" value="' . $descripcion_troceada[(16 * $i) + 5] . '"></td>';
+                    $titulillos .= '<td><input type="text" size="10" id="id_AF1' . $i . '" name="AF1' . $i . '" value="' . $descripcion_troceada[(16 * $i) + 6] . '"></td>';
+                    $titulillos .= '<td><input type="text" size="10" id="id_AP1' . $i . '" name="AP1' . $i . '" value="' . $descripcion_troceada[(16 * $i) + 7] . '"></td>';
+                    $titulillos .= '</tr>';
+                    $titulillos .= '<tr class="cell">';
+                    $titulillos .= '<td class="cell">' . get_string('dativo', 'vocabulario') . '</td>';
+                    $titulillos .= '<td><input type="text" size="10" id="id_DM1' . $i . '" name="DM1' . $i . '" value="' . $descripcion_troceada[(16 * $i) + 8] . '"></td>';
+                    $titulillos .= '<td><input type="text" size="10" id="id_DN1' . $i . '" name="DN1' . $i . '" value="' . $descripcion_troceada[(16 * $i) + 9] . '"></td>';
+                    $titulillos .= '<td><input type="text" size="10" id="id_DF1' . $i . '" name="DF1' . $i . '" value="' . $descripcion_troceada[(16 * $i) + 10] . '"></td>';
+                    $titulillos .= '<td><input type="text" size="10" id="id_DP1' . $i . '" name="DP1' . $i . '" value="' . $descripcion_troceada[(16 * $i) + 11] . '"></td>';
+                    $titulillos .= '</tr>';
+                    $titulillos .= '<tr class="cell">';
+                    $titulillos .= '<td class="cell">' . get_string('genitivo', 'vocabulario') . '</td>';
+                    $titulillos .= '<td><input type="text" size="10" id="id_GM1' . $i . '" name="GM1' . $i . '" value="' . $descripcion_troceada[(16 * $i) + 12] . '"></td>';
+                    $titulillos .= '<td><input type="text" size="10" id="id_GN1' . $i . '" name="GN1' . $i . '" value="' . $descripcion_troceada[(16 * $i) + 13] . '"></td>';
+                    $titulillos .= '<td><input type="text" size="10" id="id_GF1' . $i . '" name="GF1' . $i . '" value="' . $descripcion_troceada[(16 * $i) + 14] . '"></td>';
+                    $titulillos .= '<td><input type="text" size="10" id="id_GP1' . $i . '" name="GP1' . $i . '" value="' . $descripcion_troceada[(16 * $i) + 15] . '"></td>';
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                     $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
                     $mform->addElement('html', '</table>');
@@ -2870,7 +3255,11 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $mform->addElement('html', $titulillos);
 
                     $titulillos = '<tr class="cell">';
+<<<<<<< HEAD
                     $titulillos .= '<td colspan=2><input size="30" type="text" id="id_DEFA' . $i . '" name="DEFA' . $i . '" value="' . $descripcion_troceada[5 * $i + 0] . '"></td>';
+=======
+                    $titulillos .= '<td colspan=2><input type="text" size="40" id="id_DEFA' . $i . '" name="DEFA' . $i . '" value="' . $descripcion_troceada[5 * $i + 0] . '"></td>';
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                     $titulillos .= '</tr>';
 
                     $titulillos .= '<tr class="cell">';
@@ -3084,6 +3473,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', $titulillos);
                 $titulillos = '<tr class="cell">';
                 $titulillos .= '<td class="cell">' . get_string('acusativo', 'vocabulario') . '</td>';
+<<<<<<< HEAD
                 $titulillos .= '<td><input size="10" type="text" id="id_AS1" name="AS1" value="' . $descripcion_troceada[0] . '"></td>';
                 $titulillos .= '<td><input size="10" type="text" id="id_AS2" name="AS2" value="' . $descripcion_troceada[1] . '"></td>';
                 $titulillos .= '<td><input size="10" type="text" id="id_AS3" name="AS3" value="' . $descripcion_troceada[2] . '"></td>';
@@ -3101,6 +3491,25 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $titulillos .= '<td><input size="10" type="text" id="id_DP2" name="DP2" value="' . $descripcion_troceada[11] . '"></td>';
                 $titulillos .= '<td><input size="10" type="text" id="id_DP3" name="DP3" value="' . $descripcion_troceada[12] . '"></td>';
                 $titulillos .= '<td><input size="8" type="text" id="id_SIE" name="DSIE" value="' . $descripcion_troceada[13] . '"></td>';
+=======
+                $titulillos .= '<td><input size="6" type="text" id="id_AS1" name="AS1" value="' . $descripcion_troceada[0] . '"></td>';
+                $titulillos .= '<td><input size="6" type="text" id="id_AS2" name="AS2" value="' . $descripcion_troceada[1] . '"></td>';
+                $titulillos .= '<td><input size="6" type="text" id="id_AS3" name="AS3" value="' . $descripcion_troceada[2] . '"></td>';
+                $titulillos .= '<td><input size="6" type="text" id="id_AP1" name="AP1" value="' . $descripcion_troceada[3] . '"></td>';
+                $titulillos .= '<td><input size="6" type="text" id="id_AP2" name="AP2" value="' . $descripcion_troceada[4] . '"></td>';
+                $titulillos .= '<td><input size="6" type="text" id="id_AP3" name="AP3" value="' . $descripcion_troceada[5] . '"></td>';
+                $titulillos .= '<td><input size="6" type="text" id="id_ASIE" name="ASIE" value="' . $descripcion_troceada[6] . '"></td>';
+                $titulillos .= '</tr>';
+                $titulillos .= '<tr class="cell">';
+                $titulillos .= '<td class="cell">' . get_string('dativo', 'vocabulario') . '</td>';
+                $titulillos .= '<td><input size="6" type="text" id="id_DS1" name="DS1" value="' . $descripcion_troceada[7] . '"></td>';
+                $titulillos .= '<td><input size="6" type="text" id="id_DS2" name="DS2" value="' . $descripcion_troceada[8] . '"></td>';
+                $titulillos .= '<td><input size="6" type="text" id="id_DS3" name="DS3" value="' . $descripcion_troceada[9] . '"></td>';
+                $titulillos .= '<td><input size="6" type="text" id="id_DP1" name="DP1" value="' . $descripcion_troceada[10] . '"></td>';
+                $titulillos .= '<td><input size="6" type="text" id="id_DP2" name="DP2" value="' . $descripcion_troceada[11] . '"></td>';
+                $titulillos .= '<td><input size="6" type="text" id="id_DP3" name="DP3" value="' . $descripcion_troceada[12] . '"></td>';
+                $titulillos .= '<td><input size="6" type="text" id="id_SIE" name="DSIE" value="' . $descripcion_troceada[13] . '"></td>';
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 $titulillos .= '</tr>';
 
                 $mform->addElement('html', $titulillos);
@@ -3355,6 +3764,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
               }
               break; */
 
+<<<<<<< HEAD
 
 
 
@@ -3362,6 +3772,8 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
 
 
+=======
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
             //6.2
             case 52:
 
@@ -3444,9 +3856,15 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 //titulillos de la tabla
                 $titulillos = '<tr class="head">';
                 $titulillos .='<th style="min-width:100px;">' . get_string('praposit', 'vocabulario') . '</th>';
+<<<<<<< HEAD
                 $titulillos .='<th style="min-width:100px;">' . get_string('func', 'vocabulario') . '</th>';
                 $titulillos .='<th style="min-width:100px;">' . get_string('kas', 'vocabulario') . '</th>';
                 $titulillos .='<th style="min-width:100px;">' . get_string('beisp', 'vocabulario') . '</th>';
+=======
+                $titulillos .='<th style="min-width:160px;">' . get_string('func', 'vocabulario') . '</th>';
+                $titulillos .='<th style="min-width:80px;">' . get_string('kas', 'vocabulario') . '</th>';
+                $titulillos .='<th style="min-width:300px;">' . get_string('beisp', 'vocabulario') . '</th>';
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
 
@@ -3484,6 +3902,10 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $titulillos = '<tr class="head">';
                 $titulillos .='<th>'.get_string('prafix','vocabulario').'</th>';
                 $titulillos .='<th>'.get_string('suffix','vocabulario').'</th>';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 $titulillos .='<th>' . get_string('beisp', 'vocabulario') . '</th>';
                 $titulillos .='<th>'.get_string('bedeutung','vocabulario').'</th>';
                 $titulillos .= '</tr>';
@@ -3510,10 +3932,17 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
 
 
                     $titulillos = '<tr class="cell">';
+<<<<<<< HEAD
                     $titulillos .= '<td><input size=15 type="text" id="id_PRA' . $fila . '" name="PRA' . $fila . '" value="' . $valores[0] . '"></td>';
                     $titulillos .= '<td><input size=15 type="text" id="id_SUF' . $fila . '" name="SUF' . $fila . '" value="' . $valores[1] . '"></td>';
                     $titulillos .= '<td><input size=35 type="text" id="id_BEI' . $fila . '" name="BEI' . $fila . '" value="' . $valores[2] . '"></td>';
                     $titulillos .= '<td><input size=30 type="text" id="id_BED' . $fila . '" name="BED' . $fila . '" value="' . $valores[3] . '"></td>';
+=======
+                    $titulillos .= '<td><input size=12 type="text" id="id_PRA' . $fila . '" name="PRA' . $fila . '" value="' . $valores[0] . '"></td>';
+                    $titulillos .= '<td><input size=12 type="text" id="id_SUF' . $fila . '" name="SUF' . $fila . '" value="' . $valores[1] . '"></td>';
+                    $titulillos .= '<td><input size=25 type="text" id="id_BEI' . $fila . '" name="BEI' . $fila . '" value="' . $valores[2] . '"></td>';
+                    $titulillos .= '<td><input size=20 type="text" id="id_BED' . $fila . '" name="BED' . $fila . '" value="' . $valores[3] . '"></td>';
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                     $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
                 }
@@ -3602,6 +4031,10 @@ class mod_vocabulario_aniadir_gr_form extends moodleform {
         $mform->addElement('html', $campodinamico);
 
         $mform->addElement('text', 'campo', get_string("campo_gramatica_nueva", "vocabulario"));
+<<<<<<< HEAD
+=======
+        $mform->setType('campo', PARAM_TEXT);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
         //opcion de eliminar un campo
         $mform->addElement('checkbox', 'eliminar', get_string("eliminar", "vocabulario"));
         $mform->setDefault('eliminar', 0);
@@ -3770,6 +4203,10 @@ class mod_vocabulario_intencion_desc_form extends moodleform {
         $mform->addElement('html', $campodinamico);
 
         $mform->addElement('text', 'intencion', get_string("campo_intencion_nuevo", "vocabulario"));
+<<<<<<< HEAD
+=======
+        $mform->setType('intencion', PARAM_TEXT);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
         //opcion de eliminar un campo
         $mform->addElement('checkbox', 'eliminar', get_string("eliminar", "vocabulario"));
@@ -3820,6 +4257,7 @@ class mod_vocabulario_nuevo_tipologia_form extends moodleform {
                     $mform->addElement('html', '<div id="ocultador_tabla' . $i . '">');
                 }
                 $mform->addElement('text', 'quien' . $i, get_string('quien', 'vocabulario'),'style="width:100%;"');
+<<<<<<< HEAD
                 $mform->setDefault('quien' . $i, $descripcion_troceada[15 * ($i - 1) + 0]);
                 $mform->addElement('text', 'finalidad' . $i, get_string('finalidad', 'vocabulario'),'style="width:100%;"');
                 $mform->setDefault('finalidad' . $i, $descripcion_troceada[15 * ($i - 1) + 1]);
@@ -3848,6 +4286,51 @@ class mod_vocabulario_nuevo_tipologia_form extends moodleform {
                 $mform->addElement('text', 'que_frases' . $i, get_string('que_frases', 'vocabulario'),'style="width:100%;"');
                 $mform->setDefault('que_frases' . $i, $descripcion_troceada[15 * ($i - 1) + 13]);
                 $mform->addElement('text', 'que_tono' . $i, get_string('que_tono', 'vocabulario'),'style="width:100%;"');
+=======
+        	$mform->setType('quien', PARAM_TEXT);
+                $mform->setDefault('quien' . $i, $descripcion_troceada[15 * ($i - 1) + 0]);
+                $mform->addElement('text', 'finalidad' . $i, get_string('finalidad', 'vocabulario'),'style="width:100%;"');
+        	$mform->setType('finalidad', PARAM_TEXT);
+                $mform->setDefault('finalidad' . $i, $descripcion_troceada[15 * ($i - 1) + 1]);
+                $mform->addElement('text', 'a_quien' . $i, get_string('a_quien', 'vocabulario'),'style="width:100%;"');
+        	$mform->setType('a_quien', PARAM_TEXT);
+                $mform->setDefault('a_quien' . $i, $descripcion_troceada[15 * ($i - 1) + 2]);
+                $mform->addElement('text', 'medio' . $i, get_string('medio', 'vocabulario'),'style="width:100%;"');
+        	$mform->setType('medio', PARAM_TEXT);
+                $mform->setDefault('medio' . $i, $descripcion_troceada[15 * ($i - 1) + 3]);
+                $mform->addElement('text', 'donde' . $i, get_string('donde', 'vocabulario'),'style="width:100%;"');
+		$mform->setType('donde', PARAM_TEXT);
+                $mform->setDefault('donde' . $i, $descripcion_troceada[15 * ($i - 1) + 4]);
+                $mform->addElement('text', 'cuando' . $i, get_string('cuando', 'vocabulario'),'style="width:100%;"');
+        	$mform->setType('cuando', PARAM_TEXT);
+                $mform->setDefault('cuando' . $i, $descripcion_troceada[15 * ($i - 1) + 5]);
+                $mform->addElement('text', 'motivo' . $i, get_string('motivo', 'vocabulario'),'style="width:100%;"');
+        	$mform->setType('motivo', PARAM_TEXT);
+                $mform->setDefault('motivo' . $i, $descripcion_troceada[15 * ($i - 1) + 6]);
+                $mform->addElement('text', 'funcion' . $i, get_string('funcion', 'vocabulario'),'style="width:100%;"');
+        	$mform->setType('funcion', PARAM_TEXT);
+                $mform->setDefault('funcion' . $i, $descripcion_troceada[15 * ($i - 1) + 7]);
+                $mform->addElement('text', 'sobre_que' . $i, get_string('sobre_que', 'vocabulario'),'style="width:100%;"');
+        	$mform->setType('sobre_que', PARAM_TEXT);
+                $mform->setDefault('sobre_que' . $i, $descripcion_troceada[15 * ($i - 1) + 8]);
+                $mform->addElement('text', 'que' . $i, get_string('que', 'vocabulario'),'style="width:100%;"');
+        	$mform->setType('que', PARAM_TEXT);
+                $mform->setDefault('que' . $i, $descripcion_troceada[15 * ($i - 1) + 9]);
+                $mform->addElement('text', 'orden' . $i, get_string('orden', 'vocabulario'),'style="width:100%;"');
+        	$mform->setType('orden', PARAM_TEXT);
+                $mform->setDefault('orden' . $i, $descripcion_troceada[15 * ($i - 1) + 10]);
+                $mform->addElement('text', 'medios_nonverbales' . $i, get_string('medios_nonverbales', 'vocabulario'),'style="width:100%;"');
+        	$mform->setType('medios_nonverbales', PARAM_TEXT);
+                $mform->setDefault('medios_nonverbales' . $i, $descripcion_troceada[15 * ($i - 1) + 11]);
+                $mform->addElement('text', 'que_palabras' . $i, get_string('que_palabras', 'vocabulario'),'style="width:100%;"');
+        	$mform->setType('que_palabras', PARAM_TEXT);
+                $mform->setDefault('que_palabras' . $i, $descripcion_troceada[15 * ($i - 1) + 12]);
+                $mform->addElement('text', 'que_frases' . $i, get_string('que_frases', 'vocabulario'),'style="width:100%;"');
+        	$mform->setType('que_frases', PARAM_TEXT);
+                $mform->setDefault('que_frases' . $i, $descripcion_troceada[15 * ($i - 1) + 13]);
+                $mform->addElement('text', 'que_tono' . $i, get_string('que_tono', 'vocabulario'),'style="width:100%;"');
+        	$mform->setType('que_tono', PARAM_TEXT);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
                 $mform->setDefault('que_tono' . $i, $descripcion_troceada[15 * ($i - 1) + 14]);
                 $mform->addElement('html', '</div>');
             }
@@ -3890,7 +4373,11 @@ class mod_vocabulario_tipologia_desc_form extends moodleform {
         }
 
         $mform->addElement('text', 'tipologia', get_string("campo_tipologia_nuevo", "vocabulario"));
+<<<<<<< HEAD
 
+=======
+        $mform->setType('tipologia', PARAM_TEXT);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
         //opcion de eliminar un campo
         $mform->addElement('checkbox', 'eliminar', get_string("eliminar", "vocabulario"));
         $mform->setDefault('eliminar', 0);
@@ -3962,6 +4449,10 @@ class mod_vocabulario_estrategia_desc_form extends moodleform {
         $mform->addElement('html', '<h1>' . get_string('nueva_ea', 'vocabulario') . '<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
 
         $mform->addElement('text', 'estrategia', get_string("campo_estrategia_nuevo", "vocabulario"));
+<<<<<<< HEAD
+=======
+        $mform->setType('estrategia', PARAM_TEXT);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
         $aux = new Vocabulario_estrategias();
         $estrategias = $aux->obtener_todos($USER->id);
         $mform->addElement('select', 'campoea', get_string("nivel_estrategia", "vocabulario"), $estrategias);
@@ -4167,7 +4658,11 @@ class mod_vocabulario_buscar_intenciones_form extends moodleform {
         $attributes='size="20"';
     
         $mform->addElement('text', 'buscarpor', get_string('buscintenciones', 'vocabulario'), $attributes);
+<<<<<<< HEAD
        
+=======
+        $mform->setType('buscarpor', PARAM_TEXT);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
        
          if ($middle != "") {
             $intencion = new Vocabulario_mis_intenciones();
@@ -4232,4 +4727,8 @@ class mod_vocabulario_buscar_intenciones_form extends moodleform {
     }
    
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 ?>

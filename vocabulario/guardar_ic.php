@@ -45,6 +45,11 @@ require_once("lib.php");
 require_once("vocabulario_classes.php");
 require_once("vocabulario_formularios.php");
 
+<<<<<<< HEAD
+=======
+global $DB;
+
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 $id_tocho = optional_param('id_tocho', 0, PARAM_INT);
 
 $mform = new mod_vocabulario_nuevo_ic_form();
@@ -54,10 +59,17 @@ if ($mform->is_cancelled()) {
 }
 
 //averiguo quien soy
+<<<<<<< HEAD
 $user_object = get_record('user', 'id', $USER->id);
 
 $intencion = new Vocabulario_intenciones($user_object->id, required_param('campoic', PARAM_TEXT), optional_param('intencion', PARAM_TEXT));
 $desc = optional_param('descripcion', PARAM_TEXT);
+=======
+$user_object = $DB->get_record('user', array('id'=>$USER->id));
+
+$intencion = new Vocabulario_intenciones($user_object->id, required_param('campoic', PARAM_TEXT), optional_param('intencion', '', PARAM_TEXT));
+$desc = optional_param('descripcion', '', PARAM_TEXT);
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
 $salir = false;
 $avance = 4;
@@ -82,15 +94,28 @@ $desc .= __SEPARADORCAMPOS__ . __SEPARADORCAMPOS__ . __SEPARADORCAMPOS__ . __SEP
 
 $icidaux = $intencion->get('padre');
 
+<<<<<<< HEAD
 if ($mform->no_submit_button_pressed()) {
     if (optional_param('desc_btn')) {
+=======
+ 
+
+if ($mform->no_submit_button_pressed()) {
+    if (optional_param('desc_btn', '', PARAM_TEXT)) {
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 //        redirect('./view.php?id=' . $id_tocho . '&opcion=7&icid=' . $intencion->get('padre'));
         $icidaux = required_param('campoic', PARAM_TEXT);
 
         if ($desc != null) {
             $mintencion = new Vocabulario_mis_intenciones();
             $mintencion->leer($icidaux, $USER->id);
+<<<<<<< HEAD
             $mintencion->set($USER->id, $icidaux, $desc);
+=======
+            
+            $mintencion->set($USER->id, $icidaux, $desc);
+
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
             $mintencion->guardar();
         }
         

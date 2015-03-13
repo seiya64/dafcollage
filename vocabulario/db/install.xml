@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<<<<<<< HEAD
 <!--
 Daf-collage is made up of two Moodle modules which help in the process of
 German language learning. It facilitates the content organization like
@@ -1708,4 +1709,398 @@ GNU General Public License for more details.
             </SENTENCES>
         </STATEMENT>
     </STATEMENTS>
+=======
+<XMLDB PATH="mod/vocabulario/db" VERSION="20141227" COMMENT="XMLDB file for Moodle mod/vocabulario"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+     <TABLE NAME="vocabulario" COMMENT="Default comment for vocabulario, please edit me">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="course"/>
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Course vocabulario activity belongs to" PREVIOUS="id" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="name field for moodle instances" PREVIOUS="course" NEXT="intro"/>
+        <FIELD NAME="intro" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" COMMENT="General introduction of the vocabulario activity" PREVIOUS="name" NEXT="introformat"/>
+        <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="Format of the intro field (MOODLE, HTML, MARKDOWN...)" PREVIOUS="intro" NEXT="timecreated"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" PREVIOUS="introformat" NEXT="timemodified"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" PREVIOUS="timecreated"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="vocabulario_sustantivos" COMMENT="sustantivo" PREVIOUS="vocabulario" NEXT="vocabulario_adjetivos">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="palabra"/>
+        <FIELD NAME="palabra" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"  COMMENT="palabra en sí misma" PREVIOUS="id" NEXT="genero"/>
+        <FIELD NAME="genero" TYPE="int" LENGTH="1" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="genero del nombre 0 = neutro 1 = masculino 2 = femenino" PREVIOUS="palabra" NEXT="plural"/>
+        <FIELD NAME="plural" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false"  COMMENT="plural del nombre" PREVIOUS="genero" NEXT="significado"/>
+        <FIELD NAME="significado" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false"  COMMENT="traduccion de la palabra" PREVIOUS="plural" NEXT="observaciones"/>
+        <FIELD NAME="observaciones" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false"  COMMENT="observaciones del sustantivo" PREVIOUS="significado" NEXT="gramaticaid"/>
+        <FIELD NAME="gramaticaid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id de la gramatica" PREVIOUS="observaciones" NEXT="intencionid"/>
+        <FIELD NAME="intencionid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id de la intencion" PREVIOUS="gramaticaid" NEXT="tipologiaid"/>
+        <FIELD NAME="tipologiaid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id de la tipologia" PREVIOUS="intencionid" NEXT="ejemplo"/>
+        <FIELD NAME="ejemplo" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false"  COMMENT="ejemplo" PREVIOUS="tipologiaid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="gram_id"/>
+        <KEY NAME="gram_id" TYPE="foreign" FIELDS="gramaticaid" REFTABLE="vocabulario_gramatica" REFFIELDS="id" COMMENT="id de la gramatica" PREVIOUS="primary" NEXT="inten_id"/>
+        <KEY NAME="inten_id" TYPE="foreign" FIELDS="intencionid" REFTABLE="vocabulario_intenciones_es" REFFIELDS="id" COMMENT="id de la intencin" PREVIOUS="gram_id" NEXT="tipo_id"/>
+        <KEY NAME="tipo_id" TYPE="foreign" FIELDS="tipologiaid" REFTABLE="vocabulario_tipologias_es" REFFIELDS="id" COMMENT="id de la tipologia" PREVIOUS="inten_id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_adjetivos" COMMENT="adjetivo" PREVIOUS="vocabulario_sustantivos" NEXT="vocabulario_verbos">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="sin_declinar"/>
+        <FIELD NAME="sin_declinar" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"  COMMENT="adjetivo sin declinacion" PREVIOUS="id" NEXT="significado"/>
+        <FIELD NAME="significado" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false"  COMMENT="traduccion" PREVIOUS="sin_declinar" NEXT="observaciones"/>
+        <FIELD NAME="observaciones" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false"  COMMENT="observaciones del adjetivo" PREVIOUS="significado" NEXT="gramaticaid"/>
+        <FIELD NAME="gramaticaid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id de la gramatica" PREVIOUS="observaciones" NEXT="intencionid"/>
+        <FIELD NAME="intencionid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id de la intencion" PREVIOUS="gramaticaid" NEXT="tipologiaid"/>
+        <FIELD NAME="tipologiaid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id de la tipologia" PREVIOUS="intencionid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="gram_id"/>
+        <KEY NAME="gram_id" TYPE="foreign" FIELDS="gramaticaid" REFTABLE="vocabulario_gramatica" REFFIELDS="id" COMMENT="id de la gramatica" PREVIOUS="primary" NEXT="inten_id"/>
+        <KEY NAME="inten_id" TYPE="foreign" FIELDS="intencionid" REFTABLE="vocabulario_intenciones_es" REFFIELDS="id" COMMENT="id de la intencin" PREVIOUS="gram_id" NEXT="tipo_id"/>
+        <KEY NAME="tipo_id" TYPE="foreign" FIELDS="tipologiaid" REFTABLE="vocabulario_tipologias_es" REFFIELDS="id" COMMENT="id de la tipologia" PREVIOUS="inten_id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_verbos" COMMENT="verbos" PREVIOUS="vocabulario_adjetivos" NEXT="vocabulario_otros">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="infinitivo"/>
+        <FIELD NAME="infinitivo" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"  COMMENT="infinitivo del verbo" PREVIOUS="id" NEXT="ter_pers_sing"/>
+        <FIELD NAME="ter_pers_sing" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false"  COMMENT="tercera persona del singular" PREVIOUS="infinitivo" NEXT="preterito"/>
+        <FIELD NAME="preterito" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false"  COMMENT="preterito del verbo" PREVIOUS="ter_pers_sing" NEXT="participio"/>
+        <FIELD NAME="participio" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false"  COMMENT="participio del verbo" PREVIOUS="preterito" NEXT="significado"/>
+        <FIELD NAME="significado" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false"  COMMENT="significado del verbo" PREVIOUS="participio" NEXT="observaciones"/>
+        <FIELD NAME="observaciones" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false"  COMMENT="observaciones del verbo" PREVIOUS="significado" NEXT="gramaticaid"/>
+        <FIELD NAME="gramaticaid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id de la gramatica" PREVIOUS="observaciones" NEXT="intencionid"/>
+        <FIELD NAME="intencionid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id de la intencion" PREVIOUS="gramaticaid" NEXT="tipologiaid"/>
+        <FIELD NAME="tipologiaid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id de la tipologia" PREVIOUS="intencionid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="gram_id"/>
+        <KEY NAME="gram_id" TYPE="foreign" FIELDS="gramaticaid" REFTABLE="vocabulario_gramatica" REFFIELDS="id" COMMENT="id de la gramatica" PREVIOUS="primary" NEXT="inten_id"/>
+        <KEY NAME="inten_id" TYPE="foreign" FIELDS="intencionid" REFTABLE="vocabulario_intenciones_es" REFFIELDS="id" COMMENT="id de la intencin" PREVIOUS="gram_id" NEXT="tipo_id"/>
+        <KEY NAME="tipo_id" TYPE="foreign" FIELDS="tipologiaid" REFTABLE="vocabulario_tipologias_es" REFFIELDS="id" COMMENT="id de la tipologia" PREVIOUS="inten_id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_otros" COMMENT="otro tipo de palabras" PREVIOUS="vocabulario_verbos" NEXT="vocabulario_camposlexicos_es">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="palabra"/>
+        <FIELD NAME="palabra" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"  COMMENT="la otra palabra" PREVIOUS="id" NEXT="significado"/>
+        <FIELD NAME="significado" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false"  COMMENT="traduccion de la palbra" PREVIOUS="palabra" NEXT="observaciones"/>
+        <FIELD NAME="observaciones" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false"  COMMENT="observaciones de la palabra" PREVIOUS="significado" NEXT="gramaticaid"/>
+        <FIELD NAME="gramaticaid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id de la gramatica" PREVIOUS="observaciones" NEXT="intencionid"/>
+        <FIELD NAME="intencionid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id de la intencion" PREVIOUS="gramaticaid" NEXT="tipologiaid"/>
+        <FIELD NAME="tipologiaid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id de la tipologia" PREVIOUS="intencionid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="gram_id"/>
+        <KEY NAME="gram_id" TYPE="foreign" FIELDS="gramaticaid" REFTABLE="vocabulario_gramatica" REFFIELDS="id" COMMENT="id de la gramatica" PREVIOUS="primary" NEXT="inten_id"/>
+        <KEY NAME="inten_id" TYPE="foreign" FIELDS="intencionid" REFTABLE="vocabulario_intenciones_es" REFFIELDS="id" COMMENT="id de la intencin" PREVIOUS="gram_id" NEXT="tipo_id"/>
+        <KEY NAME="tipo_id" TYPE="foreign" FIELDS="tipologiaid" REFTABLE="vocabulario_tipologias_es" REFFIELDS="id" COMMENT="id de la tipologia" PREVIOUS="inten_id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_camposlexicos_es" COMMENT="campos lexicos disponibles en español" PREVIOUS="vocabulario_otros" NEXT="vocabulario_camposlexicos_en">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="usuarioid"/>
+        <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
+        <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false"  COMMENT="numeros que corresponden al campo y subcampos" PREVIOUS="usuarioid" NEXT="campo"/>
+        <FIELD NAME="campo" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"  COMMENT="nombre del campo lexico" PREVIOUS="padre"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+        <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="clave para el id del usuario" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_camposlexicos_en" COMMENT="campos lexicos disponibles en ingles" PREVIOUS="vocabulario_camposlexicos_es" NEXT="vocabulario_camposlexicos_pl">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="usuarioid"/>
+        <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
+        <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false"  COMMENT="numeros que corresponden al campo y subcampos" PREVIOUS="usuarioid" NEXT="campo"/>
+        <FIELD NAME="campo" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"  COMMENT="nombre del campo lexico" PREVIOUS="padre"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+        <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="clave para el id del usuario" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_camposlexicos_pl" COMMENT="campos lexicos disponibles en polaco" PREVIOUS="vocabulario_camposlexicos_en" NEXT="vocabulario_camposlexicos_de">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="usuarioid"/>
+        <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
+        <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false"  COMMENT="numeros que corresponden al campo y subcampos" PREVIOUS="usuarioid" NEXT="campo"/>
+        <FIELD NAME="campo" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"  COMMENT="nombre del campo lexico" PREVIOUS="padre"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+        <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="clave para el id del usuario" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_camposlexicos_de" COMMENT="campos lexicos disponibles aleman" PREVIOUS="vocabulario_camposlexicos_pl" NEXT="vocabulario_camposlexicos_fr">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="usuarioid"/>
+        <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
+        <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false"  COMMENT="numeros que corresponden al campo y subcampos" PREVIOUS="usuarioid" NEXT="campo"/>
+        <FIELD NAME="campo" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"  COMMENT="nombre del campo lexico" PREVIOUS="padre"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+        <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="clave para el id del usuario" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_camposlexicos_fr" COMMENT="campos lexicos disponibles frances" PREVIOUS="vocabulario_camposlexicos_de" NEXT="vocabulario_gramatica">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="usuarioid"/>
+        <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
+        <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false"  COMMENT="numeros que corresponden al campo y subcampos" PREVIOUS="usuarioid" NEXT="campo"/>
+        <FIELD NAME="campo" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"  COMMENT="nombre del campo lexico" PREVIOUS="padre"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+        <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="clave para el id del usuario" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_gramatica" COMMENT="estructuras gramaticales" PREVIOUS="vocabulario_camposlexicos_fr" NEXT="vocabulario_mis_palabras">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="usuarioid"/>
+        <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
+        <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="padre en la jerarquía de gramáticas" PREVIOUS="usuarioid" NEXT="gramatica"/>
+        <FIELD NAME="gramatica" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"  COMMENT="nombre para la estructura gramatical" PREVIOUS="padre"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+        <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_mis_palabras" COMMENT="palabras que guarda cada usuario" PREVIOUS="vocabulario_gramatica" NEXT="vocabulario_mis_gramaticas">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="usuarioid"/>
+        <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"  COMMENT="id del usuario al que pertenece la palabra" PREVIOUS="id" NEXT="sustantivoid"/>
+        <FIELD NAME="sustantivoid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"  COMMENT="id del sustantivo que guarda cada usuario" PREVIOUS="usuarioid" NEXT="adjetivoid"/>
+        <FIELD NAME="adjetivoid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  PREVIOUS="sustantivoid" NEXT="verboid"/>
+        <FIELD NAME="verboid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  PREVIOUS="adjetivoid" NEXT="otroid"/>
+        <FIELD NAME="otroid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  PREVIOUS="verboid" NEXT="campoid"/>
+        <FIELD NAME="campoid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="1" SEQUENCE="false"  PREVIOUS="otroid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+        <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary" NEXT="clave_sustantivo"/>
+        <KEY NAME="clave_sustantivo" TYPE="foreign" FIELDS="sustantivoid" REFTABLE="vocabulario_camposlexicos_es" REFFIELDS="id" COMMENT="id del sustantivo" PREVIOUS="clave_usuario" NEXT="clave_campo"/>
+        <KEY NAME="clave_campo" TYPE="foreign" FIELDS="campoid" REFTABLE="vocabulario_camposlexicos_es" REFFIELDS="id" COMMENT="id del campo lexico" PREVIOUS="clave_sustantivo" NEXT="clave_adjetivo"/>
+        <KEY NAME="clave_adjetivo" TYPE="foreign" FIELDS="adjetivoid" REFTABLE="vocabulario_adjetivos" REFFIELDS="id" COMMENT="id del adjetivo" PREVIOUS="clave_campo" NEXT="clave_verbo"/>
+        <KEY NAME="clave_verbo" TYPE="foreign" FIELDS="verboid" REFTABLE="vocabulario_verbos" REFFIELDS="id" COMMENT="id del verbo" PREVIOUS="clave_adjetivo" NEXT="clave_otro"/>
+        <KEY NAME="clave_otro" TYPE="foreign" FIELDS="otroid" REFTABLE="vocabulario_otros" REFFIELDS="id" COMMENT="id de la otra palabra" PREVIOUS="clave_verbo" NEXT="clave_norepetir"/>
+        <KEY NAME="clave_norepetir" TYPE="unique" FIELDS="sustantivoid, adjetivoid, verboid, otroid, campoid" COMMENT="clave para no repetir tuplas" PREVIOUS="clave_otro"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_mis_gramaticas" COMMENT="descripcion de los alumnos de las gramaticas" PREVIOUS="vocabulario_mis_palabras" NEXT="vocabulario_intenciones_es">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="usuarioid"/>
+        <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id del usuario" PREVIOUS="id" NEXT="gramaticaid"/>
+        <FIELD NAME="gramaticaid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id de la gramatica" PREVIOUS="usuarioid" NEXT="descripcion"/>
+        <FIELD NAME="descripcion" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false"  COMMENT="descripcion de la gramatica" PREVIOUS="gramaticaid" NEXT="tipo_palabra"/>
+        <FIELD NAME="tipo_palabra" TYPE="char" LENGTH="10" NOTNULL="false" SEQUENCE="false"  COMMENT="para saber en que tabla hay que buscar el tipo puede ser 1..4 los que tenemos" PREVIOUS="descripcion" NEXT="palabra_id"/>
+        <FIELD NAME="palabra_id" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id de la palabra, se sabe en donde esta la palabra segun el tipo" PREVIOUS="tipo_palabra"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_gramatica"/>
+        <KEY NAME="clave_gramatica" TYPE="foreign" FIELDS="gramaticaid" REFTABLE="vocabulario_gramatica" REFFIELDS="id" COMMENT="id de la gramatica" PREVIOUS="primary" NEXT="clave_usuario"/>
+        <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="clave_gramatica" NEXT="clave_norepetir"/>
+        <KEY NAME="clave_norepetir" TYPE="unique" FIELDS="usuarioid, palabra_id, tipo_palabra" COMMENT="clave para no repetir gramaticas" PREVIOUS="clave_usuario"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_intenciones_es" COMMENT="intenciones comunicativas" PREVIOUS="vocabulario_mis_gramaticas" NEXT="vocabulario_intenciones_en">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="usuarioid"/>
+        <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
+        <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="padre en la jerarquía de gramáticas" PREVIOUS="usuarioid" NEXT="intencion"/>
+        <FIELD NAME="intencion" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false"  COMMENT="nombre para la estructura gramatical" PREVIOUS="padre" NEXT="ordenid"/>
+        <FIELD NAME="ordenid" TYPE="int" LENGTH="11" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="Campo adicional para gestionar el orden de aparición de las intenciones de nivel 0." PREVIOUS="intencion"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+        <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_intenciones_en" COMMENT="intenciones comunicativas" PREVIOUS="vocabulario_intenciones_es" NEXT="vocabulario_intenciones_pl">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="usuarioid"/>
+        <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
+        <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="padre en la jerarquía de gramáticas" PREVIOUS="usuarioid" NEXT="intencion"/>
+        <FIELD NAME="intencion" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"  COMMENT="nombre para la estructura gramatical" PREVIOUS="padre" NEXT="ordenid"/>
+        <FIELD NAME="ordenid" TYPE="int" LENGTH="11" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="Campo adicional para gestionar el orden de aparición de las intenciones de nivel 0." PREVIOUS="intencion"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+        <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_intenciones_pl" COMMENT="intenciones comunicativas" PREVIOUS="vocabulario_intenciones_en" NEXT="vocabulario_intenciones_de">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="usuarioid"/>
+        <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
+        <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="padre en la jerarquía de gramáticas" PREVIOUS="usuarioid" NEXT="intencion"/>
+        <FIELD NAME="intencion" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"  COMMENT="nombre para la estructura gramatical" PREVIOUS="padre" NEXT="ordenid"/>
+        <FIELD NAME="ordenid" TYPE="int" LENGTH="11" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="Campo adicional para gestionar el orden de aparición de las intenciones de nivel 0." PREVIOUS="intencion"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+        <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_intenciones_de" COMMENT="intenciones comunicativas" PREVIOUS="vocabulario_intenciones_pl" NEXT="vocabulario_intenciones_fr">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="usuarioid"/>
+        <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
+        <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="padre en la jerarquía de gramáticas" PREVIOUS="usuarioid" NEXT="intencion"/>
+        <FIELD NAME="intencion" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"  COMMENT="nombre para la estructura gramatical" PREVIOUS="padre" NEXT="ordenid"/>
+        <FIELD NAME="ordenid" TYPE="int" LENGTH="11" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="Campo adicional para gestionar el orden de aparición de las intenciones de nivel 0." PREVIOUS="intencion"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+        <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_intenciones_fr" COMMENT="intenciones comunicativas" PREVIOUS="vocabulario_intenciones_de" NEXT="vocabulario_mis_intenciones">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="usuarioid"/>
+        <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
+        <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="padre en la jerarquía de gramáticas" PREVIOUS="usuarioid" NEXT="intencion"/>
+        <FIELD NAME="intencion" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"  COMMENT="nombre para la estructura gramatical" PREVIOUS="padre" NEXT="ordenid"/>
+        <FIELD NAME="ordenid" TYPE="int" LENGTH="11" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="Campo adicional para gestionar el orden de aparición de las intenciones de nivel 0." PREVIOUS="intencion"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+        <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_mis_intenciones" COMMENT="descripcion de los alumnos de las intenciones comunicativas" PREVIOUS="vocabulario_intenciones_fr" NEXT="vocabulario_tipologias_es">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="usuarioid"/>
+        <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id del usuario" PREVIOUS="id" NEXT="intencionesid"/>
+        <FIELD NAME="intencionesid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id de la intencion comunicativa" PREVIOUS="usuarioid" NEXT="descripcion"/>
+        <FIELD NAME="descripcion" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false"  COMMENT="descripcion de la gramatica" PREVIOUS="intencionesid" NEXT="tipo_palabra"/>
+        <FIELD NAME="tipo_palabra" TYPE="char" LENGTH="10" NOTNULL="false" SEQUENCE="false"  COMMENT="para saber en que tabla hay que buscar el tipo puede ser 1..4 los que tenemos" PREVIOUS="descripcion" NEXT="palabra_id"/>
+        <FIELD NAME="palabra_id" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id de la palabra, se sabe en donde esta la palabra segun el tipo" PREVIOUS="tipo_palabra"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_intencion"/>
+        <KEY NAME="clave_intencion" TYPE="foreign" FIELDS="intencionesid" REFTABLE="vocabulario_intenciones_es" REFFIELDS="id" COMMENT="id de la intencion" PREVIOUS="primary" NEXT="clave_usuario"/>
+        <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="clave_intencion" NEXT="clave_norepetir"/>
+        <KEY NAME="clave_norepetir" TYPE="unique" FIELDS="usuarioid, intencionesid" COMMENT="clave para no repetir intenciones" PREVIOUS="clave_usuario"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_tipologias_es" COMMENT="tipologias textuales" PREVIOUS="vocabulario_mis_intenciones" NEXT="vocabulario_tipologias_en">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="usuarioid"/>
+        <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
+        <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="padre en la jerarquía de gramáticas" PREVIOUS="usuarioid" NEXT="tipo"/>
+        <FIELD NAME="tipo" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"  COMMENT="nombre para la tipología textual" PREVIOUS="padre"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+        <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_tipologias_en" COMMENT="tipologias textuales" PREVIOUS="vocabulario_tipologias_es" NEXT="vocabulario_tipologias_pl">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="usuarioid"/>
+        <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
+        <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="padre en la jerarquía de gramáticas" PREVIOUS="usuarioid" NEXT="tipo"/>
+        <FIELD NAME="tipo" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"  COMMENT="nombre para la tipología textual" PREVIOUS="padre"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+        <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_tipologias_pl" COMMENT="tipologias textuales" PREVIOUS="vocabulario_tipologias_en" NEXT="vocabulario_tipologias_de">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="usuarioid"/>
+        <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
+        <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="padre en la jerarquía de gramáticas" PREVIOUS="usuarioid" NEXT="tipo"/>
+        <FIELD NAME="tipo" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"  COMMENT="nombre para la tipología textual" PREVIOUS="padre"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+        <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_tipologias_de" COMMENT="tipologias textuales" PREVIOUS="vocabulario_tipologias_pl" NEXT="vocabulario_tipologias_fr">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="usuarioid"/>
+        <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
+        <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="padre en la jerarquía de gramáticas" PREVIOUS="usuarioid" NEXT="tipo"/>
+        <FIELD NAME="tipo" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"  COMMENT="nombre para la tipología textual" PREVIOUS="padre"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+        <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_tipologias_fr" COMMENT="tipologias textuales" PREVIOUS="vocabulario_tipologias_de" NEXT="vocabulario_mis_tipologias">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="usuarioid"/>
+        <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
+        <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="padre en la jerarquía de gramáticas" PREVIOUS="usuarioid" NEXT="tipo"/>
+        <FIELD NAME="tipo" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"  COMMENT="nombre para la tipología textual" PREVIOUS="padre"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+        <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_mis_tipologias" COMMENT="descripcion de los alumnos de las tipologias textuales" PREVIOUS="vocabulario_tipologias_fr" NEXT="vocabulario_estrategias">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="usuarioid"/>
+        <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id del usuario" PREVIOUS="id" NEXT="tipoid"/>
+        <FIELD NAME="tipoid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id de la intencion comunicativa" PREVIOUS="usuarioid" NEXT="descripcion"/>
+        <FIELD NAME="descripcion" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false"  COMMENT="descripcion de la gramatica" PREVIOUS="tipoid" NEXT="tipo_palabra"/>
+        <FIELD NAME="tipo_palabra" TYPE="char" LENGTH="10" NOTNULL="false" SEQUENCE="false"  COMMENT="para saber en que tabla hay que buscar el tipo puede ser 1..4 los que tenemos" PREVIOUS="descripcion" NEXT="palabra_id"/>
+        <FIELD NAME="palabra_id" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id de la palabra, se sabe en donde esta la palabra segun el tipo" PREVIOUS="tipo_palabra"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_tipo"/>
+        <KEY NAME="clave_tipo" TYPE="foreign" FIELDS="tipoid" REFTABLE="vocabulario_tipologias_es" REFFIELDS="id" COMMENT="id del tipo" PREVIOUS="primary" NEXT="clave_usuario"/>
+        <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="clave_tipo" NEXT="clave_norepetir"/>
+        <KEY NAME="clave_norepetir" TYPE="unique" FIELDS="usuarioid, tipoid" COMMENT="clave para no repetir intenciones" PREVIOUS="clave_usuario"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_estrategias" COMMENT="estrategias de aprendizaje" PREVIOUS="vocabulario_mis_tipologias" NEXT="vocabulario_mis_estrategias">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="usuarioid"/>
+        <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="id del usuario" PREVIOUS="id" NEXT="padre"/>
+        <FIELD NAME="padre" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"  COMMENT="padre en la jerarquía" PREVIOUS="usuarioid" NEXT="estrategia"/>
+        <FIELD NAME="estrategia" TYPE="char" LENGTH="100" NOTNULL="true" SEQUENCE="false"  COMMENT="nombre para la estrategia de aprendizaje" PREVIOUS="padre"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_usuario"/>
+        <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="primary"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="vocabulario_mis_estrategias" COMMENT="descripcion de los alumnos de las estrategias de aprendizaje" PREVIOUS="vocabulario_estrategias">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"  NEXT="usuarioid"/>
+        <FIELD NAME="usuarioid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id del usuario" PREVIOUS="id" NEXT="estrategiaid"/>
+        <FIELD NAME="estrategiaid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id de la estrategia de aprendizaje" PREVIOUS="usuarioid" NEXT="descripcion"/>
+        <FIELD NAME="descripcion" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false"  COMMENT="descripcion de la estrategia" PREVIOUS="estrategiaid" NEXT="tipo_palabra"/>
+        <FIELD NAME="tipo_palabra" TYPE="char" LENGTH="10" NOTNULL="false" SEQUENCE="false"  COMMENT="para saber en que tabla hay que buscar el tipo puede ser 1..4 los que tenemos" PREVIOUS="descripcion" NEXT="palabra_id"/>
+        <FIELD NAME="palabra_id" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"  COMMENT="id de la palabra, se sabe en donde esta la palabra segun el tipo" PREVIOUS="tipo_palabra"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" NEXT="clave_estrategia"/>
+        <KEY NAME="clave_estrategia" TYPE="foreign" FIELDS="estrategiaid" REFTABLE="vocabulario_estrategias" REFFIELDS="id" COMMENT="id de la estrategia" PREVIOUS="primary" NEXT="clave_usuario"/>
+        <KEY NAME="clave_usuario" TYPE="foreign" FIELDS="usuarioid" REFTABLE="mdl_user" REFFIELDS="id" COMMENT="id del usuario" PREVIOUS="clave_estrategia" NEXT="clave_norepetir"/>
+        <KEY NAME="clave_norepetir" TYPE="unique" FIELDS="usuarioid, estrategiaid" COMMENT="clave para no repetir estrategias" PREVIOUS="clave_usuario"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+  
+>>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 </XMLDB>
