@@ -1,7 +1,4 @@
 añadido por ambos: ayudas/Ayudas_en.pdf
-	añadido por ambos: ayudas/Ayudas_es.pdf
-	añadido por ambos: ayudas/Ayudas_fr.pdf
-	añadido por ambos: ayudas/Ayudas_pl.pdf
 	añadido por ambos: buscarintenciones.php
 	añadido por ambos: clase_log.php
 	añadido por ambos: css/demo_page.css
@@ -28,15 +25,8 @@ añadido por ambos: ayudas/Ayudas_en.pdf
 	añadido por ambos: guardar_ic_desc.php
 	añadido por ambos: guardar_tt.php
 	añadido por ambos: guardar_tt_desc.php
-	añadido por ambos: imagenes/colaboradores.png
-	añadido por ambos: imagenes/idea.png
-	añadido por ambos: imagenes/loading.gif
 	añadido por ambos: index.php
-	añadido por ambos: info/info_de.pdf
-	añadido por ambos: info/info_es.pdf
 	añadido por ambos: jquery-1.2.6.min.js
-	añadido por ambos: js/chosen/chosen-sprite.png
-	añadido por ambos: js/chosen/chosen-sprite@2x.png
 	añadido por ambos: js/chosen/chosen.css
 	añadido por ambos: js/chosen/chosen.jquery.js
 	añadido por ambos: js/chosen/chosen.jquery.min.js
@@ -47,8 +37,6 @@ añadido por ambos: ayudas/Ayudas_en.pdf
 	añadido por ambos: js/jquery.js
 	añadido por ambos: lib.php
 	añadido por ambos: listado.php
-	añadido por ambos: manual.odt
-	añadido por ambos: manual.pdf
 	añadido por ambos: mod.html
 	añadido por ambos: pdf.php
 	añadido por ambos: style.css
