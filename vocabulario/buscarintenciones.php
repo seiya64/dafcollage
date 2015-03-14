@@ -16,11 +16,7 @@ $id_tocho = optional_param('id_tocho', 0, PARAM_INT);
 if ($mform->is_cancelled()) {
     redirect('./view.php?id=' . $id_tocho);
 }else{ //Estoy buscando
-<<<<<<< HEAD
-    $middle = optional_param('buscarpor', PARAM_TEXT);
-=======
     $middle = optional_param('buscarpor', '', PARAM_TEXT);
->>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
     
   /*  $mintencion = new Vocabulario_mis_intenciones();
     $misintenciones=$mintencion->recuperar_middles($USER->id,$middle);

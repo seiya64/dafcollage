@@ -45,11 +45,8 @@ require_once("lib.php");
 require_once("vocabulario_classes.php");
 require_once("vocabulario_formularios.php");
 
-<<<<<<< HEAD
-=======
 global $DB;
 
->>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 $id_tocho = optional_param('id_tocho', 0, PARAM_INT);
 
 $mform = new mod_vocabulario_aniadir_gr_form();
@@ -58,35 +55,20 @@ if ($mform->is_cancelled()) {
 }
 
 //averiguo quien soy
-<<<<<<< HEAD
-$user_object = get_record('user', 'id', $USER->id);
-=======
 $user_object = $DB->get_record('user', array('id'=>$USER->id));
->>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
 $campo = array();
 $campo['usuarioid'] = $user_object->id;
 $campo['padre'] = required_param('campogr', PARAM_TEXT);
-<<<<<<< HEAD
-$campo['gramatica'] = optional_param('campo', PARAM_TEXT);
-
-if (optional_param('eliminar', 0, PARAM_INT) && $campo['padre'] > 70) {
-    delete_records('vocabulario_gramatica', 'id', $campo['padre']);
-=======
 $campo['gramatica'] = optional_param('campo', '', PARAM_TEXT);
 
 if (optional_param('eliminar', 0, PARAM_INT) && $campo['padre'] > 70) {
     $DB->delete_records('vocabulario_gramatica',array('id'=> $campo['padre']));
->>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
     //echo 'eliminado ' . $campo['padre'];
 }
 
 if ($campo['gramatica'] != null) {
-<<<<<<< HEAD
-    insert_record('vocabulario_gramatica', $campo, true);
-=======
    $DB->insert_record('vocabulario_gramatica', $campo, true);
->>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 }
 
 //volvemos a donde veniamos

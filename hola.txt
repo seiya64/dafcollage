@@ -1,0 +1,10 @@
+//echo 'eliminado ' . $campo['padre'];
+}
+
+if ($campo['gramatica'] != null) {
+$DB->insert_record('vocabulario_gramatica', $campo, true);
+}
+
+//volvemos a donde veniamos
+redirect('./view.php?id=' . $id_tocho . '&opcion=15');
+

@@ -39,22 +39,15 @@
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details. */
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 require_once("../../config.php");
 require_once("lib.php");
 require_once("vocabulario_classes.php");
 require_once("vocabulario_formularios.php");
 
 global $CFG, $COURSE, $USER;
-<<<<<<< HEAD
-$context = get_context_instance(CONTEXT_COURSE, $COURSE->id);
-=======
 
 $context = context_course::instance($COURSE->id);
->>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
 $file = fopen("log_ver.txt","w");
 $log = "";
@@ -73,11 +66,7 @@ if ($cancel) {
     redirect('./view.php?id=' . $id_tocho);
 }
 
-<<<<<<< HEAD
-if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false) && empty($campo) && empty($tipo) ) {
-=======
 if (has_capability('moodle/archetypes:editingteacher', $context, $USER->id, false) && empty($campo) && empty($tipo) ) {
->>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
     $alumno = optional_param('alumnoid', 0, PARAM_INT);
     $log .= "Ha entrado en el sitio prohibido\n";
     $log .= "alumno: " . $alumno . "\n";
@@ -85,11 +74,7 @@ if (has_capability('moodle/archetypes:editingteacher', $context, $USER->id, fals
     fclose($file);
     redirect('view.php?id=' . $id_tocho . '&opcion=2&alid=' . $alumno);
 }
-<<<<<<< HEAD
-else if (has_capability('moodle/legacy:editingteacher', $context, $USER->id, false) && !empty($tipo) && !empty($campo)) {
-=======
 else if (has_capability('moodle/archetypes:editingteacher', $context, $USER->id, false) && !empty($tipo) && !empty($campo)) {
->>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
     $alumno = optional_param('alumnoid', 0, PARAM_INT);
     $log .= "BIENNNNNN\n";
     $log .= "alumno: " . $alumno . "\n";

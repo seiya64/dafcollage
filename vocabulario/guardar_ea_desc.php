@@ -48,11 +48,8 @@ require_once("lib.php");
 require_once("vocabulario_classes.php");
 require_once("vocabulario_formularios.php");
 
-<<<<<<< HEAD
-=======
 global $DB;
 
->>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 $id_tocho = optional_param('id_tocho', 0, PARAM_INT);
 
 $mform = new mod_vocabulario_estrategia_desc_form();
@@ -62,37 +59,23 @@ $eaid = optional_param('eaid', 0, PARAM_INT);
 $id_mp = optional_param('id_mp', null, PARAM_INT);
 
 //averiguo quien soy
-<<<<<<< HEAD
-$user_object = get_record('user', 'id', $USER->id);
-
-$est = new Vocabulario_estrategias($user_object->id, required_param('campoea', PARAM_TEXT), optional_param('estrategia', null, PARAM_TEXT));
-=======
 $user_object = $DB->get_record('user', array('id'=>$USER->id));
 
 $est = new Vocabulario_estrategias($user_object->id, required_param('campoea', PARAM_TEXT), optional_param('estrategia', '', PARAM_TEXT));
->>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
 if ($mform->is_cancelled()) {
     redirect('./view.php?id=' . $id_tocho);
 }
 
 if (optional_param('eliminar', 0, PARAM_INT) && $est->get('padre') > 1) {
-<<<<<<< HEAD
-    delete_records('vocabulario_estrategias', 'id', $est->get('padre'));
-=======
     $DB->delete_records('vocabulario_estrategias',array('id'=> $est->get('padre')));
->>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
     redirect('./view.php?id=' . $id_tocho . '&opcion=12');
 }
 
 if ($est->get('estrategia') != null) {
     $est->set(null, null, '0');
 
-<<<<<<< HEAD
-    $eaidaux = insert_record('vocabulario_estrategias', $est, true);
-=======
     $eaidaux = $DB->insert_record('vocabulario_estrategias', $est, true);
->>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 }
 redirect('./view.php?id=' . $id_tocho . '&opcion=12&eaid=' . $eaidaux);
 ?>

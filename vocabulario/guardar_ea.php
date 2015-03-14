@@ -48,11 +48,8 @@ require_once("lib.php");
 require_once("vocabulario_classes.php");
 require_once("vocabulario_formularios.php");
 
-<<<<<<< HEAD
-=======
 global $DB;
 
->>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 $id_tocho = optional_param('id_tocho', 0, PARAM_INT);
 
 $mform = new mod_vocabulario_nuevo_estrategia_form();
@@ -62,14 +59,6 @@ if ($mform->is_cancelled()) {
 }
 
 //averiguo quien soy
-<<<<<<< HEAD
-$user_object = get_record('user', 'id', $USER->id);
-
-$estrategia = new Vocabulario_estrategias($user_object->id, required_param('campoea', PARAM_TEXT), optional_param('estrategia', PARAM_TEXT));
-
-
-$desc = __SEPARADORCAMPOS__ . optional_param('miestrategia', null, PARAM_TEXT);
-=======
 $user_object = $DB->get_record('user', array('id'=>$USER->id));
 
 
@@ -77,16 +66,11 @@ $estrategia = new Vocabulario_estrategias($user_object->id, required_param('camp
 
 
 $desc = __SEPARADORCAMPOS__ . optional_param('miestrategia', '', PARAM_TEXT);
->>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
 
 //vemos que botón hemos pulsado
 if ($mform->no_submit_button_pressed()) {
-<<<<<<< HEAD
-    if (optional_param('desc_btn')) {
-=======
     if (optional_param('desc_btn', '', PARAM_TEXT)) {
->>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
         $estrategiaaux = new Vocabulario_mis_estrategias();
         $estrategiaaux->leer($estrategia->get('padre'));

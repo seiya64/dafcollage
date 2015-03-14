@@ -13,11 +13,8 @@
   Francisco Javier Rodríguez López (seiyadesagitario@gmail.com)
   Simeón Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto(finamolinasoto@gmail.com)
-<<<<<<< HEAD
-=======
   Luis Redondo Expósito(luis.redondo.exposito@gmail.com)
   Ramón Rueda Delgado (ramonruedadelgado@gmail.com)
->>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
   Original idea:
   Ruth Burbat
@@ -50,11 +47,7 @@ guardar palabras por columnas
 #mform1 {
     display: table;
 }
-<<<<<<< HEAD
-
-=======
 /*
->>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 #sus {
     width: 48%;
     float: left;
@@ -86,8 +79,6 @@ guardar palabras por columnas
     min-height: 250px;
     display: table-cell;
 }
-<<<<<<< HEAD
-=======
 */
 
 
@@ -131,7 +122,6 @@ guardar palabras por columnas
 }
 
 
->>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
 #viewcanvas{ padding-top:10px;}
 .menurow{ clear:both; padding-top:15px;}
@@ -153,15 +143,6 @@ guardar palabras por columnas
 
 .cajagranancho { width: 100%; }
 .twitter{ width: 252px; padding-left: 10px;}
-<<<<<<< HEAD
-#mform1 { width:90%; }
-          
-#id_cancellink{ 
-float: right;
-color: #EEE;
-font-size: 0.9em;
-}
-=======
 #mform1 { 
 	width:100%;
 	display:table-cell; 
@@ -175,7 +156,6 @@ font-size: 0.9em;
 #fgroup_id_botones{
     text-align: center;
 }
->>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
 
 .buscador{
     margin-left:300px;
@@ -226,8 +206,6 @@ font-size: 0.9em;
 	background:rgb(180, 205, 228);
 }
 .size>ul.list li:last-child { border:none }
-<<<<<<< HEAD
-=======
 
 
 /*Añadido por Salim ya que cuando vocabulario se instala como módulo, En la opción "Mis Palabras" -> los enlaces "[Combinación con otras palabras (interactivo)],... aparecen con tamaño de fuente heredado de H1, esta selector que he añadido lo resuelve*/
@@ -272,4 +250,3 @@ input, textarea, .uneditable-input {
    margin-right:auto;
    margin-left:0px;
 }
->>>>>>> 7c29cbaffbf1a0efc5907dbf3b3b442f5bb2fd2d
