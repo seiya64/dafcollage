@@ -16,6 +16,8 @@
   Simeón Ruiz Romero (simeonruiz@gmail.com)
   Serafina Molina Soto(finamolinasoto@gmail.com)
   Javier Castro Fernández (havidarou@gmail.com)
+  Luis Redondo Expósito (luis.redondo.exposito@gmail.com)
+  Ramón Rueda Delgado (ramonruedadelgado@gmail.com)
 
   Original idea:
   Ruth Burbat
