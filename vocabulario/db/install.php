@@ -44,11 +44,9 @@ function xmldb_vocabulario_install() {
 
     //En primer lugar, nos conectamos con nuestra base de datos en phpmyadmin para
     //importar los datos.
-    $dbhost = 'localhost';
-    $dbuser = 'root'; //establecemos el nombre de usuario
-    //$dbpass = 'Daf-Collage*'; //y la contraseña
+    global $CFG;
     //Con la llamada a esta función, podemos conectarnos a nuestra base de datos.
-    $conn = mysql_connect($dbhost, $dbuser/*, $dbpass*/);
+    $conn = mysql_connect($CFG->dbhost, $CFG->dbuser, $CFG->dbpass);
     //Comprobamos si la conexión se ha realizado correctamente
     if(! $conn )
     {
@@ -56,7 +54,7 @@ function xmldb_vocabulario_install() {
     }
     //A continuación, seleccionamos la base de datos donde queremos realizar la inserción
     //de datos
-    mysql_select_db('moodle');
+    mysql_select_db('moodle28des');
     //Creamos un array con el nombre de todas las tablas que deseamos importar.
     $filenames = array(
             'camposlexicos_de', 
@@ -84,7 +82,7 @@ function xmldb_vocabulario_install() {
     //En el fichero vocabulariobackupvacio.sql se encuentran las instrucciones necesarias
     //para crear las tablas oportunas en la base de datos moodle.
     $crear='/home/dafcollage/cuaderno_digital/vocabulario/db/dataxmls/vocabulariobackupvacio.sql';
-    $sql = "LOAD DATA INFILE '$crear' INTO DATABASE moodle";
+    $sql = "LOAD DATA INFILE '$crear' INTO DATABASE moodle28des";
     //Recorremos todos los ficheros *.sql
     foreach ($filenames as $filename) {
 
