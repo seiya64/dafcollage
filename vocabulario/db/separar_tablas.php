@@ -89,6 +89,56 @@ function obtenerTablasMoodle19($nombreFichero)
     
 }
 
+function obtenerTablaUsuarios($nombreFichero)
+{
+    //OJO! Cambiar path de los ficheros.
+    $fp = fopen("/home/luisre/Escritorio/".$nombreFichero.".sql","a+");
+    $res = fopen("/home/luisre/Escritorio/salida/mdl_user.sql","w");
+    $busca = "INTO `mdl_user` VALUES ";
+    $i = strlen($busca) + strlen("INSERT ");
+
+    while (!feof($fp))
+    {
+        $linea = fgets($fp);
+        $tope = strlen($linea);
+        $encontrado = strpos($linea,$busca);
+        $aux = false;
+        if ($encontrado == true)
+        {
+            while($i < $tope)
+            {
+                $cad = substr($linea,$i,2);
+                if($cad == '),')
+                {
+                    fwrite($res,"\n");
+                    $aux = true;
+                }
+                else {
+                    if($cad[0] != '(' && $cad[0] != ')' && $cad[0] != ',' && $cad[0] != "'")
+                    {
+                        fwrite($res,$cad[0]);
+                    }
+                    if ($cad[0] == ',')
+                    {
+                        if ($aux == false)
+                        {
+                            fwrite($res,"\t");
+                        }
+                        else
+                        {
+                            $aux = false;
+                        }
+                    }
+                }
+                $i++;
+            }
+            
+        }
+    }
+    fclose($fp);
+    fclose($res);
+}
+
 //Función que transforma las tablas pertenecientes a moodle 1.9 a tablas con la
 //estructura de moodle 2.8
 function transformarTablas19To28($nombreFichero)
@@ -147,7 +197,7 @@ function partirFichero($nombreFichero)
 
 //partirFichero("copiaSeguridad");
 
-$filenames = array(
+/*$filenames = array(
             'camposlexicos_de', 
             'camposlexicos_en', 
             'camposlexicos_es', 
@@ -169,9 +219,12 @@ $filenames = array(
             'sustantivos',
             'verbos',
             'gramatica'
-            );
-foreach ($filenames as $filename)
+            );*/
+
+/*foreach ($filenames as $filename)
 {
     obtenerTablasVocabulario("copiaSeguridad",$filename, $filename);
 
-}
+}*/
+
+obtenerTablaUsuarios("copiaSeguridad");
