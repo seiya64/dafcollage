@@ -36,7 +36,44 @@
 //Función que separa las tablas de vocabulario moodle 1.9 del resto de las tablas.
 function obtenerTablasVocabulario($nombreFichero)
 {
-    
+    $fp = fopen("/home/dafcollage/Escritorio/salida/".$nombreFichero.".txt","a+");
+    $res = fopen("/home/dafcollage/Escritorio/salida/prueba.txt","w");
+    $busca = "INTO `mdl_vocabulario_intenciones_de` VALUES ";
+    $i = strlen($busca) + strlen("INSERT ");
+
+    while (!feof($fp))
+    {
+        $linea = fgets($fp);
+        $tope = strlen($linea);
+        $encontrado = strpos($linea,$busca);
+     //   fwrite($res, "bah\n");
+        if ($encontrado == true)
+        {
+            //fwrite($res, "caca\n");
+            while($i < $tope)
+            {
+                $cad = substr($linea,$i,2);
+                if($cad == '),')
+                {
+                    fwrite($res,"\n");
+                }
+                else {
+                    if($cad[0] != '(' && $cad[0] != ')' && $cad[0] != ',' && $cad[0] != "'")
+                    {
+                        fwrite($res,$cad[0]);
+                    }
+                    if ($cad[0] == ',')
+                    {
+                        fwrite($res,"\t");
+                    }
+                }
+                $i++;
+                //$car = fgetc($linea);
+//                fwrite($res,$linea);
+            }
+            
+        }
+    }
 }
 
 //Función que separa las tablas de moodle 1.9 del resto de las tablas.
@@ -56,5 +93,50 @@ function transformarTablas19To28($nombreFichero)
 //copia de seguridad era muy grande y muy costoso de abrir.
 function partirFichero($nombreFichero)
 {
-    
+    $fp = fopen("/home/dafcollage/Escritorio/".$nombreFichero. ".sql", "a+");
+    $res1 = fopen("/home/dafcollage/Escritorio/salida/copia1.txt","w");
+    $res2 = fopen("/home/dafcollage/Escritorio/salida/copia2.txt","w");
+    $res3 = fopen("/home/dafcollage/Escritorio/salida/copia3.txt","w");
+    $res4 = fopen("/home/dafcollage/Escritorio/salida/copia4.txt","w");
+    $res5 = fopen("/home/dafcollage/Escritorio/salida/copia5.txt","w");
+    $res6 = fopen("/home/dafcollage/Escritorio/salida/copia6.txt","w");
+    $res7 = fopen("/home/dafcollage/Escritorio/salida/copia7.txt","w");
+    //Leemos hasta el final del fichero
+    $n = 0;
+    while (!feof($fp))
+    {
+        $linea = fgets($fp);
+        $n++;
+        if ($n < 991)
+        {
+            fwrite($res1,$linea);
+        }
+        elseif ($n > 991 && $n < 2006)
+        {
+            fwrite($res2,$linea);
+        }
+        elseif ($n > 2006 && $n < 2985)
+        {
+            fwrite($res3,$linea);
+        }
+        elseif ($n > 2985 && $n < 3990)
+        {
+            fwrite($res4,$linea);
+        }
+        elseif ($n > 3990 && $n < 5002)
+        {
+            fwrite($res5,$linea);
+        }
+        elseif ($n > 5002 && $n < 5985)
+        {
+            fwrite($res6,$linea);
+        }
+        elseif ($n > 5985)
+        {
+            fwrite($res7,$linea);
+        }
+    }
 }
+
+//partirFichero("copiaSeguridad");
+obtenerTablasVocabulario("copia7");
