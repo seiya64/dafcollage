@@ -34,11 +34,11 @@
 //moodle 2.8.
 
 //Función que separa las tablas de vocabulario moodle 1.9 del resto de las tablas.
-function obtenerTablasVocabulario($nombreFichero)
+function obtenerTablasVocabulario($nombreFichero, $cadenaBuscar, $destino)
 {
-    $fp = fopen("/home/dafcollage/Escritorio/salida/".$nombreFichero.".txt","a+");
-    $res = fopen("/home/dafcollage/Escritorio/salida/prueba.txt","w");
-    $busca = "INTO `mdl_vocabulario_intenciones_de` VALUES ";
+    $fp = fopen("/home/dafcollage/Escritorio/salida/".$nombreFichero.".sql","a+");
+    $res = fopen("/home/dafcollage/Escritorio/salida/".$destino.".sql","w");
+    $busca = "INTO `mdl_vocabulario_".$cadenaBuscar."` VALUES ";
     $i = strlen($busca) + strlen("INSERT ");
 
     while (!feof($fp))
@@ -46,16 +46,16 @@ function obtenerTablasVocabulario($nombreFichero)
         $linea = fgets($fp);
         $tope = strlen($linea);
         $encontrado = strpos($linea,$busca);
-     //   fwrite($res, "bah\n");
+        $aux = false;
         if ($encontrado == true)
         {
-            //fwrite($res, "caca\n");
             while($i < $tope)
             {
                 $cad = substr($linea,$i,2);
                 if($cad == '),')
                 {
                     fwrite($res,"\n");
+                    $aux = true;
                 }
                 else {
                     if($cad[0] != '(' && $cad[0] != ')' && $cad[0] != ',' && $cad[0] != "'")
@@ -64,16 +64,23 @@ function obtenerTablasVocabulario($nombreFichero)
                     }
                     if ($cad[0] == ',')
                     {
-                        fwrite($res,"\t");
+                        if ($aux == false)
+                        {
+                            fwrite($res,"\t");
+                        }
+                        else
+                        {
+                            $aux = false;
+                        }
                     }
                 }
                 $i++;
-                //$car = fgetc($linea);
-//                fwrite($res,$linea);
             }
             
         }
     }
+    fclose($fp);
+    fclose($res);
 }
 
 //Función que separa las tablas de moodle 1.9 del resto de las tablas.
@@ -139,4 +146,32 @@ function partirFichero($nombreFichero)
 }
 
 //partirFichero("copiaSeguridad");
-obtenerTablasVocabulario("copia7");
+
+$filenames = array(
+            'camposlexicos_de', 
+            'camposlexicos_en', 
+            'camposlexicos_es', 
+            'camposlexicos_fr',
+            'camposlexicos_pl',
+            'intenciones_de', 
+            'intenciones_en', 
+            'intenciones_es', 
+            'intenciones_fr',
+            'intenciones_pl',
+            'tipologias_de', 
+            'tipologias_en', 
+            'tipologias_es', 
+            'tipologias_fr',
+            'tipologias_pl',
+            'adjetivos',
+            'estrategias',
+            'otros',
+            'sustantivos',
+            'verbos',
+            'gramatica'
+            );
+foreach ($filenames as $filename)
+{
+    obtenerTablasVocabulario("copiaSeguridad",$filename, $filename);
+
+}
