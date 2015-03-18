@@ -99,6 +99,19 @@ function xmldb_vocabulario_install() {
                     die('Los datos no han podido ser cargados: ' .mysql_error());
             }
     }
+    
+    $table_name = "mdl_user";
+    //Para poder cargar cada fichero *.sql, debemos darle permisos a la ruta
+    //que especifica abajo.
+    $backup_file  = '/var/lib/mysql/moodle28des/mdl_user.sql';
+    //para cada tabla, insertamos sus datos correspondientes.
+    $sql = "LOAD DATA INFILE '$backup_file' INTO TABLE $table_name";
+    $retval = mysql_query( $sql, $conn );
+    //Comprobamos si la inserción se ha realizado correctamente.
+    if(! $retval )
+    {
+            die('Los datos no han podido ser cargados: ' .mysql_error());
+    }
     //Si todo ha salido bien, mostramos un mensaje diciendo que todo está OK y cerramos
     //la conexión con la base de datos.
     echo "Los datos se han cargado correctamente. \n";

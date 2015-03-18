@@ -91,7 +91,7 @@ function obtenerTablasMoodle19($nombreFichero)
 
 function obtenerTablaUsuarios($nombreFichero)
 {
-    //OJO! Cambiar path de los ficheros.
+    //OJO! Cambiar path de los fichero.
     $fp = fopen("/home/luisre/Escritorio/".$nombreFichero.".sql","a+");
     $res = fopen("/home/luisre/Escritorio/salida/mdl_user.sql","w");
     $busca = "INTO `mdl_user` VALUES ";
