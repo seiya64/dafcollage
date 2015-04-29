@@ -54,7 +54,7 @@ function xmldb_vocabulario_install() {
     }
     //A continuación, seleccionamos la base de datos donde queremos realizar la inserción
     //de datos
-    mysql_select_db('moodle28des');
+    mysql_select_db('moodle26');
     //Creamos un array con el nombre de todas las tablas que deseamos importar.
     $filenames = array(
             'camposlexicos_de', 
@@ -82,7 +82,7 @@ function xmldb_vocabulario_install() {
     //En el fichero vocabulariobackupvacio.sql se encuentran las instrucciones necesarias
     //para crear las tablas oportunas en la base de datos moodle.
     $crear='/home/dafcollage/cuaderno_digital/vocabulario/db/dataxmls/vocabulariobackupvacio.sql';
-    $sql = "LOAD DATA INFILE '$crear' INTO DATABASE moodle28des";
+    $sql = "LOAD DATA INFILE '$crear' INTO DATABASE moodle26";
     //Recorremos todos los ficheros *.sql
     foreach ($filenames as $filename) {
 
@@ -100,18 +100,7 @@ function xmldb_vocabulario_install() {
             }
     }
     
-    $table_name = "mdl_user";
-    //Para poder cargar cada fichero *.sql, debemos darle permisos a la ruta
-    //que especifica abajo.
-    $backup_file  = '/var/lib/mysql/moodle28des/mdl_user.sql';
-    //para cada tabla, insertamos sus datos correspondientes.
-    $sql = "LOAD DATA INFILE '$backup_file' INTO TABLE $table_name";
-    $retval = mysql_query( $sql, $conn );
-    //Comprobamos si la inserción se ha realizado correctamente.
-    if(! $retval )
-    {
-            die('Los datos no han podido ser cargados: ' .mysql_error());
-    }
+
     //Si todo ha salido bien, mostramos un mensaje diciendo que todo está OK y cerramos
     //la conexión con la base de datos.
     echo "Los datos se han cargado correctamente. \n";

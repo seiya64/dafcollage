@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <!--
 Daf-collage is made up of two Moodle modules which help in the process of
 German language learning. It facilitates the content organization like
@@ -34,7 +35,6 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 -->
 
-<?xml version="1.0" encoding="UTF-8" ?>
 <XMLDB PATH="mod/vocabulario/db" VERSION="20141227" COMMENT="XMLDB file for Moodle mod/vocabulario"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"

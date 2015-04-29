@@ -653,16 +653,19 @@ class Vocabulario_campo_lexico {
      
         $sufijotabla = get_sufijo_lenguaje_tabla();
         $table = 'vocabulario_camposlexicos_'.$sufijotabla;
-        $select = 'padre= 0';
-        $sort = 'usuarioid, ordenid';
-         
+        $select = '(usuarioid = ' . $usuarioid . ' or usuarioid = 0) and padre=0'; //cambiado por Ramón y Luis, antes buscaba el padre con id = 0
+       // $sort = 'usuarioid, ordenid';
+         $sort = 'id';
        
         $gr = $DB->get_records_select($table, $select, null, $sort);
              
           
             $contador = 0;
             foreach ($gr as $i) {   
-                $ic[$i->id] = $contador . ". " .$i->campo;               
+					 if($contador == 0)
+                	$ic[$i->id] = $i->campo;        
+					 else
+						$ic[$i->id] = $contador . ". " .$i->campo;        
                              
                 $this->obtener_todos_subnumerados($usuarioid, $i->id, $contador); 
                 $contador++;
@@ -671,6 +674,16 @@ class Vocabulario_campo_lexico {
         
         return $ic;
     }   
+/*function obtener_todos($usuarioid) {
+        $sufijotabla = get_sufijo_lenguaje_tabla();
+        $campos_lexicos = get_records_select('vocabulario_camposlexicos_'.$sufijotabla, 'usuarioid=' . $usuarioid . ' or usuarioid=0');
+        $clex = array();
+        $orden = $this->ordena($campos_lexicos);
+        foreach ($orden as $i) {
+            $clex[$campos_lexicos[$i]->id] = $campos_lexicos[$i]->campo;
+        }
+        return $clex;
+    }*/
     
     function obtener_todos_subnumerados($usuarioid, $id_padre, $contador_padre) {
         global $ic;
@@ -808,7 +821,7 @@ class Vocabulario_campo_lexico {
          
         foreach ($gr as $i) { 
             $orden = $this->obtener_orden($usuarioid, $i->id);
-            $ic[$i->id] = $orden . ". " . $i->campo;  
+            $ic[$i->id] = /*$orden . ". " .*/ $i->campo;  
         }
     return $ic;
     }
@@ -847,6 +860,8 @@ class Vocabulario_campo_lexico {
     }    
 
 }
+
+
 
 class Vocabulario_mis_palabras {
 
@@ -1310,7 +1325,7 @@ class Vocabulario_gramatica {
     function obtener_todos($usuarioid) {
         global $DB;
 
-        $gramaticas = $DB->get_records_select('vocabulario_gramatica', 'usuarioid=:usuarioid or usuarioid=0', array('usuarioid'=>$usuarioid));
+        $gramaticas = $DB->get_records_select('vocabulario_gramatica', 'usuarioid='.$usuarioid.' or usuarioid=0', array('usuarioid'=>$usuarioid));
         $gr = array();
         $orden = $this->ordena($gramaticas);
         foreach ($orden as $i) {
@@ -1321,7 +1336,7 @@ class Vocabulario_gramatica {
 
     function obtener_todos_ids($usuarioid) {
         global $DB;
-        $gramaticas = $DB->get_records_select('vocabulario_gramatica', 'usuarioid=:usuarioid or usuarioid=0', array('usuarioid'=>$usuarioid));
+        $gramaticas = $DB->get_records_select('vocabulario_gramatica', 'usuarioid='.$usuarioid.' or usuarioid=0', array('usuarioid'=>$usuarioid));
         $gr = array();
         $orden = $this->ordena($gramaticas);
         foreach ($orden as $i) {
@@ -1455,7 +1470,6 @@ class Vocabulario_mis_gramaticas {
     }
 
 }
-
 class Vocabulario_intenciones {
 
     var $id;
@@ -1515,11 +1529,9 @@ class Vocabulario_intenciones {
 
     function leer($intencionid, $usuarioid) {
         global $DB;
-
         $sufijotabla = get_sufijo_lenguaje_tabla();
-        $table = 'vocabulario_intenciones_'. $sufijotabla;
-        $conditions = array('id'=>$intencionid); 
- 
+        $table = 'vocabulario_intenciones_' . $sufijotabla;
+        $conditions = array('id' => $intencionid);
         $ic = $DB->get_record($table, $conditions);
         $this->usuarioid = $ic->usuarioid;
         $this->padre = $ic->padre;
@@ -1528,137 +1540,107 @@ class Vocabulario_intenciones {
         $this->id = $ic->id;
     }
 
-    
+ /*
+      Autor: Salim Tieb Mohamedi
+      Fecha: 15-nov-2014
+      Las dos funciones obtener_todos y obtener_todos_subnumerados resuelve el problema del desorden de
+      en las intenciones que se muestran en el formulario a través del SELECT.
+     */
 
-    
-     /*
-    Autor: Salim Tieb Mohamedi
-    Fecha: 15-nov-2014
-    Las dos funciones obtener_todos y obtener_todos_subnumerados resuelve el problema del desorden de
-    en las intenciones que se muestran en el formulario a través del SELECT. 
-    */
     function obtener_todos($usuarioid) {
-        global $ic; 
+        global $ic;
         global $DB;
-     
         $sufijotabla = get_sufijo_lenguaje_tabla();
-        $table = 'vocabulario_intenciones_'.$sufijotabla;
-        $select = 'padre= 0';
-        $sort = 'usuarioid, ordenid';
-         
-       
+        $table = 'vocabulario_intenciones_' . $sufijotabla;
+        $select = '(usuarioid='. $usuarioid. ' or usuarioid=0) and padre=0';
+        //$sort = 'usuarioid, ordenid';
+			$sort = 'id';
+
         $gr = $DB->get_records_select($table, $select, null, $sort);
-             
-          
-            $contador = 0;
-            foreach ($gr as $i) {   
-                $ic[$i->id] = $contador . ". " .$i->intencion;               
-                             
-                $this->obtener_todos_subnumerados($usuarioid, $i->id, $contador); 
-                $contador++;
-                
-            }
-        
+        $contador = 0;
+        foreach ($gr as $i) {
+				if ($contador == 18)
+					$contador = 19;
+				if ($contador == 0)
+           		$ic[$i->id] = $i->intencion;
+				else
+					$ic[$i->id] = $contador . '.' . $i->intencion;
+            $this->obtener_todos_subnumerados($usuarioid, $i->id, $contador);
+            $contador++;
+        }
         return $ic;
-    }   
-    
+    }
+
     function obtener_todos_subnumerados($usuarioid, $id_padre, $contador_padre) {
         global $ic;
         global $DB;
-         
         $sufijotabla = get_sufijo_lenguaje_tabla();
-        $table = 'vocabulario_intenciones_'.$sufijotabla;
-        $select = 'padre=' . $id_padre. ' AND (usuarioid= 0 OR usuarioid=' . $usuarioid . ')' ;
-        $sort = 'id';         
-       
+        $table = 'vocabulario_intenciones_' . $sufijotabla;
+        $select = 'padre=' . $id_padre . ' AND (usuarioid= 0 OR usuarioid=' . $usuarioid . ')';
+        $sort = 'id';
         $gr = $DB->get_records_select($table, $select, null, $sort);
-         
-            $contador = 1;
-            foreach ($gr as $i) {   
-                $contador_padre_padre = $contador_padre . "." . $contador;
-                $ic[$i->id] = $contador_padre . "." . $contador . ". " . $i->intencion;
-                $contador++;
-                $padre = $i->id;
-                
-                $this->obtener_todos_subnumerados($usuarioid, $padre, $contador_padre_padre);              
-            }
-            return;
-      
+        $contador = 1; 
+        foreach ($gr as $i) {
+            $contador_padre_padre = $contador_padre . "." . $contador;
+            $ic[$i->id] = $contador_padre . "." . $contador . ". " . $i->intencion;
+            $contador++;
+            $padre = $i->id;
+            $this->obtener_todos_subnumerados($usuarioid, $padre, $contador_padre_padre);
+        }
+        return;
     }
-    
+
     function obtener_orden($usuarioid, $hijoid) {
         global $ordinal;
         global $DB;
-         
         $sufijotabla = get_sufijo_lenguaje_tabla();
-        $table = 'vocabulario_intenciones_'.$sufijotabla;
+        $table = 'vocabulario_intenciones_' . $sufijotabla;
         $select = 'padre= 0';
-        $sort = 'usuarioid, ordenid';
-         
-       
+      //  $sort = 'usuarioid, ordenid';
+		  $sort = 'id';
         $gr = $DB->get_records_select($table, $select, null, $sort);
-                  
-            $contador = 0;
-            foreach ($gr as $i) { 
-                if($hijoid==$i->id)
-                {    $ordinal = $contador;
-                     //echo "la posición ordinal de " . $hijoid . " es " . $ordinal;
-                     break;    
-                
-                }
-                             
-                $this->obtener_suborden($usuarioid,$hijoid, $i->id, $contador); 
-                $contador++;
-                
+        $contador = 0;
+        foreach ($gr as $i) {
+            if ($hijoid == $i->id) {
+                $ordinal = $contador;
+//echo "la posición ordinal de " . $hijoid . " es " . $ordinal;
+                break;
             }
-        
-        
+            $this->obtener_suborden($usuarioid, $hijoid, $i->id, $contador);
+            $contador++;
+        }
         return $ordinal;
-    }  
-    
+    }
+
     function obtener_suborden($usuarioid, $hijoid, $id_padre, $contador_padre) {
-     
         global $ordinal;
         global $DB;
-         
         $sufijotabla = get_sufijo_lenguaje_tabla();
-        $table = 'vocabulario_intenciones_'.$sufijotabla;
-        $select = 'padre=' . $id_padre. ' AND (usuarioid= 0 OR usuarioid=' . $usuarioid . ')' ;
+        $table = 'vocabulario_intenciones_' . $sufijotabla;
+        $select = 'padre=' . $id_padre . ' AND (usuarioid= 0 OR usuarioid=' . $usuarioid . ')';
         $sort = 'id';
-         
-       
         $gr = $DB->get_records_select($table, $select, null, $sort);
-        
-                
-            $contador = 1;
-            foreach ($gr as $i) {   
-                $contador_padre_padre = $contador_padre . "." . $contador;
-                
-                if($hijoid==$i->id)
-                {    $ordinal = $contador_padre_padre;
-                     //echo "la posición ordinal de " . $hijoid . " es " . $ordinal;
-                     break;
-                }
-              
-                $contador++;
-                $padre = $i->id;
-                
-                $this->obtener_suborden($usuarioid, $hijoid, $padre, $contador_padre_padre);              
+        $contador = 1;
+        foreach ($gr as $i) {
+            $contador_padre_padre = /*$contador_padre . "." . */$contador;
+            if ($hijoid == $i->id) {
+                $ordinal = $contador_padre_padre;
+//echo "la posición ordinal de " . $hijoid . " es " . $ordinal;
+                break;
             }
-            return;
-      
-      
+            $contador++;
+            $padre = $i->id;
+            $this->obtener_suborden($usuarioid, $hijoid, $padre, $contador_padre_padre);
+        }
+        return;
     }
 
     function obtener_todos_ids($usuarioid) {
         global $DB;
-         
         $sufijotabla = get_sufijo_lenguaje_tabla();
-        $table = 'vocabulario_intenciones_'.$sufijotabla;
-        $select = 'usuarioid= 0 OR usuarioid=' . $usuarioid ;
-                 
-       
-        $intenciones  = $DB->get_records_select($table, $select);
+        $table = 'vocabulario_intenciones_' . $sufijotabla;
+        $select = 'usuarioid= 0 OR usuarioid=' . $usuarioid;
+        $intenciones = $DB->get_records_select($table, $select);
         $ic = array();
         $orden = $this->ordena($intenciones);
         foreach ($orden as $i) {
@@ -1666,56 +1648,51 @@ class Vocabulario_intenciones {
         }
         return $ic;
     }
+
     /*
-    Autor: Salim Tieb Mohamedi
-    Fecha: 4-dic-2014
-    Las dos funciones obtener_todos y obtener_todos_subnumerados resuelve el problema del desorden de
-    en las intenciones que se muestran en el formulario a través del SELECT. No depende del usuarioid por eso no 
-    recibe parámetros, más bien el id.
-    Para ver una demostración usar la función /test/testintenciones.php
-    */
-    function obtener_hijos($usuarioid, $padreid, $insertar=false) 
-    {
+      Autor: Salim Tieb Mohamedi
+      Fecha: 4-dic-2014
+      Las dos funciones obtener_todos y obtener_todos_subnumerados resuelve el problema del desorden de
+      en las intenciones que se muestran en el formulario a través del SELECT. No depende del usuarioid por eso no
+      recibe parámetros, más bien el id.
+      Para ver una demostración usar la función /test/testintenciones.php
+     */
+
+    function obtener_hijos($usuarioid, $padreid, $insertar = false) {
         global $DB;
         $orden = '';
-         
         $sufijotabla = get_sufijo_lenguaje_tabla();
-        $table = 'vocabulario_intenciones_'.$sufijotabla;
-        $select = 'padre=' . $padreid. ' AND (usuarioid= 0 OR usuarioid=' . $usuarioid . ')' ;
-        $sort = '';        
-        
-        if($padreid == 0)
-                $sort = 'usuarioid, ordenid';                     
-        
-         
+        $table = 'vocabulario_intenciones_' . $sufijotabla;
+        $select = 'padre=' . $padreid . ' AND (usuarioid= 0 OR usuarioid=' . $usuarioid . ')';
+        $sort = '';
+        if ($padreid == 0)
+            //$sort = 'usuarioid, ordenid';
+				$sort = 'id';
         $gr = $DB->get_records_select($table, $select, null, $sort);
         $ic = array();
-        if($padreid!=0 || $insertar){
-           $ic[$padreid] = get_string('seleccionar','vocabulario');
+        if ($padreid != 0 || $insertar) {
+            $ic[$padreid] = get_string('seleccionar', 'vocabulario');
         }
-                
+
+  		   
+        foreach ($gr as $i) {
+           $orden = $this->obtener_orden($usuarioid, $i->id);
+          // $orden.=$p;
+           $ic[$i->id] =/* $orden . ". " .*/ $i->intencion;
+
+        }
         
-         
-        foreach ($gr as $i) { 
-            $orden = $this->obtener_orden($usuarioid, $i->id);
-            $ic[$i->id] = $orden . ". " . $i->intencion;  
-        }
-    return $ic;
+
+        return $ic;
     }
-    
-    
-  
-    
-    
+
     function obtener_padres($hijoid) {
         $clex = array();
-
         $clex[] = $hijoid;
         $padre = $hijoid;
-
         while ($padre != 0) {
             $cl = new Vocabulario_intenciones();
-            //pongo 0 porque el usarioid no es necesario, ya que no se usa en la funcion
+//pongo 0 porque el usarioid no es necesario, ya que no se usa en la funcion
             $cl->leer($padre, 0);
             $padre = $cl->get('padre');
             $clex[] = $padre;
@@ -1729,9 +1706,9 @@ class Vocabulario_intenciones {
         foreach ($lista as $cosa) {
             $milista[$cosa->id] = $cosa->padre;
         }
-//        echo " </br>milista </br>"; var_dump($lista);
+// echo " </br>milista </br>"; var_dump($lista);
         $encontrados = array_keys($milista, $padre);
-        //echo " </br>encontrados </br>"; var_dump($encontrados);
+//echo " </br>encontrados </br>"; var_dump($encontrados);
         foreach ($encontrados as $cosa) {
             $salida[] = $cosa;
             $salida = $this->ordena($lista, $cosa, $salida);
@@ -1807,16 +1784,11 @@ class Vocabulario_mis_intenciones {
 
     function guardar() {
         global $DB;
-        
         $table = 'vocabulario_mis_intenciones';
         $select = "usuarioid =" . $this->usuarioid . " AND intencionesid = '" . $this->intencionesid . "'";
-       
         $ic = $DB->get_record_select($table, $select);
-
-     
         if ($ic->id == null) {
             $this->id = $DB->insert_record('vocabulario_mis_intenciones', $this, true);
-
         } else {
             $this->id = $ic->id;
             $DB->update_record('vocabulario_mis_intenciones', $this, true);
@@ -1830,11 +1802,9 @@ class Vocabulario_mis_intenciones {
 
     function leer($icid, $usuarioid = null) {
         global $DB;
-        
         if ($usuarioid == null) {
-
             $table = 'vocabulario_mis_intenciones';
-            $conditions = array('id'=>$icid); 
+            $conditions = array('id' => $icid);
             $gr = $DB->get_record($table, $conditions);
             $this->usuarioid = $gr->usuarioid;
             $this->descripcion = $gr->descripcion;
@@ -1843,7 +1813,6 @@ class Vocabulario_mis_intenciones {
             $this->tipo_palabra = $gr->tipo_palabra;
             $this->palabra_id = $gr->palabra_id;
         } else {
-
             $table = 'vocabulario_mis_intenciones';
             $select = 'usuarioid =' . $usuarioid . ' AND intencionesid = ' . $icid;
             $gr = $DB->get_record_select($table, $select);
@@ -1855,12 +1824,11 @@ class Vocabulario_mis_intenciones {
             $this->palabra_id = $gr->palabra_id;
         }
     }
-   
 
     function relacionadas($usuarioid, $intencionid) {
         global $DB;
         $table = 'vocabulario_mis_intenciones';
-        $select = 'usuarioid =' . $usuarioid . ' AND intencionesid = ' . $intencionid;           
+        $select = 'usuarioid =' . $usuarioid . ' AND intencionesid = ' . $intencionid;
         $palabras = $DB->get_record_select($table, $select);
         return $palabras;
     }
@@ -1868,46 +1836,38 @@ class Vocabulario_mis_intenciones {
     function obtener_todas($usuarioid) {
         global $DB;
         $table = 'vocabulario_mis_intenciones';
-        $select = 'usuarioid =' . $usuarioid;       
+        $select = 'usuarioid =' . $usuarioid;
         $ic = $DB->get_records_select($table, $select);
         return $ic;
     }
-    
-     function recuperar_middles($usuarioid,$middle){
-             global $DB;   
-           
-            $table = 'vocabulario_mis_intenciones';
-            $select = "usuarioid =$usuarioid AND descripcion LIKE '%$middle%'";           
-            $gr = $DB->get_record_select($table, $select);
-            $todos=array();
-          
-            foreach ($gr as $i) {
-                $todo = null;
-                $todo->usuarioid = $i->usuarioid;
-                $auxtodo = $i->descripcion;
-                $var=explode("\$FIELD\$",$auxtodo);
-                $descripcion="\$FIELD\$";
-               
-                for ($k=1;$k<count($var)-1;$k+=4) {
-                         
-                    if(strpos($var[$k],$middle)!== FALSE){
-                        for($j=$k;$j<$k+4;$j++){
-                        $descripcion.=$var[$j]."\$FIELD\$";
-                        }
+
+    function recuperar_middles($usuarioid, $middle) {
+        global $DB;
+        $table = 'vocabulario_mis_intenciones';
+        $select = "usuarioid =$usuarioid AND descripcion LIKE '%$middle%'";
+        $gr = $DB->get_record_select($table, $select);
+        $todos = array();
+        foreach ($gr as $i) {
+            $todo = null;
+            $todo->usuarioid = $i->usuarioid;
+            $auxtodo = $i->descripcion;
+            $var = explode("\$FIELD\$", $auxtodo);
+            $descripcion = "\$FIELD\$";
+            for ($k = 1; $k < count($var) - 1; $k+=4) {
+                if (strpos($var[$k], $middle) !== FALSE) {
+                    for ($j = $k; $j < $k + 4; $j++) {
+                        $descripcion.=$var[$j] . "\$FIELD\$";
                     }
-                   
-                
                 }
-                $todo->descripcion=$descripcion;
-                $todo->intencionesid = $i->intencionesid;
-                $todo->id = $i->id;
-                $todo->tipo_palabra = $i->tipo_palabra;
-                $todo->palabra_id = $i->palabra_id;
-                $todos[]=$todo;
             }
-          
-            return $todos;
-        
+            $todo->descripcion = $descripcion;
+            $todo->intencionesid = $i->intencionesid;
+            $todo->id = $i->id;
+            $todo->tipo_palabra = $i->tipo_palabra;
+            $todo->palabra_id = $i->palabra_id;
+            $todos[] = $todo;
+        }
+        return $todos;
     }
 
 }
@@ -1996,8 +1956,10 @@ class Vocabulario_tipologias {
          
         $ic = array();
         $orden = $this->ordena($tipo);
+		  $contador = 0;
         foreach ($orden as $i) {
-            $ic[$tipo[$i]->id] = $tipo[$i]->tipo;
+            $ic[$tipo[$i]->id] = /*$contador . '.' . */$tipo[$i]->tipo;
+				$contador++;
         }
         
 

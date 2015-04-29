@@ -47,7 +47,7 @@ guardar palabras por columnas
 #mform1 {
     display: table;
 }
-/*
+
 #sus {
     width: 48%;
     float: left;
@@ -79,7 +79,7 @@ guardar palabras por columnas
     min-height: 250px;
     display: table-cell;
 }
-*/
+
 
 
 /***************************************************************/
@@ -88,7 +88,7 @@ guardar palabras por columnas
 /*********Luis Redondo Expósito                 ****************/
 /*********Ramón Rueda Delgado                   ****************/
 /***************************************************************/
-
+/*
 #id_sus {
     width: 48%;
     float: left;
@@ -120,7 +120,7 @@ guardar palabras por columnas
     min-height: 250px;
     display: table-cell;
 }
-
+*/
 
 
 #viewcanvas{ padding-top:10px;}
@@ -145,7 +145,7 @@ guardar palabras por columnas
 .twitter{ width: 252px; padding-left: 10px;}
 #mform1 { 
 	width:100%;
-	display:table-cell; 
+	//display:table; 
 }
           
 #id_cancellink{ 
@@ -243,10 +243,67 @@ table#explaincaps tbody > tr:nth-child(2n+1) > td, table#defineroletable tbody >
     font-size:16px;
 }
 
-input, textarea, .uneditable-input {
-    width: 90%;
+
+textarea[cols], input[size] {
+    width: 74%;
 }
+input, textarea, .uneditable-input {
+    width: 100%;
+}
+
 .boxaligncenter{
    margin-right:auto;
    margin-left:0px;
+}
+
+.fselect select {
+    width: 76% !important;
+}
+
+input, textarea, .uneditable-input {
+    width: 94%;
+}
+
+#palabras_filter input{
+    width: 80%;
+}
+input[type="radio"], input[type="checkbox"] {
+    margin-right: 3px;
+    margin-top: -4px;
+}
+input[type="radio"] + label, input[type="checkbox"] + label {
+    display: inline;
+    margin-left: -3.8px;
+    padding-right: 18.8px;
+}
+
+#palabras_filter input {
+    width: 80%;
+}
+#above-header {
+    border-bottom: 3px solid #0afaf5;
+    height: 20px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+#page-footer .info {
+    border-top: 3px solid #0afaf5;
+    font-size: 90%;
+    line-height: 21px;
+    margin: 34px auto 0;
+    padding-bottom: 14px;
+    padding-top: 17px;
+}
+.ui-widget-header {
+    background: none repeat scroll 0 0 #696969;
+    border: 1px solid #bdc7d8;
+    color: #222222;
+    font-weight: bold;
+	 color: white;
+}
+.size .field{
+	color:#001e3c;
+	cursor: pointer;
+	font-family:"lucida sands unicode",sans-serif;
+	font-size:1em;
 }

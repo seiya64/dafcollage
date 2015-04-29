@@ -71,10 +71,12 @@ require_login($course,true, $cm);
 $PAGE->set_context(context_system::instance());
 
 
-$manager = get_log_manager();
+
+$manager = get_logs();
 if (method_exists($manager, 'legacy_add_to_log')) {
 $manager->legacy_add_to_log($course->id, 'vocabulario', 'view', "view.php?id={$cm->id}", $vocabulario->name, $cm->id, $USER->id);
 }
+
 
 /// Print the page header
 

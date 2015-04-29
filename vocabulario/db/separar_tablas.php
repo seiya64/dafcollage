@@ -1,5 +1,5 @@
 <?php
-
+header("Content-Type:text/html; charset=utf-8"); 
 /*
   Daf-collage is made up of two Moodle modules which help in the process of
   German language learning. It facilitates the content organization like
@@ -83,10 +83,40 @@ function obtenerTablasVocabulario($nombreFichero, $cadenaBuscar, $destino)
     fclose($res);
 }
 
-//Función que separa las tablas de moodle 1.9 del resto de las tablas.
-function obtenerTablasMoodle19($nombreFichero)
+function sustituir()
 {
+    $cadena="m1añana1Ó";
+    echo "antes ".$cadena."\n";
+    $res = preg_replace('/[0-9]+/', '', $cadena);
+    echo "despues ".$res."\n";
+
+}
+
+function eliminaNumeros($filename){
     
+    $filename = $filename . ".sql";
+
+    $fp = fopen("/home/dafcollage/Escritorio/salida/".$filename, "a+");	
+    $res = fopen("/home/dafcollage/Escritorio/res/".$filename,"w");
+
+    while(!feof($fp)){
+            $linea = fgets($fp);
+           
+          // $columnas = explode("\t", $linea);
+            //Con esta expresión regular lo que hacemos es eliminar de la última columna
+            //los números seguidos o no de puntos
+         //   $aux = preg_replace('/[0-9]/', '', $columnas[3]);
+            
+
+           
+           fputs($res,$linea);		
+
+    }	
+
+    //rename("/home/dafcollage/Escritorio/salida".$filename, "/tmp/".$filename);
+   // copy("/home/dafcollage/Escritorio/salida".$filename, "/tmp/".$filename);
+    fclose($res);
+    fclose($fp);    
 }
 
 function obtenerTablaUsuarios($nombreFichero)
@@ -197,8 +227,8 @@ function partirFichero($nombreFichero)
 
 //partirFichero("copiaSeguridad");
 
-/*$filenames = array(
-            'camposlexicos_de', 
+$filenames = array(
+           /* 'camposlexicos_de', 
             'camposlexicos_en', 
             'camposlexicos_es', 
             'camposlexicos_fr',
@@ -218,13 +248,20 @@ function partirFichero($nombreFichero)
             'otros',
             'sustantivos',
             'verbos',
-            'gramatica'
-            );*/
+            'gramatica'*/
+             'mis_intenciones',
+             'mis_gramaticas',
+             'mis_estrategias',
+             'mis_palabras',
+             'mis_tipologias'
+            );
 
-/*foreach ($filenames as $filename)
+foreach ($filenames as $filename)
 {
     obtenerTablasVocabulario("copiaSeguridad",$filename, $filename);
 
-}*/
+}
+//eliminaNumeros("intenciones_de");
+//eliminaNumeros("intenciones_es");
 
-obtenerTablaUsuarios("copiaSeguridad");
+//obtenerTablaUsuarios("copiaSeguridad");

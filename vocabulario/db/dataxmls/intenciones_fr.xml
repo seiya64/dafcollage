@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<table name="vocabulario_camposlexicos_fr">	
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>--</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>1. LES RAPPORTS SOCIAUX</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>2</padre>
+	<intencion>1.1 S’adresser à quelqu’un</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>2</padre>
+	<intencion>1.2 La dénomination de personnes</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>5. JUSTIFIER QUELQUE CHOSE (CAUSE)</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>6. EXPRIMER LA CONDITION</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>6</padre>
+	<intencion>6.1 Condition possible</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>6</padre>
+	<intencion>6.2 Condition improbable</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>6</padre>
+	<intencion>6.3 Condition impossible</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>4. PARVENIR À FAIRE QUELQUE CHOSE (BUT)</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>10</padre>
+	<intencion>4.1 Actions orientées vers un but</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>10</padre>
+	<intencion>4.2 Moyens utilisés pour arriver à un but</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>7. EXPRIMER LA CONSÉQUENCE</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>9. EXPRIMER LA CONTRADICTION</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>10. COMPARER</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>15</padre>
+	<intencion>10.1 Égalité et ressemblance</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>15</padre>
+	<intencion>10.2 Proportionnalité</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>15</padre>
+	<intencion>10.3 Différence</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>15</padre>
+	<intencion>10.4 Opposition</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>2. L’INTERACTION AVEC L’INTERLOCUTEUR</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>20</padre>
+	<intencion>2.1 Donner d’ordres</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>20</padre>
+	<intencion>2.2 Prévenir, averter</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>20</padre>
+	<intencion>2.3 Demander quelque chose</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>20</padre>
+	<intencion>2.4 Inciter</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>20</padre>
+	<intencion>2.5 Proposer</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>20</padre>
+	<intencion>2.6 Offrir</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>20</padre>
+	<intencion>2.7 Recommander</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>20</padre>
+	<intencion>2.8 Donner d’instructions</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>3. EXPRIMER LES GOÛTS, LES DÉSIRS ET LES SENTIMENT</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>13. SUPPOSER</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>3</padre>
+	<intencion>1.1.1 S’exprimer d’une façon personnelle</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>3</padre>
+	<intencion>1.1.2 S’exprimer d’une façon impersonnelle</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>4</padre>
+	<intencion>1.2.1 S’exprimer de façon personnelle</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>4</padre>
+	<intencion>1.2.2. S’exprimer de façon impersonnelle</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>2</padre>
+	<intencion>1.3 L’interaction entre personnes</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>35</padre>
+	<intencion>1.3.1 Se présenter et présenter quelqu’un</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>35</padre>
+	<intencion>1.3.2 Saluer</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>35</padre>
+	<intencion>1.3.3 Remercier</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>35</padre>
+	<intencion>1.3.4 Féliciter</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>35</padre>
+	<intencion>1.3.5 S’excuser</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>35</padre>
+	<intencion>1.3.6 Souhaiter quelque chose à quelqu’un</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>35</padre>
+	<intencion>1.3.7 Exprimer l’intérêt</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>35</padre>
+	<intencion>1.3.8 Exprimer la compassion</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>35</padre>
+	<intencion>1.3.9 Douter</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>29</padre>
+	<intencion>3.1 Exprimer les gouts et les préférences</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>29</padre>
+	<intencion>3.2 Exprimer les désirs</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>29</padre>
+	<intencion>3.3 Exprimer les sentiments</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>47</padre>
+	<intencion>3.3.1 Résignation</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>47</padre>
+	<intencion>3.3.2 Surprise</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>47</padre>
+	<intencion>3.3.3 Inquiétude</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>47</padre>
+	<intencion>3.3.4 Colère</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>47</padre>
+	<intencion>3.3.5 Joie</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>8. EXPRIMER L’ACCORD/ LE DÉSACCORD</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>11. EXPRIMER LA RESTRICTION</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>12. AJOUTER DE L’INFORMATION/ ÉNUMÉRER</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>14. DONNER DE L’INFORMATION</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>15. EXPRIMER LE TEMPS</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>57</padre>
+	<intencion>15.1 Antériorité</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>57</padre>
+	<intencion>15.2 Postériorité</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>57</padre>
+	<intencion>15.3 Simultanéité</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>57</padre>
+	<intencion>15.4 Durée</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>57</padre>
+	<intencion>15.5 Répétition</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>16. EXPRIMER LE BESOIN, LA POSSIBILITÉ ET LA CAPAC</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>63</padre>
+	<intencion>16.1 Besoin</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>63</padre>
+	<intencion>16.2 Possibilité</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>63</padre>
+	<intencion>16.3 Capacité</intencion>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<intencion>17. RACONTER LES FAITS</intencion>
+	</record>
+</table>
+	  

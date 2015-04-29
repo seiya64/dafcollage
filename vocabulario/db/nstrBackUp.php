@@ -111,12 +111,12 @@ foreach ($filenames as $filename) {
         {
                 die('No ha sido posible realizar la copia de seguridad: ' . mysql_error());
         }
-        if ($filename == 'camposlexicos_de' || $filename == 'camposlexicos_en'
+   /*     if ($filename == 'camposlexicos_de' || $filename == 'camposlexicos_en'
                 || $filename == 'camposlexicos_es' || $filename == 'camposlexicos_fr'
                 || $filename == 'camposlexicos_pl' || $filename == 'gramatica'){
             
             $filename = eliminaNumeros($filename);
-        } 
+        } */
 
 }
 //Si todo ha salido OK, mostramos un mensaje y cerramos la conexión con 

@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<table name="vocabulario_gramatica">
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<gramatica>--</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<gramatica>1 Nomen</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>2</padre>
+	<gramatica>1.1 Genus</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>2</padre>
+	<gramatica>1.2 Numerus</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>2</padre>
+	<gramatica>1.3 Deklination</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<gramatica>2 Pronomen</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>6</padre>
+	<gramatica>2.1 Personalpronomen</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>6</padre>
+	<gramatica>2.2 Interrogativpronomen</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>6</padre>
+	<gramatica>2.3 Demonstrativpronomen</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>6</padre>
+	<gramatica>2.4 Indefinitpronomen</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>10</padre>
+	<gramatica>2.4.1 Als Artikelwörter gebr. Indefinitpronomina</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>10</padre>
+	<gramatica>2.4.2 Nur substantivisch gebr. Indefinitpronomina</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>12</padre>
+	<gramatica>2.4.2.1 Pronomina, die nur Personen bezeichnen</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>12</padre>
+	<gramatica>2.4.2.2 Pron., die nur Nicht-Personen bezeichnen</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>6</padre>
+	<gramatica>2.5 Possessivpronomen</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>6</padre>
+	<gramatica>2.6 Relativpronomen</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>6</padre>
+	<gramatica>2.7 Pronominaladverbien</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>6</padre>
+	<gramatica>2.8 Funktionen von ES</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<gramatica>3 Verb</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>19</padre>
+	<gramatica>3.1 Zeitformen/Formensystem</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>20</padre>
+	<gramatica>3.1.1 Präsens</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>20</padre>
+	<gramatica>3.1.2 Präteritum</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>20</padre>
+	<gramatica>3.1.3 Perfekt/Partizip II</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>20</padre>
+	<gramatica>3.1.4 Partizip I</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>20</padre>
+	<gramatica>3.1.5 Futur I</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>20</padre>
+	<gramatica>3.1.6 Futur II</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>19</padre>
+	<gramatica>3.2 Modalverben</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>19</padre>
+	<gramatica>3.3 Trennbare Verben</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>19</padre>
+	<gramatica>3.4 Besondere Verben</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>19</padre>
+	<gramatica>3.5 Reflexive und reziproke Verben</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>19</padre>
+	<gramatica>3.6 Passiv</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>19</padre>
+	<gramatica>3.7 Konjunktiv</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>32</padre>
+	<gramatica>3.7.1 Konjunktiv I</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>32</padre>
+	<gramatica>3.7.2 Konjunktiv II</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>19</padre>
+	<gramatica>3.8 Imperativ</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<gramatica>4 Artikelwörter</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>36</padre>
+	<gramatica>4.1 Definitartikel</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>36</padre>
+	<gramatica>4.2 Indefinitartikel</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>36</padre>
+	<gramatica>4.3 Possessivartikel</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>36</padre>
+	<gramatica>4.4 Negationsartikel</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>36</padre>
+	<gramatica>4.5 Interrogativartikel</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>36</padre>
+	<gramatica>4.6 Demonstrativartikel</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>36</padre>
+	<gramatica>4.7 Gebrauch der Artikelwörter</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<gramatica>5 Adjektive/ Adverbien</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>44</padre>
+	<gramatica>5.1 Kriterien zur Differenzierung</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>44</padre>
+	<gramatica>5.2 Adjektive</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>46</padre>
+	<gramatica>5.2.1 Deklination</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>46</padre>
+	<gramatica>5.2.2 Komparativ / Superlativ</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>44</padre>
+	<gramatica>5.3 Adverbien</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<gramatica>6 Präpositionen</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>50</padre>
+	<gramatica>6.1 Neue Präposition hinzufügen</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>50</padre>
+	<gramatica>6.2 Präposition suchen</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<gramatica>7 Modalpartikel</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>53</padre>
+	<gramatica>7.1 Beispiele und Funktionen</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<gramatica>8 Syntax</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>55</padre>
+	<gramatica>8.1 Hauptsatz</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>55</padre>
+	<gramatica>8.2 Nebensatz</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>55</padre>
+	<gramatica>8.3 Mittelfeld</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>58</padre>
+	<gramatica>8.3.1 Ergänzungen</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>58</padre>
+	<gramatica>8.3.2 Angaben</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>58</padre>
+	<gramatica>8.3.3 Position von NICHT</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>55</padre>
+	<gramatica>8.4 Konnektoren</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>62</padre>
+	<gramatica>8.4.1 Konjunktoren</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>62</padre>
+	<gramatica>8.4.2 Subjunktoren</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>62</padre>
+	<gramatica>8.4.3 Konjunktionaladverbien</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>0</padre>
+	<gramatica>9 Wortbildung</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>66</padre>
+	<gramatica>9.1 Komposition</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>66</padre>
+	<gramatica>9.2 Derivation</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>66</padre>
+	<gramatica>9.3 Diminution</gramatica>
+	</record>
+	<record>
+	<usuarioid>0</usuarioid>
+	<padre>66</padre>
+	<gramatica>9.4 Abkürzungen</gramatica>
+	</record>
+</table>
