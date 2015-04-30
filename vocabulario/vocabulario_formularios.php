@@ -1082,7 +1082,7 @@ class mod_vocabulario_opciones_form extends moodleform {
         //4,2
        
        $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=14"><img src="./imagenes/pdf.png" id="id_pdf" name="pdf"/><div class="texto">' . get_string('pdf', 'vocabulario') . '</div></a></div></div>';
-
+       $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=18"><img src="./imagenes/pdf.png" id="id_pdf" name="pdf"/><div class="texto"> Entrenador</div></a></div></div>';
         //5,1
         $tabla_menu .='<div class="menurow"><div class="menuitem left" style="text-align:left"><a href="view.php?id=' . $id . '&opcion=11"><img src="./imagenes/estrategias_icon.png" id="id_ea_im" name="ea_im"/><div class="texto">' . get_string('admin_ea', 'vocabulario') . '</div></a></div>';
         //5,3
@@ -4314,4 +4314,17 @@ class mod_vocabulario_buscar_intenciones_form extends moodleform {
    
 }
 
+
+class mod_vocabulario_entrenador_form extends moodleform {
+    function definition() {
+        global $USER;
+        $mform = & $this->_form;
+        
+        $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
+
+        //titulo de la seccion
+        $mform->addElement('html', '<h1>Entrenador Vocabulario<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
+
+    }
+}
 ?>
