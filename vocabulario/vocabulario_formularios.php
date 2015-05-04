@@ -4318,12 +4318,33 @@ class mod_vocabulario_buscar_intenciones_form extends moodleform {
 class mod_vocabulario_entrenador_form extends moodleform {
     function definition() {
         global $USER;
+        
+        $entrenadorVocabulario = ''
+                . '<div id=EV_Principal>'
+                .   '<div id=EV_target>wert'
+                .   '</div>'
+                .   '<div id=EV_origin>trew'
+                .   '</div>'
+                . '</div>';
+        
+        
+        
+        
         $mform = & $this->_form;
         
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
 
         //titulo de la seccion
         $mform->addElement('html', '<h1>Entrenador Vocabulario<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
+        
+        //div principal
+        $mform->addElement('html', $entrenadorVocabulario);
+        
+        //div palabras en lengua target
+        //$mform->addElement('html', '<div id=EV_target></div>');
+        
+        //div palabras en lengua origin
+        //$mform->addElement('html', '<div class=EV_origin></div>'); 
 
     }
 }
