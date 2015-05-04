@@ -307,3 +307,30 @@ input[type="radio"] + label, input[type="checkbox"] + label {
 	font-family:"lucida sands unicode",sans-serif;
 	font-size:1em;
 }
+
+
+#EV_Principal
+{
+    padding: 10px;
+    width: 100%;
+    height: 1000px;
+    background-color:#B4BBBF;
+}
+
+#EV_target
+{
+    display: inline-block;
+    width: 48%;
+    height: 98%;
+    padding: 10px;
+    background-color:#999;
+}
+
+#EV_origin
+{
+    display:inline-block;
+    width: 48.5%;
+    height: 98%;
+    padding: 10px;
+    background-color:#FFF;
+}
