@@ -4319,17 +4319,26 @@ class mod_vocabulario_entrenador_form extends moodleform {
     function definition() {
         global $USER;
         
+        //Mostrar palabras
+       $palabrejas = todas_palabras_nube($USER->id);
+       $pintar='';
+       foreach ($palabrejas as $palabra)
+       {
+           $pintar .= '<tr class="cell" style="text-align:center;">';
+           $pintar .= '<td>'.$palabra->sus_lex.'</td>';
+           $pintar .= '<td> <input type="text" name="traduccion"> </td>';
+           
+       }
+        
         $entrenadorVocabulario = ''
                 . '<div id=EV_Principal>'
-                .   '<div id=EV_target>wert'
-                .   '</div>'
-                .   '<div id=EV_origin>trew'
+                .   '<div id=EV_target>'
+                .       '<table id=EV_LaTabla>'
+                .           $pintar
+                .       '</table>'
                 .   '</div>'
                 . '</div>';
-        
-        
-        
-        
+            
         $mform = & $this->_form;
         
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
@@ -4345,7 +4354,7 @@ class mod_vocabulario_entrenador_form extends moodleform {
         
         //div palabras en lengua origin
         //$mform->addElement('html', '<div class=EV_origin></div>'); 
-
+        
     }
 }
 ?>
