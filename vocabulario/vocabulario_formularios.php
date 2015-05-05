@@ -4318,28 +4318,43 @@ class mod_vocabulario_buscar_intenciones_form extends moodleform {
 class mod_vocabulario_entrenador_form extends moodleform {
     function definition() {
         global $USER;
-        
-        //Mostrar palabras
-       $palabrejas = todas_palabras_nube($USER->id);
-       $pintar='';
-       foreach ($palabrejas as $palabra)
+        $mform = & $this->_form;
+
+       //Mostrar palabras
+       $palabras = todas_palabras_nube($USER->id);
+       //La variable EVhtml contiene el codigo html y javascript necesario para pintar 
+       //el contenido del formulario del entrenador de vocabulario.
+       $EVhtml='';
+       
+       $mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
+     
+       $EVhtml .= '<form name="EV_form">';
+
+       $i = 0;
+       //Recorremos todas las palabras y para cada una de ellas pintamos una caja de texto
+       foreach ($palabras as $elemento)
        {
-           $pintar .= '<tr class="cell" style="text-align:center;">';
-           $pintar .= '<td>'.$palabra->sus_lex.'</td>';
-           $pintar .= '<td> <input type="text" name="traduccion"> </td>';
-           
+           $EVhtml .= '<tr class="cell" style="text-align:center;">';
+           $EVhtml .= '<td>'.$elemento->sus_lex.'</td>';
+           //Le asignamos un id distinto a cada traduccion para comprobarlo mas adelante
+           $EVhtml .= '<td> <input type="text" id="traduccion'.$i.'"> </td>';
+           $i++;
        }
-        
+       
+       //Como prueba, pintamos lo que vamos leyendo llamando al funcion javascript "EV_Validation()"
+       $EVhtml .= '<td> <input type="button" value="Mostrar" OnClick="EV_Validation()"> </td>';
+       $EVhtml .= '</form>';
+         
+
         $entrenadorVocabulario = ''
                 . '<div id=EV_Principal>'
                 .   '<div id=EV_target>'
                 .       '<table id=EV_LaTabla>'
-                .           $pintar
+                .           $EVhtml
                 .       '</table>'
                 .   '</div>'
                 . '</div>';
             
-        $mform = & $this->_form;
         
         $mform->addElement('html', '<link rel="stylesheet" type="text/css" href="./estilo.css">');
 
@@ -4349,11 +4364,6 @@ class mod_vocabulario_entrenador_form extends moodleform {
         //div principal
         $mform->addElement('html', $entrenadorVocabulario);
         
-        //div palabras en lengua target
-        //$mform->addElement('html', '<div id=EV_target></div>');
-        
-        //div palabras en lengua origin
-        //$mform->addElement('html', '<div class=EV_origin></div>'); 
         
     }
 }
