@@ -309,3 +309,30 @@ function mis_gramaticas_addFila56() {
     $($titulillos).appendTo(tbody);
     $('#avance').val($i+avance);
 }
+
+/*******************************************/
+
+function EV_Validation(miArray){
+    
+    alert("Entro");
+    alert(miArray[0]);
+    
+    var valores = new Array();
+    //valor = document.getElementById("traduccion0").value;
+    
+    for(i=0; i<miArray.length; i++){
+        alert(document.getElementById("traduccion_usuario" + i).value);
+        valores.push(document.getElementById("traduccion_usuario" + i).value);
+        
+        if(valores[i] == miArray[i]){
+            alert("Okas, patos y focas");
+        }
+    }
+    
+    
+    if(valor == "a"){
+        alert('[ERROR] El campo debe tener un valor de...');
+    }else{
+        alert('[ERROR] El campo debe tener un valor de...');
+    }
+}

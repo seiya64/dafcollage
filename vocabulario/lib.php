@@ -660,7 +660,7 @@ function vocabulario_todas_palabras($usuarioid, $cl = null, $gram = null, $inten
 }
 
 
-
+//Añadido al Select el significado LuisRedondo y RamónRueda.
 function todas_palabras_nube($usrid) {
         
     global $DB;
@@ -669,6 +669,7 @@ function todas_palabras_nube($usrid) {
     $sql = "SELECT
         frase.id as mpid,
 	sus.palabra as sus_lex,
+        sus.significado as sus_sig,
 	adj.sin_declinar as adj_lex,
 	ver.infinitivo as ver_lex,
 	otros.palabra as otros_lex,
