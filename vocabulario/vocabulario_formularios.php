@@ -4329,20 +4329,28 @@ class mod_vocabulario_entrenador_form extends moodleform {
        $mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
      
        $EVhtml .= '<form name="EV_form">';
-
+       //$aux = array();
        $i = 0;
+       $traduccion = '';
        //Recorremos todas las palabras y para cada una de ellas pintamos una caja de texto
        foreach ($palabras as $elemento)
        {
            $EVhtml .= '<tr class="cell" style="text-align:center;">';
            $EVhtml .= '<td>'.$elemento->sus_lex.'</td>';
+           $traduccion .= $elemento->sus_sig . "\n";
            //Le asignamos un id distinto a cada traduccion para comprobarlo mas adelante
-           $EVhtml .= '<td> <input type="text" id="traduccion'.$i.'"> </td>';
+           $EVhtml .= '<td> <input type="text" id="traduccion_usuario'.$i.'"> </td>';
+           //array_push($aux,"a");
            $i++;
        }
        
+       echo $traduccion;
+       
+       echo '<script type="text/javascript">';
+       echo 'var miArray = ' . json_encode($palabras) . ';';
+       echo '</script>';
        //Como prueba, pintamos lo que vamos leyendo llamando al funcion javascript "EV_Validation()"
-       $EVhtml .= '<td> <input type="button" value="Mostrar" OnClick="EV_Validation()"> </td>';
+       $EVhtml .= '<td> <input type="button" value="Mostrar" OnClick="EV_Validation(miArray)"> </td>';
        $EVhtml .= '</form>';
          
 
