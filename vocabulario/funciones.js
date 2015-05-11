@@ -313,28 +313,68 @@ function mis_gramaticas_addFila56() {
 /*******************************************/
 
 function EV_Validation(tam){
-    
-    //alert("Entro");
-    //alert(document.getElementById("traduccion0").value);
-    
-    var valores = new Array();
-    //valor = document.getElementById("traduccion0").value;
-    
-    for(i=0; i<tam; i++){
-        //alert(document.getElementById("traduccion_usuario" + i).value);
-        valores.push(document.getElementById("traduccion_usuario" + i).value);
-        if(document.getElementById("traduccion_usuario" + i).value == document.getElementById("traduccion" + i).value){
-            alert('[Bien] Eres un crack!');
-        }else{
-            alert('[Mal] Salte de la carrera...');
+ 
+    var fallos = new Array();
+    var num_aciertos = 0;
+
+    for(i=0; i<tam; i++){   
+        var trad_usuario = document.getElementById("traduccion_usuario" + i).value;
+        var traduccion = document.getElementById("traduccion" + i).value;
+        var palabras = document.getElementById("id" + i).value;
+ 
+        if(trad_usuario == traduccion){
+            alert("Esta bien");
+            num_aciertos++;
         }
-        
+        else{
+           
+            alert("Está mal la palabra " + palabras + "y el significado es " + traduccion);
+               
+        }
+       
     }
+   
+    return num_aciertos;
+}
+
+/*window.onload = function genera_palabras(tam, num_aleatorio){
+    var arrayPalabras = new Array();
+   alert(tam);
+   tam=17;
+   // alert(tam);
+   // alert(num_aleatorio);
     
-    
-    if(valor == "a"){
-        alert('[ERROR] El campo debe tener un valor de...');
-    }else{
-        alert('[ERROR] El campo debe tener un valor de...');
+    /*for(i=0; i<tam; i++){
+        arrayPalabras.push() ;
     }
 }
+
+function hola(){
+    alert("Hola");
+}*/
+
+function generaAleatorios(num,tam)
+{
+    var aleatorios = new Array();
+    var i=0;
+    while (i < num){
+        var aux = Math.floor((Math.random()*tam)+1);
+           
+        if(aleatorios.indexOf(aux) === -1){
+            aleatorios.push(aux);
+            i++;
+        }
+
+    }
+    return aleatorios;
+}
+
+window.onload = function() {
+    var aleatorios = new Array();
+
+    aleatorios = generaAleatorios(10,100);
+
+    for(i=0; i<10; i++){
+        document.getElementById("id"+ i).value = document.getElementById("palabra"+aleatorios[i]).value;
+    }
+};
