@@ -4332,22 +4332,33 @@ class mod_vocabulario_entrenador_form extends moodleform {
        //$aux = array();
        $i = 0;
        $traduccion = '';
+       $tam=sizeof($palabras);
+       $num_aleatorio=10;
+ 
+       $EVhtml .= '<td> <input type="button" value="aleatorias" OnClick="window.location.reload()"></td>';
+       
        //Recorremos todas las palabras y para cada una de ellas pintamos una caja de texto
        foreach ($palabras as $elemento)
        {
-           $EVhtml .= '<tr class="cell" style="text-align:center;">';
-           $EVhtml .= '<td>'.$elemento->sus_lex.'</td>';
-           $EVhtml .= '<td> <input type="hidden" id="traduccion' . $i . '" value="'.$elemento->sus_sig.'" </td>';
+           $EVhtml .= '<tr class="cell" style="text-align:center;"><input type="hidden" id="palabra' . $i . '" value="'.$elemento->sus_lex.'"> <input type="hidden" id="traduccion' . $i . '" value="'.$elemento->sus_sig.'"> </tr>';
+           //$EVhtml .= '<td id="palabra'.$i.'"> '.$elemento->sus_lex.' </td>';
+           //$EVhtml .= '<td id="1">'.$elemento->sus_lex.'</td>';
+           //$EVhtml .= '<td> <input type="hidden" id="palabra' . $i . '" value="'.$elemento->sus_lex.'"> </td>';
+
+           //$EVhtml .= '<td> <input type="hidden" id="traduccion' . $i . '" value="'.$elemento->sus_sig.'"> </td>';
            //Le asignamos un id distinto a cada traduccion para comprobarlo mas adelante
-           $EVhtml .= '<td> <input type="text" id="traduccion_usuario'.$i.'"> </td>';
-           //array_push($aux,"a");
+           //$EVhtml .= '<td> <input type="text" id="traduccion_usuario'.$i.'"> </td>';
            $i++;
        }
        
+       for($i = 0; $i < 10; $i++){
+           $EVhtml .= '<tr class="cell" style="text-align:center;">';
+           $EVhtml .= '<td><input type="text" id="id' . $i . '" value="."> </td>';
+           $EVhtml .= '<td> <input type="text" id="traduccion_usuario'.$i.'"> </td>';
+       }
        
        //Como prueba, pintamos lo que vamos leyendo llamando al funcion javascript "EV_Validation()"
        $EVhtml .= '<td> <input type="button" value="Mostrar" OnClick="EV_Validation('.$i.')"> </td>';
- 
        $EVhtml .= '</form>';
          
 
