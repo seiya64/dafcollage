@@ -498,6 +498,9 @@ function vocabulario_view($id, $opcion = 0, $id_mp = null,$palabra="",$viene=0) 
             $mform = new mod_vocabulario_buscar_intenciones_form('buscarintenciones.php?id_tocho='.$id);
             break;
         case 18:
+            $mform = new mod_vocabulario_entrenador_configuracion_form('entrenador.php?id_tocho='.$id);
+            break;
+        case 19:
             $mform = new mod_vocabulario_entrenador_form('entrenador.php?id_tocho='.$id);
             break;
     }
@@ -708,21 +711,34 @@ function todas_palabras_nube($usrid) {
     return $todas;
 }
 
-function todos_campos_lexicos(){
+function todos_campos_lexicos($usrid){
     
     global $DB;
     $sufijotabla = get_sufijo_lenguaje_tabla();
     
      $sql = "
         SELECT
-            campos.campo AS campo_lex
+            table_campoLex.campo AS campo_lex
 
         FROM
-            {vocabulario_camposlexicos_$sufijotabla} AS campos
+            {vocabulario_camposlexicos_$sufijotabla} AS table_campoLex
 
         WHERE
-            campos.padre = 0
+            (table_campoLex.`usuarioid` = $usrid OR table_campoLex.`usuarioid` = 0)
+            AND
+            table_campoLex.`padre` = 0
 	";
+     
+    $file_log = fopen("log_sql.txt", "w");
+    $cad = "SQL: " . $sql . "\n\n\n";
+    $cad.= "Error: " . mysql_error() . "\n\n";
+    fwrite($file_log, $cad, strlen($cad));
+    fclose($file_log); 
+
+    $todos = $DB->get_records_sql($sql);
+   
+       
+    return $todos;
     
 }
 

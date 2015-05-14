@@ -4346,7 +4346,11 @@ class mod_vocabulario_entrenador_form extends moodleform {
            $i++;
        }
         
-       $p= (int)$_SESSION["var"];
+       $p= (int)$_SESSION["NUMPALABRAS"];
+       echo $_SESSION["NUMPALABRAS"];
+       echo $_SESSION["TEMATICA"];
+       echo $_SESSION["ELEGIRIDIOMA"];
+       
    
        for($i = 0; $i < $p; $i++){
            $EVhtml .= '<tr class="cell" style="text-align:left;">';
@@ -4397,26 +4401,30 @@ class mod_vocabulario_entrenador_configuracion_form extends moodleform
         //Radio button para elegir si queremos generar las palabras en español y poner la traducción
         //en alemán, o viceversa
         $EVConf .= '<form action="#" method="POST">';
-        $EVConf .= '<input type="radio" name="elegirIdioma" checked>Español-Alemán';
+        $EVConf .= '<input type="radio" name="elegirIdioma" value=1 checked>Español-Alemán';
         $EVConf .= '<br>';
-        $EVConf .= '<input type="radio" name="elegirIdioma">Alemán-Español';
+        $EVConf .= '<input type="radio" name="elegirIdioma" value=2 >Alemán-Español';
         $EVConf .= '<br><br><br>';
         
         //Menú desplegable para mostrar los campos temáticos
-        /*$campotematico = todos_campos_lexicos(); 
+        $campotematico = todos_campos_lexicos($USER->id); 
 
         $EVConf .= '<select name="tematica">';
         $id=0;
         foreach($campotematico as $campo)
         {
-            $EVConf .= '<option value=campo'.$id.'>'.$campo->campo_lex.'</option> ';
+            if($id == 0){
+                $EVConf .= '<option value=campo'.$id.'>TODOS LOS CAMPOS TEMÁTICOS</option> ';
+            }else{
+                $EVConf .= '<option value=campo'.$id.'>'.$campo->campo_lex.'</option> ';
+            }
             $id++;
         }
         $EVConf .= '</select>';
-        $EVConf .= '<br><br>';*/
+        $EVConf .= '<br><br>';
         
        //Menú desplegable con el número de palabras que queremos mostrar
-        $EVConf .= '<select name="select">';
+        $EVConf .= '<select name="numPalabras">';
         $EVConf .= '<option value=5 > 5 </option>';
         $EVConf .= '<option value=10 > 10 </option>';
         $EVConf .= '<option value=15 > 15 </option>';
