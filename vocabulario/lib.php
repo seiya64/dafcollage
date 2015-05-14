@@ -708,6 +708,24 @@ function todas_palabras_nube($usrid) {
     return $todas;
 }
 
+function todos_campos_lexicos(){
+    
+    global $DB;
+    $sufijotabla = get_sufijo_lenguaje_tabla();
+    
+     $sql = "
+        SELECT
+            campos.campo AS campo_lex
+
+        FROM
+            {vocabulario_camposlexicos_$sufijotabla} AS campos
+
+        WHERE
+            campos.padre = 0
+	";
+    
+}
+
 function obtener_superpadre($id){
     global $DB;
     $sufijotabla = get_sufijo_lenguaje_tabla();
