@@ -4346,18 +4346,17 @@ class mod_vocabulario_entrenador_form extends moodleform {
            $i++;
        }
         
-       $p= (int)$_SESSION["NUMPALABRAS"];
-       echo $_SESSION["NUMPALABRAS"];
-       echo $_SESSION["TEMATICA"];
-       echo $_SESSION["ELEGIRIDIOMA"];
-       
+       $numpalabras = (int)$_SESSION["NUMPALABRAS"];
+       $idioma = (int)$_SESSION["ELEGIRIDIOMA"];
+       $totalpalabras = sizeof($palabras); //OJO: hay que tener en cuenta si queremos mostrar todas
+                                            //las palabras o solo las del campo temático!
    
-       for($i = 0; $i < $p; $i++){
-           $EVhtml .= '<tr class="cell" style="text-align:left;">';
-           $EVhtml .= '<td><output type="text" id="id' . $i . '" value="."> </td>';
-           $EVhtml .= '<td align="right"> <input type="text" id="traduccion_usuario'.$i.'" size="800"> </td>';
-       }
-
+        for($i = 0; $i < $numpalabras; $i++){
+            $EVhtml .= '<tr class="cell" style="text-align:left;">';
+            $EVhtml .= '<td align="left" width="220"><output type="text" id="id' . $i . '" value=""> </td>';
+            $EVhtml .= '<td align="right" width="320"> <input type="text" id="traduccion_usuario'.$i.'"> </td>';
+        }
+        
        $EVhtml .= '</form>';
          
 
@@ -4382,8 +4381,8 @@ class mod_vocabulario_entrenador_form extends moodleform {
         //botones
         $botones .= '<br>';
         $botones .= '<div style="text-align:center;">';
-        $botones .= '<input type="button" value="Más palabras" OnClick="window.location.reload()">';
-        $botones .= '<input type="button" value="Corregir" OnClick="EV_Validation('.$p.')">';
+        $botones .= '<input type="button" value="Más palabras" OnClick="recargarEntrenador('.$numpalabras.','.$idioma.','.$totalpalabras.')">';
+        $botones .= '<input type="button" value="Corregir" OnClick="EV_Validation('.$numpalabras.')">';
         $botones .= '</div>';
         $mform->addElement('html', $botones);
     }
@@ -4397,7 +4396,7 @@ class mod_vocabulario_entrenador_configuracion_form extends moodleform
         session_start();
         
         $mform = & $this->_form;
-        
+              
         //Radio button para elegir si queremos generar las palabras en español y poner la traducción
         //en alemán, o viceversa
         $EVConf .= '<form action="#" method="POST">';
@@ -4432,12 +4431,10 @@ class mod_vocabulario_entrenador_configuracion_form extends moodleform
         $EVConf .= '</select>';
         $EVConf .= '<br><br>';
         
-        $EVConf .= '<a href="view.php?id=2&opcion=19"><input type="submit" value="aleatorias">';
+        $EVConf .= '<a href="view.php?id=2&opcion=19"><input type="submit" value="Generar">';
 
         $EVConf .= '</form>';
         
-
-       
         
         $mform->addElement('html', $EVConf);
 

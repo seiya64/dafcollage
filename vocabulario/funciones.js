@@ -369,12 +369,24 @@ function generaAleatorios(num,tam)
     return aleatorios;
 }
 
-window.onload = function() {
+function recargarEntrenador(numpalabras,idioma,totalpalabras){
     var aleatorios = new Array();
 
-    aleatorios = generaAleatorios(10,100);
-
-    for(i=0; i<10; i++){
-        document.getElementById("id"+ i).value = document.getElementById("palabra"+aleatorios[i]).value;
+    aleatorios = generaAleatorios(numpalabras,totalpalabras);
+    
+    //Pintamos las palabras en español y la traducción hay que introducirla en alemán
+    if(idioma == 1)
+    {
+        for(i = 0; i < numpalabras; i++)
+        {
+            document.getElementById("id"+i).value = document.getElementById("traduccion"+aleatorios[i]).value;
+        }
+    }//Las palabras las pintamos en alemán...
+    else
+    {
+        for(i = 0; i < numpalabras; i++)
+        {
+            document.getElementById("id"+i).value = document.getElementById("palabra"+aleatorios[i]).value;
+        }
     }
 };
