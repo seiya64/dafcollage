@@ -4321,7 +4321,13 @@ class mod_vocabulario_entrenador_form extends moodleform {
         $mform = & $this->_form;
 
        //Mostrar palabras
-       $palabras = todas_palabras_nube($USER->id);
+       $tematica = $_SESSION["TEMATICA"];
+       //Si temática vale 0, pintamos TODOS los campos temáticos
+       if ($tematica == 0)
+            $palabras = todas_palabras_nube($USER->id);
+       //Si no hacemos la consulta y pintamos los campos temáticos específicos.
+       else
+            $palabras = campos_lexicos_especifico($USER->id, $tematica); 
        //La variable EVhtml contiene el codigo html y javascript necesario para pintar 
        //el contenido del formulario del entrenador de vocabulario.
        $EVhtml='';
@@ -4355,11 +4361,12 @@ class mod_vocabulario_entrenador_form extends moodleform {
             $EVhtml .= '<tr class="cell" style="text-align:left;">';
             $EVhtml .= '<td align="left" width="220"><output type="text" id="id' . $i . '" value=""> </td>';
             $EVhtml .= '<td align="right" width="320"> <input type="text" id="traduccion_usuario'.$i.'"> </td>';
-        }
-        
-       $EVhtml .= '</form>';
-         
+            $EVhtml .= '<td> <input type="hidden" id="traduccion_correcta'.$i.'"> </td>';
 
+        }
+                        
+        $EVhtml .= '</form>';
+        
         $entrenadorVocabulario = ''
                 . '<div id=EV_Principal>'
                 .   '<div id=EV_target>'
@@ -4396,7 +4403,10 @@ class mod_vocabulario_entrenador_configuracion_form extends moodleform
         session_start();
         
         $mform = & $this->_form;
-              
+        
+        $mform->addElement('html', '<h1>Configuración entrenador<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
+        $mform->addElement('html','<br><br>');
+        
         //Radio button para elegir si queremos generar las palabras en español y poner la traducción
         //en alemán, o viceversa
         $EVConf .= '<form action="#" method="POST">';
@@ -4413,9 +4423,9 @@ class mod_vocabulario_entrenador_configuracion_form extends moodleform
         foreach($campotematico as $campo)
         {
             if($id == 0){
-                $EVConf .= '<option value=campo'.$id.'>TODOS LOS CAMPOS TEMÁTICOS</option> ';
+                $EVConf .= '<option value=0>TODOS LOS CAMPOS TEMÁTICOS</option> ';
             }else{
-                $EVConf .= '<option value=campo'.$id.'>'.$campo->campo_lex.'</option> ';
+                $EVConf .= '<option value='.$campo->id.'>'.$campo->campo_lex.'</option> ';
             }
             $id++;
         }

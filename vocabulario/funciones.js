@@ -318,23 +318,24 @@ function EV_Validation(tam){
     var num_aciertos = 0;
 
     for(i=0; i<tam; i++){   
-        var trad_usuario = document.getElementById("traduccion_usuario" + i).value;
-        var traduccion = document.getElementById("traduccion" + i).value;
-        var palabras = document.getElementById("id" + i).value;
- 
-        if(trad_usuario == traduccion){
-            alert("Esta bien");
+        //pasamos las palabras a minúscula para que no tengamos problema a la hora de comparar
+        //el signficado.
+        var trad_usuario = document.getElementById("traduccion_usuario" + i).value.toLowerCase();
+        var palabras = document.getElementById("id" + i).value.toLowerCase();
+        var traduccion_correcta = document.getElementById("traduccion_correcta" + i).value.toLowerCase();
+  
+        if(trad_usuario === traduccion_correcta){
+            alert("Está bien");
             num_aciertos++;
         }
         else{
            
-            alert("Está mal la palabra " + palabras + "y el significado es " + traduccion);
+            alert("Está mal la palabra " + palabras + " y el significado es " + traduccion_correcta);
                
         }
        
     }
-   
-    return num_aciertos;
+    
 }
 
 /*window.onload = function genera_palabras(tam, num_aleatorio){
@@ -375,11 +376,15 @@ function recargarEntrenador(numpalabras,idioma,totalpalabras){
     aleatorios = generaAleatorios(numpalabras,totalpalabras);
     
     //Pintamos las palabras en español y la traducción hay que introducirla en alemán
-    if(idioma == 1)
+    if(idioma == 1) 
     {
         for(i = 0; i < numpalabras; i++)
         {
             document.getElementById("id"+i).value = document.getElementById("traduccion"+aleatorios[i]).value;
+            document.getElementById("traduccion_correcta"+i).value = document.getElementById("palabra"+aleatorios[i]).value;
+            document.getElementById("traduccion_usuario"+i).value = ""; //cada vez que generemos más palabras
+                                                                        //vaciamos el campo de texto...
+
         }
     }//Las palabras las pintamos en alemán...
     else
@@ -387,6 +392,9 @@ function recargarEntrenador(numpalabras,idioma,totalpalabras){
         for(i = 0; i < numpalabras; i++)
         {
             document.getElementById("id"+i).value = document.getElementById("palabra"+aleatorios[i]).value;
+            document.getElementById("traduccion_correcta"+i).value = document.getElementById("traduccion"+aleatorios[i]).value;
+            document.getElementById("traduccion_usuario"+i).value = "";//vaciamos el campo de texto...
+
         }
     }
 };

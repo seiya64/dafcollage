@@ -718,7 +718,8 @@ function todos_campos_lexicos($usrid){
     
      $sql = "
         SELECT
-            table_campoLex.campo AS campo_lex
+            table_campoLex.campo AS campo_lex,
+            table_campoLex.id AS id
 
         FROM
             {vocabulario_camposlexicos_$sufijotabla} AS table_campoLex
@@ -741,6 +742,57 @@ function todos_campos_lexicos($usrid){
     return $todos;
     
 }
+
+//función para obtener las palabras de un determinado campo léxico
+function campos_lexicos_especifico($usrid, $tematica){
+    
+    global $DB;
+    $sufijotabla = get_sufijo_lenguaje_tabla();
+    
+    $sql = "SELECT
+        frase.id as mpid,
+	sus.palabra as sus_lex,
+        sus.significado as sus_sig,
+	adj.sin_declinar as adj_lex,
+	ver.infinitivo as ver_lex,
+	otros.palabra as otros_lex
+
+        FROM
+        {vocabulario_mis_palabras}	as frase ,
+	{vocabulario_sustantivos}	as sus,
+	{vocabulario_adjetivos}	as adj,
+	{vocabulario_verbos}	as ver,
+	{vocabulario_otros}		as otros,
+        {vocabulario_camposlexicos_$sufijotabla} as campos
+
+        WHERE
+            frase.`usuarioid` = $usrid AND
+            frase.`sustantivoid` = sus.`id`
+            AND
+            frase.`adjetivoid` = adj.`id`
+            AND
+            frase.`verboid` = ver.`id`
+            AND
+            frase.`otroid` = otros.`id`
+            AND
+            frase.`campoid` = $tematica
+	";
+    
+     
+    $file_log = fopen("log_sql.txt", "w");
+    $cad = "SQL: " . $sql . "\n\n\n";
+    $cad.= "Error: " . mysql_error() . "\n\n";
+    fwrite($file_log, $cad, strlen($cad));
+    fclose($file_log); 
+
+    $todos = $DB->get_records_sql($sql);
+   
+       
+    return $todos;
+    
+}
+
+
 
 function obtener_superpadre($id){
     global $DB;
