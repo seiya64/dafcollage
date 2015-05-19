@@ -338,22 +338,6 @@ function EV_Validation(tam){
     
 }
 
-/*window.onload = function genera_palabras(tam, num_aleatorio){
-    var arrayPalabras = new Array();
-   alert(tam);
-   tam=17;
-   // alert(tam);
-   // alert(num_aleatorio);
-    
-    /*for(i=0; i<tam; i++){
-        arrayPalabras.push() ;
-    }
-}
-
-function hola(){
-    alert("Hola");
-}*/
-
 function generaAleatorios(num,tam)
 {
     var aleatorios = new Array();
@@ -370,10 +354,10 @@ function generaAleatorios(num,tam)
     return aleatorios;
 }
 
-function recargarEntrenador(numpalabras,idioma,totalpalabras){
+function recargarEntrenador(numpalabras, idioma, totalpalabras){
     var aleatorios = new Array();
 
-    aleatorios = generaAleatorios(numpalabras,totalpalabras);
+    aleatorios = generaAleatorios(numpalabras, totalpalabras);
     
     //Pintamos las palabras en español y la traducción hay que introducirla en alemán
     if(idioma == 1) 

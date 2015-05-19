@@ -1044,7 +1044,8 @@ class mod_vocabulario_opciones_form extends moodleform {
         //2,3
         $tabla_menu .='<div class="menuitem right" style="text-align:right"><a href="view.php?id=' . $id . '&opcion=15"><img src="./imagenes/nueva_gramatica.png" id="id_gram_im" name="gram_im"/><div class="texto">' . get_string('add_gram', 'vocabulario') . '</div></a></div>';
         //2,2
-        $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=17"><div class="texto">' .  '</div></a></div></div>';
+        //Entrenador de vocabulario
+        $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=18"><img src="./imagenes/entrenador.png" id="id_entrenador" name="entrenador"/><div class="texto"> Entrenador</div></a></div></div>';
 
         //3,1
         //
@@ -1069,6 +1070,7 @@ class mod_vocabulario_opciones_form extends moodleform {
 
         //3,3
         $tabla_menu .='<div class="menuitem right" style="text-align:right"><a href="view.php?id=' . $id . '&opcion=8"><img src="./imagenes/nueva_ic.png" id="id_nueva_ic" name="nueva_ic"/><div class="texto">' . get_string('nueva_ic', 'vocabulario') . '</div></a></div>';
+
         //3,2
         
         $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=13"><img src="./imagenes/listado.png" id="id_listado" name="listado"/><div class="texto">' . get_string('listado', 'vocabulario') . '</div></a></div></div>';
@@ -1082,7 +1084,6 @@ class mod_vocabulario_opciones_form extends moodleform {
         //4,2
        
        $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=14"><img src="./imagenes/pdf.png" id="id_pdf" name="pdf"/><div class="texto">' . get_string('pdf', 'vocabulario') . '</div></a></div></div>';
-       $tabla_menu .='<div class="menuitem center"><a href="view.php?id=' . $id . '&opcion=18"><img src="./imagenes/pdf.png" id="id_pdf" name="pdf"/><div class="texto"> Entrenador</div></a></div></div>';
         //5,1
         $tabla_menu .='<div class="menurow"><div class="menuitem left" style="text-align:left"><a href="view.php?id=' . $id . '&opcion=11"><img src="./imagenes/estrategias_icon.png" id="id_ea_im" name="ea_im"/><div class="texto">' . get_string('admin_ea', 'vocabulario') . '</div></a></div>';
         //5,3
@@ -4330,10 +4331,18 @@ class mod_vocabulario_entrenador_form extends moodleform {
             $palabras = campos_lexicos_especifico($USER->id, $tematica); 
        //La variable EVhtml contiene el codigo html y javascript necesario para pintar 
        //el contenido del formulario del entrenador de vocabulario.
+       
+       $numpalabras = (int)$_SESSION["NUMPALABRAS"];
+       $idioma = (int)$_SESSION["ELEGIRIDIOMA"];
+       $totalpalabras = sizeof($palabras); //OJO: hay que tener en cuenta si queremos mostrar todas
+                                            //las palabras o solo las del campo temático!
        $EVhtml='';
        
        $mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
-     
+       
+       //Ejecuta recargarEntrenador al entrar en la página por primera vez.
+       $mform->addElement('html', '<body onload="recargarEntrenador('.$numpalabras.','.$idioma.','.$totalpalabras.')">');
+       
        $EVhtml .= '<form name="EV_form">';
        //$aux = array();
        $i = 0;
@@ -4351,11 +4360,6 @@ class mod_vocabulario_entrenador_form extends moodleform {
            
            $i++;
        }
-        
-       $numpalabras = (int)$_SESSION["NUMPALABRAS"];
-       $idioma = (int)$_SESSION["ELEGIRIDIOMA"];
-       $totalpalabras = sizeof($palabras); //OJO: hay que tener en cuenta si queremos mostrar todas
-                                            //las palabras o solo las del campo temático!
    
         for($i = 0; $i < $numpalabras; $i++){
             $EVhtml .= '<tr class="cell" style="text-align:left;">';
@@ -4382,6 +4386,9 @@ class mod_vocabulario_entrenador_form extends moodleform {
         //titulo de la seccion
         $mform->addElement('html', '<h1>Entrenador Vocabulario<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
         
+        //enlace a la configuración del entrenador
+        $mform->addElement('html', '<div class="menuitem center" style="text-align:center;"><a href="view.php?id=2&opcion=18"><img src="./imagenes/entrenador.png" id="id_entrenador" name="entrenador"/><div class="texto">Entrenador</div></a></div></div><br>');
+        
         //div principal
         $mform->addElement('html', $entrenadorVocabulario);
         
@@ -4405,19 +4412,26 @@ class mod_vocabulario_entrenador_configuracion_form extends moodleform
         $mform = & $this->_form;
         
         $mform->addElement('html', '<h1>Configuración entrenador<a href="view.php?id='.optional_param('id', 0, PARAM_INT).'" onclick="skipClientValidation = true; return true;" id="id_cancellink">'.get_string('cancel', 'vocabulario').'</a></h1>');
-        $mform->addElement('html','<br><br>');
+        $mform->addElement('html','<br>');
         
-        //Radio button para elegir si queremos generar las palabras en español y poner la traducción
-        //en alemán, o viceversa
-        $EVConf .= '<form action="#" method="POST">';
-        $EVConf .= '<input type="radio" name="elegirIdioma" value=1 checked>Español-Alemán';
-        $EVConf .= '<br>';
-        $EVConf .= '<input type="radio" name="elegirIdioma" value=2 >Alemán-Español';
-        $EVConf .= '<br><br><br>';
+        $mform->addElement('html', '<p style="font-size: 20px; font-weight: bold;">Según campos temáticos:</p>');
+        $mform->addElement('html','<br>');
+        
+        $EVConf .= '<div style="background-color: #B4BBBF; padding: 10px; width: 45%;">';
+        //Menú desplegable con el número de palabras que queremos mostrar
+        $EVConf .= '<p style="font-size: 15px; font-weight: bold;"> Número de palabras: </p>';
+        $EVConf .= '<select name="numPalabras">';
+        $EVConf .= '<option value=5 > 5 </option>';
+        $EVConf .= '<option value=10 > 10 </option>';
+        $EVConf .= '<option value=15 > 15 </option>';
+        $EVConf .= '<option value=20 > 20 </option>';
+        $EVConf .= '</select>';
+        $EVConf .= '<br><br>';
         
         //Menú desplegable para mostrar los campos temáticos
         $campotematico = todos_campos_lexicos($USER->id); 
 
+        $EVConf .= '<p style="font-size: 15px; font-weight: bold;"> Campo temático: </p>';
         $EVConf .= '<select name="tematica">';
         $id=0;
         foreach($campotematico as $campo)
@@ -4432,13 +4446,15 @@ class mod_vocabulario_entrenador_configuracion_form extends moodleform
         $EVConf .= '</select>';
         $EVConf .= '<br><br>';
         
-       //Menú desplegable con el número de palabras que queremos mostrar
-        $EVConf .= '<select name="numPalabras">';
-        $EVConf .= '<option value=5 > 5 </option>';
-        $EVConf .= '<option value=10 > 10 </option>';
-        $EVConf .= '<option value=15 > 15 </option>';
-        $EVConf .= '<option value=20 > 20 </option>';
-        $EVConf .= '</select>';
+        //Radio button para elegir si queremos generar las palabras en español y poner la traducción
+        //en alemán, o viceversa
+        $EVConf .= '<p style="font-size: 15px; font-weight: bold;"> Dirección de traducción: </p>';
+        $EVConf .= '<form action="#" method="POST">';
+        $EVConf .= '<input type="radio" name="elegirIdioma" value=1 checked>Español-Alemán';
+        $EVConf .= '<br>';
+        $EVConf .= '<input type="radio" name="elegirIdioma" value=2 >Alemán-Español';
+        
+        $EVConf .= '</div>';
         $EVConf .= '<br><br>';
         
         $EVConf .= '<a href="view.php?id=2&opcion=19"><input type="submit" value="Generar">';

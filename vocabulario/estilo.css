@@ -80,49 +80,6 @@ guardar palabras por columnas
     display: table-cell;
 }
 
-
-
-/***************************************************************/
-/*********Cambios CSS del tema BCU en Moodle 2.8****************/
-/*********Autores:                              ****************/
-/*********Luis Redondo Expósito                 ****************/
-/*********Ramón Rueda Delgado                   ****************/
-/***************************************************************/
-/*
-#id_sus {
-    width: 48%;
-    float: left;
-    min-height: 250px;
-    display: table-cell;
-    clear: left;
-}
-
-#id_vrb {
-    width: 48%;
-    float: right;
-    min-height: 250px;
-    display: table-cell;
-}
-
-
-#id_adj {
-    width: 48%;
-    float: left;
-    min-height: 250px;
-    vertical-align: 20px;
-    display: table-cell;
-    clear: left;
-}
-
-#id_otr {
-    width: 48%;
-    float: right;
-    min-height: 250px;
-    display: table-cell;
-}
-*/
-
-
 #viewcanvas{ padding-top:10px;}
 .menurow{ clear:both; padding-top:15px;}
 .menurow a {text-decoration:none;}
@@ -214,21 +171,6 @@ h1 a{
 	font-size:12px;
 }
 
-
-/*input, textarea, .uneditable-input {
-	width: 100%;
-}
-
-table.flexible, .generaltable {
-	margin-bottom: 20px;
-	width: 80%;
-}
-
-.boxaligncenter {
-	margin-right: auto;
-	margin-left: 0px;
-}*/
-
 /*Modificamos el color de las filas pares*/
 
 table#explaincaps tbody > tr:nth-child(2n) > td, table#defineroletable tbody > tr:nth-child(2n) > td, table.grading-report tbody > tr:nth-child(2n) > td, table#listdirectories tbody > tr:nth-child(2n) > td, table.rolecaps tbody > tr:nth-child(2n) > td, table.userenrolment tbody > tr:nth-child( 2n) > td, table#form tbody > tr:nth-child( 2n) > td, form#movecourses table tbody > tr:nth-child( 2n) > td, #page-admin-course-index .editcourse tbody > tr:nth-child( 2n) > td, .forumheaderlist tbody > tr:nth-child( 2n) > td, table.flexible tbody > tr:nth-child( 2n) > td, .generaltable tbody > tr:nth-child( 2n) > td, table#explaincaps tbody > tr:nth-child( 2n) > th, table#defineroletable tbody > tr:nth-child( 2n) > th, table.grading-report tbody > tr:nth-child( 2n) > th, table#listdirectories tbody > tr:nth-child( 2n) > th, table.rolecaps tbody > tr:nth-child( 2n) > th, table.userenrolment tbody > tr:nth-child( 2n) > th, table#form tbody > tr:nth-child( 2n) > th, form#movecourses table tbody > tr:nth-child( 2n) > th, #page-admin-course-index .editcourse tbody > tr:nth-child( 2n) > th, .forumheaderlist tbody > tr:nth-child( 2n) > th, table.flexible tbody > tr:nth-child( 2n) > th, .generaltable tbody > tr:nth-child( 2n) > th {
@@ -242,7 +184,6 @@ table#explaincaps tbody > tr:nth-child(2n+1) > td, table#defineroletable tbody >
     background-color: LightGrey;
     font-size:16px;
 }
-
 
 textarea[cols], input[size] {
     width: 74%;
@@ -313,7 +254,7 @@ input[type="radio"] + label, input[type="checkbox"] + label {
 {
     padding: 10px;
     width: 100%;
-    height: 1000px;
+    height: auto;
     background-color:#B4BBBF;
 }
 

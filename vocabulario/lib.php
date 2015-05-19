@@ -750,32 +750,32 @@ function campos_lexicos_especifico($usrid, $tematica){
     $sufijotabla = get_sufijo_lenguaje_tabla();
     
     $sql = "SELECT
-        frase.id as mpid,
-	sus.palabra as sus_lex,
-        sus.significado as sus_sig,
-	adj.sin_declinar as adj_lex,
-	ver.infinitivo as ver_lex,
-	otros.palabra as otros_lex
+        table_misPal.id as misPal_id,
+	table_sus.palabra as sus_lex,
+        table_sus.significado as sus_sig,
+	table_adj.sin_declinar as adj_lex,
+	table_ver.infinitivo as ver_lex,
+	table_otr.palabra as otros_lex
 
         FROM
-        {vocabulario_mis_palabras}	as frase ,
-	{vocabulario_sustantivos}	as sus,
-	{vocabulario_adjetivos}	as adj,
-	{vocabulario_verbos}	as ver,
-	{vocabulario_otros}		as otros,
-        {vocabulario_camposlexicos_$sufijotabla} as campos
+        {vocabulario_mis_palabras} AS table_misPal ,
+	{vocabulario_sustantivos} AS table_sus,
+	{vocabulario_adjetivos} AS table_adj,
+	{vocabulario_verbos} AS table_ver,
+	{vocabulario_otros} AS table_otr,
+        {vocabulario_camposlexicos_$sufijotabla} AS table_campoLex
 
         WHERE
-            frase.`usuarioid` = $usrid AND
-            frase.`sustantivoid` = sus.`id`
+            table_misPal.`usuarioid` = $usrid AND
+            table_misPal.`sustantivoid` = table_sus.`id`
             AND
-            frase.`adjetivoid` = adj.`id`
+            table_misPal.`adjetivoid` = adj.`id`
             AND
-            frase.`verboid` = ver.`id`
+            table_misPal.`verboid` = ver.`id`
             AND
-            frase.`otroid` = otros.`id`
+            table_misPal.`otroid` = otros.`id`
             AND
-            frase.`campoid` = $tematica
+            table_misPal.`campoid` = $tematica
 	";
     
      
