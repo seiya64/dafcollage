@@ -1290,10 +1290,13 @@ class mod_vocabulario_ver_form extends moodleform {
         } else if ($alfa) {
             $viene=2;
             $letra = optional_param('letra', 'a', PARAM_ALPHA);
+            $l = 'a';
+            
+            // Se pinta el selector de letras
             $abecedario = '<h1 style="text-align:center;">';
             $l = 'a';
             for ($i = 1; $i < 27; $i++) {
-                $abecedario .= '<a href="./view.php?id=' . $this->id_tocho . '&opcion=2&alfa=1&letra=' . $l . '">[' . $l . ']</a>';
+                $abecedario .= '<a style="font-size:18px" "font-family: Verdana, Geneva, sans-serif" href="./view.php?id=' . $this->id_tocho . '&opcion=2&alfa=1&letra=' . $l . '"> ' . $l . ' </a>';
                 $l++;
             }
             $abecedario .= '</h1>';
