@@ -674,8 +674,11 @@ function todas_palabras_nube($usrid) {
 	sus.palabra as sus_lex,
         sus.significado as sus_sig,
 	adj.sin_declinar as adj_lex,
+        adj.significado as adj_sig,
 	ver.infinitivo as ver_lex,
+        ver.significado as ver_sig,
 	otros.palabra as otros_lex,
+	otros.significado as otros_sig,
         campos.campo as campo_lex
 
         FROM
@@ -710,6 +713,151 @@ function todas_palabras_nube($usrid) {
        
     return $todas;
 }
+
+
+function todas_palabras_sustantivo($usrid) {
+        
+    global $DB;
+    $sufijotabla = get_sufijo_lenguaje_tabla();
+    
+    $sql = "SELECT
+        frase.id as mpid,
+	sus.palabra as sus_lex,
+        sus.significado as sus_sig,
+        campos.campo as campo_lex
+
+        FROM
+        {vocabulario_mis_palabras}	as frase ,
+	{vocabulario_sustantivos}	as sus,
+        {vocabulario_camposlexicos_$sufijotabla} as campos
+
+        WHERE
+            frase.`usuarioid` = $usrid 
+            AND 
+            frase.`sustantivoid` = sus.`id`    
+            AND
+            frase.`campoid` = campos.`id`
+	";
+
+    $file_log = fopen("log_sql.txt", "w");
+    $cad = "SQL: " . $sql . "\n\n\n";
+    $cad.= "Error: " . mysql_error() . "\n\n";
+    fwrite($file_log, $cad, strlen($cad));
+    fclose($file_log); 
+
+    $todas = $DB->get_records_sql($sql);
+   
+       
+    return $todas;
+}
+function todas_palabras_adjetivo($usrid) {
+        
+    global $DB;
+    $sufijotabla = get_sufijo_lenguaje_tabla();
+    
+    $sql = "SELECT
+        frase.id as mpid,	
+	adj.sin_declinar as adj_lex,
+        adj.significado as adj_sig,
+        campos.campo as campo_lex
+
+        FROM
+        {vocabulario_mis_palabras}	as frase ,
+	{vocabulario_adjetivos}	as adj,
+        {vocabulario_camposlexicos_$sufijotabla} as campos
+
+        WHERE
+            frase.`usuarioid` = $usrid 
+            AND
+            frase.`adjetivoid` = adj.`id`
+            AND
+            frase.`campoid` = campos.`id`
+	";
+
+    $file_log = fopen("log_sql.txt", "w");
+    $cad = "SQL: " . $sql . "\n\n\n";
+    $cad.= "Error: " . mysql_error() . "\n\n";
+    fwrite($file_log, $cad, strlen($cad));
+    fclose($file_log); 
+
+    $todas = $DB->get_records_sql($sql);
+   
+       
+    return $todas;
+}
+function todas_palabras_verbo($usrid) {
+        
+    global $DB;
+    $sufijotabla = get_sufijo_lenguaje_tabla();
+    
+    $sql = "SELECT
+        frase.id as mpid,
+	ver.infinitivo as ver_lex,
+        ver.significado as ver_sig,
+        campos.campo as campo_lex
+
+        FROM
+        {vocabulario_mis_palabras}	as frase ,
+	{vocabulario_verbos}	as ver,
+        {vocabulario_camposlexicos_$sufijotabla} as campos
+
+        WHERE
+            frase.`usuarioid` = $usrid 
+            AND
+            frase.`verboid` = ver.`id`
+            AND
+            frase.`campoid` = campos.`id`
+	";
+
+    $file_log = fopen("log_sql.txt", "w");
+    $cad = "SQL: " . $sql . "\n\n\n";
+    $cad.= "Error: " . mysql_error() . "\n\n";
+    fwrite($file_log, $cad, strlen($cad));
+    fclose($file_log); 
+
+    $todas = $DB->get_records_sql($sql);
+   
+       
+    return $todas;
+}
+function todas_palabras_otras($usrid) {
+        
+    global $DB;
+    $sufijotabla = get_sufijo_lenguaje_tabla();
+    
+    $sql = "SELECT
+        frase.id as mpid,
+	otros.palabra as otros_lex,
+	otros.significado as otros_sig,
+        campos.campo as campo_lex
+
+        FROM
+        {vocabulario_mis_palabras}	as frase ,
+	{vocabulario_otros}		as otros,
+        {vocabulario_camposlexicos_$sufijotabla} as campos
+
+        WHERE
+            frase.`usuarioid` = $usrid 
+            AND
+            frase.`otroid` = otros.`id`
+            AND
+            frase.`campoid` = campos.`id`
+	";
+
+    $file_log = fopen("log_sql.txt", "w");
+    $cad = "SQL: " . $sql . "\n\n\n";
+    $cad.= "Error: " . mysql_error() . "\n\n";
+    fwrite($file_log, $cad, strlen($cad));
+    fclose($file_log); 
+
+    $todas = $DB->get_records_sql($sql);
+   
+       
+    return $todas;
+}
+
+
+
 
 function todos_campos_lexicos($usrid){
     

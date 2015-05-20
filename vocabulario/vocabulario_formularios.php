@@ -4319,51 +4319,78 @@ class mod_vocabulario_buscar_intenciones_form extends moodleform {
 class mod_vocabulario_entrenador_form extends moodleform {
     function definition() {
         global $USER;
+                
         $mform = & $this->_form;
 
        //Mostrar palabras
        $tematica = $_SESSION["TEMATICA"];
        //Si temática vale 0, pintamos TODOS los campos temáticos
        if ($tematica == 0)
-            $palabras = todas_palabras_nube($USER->id);
+       {
+            $palabras_sus = todas_palabras_sustantivo($USER->id);
+            $palabras_adj = todas_palabras_adjetivo($USER->id);
+            $palabras_verb = todas_palabras_verbo($USER->id);
+            $palabras_otro = todas_palabras_otras($USER->id);
+       }
        //Si no hacemos la consulta y pintamos los campos temáticos específicos.
        else
             $palabras = campos_lexicos_especifico($USER->id, $tematica); 
        //La variable EVhtml contiene el codigo html y javascript necesario para pintar 
        //el contenido del formulario del entrenador de vocabulario.
        
+       $palabras = array();
+       $traducciones = array();
+       foreach($palabras_sus as $elemento_sus)
+       {
+           array_push($palabras, $elemento_sus->sus_lex);
+           array_push($traducciones, $elemento_sus->sus_sig);
+       }
+       foreach($palabras_adj as $elemento_adj)
+       {
+           array_push($palabras, $elemento_adj->adj_lex);
+           array_push($traducciones, $elemento_adj->adj_sig);
+       }
+       foreach($palabras_verb as $elemento_verb)
+       {
+           array_push($palabras, $elemento_verb->ver_lex);
+           array_push($traducciones, $elemento_verb->ver_sig);
+       }
+       foreach($palabras_otro as $elemento_otro)
+       {
+           array_push($palabras, $elemento_otro->otros_lex);
+           array_push($traducciones, $elemento_otro->otros_sig);
+       }
+       
+
+       
        $numpalabras = (int)$_SESSION["NUMPALABRAS"];
        $idioma = (int)$_SESSION["ELEGIRIDIOMA"];
+       
        $totalpalabras = sizeof($palabras); //OJO: hay que tener en cuenta si queremos mostrar todas
                                             //las palabras o solo las del campo temático!
        $EVhtml='';
        
        $mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
-       
-       //Ejecuta recargarEntrenador al entrar en la página por primera vez.
        $mform->addElement('html', '<body onload="recargarEntrenador('.$numpalabras.','.$idioma.','.$totalpalabras.')">');
-       
+
+            
        $EVhtml .= '<form name="EV_form">';
        //$aux = array();
-       $i = 0;
        $traduccion = '';
        $tam=sizeof($palabras);
-       $num_aleatorio=10;
-        
+       
        //Recorremos todas las palabras y para cada una de ellas pintamos una caja de texto
-       foreach ($palabras as $elemento)
+       for($i=0; $i < $tam; $i++)
        {
            $EVhtml .= '<tr class="cell" style="text-align:center;">'
-                   . '<input type="hidden" id="palabra' . $i . '" value="'.$elemento->sus_lex.'"> '
-                   . '<input type="hidden" id="traduccion' . $i . '" value="'.$elemento->sus_sig.'">'
+                   . '<input type="hidden" id="palabra' . $i . '" value="'.$palabras[$i].'"> '
+                   . '<input type="hidden" id="traduccion' . $i . '" value="'.$traducciones[$i].'">'
                    . '</tr>';
-           
-           $i++;
        }
    
         for($i = 0; $i < $numpalabras; $i++){
             $EVhtml .= '<tr class="cell" style="text-align:left;">';
-            $EVhtml .= '<td align="left" width="220"><output type="text" id="id' . $i . '" value=""> </td>';
+            $EVhtml .= '<td align="left" width="220"><output type="text" id="id' . $i . '" value=""></td>';
             $EVhtml .= '<td align="right" width="320"> <input type="text" id="traduccion_usuario'.$i.'"> </td>';
             $EVhtml .= '<td> <input type="hidden" id="traduccion_correcta'.$i.'"> </td>';
 
@@ -4399,6 +4426,7 @@ class mod_vocabulario_entrenador_form extends moodleform {
         $botones .= '<input type="button" value="Corregir" OnClick="EV_Validation('.$numpalabras.')">';
         $botones .= '</div>';
         $mform->addElement('html', $botones);
+        
     }
 }
 
@@ -4427,7 +4455,7 @@ class mod_vocabulario_entrenador_configuracion_form extends moodleform
         $EVConf .= '<option value=20 > 20 </option>';
         $EVConf .= '</select>';
         $EVConf .= '<br><br>';
-        
+
         //Menú desplegable para mostrar los campos temáticos
         $campotematico = todos_campos_lexicos($USER->id); 
 
@@ -4453,6 +4481,7 @@ class mod_vocabulario_entrenador_configuracion_form extends moodleform
         $EVConf .= '<input type="radio" name="elegirIdioma" value=1 checked>Español-Alemán';
         $EVConf .= '<br>';
         $EVConf .= '<input type="radio" name="elegirIdioma" value=2 >Alemán-Español';
+
         
         $EVConf .= '</div>';
         $EVConf .= '<br><br>';
@@ -4463,7 +4492,7 @@ class mod_vocabulario_entrenador_configuracion_form extends moodleform
         
         
         $mform->addElement('html', $EVConf);
-
+                        
     }
 }
 ?>
