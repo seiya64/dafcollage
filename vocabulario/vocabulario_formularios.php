@@ -170,7 +170,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $mform->addElement('header', 'sus', get_string('sust', 'vocabulario'));
 
         //enlace a traduccion
-        $enlace_diccionario = "<a href='javascript:traducir(1)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string('pal', 'vocabulario') . "]</a>";
+        $enlace_diccionario = "<a style=\"color:#04B8C8\" href='javascript:traducir(1)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string('pal', 'vocabulario') . "]</a>";
         $mform->addElement('text', 'palabra_sus', $enlace_diccionario, "value=" . $sustantivo->get('palabra'));
         $mform->setType('palabras_sus', PARAM_TEXT);
 
@@ -391,7 +391,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
         //infinitivo
         //enlace a traduccion
-        $enlace_diccionario = "<a href='javascript:traducir(2)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string('infi', 'vocabulario') . "]</a>";
+        $enlace_diccionario = "<a style=\"color:#04B8C8\" href='javascript:traducir(2)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string('infi', 'vocabulario') . "]</a>";
         $mform->addElement('text', 'infinitivo', $enlace_diccionario, 'value="' . $verbo->get('infinitivo') . '"');
         $mform->setType('infinitivo', PARAM_TEXT);
         //tercera persona
@@ -587,7 +587,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
         //sin declinacion
         //enlace a traduccion
-        $enlace_diccionario = "<a href='javascript:traducir(2)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string("sindec", "vocabulario") . "]</a>";
+        $enlace_diccionario = "<a style=\"color:#04B8C8\" href='javascript:traducir(2)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string("sindec", "vocabulario") . "]</a>";
         $mform->addElement('text', 'sindeclinar', $enlace_diccionario, 'value="' . $adjetivo->get('sin_declinar') . '"');
         $mform->setType('sindeclinar', PARAM_TEXT);
         //traduccion
@@ -773,7 +773,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
         //sustantivo
         //enlace a traduccion
-        $enlace_diccionario = "<a href='javascript:traducir(2)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string("otr_sus", "vocabulario") . "]</a>";
+        $enlace_diccionario = "<a style=\"color:#04B8C8\" href='javascript:traducir(2)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string("otr_sus", "vocabulario") . "]</a>";
         $mform->addElement('text', 'palabra_otr', $enlace_diccionario, 'value="' . $otro->get('palabra') . '"');
         $mform->setType('palabra_otr', PARAM_TEXT);
         //traduccion
@@ -967,7 +967,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
          }
         //$buttonarray[] = &$mform->createElement('reset', 'resetbutton', get_string('revert', 'vocabulario'));
-        $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
+       // $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
         $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
     }
 
@@ -1437,7 +1437,7 @@ class mod_vocabulario_ver_form extends moodleform {
         }
         //botones
         $buttonarray = array();
-        $buttonarray[] = &$mform->createElement('submit', 'cancelbutton', get_string('cancel', 'vocabulario'));
+        //$buttonarray[] = &$mform->createElement('submit', 'cancelbutton', get_string('cancel', 'vocabulario'));
         /***************************************************/
        
       
@@ -1536,7 +1536,7 @@ class mod_vocabulario_nuevo_cl_form extends moodleform {
         $buttonarray = array();
         $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('savechanges'));
         //$buttonarray[] = &$mform->createElement('reset', 'resetbutton', get_string('revert', 'vocabulario'));
-        $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
+       // $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
         $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
     }
 
@@ -2820,7 +2820,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $titulillos .= '<th>' . get_string('vorfeld', 'vocabulario') . '</th>';
                // $titulillos .= '<th>' . get_string('konjugier', 'vocabulario') . '</th>';
                 $titulillos .= '<th>Position 2</th>';
-					 $titulillos .= '<th style="width: 500 px;">' . get_string('mittelfeld', 'vocabulario') . '</th>';
+                $titulillos .= '<th style="width: 600 px;">' . get_string('mittelfeld', 'vocabulario') . '</th>';
                 $titulillos .= '<th >' . get_string('verb2', 'vocabulario') . '</th>';
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
@@ -2837,10 +2837,10 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $titulillos = '<tr class="cell">';
                     $titulillos .= '<td><input type="text" id="id_VORSUB' . $i . '" name="VORSUB' . $i . '" value="' . $descripcion_troceada[$i] . '"></td>';
                     //$titulillos .= '<td style="background: #BDC7D8;"><input type="text" style="background: #BDC7D8;" id="id_KONSUB' . $i . '" name="KONSUB' . $i . '" value="' . $descripcion_troceada[$i + 1] . '"></td>';
-						  $titulillos .= '<td><input type="text" style="width:120px;" id="id_KONSUB' . $i . '" name="KONSUB' . $i . '" value="' . $descripcion_troceada[$i + 1] . '"></td>';
-                    $titulillos .= '<td style="width: 500 px;"><input style="width:400px;" type="text" id="id_MIT' . $i . '" name="MIT' . $i . '" value="' . $descripcion_troceada[$i + 2] . '"></td>';
+                    $titulillos .= '<td><input type="text" style="width:120px;" id="id_KONSUB' . $i . '" name="KONSUB' . $i . '" value="' . $descripcion_troceada[$i + 1] . '"></td>';
+                    $titulillos .= '<td style="width: 500 px;"><input style="width:600px;" type="text" id="id_MIT' . $i . '" name="MIT' . $i . '" value="' . $descripcion_troceada[$i + 2] . '"></td>';
                     //$titulillos .= '<td style="background: #BDC7D8;"><input type="text" size="8" style="background: #BDC7D8;" id="id_VER2' . $i . '" name="VER2' . $i . '" value="' . $descripcion_troceada[$i + 3] . '"></td>';
-						  $titulillos .= '<td><input type="text" style="width:220px;" id="id_KONSUB' . $i . '" name="KONSUB' . $i . '" value="' . $descripcion_troceada[$i + 1] . '"></td>';
+                    $titulillos .= '<td><input type="text" style="width:120px;" id="id_KONSUB' . $i . '" name="KONSUB' . $i . '" value="' . $descripcion_troceada[$i + 1] . '"></td>';
                     $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
                 }
@@ -2895,7 +2895,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', '</table>');
                 $mform->addElement('html', '<p>');
                 $mform->addElement('html','<input type="hidden" id="avance" value="'.$i.'" />');
-                $mform->addElement('html','<center><a href="#" onclick="mis_gramaticas_addFila57()">'.get_string('masfilas','vocabulario').'</a></center>');
+                $mform->addElement('html','<left><a href="#" onclick="mis_gramaticas_addFila57()">'.get_string('masfilas','vocabulario').'</a></center>');
                 break;
             //2.4.2.1 Pronomina, die nur Personen bezeichnen
             case 13:
@@ -3612,7 +3612,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
         }
         $mform->registerNoSubmitButton('desc_btn');
         
-        $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
+       // $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
 
         
         
@@ -3677,7 +3677,7 @@ class mod_vocabulario_aniadir_gr_form extends moodleform {
         $buttonarray = array();
         $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('savechanges'));
         //$buttonarray[] = &$mform->createElement('reset', 'resetbutton', get_string('revert', 'vocabulario'));
-        $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
+        //$buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
         $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
     }
 
@@ -3809,7 +3809,7 @@ class mod_vocabulario_nuevo_ic_form extends moodleform {
             $buttonarray[] = &$mform->createElement('submit', 'desc_btn', get_string('guardesc', 'vocabulario'));
         $mform->registerNoSubmitButton('desc_btn');
         $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('verdesc', 'vocabulario'));
-        $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
+       // $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
         $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
     }
 
@@ -3846,7 +3846,7 @@ class mod_vocabulario_intencion_desc_form extends moodleform {
 
         $buttonarray = array();
         $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('guardesc', 'vocabulario'));
-        $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
+       // $buttonarray[] = &$mform->createElement('cancel', '//', get_string('cancel', 'vocabulario'));
         $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
     }
 
@@ -3946,7 +3946,7 @@ class mod_vocabulario_nuevo_tipologia_form extends moodleform {
             $buttonarray[] = &$mform->createElement('submit', 'desc_btn', get_string('guardesc', 'vocabulario'));
         $mform->registerNoSubmitButton('desc_btn');
         $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('verdesc', 'vocabulario'));
-        $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
+     //   $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
         $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
     }
 
@@ -3981,7 +3981,7 @@ class mod_vocabulario_tipologia_desc_form extends moodleform {
 
         $buttonarray = array();
         $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('guardesc', 'vocabulario'));
-        $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
+      //  $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
         $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
     }
 
@@ -4026,7 +4026,7 @@ class mod_vocabulario_nuevo_estrategia_form extends moodleform {
             $buttonarray[] = &$mform->createElement('submit', 'desc_btn', get_string('guardesc', 'vocabulario'));
         $mform->registerNoSubmitButton('desc_btn');
         $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('verdesc', 'vocabulario'));
-        $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
+       // $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
         $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
     }
 
@@ -4064,7 +4064,7 @@ class mod_vocabulario_estrategia_desc_form extends moodleform {
 
         $buttonarray = array();
         $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('guardesc', 'vocabulario'));
-        $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
+       // $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
         $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
     }
 
@@ -4127,7 +4127,7 @@ class mod_vocabulario_listado_form extends moodleform {
         $mform->addElement('html', '</ul></div>');
         //botones
         $buttonarray = array();
-        $buttonarray[] = &$mform->createElement('submit', 'cancelbutton', get_string('cancel', 'vocabulario'));
+      //  $buttonarray[] = &$mform->createElement('submit', 'cancelbutton', get_string('cancel', 'vocabulario'));
         $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
     }
 
@@ -4161,7 +4161,7 @@ class mod_vocabulario_pdf_form extends moodleform {
 
         $buttonarray = array();
         $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('imprimir', 'vocabulario'));
-        $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
+       // $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
         $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
     }
 
@@ -4233,7 +4233,7 @@ class mod_vocabulario_colaboradores_form extends moodleform {
         $mform->addElement('static', 'colaboradores', '', '<strong>Muchas gracias y Abrazos para todos!!</strong>');
         $mform->addElement('static', 'colaboradores', '', '');
         $buttonarray = array();
-        $buttonarray[] = &$mform->createElement('submit', 'cancelbutton', get_string('cancel', 'vocabulario'));
+      //  $buttonarray[] = &$mform->createElement('submit', 'cancelbutton', get_string('cancel', 'vocabulario'));
         $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
     }
 }
@@ -4311,7 +4311,7 @@ class mod_vocabulario_buscar_intenciones_form extends moodleform {
         
         $buttonarray = array();
         $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('botbuscintenciones', 'vocabulario'));
-        $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
+       // $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
         $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
       
     }
