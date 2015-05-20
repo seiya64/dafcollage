@@ -892,7 +892,7 @@ function todos_campos_lexicos($usrid){
 }
 
 //función para obtener las palabras de un determinado campo léxico
-function campos_lexicos_especifico($usrid, $tematica){
+function campos_lexicos_especifico_sus($usrid, $tematica){
     
     global $DB;
     $sufijotabla = get_sufijo_lenguaje_tabla();
@@ -900,28 +900,129 @@ function campos_lexicos_especifico($usrid, $tematica){
     $sql = "SELECT
         table_misPal.id as misPal_id,
 	table_sus.palabra as sus_lex,
-        table_sus.significado as sus_sig,
+        table_sus.significado as sus_sig
+
+        FROM
+        {vocabulario_mis_palabras} AS table_misPal,
+	{vocabulario_sustantivos} AS table_sus,
+        {vocabulario_camposlexicos_$sufijotabla} AS table_campoLex
+
+        WHERE
+            table_misPal.`usuarioid` = $usrid 
+            AND
+            table_misPal.`sustantivoid` = table_sus.`id`
+            AND
+            table_misPal.`campoid` = $tematica
+	";
+    
+     
+    $file_log = fopen("log_sql.txt", "w");
+    $cad = "SQL: " . $sql . "\n\n\n";
+    $cad.= "Error: " . mysql_error() . "\n\n";
+    fwrite($file_log, $cad, strlen($cad));
+    fclose($file_log); 
+
+    $todos = $DB->get_records_sql($sql);
+   
+       
+    return $todos;
+    
+}
+
+function campos_lexicos_especifico_adj($usrid, $tematica){
+    
+    global $DB;
+    $sufijotabla = get_sufijo_lenguaje_tabla();
+    
+    $sql = "SELECT
+        table_misPal.id as misPal_id,
 	table_adj.sin_declinar as adj_lex,
-	table_ver.infinitivo as ver_lex,
-	table_otr.palabra as otros_lex
+        table_adj.significado as adj_sig
+
 
         FROM
         {vocabulario_mis_palabras} AS table_misPal ,
-	{vocabulario_sustantivos} AS table_sus,
 	{vocabulario_adjetivos} AS table_adj,
+        {vocabulario_camposlexicos_$sufijotabla} AS table_campoLex
+
+        WHERE
+            table_misPal.`usuarioid` = $usrid
+            AND
+            table_misPal.`adjetivoid` = table_adj.`id`
+            AND
+            table_misPal.`campoid` = $tematica
+	";
+    
+     
+    $file_log = fopen("log_sql.txt", "w");
+    $cad = "SQL: " . $sql . "\n\n\n";
+    $cad.= "Error: " . mysql_error() . "\n\n";
+    fwrite($file_log, $cad, strlen($cad));
+    fclose($file_log); 
+
+    $todos = $DB->get_records_sql($sql);
+   
+       
+    return $todos;
+    
+}
+
+function campos_lexicos_especifico_ver($usrid, $tematica){
+    
+    global $DB;
+    $sufijotabla = get_sufijo_lenguaje_tabla();
+    
+    $sql = "SELECT
+        table_misPal.id as misPal_id,
+	table_ver.infinitivo as ver_lex,
+	table_ver.significado as ver_sig
+
+        FROM
+        {vocabulario_mis_palabras} AS table_misPal ,
 	{vocabulario_verbos} AS table_ver,
+        {vocabulario_camposlexicos_$sufijotabla} AS table_campoLex
+
+        WHERE
+            table_misPal.`usuarioid` = $usrid 
+            AND
+            table_misPal.`verboid` = table_ver.`id`
+            AND
+            table_misPal.`campoid` = $tematica
+	";
+    
+     
+    $file_log = fopen("log_sql.txt", "w");
+    $cad = "SQL: " . $sql . "\n\n\n";
+    $cad.= "Error: " . mysql_error() . "\n\n";
+    fwrite($file_log, $cad, strlen($cad));
+    fclose($file_log); 
+
+    $todos = $DB->get_records_sql($sql);
+   
+       
+    return $todos;
+    
+}
+
+function campos_lexicos_especifico_otro($usrid, $tematica){
+    
+    global $DB;
+    $sufijotabla = get_sufijo_lenguaje_tabla();
+    
+    $sql = "SELECT
+        table_misPal.id as misPal_id,
+	table_otr.palabra as otros_lex,
+	table_otr.significado as otros_sig
+
+        FROM
+        {vocabulario_mis_palabras} AS table_misPal ,
 	{vocabulario_otros} AS table_otr,
         {vocabulario_camposlexicos_$sufijotabla} AS table_campoLex
 
         WHERE
-            table_misPal.`usuarioid` = $usrid AND
-            table_misPal.`sustantivoid` = table_sus.`id`
+            table_misPal.`usuarioid` = $usrid 
             AND
-            table_misPal.`adjetivoid` = adj.`id`
-            AND
-            table_misPal.`verboid` = ver.`id`
-            AND
-            table_misPal.`otroid` = otros.`id`
+            table_misPal.`otroid` = table_otr.`id`
             AND
             table_misPal.`campoid` = $tematica
 	";

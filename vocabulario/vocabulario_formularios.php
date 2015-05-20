@@ -4333,8 +4333,14 @@ class mod_vocabulario_entrenador_form extends moodleform {
             $palabras_otro = todas_palabras_otras($USER->id);
        }
        //Si no hacemos la consulta y pintamos los campos temáticos específicos.
-       else
-            $palabras = campos_lexicos_especifico($USER->id, $tematica); 
+       else{
+           
+           $palabras_sus = campos_lexicos_especifico_sus($USER->id, $tematica);
+           $palabras_adj = campos_lexicos_especifico_adj($USER->id, $tematica);
+           $palabras_verb = campos_lexicos_especifico_ver($USER->id, $tematica);
+           $palabras_otro = campos_lexicos_especifico_otro($USER->id, $tematica);
+       }
+            
        //La variable EVhtml contiene el codigo html y javascript necesario para pintar 
        //el contenido del formulario del entrenador de vocabulario.
        
@@ -4372,7 +4378,6 @@ class mod_vocabulario_entrenador_form extends moodleform {
        
        $mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
        $mform->addElement('html', '<body onload="recargarEntrenador('.$numpalabras.','.$idioma.','.$totalpalabras.')">');
-
             
        $EVhtml .= '<form name="EV_form">';
        //$aux = array();
