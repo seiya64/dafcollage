@@ -1046,9 +1046,9 @@ function campos_lexicos_especifico_otro($usrid, $tematica){
 function obtener_superpadre($id){
     global $DB;
     $sufijotabla = get_sufijo_lenguaje_tabla();
-    $sql = "SELECT `padre` FROM {vocabulario_intenciones_$sufijotabla} ";
-    $sql .= "WHERE `id`=$id";
-    
+    $sql = "SELECT `padre` FROM {vocabulario_intenciones_$sufijotabla} WHERE `id`=$id";
+   // $sql .= "WHERE `id`=$id";
+   
     $padre = $DB->get_records_sql($sql);
     
     foreach($padre as $papi){
