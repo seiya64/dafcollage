@@ -662,10 +662,10 @@ class Vocabulario_campo_lexico {
           
             $contador = 0;
             foreach ($gr as $i) {   
-					 if($contador == 0)
-                	$ic[$i->id] = $i->campo;        
-					 else
-						$ic[$i->id] = $contador . ". " .$i->campo;        
+                if($contador == 0)
+                    $ic[$i->id] = $i->campo;        
+		else
+                    $ic[$i->id] = $contador . ". " .$i->campo;        
                              
                 $this->obtener_todos_subnumerados($usuarioid, $i->id, $contador); 
                 $contador++;
@@ -1843,9 +1843,9 @@ class Vocabulario_mis_intenciones {
 
     function recuperar_middles($usuarioid, $middle) {
         global $DB;
-        $table = 'vocabulario_mis_intenciones';
-        $select = "usuarioid =$usuarioid AND descripcion LIKE '%$middle%'";
-        $gr = $DB->get_record_select($table, $select);
+
+        $sql = 'SELECT * from mdl_vocabulario_mis_intenciones WHERE usuarioid='.$usuarioid.' AND descripcion LIKE "%'.$middle.'%"'; 
+        $gr = $DB->get_records_sql($sql);
         $todos = array();
         foreach ($gr as $i) {
             $todo = null;
