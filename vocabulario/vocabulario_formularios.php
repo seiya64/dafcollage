@@ -60,7 +60,6 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $add = optional_param('add', null, PARAM_ALPHA);
         $act = optional_param('act', 0, PARAM_INT);
         $op = optional_param('op', 0, PARAM_INT);
-
         
         if ($add) {
             $act = 2;
@@ -133,10 +132,11 @@ class mod_vocabulario_rellenar_form extends moodleform {
 //        $mform->addElement('select', 'campoid', get_string("campo_lex", "vocabulario"), $clex, "onChange='javascript: if( options[indice].text == \"--\" ) { this.selectedIndex == 0; } else { cargaContenido(this.id,\"clgeneraldinamico\",0)}'");
         $mform->addElement('select', 'campoid', get_string("nivel", "vocabulario"), $clex, "onChange='javascript: if( this.options[this.selectedIndex].text == \"--\" || this.options[this.selectedIndex].text == \"Seleccionar\" ) { this.selectedIndex == 0; this.options[0].selected = true; document.getElementById(\"clgeneraldinamico\").style.display=\"none\";} else { cargaContenido(this.id,\"clgeneraldinamico\",0); document.getElementById(\"clgeneraldinamico\").style.display=\"\";}' style=\"min-height: 0;\"");
         $mform->setDefault('campoid', 1);
+        
         if ($leido) {
             $aux = new Vocabulario_campo_lexico();
             $i = 1;
-            $clex = $aux->obtener_padres($USER->id, $cosa->get('campoid'));
+            $clex = $aux->obtener_padres2($USER->id, $cosa->get('campoid'));
             $mform->setDefault('campoid', $clex[$i]);
         }
 
@@ -967,9 +967,14 @@ class mod_vocabulario_rellenar_form extends moodleform {
              $buttonarray[] = &$mform->createElement('submit', 'submitbutton', get_string('savechanges'));
 
          }
-        //$buttonarray[] = &$mform->createElement('reset', 'resetbutton', get_string('revert', 'vocabulario'));
-       // $buttonarray[] = &$mform->createElement('cancel', 'cancelbutton', get_string('cancel', 'vocabulario'));
         $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
+        //Botón guardar y continuar.
+        
+        $mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
+        $boton = '<input style="background-color:orange;" type="button" value="Guardar y continuar en la categoría" OnClick="prueba('. $var .')"> ';
+        
+        $mform->addElement('html', $boton);
+        
     }
 
 }
