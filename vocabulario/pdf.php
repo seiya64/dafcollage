@@ -128,11 +128,11 @@ if($impr_vocab_corto) {
         }
         $datos[$campo][$palabra][]=array($infinitivo, $ter_pers_sing, $participio, $significadoVerbo);
     }
-    
+
     foreach($datos as $ct=>$palabras) {
         //Campo Tematico
         $pdf->AddPage();
-        $pdf->SetFillColor(59, 89, 152); //azul oscuro
+        $pdf->SetFillColor(133, 190, 237); //azul oscuro
         $pdf->SetTextColor(TEXT_WHITE);
         $pdf->SetLineWidth(0.5);
         if((((float)$ct)*10)%10==0) {
@@ -141,92 +141,108 @@ if($impr_vocab_corto) {
             $pdf->SetFont('freeserif', 'B', '14');
         }
         
-        $pdf->Cell(190, 15, $ct, 1, 1, 'L', 1);
-        
+        $pdf->Cell(190, 15, $ct, 0, 1, 'L', 1);
+        $contadorNuevaPag = 0;
         foreach($palabras as $pal=>$atrs) {
             //Sustantivo con el genero
+            if($contadorNuevaPag == 6){
+                $pdf->AddPage();
+                $pdf->SetFillColor(133, 190, 237); //azul oscuro
+                $pdf->SetTextColor(TEXT_WHITE);
+                $pdf->SetLineWidth(0.5);
+                if((((float)$ct)*10)%10==0) {
+                    $pdf->SetFont('freeserif', 'B', '14');
+                } else {
+                    $pdf->SetFont('freeserif', 'B', '14');
+                }
+
+                $pdf->Cell(190, 15, $ct, 0, 1, 'L', 1);
+                $contadorNuevaPag = 0;
+            }
+            $contadorNuevaPag++;
+            
             $pdf->SetLineWidth(0.3);
             $pdf->SetFillColor(255, 255, 255); //blanco
             $pdf->SetTextColor(0,0,0);
             //La fuente 'freeserif' contiene codificación de caracteres especiales "β"
-            $pdf->SetFont('freeserif', 'B', '12');
+            $pdf->SetFont('freeserif', 'B', '10');
             
-            $pdf->Cell(59, 10, $atrs['genero']." ".$pal, "LT", 0, "J", 1);
-            $pdf->Cell(2, 10, " ", "T", 0, "J", 1);
+            $pdf->Cell(59, 5, $atrs['genero']." ".$pal, "", 0, "L", 1);
+            $pdf->Cell(2, 5, " ", "", 0, "J", 1);
             
             //Plural
-            $pdf->SetFont('freeserif', 'B', '12');
-            $pdf->Cell(59, 10, $atrs['plural'], "TR", 0, "L", 1);
+            $pdf->SetFont('freeserif', 'B', '10');
+            $pdf->Cell(59, 5, $atrs['plural'], "R", 0, "L", 1);
             
             //Significado
-            $pdf->SetFont('freeserif', 'B', '12');
-            $pdf->Cell(70, 10, $atrs['significado'], "LTR", 1, "J", 1);
+            $pdf->SetFont('freeserif', 'B', '10');
+            $pdf->Cell(70, 5, $atrs['significado'], "L", 1, "L", 1);
                     
                     
             //EJEMPLO
-            $pdf->SetFont('freeserif', 'I', '10');
-            $pdf->Cell(120, 10, $atrs['ejemplo'], "LBR", 0, "L", 1);
+            $pdf->SetFont('freeserif', 'I', '9');
+            $pdf->Cell(120, 5, $atrs['ejemplo'], "", 0, "L", 1);
             //$pdf->SetFillColor(255, 255, 255); //blanco
-            $pdf->Cell(70, 10, " ", "LBR", 1, "L", 1);
+            $pdf->Cell(70, 5, " ", "L", 1, "L", 1);
             $color=0;
-            
+            $yokse++;
             foreach($atrs as $verbo=>$atrv) {
                 //Solo los array asociativos numericos se recorren para imprimir el contenido
                 if(is_numeric($verbo)) {
                     //Verbo
                     if($color%2 == 0) {
-                        $pdf->SetFillColor(224, 224, 224); //gris claro
+                        $pdf->SetFillColor(204, 204, 204); //gris claro
                     }else {
-                        $pdf->SetFillColor(189, 199, 216); //azul claro
+                        $pdf->SetFillColor(229, 229, 229); //azul claro
                     }
-                    $pdf->SetFont('freeserif', 'B', '12');
+                    $pdf->SetFont('freeserif', 'B', '10');
                     
                     //Infinitivo
-                    $pdf->Cell(59, 6, "$atrv[0]", "L", 0, "R", 1);
-                    $pdf->Cell(2, 6, " ", " ", 0, "J", 1);
-                    $pdf->Cell(59, 6, " ", " ", 0, "J", 1);
+                    $pdf->Cell(59, 5, "$atrv[0]", "", 0, "R", 1);
+                    $pdf->Cell(2, 5, " ", " ", 0, "L", 1);
+                    $pdf->Cell(59, 5, " ", " ", 0, "L", 1);
                     
-                    $pdf->SetFont('freeserif', 'B', '12');
+                    $pdf->SetFont('freeserif', 'N', '9');
                     //$pdf->SetFillColor(255, 255, 255); //blanco
-                    $pdf->Cell(70, 6, $atrv[3], "LR", 1, "J", 1);
+                    $pdf->Cell(70, 5, $atrv[3], "L", 1, "L", 1);
                     
                     if($color%2 == 0) {
-                        $pdf->SetFillColor(224, 224, 224); //gris claro
+                        $pdf->SetFillColor(204, 204, 204); //gris claro
                     }else {
-                        $pdf->SetFillColor(189, 199, 216); //azul claro
+                        $pdf->SetFillColor(229, 229, 229); //azul claro
                     }
                     //Tercera persona
-                    $pdf->SetFont('freeserif', 'B', '10');
-                    $pdf->Cell(59, 6, " ", "L", 0, "J", 1);
-                    $pdf->Cell(2, 6, " ", " ", 0, "J", 1);
-                    $pdf->Cell(59, 6, "$atrv[1]", " ", 0, "J", 1);
+                    $pdf->SetFont('freeserif', 'N', '9');
+                    $pdf->Cell(59, 5, " ", "", 0, "L", 1);
+                    $pdf->Cell(2, 5, " ", " ", 0, "L", 1);
+                    $pdf->Cell(59, 5, "$atrv[1]", " ", 0, "L", 1);
                     
                     //$pdf->SetFillColor(255, 255, 255); //blanco
-                    $pdf->Cell(70, 6, " ", "LR", 1, "J", 1);
+                    $pdf->Cell(70, 5, " ", "L", 1, "L", 1);
                     
                     if($color%2 == 0) {
-                        $pdf->SetFillColor(224, 224, 224); //gris claro
+                         $pdf->SetFillColor(204, 204, 204); //gris claro
                     }else {
-                        $pdf->SetFillColor(189, 199, 216); //azul claro
+                        $pdf->SetFillColor(229, 229, 229); //azul claro
                     }
                     //Participio
-                    $pdf->Cell(59, 6, " ", "LB", 0, "J", 1);
-                    $pdf->Cell(2, 6, " ", "B", 0, "J", 1);
-                    $pdf->Cell(59, 6, $atrv[2], "B", 0, "J", 1);
+                    $pdf->Cell(59, 5, " ", "", 0, "L", 1);
+                    $pdf->Cell(2, 5, " ", 0, 0, "L", 1);
+                    $pdf->Cell(59, 5, $atrv[2], 0, 0, "L", 1);
                     
-                    $pdf->SetFont('freeserif', 'B', '10');
+                    $pdf->SetFont('freeserif', 'N', '9');
                     //$pdf->SetFillColor(255, 255, 255); //blanco
-                    $pdf->Cell(70, 6, " ", "LBR", 1, "J", 1);
+                    $pdf->Cell(70, 5, " ", "L", 1, "L", 1);
                     
                     //Espacio para que el alumno pueda escribir mas ejemplos a mano
-                    if($color%2 == 0) {
+                    /*if($color%2 == 0) {
                         $pdf->SetFillColor(224, 224, 224); //gris claro
                     }else {
                         $pdf->SetFillColor(189, 199, 216); //azul claro
                     }
                     $pdf->Cell(120, 8, " ", "LRB", 0, "L", 1);
                     //$pdf->SetFillColor(255, 255, 255); //blanco
-                    $pdf->Cell(70, 8, " ", "LRB", 1, "L", 1);
+                    $pdf->Cell(70, 8, " ", "LRB", 1, "L", 1);*/
                     $color++;
                 }
             }
@@ -245,6 +261,7 @@ if ($impr_vocab == 1) {
     //resto de paginas
     //palabras por campos
 
+
     $mis_palabras_aux = new Vocabulario_mis_palabras();
     $mis_palabras = $mis_palabras_aux->obtener_todas($usuario);
 
@@ -253,15 +270,16 @@ if ($impr_vocab == 1) {
 
 
     $mis_campos = new Vocabulario_campo_lexico();
+
     $todos_mis_campos = $mis_campos->obtener_todos($usuario);
 
 
     $genero = array(get_string('masc', 'vocabulario'), get_string('fem', 'vocabulario'), get_string('neu', 'vocabulario'));
 
     foreach ($todos_mis_campos as $mic) {
-    //    $pdf->writeHTMLCell(0,0,250,0,'aaaa',0,1,0); 
         $primera = true;
         foreach ($mis_palabras as $cosa) {
+            //$pdf->writeHTMLCell(0,0,20,0,$cosa,0,1,0);   
             if ($cosa->get('campo')->get('campo') == $mic) {
                 if ($primera) {
                     //imprimo el campolexico
@@ -270,7 +288,6 @@ if ($impr_vocab == 1) {
                     $pdf->SetTextColor(TEXT_AUTO);
                     $pdf->SetFont('freeserif', 'B', '12');
                     //            $pdf->Cell(0, 7, $mi_campo, 0, 1, 'L', 0);
-                    $pdf->writeHTMLCell(0,0,50,0,'holaaa',0,1,0);    
                     $pdf->writeHTMLCell(0, 0, 0, 0, '<h2>' . $mi_campo . '</h2>', 0, 1, 0);
                     //titulillos
                     $pdf->SetFillColor(59, 89, 152); //azul oscuro

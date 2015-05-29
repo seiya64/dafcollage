@@ -844,6 +844,22 @@ class Vocabulario_campo_lexico {
         return $clex;
     }
 
+    function obtener_padres2($usuarioid, $hijoid) {
+        $clex = array();
+
+        $clex[] = $hijoid;
+        $padre = $hijoid;
+
+        while ($padre != 0) {
+            $cl = new Vocabulario_campo_lexico();
+            $cl->leer($padre);
+            $padre = $cl->get('padre');
+            $clex[] = $padre;
+        }
+        $clex = array_reverse($clex);
+        return $clex;
+    }
+    
     function ordena($lista, $padre = '0', $salida = '') {
         $milista = array();
         foreach ($lista as $cosa) {
@@ -1554,21 +1570,37 @@ class Vocabulario_intenciones {
         $table = 'vocabulario_intenciones_' . $sufijotabla;
         $select = '(usuarioid='. $usuarioid. ' or usuarioid=0) and padre=0';
         //$sort = 'usuarioid, ordenid';
-			$sort = 'id';
+        $sort = 'id';
 
-        $gr = $DB->get_records_select($table, $select, null, $sort);
+        $gr = $DB->get_records_select($table, $select,null,$sort);
         $contador = 0;
         foreach ($gr as $i) {
-				if ($contador == 18)
-					$contador = 19;
-				if ($contador == 0)
-           		$ic[$i->id] = $i->intencion;
-				else
-					$ic[$i->id] = $contador . '.' . $i->intencion;
+            if ($contador == 18)
+                    $contador = 19;
+            if ($contador == 0)
+                $ic[$i->id] = $i->intencion;
+            else
+                    $ic[$i->id] = $contador . '.' . $i->intencion;
             $this->obtener_todos_subnumerados($usuarioid, $i->id, $contador);
             $contador++;
         }
         return $ic;
+
+    }
+    
+    function pintar_desplegable($usuarioid)
+    {
+        global $DB;
+        
+        $sufijotabla = get_sufijo_lenguaje_tabla();
+        $intenciones = $DB->get_records_select('vocabulario_intenciones_'.$sufijotabla, 'usuarioid=' . $usuarioid . ' or usuarioid=0');
+        $ic = array();
+        $orden = $this->ordena($intenciones);
+        foreach ($orden as $i) {
+            $ic[$intenciones[$i]->id] = $intenciones[$i]->intencion;
+        }
+        return $ic;    
+    
     }
 
     function obtener_todos_subnumerados($usuarioid, $id_padre, $contador_padre) {
