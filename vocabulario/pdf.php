@@ -141,6 +141,9 @@ if($impr_vocab_corto) {
             $pdf->SetFont('freeserif', 'B', '14');
         }
         
+        //Color de los márgenes.
+        $pdf->setColor('draw', 133, 190, 237); 		
+
         $pdf->Cell(190, 15, $ct, 0, 1, 'L', 1);
         $contadorNuevaPag = 0;
         foreach($palabras as $pal=>$atrs) {
@@ -185,15 +188,14 @@ if($impr_vocab_corto) {
             //$pdf->SetFillColor(255, 255, 255); //blanco
             $pdf->Cell(70, 5, " ", "L", 1, "L", 1);
             $color=0;
-            $yokse++;
             foreach($atrs as $verbo=>$atrv) {
                 //Solo los array asociativos numericos se recorren para imprimir el contenido
                 if(is_numeric($verbo)) {
                     //Verbo
                     if($color%2 == 0) {
-                        $pdf->SetFillColor(204, 204, 204); //gris claro
+                        $pdf->SetFillColor(220, 220, 220); //gris mas oscuro
                     }else {
-                        $pdf->SetFillColor(229, 229, 229); //azul claro
+                        $pdf->SetFillColor(235, 235, 235); //gris mas claro
                     }
                     $pdf->SetFont('freeserif', 'B', '10');
                     
@@ -206,10 +208,10 @@ if($impr_vocab_corto) {
                     //$pdf->SetFillColor(255, 255, 255); //blanco
                     $pdf->Cell(70, 5, $atrv[3], "L", 1, "L", 1);
                     
-                    if($color%2 == 0) {
-                        $pdf->SetFillColor(204, 204, 204); //gris claro
+                     if($color%2 == 0) {
+                        $pdf->SetFillColor(220, 220, 220); //gris mas oscuro
                     }else {
-                        $pdf->SetFillColor(229, 229, 229); //azul claro
+                        $pdf->SetFillColor(235, 235, 235); //gris mas claro
                     }
                     //Tercera persona
                     $pdf->SetFont('freeserif', 'N', '9');
@@ -220,10 +222,10 @@ if($impr_vocab_corto) {
                     //$pdf->SetFillColor(255, 255, 255); //blanco
                     $pdf->Cell(70, 5, " ", "L", 1, "L", 1);
                     
-                    if($color%2 == 0) {
-                         $pdf->SetFillColor(204, 204, 204); //gris claro
+                     if($color%2 == 0) {
+                        $pdf->SetFillColor(220, 220, 220); //gris mas oscuro
                     }else {
-                        $pdf->SetFillColor(229, 229, 229); //azul claro
+                        $pdf->SetFillColor(235, 235, 235); //gris mas claro
                     }
                     //Participio
                     $pdf->Cell(59, 5, " ", "", 0, "L", 1);

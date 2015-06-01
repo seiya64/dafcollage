@@ -111,7 +111,7 @@ color: #B4BBBF;
 font-size: 0.9em;
 }
 #fgroup_id_botones{
-    text-align: center;
+    text-align: left;
 }
 
 .buscador{
@@ -274,4 +274,22 @@ input[type="radio"] + label, input[type="checkbox"] + label {
     height: 98%;
     padding: 10px;
     background-color:#FFF;
+}
+
+#id_despuesde1
+{
+    width: 1026px;
+    height: 110px;
+}
+
+#id_despuesde2
+{
+    width: 1026px;
+    height: 110px;
+}
+
+#id_despuesde3
+{
+    width: 1026px;
+    height: 110px;
 }
