@@ -1716,28 +1716,17 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', '<table class="flexible generaltable boxwidthwide" style="text-align: center">');
 
                 $titulillos = '<tr>';
-                //bombillita
-                $titulillos .= '<td>';
-                $titulillos = '<td width="80px"></td>';
+
+                $titulillos = '<td width="97px"></td>';
                 //lista palabras
                 $titulillos .= '<td>';
+                $mform->addElement('html', $titulillos);
+
+                //Steht nach.
+               $mform->addElement('textarea', 'despuesde1', get_string('despuesde', 'vocabulario'), 'rows="5" cols="30"');
+               $mform->setDefault('despuesde1', $descripcion_troceada[17]);
+
                 
-                $mform->addElement('html', $titulillos);
-                //$mform->addElement('textarea', 'idea1', '<img src="./imagenes/idea.png" id="id_idea_im" name="idea_im"/>', 'rows="5" cols="30"');
-                $mform->addElement('textarea', 'idea1', 'More','rows=5 cols=30');
-   
-
-                $mform->setDefault('idea1', $descripcion_troceada[16]);
-
-                $titulillos = '</td>';
-                $titulillos = '<td width="50"></td>';
-                //lista palabras
-                $titulillos .= '<td>';
-                $mform->addElement('html', $titulillos);
-
-                $mform->addElement('textarea', 'despuesde1', get_string('despuesde', 'vocabulario'), 'rows="5" cols="30"');
-                $mform->setDefault('despuesde1', $descripcion_troceada[17]);
-
                 $titulillos = '</td>';
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
@@ -1802,25 +1791,18 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', '<table class="flexible generaltable boxwidthwide">');
 
                 $titulillos = '<tr>';
-                //bombillita
-                $titulillos .= '<td>';
-                $titulillos = '<td width="80px"></td>';
+
+                $titulillos = '<td width="97px"></td>';
                 //lista palabras
                 $titulillos .= '<td>';
+                $mform->addElement('html', $titulillos);
+
+                //Steht nach.
+               $mform->addElement('textarea', 'despuesde2', get_string('despuesde', 'vocabulario'), 'rows="5" cols="30"');
+               $mform->setDefault('despuesde2', $descripcion_troceada[35]);
+
+
                 
-                $mform->addElement('html', $titulillos);
-                //$mform->addElement('textarea', 'idea1', '<img src="./imagenes/idea.png" id="id_idea_im" name="idea_im"/>', 'rows="5" cols="30"');
-                $mform->addElement('textarea', 'idea1', 'More','rows=5 cols=30');
-
-                $titulillos = '</td>';
-                $titulillos = '<td width="100px"></td>';
-                //lista palabras
-                $titulillos .= '<td>';
-                $mform->addElement('html', $titulillos);
-
-                $mform->addElement('textarea', 'despuesde2', get_string('despuesde', 'vocabulario'), 'rows="5" cols="30"');
-                $mform->setDefault('despuesde2', $descripcion_troceada[35]);
-
                 $titulillos = '</td>';
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
@@ -1886,25 +1868,17 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 $mform->addElement('html', '<table class="flexible generaltable boxwidthwide">');
 
                 $titulillos = '<tr>';
-                //bombillita
-                $titulillos .= '<td>';
-                $titulillos = '<td width="80px"></td>';
+
+                $titulillos = '<td width="97px"></td>';
                 //lista palabras
                 $titulillos .= '<td>';
+                $mform->addElement('html', $titulillos);
+
+                //Steht nach.
+               $mform->addElement('textarea', 'despuesde3', get_string('despuesde', 'vocabulario'), 'rows="5" cols="30"');
+               $mform->setDefault('despuesde3', $descripcion_troceada[53]);
+
                 
-                $mform->addElement('html', $titulillos);
-                //$mform->addElement('textarea', 'idea1', '<img src="./imagenes/idea.png" id="id_idea_im" name="idea_im"/>', 'rows="5" cols="30"');
-                $mform->addElement('textarea', 'idea1', 'More','rows=5 cols=30');
-
-                $titulillos = '</td>';
-                $titulillos = '<td width="100px"></td>';
-                //lista palabras
-                $titulillos .= '<td>';
-                $mform->addElement('html', $titulillos);
-
-                $mform->addElement('textarea', 'despuesde3', get_string('despuesde', 'vocabulario'), 'rows="5" cols="30"');
-                $mform->setDefault('despuesde3', $descripcion_troceada[53]);
-
                 $titulillos = '</td>';
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
