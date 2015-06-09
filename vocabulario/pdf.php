@@ -2331,10 +2331,11 @@ if ($impr_gram == 1) {
                                     }
 
                                     if ($pintar) {
-
-                                        $pdf->Cell(63, 5, $descripcion_troceada[($f * 3)], 1, 0, 'C', 0);
-                                        $pdf->Cell(64, 5, $descripcion_troceada[($f * 3) + 1], 1, 0, 'C', 0);
-                                        $pdf->Cell(63, 5, $descripcion_troceada[($f * 3) + 2], 1, 1, 'C', 0);
+                                        $pdf->SetFillColor(255,255,255);
+                                        $pdf->Multicell(63, 10, $descripcion_troceada[($f * 3)], 1, 'L', 0, 0);
+                                        $pdf->Multicell(64, 10, $descripcion_troceada[($f * 3) + 1], 1,'L', 0, 0);
+                                        $pdf->Multicell(63, 10, $descripcion_troceada[($f * 3) + 2], 1, 'L', 0, 1);
+                                        $pdf->SetFillColor(59,89,152);
                                     }
                                 }
                                 $pdf->Ln();
