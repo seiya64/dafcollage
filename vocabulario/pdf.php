@@ -267,6 +267,9 @@ if($impr_vocab_corto) {
     }
     
     $pdf->Ln();
+    $pdf->setColor('draw', 0, 0, 0); 		
+
+    
 }
 
 if ($impr_vocab == 1) {
@@ -1898,8 +1901,8 @@ if ($impr_gram == 1) {
 
                                 $pdf->Ln();
                                 $pdf->Cell(20, 5, get_string('subjunktor', 'vocabulario'), 1, 0, 'C', 1);
-                                $pdf->Cell(20, 5, get_string('subjekt', 'vocabulario'), 1, 0, 'C', 1);
-                                $pdf->Cell(90, 5, get_string('mittelfeld', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(25, 5, get_string('subjekt', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(85, 5, get_string('mittelfeld', 'vocabulario'), 1, 0, 'C', 1);
                                 $pdf->Cell(30, 5, get_string('verb2', 'vocabulario'), 1, 0, 'C', 1);
                                 $pdf->Cell(25, 5, get_string('konjugier_resumen', 'vocabulario'), 1, 1, 'C', 1);
                                
@@ -1930,8 +1933,8 @@ if ($impr_gram == 1) {
                                     if ($pintar) {
 
                                         $pdf->Cell(20, 5, $descripcion_troceada[($f * 5)], 1, 0, 'C', 0);
-                                        $pdf->Cell(20, 5, $descripcion_troceada[($f * 5) + 4], 1, 0, 'C', 0);
-                                        $pdf->Cell(90, 5, $descripcion_troceada[($f * 5) + 2], 1, 0, 'C', 0);
+                                        $pdf->Cell(25, 5, $descripcion_troceada[($f * 5) + 4], 1, 0, 'C', 0);
+                                        $pdf->Cell(85, 5, $descripcion_troceada[($f * 5) + 2], 1, 0, 'C', 0);
                                         $pdf->Cell(30, 5, $descripcion_troceada[($f * 5) + 3], 1, 0, 'C', 1);
                                         $pdf->Cell(25, 5, $descripcion_troceada[($f * 5) + 1], 1, 1, 'C', 1);
                                         
