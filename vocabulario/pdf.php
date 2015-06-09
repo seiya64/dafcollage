@@ -601,9 +601,9 @@ if ($impr_gram == 1) {
                                 $pdf->setLeftMargin(MARGIN);
                                 $pdf->Ln();
 
-                                //femenino
+                                //neutro
                                 $pdf->SetTextColor(59,89,152);
-                                $pdf->writeHTMLCell(0, 0, 10, null, '<h3>' . get_string('femenino', 'vocabulario') . '</h3>', 0, 1, 0);
+                                $pdf->writeHTMLCell(0, 0, 10, null, '<h3>' . get_string('neutro', 'vocabulario') . '</h3>', 0, 1, 0);
                                 $pdf->Ln();
                                 $pdf->setLeftMargin(MARGIN_L2);
                                 $pdf->SetTextColor(TEXT_AUTO);
@@ -615,9 +615,9 @@ if ($impr_gram == 1) {
                                 $pdf->setLeftMargin(MARGIN);
                                 $pdf->Ln();
 
-                                //neutro
+                                //femenino
                                 $pdf->SetTextColor(59,89,152);
-                                $pdf->writeHTMLCell(0, 0, 10, null, '<h3>' . get_string('neutro', 'vocabulario') . '</h3>', 0, 1, 0);
+                                $pdf->writeHTMLCell(0, 0, 10, null, '<h3>' . get_string('femenino', 'vocabulario') . '</h3>', 0, 1, 0);
                                 $pdf->Ln();
                                 $pdf->setLeftMargin(MARGIN_L2);
                                 $pdf->SetTextColor(TEXT_AUTO);
@@ -872,8 +872,8 @@ if ($impr_gram == 1) {
                                 $pdf->SetFont('freeserif', 'B', '10');
                                 $pdf->Cell(30, 5, '', 1, 0, 'C', 1);
                                 $pdf->Cell(40, 5, get_string('masculino', 'vocabulario'), 1, 0, 'C', 1);
-                                $pdf->Cell(40, 5, get_string('femenino', 'vocabulario'), 1, 0, 'C', 1);
                                 $pdf->Cell(40, 5, get_string('neutro', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, get_string('femenino', 'vocabulario'), 1, 0, 'C', 1);
                                 $pdf->Cell(40, 5, get_string('pluralAl', 'vocabulario'), 1, 1, 'C', 1);
 
                                 //filas
@@ -938,8 +938,8 @@ if ($impr_gram == 1) {
 
                                 $pdf->Cell(30, 5, '', 1, 0, 'C', 1);
                                 $pdf->Cell(40, 5, get_string('masculino', 'vocabulario'), 1, 0, 'C', 1);
-                                $pdf->Cell(40, 5, get_string('femenino', 'vocabulario'), 1, 0, 'C', 1);
                                 $pdf->Cell(40, 5, get_string('neutro', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, get_string('femenino', 'vocabulario'), 1, 0, 'C', 1);
                                 $pdf->Cell(40, 5, get_string('pluralAl', 'vocabulario'), 1, 1, 'C', 1);
 
                                 //filas
@@ -1004,8 +1004,8 @@ if ($impr_gram == 1) {
 
                                 $pdf->Cell(30, 5, '', 1, 0, 'C', 1);
                                 $pdf->Cell(40, 5, get_string('masculino', 'vocabulario'), 1, 0, 'C', 1);
-                                $pdf->Cell(40, 5, get_string('femenino', 'vocabulario'), 1, 0, 'C', 1);
                                 $pdf->Cell(40, 5, get_string('neutro', 'vocabulario'), 1, 0, 'C', 1);
+                                $pdf->Cell(40, 5, get_string('femenino', 'vocabulario'), 1, 0, 'C', 1);
                                 $pdf->Cell(40, 5, get_string('pluralAl', 'vocabulario'), 1, 1, 'C', 1);
 
                                 //filas
