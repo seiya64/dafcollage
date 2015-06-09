@@ -2728,34 +2728,34 @@ if ($impr_inten == 1) {
                         //ponemos la descripcion por defecto en caso de que sea necesario
                         switch ($icid) {
                             case 28:
-                                $pdf->MultiCell(0, 5, get_string('desc_inten3.2', 'vocabulario'), 0, 'J', 0);
+                                $pdf->MultiCell(0, 5, get_string('desc_inten3.2', 'vocabulario'), 0, 'L', 0);
                                 $pdf->Ln();
                                 break;
                             case 37:
-                                $pdf->MultiCell(0, 5, get_string('desc_inten3.3', 'vocabulario'), 0, 'J', 0);
+                                $pdf->MultiCell(0, 5, get_string('desc_inten3.3', 'vocabulario'), 0, 'L', 0);
                                 $pdf->Ln();
                                 break;
                             case 47:
-                                $pdf->MultiCell(0, 5, get_string('desc_inten4.1', 'vocabulario'), 0, 'J', 0);
+                                $pdf->MultiCell(0, 5, get_string('desc_inten4.1', 'vocabulario'), 0, 'L', 0);
                                 $pdf->Ln();
                                 break;
                             case 56:
-                                $pdf->MultiCell(0, 5, get_string('desc_inten4.2', 'vocabulario'), 0, 'J', 0);
+                                $pdf->MultiCell(0, 5, get_string('desc_inten4.2', 'vocabulario'), 0, 'L', 0);
                                 $pdf->Ln();
                                 break;
                             case 66:
-                                $pdf->MultiCell(0, 5, get_string('desc_inten5.1', 'vocabulario'), 0, 'J', 0);
+                                $pdf->MultiCell(0, 5, get_string('desc_inten5.1', 'vocabulario'), 0, 'L', 0);
                                 $pdf->Ln();
                                 break;
                             case 75:
-                                $pdf->MultiCell(0, 5, get_string('desc_inten5.2', 'vocabulario'), 0, 'J', 0);
+                                $pdf->MultiCell(0, 5, get_string('desc_inten5.2', 'vocabulario'), 0, 'L', 0);
                                 $pdf->Ln();
                                 break;
                         }
 
 
                         $pdf->SetFont('freeserif', '', 10);
-                        $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'J', 0);
+                        $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'L', 0);
                         $pdf->setLeftMargin(MARGIN);
                         $pdf->Ln();
 
@@ -2796,18 +2796,23 @@ if ($impr_inten == 1) {
                                 $pdf->Cell(140, 5, $descripcion_troceada[1 + ($f * 4) + 0], 'TR', 1, 'L', 0);
 
 //                                            $pdf->SetTextColor(TEXT_WHITE);
+                                $numCaracteres = strlen($descripcion_troceada[1 + ($f * 4) + 1]) / 50;
+                                $cadEspacios = '';
+                                for($i = 0; $i < $numCaracteres; $i++)
+                                {
+                                    $cadEspacios .= "\n";
+                                }
                                 $pdf->SetFont('freeserif', 'B', 10);
-                                $pdf->Cell(50, 5, get_string('wortklase', 'vocabulario'), 'L', 0, 'L', 1);
+                                $pdf->MultiCell(50, 5, get_string('wortklase', 'vocabulario').$cadEspacios, 'L','L', 1, 0);
                                 $pdf->SetTextColor(TEXT_AUTO);
                                 $pdf->SetFont('freeserif', '', 9);
-                                $pdf->Cell(140, 5, $descripcion_troceada[1 + ($f * 4) + 1], 'R', 1, 'L', 0);
+                                $pdf->MultiCell(140, 5, $descripcion_troceada[1 + ($f * 4) + 1], 'R', 'L', 0);
 
 //                                            $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
 //                                            $pdf->SetTextColor(TEXT_WHITE);
                                 
                                 $numCaracteres = strlen($descripcion_troceada[1 + ($f * 4) + 2]) / 75;
                                 $cadEspacios = '';
-                                //$pdf->Cell(50, 5, $numCaracteres, 'L', 0, 'L', 1);
                                 for($i = 0; $i < $numCaracteres; $i++)
                                 {
                                     $cadEspacios .= "\n";
