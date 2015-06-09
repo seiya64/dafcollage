@@ -2804,10 +2804,19 @@ if ($impr_inten == 1) {
 
 //                                            $pdf->SetFillColor(189, 199, 216); //#BDC7D8 Azul clarito
 //                                            $pdf->SetTextColor(TEXT_WHITE);
+                                
+                                $numCaracteres = strlen($descripcion_troceada[1 + ($f * 4) + 2]) / 75;
+                                $cadEspacios = '';
+                                //$pdf->Cell(50, 5, $numCaracteres, 'L', 0, 'L', 1);
+                                for($i = 0; $i < $numCaracteres; $i++)
+                                {
+                                    $cadEspacios .= "\n";
+                                }
+                                
                                 $pdf->SetFont('freeserif', 'B', 10);
-                                $pdf->Cell(50, 5, get_string('beisp', 'vocabulario'), 'L', 0, 'L', 1);
+                                $pdf->MultiCell(50, 5, get_string('beisp', 'vocabulario').$cadEspacios, 'L','L', 1, 0);
                                 $pdf->SetTextColor(TEXT_AUTO);
-                                $pdf->SetFont('freeserif', 'I', 7);
+                                $pdf->SetFont('freeserif', 'I', 9);
                                 $pdf->MultiCell(140, 5, $descripcion_troceada[1 + ($f * 4) + 2], 'R', 'L', 0);
 
 
