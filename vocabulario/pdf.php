@@ -908,11 +908,11 @@ if ($impr_gram == 1) {
                                 $pdf->Cell(40, 5, $descripcion_troceada[14], 1, 0, 'C', 0);
                                 $pdf->Cell(40, 5, $descripcion_troceada[15], 1, 1, 'C', 0);
 
-                                $pdf->Ln();
-                                $pdf->setLeftMargin(MARGIN_L2);
-                                $pdf->SetTextColor(59,89,152);
-                                $pdf->writeHTMLCell(0, 0, 10, null, '<h4>' . get_string('particular', 'vocabulario') . '</h4>', 0, 1, 0);
-                                $pdf->Ln();
+//                                $pdf->Ln();
+//                                $pdf->setLeftMargin(MARGIN_L2);
+//                                $pdf->SetTextColor(59,89,152);
+//                                $pdf->writeHTMLCell(0, 0, 10, null, '<h4>' . get_string('particular', 'vocabulario') . '</h4>', 0, 1, 0);
+//                                $pdf->Ln();
                                 $pdf->SetTextColor(TEXT_AUTO);
                                 $pdf->MultiCell(170, 5, $descripcion_troceada[16], 0, 'L', 0);
                                 $pdf->Ln();
@@ -974,12 +974,12 @@ if ($impr_gram == 1) {
                                 $pdf->Cell(40, 5, $descripcion_troceada[32], 1, 0, 'C', 0);
                                 $pdf->Cell(40, 5, $descripcion_troceada[33], 1, 1, 'C', 0);
 
-                                $pdf->Ln();
-                                $pdf->setLeftMargin(MARGIN_L2);
-                                
-                                $pdf->SetTextColor(59,89,152);
-                                $pdf->writeHTMLCell(0, 0, 10, null, '<h4>' . get_string('particular', 'vocabulario') . '</h4>', 0, 1, 0);
-                                $pdf->Ln();
+//                                $pdf->Ln();
+//                                $pdf->setLeftMargin(MARGIN_L2);
+//                                
+//                                $pdf->SetTextColor(59,89,152);
+//                                $pdf->writeHTMLCell(0, 0, 10, null, '<h4>' . get_string('particular', 'vocabulario') . '</h4>', 0, 1, 0);
+//                                $pdf->Ln();
                                 $pdf->SetTextColor(TEXT_AUTO);
                                 $pdf->MultiCell(170, 5, $descripcion_troceada[34], 0, 'L', 0);
                                 $pdf->Ln();
@@ -1040,11 +1040,11 @@ if ($impr_gram == 1) {
                                 $pdf->Cell(40, 5, $descripcion_troceada[50], 1, 0, 'C', 0);
                                 $pdf->Cell(40, 5, $descripcion_troceada[51], 1, 1, 'C', 0);
 
-                                $pdf->Ln();
-                                $pdf->setLeftMargin(MARGIN_L2); 
-                                $pdf->SetTextColor(59,89,152);
-                                $pdf->writeHTMLCell(0, 0, 10, null, '<h4>' . get_string('particular', 'vocabulario') . '</h4>', 0, 1, 0);
-                                $pdf->Ln();
+//                                $pdf->Ln();
+//                                $pdf->setLeftMargin(MARGIN_L2); 
+//                                $pdf->SetTextColor(59,89,152);
+//                                $pdf->writeHTMLCell(0, 0, 10, null, '<h4>' . get_string('particular', 'vocabulario') . '</h4>', 0, 1, 0);
+//                                $pdf->Ln();
                                 $pdf->SetTextColor(TEXT_AUTO);
                                 $pdf->MultiCell(170, 5, $descripcion_troceada[52], 0, 'L', 0);
                                 $pdf->Ln();
