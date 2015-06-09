@@ -2817,7 +2817,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $titulillos .= '<td><input type="text" id="id_VORSUB' . $i . '" name="VORSUB' . $i . '" value="' . $descripcion_troceada[$i] . '"></td>';
                     $titulillos .= '<td><input type="text" style="width:120px;" id="id_KONSUB' . $i . '" name="KONSUB' . $i . '" value="' . $descripcion_troceada[$i + 1] . '"></td>';
                     $titulillos .= '<td style="width: 500 px;"><input style="width:600px;" type="text" id="id_MIT' . $i . '" name="MIT' . $i . '" value="' . $descripcion_troceada[$i + 2] . '"></td>';
-                    $titulillos .= '<td><input type="text" style="width:120px;" id="id_KONSUB' . $i . '" name="KONSUB' . $i . '" value="' . $descripcion_troceada[$i + 1] . '"></td>';
+                    $titulillos .= '<td><input type="text" style="width:120px;" id="id_VER2' . $i . '" name="VER2' . $i . '" value="' . $descripcion_troceada[$i + 3] . '"></td>';
                     $titulillos .= '</tr>';
                     $mform->addElement('html', $titulillos);
                 }
