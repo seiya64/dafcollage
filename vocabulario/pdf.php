@@ -170,7 +170,22 @@ if($impr_vocab_corto) {
             //La fuente 'freeserif' contiene codificación de caracteres especiales "β"
             $pdf->SetFont('freeserif', 'B', '10');
             
-            $pdf->Cell(59, 5, $atrs['genero']." ".$pal, "", 0, "L", 1);
+            //Femenino
+            if($atrs['genero'] == 'die'){
+                $pdf->SetTextColor(255,131,255); //Rosa
+            }
+            //Masculino
+            if($atrs['genero'] == 'der'){
+                $pdf->SetTextColor(90,134,232); //Azul
+            }
+            //Neutro
+            if($atrs['genero'] == 'das'){
+                $pdf->SetTextColor(117,171,83); //Verde
+            }
+            
+            $pdf->Cell(6, 5, $atrs['genero'], "", 0, "L", 1);
+            $pdf->SetTextColor(0,0,0); //Negro
+            $pdf->Cell(53, 5, $pal, "", 0, "L", 1);
             $pdf->Cell(2, 5, " ", "", 0, "J", 1);
             
             //Plural
