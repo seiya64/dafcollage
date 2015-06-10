@@ -169,6 +169,10 @@ class mod_vocabulario_rellenar_form extends moodleform {
         //------ sustantivo
         $mform->addElement('header', 'sus', get_string('sust', 'vocabulario'));
 
+        $ayuda = '<div id="div_boton"> <b> <a id="boton" href="#" onClick="javascript: mostrarAyuda()" onmouseout="javascript: ocultarAyuda()"><img src="./imagenes/interrogacion.png" id="id_interrogacion" name="ayuda_sust"/></a> </b>  </div>'
+                . '<div id="ayuda_sus" class="popup" style="visibility:hidden;"> <b> Hola caracola </b> </div>' ;
+        $mform->addElement('html', $ayuda);
+        
         //enlace a traduccion
         $enlace_diccionario = "<a style=\"color:#04B8C8\" href='javascript:traducir(1)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string('pal', 'vocabulario') . "]</a>";
         $mform->addElement('text', 'palabra_sus', $enlace_diccionario, "value=" . $sustantivo->get('palabra'));
@@ -968,12 +972,12 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
          }
         $mform->addGroup($buttonarray, 'botones', '', array(' '), false);
-        //Botón guardar y continuar.
-        
-        $mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
-        $boton = '<input style="background-color:orange;" type="button" value="Guardar y continuar en la categoría" OnClick="prueba('. $var .')"> ';
-        
-        $mform->addElement('html', $boton);
+//        //Botón guardar y continuar.
+//        
+//        $mform->addElement('html', '<script type="text/javascript" src="funciones.js"></script>');
+//        $boton = '<input style="background-color:orange;" type="button" value="Guardar y continuar en la categoría" OnClick="prueba('. $var .')"> ';
+//        
+//        $mform->addElement('html', $boton);
         
     }
 
