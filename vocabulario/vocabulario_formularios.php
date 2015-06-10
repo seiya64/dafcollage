@@ -168,18 +168,20 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
         //------ sustantivo
         $mform->addElement('header', 'sus', get_string('sust', 'vocabulario'));
-
-        $ayuda = '<div id="div_boton"> <b> <a id="boton" href="#" onClick="javascript: mostrarAyuda()" onmouseout="javascript: ocultarAyuda()"><img src="./imagenes/interrogacion.png" id="id_interrogacion" name="ayuda_sust"/></a> </b>  </div>'
-                . '<div id="ayuda_sus" class="popup" style="visibility:hidden;"> <b> Hola caracola </b> </div>' ;
-        $mform->addElement('html', $ayuda);
-        
+   
         //enlace a traduccion
         $enlace_diccionario = "<a style=\"color:#04B8C8\" href='javascript:traducir(1)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string('pal', 'vocabulario') . "]</a>";
+       
+//      $mform->addElement('text', 'significado_sus', get_string("Tpal", "vocabulario"), 'value="' . $sustantivo->get('significado') . '" title="'.get_string('titlecolocacion', 'vocabulario').'"');
+
+        $ayuda =  '<div id="div_boton" style="text-align:center"><a id="boton" href="#" title="'.get_string('ayuda_sus','vocabulario').'"><img src="./imagenes/interrogacion.png" id="id_interrogacion" name="ayuda_sust"/></a></div>';
+              //  . '<div id="ayuda_sus" class="popup" style="visibility:hidden;"> <b> Hola caracola</b> </div>' ;
+        $mform->addElement('html', $ayuda);
         $mform->addElement('text', 'palabra_sus', $enlace_diccionario, "value=" . $sustantivo->get('palabra'));
         $mform->setType('palabras_sus', PARAM_TEXT);
 
         //tiene que estar relleno
-        
+       
         $mform->addRule('palabra_sus', get_string('error_sus', 'vocabulario'), 'required', null, 'client');
 
         //genero
@@ -395,6 +397,10 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
         //infinitivo
         //enlace a traduccion
+        //boton de ayuda
+        $ayuda =  '<div id="div_boton" style="text-align:center"><a id="boton_vrb" href="#" title="'.get_string('ayuda_sus','vocabulario').'"><img src="./imagenes/interrogacion.png" id="id_interrogacion" name="ayuda_sust"/></a></div>';
+              //  . '<div id="ayuda_sus" class="popup" style="visibility:hidden;"> <b> Hola caracola</b> </div>' ;
+        $mform->addElement('html', $ayuda);
         $enlace_diccionario = "<a style=\"color:#04B8C8\" href='javascript:traducir(2)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string('infi', 'vocabulario') . "]</a>";
         $mform->addElement('text', 'infinitivo', $enlace_diccionario, 'value="' . $verbo->get('infinitivo') . '"');
         $mform->setType('infinitivo', PARAM_TEXT);

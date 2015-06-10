@@ -325,4 +325,6 @@ $string['intencioncomunicativa']='Kommunikative Intention';
 $string['titlesignificado']='Bedeutung ohne Kontext';
 $string['titlecolocacion']='Bedeutung im Kontext';
 $string['sin_genero']='ohne Genus';
+
+$string['ayuda_sus']='Escribe aquí el mensaje de ayuda para sustantivo';
 ?>
