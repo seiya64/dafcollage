@@ -327,4 +327,7 @@ $string['titlecolocacion']='Znaczenie w kontekście';
 $string['sin_genero']='niemeskoosobowy';
 
 $string['ayuda_sus']='Escribe aquí el mensaje de ayuda para sustantivo';
+$string['ayuda_adj'] = '';
+$string['ayuda_vrb'] = '';
+$string['ayuda_otr'] = '';
 ?>

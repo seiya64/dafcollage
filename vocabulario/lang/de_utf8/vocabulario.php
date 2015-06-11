@@ -327,4 +327,7 @@ $string['titlecolocacion']='Bedeutung im Kontext';
 $string['sin_genero']='ohne Genus';
 
 $string['ayuda_sus']='Escribe aquí el mensaje de ayuda para sustantivo';
+$string['ayuda_adj'] = '';
+$string['ayuda_vrb'] = '';
+$string['ayuda_otr'] = '';
 ?>

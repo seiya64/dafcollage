@@ -167,16 +167,16 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $mform->setDefault('diccionario', 0);
 
         //------ sustantivo
-        $mform->addElement('header', 'sus', get_string('sust', 'vocabulario'));
+         $ayuda =  '<a id="boton" href="#" title="'.get_string('ayuda_sus','vocabulario').'"><img src="./imagenes/interrogacion.png" id="id_interrogacion" name="ayuda_sust"/></a>';
+              //  . '<div id="ayuda_sus" class="popup" style="visibility:hidden;"> <b> Hola caracola</b> </div>' ;
+        $mform->addElement('header','sus', get_string('sust', 'vocabulario').$ayuda);
+        //$mform->addElement('header', 'sus', get_string('sust', 'vocabulario'));
    
         //enlace a traduccion
         $enlace_diccionario = "<a style=\"color:#04B8C8\" href='javascript:traducir(1)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string('pal', 'vocabulario') . "]</a>";
        
-//      $mform->addElement('text', 'significado_sus', get_string("Tpal", "vocabulario"), 'value="' . $sustantivo->get('significado') . '" title="'.get_string('titlecolocacion', 'vocabulario').'"');
 
-        $ayuda =  '<div id="div_boton" style="text-align:center"><a id="boton" href="#" title="'.get_string('ayuda_sus','vocabulario').'"><img src="./imagenes/interrogacion.png" id="id_interrogacion" name="ayuda_sust"/></a></div>';
-              //  . '<div id="ayuda_sus" class="popup" style="visibility:hidden;"> <b> Hola caracola</b> </div>' ;
-        $mform->addElement('html', $ayuda);
+       
         $mform->addElement('text', 'palabra_sus', $enlace_diccionario, "value=" . $sustantivo->get('palabra'));
         $mform->setType('palabras_sus', PARAM_TEXT);
 
@@ -393,14 +393,15 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $mform->closeHeaderBefore('vrb');
         ////------ sustantivo
         //------ verbo
-        $mform->addElement('header', 'vrb', get_string('vrb', 'vocabulario'));
+        $ayuda =  '<a id="boton_vrb" href="#" title="'.get_string('ayuda_vrb','vocabulario').'"><img src="./imagenes/interrogacion.png" id="id_interrogacion" name="ayuda_sust"/></a>';
+              //  . '<div id="ayuda_sus" class="popup" style="visibility:hidden;"> <b> Hola caracola</b> </div>' ;
+        $mform->addElement('header','vrb', get_string('vrb', 'vocabulario').$ayuda);
+       // $mform->addElement('header', 'vrb', get_string('vrb', 'vocabulario'));
 
         //infinitivo
         //enlace a traduccion
         //boton de ayuda
-        $ayuda =  '<div id="div_boton" style="text-align:center"><a id="boton_vrb" href="#" title="'.get_string('ayuda_sus','vocabulario').'"><img src="./imagenes/interrogacion.png" id="id_interrogacion" name="ayuda_sust"/></a></div>';
-              //  . '<div id="ayuda_sus" class="popup" style="visibility:hidden;"> <b> Hola caracola</b> </div>' ;
-        $mform->addElement('html', $ayuda);
+        
         $enlace_diccionario = "<a style=\"color:#04B8C8\" href='javascript:traducir(2)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string('infi', 'vocabulario') . "]</a>";
         $mform->addElement('text', 'infinitivo', $enlace_diccionario, 'value="' . $verbo->get('infinitivo') . '"');
         $mform->setType('infinitivo', PARAM_TEXT);
@@ -593,7 +594,12 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $mform->closeHeaderBefore('adj');
         ////------ verbo
         //------ adjetivo
-        $mform->addElement('header', 'adj', get_string('adj', 'vocabulario'));
+        $ayuda =  '<a id="boton_vrb" href="#" title="'.get_string('ayuda_adj','vocabulario').'"><img src="./imagenes/interrogacion.png" id="id_interrogacion" name="ayuda_sust"/></a>';
+              //  . '<div id="ayuda_sus" class="popup" style="visibility:hidden;"> <b> Hola caracola</b> </div>' ;
+        $mform->addElement('header','adj', get_string('adj', 'vocabulario').$ayuda);
+        
+        
+        //$mform->addElement('header', 'adj', get_string('adj', 'vocabulario'));
 
         //sin declinacion
         //enlace a traduccion
@@ -779,7 +785,10 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $mform->closeHeaderBefore('otr');
         ////------ adjetivo
         //------ otros
-        $mform->addElement('header', 'otr', get_string('otr', 'vocabulario'));
+        $ayuda =  '<a id="boton_vrb" href="#" title="'.get_string('ayuda_otr','vocabulario').'"><img src="./imagenes/interrogacion.png" id="id_interrogacion" name="ayuda_otr"/></a>';
+              //  . '<div id="ayuda_sus" class="popup" style="visibility:hidden;"> <b> Hola caracola</b> </div>' ;
+        $mform->addElement('header','otr', get_string('otr', 'vocabulario').$ayuda);
+       // $mform->addElement('header', 'otr', get_string('otr', 'vocabulario'));
 
         //sustantivo
         //enlace a traduccion

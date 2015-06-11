@@ -506,6 +506,8 @@ if ($impr_vocab == 1) {
         $pdf->Ln();
     }
 }
+
+//Empezamos a pintar la gramática en el pdf
 if ($impr_gram == 1) {
     //gramaticas
     $gramaticas = new Vocabulario_gramatica();

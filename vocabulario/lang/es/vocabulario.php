@@ -331,5 +331,12 @@ $string['titlesignificado']='Significado sin contexto';
 $string['titlecolocacion']='Significado con contexto';
 $string['sin_genero']='sin género';
 
-$string['ayuda_sus']='Escribe aquí el mensaje de ayuda para sustantivo';
+$string['ayuda_sus']='En caso de no introducir un susantivo, introduzca un guión. Si la palabra'
+        . ' no tuviera equivalencia directa (como en el caso de las colocaciones) se escribe el significado'
+        . ' completo sólo en un campo, introduciendo un guión en los demás.';
+$string['ayuda_adj'] = 'Se recomienda usar el campo del ejemplo para que se quede reflejado el uso del adjetivo/ adverbio '
+        . 'de forma contextualizado también en la ficha de estudio.';
+$string['ayuda_vrb'] = 'Se recomienda usar el campo del ejemplo para que se quede'
+        . ' reflejado el uso de la preposición de forma contextualizado.';
+$string['ayuda_otr'] = 'Para apuntar cualquier otra palabra relacionada con el sustantivo. ';
 ?>
