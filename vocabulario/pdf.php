@@ -184,7 +184,7 @@ if($impr_vocab_corto) {
             }
             
             $pdf->Cell(6, 5, $atrs['genero'], "", 0, "L", 1);
-            $pdf->SetTextColor(0,0,0); //Negro
+            $pdf->SetTextColor(90,90,90); //Negro
             $pdf->Cell(53, 5, $pal, "", 0, "L", 1);
             $pdf->Cell(2, 5, " ", "", 0, "J", 1);
             
@@ -517,7 +517,7 @@ if ($impr_gram == 1) {
     $gr_num = $gramaticas->obtener_todos_ids($usuario);
 
 
-    $pdf->SetTextColor(TEXT_AUTO);
+    $pdf->SetTextColor(90,90,90);
 
 
     /*
@@ -594,11 +594,11 @@ if ($impr_gram == 1) {
                                 $pdf->SetFont('freeserif', 'B', '10');
                                 $pdf->SetFillColor(59, 89, 152); //#3B5998
                                 //masculino
-                                $pdf->SetTextColor(59,89,152);
+                                $pdf->SetTextColor(191,40,115);
                                 $pdf->writeHTMLCell(0, 0, 10, 20, '<h3>' . get_string('masculino', 'vocabulario') . '</h3>', 0, 1, 0);
                                 $pdf->Ln();
                                 $pdf->setLeftMargin(MARGIN_L2);
-                                $pdf->SetTextColor(TEXT_AUTO);
+                                $pdf->SetTextColor(90,90,90);
                                 $pdf->writeHTMLCell(0, 0, 15, null, '<h4>' . get_string('clasificacionsemantica', 'vocabulario') . '</h4>', 0, 1, 0);
                                 $pdf->MultiCell(0, 5, $descripcion_troceada[0], 0, 'L', 0);
                                 $pdf->writeHTMLCell(0, 0, 15, null, '<h4>' . get_string('clasificacionformal', 'vocabulario') . '</h4>', 0, 1, 0);
@@ -607,11 +607,11 @@ if ($impr_gram == 1) {
                                 $pdf->Ln();
 
                                 //neutro
-                                $pdf->SetTextColor(59,89,152);
+                                $pdf->SetTextColor(191,40,115);
                                 $pdf->writeHTMLCell(0, 0, 10, null, '<h3>' . get_string('neutro', 'vocabulario') . '</h3>', 0, 1, 0);
                                 $pdf->Ln();
                                 $pdf->setLeftMargin(MARGIN_L2);
-                                $pdf->SetTextColor(TEXT_AUTO);
+                                $pdf->SetTextColor(90,90,90);
                                 $pdf->writeHTMLCell(0, 0, 15, null, '<h4>' . get_string('clasificacionsemantica', 'vocabulario') . '</h4>', 0, 1, 0);
                                 $pdf->MultiCell(0, 5, $descripcion_troceada[2], 0, 'L', 0);
                                 $pdf->Ln();
@@ -621,11 +621,11 @@ if ($impr_gram == 1) {
                                 $pdf->Ln();
 
                                 //femenino
-                                $pdf->SetTextColor(59,89,152);
+                                $pdf->SetTextColor(191,40,115);
                                 $pdf->writeHTMLCell(0, 0, 10, null, '<h3>' . get_string('femenino', 'vocabulario') . '</h3>', 0, 1, 0);
                                 $pdf->Ln();
                                 $pdf->setLeftMargin(MARGIN_L2);
-                                $pdf->SetTextColor(TEXT_AUTO);
+                                $pdf->SetTextColor(90,90,90);
                                 $pdf->writeHTMLCell(0, 0, 15, null, '<h4>' . get_string('clasificacionsemantica', 'vocabulario') . '</h4>', 0, 1, 0);
                                 $pdf->MultiCell(0, 5, $descripcion_troceada[4], 0, 'L', 0);
                                 $pdf->Ln();
@@ -2485,21 +2485,21 @@ if ($impr_gram == 1) {
                         $pdf->Ln();
                         $pdf->setLeftMargin(MARGIN_L2);
 
-                        $pdf->SetFillColor(59, 89, 152); //#3B5998
+                        $pdf->SetFillColor(191,40,115); //#3B5998
                         $pdf->SetTextColor(TEXT_WHITE);
                         $pdf->SetLineWidth(0.3);
                         $pdf->SetFont('freeserif', 'B', '12');
-                        $pdf->Cell(47, 5, get_string('atencion_may', 'vocabulario'), 1, 1, 'C', 1);
-                        $pdf->SetTextColor(TEXT_AUTO);
+                        $pdf->Cell(47, 5, get_string('atencion_may', 'vocabulario'), 0, 1, 'C', 1);
+                        $pdf->SetTextColor(90,90,90);
                         $pdf->SetFont('freeserif', '', '10');
-                        $pdf->MultiCell(170, 5, $descripcion_troceada[count($descripcion_troceada) - 2], 1, 'L', 0);
+                        $pdf->MultiCell(170, 5, $descripcion_troceada[count($descripcion_troceada) - 2], 0, 'L', 0);
                         $pdf->Ln();
                         $pdf->SetTextColor(TEXT_WHITE);
                         $pdf->SetFont('freeserif', 'B', '12');
-                        $pdf->Cell(47, 5, get_string('miraren', 'vocabulario'), 1, 1, 'C', 1);
-                        $pdf->SetTextColor(TEXT_AUTO);
+                        $pdf->Cell(47, 5, get_string('miraren', 'vocabulario'), 0, 1, 'C', 1);
+                        $pdf->SetTextColor(90,90,90);
                         $pdf->SetFont('freeserif', '', '10');
-                        $pdf->MultiCell(170, 5, $descripcion_troceada[count($descripcion_troceada) - 1], 1, 'L', 0);
+                        $pdf->MultiCell(170, 5, $descripcion_troceada[count($descripcion_troceada) - 1], 0, 'L', 0);
 
                         $pdf->setLeftMargin(MARGIN);
 
