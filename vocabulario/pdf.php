@@ -53,6 +53,14 @@ define('MARGIN_L5', 50);
 define('TEXT_AUTO', 0);
 define('TEXT_WHITE', 255);
 
+define('TextGrisR', 90);
+define('TextGrisG', 90);
+define('TextGrisB', 90);
+
+define('AzulOscuroR', 95);
+define('AzulOscuroG', 111);
+define('AzulOscuroB', 137);
+
 
 
 $id_tocho = optional_param('id_tocho', 0, PARAM_INT);
@@ -132,7 +140,7 @@ if($impr_vocab_corto) {
     foreach($datos as $ct=>$palabras) {
         //Campo Tematico
         $pdf->AddPage();
-        $pdf->SetFillColor(133, 190, 237); //azul oscuro
+        $pdf->SetFillColor(AzulOscuroR, AzulOscuroG, AzulOscuroB); //azul oscuro
         $pdf->SetTextColor(TEXT_WHITE);
         $pdf->SetLineWidth(0.5);
         if((((float)$ct)*10)%10==0) {
@@ -142,7 +150,7 @@ if($impr_vocab_corto) {
         }
         
         //Color de los márgenes.
-        $pdf->setColor('draw', 133, 190, 237); 		
+        $pdf->setColor('draw', AzulOscuroR, AzulOscuroG, AzulOscuroB); 		
 
         $pdf->Cell(190, 15, $ct, 0, 1, 'L', 1);
         $contadorNuevaPag = 0;
@@ -150,7 +158,7 @@ if($impr_vocab_corto) {
             //Sustantivo con el genero
             if($contadorNuevaPag == 6){
                 $pdf->AddPage();
-                $pdf->SetFillColor(133, 190, 237); //azul oscuro
+                $pdf->SetFillColor(AzulOscuroR, AzulOscuroG, AzulOscuroB); //azul oscuro
                 $pdf->SetTextColor(TEXT_WHITE);
                 $pdf->SetLineWidth(0.5);
                 if((((float)$ct)*10)%10==0) {
@@ -184,7 +192,7 @@ if($impr_vocab_corto) {
             }
             
             $pdf->Cell(6, 5, $atrs['genero'], "", 0, "L", 1);
-            $pdf->SetTextColor(90,90,90); //Negro
+            $pdf->SetTextColor(TextGrisR, TextGrisG, TextGrisB);
             $pdf->Cell(53, 5, $pal, "", 0, "L", 1);
             $pdf->Cell(2, 5, " ", "", 0, "J", 1);
             
