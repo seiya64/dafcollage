@@ -107,7 +107,7 @@ guardar palabras por columnas
           
 #id_cancellink{ 
 float: right;
-color: #B4BBBF;
+color: red;
 font-size: 0.9em;
 }
 #fgroup_id_botones{
@@ -222,13 +222,13 @@ input[type="radio"] + label, input[type="checkbox"] + label {
     width: 80%;
 }
 #above-header {
-    border-bottom: 3px solid #0afaf5;
+    border-bottom: 3px solid #1A3156;
     height: 20px;
     padding-bottom: 5px;
     padding-top: 5px;
 }
 #page-footer .info {
-    border-top: 3px solid #0afaf5;
+    border-top: 3px solid #1A3156;
     font-size: 90%;
     line-height: 21px;
     margin: 34px auto 0;

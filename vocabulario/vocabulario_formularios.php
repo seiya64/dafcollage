@@ -167,13 +167,12 @@ class mod_vocabulario_rellenar_form extends moodleform {
         $mform->setDefault('diccionario', 0);
 
         //------ sustantivo
-         $ayuda =  '<a id="boton" href="#" title="'.get_string('ayuda_sus','vocabulario').'"><img src="./imagenes/interrogacion.png" id="id_interrogacion" name="ayuda_sust"/></a>';
-              //  . '<div id="ayuda_sus" class="popup" style="visibility:hidden;"> <b> Hola caracola</b> </div>' ;
+        $ayuda =  '<a id="boton" href="#" title="'.get_string('ayuda_sus','vocabulario').'"><img src="./imagenes/interrogacion.png" id="id_interrogacion" name="ayuda_sust"/></a>';
         $mform->addElement('header','sus', get_string('sust', 'vocabulario').$ayuda);
         //$mform->addElement('header', 'sus', get_string('sust', 'vocabulario'));
    
         //enlace a traduccion
-        $enlace_diccionario = "<a style=\"color:#04B8C8\" href='javascript:traducir(1)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string('pal', 'vocabulario') . "]</a>";
+        $enlace_diccionario = "<a style=\"color:#F6A335\" href='javascript:traducir(1)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string('pal', 'vocabulario') . "]</a>";
        
 
        
@@ -391,10 +390,8 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
         //$mform->addElement('submit', 'submitbutton', get_string('savechanges'));
         $mform->closeHeaderBefore('vrb');
-        ////------ sustantivo
         //------ verbo
         $ayuda =  '<a id="boton_vrb" href="#" title="'.get_string('ayuda_vrb','vocabulario').'"><img src="./imagenes/interrogacion.png" id="id_interrogacion" name="ayuda_sust"/></a>';
-              //  . '<div id="ayuda_sus" class="popup" style="visibility:hidden;"> <b> Hola caracola</b> </div>' ;
         $mform->addElement('header','vrb', get_string('vrb', 'vocabulario').$ayuda);
        // $mform->addElement('header', 'vrb', get_string('vrb', 'vocabulario'));
 
@@ -592,10 +589,8 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
         //$mform->addElement('submit', 'submitbutton', get_string('savechanges'));
         $mform->closeHeaderBefore('adj');
-        ////------ verbo
         //------ adjetivo
         $ayuda =  '<a id="boton_vrb" href="#" title="'.get_string('ayuda_adj','vocabulario').'"><img src="./imagenes/interrogacion.png" id="id_interrogacion" name="ayuda_sust"/></a>';
-              //  . '<div id="ayuda_sus" class="popup" style="visibility:hidden;"> <b> Hola caracola</b> </div>' ;
         $mform->addElement('header','adj', get_string('adj', 'vocabulario').$ayuda);
         
         
@@ -783,10 +778,8 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
         //$mform->addElement('submit', 'submitbutton', get_string('savechanges'));
         $mform->closeHeaderBefore('otr');
-        ////------ adjetivo
         //------ otros
         $ayuda =  '<a id="boton_vrb" href="#" title="'.get_string('ayuda_otr','vocabulario').'"><img src="./imagenes/interrogacion.png" id="id_interrogacion" name="ayuda_otr"/></a>';
-              //  . '<div id="ayuda_sus" class="popup" style="visibility:hidden;"> <b> Hola caracola</b> </div>' ;
         $mform->addElement('header','otr', get_string('otr', 'vocabulario').$ayuda);
        // $mform->addElement('header', 'otr', get_string('otr', 'vocabulario'));
 
@@ -873,7 +866,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
                 $mform->setDefault('intencion_otr', $otro->get('intencionid'));
                 $mform->addElement('hidden', 'descripcion_intenotr');
 		$mform->setType('descripcion_intenotr', PARAM_RAW);
-                //tipologia textual
+                //tipología textual
                 $mform->addElement('select', 'tipologia_otr', get_string("campo_tipologia", "vocabulario"), $ctipologia,"style=\"width:200px;\"");
                 $mform->setDefault('tipologia_otr', $otro->get('tipologiaid'));
                 $mform->addElement('hidden', 'descripcion_tipootr');
@@ -1251,7 +1244,7 @@ class mod_vocabulario_ver_form extends moodleform {
             $clex = $aux->obtener_hijos($usuarioid, 0);
             $mform->addElement('hidden', 'tipo', 'gr');
 	    $mform->setType('tipo', PARAM_RAW);
-            $mform->addElement('select', 'campoid', get_string("campo_gram", "vocabulario"), $clex, "onChange='javascript:cargaContenido(this.id,\"clgeneraldinamico\",1)' style=\"min-height: 0;\" ");
+            $mform->addElement('select', 'campoid',get_string("campo_gram", "vocabulario"), $clex, "onChange='javascript:cargaContenido(this.id,\"clgeneraldinamico\",1)' style=\"min-height: 0;\" ");
             if ($valor_campoid) {
                 $mform->setDefault('campoid', $valor_campoid);
                 $mis_palabras = vocabulario_todas_palabras($usuarioid, null, $valor_campoid);
@@ -1340,14 +1333,14 @@ class mod_vocabulario_ver_form extends moodleform {
             $titulillos = '<thead>';
             $titulillos .= '<tr class="header">';
          
-            $titulillos .= '<th>' . get_string('sust', 'vocabulario') . '</th>';
-            $titulillos .= '<th>' . get_string('adj', 'vocabulario') . '</th>';
-            $titulillos .= '<th>' . get_string('vrb', 'vocabulario') . '</th>';
-            $titulillos .= '<th>' . get_string('otr', 'vocabulario') . '</th>';
-            $titulillos .= '<th>' . get_string('campo_lex', 'vocabulario') . '</th>';
-            $titulillos .= '<th>' . get_string('opciones', 'vocabulario') . '</th>';
-            $titulillos .= '<th>' . get_string('opciones', 'vocabulario') . '</th>';
-            $titulillos .= '<th>' . get_string('opciones', 'vocabulario') . '</th>';
+            $titulillos .= '<th style="background:white">' . get_string('sust', 'vocabulario') . '</th>';
+            $titulillos .= '<th style="background:white">' . get_string('adj', 'vocabulario') . '</th>';
+            $titulillos .= '<th style="background:white">' . get_string('vrb', 'vocabulario') . '</th>';
+            $titulillos .= '<th style="background:white">' . get_string('otr', 'vocabulario') . '</th>';
+            $titulillos .= '<th style="background:white">' . get_string('campo_lex', 'vocabulario') . '</th>';
+            $titulillos .= '<th style="background:white">' . get_string('opciones', 'vocabulario') . '</th>';
+            $titulillos .= '<th style="background:white">' . get_string('opciones', 'vocabulario') . '</th>';
+            $titulillos .= '<th style="background:white">' . get_string('opciones', 'vocabulario') . '</th>';
             $titulillos .= '</tr>';
             $titulillos .= '</thead>';
             $mform->addElement('html', $titulillos);
@@ -1358,17 +1351,17 @@ class mod_vocabulario_ver_form extends moodleform {
                 $titulillos = '<tr class="cell" style="text-align:center;">';
 
                
-                $titulillos .= '<td>' . $palabra->sus_lex . '</td>';
-                $titulillos .= '<td>' . $palabra->adj_lex . '</td>';
-                $titulillos .= '<td>' . $palabra->ver_lex . '</td>';
-                $titulillos .= '<td>' . $palabra->otros_lex . '</td>';
-                $titulillos .= '<td>' . $palabra->campo_lex . '</td>';
+                $titulillos .= '<td style="background:#ECECEC">' . $palabra->sus_lex . '</td>';
+                $titulillos .= '<td style="background:#ECECEC">' . $palabra->adj_lex . '</td>';
+                $titulillos .= '<td style="background:#ECECEC">' . $palabra->ver_lex . '</td>';
+                $titulillos .= '<td style="background:#ECECEC">' . $palabra->otros_lex . '</td>';
+                $titulillos .= '<td style="background:#ECECEC">' . $palabra->campo_lex . '</td>';
               //  $titulillos .= '<td>' . $palabra->mpid . '</td>';
 
-                //modificado o quitado por mi fina (cambiado editar por modificar)
-               $titulillos .= '<td> <a href="./view.php?id=' . $this->id_tocho . '&opcion=4&viene=0&act=1&id_mp=' . $palabra->mpid . '">[' . get_string('modificar', 'vocabulario') . ']</a></td>';
-               $titulillos .= '<td> <a href="./view.php?id=' . $this->id_tocho . '&opcion=4&op=1&viene=0&act=1&id_mp=' . $palabra->mpid . '">[' . get_string('anadir', 'vocabulario') . ']</a></td>';
-               $titulillos .= '<td> <a href="#" style="color:#CC0000;" onclick="javascript:eliminandonube('.$this->id_tocho.','. $palabra->mpid . ')" >[' . get_string('eliminar', 'vocabulario') . ']</a></td>';
+                //modificado o quitado por mi fina, Ramón y Luis (cambiado editar por modificar)
+               $titulillos .= '<td style="background:#ECECEC"> <a style="color:#1A3156; href="./view.php?id=' . $this->id_tocho . '&opcion=4&viene=0&act=1&id_mp=' . $palabra->mpid . '">[' . get_string('modificar', 'vocabulario') . ']</a></td>';
+               $titulillos .= '<td style="background:#ECECEC"> <a style="color:#1A3156; href="./view.php?id=' . $this->id_tocho . '&opcion=4&op=1&viene=0&act=1&id_mp=' . $palabra->mpid . '">[' . get_string('anadir', 'vocabulario') . ']</a></td>';
+               $titulillos .= '<td style="background:#ECECEC"> <a href="#" style="color:#CC0000;" onclick="javascript:eliminandonube('.$this->id_tocho.','. $palabra->mpid . ')" >[' . get_string('eliminar', 'vocabulario') . ']</a></td>';
 
                 $titulillos .= '</tr>';
                 $mform->addElement('html', $titulillos);
