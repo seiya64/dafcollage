@@ -236,7 +236,7 @@ input[type="radio"] + label, input[type="checkbox"] + label {
     padding-top: 17px;
 }
 .ui-widget-header {
-    background: none repeat scroll 0 0 #696969;
+    background: none repeat scroll 0 0 #5F6F89;
     border: 1px solid #bdc7d8;
     color: #222222;
     font-weight: bold;

@@ -399,7 +399,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         //enlace a traduccion
         //boton de ayuda
         
-        $enlace_diccionario = "<a style=\"color:#04B8C8\" href='javascript:traducir(2)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string('infi', 'vocabulario') . "]</a>";
+        $enlace_diccionario = "<a style=\"color:#F6A335\"  href='javascript:traducir(2)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string('infi', 'vocabulario') . "]</a>";
         $mform->addElement('text', 'infinitivo', $enlace_diccionario, 'value="' . $verbo->get('infinitivo') . '"');
         $mform->setType('infinitivo', PARAM_TEXT);
         //tercera persona
@@ -598,7 +598,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
 
         //sin declinacion
         //enlace a traduccion
-        $enlace_diccionario = "<a style=\"color:#04B8C8\" href='javascript:traducir(3)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string("sindec", "vocabulario") . "]</a>";
+        $enlace_diccionario = "<a style=\"color:#F6A335\" href='javascript:traducir(3)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string("sindec", "vocabulario") . "]</a>";
         $mform->addElement('text', 'sindeclinar', $enlace_diccionario, 'value="' . $adjetivo->get('sin_declinar') . '"');
         $mform->setType('sindeclinar', PARAM_TEXT);
         //traduccion
@@ -786,7 +786,7 @@ class mod_vocabulario_rellenar_form extends moodleform {
         //sustantivo
         //enlace a traduccion
 
-        $enlace_diccionario = "<a style=\"color:#04B8C8\" href='javascript:traducir(4)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string("otr_sus", "vocabulario") . "]</a>";
+        $enlace_diccionario = "<a style=\"color:#F6A335\" href='javascript:traducir(4)' title='" . get_string('titlesignificado', 'vocabulario') . "'>[" . get_string("otr_sus", "vocabulario") . "]</a>";
         $mform->addElement('text', 'palabra_otr', $enlace_diccionario, 'value="' . $otro->get('palabra') . '"');
         $mform->setType('palabra_otr', PARAM_TEXT);
         //traduccion
@@ -3211,7 +3211,7 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                         }
 
                         $mform->addElement('html', $ocultador);
-                        $titulillos = '<td><input type="text" id="id_BE' . $tabla . '_' . $fila . '" name="BE' . $tabla . '_' . $fila . '" value="' . $descripcion_troceada[($tabla * $tope * 2) + ((2 * $fila) + 0)] . '"></td>';
+                        $titulillos = '<td width=450px ><input type="text" id="id_BE' . $tabla . '_' . $fila . '" name="BE' . $tabla . '_' . $fila . '" value="' . $descripcion_troceada[($tabla * $tope * 2) + ((2 * $fila) + 0)] . '"></td>';
                         $titulillos .= '<td><input type="text" id="id_GE' . $tabla . '_' . $fila . '" name="GE' . $tabla . '_' . $fila . '" value="' . $descripcion_troceada[($tabla * $tope * 2) + ((2 * $fila) + 1)] . '"></td>';
                         $titulillos .= '</tr>';
                         $mform->addElement('html', $titulillos);
@@ -3429,26 +3429,25 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                 //se ordena el array
                 sort($arrayAux1);
                 // Se pinta el selector de letras
-                $abecedario = '<h1 style="text-align:left;">';
+                $abecedario = '<div> <h1 style="text-align:left;">';
                 $l = 'a';
                 for ($i = 1; $i < 27; $i++) {
                     $abecedario .= '<a style= "font-size:18px" "font-family:Verdana, Geneva, sans-serif" href="./view.php?id=' . $id_tocho . '&opcion=5&grid=' . $grid . '&letra=' . $l . '">' . $l . '   </a>';
                     $l++;
                 }
-                $abecedario .= '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
-                $abecedario .= '<a style= "font-size:18px" "font-family:Verdana, Geneva, sans-serif" href="./view.php?id=' . $id_tocho . '&opcion=5&grid=' . $grid . '">Todas</a>';
+                $abecedario .= '<div style="float:right;padding-right:290px;"> <a style= "font-size:18px" "font-family:Verdana, Geneva, sans-serif" href="./view.php?id=' . $id_tocho . '&opcion=5&grid=' . $grid . '">Todas</a></div></div>';
                 $abecedario .= '</h1>';
                 $mform->addElement('html', $abecedario);
 
 
                 //aqui se buscan por casos
-                $kasos = '<h1 style="text-align:left;">';
+                $kasos = '<div><h1 style="text-align:left;">';
                 for ($i = 0; $i < 4; $i++) {
                     $kasos .= '<a style= "font-size:18px" "font-family:Verdana, Geneva, sans-serif"  href="./view.php?id=' . $id_tocho . '&opcion=5&grid=' . $grid . '&caso=' . $i . '">' . $kasus[$i] . '&nbsp&nbsp&nbsp</a>';
                     $l++;
                 }
-                $kasos .= '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
-                $kasos .= '<a style= "font-size:18px" "font-family:Verdana, Geneva, sans-serif" href="./view.php?id=' . $id_tocho . '&opcion=5&grid=' . $grid . '">Todas</a>';
+                
+                $kasos .= '<div style="float:right; padding-right:290px;"> <a style="font-size:18px" font-family:Verdana, Geneva, sans-serif" href="./view.php?id=' . $id_tocho . '&opcion=5&grid=' . $grid . '">Todas</a> </div> </div>';
                 $kasos .= '</h1>';
                 $mform->addElement('html', $kasos);
 
