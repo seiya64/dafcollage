@@ -330,8 +330,16 @@ $string['titlesignificado']='Signification sans contexte';
 $string['titlecolocacion']='Significaction en contexte';
 $string['sin_genero']='sans genre';
 
-$string['ayuda_sus']='Escribe aquí el mensaje de ayuda para sustantivo';
-$string['ayuda_adj'] = '';
-$string['ayuda_vrb'] = '';
-$string['ayuda_otr'] = '';
+// Añadido Ramón Rueda y Luis Redondo, cuaderno digital, nueva palabra
+$string['ayuda_sus']='En caso de no introducir un sustantivo, introduzca un guión.
+    Si la palabra no tuviera equivalencia directa en la lengua materna '
+   .'(como en el caso de las colocaciones o expresiones complejas) se escribe el '
+   .'significado completo sólo en uno de los posibles campos,introduciendo un guión en los demás.';
+$string['ayuda_adj'] = 'Se recomienda usar el campo del ejemplo para que quede reflejado también '
+   .'el uso del adjetivo/adverbio en la ficha de estudio.';
+$string['ayuda_vrb'] = 'Si el verbo rige una determinada preposición, se recomienda'
+.' usar el campo del ejemplo para que quede reflejado el uso de la preposición de forma contextualizada.';
+$string['ayuda_otr'] = 'Campo para apuntar cualquier otra palabra relacionada con el sustantivo'
+    .' y/o las demás  palabras. Se recomienda recurrir al ejemplo para que aparezca en la ficha de estudio.';
+
 ?>
