@@ -596,7 +596,7 @@ if ($impr_gram == 1) {
     }
     for ($i = 0; $i < count($gramaticas_usadas); ++$i) {
         if ($gramaticas_usadas[$i][1] == 51) {
-            $gramaticas_usadas[$i][0] = '6.2 ' . get_string('preposiciones', 'vocabulario');
+            $gramaticas_usadas[$i][0] = '' . get_string('preposiciones', 'vocabulario');
         }
     }
 
@@ -2335,7 +2335,8 @@ if ($impr_gram == 1) {
                                         $pdf->setTextColor(TEXT_WHITE);
                                         $pdf->SetFont('freeserif', '', 10);
                                         $pdf->SetFillColor(RojoR,RojoG,RojoB);
-                                        $pdf->Cell(24, 5, get_string('nominativo', 'vocabulario'), 0, 0, 'C', 1);
+                                        //$pdf->Cell(24, 5, get_string('nominativo', 'vocabulario'), 0, 0, 'C', 1);
+                                        $pdf->Cell(24, 5, 'Pronomina, die nur Personen bezeichnen', 0, 0, 'C', 1);
                                         $pdf->setTextColor(TextGrisR,TextGrisG,TextGrisB);
                                         $pdf->SetFillColor(GrisClaroR,GrisClaroG,GrisClaroB);
                                         $pdf->Cell(86, 5, $descripcion_troceada[(5 * $i) + 1], 0, 1, 'C', 1);
