@@ -1359,8 +1359,8 @@ class mod_vocabulario_ver_form extends moodleform {
               //  $titulillos .= '<td>' . $palabra->mpid . '</td>';
 
                 //modificado o quitado por mi fina, Ramón y Luis (cambiado editar por modificar)
-               $titulillos .= '<td style="background:#ECECEC"> <a style="color:#1A3156; href="./view.php?id=' . $this->id_tocho . '&opcion=4&viene=0&act=1&id_mp=' . $palabra->mpid . '">[' . get_string('modificar', 'vocabulario') . ']</a></td>';
-               $titulillos .= '<td style="background:#ECECEC"> <a style="color:#1A3156; href="./view.php?id=' . $this->id_tocho . '&opcion=4&op=1&viene=0&act=1&id_mp=' . $palabra->mpid . '">[' . get_string('anadir', 'vocabulario') . ']</a></td>';
+               $titulillos .= '<td style="background:#ECECEC"> <a style="color:#1A3156;" href="./view.php?id=' . $this->id_tocho . '&opcion=4&viene=0&act=1&id_mp=' . $palabra->mpid . '">[' . get_string('modificar', 'vocabulario') . ']</a></td>';
+               $titulillos .= '<td style="background:#ECECEC"> <a style="color:#1A3156;" href="./view.php?id=' . $this->id_tocho . '&opcion=4&op=1&viene=0&act=1&id_mp=' . $palabra->mpid . '">[' . get_string('anadir', 'vocabulario') . ']</a></td>';
                $titulillos .= '<td style="background:#ECECEC"> <a href="#" style="color:#CC0000;" onclick="javascript:eliminandonube('.$this->id_tocho.','. $palabra->mpid . ')" >[' . get_string('eliminar', 'vocabulario') . ']</a></td>';
 
                 $titulillos .= '</tr>';
@@ -2914,8 +2914,12 @@ class mod_vocabulario_nuevo_gr_form extends moodleform {
                     $mform->addElement('html', '<table class="flexible generaltable generalbox boxaligncenter">');
                     //titulillos de la tabla
 
+                    $titulillos = '<tr class="header">';
+                    $titulillos .= '<th>&nbsp;</th>';
+                    $titulillos .= '<th>&nbsp;</th>';
+                    $titulillos .= '</tr>';
+                    
                     $mform->addElement('html', $titulillos);
-
 
                     $titulillos .= '<tr class="cell">';
                     $titulillos .= '<td class="cell">' . get_string('nominativo', 'vocabulario') . '</td>';
