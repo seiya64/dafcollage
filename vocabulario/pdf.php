@@ -135,6 +135,8 @@ $pdf->SetFont('freeserif', 'B', '12');
 $pdf->AddPage();
 
 $pdf->writeHTMLCell(0, 0, 20, 5, '<h1>' . get_string('cuad_digital_may', 'vocabulario') . '</h1>', 0, 1, 0);
+
+
 $pdf->writeHTMLCell(0, 0, 150, 250, $USER->firstname . ' ' . $USER->lastname, 0, 1, 0);
 $pdf->writeHTMLCell(0, 0, 150, 255, $USER->email, 0, 1, 0);
 
@@ -181,6 +183,7 @@ if($impr_vocab_corto) {
     foreach($datos as $ct=>$palabras) {
         //Campo Tematico
         $pdf->AddPage();
+        
         $pdf->SetFillColor(AzulOscuroR, AzulOscuroG, AzulOscuroB); //azul oscuro
         $pdf->SetTextColor(TEXT_WHITE);
         $pdf->SetLineWidth(0.5);
@@ -198,6 +201,10 @@ if($impr_vocab_corto) {
         foreach($palabras as $pal=>$atrs) {
             //Sustantivo con el genero
             if($contadorNuevaPag == 6){
+                //Nombre del alumno
+                $pdf->writeHTMLCell(0, 0, 150, 260, $USER->firstname . ' ' . $USER->lastname, 0, 1, 0);
+                $pdf->writeHTMLCell(0, 0, 150, 265, $USER->email, 0, 1, 0);
+                
                 $pdf->AddPage();
                 $pdf->SetFillColor(AzulOscuroR, AzulOscuroG, AzulOscuroB); //azul oscuro
                 $pdf->SetTextColor(TEXT_WHITE);
@@ -315,7 +322,12 @@ if($impr_vocab_corto) {
                     $color++;
                 }
             }
+            
         }
+        
+        $pdf->writeHTMLCell(0, 0, 150, 260, $USER->firstname . ' ' . $USER->lastname, 0, 1, 0);
+        $pdf->writeHTMLCell(0, 0, 150, 265, $USER->email, 0, 1, 0);
+        
     }
     
     $pdf->Ln();
@@ -602,6 +614,9 @@ if ($impr_gram == 1) {
 
     //nueva pagina para las gramaticas
     $pdf->AddPage();
+    $pdf->writeHTMLCell(0, 0, 150, 260, $USER->firstname . ' ' . $USER->lastname, 0, 1, 0);
+    $pdf->writeHTMLCell(0, 0, 150, 265, $USER->email, 0, 1, 0);
+                
     $pdf->SetFont('freeserif', 'B', '12');
     $pdf->writeHTMLCell(0, 0, 20, 5, '<h1>' . get_string('gramatica_may', 'vocabulario') . '</h1>', 0, 1, 0);
 
@@ -628,6 +643,11 @@ if ($impr_gram == 1) {
 
                     if ($pintartochaco) {
                         $pdf->AddPage();
+                        
+                        //Nombre del alumno
+                        $pdf->writeHTMLCell(0, 0, 150, 260, $USER->firstname . ' ' . $USER->lastname, 0, 1, 0);
+                        $pdf->writeHTMLCell(0, 0, 150, 265, $USER->email, 0, 1, 0);
+    
                         $pdf->SetFont('freeserif', 'B', '12');
                         $pdf->SetTextColor(RojoTituloR,RojoTituloG,RojoTituloB);
                         $pdf->writeHTMLCell(0, 0, 10, 5, '<h2>' . $mi_gram . '</h2>', 0, 1, 0);
